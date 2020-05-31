@@ -22,6 +22,9 @@ if not exists(libs_dir):
 
 urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js", libs_dir + "/jQuery.js")
 
+urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js", libs_dir + "/three.js")
+urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/23f814719b2d199e324448751862f2a5fc7d27a5/examples/js/controls/OrbitControls.js", libs_dir + "/orbitControls.js")
+
 compile(dirname=("app/sass", "app/css"))
 
 app.run(host="0.0.0.0", port=4000, debug=True)
