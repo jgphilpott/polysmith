@@ -1,0 +1,7 @@
+web:
+  container_name: shapeMaker
+  build: .
+  volumes:
+   - .:/root
+  ports:
+   - 4000:4000
