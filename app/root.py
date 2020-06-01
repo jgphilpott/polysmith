@@ -24,6 +24,9 @@ urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js",
 
 urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js", libs_dir + "/three.js")
 urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/23f814719b2d199e324448751862f2a5fc7d27a5/examples/js/controls/OrbitControls.js", libs_dir + "/orbitControls.js")
+urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/a72347515fa34e892f7a9bfa66a34fdc0df55954/examples/js/exporters/STLExporter.js", libs_dir + "/STLExporter.js")
+
+urlretrieve("https://raw.githubusercontent.com/eligrey/FileSaver.js/master/src/FileSaver.js", libs_dir + "/FileSaver.js")
 
 compile(dirname=("app/sass", "app/css"))
 

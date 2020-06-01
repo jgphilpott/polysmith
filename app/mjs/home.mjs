@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  let white3 = new THREE.Color("rgba(255, 255, 255)")
+  let white = new THREE.Color("rgba(255, 255, 255)")
 
   let width = $(window).width()
   let height = $(window).height()
@@ -11,9 +11,9 @@ $(document).ready(function() {
   let canvas = document.body.appendChild(renderer.domElement)
 
   let scene = new THREE.Scene()
-  scene.background = white3
+  scene.background = white
 
-  let light = new THREE.PointLight(white3, 1)
+  let light = new THREE.PointLight(white, 1)
   light.position.set(10, 10, 10)
   scene.add(light)
 
@@ -21,6 +21,8 @@ $(document).ready(function() {
   camera.position.set(10, 10, 10)
 
   let controls = new THREE.OrbitControls(camera, canvas)
+
+  let exporter = new THREE.STLExporter()
 
   function animate() {
 
@@ -33,5 +35,9 @@ $(document).ready(function() {
   }
 
   animate()
+
+  let blob = new Blob([exporter.parse(scene)], {"type": "text/plain"})
+
+  saveAs(blob, "shape.stl")
 
 })
