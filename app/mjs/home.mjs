@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+  let black = new THREE.Color("rgba(0, 0, 0)")
   let white = new THREE.Color("rgba(255, 255, 255)")
 
   let width = $(window).width()
@@ -22,7 +23,19 @@ $(document).ready(function() {
 
   let controls = new THREE.OrbitControls(camera, canvas)
 
-  let exporter = new THREE.STLExporter()
+  $("body").keypress(function(event) {
+
+    if (event.ctrlKey && event.keyCode == 10) {
+
+      let exporter = new THREE.STLExporter()
+
+      let blob = new Blob([exporter.parse(scene)], {"type": "text/plain"})
+
+      saveAs(blob, "shape.stl")
+
+    }
+
+  })
 
   function animate() {
 
@@ -35,9 +48,5 @@ $(document).ready(function() {
   }
 
   animate()
-
-  let blob = new Blob([exporter.parse(scene)], {"type": "text/plain"})
-
-  saveAs(blob, "shape.stl")
 
 })
