@@ -1,4 +1,4 @@
-FROM docker.pkg.github.com/jgphilpott/docker-images/flask-pack:v4
+FROM docker.pkg.github.com/jgphilpott/docker-images/flask-pack:v5
 
 ADD . /root
 
