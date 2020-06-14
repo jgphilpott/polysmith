@@ -1,4 +1,18 @@
-export function importOBJ() {}
+import {black, white} from "./colors.mjs"
+
+export function importOBJ(path) {
+
+  let loader = new THREE.OBJLoader()
+
+  loader.load(path, function(obj) {
+
+    let mesh = obj
+    data.meshes.push(mesh)
+    data.scene.add(mesh)
+
+  })
+
+}
 
 export function exportOBJ() {
 

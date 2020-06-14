@@ -21,6 +21,8 @@ export function setup(width, height) {
   scene.background = white
   data.scene = scene
 
+  data.meshes = []
+
   addLights()
   addCamera()
   addControls()
