@@ -1,14 +1,19 @@
+import {exportSTL} from "./stl.mjs"
+import {exportOBJ} from "./obj.mjs"
+
 export function addEvents() {
 
   $("body").keypress(function(event) {
 
+    // Ctrl + Enter
     if (event.ctrlKey && event.keyCode == 10) {
 
-      let exporter = new THREE.STLExporter()
+      exportSTL()
 
-      let blob = new Blob([exporter.parse(data.scene)], {"type": "text/plain"})
+    // Shift + Enter
+    } else if (event.shiftKey && event.keyCode == 13) {
 
-      saveAs(blob, "shape.stl")
+      exportOBJ()
 
     }
 
