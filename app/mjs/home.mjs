@@ -1,6 +1,9 @@
 import {setup} from "./libs/setup.mjs"
 import {black, white} from "./libs/colors.mjs"
 
+import {importSTL} from "./libs/stl.mjs"
+import {importOBJ} from "./libs/obj.mjs"
+
 $(document).ready(function() {
 
   let width = $(window).width()
@@ -15,10 +18,10 @@ $(document).ready(function() {
 
   function generator() {
 
-    // Code Here!
-
   }
 
   generator()
+
+  console.log(data)
 
 })
