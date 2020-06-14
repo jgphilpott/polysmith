@@ -4,4 +4,4 @@
 
 # shapeMaker
 
-A tool to generate STL files for 3D printing.
+A tool to generate STL and OBJ files for 3D printing.
