@@ -4,6 +4,7 @@ import {addLights} from "./lights.mjs"
 import {addCamera} from "./camera.mjs"
 import {addControls} from "./controls.mjs"
 import {addEvents} from "./events.mjs"
+import {addAxes} from "./axes.mjs"
 
 export function setup(width, height) {
 
@@ -27,6 +28,7 @@ export function setup(width, height) {
   addCamera()
   addControls()
   addEvents()
+  addAxes()
 
   function animate() {
 
