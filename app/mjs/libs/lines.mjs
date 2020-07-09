@@ -1,4 +1,4 @@
-import {black, white, red, green, blue} from "./colors.mjs"
+import {black, white, red, yellow, green, blue} from "./colors.mjs"
 
 export function newVector(vertices=[]) {
 
