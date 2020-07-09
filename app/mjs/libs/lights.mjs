@@ -1,9 +1,9 @@
-import {black, white} from "./colors.mjs"
+import {black, white, red, yellow, green, blue} from "./colors.mjs"
 
-export function addLights() {
+export function addLights(position=data.scale, intensity=100) {
 
-  let light = new THREE.PointLight(white, 100)
-  light.position.set(100, 100, 100)
+  let light = new THREE.PointLight(white, intensity)
+  light.position.set(position, position, position)
   data.lights = [light]
   data.scene.add(light)
 
