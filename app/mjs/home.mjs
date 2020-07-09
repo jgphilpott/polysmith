@@ -1,5 +1,5 @@
 import {setup} from "./libs/setup.mjs"
-import {black, white, red, green, blue} from "./libs/colors.mjs"
+import {black, white, red, yellow, green, blue} from "./libs/colors.mjs"
 
 import {importSTL} from "./libs/stl.mjs"
 import {importOBJ} from "./libs/obj.mjs"
