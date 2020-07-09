@@ -28,6 +28,10 @@ export function newLine(vertices=[], color=black, linewidth=1) {
 
 export function addLine(vertices=[], color=black, linewidth=1) {
 
-  return data.scene.add(newLine(vertices, color, linewidth))
+  let line = newLine(vertices, color, linewidth)
+
+  data.scene.add(line)
+
+  return line
 
 }
