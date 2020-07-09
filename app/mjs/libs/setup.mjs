@@ -1,12 +1,12 @@
 import {black, white} from "./colors.mjs"
 
 import {addLights} from "./lights.mjs"
-import {addCamera} from "./camera.mjs"
+import {addCamera} from "./cameras.mjs"
 import {addControls} from "./controls.mjs"
 import {addEvents} from "./events.mjs"
 import {addAxes} from "./axes.mjs"
 
-export function setup(width, height) {
+export function setup(width, height, scale=300) {
 
   data.width = width
   data.height = height
@@ -23,6 +23,8 @@ export function setup(width, height) {
   data.scene = scene
 
   data.meshes = []
+
+  data.scale = scale
 
   addLights()
   addCamera()
