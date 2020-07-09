@@ -1,7 +1,11 @@
 import {addLine} from "./lines.mjs"
-import {black, white, red, yellow, green, blue} from "./colors.mjs"
+import {addSphere} from "./spheres.mjs"
 
-export function addAxes(size=100) {
+import {black, white, red, orange, yellow, green, blue} from "./colors.mjs"
+
+export function addAxes(size=data.scale) {
+
+  data.axes = []
 
   let min = -size
   let max = size
@@ -14,18 +18,34 @@ export function addAxes(size=100) {
 
 export function addAxisX(min, max) {
 
-  addLine([[max, 0, 0], [min, 0, 0]], red)
+  data.axes.push(addSphere([max, 0, 0], max / 100, black))
+  data.axes.push(addLine([[max, 0, 0], [min, 0, 0]], red))
+  data.axes.push(addSphere([min, 0, 0], max / 100, orange))
 
 }
 
 export function addAxisY(min, max) {
 
-  addLine([[0, max, 0], [0, min, 0]], green)
+  data.axes.push(addSphere([0, max, 0], max / 100, black))
+  data.axes.push(addLine([[0, max, 0], [0, min, 0]], green))
+  data.axes.push(addSphere([0, min, 0], max / 100, orange))
 
 }
 
 export function addAxisZ(min, max) {
 
-  addLine([[0, 0, max], [0, 0, min]], blue)
+  data.axes.push(addSphere([0, 0, max], max / 100, black))
+  data.axes.push(addLine([[0, 0, max], [0, 0, min]], blue))
+  data.axes.push(addSphere([0, 0, min], max / 100, orange))
+
+}
+
+export function removeAxes() {
+
+  for (let i = 0; i < data.axes.length; i++) {
+
+    data.scene.remove(data.axes[i])
+
+  }
 
 }
