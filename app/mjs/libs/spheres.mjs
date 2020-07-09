@@ -15,7 +15,8 @@ export function addSphere(position=[0, 0, 0], radius=1, color=black) {
   let sphere = newSphere(radius, color)
 
   sphere.position.set(position[0], position[1], position[2])
+  data.scene.add(sphere)
 
-  return data.scene.add(sphere)
+  return sphere
 
 }
