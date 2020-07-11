@@ -1,26 +1,46 @@
-function generator(count=3) {
+function generator(dimensions=1) {
 
   let size = 10
+  let cutoutSize = 5
+  let sizeMultiplier = 2.5
+  let totalSize = size
 
-  let standardMaterial = new THREE.MeshStandardMaterial({"color": black})
+  for (let i = 0; i < dimensions - 1; i++) {
 
-  for (let i = 0; i < count; i++) {
+    totalSize *= sizeMultiplier
+
+  }
+
+  for (let i = 0; i < dimensions; i++) {
 
     let boxGeometry = new THREE.BoxGeometry(size, size, size)
-    let cylinderGeometry = new THREE.CylinderGeometry(size / 3.33, size / 3.33, size * 2, 42)
-
     let box = new THREE.Mesh(boxGeometry, standardMaterial)
-    let cylinder = new THREE.Mesh(cylinderGeometry, standardMaterial)
 
-    box = cutMesh(box, cylinder)
-    cylinder.rotation.x = Math.PI / 2
-    box = cutMesh(box, cylinder)
-    cylinder.rotation.z = Math.PI / 2
-    box = cutMesh(box, cylinder)
+    let boxStandGeometry = new THREE.BoxGeometry(size, size, totalSize / 2)
+    let boxStand = new THREE.Mesh(boxStandGeometry, standardMaterial)
+    boxStand.position.set(0, 0, -totalSize / 4)
+    box = joinMesh(box, boxStand)
+
+    let cutOneGeometry = new THREE.BoxGeometry(totalSize + 1, cutoutSize, cutoutSize)
+    let cutTwoGeometry = new THREE.BoxGeometry(cutoutSize, totalSize + 1, cutoutSize)
+    let cutThreeGeometry = new THREE.BoxGeometry(cutoutSize, cutoutSize, totalSize + 1)
+
+    let cutOne = new THREE.Mesh(cutOneGeometry, standardMaterial)
+    let cutTwo = new THREE.Mesh(cutTwoGeometry, standardMaterial)
+    let cutThree = new THREE.Mesh(cutThreeGeometry, standardMaterial)
+
+    cutOne.rotateX(Math.PI / 4)
+    cutTwo.rotateY(Math.PI / 4)
+    cutThree.rotateZ(Math.PI / 4)
+
+    box = cutMesh(box, cutOne)
+    box = cutMesh(box, cutTwo)
+    box = cutMesh(box, cutThree)
 
     data.scene.add(box)
 
-    size *= 2
+    size *= sizeMultiplier
+    cutoutSize *= sizeMultiplier
 
   }
 
