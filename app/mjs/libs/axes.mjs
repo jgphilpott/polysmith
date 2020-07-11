@@ -18,25 +18,25 @@ export function addAxes(size=data.scale) {
 
 export function addAxisX(min, max) {
 
-  data.axes.push(addSphere([max, 0, 0], max / 100, black))
+  data.axes.push(addSphere([max, 0, 0], max / 100, yellow))
   data.axes.push(addLine([[max, 0, 0], [min, 0, 0]], red))
-  data.axes.push(addSphere([min, 0, 0], max / 100, orange))
+  data.axes.push(addSphere([min, 0, 0], max / 100, black))
 
 }
 
 export function addAxisY(min, max) {
 
-  data.axes.push(addSphere([0, max, 0], max / 100, black))
+  data.axes.push(addSphere([0, max, 0], max / 100, yellow))
   data.axes.push(addLine([[0, max, 0], [0, min, 0]], green))
-  data.axes.push(addSphere([0, min, 0], max / 100, orange))
+  data.axes.push(addSphere([0, min, 0], max / 100, black))
 
 }
 
 export function addAxisZ(min, max) {
 
-  data.axes.push(addSphere([0, 0, max], max / 100, black))
+  data.axes.push(addSphere([0, 0, max], max / 100, yellow))
   data.axes.push(addLine([[0, 0, max], [0, 0, min]], blue))
-  data.axes.push(addSphere([0, 0, min], max / 100, orange))
+  data.axes.push(addSphere([0, 0, min], max / 100, black))
 
 }
 
