@@ -4,6 +4,8 @@ import {black, white, red, orange, yellow, green, blue} from "./libs/colors.mjs"
 
 import {standardMaterial} from "./libs/materials.mjs"
 
+import {addText} from "./libs/text.mjs"
+
 import {importSTL} from "./libs/stl.mjs"
 import {importOBJ} from "./libs/obj.mjs"
 
