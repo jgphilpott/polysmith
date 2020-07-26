@@ -4,11 +4,11 @@ import {black, white, red, orange, yellow, green, blue} from "./libs/colors.mjs"
 
 import {standardMaterial} from "./libs/materials.mjs"
 
-import {addBox} from "./libs/geometries/boxes.mjs"
-import {addCylinder} from "./libs/geometries/cylinders.mjs"
-import {addLine} from "./libs/geometries/lines.mjs"
-import {addSphere} from "./libs/geometries/spheres.mjs"
-import {addText} from "./libs/geometries/text.mjs"
+import {newBox, addBox} from "./libs/geometries/boxes.mjs"
+import {newCylinder, addCylinder} from "./libs/geometries/cylinders.mjs"
+import {newLine, addLine} from "./libs/geometries/lines.mjs"
+import {newSphere, addSphere} from "./libs/geometries/spheres.mjs"
+import {newText, addText} from "./libs/geometries/text.mjs"
 
 import {importSTL} from "./libs/files/stl.mjs"
 import {importOBJ} from "./libs/files/obj.mjs"
