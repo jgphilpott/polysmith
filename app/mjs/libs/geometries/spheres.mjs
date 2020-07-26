@@ -4,7 +4,7 @@ import {black, white, red, yellow, green, blue} from "../colors.mjs"
 
 import {standardMaterial} from "../materials.mjs"
 
-export function newSphere(position=[0, 0, 0], radius=1, color=black) {
+export function newSphere(radius=1, position=[0, 0, 0], color=black) {
 
   let geometry = new THREE.SphereGeometry(radius, 42, 42)
   let sphere = new THREE.Mesh(geometry, standardMaterial(color))
@@ -15,9 +15,9 @@ export function newSphere(position=[0, 0, 0], radius=1, color=black) {
 
 }
 
-export function addSphere(position=[0, 0, 0], radius=1, color=black) {
+export function addSphere(radius=1, position=[0, 0, 0], color=black) {
 
-  let sphere = newSphere(position, radius, color)
+  let sphere = newSphere(radius, position, color)
 
   data.scene.add(sphere)
 
