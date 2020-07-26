@@ -1,5 +1,5 @@
-import {addLine} from "./lines.mjs"
-import {addSphere} from "./spheres.mjs"
+import {addLine} from "./geometries/lines.mjs"
+import {addSphere} from "./geometries/spheres.mjs"
 
 import {black, white, red, orange, yellow, green, blue} from "./colors.mjs"
 
