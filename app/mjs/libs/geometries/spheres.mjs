@@ -1,3 +1,5 @@
+// Link: https://threejs.org/docs/#api/en/geometries/SphereGeometry
+
 import {black, white, red, yellow, green, blue} from "../colors.mjs"
 
 import {standardMaterial} from "../materials.mjs"

@@ -1,3 +1,5 @@
+// Linl: https://threejs.org/docs/#api/en/objects/Line
+
 import {black, white, red, yellow, green, blue} from "../colors.mjs"
 
 import {lineMaterial} from "../materials.mjs"
