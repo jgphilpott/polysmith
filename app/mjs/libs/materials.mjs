@@ -1,6 +1,10 @@
 import {black, white, red, orange, yellow, green, blue} from "./colors.mjs"
 
-export let standardMaterial = new THREE.MeshStandardMaterial({"color": black})
+export function standardMaterial(color=black) {
+
+  return new THREE.MeshStandardMaterial({"color": color})
+
+}
 
 export function lineMaterial(color=black, linewidth=1) {
 
