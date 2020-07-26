@@ -6,8 +6,8 @@ import {standardMaterial} from "./libs/materials.mjs"
 
 import {addText} from "./libs/text.mjs"
 
-import {importSTL} from "./libs/stl.mjs"
-import {importOBJ} from "./libs/obj.mjs"
+import {importSTL} from "./libs/files/stl.mjs"
+import {importOBJ} from "./libs/files/obj.mjs"
 
 $(document).ready(function() {
 

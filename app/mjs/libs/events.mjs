@@ -1,7 +1,7 @@
 import {addAxes, removeAxes} from "./axes.mjs"
 
-import {exportSTL} from "./stl.mjs"
-import {exportOBJ} from "./obj.mjs"
+import {exportSTL} from "./files/stl.mjs"
+import {exportOBJ} from "./files/obj.mjs"
 
 export function addEvents() {
 
