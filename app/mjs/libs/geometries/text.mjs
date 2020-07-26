@@ -32,7 +32,7 @@ export function addText(text, size=12, font="ubuntu") {
 
     let textGeometry = newText(text, size, font)
 
-    let mesh = new THREE.Mesh(textGeometry, standardMaterial)
+    let mesh = new THREE.Mesh(textGeometry, standardMaterial())
 
     data.meshes.push(mesh)
     data.scene.add(mesh)
