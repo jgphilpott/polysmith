@@ -13,6 +13,8 @@ import {addText} from "./libs/geometries/text.mjs"
 import {importSTL} from "./libs/files/stl.mjs"
 import {importOBJ} from "./libs/files/obj.mjs"
 
+import {sleep} from "./libs/time.mjs"
+
 $(document).ready(function() {
 
   let width = $(window).width()
