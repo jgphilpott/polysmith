@@ -2,9 +2,9 @@
 
 import {black, white, red, orange, yellow, green, blue} from "./colors.mjs"
 
-export function standardMaterial(color=black) {
+export function standardMaterial(color=black, doubleSided=THREE.DoubleSide) {
 
-  return new THREE.MeshStandardMaterial({"color": color})
+  return new THREE.MeshStandardMaterial({"color": color, "side": doubleSided})
 
 }
 
