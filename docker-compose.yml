@@ -1,5 +1,5 @@
 web:
-  container_name: shapeMaker
+  container_name: polymaker
   build: .
   volumes:
    - .:/root
