@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="310" height="180" src="https://github.com/jgphilpott/shapeMaker/blob/master/app/imgs/blox.png">
+  <img width="300" height="300" src="https://github.com/jgphilpott/shapeMaker/blob/master/app/imgs/icon.png">
 </p>
 
 # shapeMaker
