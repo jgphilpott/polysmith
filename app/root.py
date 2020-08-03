@@ -7,7 +7,7 @@ from urllib.request import urlretrieve
 
 from sass import compile
 
-app = Flask("shapeMaker", template_folder="app", static_folder="app")
+app = Flask("Polymaker", template_folder="app", static_folder="app")
 
 @app.route("/")
 def home():
