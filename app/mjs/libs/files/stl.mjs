@@ -20,6 +20,6 @@ export function exportSTL() {
 
   let blob = new Blob([exporter.parse(data.scene)], {"type": "text/plain"})
 
-  saveAs(blob, "shape.stl")
+  saveAs(blob, "poly.stl")
 
 }
