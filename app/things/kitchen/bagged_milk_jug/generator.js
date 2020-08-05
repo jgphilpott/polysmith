@@ -9,6 +9,10 @@ function generator(lang="en") {
   let bottomRadius = 40
   let radialSegments = 24
 
+  let handleHeight = 100
+  let handleRadius = 12
+  let handleAngle = 35
+
   let cleanup = newBox(offset * 2, topRadius * 3, height, [0, 0, thickness])
   let base = addBox(offset * 2, (bottomRadius + thickness) * 2, thickness, [0, 0, - (height / 2)  + (thickness / 2)])
   let topAngle = newBox(topRadius * 3, topRadius * 3, offset * 2, [0, 0, (height / 2) + offset - ((topRadius + thickness + offset) * Math.tan(angle * (Math.PI / 180)))]).rotateY(- angle * (Math.PI / 180))
@@ -39,5 +43,19 @@ function generator(lang="en") {
   addQuadrilateral(rightInteriorWall[0], rightInteriorWall[1], rightInteriorWall[2], rightInteriorWall[3])
   addQuadrilateral(rightExteriorWall[0], rightExteriorWall[1], rightExteriorWall[2], rightExteriorWall[3])
   addQuadrilateral(rightExteriorWall[0], rightInteriorWall[0], rightInteriorWall[1], rightExteriorWall[1])
+
+  let handle = addCylinder(handleHeight, handleRadius, handleRadius, [- (offset + bottomRadius + thickness + (handleRadius * 3)), 0, 0]).rotateX(Math.PI / 2)
+
+  let handleTopSupport = newBox(handleRadius * 8, handleRadius * 2, thickness * 2, [- (offset + bottomRadius + thickness + (handleRadius * 2)), 0, (handleHeight / 2) - (thickness * 2)]).rotateY(- (handleAngle * (Math.PI / 180)))
+  let handleBottomSupport = newBox(handleRadius * 8, handleRadius * 2, thickness * 2, [- (offset + bottomRadius + thickness + (handleRadius * 2)), 0, - ((handleHeight / 2) - (thickness * 2))]).rotateY(handleAngle * (Math.PI / 180))
+
+  handleTopSupport = cutMesh(handleTopSupport, backInteriorCylinder)
+  handleBottomSupport = cutMesh(handleBottomSupport, backInteriorCylinder)
+
+  handleTopSupport.position.setZ((handleHeight / 2) - (thickness * 2))
+  handleBottomSupport.position.setZ(- ((handleHeight / 2) - (thickness * 2)))
+
+  data.scene.add(handleTopSupport)
+  data.scene.add(handleBottomSupport)
 
 }
