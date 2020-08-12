@@ -1,5 +1,6 @@
 # Models
 *.gcode
+*.scad
 
 # Libs
 app/libs
