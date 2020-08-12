@@ -1,3 +1,6 @@
+# Models
+*.gcode
+
 # Libs
 app/libs
 
