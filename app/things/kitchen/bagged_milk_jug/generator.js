@@ -44,17 +44,52 @@ function generator(lang="en") {
   addQuadrilateral(rightExteriorWall[0], rightExteriorWall[1], rightExteriorWall[2], rightExteriorWall[3])
   addQuadrilateral(rightExteriorWall[0], rightInteriorWall[0], rightInteriorWall[1], rightExteriorWall[1])
 
-  let handle = addCylinder(handleHeight, handleRadius, handleRadius, [- (offset + bottomRadius + thickness + (handleRadius * 3)), 0, 0]).rotateX(Math.PI / 2)
+  let handle = newCylinder(handleHeight, handleRadius, handleRadius, [- (offset + bottomRadius + thickness + (handleRadius * 3)), 0, 0]).rotateX(Math.PI / 2)
 
-  let handleTopSupport = newBox(handleRadius * 8, handleRadius * 2, thickness * 2, [- (offset + bottomRadius + thickness + (handleRadius * 2)), 0, (handleHeight / 2) - (thickness * 2)]).rotateY(- (handleAngle * (Math.PI / 180)))
-  let handleBottomSupport = newBox(handleRadius * 8, handleRadius * 2, thickness * 2, [- (offset + bottomRadius + thickness + (handleRadius * 2)), 0, - ((handleHeight / 2) - (thickness * 2))]).rotateY(handleAngle * (Math.PI / 180))
+  let handleTopSupport = newBox(handleRadius * 8, handleRadius * 2, thickness * 5, [- (offset + bottomRadius + thickness + (handleRadius * 2)), 0, (handleHeight / 2) - (thickness * 2)]).rotateY(- (handleAngle * (Math.PI / 180)))
+  let handleBottomSupport = newBox(handleRadius * 8, handleRadius * 2, thickness * 5, [- (offset + bottomRadius + thickness + (handleRadius * 2)), 0, - ((handleHeight / 2) - (thickness * 2))]).rotateY(handleAngle * (Math.PI / 180))
 
   handleTopSupport = cutMesh(handleTopSupport, backInteriorCylinder)
   handleBottomSupport = cutMesh(handleBottomSupport, backInteriorCylinder)
 
   handleTopSupport.position.setZ((handleHeight / 2) - (thickness * 2))
+  handleTopSupport.position.setX(- 1.2)
   handleBottomSupport.position.setZ(- ((handleHeight / 2) - (thickness * 2)))
 
+  let handleCleanup = newBox(handleRadius * 4, handleRadius * 4, handleHeight * 2, [- (offset + bottomRadius + thickness + (handleRadius * 5)), 0, 0], red)
+
+  handleTopSupport = cutMesh(handleTopSupport, handleCleanup)
+  handleBottomSupport = cutMesh(handleBottomSupport, handleCleanup)
+
+  let handleTopCleanup = newBox(handleRadius * 24, handleRadius * 4, handleRadius * 2, [- (offset + bottomRadius + thickness + (handleRadius * 3)), 0, handleHeight]).rotateY(- (handleAngle * (Math.PI / 180)))
+  let handleBottomCleanup = newBox(handleRadius * 24, handleRadius * 4, handleRadius * 2, [- (offset + bottomRadius + thickness + (handleRadius * 3)), 0, - (handleHeight / 1)]).rotateY(handleAngle * (Math.PI / 180))
+
+  handle = cutMesh(cutMesh(handle, handleTopCleanup), handleBottomCleanup)
+  handleTopSupport = cutMesh(handleTopSupport, handleTopCleanup)
+  handleBottomSupport = cutMesh(handleBottomSupport, handleBottomCleanup)
+
+  if (lang == "en") {
+
+    let text = addText("MILK")
+
+  } else if (lang == "fr") {
+
+    let text = addText("LAIT")
+
+  } else {
+
+    let text = addText("MILK")
+
+  }
+
+  sleep(2000).then(() => {
+
+    data.meshes[0].position.set(- (offset + bottomRadius + thickness + (handleRadius * 3.4)), - 6, handleHeight / 2.6)
+    data.meshes[0].rotateY(- (handleAngle * (Math.PI / 180)))
+
+  })
+
+  data.scene.add(handle)
   data.scene.add(handleTopSupport)
   data.scene.add(handleBottomSupport)
 
