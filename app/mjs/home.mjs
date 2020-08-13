@@ -1,3 +1,5 @@
+import * as tools from "./libs/tools.mjs"
+
 import {setup} from "./libs/setup.mjs"
 
 import {black, white, red, orange, yellow, green, blue} from "./libs/colors.mjs"

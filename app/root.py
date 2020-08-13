@@ -37,6 +37,8 @@ urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/8880636d522afded0
 
 urlretrieve("https://raw.githubusercontent.com/eligrey/FileSaver.js/master/src/FileSaver.js", libs_dir + "/FileSaver.js")
 
+urlretrieve("https://gist.githubusercontent.com/jgphilpott/6332dc7f5636db9ba455e1575407c496/raw/b72589532af0b7c63e321b15254acbb848248209/scaling.js", libs_dir + "/tools.js")
+
 compile(dirname=("app/sass", "app/css"))
 
 app.run(host="0.0.0.0", port=4000, debug=True)
