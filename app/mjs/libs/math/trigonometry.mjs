@@ -15,10 +15,30 @@ export function angle4angles(x=null, y=null) {
 
 }
 
-export function angle4sides() {
+// Remember: SOH-CAH-TOA
+export function angle4sides(hypotenuse=null, adjacent=null, opposite=null) {
+
+  if (typeof(hypotenuse) == "number" && !adjacent && typeof(opposite) == "number") {
+
+    return radian2degree(Math.asin(opposite / hypotenuse))
+
+  } else if (typeof(hypotenuse) == "number" && typeof(adjacent) == "number" && !opposite) {
+
+    return radian2degree(Math.acos(adjacent / hypotenuse))
+
+  } else if (!hypotenuse && typeof(adjacent) == "number" && typeof(opposite) == "number") {
+
+    return radian2degree(Math.atan(opposite / adjacent))
+
+  } else {
+
+    return null
+
+  }
 
 }
 
+// Remember: SOH-CAH-TOA
 export function side4angles() {
 
 }
