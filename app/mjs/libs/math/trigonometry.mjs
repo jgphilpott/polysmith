@@ -1,5 +1,30 @@
+import {degree2radian, radian2degree} from "../tools.mjs"
+
+// In all triangles the sum of the angles is always equal to 180 degrees.
+export function angle4angles(x=null, y=null) {
+
+  if (x + y < 180) {
+
+    return 180 - x - y
+
+  } else {
+
+    return null
+
+  }
+
+}
+
+export function angle4sides() {
+
+}
+
+export function side4angles() {
+
+}
+
 // Pythagorean Theorem is a^2 + b^2 = c^2 .. where C is the hypotenuse.
-export function pythagoreanTheorem(a=null, b=null, c=null) {
+export function side4sides(a=null, b=null, c=null) {
 
   if (typeof(a) == "number" && typeof(b) == "number" && !c) {
 
