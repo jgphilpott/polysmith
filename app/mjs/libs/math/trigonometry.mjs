@@ -39,11 +39,69 @@ export function angle4sides(hypotenuse=null, adjacent=null, opposite=null) {
 }
 
 // Remember: SOH-CAH-TOA
-export function side4angles() {
+export function side4angle(angle=null, hypotenuse=null, adjacent=null, opposite=null) {
+
+  if (typeof(angle) == "number" && angle < 180) {
+
+    if (typeof(hypotenuse) == "number") {
+
+      if (adjacent) {
+
+        return hypotenuse * Math.cos(degree2radian(angle))
+
+      } else if (opposite) {
+
+        return hypotenuse * Math.sin(degree2radian(angle))
+
+      } else {
+
+        return null
+
+      }
+
+    } else if (typeof(adjacent) == "number") {
+
+      if (hypotenuse) {
+
+        return adjacent / Math.cos(degree2radian(angle))
+
+      } else if (opposite) {
+
+        return adjacent * Math.tan(degree2radian(angle))
+
+      } else {
+
+        return null
+
+      }
+
+    } else if (typeof(opposite) == "number") {
+
+      if (hypotenuse) {
+
+        return opposite / Math.sin(degree2radian(angle))
+
+      } else if (adjacent) {
+
+        return opposite / Math.tan(degree2radian(angle))
+
+      } else {
+
+        return null
+
+      }
+
+    }
+
+  } else {
+
+    return null
+
+  }
 
 }
 
-// Pythagorean Theorem is a^2 + b^2 = c^2 .. where C is the hypotenuse.
+// Pythagorean Theorem is a^2 + b^2 = c^2 ... where 'c' is the hypotenuse.
 export function side4sides(a=null, b=null, c=null) {
 
   if (typeof(a) == "number" && typeof(b) == "number" && !c) {
