@@ -11,6 +11,11 @@ function generator(language="english") {
 
   let cylinderOffset = 15
 
+  let handleThickness = 10
+  let handleHeight = 100
+  let handleRadius = 12
+  let handleAngle = 55
+
   let frontInteriorCylinder = newCylinder(height, topRadius, bottomRadius, [cylinderOffset, thickness, 0], black, radialSegments)
   let frontExteriorCylinder = newCylinder(height, topRadius + thickness, bottomRadius + thickness, [cylinderOffset, 0, 0], black, radialSegments)
 
@@ -34,34 +39,17 @@ function generator(language="english") {
 
   let jug = cutMesh(joinMesh(joinMesh(joinMesh(joinMesh(frontCylinder, backCylinder), leftWall), rightWall), base), topCut)
 
-  // let handleHeight = 100
-  // let handleRadius = 12
-  // let handleAngle = 35
-  //
-  // let handle = newCylinder(handleHeight, handleRadius, handleRadius, [- (offset + bottomRadius + thickness + (handleRadius * 3)), 0, 0]).rotateX(Math.PI / 2)
-  //
-  // let handleTopSupport = newBox(handleRadius * 8, handleRadius * 2, thickness * 5, [- (offset + bottomRadius + thickness + (handleRadius * 2)), 0, (handleHeight / 2) - (thickness * 2)]).rotateY(- (handleAngle * (Math.PI / 180)))
-  // let handleBottomSupport = newBox(handleRadius * 8, handleRadius * 2, thickness * 5, [- (offset + bottomRadius + thickness + (handleRadius * 2)), 0, - ((handleHeight / 2) - (thickness * 2))]).rotateY(handleAngle * (Math.PI / 180))
-  //
-  // handleTopSupport = cutMesh(handleTopSupport, backInteriorCylinder)
-  // handleBottomSupport = cutMesh(handleBottomSupport, backInteriorCylinder)
-  //
-  // handleTopSupport.position.setZ((handleHeight / 2) - (thickness * 2))
-  // handleTopSupport.position.setX(- 1.2)
-  // handleBottomSupport.position.setZ(- ((handleHeight / 2) - (thickness * 2)))
-  //
-  // let handleCleanup = newBox(handleRadius * 4, handleRadius * 4, handleHeight * 2, [- (offset + bottomRadius + thickness + (handleRadius * 5)), 0, 0], red)
-  //
-  // handleTopSupport = cutMesh(handleTopSupport, handleCleanup)
-  // handleBottomSupport = cutMesh(handleBottomSupport, handleCleanup)
-  //
-  // let handleTopCleanup = newBox(handleRadius * 24, handleRadius * 4, handleRadius * 2, [- (offset + bottomRadius + thickness + (handleRadius * 3)), 0, handleHeight]).rotateY(- (handleAngle * (Math.PI / 180)))
-  // let handleBottomCleanup = newBox(handleRadius * 24, handleRadius * 4, handleRadius * 2, [- (offset + bottomRadius + thickness + (handleRadius * 3)), 0, - (handleHeight / 1)]).rotateY(handleAngle * (Math.PI / 180))
-  //
-  // handle = cutMesh(cutMesh(handle, handleTopCleanup), handleBottomCleanup)
-  // handleTopSupport = cutMesh(handleTopSupport, handleTopCleanup)
-  // handleBottomSupport = cutMesh(handleBottomSupport, handleBottomCleanup)
-  //
+  let handleShaft = newCylinder(handleHeight, handleRadius, handleRadius, [-(cylinderOffset + bottomRadius + thickness + (handleRadius * 3)), 0, 0], black, radialSegments * 10)
+  let handleCleanup = newBox(handleRadius * 4, handleHeight * 2, handleRadius * 4, [-(cylinderOffset + bottomRadius + thickness + (handleRadius * 5)), 0, 0])
+
+  let handleTopSupport = cutMesh(newBox(handleThickness, handleHeight, handleRadius * 2, [-(cylinderOffset + topRadius + (handleRadius * 2)), -handleThickness, 0]).rotateZ(tools.degree2radian(-handleAngle)), handleCleanup)
+  let handleBottomSupport = cutMesh(newBox(handleThickness, handleHeight, handleRadius * 2, [-(cylinderOffset + topRadius + (handleRadius * 2)), handleThickness, 0]).rotateZ(tools.degree2radian(handleAngle)), handleCleanup)
+
+  let handleTopCleanup = newBox(handleThickness * 2, handleHeight, handleRadius * 3, [-(cylinderOffset + topRadius + (handleRadius * 2) + (handleThickness * 1.5)), -(handleThickness * 2), 0]).rotateZ(tools.degree2radian(-handleAngle))
+  let handleBottomCleanup = newBox(handleThickness * 2, handleHeight, handleRadius * 3, [-(cylinderOffset + topRadius + (handleRadius * 2) + (handleThickness * 1.5)), handleThickness * 2, 0]).rotateZ(tools.degree2radian(handleAngle))
+
+  let handle = cutMesh(cutMesh(cutMesh(joinMesh(joinMesh(handleShaft, handleTopSupport), handleBottomSupport), handleTopCleanup), handleBottomCleanup), backInteriorCylinder)
+
   // if (lang == "en") {
   //
   //   let text = addText("MILK")
@@ -83,6 +71,8 @@ function generator(language="english") {
   //
   // })
 
-  data.scene.add(jug.rotateX(Math.PI / 2))
+  let milkJug = joinMesh(jug, handle)
+
+  data.scene.add(milkJug.rotateX(tools.degree2radian(90)))
 
 }
