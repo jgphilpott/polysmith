@@ -20,9 +20,9 @@ if not exists(libs_dir):
 
     makedirs(libs_dir)
 
-urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js", libs_dir + "/jQuery.js")
+urlretrieve("https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js", libs_dir + "/jQuery.js")
 
-urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js", libs_dir + "/three.js")
+urlretrieve("https://ajax.googleapis.com/ajax/libs/threejs/r84/three.min.js", libs_dir + "/three.js")
 
 urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/23f814719b2d199e324448751862f2a5fc7d27a5/examples/js/controls/OrbitControls.js", libs_dir + "/orbitControls.js")
 
