@@ -2,7 +2,7 @@
 
 import {standardMaterial} from "../materials.mjs"
 
-export function newText(text, size=12, height=3, bevel=false, font="ubuntu") {
+export function newText(text, size=12, height=2, bevel=false, font="arial") {
 
   let textGeometry = new THREE.TextGeometry(text, {
 
@@ -26,7 +26,7 @@ export function newText(text, size=12, height=3, bevel=false, font="ubuntu") {
 
 }
 
-export function addText(text, size=12, height=3, bevel=false, font="ubuntu") {
+export function addText(text, size=12, height=2, bevel=false, font="arial") {
 
   let loader = new THREE.FontLoader()
 
