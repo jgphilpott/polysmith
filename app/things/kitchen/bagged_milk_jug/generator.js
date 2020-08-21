@@ -50,29 +50,32 @@ function generator(language="english") {
 
   let handle = cutMesh(cutMesh(cutMesh(joinMesh(joinMesh(handleShaft, handleTopSupport), handleBottomSupport), handleTopCleanup), handleBottomCleanup), backInteriorCylinder)
 
-  // if (lang == "en") {
-  //
-  //   let text = addText("MILK")
-  //
-  // } else if (lang == "fr") {
-  //
-  //   let text = addText("LAIT")
-  //
-  // } else {
-  //
-  //   let text = addText("MILK")
-  //
-  // }
-  //
-  // sleep(2000).then(() => {
-  //
-  //   data.meshes[0].position.set(- (offset + bottomRadius + thickness + (handleRadius * 3.4)), - 6, handleHeight / 2.6)
-  //   data.meshes[0].rotateY(- (handleAngle * (Math.PI / 180)))
-  //
-  // })
+  if (language == "english") {
 
-  let milkJug = joinMesh(jug, handle)
+    addText("MILK", 12, 2)
 
-  data.scene.add(milkJug.rotateX(tools.degree2radian(90)))
+  } else if (language == "french") {
+
+    addText("LAIT", 12, 4)
+
+  } else {
+
+    addText("")
+
+  }
+
+  sleep(1000).then(() => {
+
+    let text = data.meshes[0].rotateY(tools.degree2radian(handleAngle - 90))
+
+    let boundingBox = tools.getBoundingBox(text)
+
+    text.position.set(tools.centerX(boundingBox) - (cylinderOffset + bottomRadius + thickness + (handleRadius * 1.8)), tools.centerY(boundingBox), tools.centerZ(boundingBox) + (handleHeight / 2.5))
+
+    let milkJug = joinMesh(jug, handle)
+
+    data.scene.add(milkJug.rotateX(tools.degree2radian(90)))
+
+  })
 
 }
