@@ -40,3 +40,21 @@ export function getBoundingBox(mesh) {
   }
 
 }
+
+export function centerX(boundingBox) {
+
+  return - boundingBox.min.x - (Math.abs(boundingBox.max.x - boundingBox.min.x) / 2)
+
+}
+
+export function centerY(boundingBox) {
+
+  return - boundingBox.min.y - (Math.abs(boundingBox.max.y - boundingBox.min.y) / 2)
+
+}
+
+export function centerZ(boundingBox) {
+
+  return - boundingBox.min.z - (Math.abs(boundingBox.max.z - boundingBox.min.z) / 2)
+
+}
