@@ -50,13 +50,21 @@ function generator(language="english") {
 
   let handle = cutMesh(cutMesh(cutMesh(joinMesh(joinMesh(handleShaft, handleTopSupport), handleBottomSupport), handleTopCleanup), handleBottomCleanup), backInteriorCylinder)
 
-  if (language == "english") {
+  if (language == "cantonese") {
+
+    addText("牛奶", 12, 6, false, "unifont")
+
+  } else if (language == "english") {
 
     addText("MILK", 12, 2)
 
   } else if (language == "french") {
 
     addText("LAIT", 12, 4)
+
+  } else if (language == "mandarin") {
+
+    addText("牛奶", 12, 6, false, "unifont")
 
   } else {
 
