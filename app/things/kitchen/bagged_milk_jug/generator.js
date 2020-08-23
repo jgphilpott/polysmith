@@ -54,6 +54,14 @@ function generator(language="english") {
 
     addText("牛奶", 12, 6, false, "unifont")
 
+  } else if (language == "czech") {
+
+    addText("MLÉKO", 8, 3)
+
+  } else if (language == "dutch") {
+
+    addText("MELK", 10, 3)
+
   } else if (language == "english") {
 
     addText("MILK", 12, 2)
@@ -61,6 +69,18 @@ function generator(language="english") {
   } else if (language == "french") {
 
     addText("LAIT", 12, 4)
+
+  } else if (language == "german") {
+
+    addText("MILCH", 9, 3)
+
+  } else if (language == "greek") {
+
+    addText("ΓΑΛΑ", 10, 4)
+
+  } else if (language == "irish") {
+
+    addText("BAINNE", 7, 3.14)
 
   } else if (language == "mandarin") {
 
