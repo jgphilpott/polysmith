@@ -90,9 +90,21 @@ function generator(language="english") {
 
     addText("牛乳", 12, 6, false, "unifont")
 
+  } else if (language == "korean") {
+
+    addText("우유", 12, 6, false, "unifont")
+
+  } else if (language == "latin") {
+
+    addText("LATEX", 8, 4)
+
   } else if (language == "mandarin") {
 
     addText("牛奶", 12, 6, false, "unifont")
+
+  } else if (language == "polish") {
+
+    addText("MLEKO", 8, 3)
 
   } else {
 
