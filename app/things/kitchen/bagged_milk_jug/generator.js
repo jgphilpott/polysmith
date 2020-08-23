@@ -82,6 +82,14 @@ function generator(language="english") {
 
     addText("BAINNE", 7, 3.14)
 
+  } else if (language == "italian") {
+
+    addText("LATTE", 8, 4)
+
+  } else if (language == "japanese") {
+
+    addText("牛乳", 12, 6, false, "unifont")
+
   } else if (language == "mandarin") {
 
     addText("牛奶", 12, 6, false, "unifont")
