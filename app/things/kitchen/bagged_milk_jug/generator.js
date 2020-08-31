@@ -50,7 +50,11 @@ function generator(language="english") {
 
   let handle = cutMesh(cutMesh(cutMesh(joinMesh(joinMesh(handleShaft, handleTopSupport), handleBottomSupport), handleTopCleanup), handleBottomCleanup), backInteriorCylinder)
 
-  if (language == "cantonese") {
+  if (language == "afrikaans") {
+
+    addText("MELK", 8, 6)
+
+  } else if (language == "cantonese") {
 
     addText("牛奶", 12, 6, false, "unifont")
 
@@ -77,6 +81,14 @@ function generator(language="english") {
   } else if (language == "greek") {
 
     addText("ΓΑΛΑ", 10, 4)
+
+  } else if (language == "hungarian") {
+
+    addText("TEJ", 12, 7)
+
+  } else if (language == "icelandic") {
+
+    addText("Mjólk", 9, 7)
 
   } else if (language == "irish") {
 
@@ -105,6 +117,42 @@ function generator(language="english") {
   } else if (language == "polish") {
 
     addText("MLEKO", 8, 3)
+
+  } else if (language == "portuguese") {
+
+    addText("LEITE", 10, 3)
+
+  } else if (language == "punjabi") {
+
+    addText("ਦੁੱਧ", 12, 5, false, "unifont")
+
+  } else if (language == "russian") {
+
+    addText("МОЛОКО", 6.5, 3)
+
+  } else if (language == "spanish") {
+
+    addText("LECHE", 8, 3)
+
+  } else if (language == "swahili") {
+
+    addText("MILIKI", 9, 4)
+
+  } else if (language == "swedish") {
+
+    addText("MJÖLK", 7, 5)
+
+  } else if (language == "turkish") {
+
+    addText("SÜT", 11, 6)
+
+  } else if (language == "vietnamese") {
+
+    addText("SỮA", 10, 6)
+
+  } else if (language == "zulu") {
+
+    addText("UBISI", 10, 4)
 
   } else {
 
