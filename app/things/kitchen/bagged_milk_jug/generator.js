@@ -136,7 +136,7 @@ function generator(language="english") {
 
   } else if (language == "swahili") {
 
-    addText("MILIKI", 9, 4)
+    addText("MAZIWA", 7, 3)
 
   } else if (language == "swedish") {
 
