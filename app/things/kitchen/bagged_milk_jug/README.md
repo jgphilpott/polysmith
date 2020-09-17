@@ -1,8 +1,14 @@
-# Promo Video
+# Bagged Milk Jug (Low Polygon)
+
+## Intro
+
+The Bagged Milk Jug is a jug designed to carry plastic milk bags. The designs are available in over two dozen languages (translated by Google) as well as a blank model.
+
+## Promo Video
 
  - [YouTube](https://youtu.be/iK1R7mIFZOA)
 
-# STL Files
+## STL Files
 
  - [Cults3D](https://cults3d.com/en/3d-model/home/bagged-milk-jug-low-polygon)
  - [GitHub](https://github.com/jgphilpott/polymaker/tree/master/app/things/kitchen/bagged_milk_jug/stl)
