@@ -1,5 +1,5 @@
 function generator() {
 
-  importSTL("./app/things/humanoid/head/mask.stl")
+  importSTL("./app/things/humanoid/head/face.stl")
 
 }
