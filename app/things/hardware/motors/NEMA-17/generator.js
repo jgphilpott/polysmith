@@ -1,13 +1,13 @@
 function generator(collar=false) {
 
-  let shaftLength = 20
+  let shaftLength = 22
   let shaftRadius = 2.5
 
   let cutLength = 18
-  let cutDepth = 0.8
+  let cutDepth = 0.5
 
   let collarLength = 2
-  let collarRadius = 11
+  let collarRadius = 12
 
   let shaft = newCylinder(shaftLength, shaftRadius, shaftRadius)
   let cut = newBox(shaftLength, shaftLength, shaftLength, [0, shaftLength - cutLength, (shaftLength / 2 + shaftRadius) - cutDepth])
