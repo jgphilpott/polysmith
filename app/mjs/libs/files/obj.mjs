@@ -20,6 +20,6 @@ export function exportOBJ() {
 
   let blob = new Blob([exporter.parse(data.scene)], {"type": "text/plain"})
 
-  saveAs(blob, "poly.obj")
+  saveAs(blob, data.name + ".obj")
 
 }

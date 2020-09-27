@@ -8,6 +8,8 @@ import {addAxes} from "./axes.mjs"
 
 export function setup(width, height, scale=150) {
 
+  data.name = "Poly"
+
   data.width = width
   data.height = height
 
