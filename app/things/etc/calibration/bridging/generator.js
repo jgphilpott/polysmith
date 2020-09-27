@@ -1,4 +1,4 @@
-function generator(bridgeLength=1) {
+function generator(bridgeLength=10) {
 
   let segments = bridgeLength * 2
   let segmentWidth = 5
