@@ -1,5 +1,7 @@
 import {black, white} from "../colors.mjs"
 
+import {addAxes, removeAxes} from "../axes.mjs"
+
 export function importOBJ(path) {
 
   let loader = new THREE.OBJLoader()
@@ -16,10 +18,14 @@ export function importOBJ(path) {
 
 export function exportOBJ() {
 
+  removeAxes()
+
   let exporter = new THREE.OBJExporter()
 
   let blob = new Blob([exporter.parse(data.scene)], {"type": "text/plain"})
 
   saveAs(blob, data.name + ".obj")
+
+  addAxes()
 
 }

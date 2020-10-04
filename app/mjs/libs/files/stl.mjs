@@ -1,5 +1,7 @@
 import {black, white} from "../colors.mjs"
 
+import {addAxes, removeAxes} from "../axes.mjs"
+
 export function importSTL(path) {
 
   let loader = new THREE.STLLoader()
@@ -16,10 +18,14 @@ export function importSTL(path) {
 
 export function exportSTL() {
 
+  removeAxes()
+
   let exporter = new THREE.STLExporter()
 
   let blob = new Blob([exporter.parse(data.scene)], {"type": "text/plain"})
 
   saveAs(blob, data.name + ".stl")
+
+  addAxes()
 
 }
