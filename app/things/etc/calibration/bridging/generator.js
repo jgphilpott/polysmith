@@ -1,5 +1,7 @@
 function generator(bridgeLength=10) {
 
+  data.name = "Bridging Test (" + bridgeLength + " cm)"
+
   let segments = bridgeLength * 2
   let segmentWidth = 5
 

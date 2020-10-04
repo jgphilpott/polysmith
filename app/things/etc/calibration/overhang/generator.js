@@ -1,5 +1,7 @@
 function generator(degree=10, size=50) {
 
+  data.name = "Overhang Test (" + degree + "° Steps)"
+
   let steps = (90 / degree) - 1
 
   let thickness = 5
