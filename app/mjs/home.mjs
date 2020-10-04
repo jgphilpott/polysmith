@@ -17,7 +17,10 @@ import {newText, addText} from "./libs/geometries/text.mjs"
 import {newTriangle, addTriangle} from "./libs/geometries/triangles.mjs"
 
 import {importSTL} from "./libs/files/stl.mjs"
+import {exportSTL} from "./libs/files/stl.mjs"
+
 import {importOBJ} from "./libs/files/obj.mjs"
+import {exportOBJ} from "./libs/files/obj.mjs"
 
 import {sleep} from "./libs/time.mjs"
 
