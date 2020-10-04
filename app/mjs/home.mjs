@@ -4,7 +4,7 @@ import * as tools from "./libs/tools.mjs"
 
 import * as trig from "./libs/math/trigonometry.mjs"
 
-import {black, white, red, orange, yellow, green, blue} from "./libs/colors.mjs"
+import {black, white, red, orange, yellow, green, blue, purple, pink} from "./libs/colors.mjs"
 
 import {standardMaterial} from "./libs/materials.mjs"
 
