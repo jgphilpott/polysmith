@@ -1,27 +1,25 @@
-function generator(bridgeLength=10) {
+function generator(maxLength=10) {
 
-  data.name = "Bridging Test (" + bridgeLength + " cm)"
+  for (let i = 1; i <= maxLength; i++) {
 
-  let segments = bridgeLength * 2
-  let segmentWidth = 5
+    data.name = "Bridging Test (" + i + " cm)"
 
-  let baseWidth = ((segments * 2) - 1) * segmentWidth
-  let baseLength = (bridgeLength * 10) + (segmentWidth * 2)
-  let base = newBox(baseLength + segmentWidth, baseWidth + segmentWidth, segmentWidth, [baseLength / 2, baseWidth / 2, - (segmentWidth / 2)])
+    let bridgeLength = i * 10
+    let bridgeWidth = 5
 
-  for (let i = 0; i < segments; i++) {
+    let span = newBox(bridgeLength + (bridgeWidth * 2), bridgeWidth, bridgeWidth, [0, 0, bridgeWidth])
 
-    let pillar0 = newBox(segmentWidth, segmentWidth, segmentWidth * 3, [segmentWidth / 2, (segmentWidth / 2) + (i * 10), segmentWidth / 2])
-    let pillar1 = newBox(segmentWidth, segmentWidth, segmentWidth * 3, [(segmentWidth / 2) + (i * segmentWidth) + (segmentWidth * 2), (segmentWidth / 2) + (i * 10), segmentWidth / 2])
+    let pillar0 = newBox(bridgeWidth, bridgeWidth, bridgeWidth * 3, [(bridgeLength / 2) + (bridgeWidth / 2), 0, 0])
+    let pillar1 = newBox(bridgeWidth, bridgeWidth, bridgeWidth * 3, [ - ((bridgeLength / 2) + (bridgeWidth / 2)), 0, 0])
 
-    let bridgeLength = (segmentWidth * (i + 1)) + (segmentWidth * 2)
-    let bridge = newBox(bridgeLength, segmentWidth, segmentWidth, [bridgeLength / 2, (segmentWidth / 2) + (i * 10), segmentWidth * 1.5])
-    bridge = joinMesh(joinMesh(bridge, pillar0), pillar1)
+    let base = newBox(bridgeLength + (bridgeWidth * 3), bridgeWidth * 2, bridgeWidth, [0, 0, - bridgeWidth])
 
-    base = joinMesh(base, bridge)
+    let bridge = joinMesh(joinMesh(joinMesh(span, pillar0), pillar1), base)
+
+    data.scene.add(bridge)
+    exportSTL()
+    data.scene.remove(bridge)
 
   }
-
-  data.scene.add(base)
 
 }
