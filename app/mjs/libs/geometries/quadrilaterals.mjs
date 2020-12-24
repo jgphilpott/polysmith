@@ -12,7 +12,7 @@ export function newQuadrilateral(v1=[0, 0, 10], v2=[0, 10, 10], v3=[0, 10, 0], v
   geometry.vertices.push(new THREE.Vector3(v4[0], v4[1], v4[2]))
 
   geometry.faces.push(new THREE.Face3(0, 1, 2))
-  geometry.faces.push(new THREE.Face3(0, 3, 2))
+  geometry.faces.push(new THREE.Face3(2, 3, 0))
 
   let quadrilateral = new THREE.Mesh(geometry, standardMaterial(color))
 
