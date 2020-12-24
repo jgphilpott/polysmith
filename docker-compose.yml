@@ -1,4 +1,4 @@
-web:
+app:
   container_name: polymaker
   build: .
   volumes:
