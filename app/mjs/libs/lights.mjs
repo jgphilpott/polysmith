@@ -7,7 +7,7 @@ export function addLights(position=data.scale) {
   ambientLight.position.set(0, 0, 0)
   data.scene.add(ambientLight)
 
-  let pointLight = new THREE.PointLight(white, 10)
+  let pointLight = new THREE.PointLight(white, 1)
 
   pointLight.position.set(position, position, position)
   data.scene.add(pointLight)

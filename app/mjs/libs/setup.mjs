@@ -6,7 +6,7 @@ import {addControls} from "./controls.mjs"
 import {addEvents} from "./events.mjs"
 import {addAxes} from "./axes.mjs"
 
-export function setup(width, height, scale=150) {
+export function setup(width, height, scale=100) {
 
   data.name = "Poly"
 
