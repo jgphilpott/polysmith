@@ -23,6 +23,7 @@ if not exists(libs_dir):
     urlretrieve("https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js", libs_dir + "/jQuery.js")
 
     urlretrieve("http://threejs.org/build/three.min.js", libs_dir + "/three.js")
+    urlretrieve("https://raw.githubusercontent.com/jeromeetienne/threex.domevents/1100828c40df668a82a97c811895918088cc607f/threex.domevents.js", libs_dir + "/threeX.js")
 
     urlretrieve("https://raw.githubusercontent.com/evanw/csg.js/a8512afbac3cf503195870f7ef11c0a32f36c6d4/csg.js", libs_dir + "/csg.js")
     urlretrieve("https://raw.githubusercontent.com/kraag22/csg-wrapper/1d2182b6265282ea9f1f3d66bd4c0bb2b87a232b/ThreeCSG.js", libs_dir + "/csgWrapper.js")
@@ -37,6 +38,6 @@ if not exists(libs_dir):
 
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/6332dc7f5636db9ba455e1575407c496/raw/b72589532af0b7c63e321b15254acbb848248209/scaling.js", libs_dir + "/tools.js")
 
-compile(dirname=("app/sass", "app/css"))
+compile(dirname=("app/sass", "app/css"), output_style="compressed")
 
 app.run(host="0.0.0.0", port=4000, debug=True)

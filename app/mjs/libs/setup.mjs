@@ -35,6 +35,8 @@ export function setup(width, height, scale=100) {
   addEvents()
   addAxes()
 
+  data.events = new THREEx.DomEvents(data.camera, data.canvas)
+
   function animate() {
 
     requestAnimationFrame(animate)
