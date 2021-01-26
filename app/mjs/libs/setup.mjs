@@ -8,7 +8,7 @@ import {addAxes} from "./axes.mjs"
 
 export function setup(width, height, scale=100) {
 
-  data.name = "Poly"
+  data.name = "poly"
 
   data.width = width
   data.height = height
@@ -34,8 +34,6 @@ export function setup(width, height, scale=100) {
   addControls()
   addEvents()
   addAxes()
-
-  data.events = new THREEx.DomEvents(data.camera, data.canvas)
 
   function animate() {
 

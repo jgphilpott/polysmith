@@ -1,7 +1,14 @@
+import {focus} from "./controls.mjs"
 import {addLine} from "./geometries/lines.mjs"
 import {addSphere} from "./geometries/spheres.mjs"
 
 import {black, white, red, orange, yellow, green, blue} from "./colors.mjs"
+
+function addFocusEvent(obj) {
+  data.events.addEventListener(obj, "dblclick", function(event) {
+    focus(event.target.position)
+  }, false)
+}
 
 export function addAxes(size=data.scale) {
 
@@ -9,6 +16,10 @@ export function addAxes(size=data.scale) {
 
   let min = -size
   let max = size
+
+  let centroid = addSphere(max / 100, [0, 0, 0], black)
+  data.axes.push(centroid)
+  addFocusEvent(centroid)
 
   addAxisX(min, max)
   addAxisY(min, max)
@@ -18,25 +29,46 @@ export function addAxes(size=data.scale) {
 
 export function addAxisX(min, max) {
 
-  data.axes.push(addSphere(max / 100, [max, 0, 0], green))
-  data.axes.push(addLine([[max, 0, 0], [min, 0, 0]], red))
-  data.axes.push(addSphere(max / 100, [min, 0, 0], red))
+  let maxCap = addSphere(max / 100, [max, 0, 0], green)
+  let axis = addLine([[max, 0, 0], [min, 0, 0]], red)
+  let minCap = addSphere(max / 100, [min, 0, 0], red)
+
+  data.axes.push(maxCap)
+  data.axes.push(axis)
+  data.axes.push(minCap)
+
+  addFocusEvent(maxCap)
+  addFocusEvent(minCap)
 
 }
 
 export function addAxisY(min, max) {
 
-  data.axes.push(addSphere(max / 100, [0, max, 0], green))
-  data.axes.push(addLine([[0, max, 0], [0, min, 0]], green))
-  data.axes.push(addSphere(max / 100, [0, min, 0], red))
+  let maxCap = addSphere(max / 100, [0, max, 0], green)
+  let axis = addLine([[0, max, 0], [0, min, 0]], green)
+  let minCap = addSphere(max / 100, [0, min, 0], red)
+
+  data.axes.push(maxCap)
+  data.axes.push(axis)
+  data.axes.push(minCap)
+
+  addFocusEvent(maxCap)
+  addFocusEvent(minCap)
 
 }
 
 export function addAxisZ(min, max) {
 
-  data.axes.push(addSphere(max / 100, [0, 0, max], green))
-  data.axes.push(addLine([[0, 0, max], [0, 0, min]], blue))
-  data.axes.push(addSphere(max / 100, [0, 0, min], red))
+  let maxCap = addSphere(max / 100, [0, 0, max], green)
+  let axis = addLine([[0, 0, max], [0, 0, min]], blue)
+  let minCap = addSphere(max / 100, [0, 0, min], red)
+
+  data.axes.push(maxCap)
+  data.axes.push(axis)
+  data.axes.push(minCap)
+
+  addFocusEvent(maxCap)
+  addFocusEvent(minCap)
 
 }
 

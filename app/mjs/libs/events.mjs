@@ -3,6 +3,8 @@ import {exportOBJ} from "./files/obj.mjs"
 
 export function addEvents() {
 
+  data.events = new THREEx.DomEvents(data.camera, data.canvas)
+
   $("body").keypress(function(event) {
 
     // Ctrl + Enter

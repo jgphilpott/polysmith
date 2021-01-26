@@ -252,3 +252,35 @@ export function addControls() {
   addZoomControls()
 
 }
+
+export function focus(obj, duration=1000, steps=100) {
+
+  let x = obj.x
+  let y = obj.y
+  let z = obj.z
+
+  let camera = data.camera
+  let position = camera.position
+  let target = camera.target
+
+  let stepX = (x - target.x) / steps
+  let stepY = (y - target.y) / steps
+  let stepZ = (z - target.z) / steps
+
+  for (let i = 1; i <= steps; i++) {
+
+    setTimeout(updateCameraTarget, (duration / steps) * i)
+
+  }
+
+  function updateCameraTarget() {
+
+    target.x += stepX
+    target.y += stepY
+    target.z += stepZ
+
+    camera.lookAt(target.x, target.y, target.z)
+
+  }
+
+}
