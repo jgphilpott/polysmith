@@ -18,6 +18,7 @@ export function setup(width, height, scale=100) {
   data.renderer = renderer
 
   let canvas = document.body.appendChild(renderer.domElement)
+  canvas.setAttribute("id", "canvas")
   data.canvas = canvas
 
   let scene = new THREE.Scene()
@@ -37,8 +38,6 @@ export function setup(width, height, scale=100) {
   function animate() {
 
     requestAnimationFrame(animate)
-
-    data.controls.update()
 
     data.renderer.render(data.scene, data.camera)
 
