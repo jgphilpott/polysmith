@@ -34,7 +34,9 @@ if not exists(libs_dir):
     urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/8880636d522afded0c481a59ef2815c11ed64bda/examples/js/loaders/OBJLoader.js", libs_dir + "/OBJLoader.js")
     urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/8880636d522afded0c481a59ef2815c11ed64bda/examples/js/exporters/OBJExporter.js", libs_dir + "/OBJExporter.js")
 
-    urlretrieve("https://raw.githubusercontent.com/eligrey/FileSaver.js/master/src/FileSaver.js", libs_dir + "/FileSaver.js")
+    urlretrieve("https://raw.githubusercontent.com/eligrey/FileSaver.js/b5e61ec88969461ce0504658af07c2b56650ee8c/src/FileSaver.js", libs_dir + "/FileSaver.js")
+
+    urlretrieve("https://raw.githubusercontent.com/sloisel/numeric/656fa1254be540f428710738ca9c1539625777f1/src/numeric.js", libs_dir + "/numeric.js")
 
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/6332dc7f5636db9ba455e1575407c496/raw/b72589532af0b7c63e321b15254acbb848248209/scaling.js", libs_dir + "/tools.js")
 
