@@ -50,3 +50,27 @@ export function polyfit(xArray, yArray, order) {
   }
 
 }
+
+// Predict y given x.
+export function predict(x, coefficients) {
+
+  // Check arguments validity.
+  if (typeof(x) == "number" && Array.isArray(coefficients) && coefficients.length > 0) {
+
+    let prediction = 0
+
+    for (let i = 0; i < coefficients.length; i++) {
+
+      prediction += coefficients[i] * Math.pow(x, i)
+
+    }
+
+    return prediction
+
+  } else {
+
+    throw "Invalid arguments."
+
+  }
+
+}
