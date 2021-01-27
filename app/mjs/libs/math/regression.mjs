@@ -74,3 +74,25 @@ export function predict(x, coefficients) {
   }
 
 }
+
+// Calculate model accuracy.
+export function rSquared(x, y, coefficients) {
+
+  let regressionSquaredError = []
+  let totalSquaredError = []
+
+  let yMean = y.reduce((a, b) => a + b, 0) / y.length
+
+  for (let i = 0; i < x.length; i++) {
+
+    regressionSquaredError.push(Math.pow(y[i] - predict(x[i], coefficients), 2))
+    totalSquaredError.push(Math.pow(y[i] - yMean, 2))
+
+  }
+
+  let regressionSquaredErrorSum = regressionSquaredError.reduce((a, b) => a + b, 0)
+  let totalSquaredErrorSum = totalSquaredError.reduce((a, b) => a + b, 0)
+
+  return 1 - (regressionSquaredErrorSum / totalSquaredErrorSum)
+
+}
