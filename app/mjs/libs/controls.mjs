@@ -140,29 +140,16 @@ export function addControls() {
 
       }
 
-      deltaX = position.x - target.x
-      deltaY = position.y - target.y
-      deltaZ = position.z - target.z
-
       if (event.keyCode == 38) { // Up
 
-        let stepX = deltaX / radius3
-        let stepY = deltaY / radius3
-        let stepZ = deltaZ / radius3
+        let inverter = -1
+        if (verticalAngle > 90) { verticalAngle = 180 - verticalAngle; inverter = -inverter }
 
-        position.x -= stepX
-        position.y -= stepY
-        position.z -= stepZ
+        let radius2 = trig.side4angle(verticalAngle, 1, true, null)
 
-        target.x -= stepX
-        target.y -= stepY
-        target.z -= stepZ
-
-      } else if (event.keyCode == 40) { // Down
-
-        let stepX = deltaX / radius3
-        let stepY = deltaY / radius3
-        let stepZ = deltaZ / radius3
+        let stepX = trig.side4angle(horizontalAngle, radius2, true, null) * inverter
+        let stepY = trig.side4angle(horizontalAngle, radius2, null, true) * inverter
+        let stepZ = trig.side4angle(verticalAngle, 1, null, true)
 
         position.x += stepX
         position.y += stepY
@@ -171,6 +158,25 @@ export function addControls() {
         target.x += stepX
         target.y += stepY
         target.z += stepZ
+
+      } else if (event.keyCode == 40) { // Down
+
+        let inverter = -1
+        if (verticalAngle > 90) { verticalAngle = 180 - verticalAngle; inverter = -inverter }
+
+        let radius2 = trig.side4angle(verticalAngle, 1, true, null)
+
+        let stepX = trig.side4angle(horizontalAngle, radius2, true, null) * inverter
+        let stepY = trig.side4angle(horizontalAngle, radius2, null, true) * inverter
+        let stepZ = trig.side4angle(verticalAngle, 1, null, true)
+
+        position.x -= stepX
+        position.y -= stepY
+        position.z -= stepZ
+
+        target.x -= stepX
+        target.y -= stepY
+        target.z -= stepZ
 
       } else if (event.keyCode == 37) { // Left
 
