@@ -80,9 +80,12 @@ export function addControls() {
 
     $(document).keydown(function(event) {
 
+      let flySpeed = 1
+      let spinSpeed = 1
+
       let camera = data.camera
-      let position = camera.position
       let target = camera.target
+      let position = camera.position
 
       let deltaX = Math.abs(position.x - target.x)
       let deltaY = Math.abs(position.y - target.y)
@@ -98,58 +101,16 @@ export function addControls() {
       let verticalAngle = trig.angle4sides(radius3, deltaZ)
       if (position.z < target.z) { verticalAngle = 180 - verticalAngle }
 
-      if (event.keyCode == 87) { // W
-
-        let newVerticalAngle = verticalAngle + 1
-        if (newVerticalAngle <= 0) { newVerticalAngle = 0.000001 } else if (newVerticalAngle >= 180) { newVerticalAngle = -180 - 0.000001 }
-
-        target.z = position.z - trig.side4angle(newVerticalAngle, radius3, true, null)
-
-        radius2 = trig.side4sides(Math.abs(position.z - target.z), null, radius3)
-
-        target.x = position.x - trig.side4angle(horizontalAngle, radius2, true, null)
-        target.y = position.y - trig.side4angle(horizontalAngle, radius2, null, true)
-
-      } else if (event.keyCode == 83) { // S
-
-        let newVerticalAngle = verticalAngle - 1
-        if (newVerticalAngle <= 0) { newVerticalAngle = 0.000001 } else if (newVerticalAngle >= 180) { newVerticalAngle = -180 - 0.000001 }
-
-        target.z = position.z - trig.side4angle(newVerticalAngle, radius3, true, null)
-
-        radius2 = trig.side4sides(Math.abs(position.z - target.z), null, radius3)
-
-        target.x = position.x - trig.side4angle(horizontalAngle, radius2, true, null)
-        target.y = position.y - trig.side4angle(horizontalAngle, radius2, null, true)
-
-      } else if (event.keyCode == 65) { // A
-
-        let newHorizontalAngle = horizontalAngle + 1
-        if (newHorizontalAngle >= 180) { newHorizontalAngle = newHorizontalAngle - 360 }
-
-        target.x = position.x - trig.side4angle(newHorizontalAngle, radius2, true, null)
-        target.y = position.y - trig.side4angle(newHorizontalAngle, radius2, null, true)
-
-      } else if (event.keyCode == 68) { // D
-
-        let newHorizontalAngle = horizontalAngle - 1
-        if (newHorizontalAngle >= 180) { newHorizontalAngle = newHorizontalAngle - 360 }
-
-        target.x = position.x - trig.side4angle(newHorizontalAngle, radius2, true, null)
-        target.y = position.y - trig.side4angle(newHorizontalAngle, radius2, null, true)
-
-      }
-
       if (event.keyCode == 38) { // Up
 
         let inverter = -1
         if (verticalAngle > 90) { verticalAngle = 180 - verticalAngle; inverter = -inverter }
 
-        let radius2 = trig.side4angle(verticalAngle, 1, true, null)
+        let radius2 = trig.side4angle(verticalAngle, flySpeed, true, null)
 
         let stepX = trig.side4angle(horizontalAngle, radius2, true, null) * inverter
         let stepY = trig.side4angle(horizontalAngle, radius2, null, true) * inverter
-        let stepZ = trig.side4angle(verticalAngle, 1, null, true)
+        let stepZ = trig.side4angle(verticalAngle, flySpeed, null, true)
 
         position.x += stepX
         position.y += stepY
@@ -164,11 +125,11 @@ export function addControls() {
         let inverter = -1
         if (verticalAngle > 90) { verticalAngle = 180 - verticalAngle; inverter = -inverter }
 
-        let radius2 = trig.side4angle(verticalAngle, 1, true, null)
+        let radius2 = trig.side4angle(verticalAngle, flySpeed, true, null)
 
         let stepX = trig.side4angle(horizontalAngle, radius2, true, null) * inverter
         let stepY = trig.side4angle(horizontalAngle, radius2, null, true) * inverter
-        let stepZ = trig.side4angle(verticalAngle, 1, null, true)
+        let stepZ = trig.side4angle(verticalAngle, flySpeed, null, true)
 
         position.x -= stepX
         position.y -= stepY
@@ -183,8 +144,8 @@ export function addControls() {
         let newHorizontalAngle = horizontalAngle + 90
         if (newHorizontalAngle >= 180) { newHorizontalAngle = newHorizontalAngle - 360 }
 
-        let stepX = trig.side4angle(newHorizontalAngle, 1, true, null)
-        let stepY = trig.side4angle(newHorizontalAngle, 1, null, true)
+        let stepX = trig.side4angle(newHorizontalAngle, flySpeed, true, null)
+        let stepY = trig.side4angle(newHorizontalAngle, flySpeed, null, true)
 
         position.x -= stepX
         position.y -= stepY
@@ -197,14 +158,56 @@ export function addControls() {
         let newHorizontalAngle = horizontalAngle + 90
         if (newHorizontalAngle >= 180) { newHorizontalAngle = newHorizontalAngle - 360 }
 
-        let stepX = trig.side4angle(newHorizontalAngle, 1, true, null)
-        let stepY = trig.side4angle(newHorizontalAngle, 1, null, true)
+        let stepX = trig.side4angle(newHorizontalAngle, flySpeed, true, null)
+        let stepY = trig.side4angle(newHorizontalAngle, flySpeed, null, true)
 
         position.x += stepX
         position.y += stepY
 
         target.x += stepX
         target.y += stepY
+
+      }
+
+      if (event.keyCode == 87) { // W
+
+        let newVerticalAngle = verticalAngle + spinSpeed
+        if (newVerticalAngle <= 0) { newVerticalAngle = 0.000001 } else if (newVerticalAngle >= 180) { newVerticalAngle = -180 - 0.000001 }
+
+        target.z = position.z - trig.side4angle(newVerticalAngle, radius3, true, null)
+
+        radius2 = trig.side4sides(Math.abs(position.z - target.z), null, radius3)
+
+        target.x = position.x - trig.side4angle(horizontalAngle, radius2, true, null)
+        target.y = position.y - trig.side4angle(horizontalAngle, radius2, null, true)
+
+      } else if (event.keyCode == 83) { // S
+
+        let newVerticalAngle = verticalAngle - spinSpeed
+        if (newVerticalAngle <= 0) { newVerticalAngle = 0.000001 } else if (newVerticalAngle >= 180) { newVerticalAngle = -180 - 0.000001 }
+
+        target.z = position.z - trig.side4angle(newVerticalAngle, radius3, true, null)
+
+        radius2 = trig.side4sides(Math.abs(position.z - target.z), null, radius3)
+
+        target.x = position.x - trig.side4angle(horizontalAngle, radius2, true, null)
+        target.y = position.y - trig.side4angle(horizontalAngle, radius2, null, true)
+
+      } else if (event.keyCode == 65) { // A
+
+        let newHorizontalAngle = horizontalAngle + spinSpeed
+        if (newHorizontalAngle >= 180) { newHorizontalAngle = newHorizontalAngle - 360 }
+
+        target.x = position.x - trig.side4angle(newHorizontalAngle, radius2, true, null)
+        target.y = position.y - trig.side4angle(newHorizontalAngle, radius2, null, true)
+
+      } else if (event.keyCode == 68) { // D
+
+        let newHorizontalAngle = horizontalAngle - spinSpeed
+        if (newHorizontalAngle >= 180) { newHorizontalAngle = newHorizontalAngle - 360 }
+
+        target.x = position.x - trig.side4angle(newHorizontalAngle, radius2, true, null)
+        target.y = position.y - trig.side4angle(newHorizontalAngle, radius2, null, true)
 
       }
 
@@ -218,14 +221,14 @@ export function addControls() {
 
     $("#canvas").on("wheel", function(event) {
 
-      let camera = data.camera
-      let target = camera.target
-      let position = camera.position
-
       let zoomMin = 1
       let zoomMax = 500
       let zoomSpeed = 1000
       let zoomDelta = event.originalEvent.wheelDelta / zoomSpeed
+
+      let camera = data.camera
+      let target = camera.target
+      let position = camera.position
 
       let stepX = position.x - target.x
       let stepY = position.y - target.y
