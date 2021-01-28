@@ -219,17 +219,17 @@ export function addControls() {
     $("#canvas").on("wheel", function(event) {
 
       let camera = data.camera
-      let position = camera.position
       let target = camera.target
+      let position = camera.position
 
       let zoomMin = 1
       let zoomMax = 500
       let zoomSpeed = 1000
       let zoomDelta = event.originalEvent.wheelDelta / zoomSpeed
 
-      let deltaX = position.x - target.x
-      let deltaY = position.y - target.y
-      let deltaZ = position.z - target.z
+      let stepX = position.x - target.x
+      let stepY = position.y - target.y
+      let stepZ = position.z - target.z
 
       // Zoom In
       if (zoomDelta > 0) {
@@ -243,9 +243,9 @@ export function addControls() {
 
       function zoom() {
 
-        position.x -= deltaX * zoomDelta
-        position.y -= deltaY * zoomDelta
-        position.z -= deltaZ * zoomDelta
+        position.x -= stepX * zoomDelta
+        position.y -= stepY * zoomDelta
+        position.z -= stepZ * zoomDelta
 
       }
 
