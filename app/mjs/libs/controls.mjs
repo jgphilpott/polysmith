@@ -4,14 +4,14 @@ export function addControls() {
 
   function addDragControls() {
 
-    let camera = data.camera
-    let position = camera.position
-    let target = camera.target
-
     let radius3 = null
     let dragSpeed = 10
     let startX, startY = null
     let horizontalAngle, verticalAngle = null
+
+    let camera = data.camera
+    let target = camera.target
+    let position = camera.position
 
     function start(event) {
 
