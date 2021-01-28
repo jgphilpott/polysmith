@@ -261,17 +261,13 @@ export function addControls() {
 
 export function focus(obj, duration=1000, steps=100) {
 
-  let x = obj.x
-  let y = obj.y
-  let z = obj.z
-
   let camera = data.camera
-  let position = camera.position
   let target = camera.target
+  let position = camera.position
 
-  let stepX = (x - target.x) / steps
-  let stepY = (y - target.y) / steps
-  let stepZ = (z - target.z) / steps
+  let stepX = (obj.x - target.x) / steps
+  let stepY = (obj.y - target.y) / steps
+  let stepZ = (obj.z - target.z) / steps
 
   for (let i = 1; i <= steps; i++) {
 
