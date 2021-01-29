@@ -1,4 +1,4 @@
-// Find the tangent of a polynomial function at x.
+// Find the tangent of any polynomial function at x.
 export function findTangent(x, coefficients) {
 
   let slope = 0
@@ -15,7 +15,7 @@ export function findTangent(x, coefficients) {
 
 }
 
-// Find the area under a polynomial function within bounds.
+// Find the area under any polynomial function within bounds.
 // This function works assuming your curve is either entirely above or entirely below the x axis.
 // If your curve crosses the x axis within the given bounds you will need to first find the roots (x intercepts) and then calculate the segments above and below the axis separately.
 export function findArea(lowerLimit, upperLimit, coefficients) {
