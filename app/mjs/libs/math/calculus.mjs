@@ -1,22 +1,16 @@
 export function findTangent(x, coefficients) {
 
-  let slope = [0]
+  let slope = 0
+  let intercept = coefficients[0]
 
   for (let i = 1; i < coefficients.length; i++) {
-    slope.push(coefficients[i] * i * Math.pow(x, i - 1))
+
+    slope += coefficients[i] * i * Math.pow(x, i - 1)
+    intercept += coefficients[i] * Math.pow(x, i)
+
   }
 
-  slope = slope.reduce((a, b) => a + b)
-
-  let intercept = [coefficients[0]]
-
-  for (let i = 1; i < coefficients.length; i++) {
-    intercept.push(coefficients[i] * Math.pow(x, i))
-  }
-
-  intercept = intercept.reduce((a, b) => a + b) - slope * x
-
-  return [intercept, slope]
+  return [intercept - slope * x, slope]
 
 }
 
