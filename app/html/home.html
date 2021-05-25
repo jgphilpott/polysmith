@@ -6,6 +6,8 @@
 
     <title>shapeMaker</title>
 
+    <link rel="shortcut icon" href="{{ url_for('static', filename='imgs/icon.png') }}">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 
     <script src="{{ url_for('static', filename='libs/jQuery.js') }}"></script>
@@ -17,10 +19,12 @@
     <script src="{{ url_for('static', filename='libs/csgWrapper.js') }}"></script>
     <script src="{{ url_for('static', filename='libs/meshOperations.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='libs/STLLoader.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/STLExporter.js') }}"></script>
     <script src="{{ url_for('static', filename='libs/OBJLoader.js') }}"></script>
+    <script src="{{ url_for('static', filename='libs/STLLoader.js') }}"></script>
+    <script src="{{ url_for('static', filename='libs/SVGLoader.js') }}"></script>
+
     <script src="{{ url_for('static', filename='libs/OBJExporter.js') }}"></script>
+    <script src="{{ url_for('static', filename='libs/STLExporter.js') }}"></script>
 
     <script src="{{ url_for('static', filename='libs/FileSaver.js') }}"></script>
 
