@@ -1,15 +1,15 @@
-function generator(spikes=5) {
+function generator(name=true, spikes=5) {
 
   let width = 80
   let height = 100
   let depth = 80
   let thickness = 2
 
-  let blockExterior = newBox(width, depth, height)
-  let blockInterior = newBox(width - (thickness * 2), depth - (thickness * 2), height - (thickness * 2))
-
   let angle = 45
   let offset = trig.side4angle(angle, height, true, null) * 1.2
+
+  let blockExterior = newBox(width, depth, height, [0, 0, 0], red)
+  let blockInterior = newBox(width - (thickness * 2), depth - (thickness * 2), height - (thickness * 2))
 
   let angleCut = newBox(height, height, height * 5, [0, offset, 0])
   angleCut.rotation.x = tools.degree2radian(angle)
@@ -54,5 +54,17 @@ function generator(spikes=5) {
   block.rotation.x = tools.degree2radian(-135)
 
   data.scene.add(block)
+
+  if (name) {addName("Golf", "ubuntu", 16, 1, 0, 0)}
+
+  function addName(name="Golf", font="ubuntu", size=16, extrusion=1, vertical=0, horizontal=0) {
+
+    let x = horizontal
+    let y = trig.side4angle(angle, depth / 2, true, null) + trig.side4angle(angle, vertical, true, null)
+    let z = trig.side4angle(angle, depth / 2, null, true) - trig.side4angle(angle, vertical, null, true)
+
+    addText(name, size, extrusion * 2, false, font, true, x, y, z, -angle)
+
+  }
 
 }
