@@ -1,4 +1,4 @@
-function generator(name=true, spikes=5) {
+function generator(name=true, logo=true, spikes=5) {
 
   let width = 80
   let height = 100
@@ -55,7 +55,8 @@ function generator(name=true, spikes=5) {
 
   data.scene.add(block)
 
-  if (name) {addName("Golf", "ubuntu", 16, 1, 0, 0)}
+  if (name) {addName("Golf", "ubuntu", 16, 1.5, -25, 0)}
+  if (logo) {addLogo("app/things/sports/golf/tee_block/logo.txt", 0.25, 1.5, 15, 0)}
 
   function addName(name="Golf", font="ubuntu", size=16, extrusion=1, vertical=0, horizontal=0) {
 
@@ -64,6 +65,32 @@ function generator(name=true, spikes=5) {
     let z = trig.side4angle(angle, depth / 2, null, true) - trig.side4angle(angle, vertical, null, true)
 
     addText(name, size, extrusion * 2, false, font, true, x, y, z, -angle)
+
+  }
+
+  function addLogo(path="app/things/sports/golf/tee_block/logo.txt", scale=1, extrusion=1, vertical=0, horizontal=0) {
+
+    $.get(path, function(svg) {
+
+      let logo = importSVG(svg, extrusion * 10)
+
+      logo.rotateX(tools.degree2radian(-angle))
+      logo.rotateY(tools.degree2radian(0))
+      logo.rotateZ(tools.degree2radian(180))
+
+      let x = horizontal
+      let y = trig.side4angle(angle, depth / 2, true, null) + trig.side4angle(angle, vertical, true, null)
+      let z = trig.side4angle(angle, depth / 2, null, true) - trig.side4angle(angle, vertical, null, true)
+
+      logo.position.set(x, y, z)
+
+      logo.scale.x = scale
+      logo.scale.y = scale
+      logo.scale.z = scale
+
+      data.scene.add(logo)
+
+    })
 
   }
 
