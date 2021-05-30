@@ -22,7 +22,7 @@ function generator(name=true, logo=true, spikes=5) {
 
   if (spikes == 1 || spikes == 5) {
 
-    let primarySpike = newCylinder(height, 2, 0, [0, -height, 0])
+    let primarySpike = newCylinder(height, 4, 0, [0, -height, 0])
 
     primarySpike.rotation.x = tools.degree2radian(90)
 
@@ -34,10 +34,10 @@ function generator(name=true, logo=true, spikes=5) {
 
   if (spikes == 4 || spikes == 5) {
 
-    let secondarySpikeOne = newCylinder(height/2, 1.5, 0, [spikeOffset, -(height/2) - (height/4), spikeOffset])
-    let secondarySpikeTwo = newCylinder(height/2, 1.5, 0, [-spikeOffset, -(height/2) - (height/4), spikeOffset])
-    let secondarySpikeThree = newCylinder(height/2, 1.5, 0, [spikeOffset, -(height/2) - (height/4), -spikeOffset])
-    let secondarySpikeFour = newCylinder(height/2, 1.5, 0, [-spikeOffset, -(height/2) - (height/4), -spikeOffset])
+    let secondarySpikeOne = newCylinder(height/2, 3, 0, [spikeOffset, -(height/2) - (height/4), spikeOffset])
+    let secondarySpikeTwo = newCylinder(height/2, 3, 0, [-spikeOffset, -(height/2) - (height/4), spikeOffset])
+    let secondarySpikeThree = newCylinder(height/2, 3, 0, [spikeOffset, -(height/2) - (height/4), -spikeOffset])
+    let secondarySpikeFour = newCylinder(height/2, 3, 0, [-spikeOffset, -(height/2) - (height/4), -spikeOffset])
 
     secondarySpikeOne.rotation.x = tools.degree2radian(90)
     secondarySpikeTwo.rotation.x = tools.degree2radian(90)
