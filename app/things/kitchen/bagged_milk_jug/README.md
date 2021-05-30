@@ -1,4 +1,4 @@
-# Bagged Milk Jug (Low Polygon)
+# Bagged Milk Jug (Low Polygon Style)
 
 ## Intro
 
