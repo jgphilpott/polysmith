@@ -11,7 +11,7 @@ The model is also available with four or five ground spikes.
  - [Cults3D](https://cults3d.com/en/3d-model/game/golf-tee-block)
  - [GitHub](https://github.com/jgphilpott/polymaker/tree/master/app/things/sports/golf/tee_block)
  - [GrabCAD](https://grabcad.com/library/golf-tee-block-1)
- - MyMiniFactory
+ - [MyMiniFactory](https://www.myminifactory.com/object/3d-print-171771)
  - Pinshape
  - **[Thingiverse](https://www.thingiverse.com/thing:4873125)**
  - [YouMagine](https://www.youmagine.com/designs/golf-tee-block)
