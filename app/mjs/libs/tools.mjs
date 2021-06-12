@@ -1,13 +1,17 @@
+export function mm2inch(mm) {
+  return mm / 25.4
+}
+
+export function inch2mm(inch) {
+  return inch * 25.4
+}
+
 export function degree2radian(degree) {
-
   return degree * (Math.PI / 180)
-
 }
 
 export function radian2degree(radian) {
-
   return radian * (180 / Math.PI)
-
 }
 
 export function getBoundingBox(mesh) {
