@@ -30,9 +30,9 @@ If you have any problems with the software or ideas for new features please [ope
 
 **I'd love to see all the things you create with Polymaker so please connect and share!** I ([Jacob Philpott](https://github.com/jgphilpott)) have used this software for all of my personal 3D models. You can view and download my creations on several different websites listed here:
 
-### <img align="left" width="25" height="25" src="https://pbs.twimg.com/profile_images/378800000251714095/46fe768c2c043def07a604dd24d6523d_400x400.png"> [Thingiverse](https://www.thingiverse.com/jgphilpott)
-### <img align="left" width="25" height="25" src="https://pbs.twimg.com/profile_images/499763216981835776/0oPskR_u_400x400.jpeg"> [Pinshape](https://pinshape.com/users/964002)
-### <img align="left" width="25" height="25" src="https://pbs.twimg.com/profile_images/1145999607308128256/lJf3dSDD_400x400.png"> [MyMiniFactory](https://www.myminifactory.com/users/jgphilpott)
-### <img align="left" width="25" height="25" src="https://pbs.twimg.com/profile_images/1196418087739908096/1q-mp6dz_400x400.jpg"> [GrabCAD](https://grabcad.com/jacob.philpott-1)
-### <img align="left" width="25" height="25" src="https://pbs.twimg.com/profile_images/378800000150999367/535822160d96db86e979bc5511ba34bd_400x400.jpeg"> [YouMagine](https://www.youmagine.com/jgphilpott)
-### <img align="left" width="25" height="25" src="https://pbs.twimg.com/profile_images/378800000509674306/abac759daf6b662ba7fbd7112f9db559_400x400.png"> [Cults](https://cults3d.com/en/users/jgphilpott)
+### <img align="left" width="25" height="25" src="https://www.thingiverse.com/favicon.ico"> [Thingiverse](https://www.thingiverse.com/jgphilpott)
+### <img align="left" width="25" height="25" src="https://pinshape.com/favicon.ico"> [Pinshape](https://pinshape.com/users/964002)
+### <img align="left" width="25" height="25" src="https://www.myminifactory.com/favicon.ico"> [MyMiniFactory](https://www.myminifactory.com/users/jgphilpott)
+### <img align="left" width="25" height="25" src="https://grabcad.com/favicon.ico"> [GrabCAD](https://grabcad.com/jacob.philpott-1)
+### <img align="left" width="25" height="25" src="https://www.youmagine.com/favicon.ico"> [YouMagine](https://www.youmagine.com/jgphilpott)
+### <img align="left" width="25" height="25" src="https://cults3d.com/favicon.ico"> [Cults](https://cults3d.com/en/users/jgphilpott)
