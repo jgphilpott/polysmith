@@ -13,12 +13,56 @@ function generator(sides=3, size=75) {
       angle = 60
       holderDistance = 50
       slotDistance = 75
+      data.name = "triangle"
       break
 
     case 4:
       angle = 0
       holderDistance = 55
       slotDistance = 80
+      data.name = "square"
+      break
+
+    case 5:
+      angle = 0
+      holderDistance = -60
+      slotDistance = -85
+      data.name = "pentagon"
+      break
+
+    case 6:
+      angle = 0
+      holderDistance = 60
+      slotDistance = 85
+      data.name = "hexagon"
+      break
+
+    case 7:
+      angle = 0
+      holderDistance = -60
+      slotDistance = -85
+      data.name = "heptagon"
+      break
+
+    case 8:
+      angle = 0
+      holderDistance = 60
+      slotDistance = 85
+      data.name = "octagon"
+      break
+
+    case 9:
+      angle = 0
+      holderDistance = -60
+      slotDistance = -85
+      data.name = "nonagon"
+      break
+
+    case 10:
+      angle = 0
+      holderDistance = 60
+      slotDistance = 85
+      data.name = "decagon"
       break
 
   }
