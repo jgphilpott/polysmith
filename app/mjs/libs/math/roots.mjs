@@ -35,7 +35,7 @@ export function findRoots(y=0, coefficients=[]) {
 
 }
 
-export function uniFormula(y, coefficients) {
+export function uniFormula(y=0, coefficients) {
 
   if (y == coefficients[0]) {
 
@@ -49,14 +49,14 @@ export function uniFormula(y, coefficients) {
 
 }
 
-export function linierFormula(y, coefficients) {
+export function linierFormula(y=0, coefficients) {
 
   return [(y - coefficients[0]) / coefficients[1]]
 
 }
 
 // Credit: https://stackoverflow.com/a/33454565/1544937
-export function quadraticFormula(y, coefficients) {
+export function quadraticFormula(y=0, coefficients) {
 
   let roots = []
 
@@ -75,7 +75,7 @@ export function quadraticFormula(y, coefficients) {
 }
 
 // Credit: https://stackoverflow.com/a/27176424/1544937
-export function cubicFormula(y, coefficients) {
+export function cubicFormula(y=0, coefficients) {
 
   let roots = null
 
@@ -173,7 +173,7 @@ export function cubicFormula(y, coefficients) {
 
 }
 
-export function polyFormula(y, coefficients) {
+export function polyFormula(y=0, coefficients) {
 
   return "https://en.wikipedia.org/wiki/Quartic_function"
 
