@@ -6,6 +6,10 @@ The Golf Tee Block is available with or without a name/logo. If you would like t
 
 The model is also available with four or five ground spikes.
 
+## Promo Video
+
+ - [YouTube](https://youtu.be/u9dYNAEyLqI)
+
 ## STL Files
 
  - [Cults3D](https://cults3d.com/en/3d-model/game/golf-tee-block)
