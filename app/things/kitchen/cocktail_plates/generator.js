@@ -11,8 +11,8 @@ function generator(sides=3, size=75) {
 
     case 3:
       angle = 60
-      holderDistance = 50
-      slotDistance = 75
+      holderDistance = 48
+      slotDistance = 73
       data.name = "triangle"
       break
 
@@ -25,15 +25,15 @@ function generator(sides=3, size=75) {
 
     case 5:
       angle = 0
-      holderDistance = -60
-      slotDistance = -85
+      holderDistance = -58
+      slotDistance = -83
       data.name = "pentagon"
       break
 
     case 6:
       angle = 0
-      holderDistance = 60
-      slotDistance = 85
+      holderDistance = 58
+      slotDistance = 83
       data.name = "hexagon"
       break
 
