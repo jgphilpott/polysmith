@@ -1,8 +1,8 @@
-# Raspberry Pi Standoff Wrench
+# Raspberry Pi Standoff Wrench Set
 
 ## Intro
 
-A mini wrench for working with Raspberry Pi standoffs.
+A mini wrench set for working with Raspberry Pi standoffs.
 
 ## Promo Video
 
