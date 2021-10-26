@@ -8,7 +8,9 @@ export function importSTL(path, center=null) {
 
   loader.load(path, function(stl) {
 
-    let mesh = new THREE.Mesh(stl, new THREE.MeshStandardMaterial({color: black}))
+    let material = new THREE.MeshStandardMaterial({color: black, side: THREE.DoubleSide})
+    let geometry = new THREE.Geometry().fromBufferGeometry(stl)
+    let mesh = new THREE.Mesh(geometry, material)
 
     data.meshes.push(mesh)
 

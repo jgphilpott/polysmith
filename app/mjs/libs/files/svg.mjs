@@ -5,8 +5,7 @@ export function importSVG(path, depth=10, bevelEnabled=false, center=true) {
   let shapes = []
   let paths = new THREE.SVGLoader().parse(path).paths
 
-  let extrusionSettings = {depth: depth,
-                           bevelEnabled: bevelEnabled}
+  let extrusionSettings = {depth: depth, bevelEnabled: bevelEnabled}
 
   for (let i = 0; i < paths.length; i ++) {
     Array.prototype.push.apply(shapes, paths[i].toShapes())
