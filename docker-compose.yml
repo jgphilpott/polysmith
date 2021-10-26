@@ -6,10 +6,10 @@ app:
   ports:
    - 4000:4000
   links:
-   - db
+   - mongo
 
-db:
+mongo:
   container_name: mongo
   image: mongo:3.0.2
   ports:
-   - 27017:27017
+   - 27018:27018
