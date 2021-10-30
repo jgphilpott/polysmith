@@ -1,5 +1,6 @@
 from os import makedirs
 from os.path import exists
+from subprocess import Popen
 
 from flask import Flask, render_template
 
@@ -43,5 +44,6 @@ if not exists(libs_dir):
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/6332dc7f5636db9ba455e1575407c496/raw/b72589532af0b7c63e321b15254acbb848248209/scaling.js", libs_dir + "/tools.js")
 
 compile(dirname=("app/sass", "app/css"), output_style="compressed")
+Popen(["boussole", "watch"], cwd="app/config")
 
 app.run(host="0.0.0.0", port=4000, debug=True)
