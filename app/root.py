@@ -1,3 +1,4 @@
+from os import urandom
 from os import makedirs
 from os.path import exists
 from subprocess import Popen
@@ -9,6 +10,9 @@ from urllib.request import urlretrieve
 from sass import compile
 
 app = Flask("Polymaker", template_folder="app", static_folder="app")
+
+app.jinja_env.auto_reload = True
+app.config["SECRET_KEY"] = urandom(42).hex()
 
 @app.route("/")
 def home():
