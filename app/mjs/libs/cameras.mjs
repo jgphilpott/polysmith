@@ -5,7 +5,7 @@ export function addCamera(position=data.scale) {
   camera.up.set(0, 0, 1)
   camera.position.set(position, position, position)
 
-  camera.target = {"x": 0, "y": 0, "z": 0}
+  camera.target = {x: 0, y: 0, z: 33.33}
   camera.lookAt(camera.target.x, camera.target.y, camera.target.z)
 
   data.camera = camera
