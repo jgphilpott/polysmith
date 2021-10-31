@@ -10,10 +10,9 @@ Simple shape cocktail plates with a slot cut into them for holding a wine glass.
 
 ## STL Files
 
- - [Cults3D]()
  - [GitHub](https://github.com/jgphilpott/polymaker/tree/master/app/things/kitchen/cocktail_plates/stl)
- - [GrabCAD]()
- - [MyMiniFactory]()
- - [Pinshape]()
+ - [GrabCAD](https://grabcad.com/library/cocktail-plates-with-wine-glass-holder-1)
+ - [MyMiniFactory](https://www.myminifactory.com/object/3d-print-cocktail-plates-with-wine-glass-holder-192627)
+ - [Pinshape](https://pinshape.com/items/108267-3d-printed-cocktail-plates-with-wine-glass-holder)
  - **[Thingiverse](https://www.thingiverse.com/thing:5072557)**
- - [YouMagine]()
+ - [YouMagine](https://www.youmagine.com/designs/cocktail-plates-with-wine-glass-holder)
