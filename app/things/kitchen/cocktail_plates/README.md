@@ -2,11 +2,11 @@
 
 ## Intro
 
-These cocktail plates are simple flat plates with a small lip and a slot cut out to hold a wine glass. The plates are available in a variety of simple shapes, see below.
+Simple shape cocktail plates with a slot cut into them for holding a wine glass. They are available in a variety of geometric shapes from a triangle to a decagon.
 
 ## Promo Video
 
- - [YouTube]()
+ - [YouTube](https://youtu.be/NN9xtuOYBMU)
 
 ## STL Files
 
@@ -15,5 +15,5 @@ These cocktail plates are simple flat plates with a small lip and a slot cut out
  - [GrabCAD]()
  - [MyMiniFactory]()
  - [Pinshape]()
- - **[Thingiverse]()**
+ - **[Thingiverse](https://www.thingiverse.com/thing:5072557)**
  - [YouMagine]()
