@@ -27,7 +27,7 @@ if not exists(libs_dir):
 
     urlretrieve("https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js", libs_dir + "/jQuery.js")
 
-    urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js", libs_dir + "/three.js")
+    urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js", libs_dir + "/three.js")
     urlretrieve("https://raw.githubusercontent.com/jeromeetienne/threex.domevents/1100828c40df668a82a97c811895918088cc607f/threex.domevents.js", libs_dir + "/threeX.js")
 
     urlretrieve("https://raw.githubusercontent.com/evanw/csg.js/a8512afbac3cf503195870f7ef11c0a32f36c6d4/csg.js", libs_dir + "/csg.js")
