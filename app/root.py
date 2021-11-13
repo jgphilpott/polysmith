@@ -30,9 +30,8 @@ if not exists(libs_dir):
     urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js", libs_dir + "/three.js")
     urlretrieve("https://raw.githubusercontent.com/jeromeetienne/threex.domevents/1100828c40df668a82a97c811895918088cc607f/threex.domevents.js", libs_dir + "/threeX.js")
 
-    urlretrieve("https://raw.githubusercontent.com/evanw/csg.js/a8512afbac3cf503195870f7ef11c0a32f36c6d4/csg.js", libs_dir + "/csg.js")
-    urlretrieve("https://raw.githubusercontent.com/kraag22/csg-wrapper/1d2182b6265282ea9f1f3d66bd4c0bb2b87a232b/ThreeCSG.js", libs_dir + "/csgWrapper.js")
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/59ad8432ba8567e91176e669454b9afa/raw/381ceef76f9b0e69b492910306434c6f52ba420d/meshOperations.js", libs_dir + "/meshOperations.js")
+    urlretrieve("https://gist.githubusercontent.com/jgphilpott/03df747c3047504480e6dbeeddd27d68/raw/e6708feb515affff5884032d703ea67f03a283fe/csgWrapper.mjs", libs_dir + "/csgWrapper.mjs")
+    urlretrieve("https://gist.githubusercontent.com/jgphilpott/59ad8432ba8567e91176e669454b9afa/raw/4d115791d9d1d632cc758b07826c00add7ada3dd/meshOperations.mjs", libs_dir + "/meshOperations.mjs")
 
     urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/loaders/OBJLoader.js", libs_dir + "/OBJLoader.js")
     urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/loaders/STLLoader.js", libs_dir + "/STLLoader.js")

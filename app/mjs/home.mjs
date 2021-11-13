@@ -7,6 +7,8 @@ import * as regr from "./libs/math/regression.mjs"
 import * as root from "./libs/math/roots.mjs"
 import * as trig from "./libs/math/trigonometry.mjs"
 
+import {joinMesh, cutMesh, intersectMesh} from "../libs/meshOperations.mjs"
+
 import {black, white, red, orange, yellow, green, blue, purple, pink} from "./libs/colors.mjs"
 
 import {standardMaterial} from "./libs/materials.mjs"
