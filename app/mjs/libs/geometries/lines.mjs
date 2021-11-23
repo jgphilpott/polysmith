@@ -1,6 +1,7 @@
 // Linl: https://threejs.org/docs/#api/en/objects/Line
 
-import {black, white, red, yellow, green, blue} from "../colors.mjs"
+import {black, white, grayscale} from "../colors/grayscale.mjs"
+import {red, orange, yellow, green, blue, purple, pink, rainbow} from "../colors/rainbow.mjs"
 
 import {lineMaterial} from "../materials.mjs"
 

@@ -1,4 +1,5 @@
-import {black, white, red, yellow, green, blue} from "./colors.mjs"
+import {black, white, grayscale} from "./colors/grayscale.mjs"
+import {red, orange, yellow, green, blue, purple, pink, rainbow} from "./colors/rainbow.mjs"
 
 export function addLights(position=data.scale) {
 

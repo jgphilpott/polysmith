@@ -1,4 +1,4 @@
-import {black, white} from "../colors.mjs"
+import {black, white} from "../colors/grayscale.mjs"
 
 export function importSVG(path, depth=10, bevelEnabled=false, center=true) {
 

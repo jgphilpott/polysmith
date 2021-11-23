@@ -1,4 +1,4 @@
-import {black, white} from "../colors.mjs"
+import {black, white} from "../colors/grayscale.mjs"
 
 import {addAxes, removeAxes} from "../axes.mjs"
 

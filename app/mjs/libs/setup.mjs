@@ -1,4 +1,4 @@
-import {black, white} from "./colors.mjs"
+import {black, white} from "./colors/grayscale.mjs"
 
 import {addLights} from "./lights.mjs"
 import {addCamera} from "./cameras.mjs"

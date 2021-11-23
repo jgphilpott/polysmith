@@ -2,7 +2,8 @@ import {focus} from "./controls.mjs"
 import {addLine} from "./geometries/lines.mjs"
 import {addSphere} from "./geometries/spheres.mjs"
 
-import {black, white, red, orange, yellow, green, blue} from "./colors.mjs"
+import {black, white, grayscale} from "./colors/grayscale.mjs"
+import {red, orange, yellow, green, blue, purple, pink, rainbow} from "./colors/rainbow.mjs"
 
 function addFocusEvent(obj) {
   data.events.addEventListener(obj, "dblclick", function(event) {
