@@ -25,8 +25,6 @@ import {importOBJ, exportOBJ} from "./libs/files/obj.mjs"
 import {importSTL, exportSTL} from "./libs/files/stl.mjs"
 import {importSVG} from "./libs/files/svg.mjs"
 
-import {sleep} from "./libs/time.mjs"
-
 $(document).ready(function() {
 
   let width = $(window).width()
@@ -39,12 +37,8 @@ $(document).ready(function() {
   //|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|//
   //  ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓  |//
 
-  function generator() {
-
-  }
+  function generator() {}
 
   generator()
-
-  console.log(data)
 
 })
