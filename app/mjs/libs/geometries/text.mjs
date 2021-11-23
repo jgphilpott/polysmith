@@ -2,7 +2,7 @@
 
 import * as tools from "../tools.mjs"
 
-import {standardMaterial} from "../materials/materials.mjs"
+import {meshMaterial} from "../materials/mesh.mjs"
 
 export function newText(text, size=12, height=2, bevel=false, font="ubuntu", center=true, x=0, y=0, z=0, rotateX=0, rotateY=0, rotateZ=0) {
 
@@ -24,7 +24,7 @@ export function newText(text, size=12, height=2, bevel=false, font="ubuntu", cen
 
   if (center) {textGeometry.center()}
 
-  let textMesh = new THREE.Mesh(textGeometry, standardMaterial())
+  let textMesh = new THREE.Mesh(textGeometry, meshMaterial("basic"))
 
   return textMesh
 

@@ -3,7 +3,7 @@
 import {black, white, grayscale} from "../colors/grayscale.mjs"
 import {red, orange, yellow, green, blue, purple, pink, rainbow} from "../colors/rainbow.mjs"
 
-import {lineMaterial} from "../materials/materials.mjs"
+import {lineMaterial} from "../materials/line.mjs"
 
 export function newVector(vertices=[]) {
 
@@ -21,7 +21,7 @@ export function newVector(vertices=[]) {
 
 export function newLine(vertices=[], color=black, linewidth=1) {
 
-  return new THREE.Line(newVector(vertices), lineMaterial(color, linewidth))
+  return new THREE.Line(newVector(vertices), lineMaterial("basic", color, linewidth))
 
 }
 

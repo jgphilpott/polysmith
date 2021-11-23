@@ -1,7 +1,7 @@
 import {black, white, grayscale} from "../colors/grayscale.mjs"
 import {red, orange, yellow, green, blue, purple, pink, rainbow} from "../colors/rainbow.mjs"
 
-import {standardMaterial} from "../materials/materials.mjs"
+import {meshMaterial} from "../materials/mesh.mjs"
 
 export function newQuadrilateral(v1=[0, 0, 10], v2=[0, 10, 10], v3=[0, 10, 0], v4=[0, 0, 0], color=black) {
 
@@ -15,7 +15,7 @@ export function newQuadrilateral(v1=[0, 0, 10], v2=[0, 10, 10], v3=[0, 10, 0], v
   geometry.faces.push(new THREE.Face3(0, 1, 2))
   geometry.faces.push(new THREE.Face3(2, 3, 0))
 
-  let quadrilateral = new THREE.Mesh(geometry, standardMaterial(color))
+  let quadrilateral = new THREE.Mesh(geometry, meshMaterial("basic", color))
 
   return quadrilateral
 

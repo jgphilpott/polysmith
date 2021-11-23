@@ -1,7 +1,7 @@
 import {black, white, grayscale} from "../colors/grayscale.mjs"
 import {red, orange, yellow, green, blue, purple, pink, rainbow} from "../colors/rainbow.mjs"
 
-import {standardMaterial} from "../materials/materials.mjs"
+import {meshMaterial} from "../materials/mesh.mjs"
 
 export function newTriangle(v1=[10, 0, 0], v2=[0, 10, 0], v3=[0, 0, 10], color=black) {
 
@@ -13,7 +13,7 @@ export function newTriangle(v1=[10, 0, 0], v2=[0, 10, 0], v3=[0, 0, 10], color=b
 
   geometry.faces.push(new THREE.Face3(0, 1, 2))
 
-  let triangle = new THREE.Mesh(geometry, standardMaterial(color))
+  let triangle = new THREE.Mesh(geometry, meshMaterial("basic", color))
 
   return triangle
 
