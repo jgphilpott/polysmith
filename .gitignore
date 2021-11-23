@@ -1,6 +1,8 @@
 # Models
 *.gcode
 *.scad
+*.stp
+*.ipt
 
 # Libs
 app/libs
