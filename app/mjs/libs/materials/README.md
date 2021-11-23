@@ -1,0 +1,2 @@
+ - Read these three.js docs to learn about material [constants](https://threejs.org/docs/#api/en/constants/Materials) and [properties](https://threejs.org/docs/#api/en/materials/Material).
+ - Checkout the three.js source code on GitHub to see [all the materials available](https://github.com/mrdoob/three.js/tree/670b1e9e85356d98efa4c702e93c85dd52f01e1e/src/materials).

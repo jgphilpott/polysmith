@@ -12,8 +12,6 @@ import {joinMesh, cutMesh, intersectMesh} from "../libs/meshOperations.mjs"
 import {black, white, grayscale} from "./libs/colors/grayscale.mjs"
 import {red, orange, yellow, green, blue, purple, pink, rainbow} from "./libs/colors/rainbow.mjs"
 
-import {standardMaterial} from "./libs/materials.mjs"
-
 import {newBox, addBox} from "./libs/geometries/boxes.mjs"
 import {newCylinder, addCylinder} from "./libs/geometries/cylinders.mjs"
 import {newLine, addLine} from "./libs/geometries/lines.mjs"
@@ -28,10 +26,7 @@ import {importSVG} from "./libs/files/svg.mjs"
 
 $(document).ready(function() {
 
-  let width = $(window).width()
-  let height = $(window).height()
-
-  setup(width, height)
+  setup()
 
   //|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|//
   //  Paste Generator Function Below  |//

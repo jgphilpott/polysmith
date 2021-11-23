@@ -3,7 +3,7 @@
 import {black, white, grayscale} from "../colors/grayscale.mjs"
 import {red, orange, yellow, green, blue, purple, pink, rainbow} from "../colors/rainbow.mjs"
 
-import {standardMaterial} from "../materials.mjs"
+import {standardMaterial} from "../materials/materials.mjs"
 
 export function newCylinder(length=10, positiveRadius=10, negativeRadius=10, position=[0, 0, 0], color=black, radialSegments=42) {
 

@@ -1,7 +1,7 @@
 import {black, white, grayscale} from "../colors/grayscale.mjs"
 import {red, orange, yellow, green, blue, purple, pink, rainbow} from "../colors/rainbow.mjs"
 
-import {standardMaterial} from "../materials.mjs"
+import {standardMaterial} from "../materials/materials.mjs"
 
 export function newQuadrilateral(v1=[0, 0, 10], v2=[0, 10, 10], v3=[0, 10, 0], v4=[0, 0, 0], color=black) {
 

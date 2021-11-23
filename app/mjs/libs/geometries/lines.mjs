@@ -3,7 +3,7 @@
 import {black, white, grayscale} from "../colors/grayscale.mjs"
 import {red, orange, yellow, green, blue, purple, pink, rainbow} from "../colors/rainbow.mjs"
 
-import {lineMaterial} from "../materials.mjs"
+import {lineMaterial} from "../materials/materials.mjs"
 
 export function newVector(vertices=[]) {
 

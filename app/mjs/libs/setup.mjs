@@ -6,9 +6,12 @@ import {addControls} from "./controls.mjs"
 import {addEvents} from "./events.mjs"
 import {addAxes} from "./axes.mjs"
 
-export function setup(width, height, scale=100) {
+export function setup(scale=100) {
 
   data.name = "poly"
+
+  let width = $(window).width()
+  let height = $(window).height()
 
   data.width = width
   data.height = height
