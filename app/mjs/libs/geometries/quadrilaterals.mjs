@@ -21,7 +21,7 @@ export function newQuadrilateral(v1=[0, 0, 10], v2=[0, 10, 10], v3=[0, 10, 0], v
 
 export function addQuadrilateral(v1=[0, 0, 10], v2=[0, 10, 10], v3=[0, 10, 0], v4=[0, 0, 0], color=black, material="normal") {
 
-  let quadrilateral = newQuadrilateral(v1, v2, v3, v4, color)
+  let quadrilateral = newQuadrilateral(v1, v2, v3, v4, color, material)
 
   data.scene.add(quadrilateral)
 

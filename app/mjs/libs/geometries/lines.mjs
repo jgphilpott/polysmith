@@ -1,4 +1,4 @@
-// Linl: https://threejs.org/docs/#api/en/objects/Line
+// Link: https://threejs.org/docs/#api/en/objects/Line
 
 import {black} from "../colors/grayscale.mjs"
 import {lineMaterial} from "../materials/line.mjs"
@@ -17,15 +17,15 @@ export function newVector(vertices=[]) {
 
 }
 
-export function newLine(vertices=[], color=black, linewidth=1) {
+export function newLine(vertices=[], color=black, material="basic", linewidth=1) {
 
-  return new THREE.Line(newVector(vertices), lineMaterial("basic", color, linewidth))
+  return new THREE.Line(newVector(vertices), lineMaterial(material, color, linewidth))
 
 }
 
-export function addLine(vertices=[], color=black, linewidth=1) {
+export function addLine(vertices=[], color=black, material="basic", linewidth=1) {
 
-  let line = newLine(vertices, color, linewidth)
+  let line = newLine(vertices, color, material, linewidth)
 
   data.scene.add(line)
 
