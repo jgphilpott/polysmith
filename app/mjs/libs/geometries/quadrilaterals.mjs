@@ -1,7 +1,7 @@
 import {black} from "../colors/grayscale.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
-export function newQuadrilateral(v1=[0, 0, 10], v2=[0, 10, 10], v3=[0, 10, 0], v4=[0, 0, 0], color=black, material="basic") {
+export function newQuadrilateral(v1=[0, 0, 10], v2=[0, 10, 10], v3=[0, 10, 0], v4=[0, 0, 0], color=black, material="normal") {
 
   let geometry = new THREE.Geometry()
 
@@ -13,13 +13,13 @@ export function newQuadrilateral(v1=[0, 0, 10], v2=[0, 10, 10], v3=[0, 10, 0], v
   geometry.faces.push(new THREE.Face3(0, 1, 2))
   geometry.faces.push(new THREE.Face3(2, 3, 0))
 
-  let quadrilateral = new THREE.Mesh(geometry, meshMaterial("basic", color))
+  let quadrilateral = new THREE.Mesh(geometry, meshMaterial(material, color))
 
   return quadrilateral
 
 }
 
-export function addQuadrilateral(v1=[0, 0, 10], v2=[0, 10, 10], v3=[0, 10, 0], v4=[0, 0, 0], color=black, material="basic") {
+export function addQuadrilateral(v1=[0, 0, 10], v2=[0, 10, 10], v3=[0, 10, 0], v4=[0, 0, 0], color=black, material="normal") {
 
   let quadrilateral = newQuadrilateral(v1, v2, v3, v4, color)
 

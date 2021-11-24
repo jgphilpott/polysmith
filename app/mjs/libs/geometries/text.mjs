@@ -23,7 +23,7 @@ export function newText(text, size=12, height=2, bevel=false, font="ubuntu", cen
 
   if (center) {textGeometry.center()}
 
-  let textMesh = new THREE.Mesh(textGeometry, meshMaterial("basic"))
+  let textMesh = new THREE.Mesh(textGeometry, meshMaterial("normal"))
 
   return textMesh
 

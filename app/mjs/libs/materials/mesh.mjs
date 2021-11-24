@@ -1,6 +1,6 @@
 import {black} from "../colors/grayscale.mjs"
 
-export function meshMaterial(type="basic", color=black, side=THREE.DoubleSide) {
+export function meshMaterial(type="normal", color=black, side=THREE.DoubleSide) {
 
   switch (type) {
 
