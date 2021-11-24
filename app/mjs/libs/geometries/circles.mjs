@@ -3,7 +3,7 @@
 import {black} from "../colors/grayscale.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
-export function newCircle(radius=5, radialSegments=42, position=[0, 0, 0], material="normal", color=black) {
+export function newCircle(radius=10, radialSegments=42, position=[0, 0, 0], material="normal", color=black) {
 
   let geometry = new THREE.CircleGeometry(radius, radialSegments)
   let circle = new THREE.Mesh(geometry, meshMaterial(material, color))
@@ -14,7 +14,7 @@ export function newCircle(radius=5, radialSegments=42, position=[0, 0, 0], mater
 
 }
 
-export function addCircle(radius=5, radialSegments=42, position=[0, 0, 0], material="normal", color=black) {
+export function addCircle(radius=10, radialSegments=42, position=[0, 0, 0], material="normal", color=black) {
 
   let circle = newCircle(radius, radialSegments, position, material, color)
 
