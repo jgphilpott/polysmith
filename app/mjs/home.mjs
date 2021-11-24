@@ -14,6 +14,7 @@ import {red, orange, yellow, green, blue, purple, pink, rainbow} from "./libs/co
 
 import {newBox, addBox} from "./libs/geometries/boxes.mjs"
 import {newCircle, addCircle} from "./libs/geometries/circles.mjs"
+import {newCone, addCone} from "./libs/geometries/cones.mjs"
 import {newCylinder, addCylinder} from "./libs/geometries/cylinders.mjs"
 import {newLine, addLine} from "./libs/geometries/lines.mjs"
 import {newQuadrilateral, addQuadrilateral} from "./libs/geometries/quadrilaterals.mjs"
