@@ -3,9 +3,9 @@
 import {black} from "../colors/grayscale.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
-export function newSphere(radius=1, position=[0, 0, 0], color=black, material="normal") {
+export function newSphere(radius=5, widthSegments=42, heightSegments=42, position=[0, 0, 0], color=black, material="normal") {
 
-  let geometry = new THREE.SphereGeometry(radius, 42, 42)
+  let geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments)
   let sphere = new THREE.Mesh(geometry, meshMaterial(material, color))
 
   sphere.position.set(position[0], position[1], position[2])
@@ -14,9 +14,9 @@ export function newSphere(radius=1, position=[0, 0, 0], color=black, material="n
 
 }
 
-export function addSphere(radius=1, position=[0, 0, 0], color=black, material="normal") {
+export function addSphere(radius=5, widthSegments=42, heightSegments=42, position=[0, 0, 0], color=black, material="normal") {
 
-  let sphere = newSphere(radius, position, color, material)
+  let sphere = newSphere(radius, widthSegments, heightSegments, position, color, material)
 
   data.scene.add(sphere)
 
