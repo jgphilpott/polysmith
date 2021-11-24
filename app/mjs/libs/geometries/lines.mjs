@@ -3,7 +3,7 @@
 import {black} from "../colors/grayscale.mjs"
 import {lineMaterial} from "../materials/line.mjs"
 
-export function newVector(vertices=[]) {
+export function newVector(vertices=[[]]) {
 
   let vector = new THREE.Geometry()
 
@@ -17,13 +17,13 @@ export function newVector(vertices=[]) {
 
 }
 
-export function newLine(vertices=[], material="basic", color=black, linewidth=1) {
+export function newLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=black, linewidth=1) {
 
   return new THREE.Line(newVector(vertices), lineMaterial(material, color, linewidth))
 
 }
 
-export function addLine(vertices=[], material="basic", color=black, linewidth=1) {
+export function addLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=black, linewidth=1) {
 
   let line = newLine(vertices, material, color, linewidth)
 
