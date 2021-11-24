@@ -1,5 +1,3 @@
-import {degree2radian, radian2degree} from "../tools.mjs"
-
 // In all triangles the sum of the angles is always equal to 180 degrees.
 export function angle4angles(x=null, y=null) {
 

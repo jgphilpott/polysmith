@@ -1,20 +1,36 @@
-export function mm2inch(mm) {
+function minValue(values=[]) {
+  return Math.min.apply(null, values)
+}
+
+function maxValue(values=[]) {
+  return Math.max.apply(null, values)
+}
+
+function absMinValue(values=[]) {
+  return Math.min.apply(null, values.map(Math.abs))
+}
+
+function absMaxValue(values=[]) {
+  return Math.max.apply(null, values.map(Math.abs))
+}
+
+function mm2inch(mm) {
   return mm / 25.4
 }
 
-export function inch2mm(inch) {
+function inch2mm(inch) {
   return inch * 25.4
 }
 
-export function degree2radian(degree) {
+function degree2radian(degree) {
   return degree * (Math.PI / 180)
 }
 
-export function radian2degree(radian) {
+function radian2degree(radian) {
   return radian * (180 / Math.PI)
 }
 
-export function getBoundingBox(mesh) {
+function getBoundingBox(mesh) {
 
   if (!mesh.geometry.boundingBox) {
 
@@ -45,20 +61,14 @@ export function getBoundingBox(mesh) {
 
 }
 
-export function centerX(boundingBox) {
-
+function centerX(boundingBox) {
   return - boundingBox.min.x - (Math.abs(boundingBox.max.x - boundingBox.min.x) / 2)
-
 }
 
-export function centerY(boundingBox) {
-
+function centerY(boundingBox) {
   return - boundingBox.min.y - (Math.abs(boundingBox.max.y - boundingBox.min.y) / 2)
-
 }
 
-export function centerZ(boundingBox) {
-
+function centerZ(boundingBox) {
   return - boundingBox.min.z - (Math.abs(boundingBox.max.z - boundingBox.min.z) / 2)
-
 }

@@ -1,7 +1,5 @@
 import {setup} from "./libs/setup.mjs"
 
-import * as tools from "./libs/tools.mjs"
-
 import * as calc from "./libs/math/calculus.mjs"
 import * as regr from "./libs/math/regression.mjs"
 import * as root from "./libs/math/roots.mjs"

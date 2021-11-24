@@ -44,8 +44,6 @@ if not exists(libs_dir):
 
     urlretrieve("https://raw.githubusercontent.com/sloisel/numeric/656fa1254be540f428710738ca9c1539625777f1/src/numeric.js", libs_dir + "/numeric.js")
 
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/6332dc7f5636db9ba455e1575407c496/raw/b72589532af0b7c63e321b15254acbb848248209/scaling.js", libs_dir + "/tools.js")
-
 compile(dirname=("app/sass", "app/css"), output_style="compressed")
 Popen(["boussole", "watch"], cwd="app/config")
 
