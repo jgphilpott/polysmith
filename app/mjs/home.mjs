@@ -13,6 +13,7 @@ import {black, white, grayscale} from "./libs/colors/grayscale.mjs"
 import {red, orange, yellow, green, blue, purple, pink, rainbow} from "./libs/colors/rainbow.mjs"
 
 import {newBox, addBox} from "./libs/geometries/boxes.mjs"
+import {newCircle, addCircle} from "./libs/geometries/circles.mjs"
 import {newCylinder, addCylinder} from "./libs/geometries/cylinders.mjs"
 import {newLine, addLine} from "./libs/geometries/lines.mjs"
 import {newQuadrilateral, addQuadrilateral} from "./libs/geometries/quadrilaterals.mjs"
