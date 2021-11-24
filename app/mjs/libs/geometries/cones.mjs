@@ -3,7 +3,7 @@
 import {black} from "../colors/grayscale.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
-export function newCone(radius=5, height=10, radialSegments=42, position=[0, 0, 0], color=black, material="normal") {
+export function newCone(radius=5, height=10, radialSegments=42, position=[0, 0, 0], material="normal", color=black) {
 
   let geometry = new THREE.ConeGeometry(radius, height, radialSegments)
   let cone = new THREE.Mesh(geometry, meshMaterial(material, color))
@@ -14,9 +14,9 @@ export function newCone(radius=5, height=10, radialSegments=42, position=[0, 0, 
 
 }
 
-export function addCone(radius=5, height=10, radialSegments=42, position=[0, 0, 0], color=black, material="normal") {
+export function addCone(radius=5, height=10, radialSegments=42, position=[0, 0, 0], material="normal", color=black) {
 
-  let cone = newCone(radius, height, radialSegments, position, color, material)
+  let cone = newCone(radius, height, radialSegments, position, material, color)
 
   data.scene.add(cone)
 

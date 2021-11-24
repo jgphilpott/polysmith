@@ -3,7 +3,7 @@
 import {black} from "../colors/grayscale.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
-export function newText(text="Polymaker!", size=12, height=2, bevel=false, font="ubuntu", color=black, material="normal", center=true, x=0, y=0, z=0, rotateX=0, rotateY=0, rotateZ=0) {
+export function newText(text="", size=12, height=2, bevel=false, font="ubuntu", material="normal", color=black, center=true, x=0, y=0, z=0, rotateX=0, rotateY=0, rotateZ=0) {
 
   let textGeometry = new THREE.TextGeometry(text, {
 
@@ -29,13 +29,13 @@ export function newText(text="Polymaker!", size=12, height=2, bevel=false, font=
 
 }
 
-export function addText(text="Polymaker!", size=12, height=2, bevel=false, font="ubuntu", color=black, material="normal", center=true, x=0, y=0, z=0, rotateX=0, rotateY=0, rotateZ=0) {
+export function addText(text="", size=12, height=2, bevel=false, font="ubuntu", material="normal", color=black, center=true, x=0, y=0, z=0, rotateX=0, rotateY=0, rotateZ=0) {
 
   let loader = new THREE.FontLoader()
 
   loader.load("./app/fonts/JSON/" + font + ".json", function (font) {
 
-    let textMesh = newText(text, size, height, bevel, font, color, material, center, x, y, z, rotateX, rotateY, rotateZ)
+    let textMesh = newText(text, size, height, bevel, font, material, color, center, x, y, z, rotateX, rotateY, rotateZ)
 
     textMesh.rotateX(degree2radian(rotateX))
     textMesh.rotateY(degree2radian(rotateY))

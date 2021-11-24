@@ -3,7 +3,7 @@
 import {black} from "../colors/grayscale.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
-export function newCylinder(length=10, positiveRadius=5, negativeRadius=5, position=[0, 0, 0], color=black, material="normal", radialSegments=42) {
+export function newCylinder(length=10, positiveRadius=5, negativeRadius=5, position=[0, 0, 0], material="normal", color=black, radialSegments=42) {
 
   let geometry = new THREE.CylinderGeometry(positiveRadius, negativeRadius, length, radialSegments)
   let cylinder = new THREE.Mesh(geometry, meshMaterial(material, color))
@@ -14,9 +14,9 @@ export function newCylinder(length=10, positiveRadius=5, negativeRadius=5, posit
 
 }
 
-export function addCylinder(length=10, positiveRadius=5, negativeRadius=5, position=[0, 0, 0], color=black, material="normal", radialSegments=42) {
+export function addCylinder(length=10, positiveRadius=5, negativeRadius=5, position=[0, 0, 0], material="normal", color=black, radialSegments=42) {
 
-  let cylinder = newCylinder(length, positiveRadius, negativeRadius, position, color, material, radialSegments)
+  let cylinder = newCylinder(length, positiveRadius, negativeRadius, position, material, color, radialSegments)
 
   data.scene.add(cylinder)
 
