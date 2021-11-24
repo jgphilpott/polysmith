@@ -1,8 +1,6 @@
 // Linl: https://threejs.org/docs/#api/en/objects/Line
 
-import {black, white, grayscale} from "../colors/grayscale.mjs"
-import {red, orange, yellow, green, blue, purple, pink, rainbow} from "../colors/rainbow.mjs"
-
+import {black} from "../colors/grayscale.mjs"
 import {lineMaterial} from "../materials/line.mjs"
 
 export function newVector(vertices=[]) {

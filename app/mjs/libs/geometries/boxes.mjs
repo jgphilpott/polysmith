@@ -1,14 +1,12 @@
 // Link: https://threejs.org/docs/#api/en/geometries/BoxGeometry
 
-import {black, white, grayscale} from "../colors/grayscale.mjs"
-import {red, orange, yellow, green, blue, purple, pink, rainbow} from "../colors/rainbow.mjs"
-
+import {black} from "../colors/grayscale.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
-export function newBox(width=10, height=10, depth=10, position=[0, 0, 0], color=black) {
+export function newBox(width=10, height=10, depth=10, position=[0, 0, 0], color=black, material="basic") {
 
   let geometry = new THREE.BoxGeometry(width, height, depth)
-  let box = new THREE.Mesh(geometry, meshMaterial("basic", color))
+  let box = new THREE.Mesh(geometry, meshMaterial(material, color))
 
   box.position.set(position[0], position[1], position[2])
 
@@ -16,9 +14,9 @@ export function newBox(width=10, height=10, depth=10, position=[0, 0, 0], color=
 
 }
 
-export function addBox(width=10, height=10, depth=10, position=[0, 0, 0], color=black) {
+export function addBox(width=10, height=10, depth=10, position=[0, 0, 0], color=black, material="basic") {
 
-  let box = newBox(width, height, depth, position, color)
+  let box = newBox(width, height, depth, position, color, material)
 
   data.scene.add(box)
 
