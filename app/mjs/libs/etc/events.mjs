@@ -1,5 +1,5 @@
-import {exportSTL} from "./files/stl.mjs"
-import {exportOBJ} from "./files/obj.mjs"
+import {exportSTL} from "../files/stl.mjs"
+import {exportOBJ} from "../files/obj.mjs"
 
 export function addEvents() {
 
