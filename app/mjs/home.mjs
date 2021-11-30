@@ -1,9 +1,12 @@
-import {setup} from "./libs/setup.mjs"
+import {setup} from "./libs/etc/setup.mjs"
 
 import {joinMesh, cutMesh, intersectMesh} from "../libs/meshOperations.mjs"
 
 import {black, white, grayscale} from "./libs/colors/grayscale.mjs"
 import {red, orange, yellow, green, blue, purple, pink, rainbow} from "./libs/colors/rainbow.mjs"
+
+import {lineMaterial} from "./libs/materials/line.mjs"
+import {meshMaterial} from "./libs/materials/mesh.mjs"
 
 import {newBox, addBox} from "./libs/geometries/boxes.mjs"
 import {newCircle, addCircle} from "./libs/geometries/circles.mjs"
@@ -21,11 +24,13 @@ import {newTriangle, addTriangle} from "./libs/geometries/triangles.mjs"
 
 import {importOBJ, exportOBJ} from "./libs/files/obj.mjs"
 import {importSTL, exportSTL} from "./libs/files/stl.mjs"
-import {importSVG} from "./libs/files/svg.mjs"
+import {importSVG, exportSVG} from "./libs/files/svg.mjs"
 
 $(document).ready(function() {
 
   setup()
+
+  console.log("Welcome to Polymaker!")
 
   //|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|//
   //  Paste Generator Function Below  |//
