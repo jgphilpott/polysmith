@@ -1,8 +1,8 @@
 import {black, white} from "../colors/grayscale.mjs"
+import {meshMaterial} from "../materials/mesh.mjs"
+import {addAxes, removeAxes} from "../draw/axes.mjs"
 
-import {addAxes, removeAxes} from "../axes.mjs"
-
-export function importOBJ(path, center=null) {
+export function importOBJ(path) {
 
   let loader = new THREE.OBJLoader()
 
