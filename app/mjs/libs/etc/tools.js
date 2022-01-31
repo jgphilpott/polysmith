@@ -72,3 +72,29 @@ function centerY(boundingBox) {
 function centerZ(boundingBox) {
   return - boundingBox.min.z - (Math.abs(boundingBox.max.z - boundingBox.min.z) / 2)
 }
+
+function surfaceArea(mesh) {
+
+  let surface = 0
+
+  for (let i = 0; i < mesh.geometry.faces.length; i++) {
+
+    let v1 = mesh.geometry.vertices[mesh.geometry.faces[i].a]
+    let v2 = mesh.geometry.vertices[mesh.geometry.faces[i].b]
+    let v3 = mesh.geometry.vertices[mesh.geometry.faces[i].c]
+
+    let p1 = new THREE.Vector3(v1.x, v1.y, v1.z)
+    let p2 = new THREE.Vector3(v2.x, v2.y, v2.z)
+    let p3 = new THREE.Vector3(v3.x, v3.y, v3.z)
+
+    let triangle = new THREE.Triangle(p1, p2, p3)
+
+    let area = triangle.getArea()
+
+    surface += area
+
+  }
+
+  return surface
+
+}
