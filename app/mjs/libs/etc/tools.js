@@ -1,6 +1,10 @@
 // Credit: https://stackoverflow.com/a/64777515/1544937
 const chunkArray = (a,n)=>[...Array(Math.ceil(a.length/n))].map((_,i)=>a.slice(n*i,n+n*i))
 
+function signedVolumeOfTriangle(p1, p2, p3) {
+  return p1.dot(p2.cross(p3)) / 6.0
+}
+
 function minValue(values=[]) {
   return Math.min.apply(null, values)
 }
@@ -76,7 +80,7 @@ function centerZ(boundingBox) {
   return - boundingBox.min.z - (Math.abs(boundingBox.max.z - boundingBox.min.z) / 2)
 }
 
-function surfaceArea(mesh) {
+function getSurfaceArea(mesh) {
 
   let surface = 0
   let geometry = mesh.geometry
@@ -94,7 +98,6 @@ function surfaceArea(mesh) {
       let p3 = new THREE.Vector3(v3.x, v3.y, v3.z)
 
       let triangle = new THREE.Triangle(p1, p2, p3)
-
       let area = triangle.getArea()
 
       surface += area
@@ -118,7 +121,6 @@ function surfaceArea(mesh) {
       let p3 = new THREE.Vector3(v3[0], v3[1], v3[2])
 
       let triangle = new THREE.Triangle(p1, p2, p3)
-
       let area = triangle.getArea()
 
       surface += area
@@ -128,5 +130,68 @@ function surfaceArea(mesh) {
   }
 
   return surface
+
+}
+
+function getVolume(mesh) {
+
+  let volume = 0
+  let geometry = mesh.geometry
+
+  let p1 = new THREE.Vector3()
+  let p2 = new THREE.Vector3()
+  let p3 = new THREE.Vector3()
+
+  if (!geometry.isBufferGeometry) {
+
+    try {
+
+      geometry = new THREE.BufferGeometry().fromGeometry(geometry)
+
+    } catch (error) {
+
+      console.warn("The 'geometry' must be an indexed or non-indexed buffer geometry.")
+
+      return null
+
+    }
+
+  }
+
+  let isIndexed = geometry.index !== null
+  let position = geometry.attributes.position
+
+  if (!isIndexed) {
+
+    let faces = position.count / 3
+
+    for (let i = 0; i < faces; i++) {
+
+      p1.fromBufferAttribute(position, i * 3 + 0)
+      p2.fromBufferAttribute(position, i * 3 + 1)
+      p3.fromBufferAttribute(position, i * 3 + 2)
+
+      volume += signedVolumeOfTriangle(p1, p2, p3)
+
+    }
+
+  } else {
+
+    let index = geometry.index
+    let faces = index.count / 3
+
+    for (let i = 0; i < faces; i++) {
+
+      p1.fromBufferAttribute(position, index.array[i * 3 + 0])
+      p2.fromBufferAttribute(position, index.array[i * 3 + 1])
+      p3.fromBufferAttribute(position, index.array[i * 3 + 2])
+
+      volume += signedVolumeOfTriangle(p1, p2, p3)
+
+    }
+
+  }
+
+  return volume
 
 }
