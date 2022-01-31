@@ -1,3 +1,6 @@
+// Credit: https://stackoverflow.com/a/64777515/1544937
+const chunkArray = (a,n)=>[...Array(Math.ceil(a.length/n))].map((_,i)=>a.slice(n*i,n+n*i))
+
 function minValue(values=[]) {
   return Math.min.apply(null, values)
 }
@@ -76,22 +79,51 @@ function centerZ(boundingBox) {
 function surfaceArea(mesh) {
 
   let surface = 0
+  let geometry = mesh.geometry
 
-  for (let i = 0; i < mesh.geometry.faces.length; i++) {
+  if (geometry.faces && geometry.vertices) {
 
-    let v1 = mesh.geometry.vertices[mesh.geometry.faces[i].a]
-    let v2 = mesh.geometry.vertices[mesh.geometry.faces[i].b]
-    let v3 = mesh.geometry.vertices[mesh.geometry.faces[i].c]
+    for (let i = 0; i < geometry.faces.length; i++) {
 
-    let p1 = new THREE.Vector3(v1.x, v1.y, v1.z)
-    let p2 = new THREE.Vector3(v2.x, v2.y, v2.z)
-    let p3 = new THREE.Vector3(v3.x, v3.y, v3.z)
+      let v1 = geometry.vertices[geometry.faces[i].a]
+      let v2 = geometry.vertices[geometry.faces[i].b]
+      let v3 = geometry.vertices[geometry.faces[i].c]
 
-    let triangle = new THREE.Triangle(p1, p2, p3)
+      let p1 = new THREE.Vector3(v1.x, v1.y, v1.z)
+      let p2 = new THREE.Vector3(v2.x, v2.y, v2.z)
+      let p3 = new THREE.Vector3(v3.x, v3.y, v3.z)
 
-    let area = triangle.getArea()
+      let triangle = new THREE.Triangle(p1, p2, p3)
 
-    surface += area
+      let area = triangle.getArea()
+
+      surface += area
+
+    }
+
+  } else if (geometry.attributes.position.array) {
+
+    let faces = chunkArray(geometry.attributes.position.array, 9)
+
+    for (let i = 0; i < faces.length; i++) {
+
+      let vertices = chunkArray(faces[i], 3)
+
+      let v1 = vertices[0]
+      let v2 = vertices[1]
+      let v3 = vertices[2]
+
+      let p1 = new THREE.Vector3(v1[0], v1[1], v1[2])
+      let p2 = new THREE.Vector3(v2[0], v2[1], v2[2])
+      let p3 = new THREE.Vector3(v3[0], v3[1], v3[2])
+
+      let triangle = new THREE.Triangle(p1, p2, p3)
+
+      let area = triangle.getArea()
+
+      surface += area
+
+    }
 
   }
 
