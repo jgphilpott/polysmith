@@ -12,6 +12,7 @@ import {addDragControls} from "../controls/drag.mjs"
 import {addFlyControls} from "../controls/fly.mjs"
 import {addZoomControls} from "../controls/zoom.mjs"
 
+import {addPanels} from "../../panels/all.mjs"
 import {addEvents} from "../etc/events.mjs"
 import {addAxes} from "../draw/axes.mjs"
 
@@ -48,6 +49,7 @@ export function setup(scale=100) {
   addFlyControls()
   addZoomControls()
 
+  addPanels()
   addEvents()
   addAxes()
 
