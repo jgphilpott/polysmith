@@ -80,6 +80,7 @@ function centerZ(boundingBox) {
   return - boundingBox.min.z - (Math.abs(boundingBox.max.z - boundingBox.min.z) / 2)
 }
 
+// Credit: https://stackoverflow.com/a/50937272/1544937
 function getSurfaceArea(mesh) {
 
   let surface = 0
@@ -133,6 +134,7 @@ function getSurfaceArea(mesh) {
 
 }
 
+// Credit: https://discourse.threejs.org/t/volume-of-three-buffergeometry/5109
 function getVolume(mesh) {
 
   let volume = 0
