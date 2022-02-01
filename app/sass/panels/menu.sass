@@ -1,8 +1,64 @@
+@import "../colors/solid/grayscale.sass"
+@import "../colors/solid/rainbow.sass"
+
 #menu.panel
 
-  visibility: visible
+  visibility: hidden
 
   top: 25%
   left: 50%
 
-  transform: translate(-50%, -25%)
+  transform: translate(-50%, -50%)
+
+  .head
+
+    display: flex
+    align-items: center
+    justify-content: center
+
+    padding: 5px
+
+    #logo
+
+      float: left
+
+      width: 75px
+      height: 75px
+
+      padding: 5px
+
+    #name
+
+      float: left
+
+      font-size: 28px
+
+      padding: 5px
+
+  .option
+
+    text-align: center
+
+    border: 1px solid $black
+    border-radius: 5px
+
+    margin: 10px
+    padding: 5px
+
+  .option:hover
+
+    cursor: pointer
+
+  .opt
+
+    width: 40%
+
+  #signup,
+  #profile
+
+    float: left
+
+  #login,
+  #logout
+
+    float: right
