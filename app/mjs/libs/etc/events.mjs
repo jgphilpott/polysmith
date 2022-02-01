@@ -10,10 +10,16 @@ export function addEvents() {
     // Ctrl + Enter
     if (event.ctrlKey && event.keyCode == 10) {
 
+      event.preventDefault()
+      event.stopPropagation()
+
       exportSTL()
 
     // Shift + Enter
     } else if (event.shiftKey && event.keyCode == 13) {
+
+      event.preventDefault()
+      event.stopPropagation()
 
       exportOBJ()
 
