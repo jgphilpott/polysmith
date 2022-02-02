@@ -12,10 +12,6 @@
 
   display: none
 
-canvas
-
-  outline: none
-
 @font-face
 
   font-family: "polyfont"
@@ -24,6 +20,28 @@ canvas
 body
 
   font-family: "polyfont"
+
+canvas
+
+  outline: none
+
+img, h1, h2, h3, h4, h5, h6, p, a
+
+  -webkit-user-select: none
+  -khtml-user-select: none
+  -moz-user-select: none
+  -o-user-select: none
+  user-select: none
+
+  -webkit-user-drag: none
+  -khtml-user-drag: none
+  -moz-user-drag: none
+  -o-user-drag: none
+  user-drag: none
+
+a:hover
+
+  cursor: url('../imgs/icons/cursors/pointer.png'), pointer
 
 #nav
 
@@ -42,7 +60,7 @@ body
 
   #menu:hover
 
-    cursor: pointer
+    cursor: url('../imgs/icons/cursors/pointer.png'), pointer
 
   #title
 
