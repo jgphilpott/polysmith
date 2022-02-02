@@ -80,6 +80,26 @@ function centerZ(boundingBox) {
   return - boundingBox.min.z - (Math.abs(boundingBox.max.z - boundingBox.min.z) / 2)
 }
 
+// Credit: https://stackoverflow.com/a/13091694/1544937
+function getMouseCoordinates(event) {
+
+  let vector = new THREE.Vector3()
+  let coordinates = new THREE.Vector3()
+
+  vector.set((event.clientX / window.innerWidth) * 2 - 1, - (event.clientY / window.innerHeight) * 2 + 1, 0.5)
+
+  vector.unproject(data.camera)
+
+  vector.sub(data.camera.position).normalize()
+
+  let distance = - data.camera.position.z / vector.z
+
+  coordinates.copy(data.camera.position).add(vector.multiplyScalar(distance))
+
+  return coordinates
+
+}
+
 // Credit: https://stackoverflow.com/a/50937272/1544937
 function getSurfaceArea(mesh) {
 
