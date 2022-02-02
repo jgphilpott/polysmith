@@ -37,9 +37,7 @@ export function addShapesPanel() {
 
     }
 
-    data.events.addEventListener(mesh, "contextmenu", function(event) {
-      contextMenu("mesh", mesh, event.origDomEvent)
-    }, false)
+    data.events.addEventListener(mesh, "contextmenu", function(event) { contextMenu("mesh", mesh, event.origDomEvent) })
 
   })
 

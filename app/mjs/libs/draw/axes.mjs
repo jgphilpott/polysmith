@@ -1,15 +1,10 @@
 import {focus} from "../controls/focus.mjs"
+
 import {addLine} from "../geometries/lines.mjs"
 import {addSphere} from "../geometries/spheres.mjs"
 
 import {black, white} from "../colors/grayscale.mjs"
 import {red, orange, yellow, green, blue, purple, pink} from "../colors/rainbow.mjs"
-
-function addFocusEvent(obj) {
-  data.events.addEventListener(obj, "dblclick", function(event) {
-    focus(event.target.position)
-  }, false)
-}
 
 export function addAxes(size=data.scale) {
 
@@ -80,5 +75,11 @@ export function removeAxes() {
     data.scene.remove(data.axes[i])
 
   }
+
+}
+
+function addFocusEvent(obj) {
+
+  data.events.addEventListener(obj, "dblclick", function(event) { focus(event.target.position) })
 
 }

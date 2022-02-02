@@ -1,3 +1,6 @@
+import {focus} from "../libs/controls/focus.mjs"
+import {addMeshPanel} from "./mesh.mjs"
+
 export function addContextPanel() {
 
   $("#nav, #forkme, #canvas, .panel").mouseover(function() { $("#context-menu.panel").remove() })
@@ -14,13 +17,30 @@ export function contextMenu(type, element, event) {
 
     case "mesh":
 
-      contextMenu.append("<p>Open Panel</p>")
-      contextMenu.append("<p>Look Here</p>")
-      contextMenu.append("<p>Remove Mesh</p>")
+      contextMenu.append("<p id='open'>Open Panel</p>")
+      contextMenu.append("<p id='look'>Look Here</p>")
+      contextMenu.append("<p id='remove'>Remove Mesh</p>")
+
+      $("#context-menu.panel #open").click(function() {
+        addMeshPanel(element)
+      })
+
+      $("#context-menu.panel #look").click(function() {
+        focus(element.geometry.boundingSphere.center)
+      })
+
+      $("#context-menu.panel #remove").click(function() {
+
+        data.events.removeEventListener(element, "contextmenu")
+        data.scene.remove(element)
+
+      })
 
       break
 
   }
+
+  $("#context-menu.panel p").click(function() { contextMenu.remove() })
 
   positionMenu(contextMenu, event)
 
