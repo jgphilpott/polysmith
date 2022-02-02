@@ -1,4 +1,4 @@
-import {contextMenu} from "../libs/etc/context.mjs"
+import {contextMenu} from "./context.mjs"
 
 import {addBox} from "../libs/geometries/boxes.mjs"
 import {addCylinder} from "../libs/geometries/cylinders.mjs"
@@ -38,7 +38,7 @@ export function addShapesPanel() {
     }
 
     data.events.addEventListener(mesh, "contextmenu", function(event) {
-      contextMenu(mesh, event.origDomEvent)
+      contextMenu("mesh", mesh, event.origDomEvent)
     }, false)
 
   })
