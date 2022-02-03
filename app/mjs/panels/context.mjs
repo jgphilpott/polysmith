@@ -26,7 +26,7 @@ export function contextMenu(type, element, event) {
       })
 
       $("#context-menu.panel #look").click(function() {
-        focus(element.geometry.boundingSphere.center)
+        focus({x: element.position.x, y: element.position.y, z: element.position.z})
       })
 
       $("#context-menu.panel #remove").click(function() {

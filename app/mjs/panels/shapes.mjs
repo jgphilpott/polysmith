@@ -1,10 +1,5 @@
-import {contextMenu} from "./context.mjs"
-
+import {addMesh} from "./mesh.mjs"
 import {dragable} from "../libs/etc/events.mjs"
-
-import {addBox} from "../libs/geometries/boxes.mjs"
-import {addCylinder} from "../libs/geometries/cylinders.mjs"
-import {addSphere} from "../libs/geometries/spheres.mjs"
 
 export function addShapesPanel() {
 
@@ -31,26 +26,7 @@ export function addShapesPanel() {
     event.preventDefault()
     event.stopPropagation()
 
-    let mesh = null
-    let id = $(this).attr("id")
-
-    switch (id) {
-
-      case "cube":
-        mesh = addBox()
-        break
-
-      case "cylinder":
-        mesh = addCylinder()
-        break
-
-      case "sphere":
-        mesh = addSphere()
-        break
-
-    }
-
-    data.events.addEventListener(mesh, "contextmenu", function(event) { contextMenu("mesh", mesh, event.origDomEvent) })
+    addMesh($(this).attr("id"))
 
   })
 

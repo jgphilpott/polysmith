@@ -1,3 +1,5 @@
+import {addMesh} from "../../panels/mesh.mjs"
+
 import {exportSTL} from "../files/stl.mjs"
 import {exportOBJ} from "../files/obj.mjs"
 
@@ -31,6 +33,7 @@ export function addEvents() {
 
 export function dragable(element) {
 
+  let dragged = null
   let xOffset, yOffset = 0
 
   function start(event) {
@@ -60,6 +63,8 @@ export function dragable(element) {
   }
 
   function drag(event) {
+
+    dragged = true
 
     event.preventDefault()
     event.stopPropagation()
@@ -94,9 +99,21 @@ export function dragable(element) {
 
     } else if (element.hasClass("shape")) {
 
-      $(".ghost-shape").remove()
+      let ghost = $(".ghost-shape")
+
+      if (dragged) {
+
+        let coordinates = screen2worldCoordinates(ghost.offset().left + (ghost.width() / 2), ghost.offset().top + (ghost.height() / 2), 0)
+
+        addMesh(element.attr("id"), [coordinates.x, coordinates.y, coordinates.z])
+
+      }
+
+      ghost.remove()
 
     }
+
+    dragged = null
 
     document.onmouseup = null
     document.onmousemove = null
