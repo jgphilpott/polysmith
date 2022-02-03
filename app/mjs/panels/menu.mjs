@@ -1,3 +1,5 @@
+import {dragable} from "../libs/etc/events.mjs"
+
 export function addMenuPanel() {
 
   $("body").append("<div id='menu' class='panel'></div>")
@@ -25,6 +27,8 @@ export function addMenuPanel() {
   $(document).keypress(function(event) {
     if (event.keyCode == 13) { toggleMenu() }
   })
+
+  dragable(panel)
 
 }
 

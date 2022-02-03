@@ -1,5 +1,7 @@
 import {contextMenu} from "./context.mjs"
 
+import {dragable} from "../libs/etc/events.mjs"
+
 import {addBox} from "../libs/geometries/boxes.mjs"
 import {addCylinder} from "../libs/geometries/cylinders.mjs"
 import {addSphere} from "../libs/geometries/spheres.mjs"
@@ -16,7 +18,18 @@ export function addShapesPanel() {
 
   panel.append("<img id='+' class='nav' src='/app/imgs/icons/nav/+.png'>")
 
-  $("#shapes.panel img.shape").dblclick(function() {
+  let shapes = $("#shapes.panel img.shape")
+
+  for (let i = 0; i < shapes.length; i++) {
+
+    dragable($(shapes[i]))
+
+  }
+
+  shapes.dblclick(function() {
+
+    event.preventDefault()
+    event.stopPropagation()
 
     let mesh = null
     let id = $(this).attr("id")
@@ -40,5 +53,7 @@ export function addShapesPanel() {
     data.events.addEventListener(mesh, "contextmenu", function(event) { contextMenu("mesh", mesh, event.origDomEvent) })
 
   })
+
+  dragable(panel)
 
 }

@@ -1,9 +1,11 @@
-export function addMeshPanel(mesh=null) {
+import {dragable} from "../libs/etc/events.mjs"
 
-  $("body").append("<div id='mesh' class='panel'>Mesh</div>")
+export function addMeshPanel(mesh) {
+
+  $("body").append("<div id='mesh' class='panel'></div>")
 
   let panel = $("#mesh.panel")
 
-  console.log(mesh)
+  dragable(panel)
 
 }

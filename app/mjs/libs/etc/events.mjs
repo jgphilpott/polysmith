@@ -38,17 +38,19 @@ export function dragable(element) {
     event.preventDefault()
     event.stopPropagation()
 
-    if (element.css("transform") != "none") {
+    if (element.hasClass("panel")) {
 
-      let translation = element.css("transform").replace(/[{()}]/g, "").replace(/[a-zA-Z]/g, "").split(",")
+      let transform = element.css("transform").replace(/[{()}]/g, "").replace(/[a-zA-Z]/g, "").split(",")
 
-      xOffset = event.clientX - element.position().left + Number(translation[4])
-      yOffset = event.clientY - element.position().top + Number(translation[5])
+      xOffset = event.clientX - element.position().left + Number(transform[4])
+      yOffset = event.clientY - element.position().top + Number(transform[5])
 
-    } else {
+    } else if (element.hasClass("shape")) {
 
-      xOffset = event.clientX - element.position().left
-      yOffset = event.clientY - element.position().top
+      $("body").append("<img class='ghost-shape' src='" + element.attr("src") + "'>")
+
+      xOffset = event.clientX - element.offset().left
+      yOffset = event.clientY - element.offset().top
 
     }
 
@@ -65,10 +67,18 @@ export function dragable(element) {
     let eventX = event.clientX - xOffset
     let eventY = event.clientY - yOffset
 
-    element.css({top: eventY, left: eventX})
+    if (element.hasClass("panel")) {
 
-    element.css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
-    element.children("*").css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
+      element.css({top: eventY, left: eventX})
+
+      element.css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
+      element.children("*").css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
+
+    } else if (element.hasClass("shape")) {
+
+      $(".ghost-shape").css({top: eventY, left: eventX})
+
+    }
 
   }
 
@@ -77,8 +87,16 @@ export function dragable(element) {
     event.preventDefault()
     event.stopPropagation()
 
-    element.css("cursor", "")
-    element.children("*").css("cursor", "")
+    if (element.hasClass("panel")) {
+
+      element.css("cursor", "")
+      element.children("*").css("cursor", "")
+
+    } else if (element.hasClass("shape")) {
+
+      $(".ghost-shape").remove()
+
+    }
 
     document.onmouseup = null
     document.onmousemove = null
