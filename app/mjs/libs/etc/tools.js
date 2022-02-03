@@ -81,22 +81,39 @@ function centerZ(boundingBox) {
 }
 
 // Credit: https://stackoverflow.com/a/13091694/1544937
-function getMouseCoordinates(event) {
+function screen2worldCoordinates(x, y, zTarget=0) {
 
   let vector = new THREE.Vector3()
   let coordinates = new THREE.Vector3()
 
-  vector.set((event.clientX / window.innerWidth) * 2 - 1, - (event.clientY / window.innerHeight) * 2 + 1, 0.5)
+  vector.set((x / window.innerWidth) * 2 - 1, - (y / window.innerHeight) * 2 + 1, 0)
 
   vector.unproject(data.camera)
 
   vector.sub(data.camera.position).normalize()
 
-  let distance = - data.camera.position.z / vector.z
+  let distance = (zTarget - data.camera.position.z) / vector.z
 
   coordinates.copy(data.camera.position).add(vector.multiplyScalar(distance))
 
   return coordinates
+
+}
+
+// Credit: https://stackoverflow.com/a/36706930/1544937
+function world2screenCoordinates(x, y, z) {
+
+  let halfWidth = window.innerWidth / 2
+  let halfHeight = window.innerHeight / 2
+
+  let coordinates = new THREE.Vector3(x, y, z)
+
+  coordinates.project(data.camera)
+
+  coordinates.x = (coordinates.x * halfWidth) + halfWidth
+  coordinates.y = - (coordinates.y * halfHeight) + halfHeight
+
+  return new THREE.Vector2(coordinates.x, coordinates.y)
 
 }
 
