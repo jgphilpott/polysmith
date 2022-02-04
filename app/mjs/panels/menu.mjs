@@ -6,19 +6,19 @@ export function addMenuPanel() {
 
   let panel = $("#menu.panel")
 
-  panel.append("<div class='head'><img id='logo' src='/app/imgs/theme/logo.png'><h1 id='name'>Polymaker</h1></div>")
+  panel.append("<div class='head'><img id='logo' src='/app/imgs/theme/logo.png'><h2 id='name'>Polymaker</h2></div>")
 
   var client = false
 
   if (client) {
 
-    panel.append("<div id='profile' class='option opt'><h3>Profile</h3></div>")
-    panel.append("<div id='logout' class='option opt'><h3>Logout</h3></div>")
+    panel.append("<div id='profile' class='option opt'><h4>Profile</h4></div>")
+    panel.append("<div id='logout' class='option opt'><h4>Logout</h4></div>")
 
   } else {
 
-    panel.append("<div id='signup' class='option opt'><h3>Sign Up</h3></div>")
-    panel.append("<div id='login' class='option opt'><h3>Login</h3></div>")
+    panel.append("<div id='signup' class='option opt'><h4>Sign Up</h4></div>")
+    panel.append("<div id='login' class='option opt'><h4>Login</h4></div>")
 
   }
 

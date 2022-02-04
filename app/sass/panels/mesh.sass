@@ -1,16 +1,62 @@
+@import "../colors/glass/grayscale.sass"
+@import "../colors/glass/rainbow.sass"
+
+@import "../colors/solid/grayscale.sass"
+@import "../colors/solid/rainbow.sass"
+
 #mesh.panel
 
   transform: translate(-50%, -50%)
 
   h3
 
+    margin: 10px
+
+  h3, h4
+
     text-align: center
 
-  input[type=number]
+  h4, p, input, button
+
+    margin: 5px
+
+  span
+
+    margin: 0px 5px
+
+    display: flex
+    align-items: center
+    justify-content: center
+
+  input, button
+
+    border: 1px solid $black
+    border-radius: 5px
+
+  input
+
+    width: 150px
+    padding: 3px
 
     -moz-appearance: textfield
+
+  input:focus
+
+    outline: none
 
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button
 
     -webkit-appearance: none
+
+  button.plus
+
+    background-color: $green-glass
+
+  button.minus
+
+    background-color: $red-glass
+
+  button:hover
+
+    cursor: url('../imgs/icons/cursors/pointer.png'), pointer
