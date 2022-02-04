@@ -84,6 +84,7 @@ export function dragable(element) {
     } else if (element.hasClass("shape")) {
 
       $(".ghost-shape").css({top: eventY, left: eventX})
+      $("body").css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
 
     }
 
@@ -108,6 +109,8 @@ export function dragable(element) {
 
         addMesh(element.attr("id"), [coordinates.x, coordinates.y, coordinates.z])
 
+        $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab")
+
       }
 
       ghost.remove()
@@ -116,8 +119,8 @@ export function dragable(element) {
 
     dragged = null
 
-    document.onmouseup = null
     document.onmousemove = null
+    document.onmouseup = null
 
   }
 

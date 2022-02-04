@@ -112,6 +112,10 @@ export function addMesh(type, position=[0, 0, 0]) {
 
   }
 
+  data.events.addEventListener(mesh, "mouseover", function(event) { $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab") })
+  data.events.addEventListener(mesh, "mouseout", function(event) { $("body").css("cursor", "") })
+  data.events.addEventListener(mesh, "mousedown", function(event) { dragMesh(mesh, event.origDomEvent) })
+
   data.events.addEventListener(mesh, "dblclick", function(event) { focus({x: mesh.position.x, y: mesh.position.y, z: mesh.position.z}) })
   data.events.addEventListener(mesh, "contextmenu", function(event) { contextMenu("mesh", mesh, event.origDomEvent) })
 
@@ -139,6 +143,45 @@ export function updateMesh(mesh, type, key, value) {
   if (type == "rotation") { value = degree2radian(value) }
 
   mesh[type][key] = value
+
+}
+
+export function dragMesh(mesh, event) {
+
+  function drag(event) {
+
+    let max = 300
+    let min = -300
+
+    $("body").css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
+
+    let coordinates = screen2worldCoordinates(event.clientX, event.clientY, mesh.position.z)
+
+    if (coordinates.x > max) { coordinates.x = max}
+    if (coordinates.x < min) { coordinates.x = min}
+
+    if (coordinates.y > max) { coordinates.y = max}
+    if (coordinates.y < min) { coordinates.y = min}
+
+    $("#mesh." + mesh.uuid + " #position-x input").val(coordinates.x.toFixed(2))
+    $("#mesh." + mesh.uuid + " #position-y input").val(coordinates.y.toFixed(2))
+
+    mesh.position.x = coordinates.x
+    mesh.position.y = coordinates.y
+
+  }
+
+  function stop(event) {
+
+    $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab")
+
+    document.onmousemove = null
+    document.onmouseup = null
+
+  }
+
+  document.onmousemove = drag
+  document.onmouseup = stop
 
 }
 
