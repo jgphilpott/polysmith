@@ -1,5 +1,5 @@
 import {focus} from "../libs/controls/focus.mjs"
-import {addMeshPanel} from "./mesh.mjs"
+import {addMeshPanel, addMesh, removeMesh} from "./mesh.mjs"
 
 export function addContextPanel() {
 
@@ -30,10 +30,7 @@ export function contextMenu(type, element, event) {
       })
 
       $("#context-menu.panel #remove").click(function() {
-
-        data.events.removeEventListener(element, "contextmenu")
-        data.scene.remove(element)
-
+        removeMesh(element)
       })
 
       break

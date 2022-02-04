@@ -7,7 +7,7 @@ export function addShapesPanel() {
 
   let panel = $("#shapes.panel")
 
-  panel.append("<img id='cube' class='shape' src='/app/imgs/icons/shapes/basic/cube.png'>")
+  panel.append("<img id='box' class='shape' src='/app/imgs/icons/shapes/basic/box.png'>")
   panel.append("<img id='cylinder' class='shape' src='/app/imgs/icons/shapes/basic/cylinder.png'>")
   panel.append("<img id='sphere' class='shape' src='/app/imgs/icons/shapes/basic/sphere.png'>")
 
@@ -16,18 +16,11 @@ export function addShapesPanel() {
   let shapes = $("#shapes.panel img.shape")
 
   for (let i = 0; i < shapes.length; i++) {
-
     dragable($(shapes[i]))
-
   }
 
   shapes.dblclick(function() {
-
-    event.preventDefault()
-    event.stopPropagation()
-
     addMesh($(this).attr("id"))
-
   })
 
   dragable(panel)

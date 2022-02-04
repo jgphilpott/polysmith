@@ -29,6 +29,10 @@ export function addEvents() {
 
   })
 
+  $("#canvas").click(function() {
+    $("input").blur()
+  })
+
 }
 
 export function dragable(element) {
@@ -38,7 +42,6 @@ export function dragable(element) {
 
   function start(event) {
 
-    event.preventDefault()
     event.stopPropagation()
 
     if (element.hasClass("panel")) {
@@ -66,7 +69,6 @@ export function dragable(element) {
 
     dragged = true
 
-    event.preventDefault()
     event.stopPropagation()
 
     let eventX = event.clientX - xOffset
@@ -89,7 +91,6 @@ export function dragable(element) {
 
   function stop(event) {
 
-    event.preventDefault()
     event.stopPropagation()
 
     if (element.hasClass("panel")) {
