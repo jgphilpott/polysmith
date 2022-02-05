@@ -18,7 +18,7 @@ import {addAxes} from "../draw/axes.mjs"
 
 export function setup() {
 
-  data.name = "poly"
+  data.name = "Polymaker"
   data.scale = 100
   data.meshes = []
 
