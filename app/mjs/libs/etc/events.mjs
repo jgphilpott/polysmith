@@ -7,6 +7,8 @@ export function addEvents() {
 
   data.events = new THREEx.DomEvents(data.camera, data.canvas)
 
+  data.events.operation = {mesh: null, key: null}
+
   $("body").keypress(function(event) {
 
     // Ctrl + Enter
@@ -30,7 +32,19 @@ export function addEvents() {
   })
 
   $("#canvas").click(function() {
+
     $("input").blur()
+
+    if (data.events.operation.key) {
+
+      $("body").css("cursor", "")
+      $("#canvas").css("cursor", "")
+
+      data.events.operation.mesh = null
+      data.events.operation.key = null
+
+    }
+
   })
 
 }

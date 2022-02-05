@@ -16,20 +16,14 @@ import {addPanels} from "../../panels/all.mjs"
 import {addEvents} from "../etc/events.mjs"
 import {addAxes} from "../draw/axes.mjs"
 
-export function setup(scale=100) {
+export function setup() {
 
   data.name = "poly"
-  data.scale = scale
+  data.scale = 100
   data.meshes = []
 
-  let width = $(window).width()
-  let height = $(window).height()
-
-  data.width = width
-  data.height = height
-
   let renderer = new THREE.WebGLRenderer()
-  renderer.setSize(width, height)
+  renderer.setSize(window.innerWidth, window.innerHeight)
   data.renderer = renderer
 
   let canvas = document.body.appendChild(renderer.domElement)

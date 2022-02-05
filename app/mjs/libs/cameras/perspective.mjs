@@ -1,8 +1,7 @@
 // Link: https://threejs.org/docs/#api/en/cameras/PerspectiveCamera
-
 export function addPerspectiveCamera(position=data.scale) {
 
-  let camera = new THREE.PerspectiveCamera(75, data.width / data.height, 0.1, 1000)
+  let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
 
   camera.up.set(0, 0, 1)
   camera.position.set(position * 1.35, position * 1.35, position * 0.55)

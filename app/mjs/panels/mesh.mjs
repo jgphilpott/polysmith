@@ -116,6 +116,7 @@ export function addMesh(type, position=[0, 0, 0]) {
   data.events.addEventListener(mesh, "mousedown", function(event) { dragable(mesh, event.origDomEvent) })
   data.events.addEventListener(mesh, "mouseout", function(event) { $("body").css("cursor", "") })
 
+  data.events.addEventListener(mesh, "click", function(event) { updateMesh(mesh, "operation", data.events.operation.key, null) })
   data.events.addEventListener(mesh, "dblclick", function(event) { focus({x: mesh.position.x, y: mesh.position.y, z: mesh.position.z}) })
   data.events.addEventListener(mesh, "contextmenu", function(event) { contextMenu("mesh", mesh, event.origDomEvent) })
 
@@ -133,23 +134,54 @@ export function addMesh(type, position=[0, 0, 0]) {
 
 export function updateMesh(mesh, type, key, value) {
 
-  let input = $("#mesh." + mesh.uuid + " #" + type + "-" + key + " input")
+  if (type == "position" || type == "rotation") {
 
-  if (value > input.attr("max")) { value = input.attr("max") }
-  if (value < input.attr("min")) { value = input.attr("min") }
+    let input = $("#mesh." + mesh.uuid + " #" + type + "-" + key + " input")
 
-  input.val(value)
+    if (value > input.attr("max")) { value = input.attr("max") }
+    if (value < input.attr("min")) { value = input.attr("min") }
 
-  if (type == "rotation") { value = degree2radian(value) }
+    input.val(value)
 
-  mesh[type][key] = value
+    if (type == "rotation") { value = degree2radian(value) }
+
+    mesh[type][key] = value
+
+  } else if (type == "operation") {
+
+    if (value == "setup") {
+
+      $("#canvas").css("cursor", "url('app/imgs/icons/cursors/copy.png'), copy")
+
+      data.events.operation.mesh = mesh
+      data.events.operation.key = key
+
+    } else if (data.events.operation.key) {
+
+      console.log("Operation: " + key + "")
+
+      $("#canvas").css("cursor", "")
+
+      data.events.operation.mesh = null
+      data.events.operation.key = null
+
+    }
+
+  }
 
 }
 
 export function removeMesh(mesh) {
 
+  $("body").css("cursor", "")
+
   $("#mesh." + mesh.uuid + "").remove()
 
+  data.events.removeEventListener(mesh, "mousemove")
+  data.events.removeEventListener(mesh, "mousedown")
+  data.events.removeEventListener(mesh, "mouseout")
+
+  data.events.removeEventListener(mesh, "click")
   data.events.removeEventListener(mesh, "dblclick")
   data.events.removeEventListener(mesh, "contextmenu")
 

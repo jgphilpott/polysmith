@@ -1,5 +1,5 @@
 import {focus} from "../libs/controls/focus.mjs"
-import {addMeshPanel, addMesh, removeMesh} from "./mesh.mjs"
+import {addMeshPanel, addMesh, updateMesh, removeMesh} from "./mesh.mjs"
 
 export function addContextPanel() {
 
@@ -17,8 +17,14 @@ export function contextMenu(type, element, event) {
 
     case "mesh":
 
+      contextMenu.append("<h4>Basic</h4>")
       contextMenu.append("<p id='open'>Open Panel</p>")
       contextMenu.append("<p id='look'>Look Here</p>")
+
+      contextMenu.append("<h4>Mesh</h4>")
+      contextMenu.append("<p id='cut'>Cut Mesh</p>")
+      contextMenu.append("<p id='join'>Join Mesh</p>")
+      contextMenu.append("<p id='intersect'>Intersect Mesh</p>")
       contextMenu.append("<p id='remove'>Remove Mesh</p>")
 
       $("#context-menu.panel #open").click(function() {
@@ -29,9 +35,11 @@ export function contextMenu(type, element, event) {
         focus({x: element.position.x, y: element.position.y, z: element.position.z})
       })
 
-      $("#context-menu.panel #remove").click(function() {
-        removeMesh(element)
-      })
+      $("#context-menu.panel #cut").click(function() { updateMesh(element, "operation", "cut", "setup") })
+      $("#context-menu.panel #join").click(function() { updateMesh(element, "operation", "join", "setup") })
+      $("#context-menu.panel #intersect").click(function() { updateMesh(element, "operation", "intersect", "setup") })
+
+      $("#context-menu.panel #remove").click(function() { removeMesh(element) })
 
       break
 
