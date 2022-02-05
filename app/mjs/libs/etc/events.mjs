@@ -35,28 +35,41 @@ export function addEvents() {
 
 }
 
-export function dragable(element) {
+export function dragable(element, origEvent=null) {
 
   let dragged = null
   let xOffset, yOffset = 0
+  let max = data.scale * 3
+  let min = - (data.scale * 3)
 
   function start(event) {
 
-    event.stopPropagation()
+    if (element.type != "Mesh") {
 
-    if (element.hasClass("panel")) {
+      event.stopPropagation()
 
-      let transform = element.css("transform").replace(/[{()}]/g, "").replace(/[a-zA-Z]/g, "").split(",")
+      if (element.hasClass("panel")) {
 
-      xOffset = event.clientX - element.position().left + Number(transform[4])
-      yOffset = event.clientY - element.position().top + Number(transform[5])
+        let transform = element.css("transform").replace(/[{()}]/g, "").replace(/[a-zA-Z]/g, "").split(",")
 
-    } else if (element.hasClass("shape")) {
+        xOffset = event.clientX - element.position().left + Number(transform[4])
+        yOffset = event.clientY - element.position().top + Number(transform[5])
 
-      $("body").append("<img class='ghost-shape' src='" + element.attr("src") + "'>")
+      } else if (element.hasClass("shape")) {
 
-      xOffset = event.clientX - element.offset().left
-      yOffset = event.clientY - element.offset().top
+        $("body").append("<img class='ghost-shape' src='" + element.attr("src") + "'>")
+
+        xOffset = event.clientX - element.offset().left
+        yOffset = event.clientY - element.offset().top
+
+      }
+
+    } else {
+
+      let coordinates = world2screenCoordinates(element.position.x, element.position.y, element.position.z)
+
+      xOffset = origEvent.clientX - coordinates.x
+      yOffset = origEvent.clientY - coordinates.y
 
     }
 
@@ -69,22 +82,44 @@ export function dragable(element) {
 
     dragged = true
 
-    event.stopPropagation()
-
     let eventX = event.clientX - xOffset
     let eventY = event.clientY - yOffset
 
-    if (element.hasClass("panel")) {
+    if (element.type != "Mesh") {
 
-      element.css({top: eventY, left: eventX})
+      event.stopPropagation()
 
-      element.css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
-      element.children("*").css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
+      if (element.hasClass("panel")) {
 
-    } else if (element.hasClass("shape")) {
+        element.css({top: eventY, left: eventX})
 
-      $(".ghost-shape").css({top: eventY, left: eventX})
+        element.css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
+        element.children("*").css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
+
+      } else if (element.hasClass("shape")) {
+
+        $(".ghost-shape").css({top: eventY, left: eventX})
+        $("body").css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
+
+      }
+
+    } else {
+
       $("body").css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
+
+      let coordinates = screen2worldCoordinates(eventX, eventY, element.position.z)
+
+      if (coordinates.x > max) { coordinates.x = max}
+      if (coordinates.x < min) { coordinates.x = min}
+
+      if (coordinates.y > max) { coordinates.y = max}
+      if (coordinates.y < min) { coordinates.y = min}
+
+      $("#mesh." + element.uuid + " #position-x input").val(coordinates.x.toFixed(2))
+      $("#mesh." + element.uuid + " #position-y input").val(coordinates.y.toFixed(2))
+
+      element.position.x = coordinates.x
+      element.position.y = coordinates.y
 
     }
 
@@ -92,38 +127,46 @@ export function dragable(element) {
 
   function stop(event) {
 
-    event.stopPropagation()
+    if (element.type != "Mesh") {
 
-    if (element.hasClass("panel")) {
+      event.stopPropagation()
 
-      element.css("cursor", "")
-      element.children("*").css("cursor", "")
+      if (element.hasClass("panel")) {
 
-    } else if (element.hasClass("shape")) {
+        element.css("cursor", "")
+        element.children("*").css("cursor", "")
 
-      let ghost = $(".ghost-shape")
+      } else if (element.hasClass("shape")) {
 
-      if (dragged) {
+        let ghost = $(".ghost-shape")
 
-        let coordinates = screen2worldCoordinates(ghost.offset().left + (ghost.width() / 2), ghost.offset().top + (ghost.height() / 2), 0)
+        if (dragged) {
 
-        addMesh(element.attr("id"), [coordinates.x, coordinates.y, coordinates.z])
+          let coordinates = screen2worldCoordinates(ghost.offset().left + (ghost.width() / 2), ghost.offset().top + (ghost.height() / 2), 0)
 
-        $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab")
+          addMesh(element.attr("id"), [coordinates.x, coordinates.y, coordinates.z])
+
+          $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab")
+
+        }
+
+        ghost.remove()
 
       }
 
-      ghost.remove()
+    } else {
+
+      $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab")
 
     }
-
-    dragged = null
 
     document.onmousemove = null
     document.onmouseup = null
 
+    dragged = null
+
   }
 
-  element.mousedown(start)
+  element.type != "Mesh" ? element.mousedown(start) : start()
 
 }
