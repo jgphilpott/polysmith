@@ -8,6 +8,10 @@ export function addMenuPanel() {
 
   panel.append("<div class='head'><img id='logo' src='/app/imgs/theme/logo.png'><h2 id='name'>Polymaker</h2></div>")
 
+  panel.append("<div id='export-import' class='option'><h4>Export / Import</h4></div>")
+  panel.append("<div id='panels' class='option'><h4>Panels</h4></div>")
+  panel.append("<div id='settings' class='option'><h4>Settings</h4></div>")
+
   var client = false
 
   if (client) {
