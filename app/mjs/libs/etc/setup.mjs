@@ -1,3 +1,4 @@
+import {addSettings} from "./settings.mjs"
 import {black, white} from "../colors/grayscale.mjs"
 
 import {addAmbientLight} from "../lights/ambient.mjs"
@@ -12,7 +13,6 @@ import {addDragControls} from "../controls/drag.mjs"
 import {addFlyControls} from "../controls/fly.mjs"
 import {addZoomControls} from "../controls/zoom.mjs"
 
-import {addSettings} from "./settings.mjs"
 import {addPanels} from "../../panels/all.mjs"
 import {addEvents} from "../etc/events.mjs"
 import {addAxes} from "../draw/axes.mjs"
@@ -22,6 +22,8 @@ export function setup() {
   data.name = "Polymaker"
   data.scale = 100
   data.meshes = []
+
+  addSettings()
 
   let renderer = new THREE.WebGLRenderer()
   renderer.setSize(window.innerWidth, window.innerHeight)
@@ -44,7 +46,6 @@ export function setup() {
   addFlyControls()
   addZoomControls()
 
-  addSettings()
   addPanels()
   addEvents()
   addAxes()

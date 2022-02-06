@@ -42,9 +42,9 @@ export function addSettings() {
 
   let controls = settings.controls
 
-  controls.dragSpeed = 10
   controls.flySpeed = 1
   controls.spinSpeed = 1
+  controls.dragSpeed = 10
   controls.zoomSpeed = 1000
 
   controls.zoomMax = 500

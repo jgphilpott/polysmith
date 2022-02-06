@@ -2,9 +2,9 @@ export function addZoomControls() {
 
   $("#canvas").on("wheel", function(event) {
 
-    let zoomMin = 1
-    let zoomMax = 500
-    let zoomSpeed = 1000
+    let zoomMax = data.settings.controls.zoomMax
+    let zoomMin = data.settings.controls.zoomMin
+    let zoomSpeed = data.settings.controls.zoomSpeed
     let zoomDelta = event.originalEvent.wheelDelta / zoomSpeed
 
     let camera = data.camera
