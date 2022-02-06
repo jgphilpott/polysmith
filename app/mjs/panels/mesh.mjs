@@ -8,7 +8,7 @@ import {addSphere} from "../libs/geometries/spheres.mjs"
 
 import {joinMesh, cutMesh, intersectMesh} from "../../libs/meshOperations.mjs"
 
-export function addMeshPanel(mesh) {
+export function addMeshPanel(mesh, coordinates=null) {
 
   if ($("#mesh." + mesh.uuid + "").length == 0) {
 
@@ -16,7 +16,7 @@ export function addMeshPanel(mesh) {
 
     let panel = $("#mesh." + mesh.uuid + "")
 
-    let coordinates = world2screenCoordinates(mesh.position.x, mesh.position.y, mesh.position.z)
+    if (!coordinates) coordinates = world2screenCoordinates(mesh.position.x, mesh.position.y, mesh.position.z)
 
     panel.css({top: coordinates.y, left: coordinates.x})
 
@@ -24,15 +24,21 @@ export function addMeshPanel(mesh) {
     panel.append("<p id='surface'><b>Surface:</b> " + mesh.surface.toFixed(2) + "</p>")
     panel.append("<p id='volume'><b>Volume:</b> " + mesh.volume.toFixed(2) + "</p>")
 
-    panel.append("<h4><b>Position</b></h4>")
-    panel.append("<span id='position-x'><label><b>X</b> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-    panel.append("<span id='position-y'><label><b>Y</b> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-    panel.append("<span id='position-z'><label><b>Z</b> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+    let position = ""
+    let rotation = ""
 
-    panel.append("<h4><b>Rotation</b></h4>")
-    panel.append("<span id='rotation-x'><label><b>X</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-    panel.append("<span id='rotation-y'><label><b>Y</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-    panel.append("<span id='rotation-z'><label><b>Z</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+    position += "<div id='position'><h4><b>Position</b></h4>"
+    position += "<span id='position-x'><label><b>X</b> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>"
+    position += "<span id='position-y'><label><b>Y</b> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>"
+    position += "<span id='position-z'><label><b>Z</b> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span></div>"
+
+    rotation += "<div id='rotation'><h4><b>Rotation</b></h4>"
+    rotation += "<span id='rotation-x'><label><b>X</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>"
+    rotation += "<span id='rotation-y'><label><b>Y</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>"
+    rotation += "<span id='rotation-z'><label><b>Z</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span></div>"
+
+    panel.append(position)
+    panel.append(rotation)
 
     $("#mesh." + mesh.uuid + " #position-x input").val(mesh.position.x.toFixed(2))
     $("#mesh." + mesh.uuid + " #position-y input").val(mesh.position.y.toFixed(2))
@@ -188,7 +194,7 @@ export function updateMesh(mesh, type, key=null, value=null) {
         addMesh(result)
 
         let panel = $("#mesh." + data.events.operation.mesh.uuid + "")
-        if (panel.length) { panel.removeClass("" + data.events.operation.mesh.uuid + "").addClass("" + result.uuid + ""); updateMesh(result, "meta") }
+        if (panel.length) addMeshPanel(result, {x: parseFloat(panel.css("left")), y: parseFloat(panel.css("top"))})
 
         removeMesh(data.events.operation.mesh)
 
@@ -200,12 +206,6 @@ export function updateMesh(mesh, type, key=null, value=null) {
       data.events.operation.key = null
 
     }
-
-  } else if (type == "meta") {
-
-    $("#mesh." + mesh.uuid + " #type").html("<b>Type:</b> " + mesh.class.replace(/\b\w/g, function(char) { return char.toUpperCase() }) + "")
-    $("#mesh." + mesh.uuid + " #surface").html("<b>Surface:</b> " + mesh.surface.toFixed(2) + "")
-    $("#mesh." + mesh.uuid + " #volume").html("<b>Volume:</b> " + mesh.volume.toFixed(2) + "")
 
   }
 
