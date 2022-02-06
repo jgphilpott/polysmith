@@ -81,7 +81,7 @@ export function removeAxes() {
 
     }
 
-    data.scene.remove()
+    data.scene.remove(data.axes[i])
 
   }
 

@@ -15,13 +15,9 @@ export function addShapesPanel() {
 
   let shapes = $("#shapes.panel img.shape")
 
-  for (let i = 0; i < shapes.length; i++) {
-    dragable($(shapes[i]))
-  }
+  for (let i = 0; i < shapes.length; i++) { dragable($(shapes[i])) }
 
-  shapes.dblclick(function() {
-    addMesh($(this).attr("id"))
-  })
+  shapes.dblclick(function() { addMesh(null, {type: $(this).attr("id")}) })
 
   dragable(panel)
 

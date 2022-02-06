@@ -31,11 +31,11 @@ export function addEvents() {
 
   })
 
-  $("#canvas").click(function() {
+  $("#canvas").click(function(event) {
 
     $("input").blur()
 
-    if (data.events.operation.key) {
+    if (data.events.operation.key && !data.camera.dragged) {
 
       $("body").css("cursor", "")
       $("#canvas").css("cursor", "")
@@ -158,7 +158,7 @@ export function dragable(element, origEvent=null) {
 
           let coordinates = screen2worldCoordinates(ghost.offset().left + (ghost.width() / 2), ghost.offset().top + (ghost.height() / 2), 0)
 
-          addMesh(element.attr("id"), [coordinates.x, coordinates.y, coordinates.z])
+          addMesh(null, {type: element.attr("id"), position: {x: coordinates.x, y: coordinates.y, z: coordinates.z}})
 
           $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab")
 
@@ -181,6 +181,6 @@ export function dragable(element, origEvent=null) {
 
   }
 
-  element.type != "Mesh" ? element.mousedown(start) : start()
+  element.type != "Mesh" ? element.mousedown(start) : !data.events.operation.key ? start() : null
 
 }
