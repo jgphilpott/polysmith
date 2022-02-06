@@ -1,4 +1,5 @@
 import {addMesh} from "../../panels/mesh.mjs"
+import {addLine} from "../geometries/lines.mjs"
 
 import {exportSTL} from "../files/stl.mjs"
 import {exportOBJ} from "../files/obj.mjs"
@@ -85,6 +86,8 @@ export function dragable(element, origEvent=null) {
       xOffset = origEvent.clientX - coordinates.x
       yOffset = origEvent.clientY - coordinates.y
 
+      data.tooltips.distanceLines = []
+
     }
 
     document.onmousemove = drag
@@ -135,6 +138,12 @@ export function dragable(element, origEvent=null) {
       element.position.x = coordinates.x
       element.position.y = coordinates.y
 
+      for (let i = 0; i < data.tooltips.distanceLines.length; i++) { data.scene.remove(data.tooltips.distanceLines[i]) }
+
+      data.tooltips.distanceLines.push(addLine([[0, coordinates.y, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed"))
+      data.tooltips.distanceLines.push(addLine([[coordinates.x, 0, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed"))
+      data.tooltips.distanceLines.push(addLine([[coordinates.x, coordinates.y, 0], [coordinates.x, coordinates.y, coordinates.z]], "dashed"))
+
     }
 
   }
@@ -171,6 +180,8 @@ export function dragable(element, origEvent=null) {
     } else {
 
       $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab")
+
+      for (let i = 0; i < data.tooltips.distanceLines.length; i++) { data.scene.remove(data.tooltips.distanceLines[i]) }
 
     }
 

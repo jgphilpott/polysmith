@@ -17,15 +17,15 @@ export function newVector(vertices=[[]]) {
 
 }
 
-export function newLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=black, linewidth=1) {
+export function newLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=black, linewidth=1, dashSize=5, gapSize=3) {
 
-  return new THREE.Line(newVector(vertices), lineMaterial(material, color, linewidth))
+  return new THREE.Line(newVector(vertices), lineMaterial(material, color, linewidth, dashSize, gapSize)).computeLineDistances()
 
 }
 
-export function addLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=black, linewidth=1) {
+export function addLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=black, linewidth=1, dashSize=5, gapSize=3) {
 
-  let line = newLine(vertices, material, color, linewidth)
+  let line = newLine(vertices, material, color, linewidth, dashSize, gapSize)
 
   data.scene.add(line)
 

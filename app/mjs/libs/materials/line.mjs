@@ -1,6 +1,6 @@
 import {black} from "../colors/grayscale.mjs"
 
-export function lineMaterial(type="basic", color=black, linewidth=1, dashSize=3, gapSize=1, scale=1) {
+export function lineMaterial(type="basic", color=black, linewidth=1, dashSize=5, gapSize=3) {
 
   switch (type) {
 
@@ -9,7 +9,7 @@ export function lineMaterial(type="basic", color=black, linewidth=1, dashSize=3,
       break
 
     case "dashed":
-      return new THREE.LineDashedMaterial({color: color, linewidth: linewidth, dashSize: dashSize, gapSize: gapSize, scale: scale})
+      return new THREE.LineDashedMaterial({color: color, linewidth: linewidth, dashSize: dashSize, gapSize: gapSize})
       break
 
   }
