@@ -58,4 +58,4 @@ if not exists(libs_dir):
 compile(dirname=("app/sass", "app/css"), output_style="compressed")
 Popen(["boussole", "watch"], cwd="app/config")
 
-app.run(host="0.0.0.0", port=4000, debug=True)
+app.run(host="0.0.0.0", port=5000, debug=True)

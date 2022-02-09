@@ -4,12 +4,20 @@ app:
   volumes:
    - .:/root
   ports:
-   - 4000:4000
+   - 5000:5000
   links:
-   - mongo
+   - db
 
-mongo:
+jupyter:
+  container_name: notes
+  image: jupyter/minimal-notebook:latest
+  ports:
+   - 8888:8888
+  links:
+   - db
+
+db:
   container_name: mongo
   image: mongo:3.0.2
   ports:
-   - 27018:27018
+   - 27017:27017
