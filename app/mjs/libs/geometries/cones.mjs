@@ -1,6 +1,6 @@
 // Link: https://threejs.org/docs/#api/en/geometries/ConeGeometry
 
-import {black} from "../colors/grayscale.mjs"
+import {black} from "../colors/three/grayscale.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
 export function newCone(radius=5, height=10, radialSegments=42, position=[0, 0, 0], material="normal", color=black) {

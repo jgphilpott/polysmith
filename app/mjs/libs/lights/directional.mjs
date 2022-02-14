@@ -1,6 +1,6 @@
 // Link: https://threejs.org/docs/#api/en/lights/DirectionalLight
 
-import {white} from "../colors/grayscale.mjs"
+import {white} from "../colors/three/grayscale.mjs"
 
 export function addDirectionalLight(position=data.scale) {
 

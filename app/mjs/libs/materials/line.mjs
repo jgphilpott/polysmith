@@ -1,4 +1,4 @@
-import {black} from "../colors/grayscale.mjs"
+import {black} from "../colors/three/grayscale.mjs"
 
 export function lineMaterial(type="basic", color=black, linewidth=1, dashSize=5, gapSize=3) {
 

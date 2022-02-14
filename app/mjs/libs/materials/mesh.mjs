@@ -1,4 +1,4 @@
-import {black} from "../colors/grayscale.mjs"
+import {black} from "../colors/three/grayscale.mjs"
 
 export function meshMaterial(type="normal", color=black, side=THREE.DoubleSide) {
 

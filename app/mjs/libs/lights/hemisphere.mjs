@@ -1,6 +1,6 @@
 // Link: https://threejs.org/docs/#api/en/lights/HemisphereLight
 
-import {black, white} from "../colors/grayscale.mjs"
+import {black, white} from "../colors/three/grayscale.mjs"
 
 export function addHemisphereLight(position=data.scale) {
 

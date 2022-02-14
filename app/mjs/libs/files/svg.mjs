@@ -1,4 +1,3 @@
-import {black, white} from "../colors/grayscale.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
 export function importSVG(path, depth=10, bevelEnabled=false) {

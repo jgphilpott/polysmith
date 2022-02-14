@@ -1,5 +1,5 @@
 import {addSettings} from "./settings.mjs"
-import {black, white} from "../colors/grayscale.mjs"
+import {black, white} from "../colors/three/grayscale.mjs"
 
 import {addAmbientLight} from "../lights/ambient.mjs"
 import {addDirectionalLight} from "../lights/directional.mjs"

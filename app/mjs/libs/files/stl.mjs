@@ -1,4 +1,3 @@
-import {black, white} from "../colors/grayscale.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 import {addAxes, removeAxes} from "../draw/axes.mjs"
 

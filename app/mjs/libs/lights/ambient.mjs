@@ -1,6 +1,6 @@
 // Link: https://threejs.org/docs/#api/en/lights/AmbientLight
 
-import {white} from "../colors/grayscale.mjs"
+import {white} from "../colors/three/grayscale.mjs"
 
 export function addAmbientLight(position=data.scale) {
 

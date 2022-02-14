@@ -3,8 +3,8 @@ import {focus} from "../controls/focus.mjs"
 import {addLine} from "../geometries/lines.mjs"
 import {addSphere} from "../geometries/spheres.mjs"
 
-import {black, white} from "../colors/grayscale.mjs"
-import {red, orange, yellow, green, blue, purple, pink} from "../colors/rainbow.mjs"
+import {black, white} from "../colors/three/grayscale.mjs"
+import {red, orange, yellow, green, blue, purple, pink} from "../colors/three/rainbow.mjs"
 
 export function addAxes() {
 

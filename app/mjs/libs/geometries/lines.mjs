@@ -1,6 +1,6 @@
 // Link: https://threejs.org/docs/#api/en/objects/Line
 
-import {black} from "../colors/grayscale.mjs"
+import {black} from "../colors/three/grayscale.mjs"
 import {lineMaterial} from "../materials/line.mjs"
 
 export function newVector(vertices=[[]]) {

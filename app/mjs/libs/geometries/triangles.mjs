@@ -1,4 +1,4 @@
-import {black} from "../colors/grayscale.mjs"
+import {black} from "../colors/three/grayscale.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
 export function newTriangle(v1=[0, 0, 0], v2=[0, 10, 0], v3=[0, 0, 10], material="normal", color=black) {
