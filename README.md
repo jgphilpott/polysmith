@@ -12,7 +12,7 @@ Assuming you have [docker compose installed](https://docs.docker.com/compose/ins
 docker-compose up --build
 ```
 
-The build will take some time but once it’s done you can view the application by visiting `localhost:5000` in a web browser. In future deployments you can simply use the command:
+The build will take some time but once it’s done you can view the application by visiting `localhost:4000` in a web browser. In future deployments you can simply use the command:
 
 ```
 docker-compose up
