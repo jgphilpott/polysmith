@@ -1,23 +1,27 @@
-app:
-  container_name: polymaker
-  build: .
-  volumes:
-   - .:/root
-  ports:
-   - 5000:5000
-  links:
-   - db
+version: "2"
+services:
 
-jupyter:
-  container_name: notes
-  image: jupyter/minimal-notebook:latest
-  ports:
-   - 8888:8888
-  links:
-   - db
+  application:
+    container_name: polymaker
+    build: .
+    volumes:
+     - .:/root
+    ports:
+     - 4000:4000
+    links:
+     - database
 
-db:
-  container_name: mongo
-  image: mongo:3.0.2
-  ports:
-   - 27017:27017
+  jupyter:
+    container_name: notebook
+    image: jupyter/minimal-notebook:latest
+    ports:
+     - 8888:8888
+    links:
+     - database
+
+  database:
+    container_name: mongodb
+    entrypoint: mongod
+    image: mongo:3.0.2
+    ports:
+     - 27017:27017
