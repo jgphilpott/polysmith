@@ -1,5 +1,5 @@
+import {addPanelEvents, dragable} from "../libs/etc/events.mjs"
 import {contextMenu} from "./context.mjs"
-import {dragable} from "../libs/etc/events.mjs"
 import {focus} from "../libs/controls/focus.mjs"
 
 import {addBox} from "../libs/geometries/boxes.mjs"
@@ -89,7 +89,7 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     panel.mouseover(function() { $("#context-menu.panel").remove() })
 
-    dragable(panel)
+    addPanelEvents(panel)
 
   }
 

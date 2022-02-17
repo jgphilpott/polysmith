@@ -1,4 +1,4 @@
-import {dragable} from "../libs/etc/events.mjs"
+import {addPanelEvents} from "../libs/etc/events.mjs"
 
 export function addCameraPanel() {
 
@@ -6,6 +6,6 @@ export function addCameraPanel() {
 
   let panel = $("#camera.panel")
 
-  dragable(panel)
+  addPanelEvents(panel)
 
 }

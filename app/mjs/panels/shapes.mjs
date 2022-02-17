@@ -1,5 +1,5 @@
 import {addMesh} from "./mesh.mjs"
-import {dragable} from "../libs/etc/events.mjs"
+import {addPanelEvents, dragable} from "../libs/etc/events.mjs"
 
 export function addShapesPanel() {
 
@@ -19,6 +19,6 @@ export function addShapesPanel() {
 
   shapes.dblclick(function() { addMesh(null, {type: $(this).attr("id")}) })
 
-  dragable(panel)
+  addPanelEvents(panel)
 
 }

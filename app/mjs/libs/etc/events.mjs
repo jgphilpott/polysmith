@@ -9,6 +9,7 @@ export function addEvents() {
   data.events = new THREEx.DomEvents(data.camera, data.canvas)
 
   data.events.operation = {mesh: null, key: null}
+  data.events.zIndex = 0
 
   $("body").keypress(function(event) {
 
@@ -47,6 +48,30 @@ export function addEvents() {
     }
 
   })
+
+}
+
+export function addPanelEvents(panel) {
+
+  panel.hover(function(event) {
+
+    data.events.zIndex += 1
+
+    panel.css("z-index", data.events.zIndex)
+
+
+  })
+
+  // panel.mouseover(function(event) {
+  //   // $(this).css("background-color", "black")
+  //   panel.animate({backgroundColor: "rgba(220, 220, 220, " + generalSettings.opacity + ")"}, {duration: duration, queue: false})
+  // })
+  //
+  // panel.mouseout(function(event) {
+  //   // $(this).css("background-color", "")
+  // })
+
+  dragable(panel)
 
 }
 
