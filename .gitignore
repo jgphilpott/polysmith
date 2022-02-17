@@ -4,8 +4,11 @@
 *.stp
 *.ipt
 
+# CSS
+app/css
+
 # Libs
 app/libs
 
-# CSS
-app/css
+# Python
+__pycache__
