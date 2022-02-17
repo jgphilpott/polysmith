@@ -1,4 +1,4 @@
-import {dragable} from "../libs/etc/events.mjs"
+import {addPanelEvents} from "../libs/etc/events.mjs"
 
 export function addMenuPanel() {
 
@@ -32,7 +32,7 @@ export function addMenuPanel() {
     if (event.keyCode == 13) { toggleMenu() }
   })
 
-  dragable(panel)
+  addPanelEvents(panel)
 
 }
 

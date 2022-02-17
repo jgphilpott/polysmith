@@ -1,4 +1,4 @@
-import {dragable} from "../libs/etc/events.mjs"
+import {addPanelEvents} from "../libs/etc/events.mjs"
 
 export function addMeshesPanel() {
 
@@ -6,6 +6,6 @@ export function addMeshesPanel() {
 
   let panel = $("#meshes.panel")
 
-  dragable(panel)
+  addPanelEvents(panel)
 
 }

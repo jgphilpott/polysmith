@@ -49,6 +49,8 @@ export function contextMenu(type, element, event) {
 
   positionMenu(contextMenu, event)
 
+  contextMenu.css("z-index", data.events.zIndex + 1)
+
 }
 
 function positionMenu(menu, event) {
