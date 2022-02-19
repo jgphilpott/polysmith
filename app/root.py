@@ -4,6 +4,7 @@ from os.path import exists
 from subprocess import Popen
 
 from flask import Flask, render_template
+from mongo.socket.plug import plugin
 
 from requests import get
 from urllib.request import urlretrieve
@@ -58,4 +59,4 @@ if not exists(libs_dir):
 compile(dirname=("app/sass", "app/css"), output_style="compressed")
 Popen(["boussole", "watch"], cwd="app/config")
 
-app.run(host="0.0.0.0", port=4000, debug=True)
+plugin(app).run(app, host="0.0.0.0", port=4000, debug=True)

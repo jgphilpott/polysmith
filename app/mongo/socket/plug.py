@@ -1,7 +1,7 @@
 from flask_socketio import SocketIO
 
-from socket.images import connect_images
-from socket.models import connect_models
+from mongo.socket.images import connect_images
+from mongo.socket.models import connect_models
 
 def plugin(app):
 
