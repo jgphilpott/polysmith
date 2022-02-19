@@ -2,6 +2,9 @@ export function addZoomControls() {
 
   $("#canvas").on("wheel", function(event) {
 
+    event.preventDefault()
+    event.stopPropagation()
+
     let zoomMax = data.settings.controls.zoomMax
     let zoomMin = data.settings.controls.zoomMin
     let zoomSpeed = data.settings.controls.zoomSpeed
