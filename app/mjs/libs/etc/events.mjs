@@ -4,12 +4,14 @@ import {addLine} from "../geometries/lines.mjs"
 import {exportSTL} from "../files/stl.mjs"
 import {exportOBJ} from "../files/obj.mjs"
 
+import {grayGlass, lightGrayGlass} from "../colors/glass/grayscale.mjs"
+
 export function addEvents() {
 
   data.events = new THREEx.DomEvents(data.camera, data.canvas)
 
-  data.events.operation = {mesh: null, key: null}
   data.events.zIndex = 0
+  data.events.operation = {mesh: null, key: null}
 
   $("body").keypress(function(event) {
 
@@ -53,6 +55,9 @@ export function addEvents() {
 
 export function addPanelEvents(panel) {
 
+  let queue = false
+  let duration = 1000
+
   panel.hover(function(event) {
 
     data.events.zIndex += 1
@@ -62,14 +67,13 @@ export function addPanelEvents(panel) {
 
   })
 
-  // panel.mouseover(function(event) {
-  //   // $(this).css("background-color", "black")
-  //   panel.animate({backgroundColor: "rgba(220, 220, 220, " + generalSettings.opacity + ")"}, {duration: duration, queue: false})
-  // })
-  //
-  // panel.mouseout(function(event) {
-  //   // $(this).css("background-color", "")
-  // })
+  panel.mouseover(function(event) {
+    panel.animate({backgroundColor: grayGlass}, {duration: duration, queue: queue})
+  })
+
+  panel.mouseout(function(event) {
+    panel.animate({backgroundColor: lightGrayGlass}, {duration: duration, queue: queue})
+  })
 
   dragable(panel)
 

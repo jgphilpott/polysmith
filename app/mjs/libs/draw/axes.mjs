@@ -68,6 +68,15 @@ export function addAxisZ(min, max) {
 
 }
 
+function addAxesEvents(obj) {
+
+  data.events.addEventListener(obj, "mouseover", function(event) { $("body").css("cursor", "url('app/imgs/icons/cursors/pointer.png'), pointer") })
+  data.events.addEventListener(obj, "mouseout", function(event) { $("body").css("cursor", "") })
+
+  data.events.addEventListener(obj, "dblclick", function(event) { if (focus(event.target.position)) $("body").css("cursor", "") })
+
+}
+
 export function removeAxes() {
 
   for (let i = 0; i < data.axes.length; i++) {
@@ -84,14 +93,5 @@ export function removeAxes() {
     data.scene.remove(data.axes[i])
 
   }
-
-}
-
-function addAxesEvents(obj) {
-
-  data.events.addEventListener(obj, "mouseover", function(event) { $("body").css("cursor", "url('app/imgs/icons/cursors/pointer.png'), pointer") })
-  data.events.addEventListener(obj, "mouseout", function(event) { $("body").css("cursor", "") })
-
-  data.events.addEventListener(obj, "dblclick", function(event) { if (focus(event.target.position)) $("body").css("cursor", "") })
 
 }
