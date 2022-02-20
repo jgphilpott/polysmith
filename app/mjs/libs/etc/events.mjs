@@ -13,10 +13,19 @@ export function addEvents() {
   data.events.zIndex = 0
   data.events.operation = {mesh: null, key: null}
 
+  $(window).on("resize", function() {
+
+    data.renderer.setSize(window.innerWidth, window.innerHeight)
+
+    data.camera.aspect = window.innerWidth / window.innerHeight
+    data.camera.updateProjectionMatrix()
+
+  })
+
   $("body").keypress(function(event) {
 
     // Ctrl + Enter
-    if (event.ctrlKey && event.keyCode == 10) {
+    if (event.ctrlKey && (event.keyCode == 13 || event.keyCode == 10)) {
 
       event.preventDefault()
       event.stopPropagation()
