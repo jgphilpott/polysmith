@@ -10,11 +10,15 @@ import {joinMesh, cutMesh, intersectMesh} from "../../libs/meshOperations.mjs"
 
 export function addMeshPanel(mesh, coordinates=null) {
 
-  if ($("#mesh." + mesh.uuid + "").length == 0) {
+  let panel = $("#mesh." + mesh.uuid + "")
+
+  if (panel.length == 0) {
 
     $("body").append("<div id='mesh' class='panel " + mesh.uuid + "'><h3>Mesh</h3></div>")
 
-    let panel = $("#mesh." + mesh.uuid + "")
+    panel = $("#mesh." + mesh.uuid + "")
+
+    panel.append("<img class='close' src='/app/imgs/panels/close.png'>")
 
     if (!coordinates) coordinates = world2screenCoordinates(mesh.position.x, mesh.position.y, mesh.position.z)
 
@@ -90,6 +94,10 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.mouseover(function() { $("#context-menu.panel").remove() })
 
     addPanelEvents(panel)
+
+  } else {
+
+    panel.css("visibility", "visible")
 
   }
 

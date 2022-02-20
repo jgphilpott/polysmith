@@ -6,6 +6,8 @@ export function addGeometriesPanel() {
 
   let panel = $("#geometries.panel")
 
+  panel.append("<img class='close' src='/app/imgs/panels/close.png'>")
+
   addPanelEvents(panel)
 
 }

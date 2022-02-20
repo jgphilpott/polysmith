@@ -7,6 +7,8 @@ export function addShapesPanel() {
 
   let panel = $("#shapes.panel")
 
+  panel.append("<img class='close' src='/app/imgs/panels/close.png'>")
+
   panel.append("<img id='box' class='shape' src='/app/imgs/icons/shapes/basic/box.png'>")
   panel.append("<img id='cylinder' class='shape' src='/app/imgs/icons/shapes/basic/cylinder.png'>")
   panel.append("<img id='sphere' class='shape' src='/app/imgs/icons/shapes/basic/sphere.png'>")

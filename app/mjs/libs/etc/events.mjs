@@ -67,21 +67,29 @@ export function addPanelEvents(panel) {
   let queue = false
   let duration = 1000
 
+  let id = panel.attr("id")
+  let close = $("#" + id + ".panel .close")
+
   panel.hover(function(event) {
 
     data.events.zIndex += 1
 
     panel.css("z-index", data.events.zIndex)
 
-
   })
 
   panel.mouseover(function(event) {
+    close.animate({opacity: 1}, {duration: duration, queue: queue})
     panel.animate({backgroundColor: grayGlass}, {duration: duration, queue: queue})
   })
 
   panel.mouseout(function(event) {
+    close.animate({opacity: 0}, {duration: duration, queue: queue})
     panel.animate({backgroundColor: lightGrayGlass}, {duration: duration, queue: queue})
+  })
+
+  close.click(function(event) {
+    panel.css("visibility", "hidden")
   })
 
   dragable(panel)

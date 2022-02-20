@@ -6,6 +6,8 @@ export function addCameraPanel() {
 
   let panel = $("#camera.panel")
 
+  panel.append("<img class='close' src='/app/imgs/panels/close.png'>")
+
   addPanelEvents(panel)
 
 }
