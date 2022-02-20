@@ -89,7 +89,7 @@ export function addPanelEvents(panel) {
   })
 
   close.click(function(event) {
-    panel.css("visibility", "hidden")
+    id == "mesh" ? panel.remove() : panel.css("visibility", "hidden")
   })
 
   dragable(panel)

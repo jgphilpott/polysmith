@@ -6,6 +6,8 @@ import {addBox} from "../libs/geometries/boxes.mjs"
 import {addCylinder} from "../libs/geometries/cylinders.mjs"
 import {addSphere} from "../libs/geometries/spheres.mjs"
 
+import {grayGlass, lightGrayGlass} from "../libs/colors/glass/grayscale.mjs"
+
 import {joinMesh, cutMesh, intersectMesh} from "../../libs/meshOperations.mjs"
 
 export function addMeshPanel(mesh, coordinates=null) {
@@ -97,7 +99,10 @@ export function addMeshPanel(mesh, coordinates=null) {
 
   } else {
 
-    panel.css("visibility", "visible")
+    setTimeout(function() { panel.css("background", grayGlass) }, 0)
+    setTimeout(function() { panel.css("background", lightGrayGlass) }, 100)
+    setTimeout(function() { panel.css("background", grayGlass) }, 200)
+    setTimeout(function() { panel.css("background", lightGrayGlass) }, 300)
 
   }
 
