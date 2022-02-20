@@ -27,8 +27,9 @@ export function setup() {
 
   addSettings()
 
-  let renderer = new THREE.WebGLRenderer()
+  let renderer = new THREE.WebGLRenderer({alpha: true})
   renderer.setSize(window.innerWidth, window.innerHeight)
+  renderer.setPixelRatio(window.devicePixelRatio)
   data.renderer = renderer
 
   let canvas = document.body.appendChild(renderer.domElement)

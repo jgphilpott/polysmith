@@ -13,7 +13,7 @@ export function addAxes() {
   let max = data.scale
   let min = - data.scale
 
-  let centroid = addSphere(max / 100, 42, 42, [0, 0, 0], "basic", black)
+  let centroid = addSphere(max / 100, 42, 42, [0, 0, 0], "standard", black)
   data.axes.push(centroid)
   addAxesEvents(centroid)
 
@@ -25,9 +25,9 @@ export function addAxes() {
 
 export function addAxisX(min, max) {
 
-  let maxCap = addSphere(max / 100, 42, 42, [max, 0, 0], "basic", green)
+  let maxCap = addSphere(max / 100, 42, 42, [max, 0, 0], "standard", green)
   let axis = addLine([[max, 0, 0], [min, 0, 0]], "basic", red)
-  let minCap = addSphere(max / 100, 42, 42, [min, 0, 0], "basic", red)
+  let minCap = addSphere(max / 100, 42, 42, [min, 0, 0], "standard", red)
 
   data.axes.push(maxCap)
   data.axes.push(axis)
@@ -40,9 +40,9 @@ export function addAxisX(min, max) {
 
 export function addAxisY(min, max) {
 
-  let maxCap = addSphere(max / 100, 42, 42, [0, max, 0], "basic", green)
+  let maxCap = addSphere(max / 100, 42, 42, [0, max, 0], "standard", green)
   let axis = addLine([[0, max, 0], [0, min, 0]], "basic", green)
-  let minCap = addSphere(max / 100, 42, 42, [0, min, 0], "basic", red)
+  let minCap = addSphere(max / 100, 42, 42, [0, min, 0], "standard", red)
 
   data.axes.push(maxCap)
   data.axes.push(axis)
@@ -55,9 +55,9 @@ export function addAxisY(min, max) {
 
 export function addAxisZ(min, max) {
 
-  let maxCap = addSphere(max / 100, 42, 42, [0, 0, max], "basic", green)
+  let maxCap = addSphere(max / 100, 42, 42, [0, 0, max], "standard", green)
   let axis = addLine([[0, 0, max], [0, 0, min]], "basic", blue)
-  let minCap = addSphere(max / 100, 42, 42, [0, 0, min], "basic", red)
+  let minCap = addSphere(max / 100, 42, 42, [0, 0, min], "standard", red)
 
   data.axes.push(maxCap)
   data.axes.push(axis)
