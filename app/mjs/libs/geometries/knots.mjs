@@ -3,7 +3,7 @@
 import {black} from "../colors/three/grayscale.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
-export function newKnot(size=10, thickness=3, radialSegments=42, tubularSegments=64, position=[0, 0, 0], material="normal", color=black) {
+export function newKnot(size=10, thickness=3, radialSegments=42, tubularSegments=42, position=[0, 0, 0], material="normal", color=black) {
 
   let geometry = new THREE.TorusKnotGeometry(size, thickness, tubularSegments, radialSegments)
   let knot = new THREE.Mesh(geometry, meshMaterial(material, color))
@@ -14,7 +14,7 @@ export function newKnot(size=10, thickness=3, radialSegments=42, tubularSegments
 
 }
 
-export function addKnot(size=10, thickness=3, radialSegments=42, tubularSegments=64, position=[0, 0, 0], material="normal", color=black) {
+export function addKnot(size=10, thickness=3, radialSegments=42, tubularSegments=42, position=[0, 0, 0], material="normal", color=black) {
 
   let knot = newKnot(size, thickness, radialSegments, tubularSegments, position, material, color)
 
