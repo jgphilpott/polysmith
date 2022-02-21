@@ -27,7 +27,7 @@ export function setup() {
 
   addSettings()
 
-  let renderer = new THREE.WebGLRenderer({alpha: true})
+  let renderer = new THREE.WebGLRenderer({alpha: true, antialias: true, logarithmicDepthBuffer: true})
   renderer.setSize(window.innerWidth, window.innerHeight)
   renderer.setPixelRatio(window.devicePixelRatio)
   data.renderer = renderer
