@@ -3,6 +3,7 @@ services:
 
   application:
     container_name: polymaker
+    restart: always
     build: .
     volumes:
      - .:/root
@@ -14,6 +15,7 @@ services:
   jupyter:
     container_name: notebook
     image: jupyter/minimal-notebook:latest
+    restart: always
     ports:
      - 8888:8888
     links:
@@ -23,5 +25,6 @@ services:
     container_name: mongodb
     entrypoint: mongod
     image: mongo:3.0.2
+    restart: always
     ports:
      - 27017:27017
