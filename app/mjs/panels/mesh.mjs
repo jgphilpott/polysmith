@@ -5,6 +5,7 @@ import {focus} from "../libs/controls/focus.mjs"
 import {addBox} from "../libs/geometries/boxes.mjs"
 import {addCylinder} from "../libs/geometries/cylinders.mjs"
 import {addSphere} from "../libs/geometries/spheres.mjs"
+import {addTorus} from "../libs/geometries/toruses.mjs"
 
 import {grayGlass, lightGrayGlass} from "../libs/colors/glass/grayscale.mjs"
 
@@ -114,17 +115,60 @@ export function addMesh(mesh=null, properties={}) {
 
     switch (properties.type) {
 
-      case "box":
+      case "cube":
         mesh = addBox()
         break
 
       case "cylinder":
-        mesh = addCylinder()
-        mesh.rotation.x = degree2radian(90)
+        mesh = addCylinder().rotateX(degree2radian(90))
         break
 
       case "sphere":
         mesh = addSphere()
+        break
+
+      case "triangular-prism":
+        mesh = addCylinder(10, 5, 5, 3)
+        break
+
+      case "rectangular-prism":
+        mesh = addCylinder(10, 5, 5, 4)
+        break
+
+      case "pentagonal-prism":
+        mesh = addCylinder(10, 5, 5, 5)
+        break
+
+      case "hexagonal-prism":
+        mesh = addCylinder(10, 5, 5, 6)
+        break
+
+      case "heptagonal-prism":
+        mesh = addCylinder(10, 5, 5, 7)
+        break
+
+      case "octagonal-prism":
+        mesh = addCylinder(10, 5, 5, 8)
+        break
+
+      case "triangular-pyramid":
+        mesh = addCylinder(10, 0, 5, 3).rotateX(degree2radian(90))
+        break
+
+      case "rectangular-pyramid":
+        mesh = addCylinder(10, 0, 5, 4).rotateX(degree2radian(90))
+        break
+
+      case "pentagonal-pyramid":
+        mesh = addCylinder(10, 0, 5, 5).rotateX(degree2radian(90))
+        break
+
+      case "cone":
+        mesh = addCylinder(10, 0, 5, 42).rotateX(degree2radian(90))
+        break
+
+      case "torus":
+        mesh = addTorus().rotateY(degree2radian(90))
         break
 
     }
