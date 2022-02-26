@@ -1,3 +1,1 @@
-function generator() {
-
-}
+function generator() {}

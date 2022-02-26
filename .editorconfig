@@ -1,0 +1,23 @@
+root = true
+
+[*] # All
+charset = utf-8
+indent_size = 2
+indent_style = space
+insert_final_newline = false
+trim_trailing_whitespace=true
+
+[*.md] # Markdown
+
+[*.py] # Python
+indent_size = 4
+insert_final_newline = true
+
+[*.js] # JavaScript
+
+[*.mjs] # Modular JavaScript
+
+[*.html] # HTML
+
+[*.sass] # Sass
+insert_final_newline = true

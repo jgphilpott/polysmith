@@ -1,18 +1,18 @@
-                   .:                     :,                                          
-,:::::::: ::`      :::                   :::                                          
-,:::::::: ::`      :::                   :::                                          
-.,,:::,,, ::`.:,   ... .. .:,     .:. ..`... ..`   ..   .:,    .. ::  .::,     .:,`   
-   ,::    :::::::  ::, :::::::  `:::::::.,:: :::  ::: .::::::  ::::: ::::::  .::::::  
-   ,::    :::::::: ::, :::::::: ::::::::.,:: :::  ::: :::,:::, ::::: ::::::, :::::::: 
-   ,::    :::  ::: ::, :::  :::`::.  :::.,::  ::,`::`:::   ::: :::  `::,`   :::   ::: 
-   ,::    ::.  ::: ::, ::`  :::.::    ::.,::  :::::: ::::::::: ::`   :::::: ::::::::: 
-   ,::    ::.  ::: ::, ::`  :::.::    ::.,::  .::::: ::::::::: ::`    ::::::::::::::: 
-   ,::    ::.  ::: ::, ::`  ::: ::: `:::.,::   ::::  :::`  ,,, ::`  .::  :::.::.  ,,, 
-   ,::    ::.  ::: ::, ::`  ::: ::::::::.,::   ::::   :::::::` ::`   ::::::: :::::::. 
-   ,::    ::.  ::: ::, ::`  :::  :::::::`,::    ::.    :::::`  ::`   ::::::   :::::.  
-                                ::,  ,::                               ``             
-                                ::::::::                                              
-                                 ::::::                                               
+                   .:                     :,
+,:::::::: ::`      :::                   :::
+,:::::::: ::`      :::                   :::
+.,,:::,,, ::`.:,   ... .. .:,     .:. ..`... ..`   ..   .:,    .. ::  .::,     .:,`
+   ,::    :::::::  ::, :::::::  `:::::::.,:: :::  ::: .::::::  ::::: ::::::  .::::::
+   ,::    :::::::: ::, :::::::: ::::::::.,:: :::  ::: :::,:::, ::::: ::::::, ::::::::
+   ,::    :::  ::: ::, :::  :::`::.  :::.,::  ::,`::`:::   ::: :::  `::,`   :::   :::
+   ,::    ::.  ::: ::, ::`  :::.::    ::.,::  :::::: ::::::::: ::`   :::::: :::::::::
+   ,::    ::.  ::: ::, ::`  :::.::    ::.,::  .::::: ::::::::: ::`    :::::::::::::::
+   ,::    ::.  ::: ::, ::`  ::: ::: `:::.,::   ::::  :::`  ,,, ::`  .::  :::.::.  ,,,
+   ,::    ::.  ::: ::, ::`  ::: ::::::::.,::   ::::   :::::::` ::`   ::::::: :::::::.
+   ,::    ::.  ::: ::, ::`  :::  :::::::`,::    ::.    :::::`  ::`   ::::::   :::::.
+                                ::,  ,::                               ``
+                                ::::::::
+                                 ::::::
                                   `,,`
 
 
@@ -35,7 +35,7 @@ This new version is wider on the jaw and cheeks. The thickness of the entire mod
 
 Lastly, I added a buckle for the head strap. The strap should be about 1/2 inch in width.
 
-I'll keep my remixed version on here, but I recommend Version 2 since it's a complete remodel and will most likely fit better. And it still fits on a 6" x 6" bed. 
+I'll keep my remixed version on here, but I recommend Version 2 since it's a complete remodel and will most likely fit better. And it still fits on a 6" x 6" bed.
 
 
 
@@ -46,7 +46,7 @@ Supports: No
 Resolution: .2mm
 Infill: 15%
 
-Notes: 
+Notes:
 I recommend printing the mask in PLA in case it feels a bit tight. PLA can be heat molded to fit better.
 
 No need for supports. I printed my mask with natural PETG using honeycomb infill. Looks pretty neat. Took about 7 and half hours to print.
