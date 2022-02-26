@@ -1,5 +1,5 @@
 import {addMesh} from "./mesh.mjs"
-// import {contextMenu} from "./context.mjs"
+import {contextMenu} from "./context.mjs"
 import {addPanelEvents, dragable} from "../libs/etc/events.mjs"
 
 import {grayGlass, lightGrayGlass} from "../libs/colors/glass/grayscale.mjs"
@@ -40,7 +40,7 @@ export function addShapesPanel() {
   for (let i = 0; i < shapes.length; i++) { dragable($(shapes[i])) }
 
   shapes.dblclick(function(event) { addMesh(null, {type: $(this).attr("id")}) })
-  // shapes.contextmenu(function(event) { contextMenu("shape", $(this), event) })
+  shapes.contextmenu(function(event) { contextMenu("shape", $(this), event) })
 
   $("#shapes.panel .nav").click(function(event) {
 
