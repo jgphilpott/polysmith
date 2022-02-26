@@ -22,15 +22,12 @@ export function addShapesPanel() {
   panel.append("<img title='Hexagonal Prism' id='hexagonal-prism' class='shape' src='/app/imgs/icons/shapes/prisms/prism-6.png'>")
   panel.append("<img title='Heptagonal Prism' id='heptagonal-prism' class='shape' src='/app/imgs/icons/shapes/prisms/prism-7.png'>")
   panel.append("<img title='Octagonal Prism' id='octagonal-prism' class='shape' src='/app/imgs/icons/shapes/prisms/prism-8.png'>")
-  // panel.append("<img title='Cylinder Prism' id='cylinder-prism' class='shape' src='/app/imgs/icons/shapes/prisms/prism-x.png'>")
 
   panel.append("<img title='Triangular Pyramid' id='triangular-pyramid' class='shape' src='/app/imgs/icons/shapes/pyramids/pyramid-3.png'>")
   panel.append("<img title='Rectangular Pyramid' id='rectangular-pyramid' class='shape' src='/app/imgs/icons/shapes/pyramids/pyramid-4.png'>")
   panel.append("<img title='Pentagonal Pyramid' id='pentagonal-pyramid' class='shape' src='/app/imgs/icons/shapes/pyramids/pyramid-5.png'>")
   panel.append("<img title='Cone' id='cone' class='shape' src='/app/imgs/icons/shapes/pyramids/pyramid-x.png'>")
 
-  // panel.append("<img title='Dome' id='dome' class='shape' src='/app/imgs/icons/shapes/special/dome.png'>")
-  // panel.append("<img title='Star' id='star' class='shape' src='/app/imgs/icons/shapes/special/star.png'>")
   panel.append("<img title='Torus' id='torus' class='shape' src='/app/imgs/icons/shapes/special/torus.png'>")
 
   panel.append("<img id='+' class='nav' src='/app/imgs/icons/nav/+.png'>")

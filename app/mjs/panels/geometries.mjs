@@ -1,4 +1,6 @@
-import {addPanelEvents} from "../libs/etc/events.mjs"
+import {addMesh} from "./mesh.mjs"
+import {contextMenu} from "./context.mjs"
+import {addPanelEvents, dragable} from "../libs/etc/events.mjs"
 
 export function addGeometriesPanel() {
 
@@ -20,7 +22,6 @@ export function addGeometriesPanel() {
   panel.append("<img title='Hexagonal Prism' id='hexagonal-prism' class='shape' src='/app/imgs/icons/shapes/prisms/prism-6.png'>")
   panel.append("<img title='Heptagonal Prism' id='heptagonal-prism' class='shape' src='/app/imgs/icons/shapes/prisms/prism-7.png'>")
   panel.append("<img title='Octagonal Prism' id='octagonal-prism' class='shape' src='/app/imgs/icons/shapes/prisms/prism-8.png'>")
-  // panel.append("<img title='Cylinder Prism' id='cylinder-prism' class='shape' src='/app/imgs/icons/shapes/prisms/prism-x.png'>")
 
   panel.append("<h4 id='pyramids'>Pyramids</h4>")
   panel.append("<img title='Triangular Pyramid' id='triangular-pyramid' class='shape' src='/app/imgs/icons/shapes/pyramids/pyramid-3.png'>")
@@ -29,9 +30,25 @@ export function addGeometriesPanel() {
   panel.append("<img title='Cone' id='cone' class='shape' src='/app/imgs/icons/shapes/pyramids/pyramid-x.png'>")
 
   panel.append("<h4 id='special'>Special</h4>")
-  // panel.append("<img title='Dome' id='dome' class='shape' src='/app/imgs/icons/shapes/special/dome.png'>")
-  // panel.append("<img title='Star' id='star' class='shape' src='/app/imgs/icons/shapes/special/star.png'>")
   panel.append("<img title='Torus' id='torus' class='shape' src='/app/imgs/icons/shapes/special/torus.png'>")
+
+  let shapes = $("#geometries.panel img.shape")
+
+  for (let i = 0; i < shapes.length; i++) { dragable($(shapes[i])) }
+
+  shapes.clickSingleDouble(function(event) {
+
+    let shape = $("#shapes.panel img#" + $(this).attr("id") + ".shape")
+
+    shape.css("display") == "none" ? shape.css("display", "block") : shape.css("display", "none")
+
+  }, function(event) {
+
+    addMesh(null, {type: $(this).attr("id")})
+
+  })
+
+  shapes.contextmenu(function(event) { contextMenu("geometry", $(this), event) })
 
   addPanelEvents(panel)
 

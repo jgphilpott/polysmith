@@ -1,6 +1,27 @@
 // Credit: https://stackoverflow.com/a/64777515/1544937
 const chunkArray = (a,n)=>[...Array(Math.ceil(a.length/n))].map((_,i)=>a.slice(n*i,n+n*i))
 
+// Credit: http://gist.github.com/399624
+// The click event will be fired with a small delay but will not fire upon a double click.
+$.fn.clickSingleDouble = function(single_click_callback, double_click_callback, delay=300) {
+  return this.each(function(){
+    var clicks = 0, self = this
+    jQuery(this).click(function(event){
+      clicks++
+      if (clicks == 1) {
+        setTimeout(function(){
+          if(clicks == 1) {
+            single_click_callback.call(self, event)
+          } else {
+            double_click_callback.call(self, event)
+          }
+          clicks = 0;
+        }, delay)
+      }
+    })
+  })
+}
+
 function signedVolumeOfTriangle(p1, p2, p3) {
   return p1.dot(p2.cross(p3)) / 6.0
 }
