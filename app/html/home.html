@@ -10,6 +10,9 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 
+    <script src="{{ url_for('static', filename='libs/sha256.js') }}"></script>
+    <script src="{{ url_for('static', filename='libs/socket.js') }}"></script>
+
     <script src="{{ url_for('static', filename='libs/jQuery.js') }}"></script>
     <script src="{{ url_for('static', filename='libs/jQueryUI.js') }}"></script>
 
@@ -37,7 +40,14 @@
 
   <body oncontextmenu="return false">
 
-    <script> const data = {} </script>
+    <script>
+
+      const data = {}
+      const socket = io()
+
+      console.log("Welcome to Polymaker!")
+
+    </script>
 
     <div id='nav'>
 

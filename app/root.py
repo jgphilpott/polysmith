@@ -27,6 +27,9 @@ if not exists(libs_dir):
 
     makedirs(libs_dir)
 
+    urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js", libs_dir + "/sha256.js")
+    urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.4.0/socket.io.min.js", libs_dir + "/socket.js")
+
     urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js", libs_dir + "/jQuery.js")
     urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js", libs_dir + "/jQueryUI.js")
 

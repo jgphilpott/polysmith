@@ -30,8 +30,6 @@ $(document).ready(function() {
 
   setup()
 
-  console.log("Welcome to Polymaker!")
-
   //|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|//
   //  Paste Generator Function Below  |//
   //|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|//
