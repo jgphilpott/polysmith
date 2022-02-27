@@ -6,9 +6,9 @@ export function addCameraPanel() {
 
   let panel = $("#camera.panel")
 
-  panel.append("<img class='close' src='/app/imgs/panels/close.png'>")
+  panel.append("<img class='close' src='/app/imgs/panels/nav/close.png'>")
 
-  panel.append("<img class='camera' src='/app/imgs/panels/camera.png'>")
+  panel.append("<img class='camera' src='/app/imgs/panels/main/camera.png'>")
 
   panel.append("<h4>Drag Speed</h4>")
   panel.append("<input type='range' id='drag' class='range' min='1' max='100' value='50'>")

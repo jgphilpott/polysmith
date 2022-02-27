@@ -6,7 +6,7 @@ export function addMenuPanel() {
 
   let panel = $("#menu.panel")
 
-  panel.append("<img class='close' src='/app/imgs/panels/close.png'>")
+  panel.append("<img class='close' src='/app/imgs/panels/nav/close.png'>")
 
   panel.append("<div class='head'><img id='logo' src='/app/imgs/theme/logo.png'><h2 id='name'>Polymaker</h2></div>")
 

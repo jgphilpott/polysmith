@@ -10,7 +10,7 @@ export function addShapesPanel() {
 
   let panel = $("#shapes.panel")
 
-  panel.append("<img class='close' src='/app/imgs/panels/close.png'>")
+  panel.append("<img class='close' src='/app/imgs/panels/nav/close.png'>")
 
   panel.append("<img title='Cube' id='cube' class='shape' src='/app/imgs/icons/shapes/basic/cube.png'>")
   panel.append("<img title='Cylinder' id='cylinder' class='shape' src='/app/imgs/icons/shapes/basic/cylinder.png'>")
@@ -30,7 +30,7 @@ export function addShapesPanel() {
 
   panel.append("<img title='Torus' id='torus' class='shape' src='/app/imgs/icons/shapes/special/torus.png'>")
 
-  panel.append("<img id='+' class='nav' src='/app/imgs/icons/nav/+.png'>")
+  panel.append("<img id='+' class='nav' src='/app/imgs/panels/nav/+.png'>")
 
   let shapes = $("#shapes.panel img.shape")
 

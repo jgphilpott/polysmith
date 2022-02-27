@@ -6,7 +6,7 @@ export function addMeshesPanel() {
 
   let panel = $("#meshes.panel")
 
-  panel.append("<img class='close' src='/app/imgs/panels/close.png'>")
+  panel.append("<img class='close' src='/app/imgs/panels/nav/close.png'>")
 
   addPanelEvents(panel)
 

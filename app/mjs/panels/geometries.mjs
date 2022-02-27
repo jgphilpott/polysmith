@@ -8,7 +8,7 @@ export function addGeometriesPanel() {
 
   let panel = $("#geometries.panel")
 
-  panel.append("<img class='close' src='/app/imgs/panels/close.png'>")
+  panel.append("<img class='close' src='/app/imgs/panels/nav/close.png'>")
 
   panel.append("<h4 id='basic'>Basic</h4>")
   panel.append("<img title='Cube' id='cube' class='shape' src='/app/imgs/icons/shapes/basic/cube.png'>")

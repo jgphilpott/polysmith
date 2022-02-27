@@ -21,7 +21,7 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     panel = $("#mesh." + mesh.uuid + "")
 
-    panel.append("<img class='close' src='/app/imgs/panels/close.png'>")
+    panel.append("<img class='close' src='/app/imgs/panels/nav/close.png'>")
 
     if (!coordinates) coordinates = world2screenCoordinates(mesh.position.x, mesh.position.y, mesh.position.z)
 
