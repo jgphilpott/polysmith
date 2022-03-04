@@ -15,9 +15,33 @@
     display: none
     vertical-align: top
 
-    #title
+    #title, h3
 
-      margin: 31.5px
+      padding: 30px
+
+      text-align: center
+
+  .option
+
+    text-align: center
+
+    border: 1px solid $black
+    border-radius: 5px
+
+    padding: 5px
+
+    margin: 10px
+    margin-top: 20px
+
+  .option:hover
+
+    cursor: url('../imgs/icons/cursors/pointer.png'), pointer
+
+  .opt
+
+    width: 40%
+
+    margin-top: 10px
 
   #main
 
@@ -46,28 +70,6 @@
 
         padding: 5px
 
-    .option
-
-      text-align: center
-
-      border: 1px solid $black
-      border-radius: 5px
-
-      padding: 5px
-
-      margin: 10px
-      margin-top: 20px
-
-    .option:hover
-
-      cursor: url('../imgs/icons/cursors/pointer.png'), pointer
-
-    .opt
-
-      width: 40%
-
-      margin-top: 10px
-
     #signup,
     #profile
 
@@ -77,3 +79,31 @@
     #logout
 
       float: right
+
+  #export-import-panel
+
+    #stl,
+    #obj,
+    #import
+
+      width: 90px
+
+    #stl,
+    #obj
+
+      display: inline-block
+
+    #import
+
+      margin: auto
+
+    input[type=file]
+
+      display: none
+
+  #panels-panel
+  #settings-panel
+  #signup-panel
+  #profile-panel
+  #login-panel
+  #logout-panel

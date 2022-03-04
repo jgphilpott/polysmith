@@ -36,9 +36,22 @@ export function addMenuPanel() {
 
   function appendExportImport() {
 
-    let porting = "<div id='export-import-panel' class='sub-panel'><h3 id='title'>Export / Import</h3>"
+    let porting = "<div id='export-import-panel' class='sub-panel'>"
+
+    porting += "<div><h3>Export</h3></div>"
+
+    porting += "<div id='stl' class='option'><h4>STL<h4></div>"
+    porting += "<div id='obj' class='option'><h4>OBJ<h4></div>"
+
+    porting += "<div><h3>Import</h3></div>"
+
+    porting += "<input id='file' type='file'>"
+    porting += "<div id='import' class='option'><h4>Choose File</h4></div>"
 
     panel.append(porting + "</div>")
+
+    $("#import").click(function() { $("#file").trigger("click") })
+    $("#file").on("change", function() { readURL(this) })
 
   }
 
@@ -143,7 +156,7 @@ export function addMenuPanel() {
 
   }
 
-  $("#menu.panel .option").click(function(event) {
+  $("#menu.panel #main .option").click(function(event) {
     toggleSubPanel($("#menu.panel #" + this.id + "-panel.sub-panel"))
   })
 
