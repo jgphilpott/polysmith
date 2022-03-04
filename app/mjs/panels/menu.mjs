@@ -10,7 +10,7 @@ export function addMenuPanel() {
 
   function appendMain() {
 
-    let main = "<div id='main' class='sub-panel'>"
+    let main = "<div id='main'>"
 
     main += "<div class='head'><img id='logo' src='/app/imgs/theme/logo.png'><h2 id='title'>Polymaker</h2></div>"
 
@@ -60,7 +60,7 @@ export function addMenuPanel() {
 
   function appendSignup() {
 
-    let signup = "<div id='panels-panel' class='sub-panel'><h3 id='title'>Signup</h3>"
+    let signup = "<div id='signup-panel' class='sub-panel'><h3 id='title'>Signup</h3>"
 
     panel.append(signup + "</div>")
 
@@ -68,7 +68,7 @@ export function addMenuPanel() {
 
   function appendProfile() {
 
-    let profile = "<div id='panels-panel' class='sub-panel'><h3 id='title'>Profile</h3>"
+    let profile = "<div id='profile-panel' class='sub-panel'><h3 id='title'>Profile</h3>"
 
     panel.append(profile + "</div>")
 
@@ -76,7 +76,7 @@ export function addMenuPanel() {
 
   function appendLogin() {
 
-    let login = "<div id='panels-panel' class='sub-panel'><h3 id='title'>Login</h3>"
+    let login = "<div id='login-panel' class='sub-panel'><h3 id='title'>Login</h3>"
 
     panel.append(login + "</div>")
 
@@ -84,7 +84,7 @@ export function addMenuPanel() {
 
   function appendLogout() {
 
-    let logout = "<div id='panels-panel' class='sub-panel'><h3 id='title'>Logout</h3>"
+    let logout = "<div id='logout-panel' class='sub-panel'><h3 id='title'>Logout</h3>"
 
     panel.append(logout + "</div>")
 
@@ -104,30 +104,55 @@ export function addMenuPanel() {
     appendLogin()
   }
 
+  let menuWidth = panel.outerWidth()
+  let menuHeight = panel.outerHeight()
+
+  function toggleSubPanel(subPanel, duration=1000) {
+
+    if (subPanel.css("display") == "none") {
+
+      $(".sub-panel").css("display", "none")
+
+      subPanel.css("display", "inline-block")
+      let panelWidth = subPanel.outerWidth() + 1
+      subPanel.css("display", "none")
+
+      panel.animate({width: menuWidth + panelWidth}, {duration: duration, queue: false})
+      panel.animate({height: menuHeight}, {duration: duration, queue: false , complete: function() { subPanel.css("display", "inline-block") }})
+
+    } else {
+
+      subPanel.css("display", "none")
+
+      panel.animate({width: menuWidth}, {duration: duration, queue: false})
+      panel.animate({height: menuHeight}, {duration: duration, queue: false})
+
+    }
+
+  }
+
+  function toggleMenu() {
+
+    let menu = $("#menu.panel")
+
+    if (menu.css("visibility") == "hidden") {
+      menu.css("visibility", "visible")
+    } else if (menu.css("visibility") == "visible") {
+      menu.css("visibility", "hidden")
+    }
+
+  }
+
   $("#menu.panel .option").click(function(event) {
-    console.log(this.id)
+    toggleSubPanel($("#menu.panel #" + this.id + "-panel.sub-panel"))
   })
 
-  $("#nav #menu").click(function() { toggleMenu() })
+  $("#nav #menu").click(function(event) { toggleMenu() })
 
   $(document).keypress(function(event) {
     if (event.keyCode == 13) { toggleMenu() }
   })
 
   addPanelEvents(panel)
-
-}
-
-function toggleMenu() {
-
-  let menu = $("#menu.panel")
-
-  if (menu.css("visibility") == "hidden") {
-    menu.css("visibility", "visible")
-  } else if (menu.css("visibility") == "visible") {
-    menu.css("visibility", "hidden")
-  } else {
-    menu.css("visibility", "visible")
-  }
 
 }
