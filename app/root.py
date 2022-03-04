@@ -26,6 +26,8 @@ libs_dir = "app/libs"
 if not exists(libs_dir):
 
     makedirs(libs_dir)
+    makedirs(libs_dir + "/exporters")
+    makedirs(libs_dir + "/importers")
 
     urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js", libs_dir + "/sha256.js")
     urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.4.0/socket.io.min.js", libs_dir + "/socket.js")
@@ -39,14 +41,19 @@ if not exists(libs_dir):
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/03df747c3047504480e6dbeeddd27d68/raw/e6708feb515affff5884032d703ea67f03a283fe/csgWrapper.mjs", libs_dir + "/csgWrapper.mjs")
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/59ad8432ba8567e91176e669454b9afa/raw/4d115791d9d1d632cc758b07826c00add7ada3dd/meshOperations.mjs", libs_dir + "/meshOperations.mjs")
 
-    urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/loaders/OBJLoader.js", libs_dir + "/OBJLoader.js")
-    urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/loaders/STLLoader.js", libs_dir + "/STLLoader.js")
-    urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/loaders/SVGLoader.js", libs_dir + "/SVGLoader.js")
-
-    urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/exporters/OBJExporter.js", libs_dir + "/OBJExporter.js")
-    urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/exporters/STLExporter.js", libs_dir + "/STLExporter.js")
-
     urlretrieve("https://raw.githubusercontent.com/eligrey/FileSaver.js/b5e61ec88969461ce0504658af07c2b56650ee8c/src/FileSaver.js", libs_dir + "/FileSaver.js")
+
+    commit = "670b1e9e85356d98efa4c702e93c85dd52f01e1e"
+    exporters = ["ColladaExporter.js", "DRACOExporter.js", "GLTFExporter.js", "MMDExporter.js", "OBJExporter.js", "PLYExporter.js", "STLExporter.js"]
+    importers = ["3MFLoader.js", "AMFLoader.js", "ColladaLoader.js", "DRACOLoader.js", "FBXLoader.js", "GLTFLoader.js", "MMDLoader.js", "OBJLoader.js", "PLYLoader.js", "STLLoader.js", "SVGLoader.js", "VRMLLoader.js"]
+
+    for exporter in exporters:
+
+        urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/" + commit + "/examples/js/exporters/" + exporter, libs_dir + "/exporters/" + exporter)
+
+    for importer in importers:
+
+        urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/" + commit + "/examples/js/loaders/" + importer, libs_dir + "/importers/" + importer)
 
     with open(libs_dir + "/math.js", "w") as file:
 
