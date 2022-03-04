@@ -4,11 +4,11 @@ import {addPanelEvents, dragable} from "../libs/etc/events.mjs"
 
 export function addGeometriesPanel() {
 
-  $("body").append("<div id='geometries' class='panel'><h3>Geometries</h3></div>")
+  $("body").append("<div id='geometries' class='panel'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")
 
   let panel = $("#geometries.panel")
 
-  panel.append("<img class='close' src='/app/imgs/panels/nav/close.png'>")
+  panel.append("<h3>Geometries</h3>")
 
   panel.append("<h4 id='basic'>Basic</h4>")
   panel.append("<img title='Cube' id='cube' class='shape' src='/app/imgs/icons/shapes/basic/cube.png'>")

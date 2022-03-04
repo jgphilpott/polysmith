@@ -17,15 +17,15 @@ export function addMeshPanel(mesh, coordinates=null) {
 
   if (panel.length == 0) {
 
-    $("body").append("<div id='mesh' class='panel " + mesh.uuid + "'><h3>Mesh</h3></div>")
-
-    panel = $("#mesh." + mesh.uuid + "")
-
-    panel.append("<img class='close' src='/app/imgs/panels/nav/close.png'>")
+    $("body").append("<div id='mesh' class='panel " + mesh.uuid + "'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")
 
     if (!coordinates) coordinates = world2screenCoordinates(mesh.position.x, mesh.position.y, mesh.position.z)
 
-    panel.css({top: coordinates.y, left: coordinates.x})
+    $("#mesh." + mesh.uuid + "").css({top: coordinates.y, left: coordinates.x})
+
+    panel = $("#mesh." + mesh.uuid + "")
+
+    panel.append("<h3>Mesh</h3>")
 
     panel.append("<p id='type'><b>Type:</b> " + mesh.class.replace(/\b\w/g, function(char) { return char.toUpperCase() }) + "</p>")
     panel.append("<p id='surface'><b>Surface:</b> " + mesh.surface.toFixed(2) + "</p>")

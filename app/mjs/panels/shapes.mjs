@@ -6,11 +6,9 @@ import {grayGlass, lightGrayGlass} from "../libs/colors/glass/grayscale.mjs"
 
 export function addShapesPanel() {
 
-  $("body").append("<div id='shapes' class='panel'></div>")
+  $("body").append("<div id='shapes' class='panel'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")
 
   let panel = $("#shapes.panel")
-
-  panel.append("<img class='close' src='/app/imgs/panels/nav/close.png'>")
 
   panel.append("<img title='Cube' id='cube' class='shape' src='/app/imgs/icons/shapes/basic/cube.png'>")
   panel.append("<img title='Cylinder' id='cylinder' class='shape' src='/app/imgs/icons/shapes/basic/cylinder.png'>")
