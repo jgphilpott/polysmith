@@ -3,4 +3,4 @@ from pymongo import MongoClient
 
 def mongo_client():
 
-    return MongoClient(environ["MONGO_PORT_27017_TCP_ADDR"], 27017)
+    return MongoClient("database", 27017)
