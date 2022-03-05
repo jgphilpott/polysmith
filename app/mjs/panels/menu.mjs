@@ -1,3 +1,6 @@
+import {exportFile} from "../libs/files/export.mjs"
+import {importFile} from "../libs/files/import.mjs"
+
 import {addPanelEvents} from "../libs/etc/events.mjs"
 
 export function addMenuPanel() {
@@ -45,13 +48,35 @@ export function addMenuPanel() {
 
     porting += "<div><h3>Import</h3></div>"
 
-    porting += "<input id='file' type='file'>"
+    porting += "<input id='file' type='file' accept='.obj, .ply, .stl' multiple>"
     porting += "<div id='import' class='option'><h4>Choose File</h4></div>"
 
     panel.append(porting + "</div>")
 
+    $("#stl, #obj").click(function() { exportFile(this.id) })
+
+    $("#file").on("change", function() { importFiles(this) })
     $("#import").click(function() { $("#file").trigger("click") })
-    $("#file").on("change", function() { readURL(this) })
+
+    function importFiles(input) {
+
+      if (input.files && input.files[0]) {
+
+        for (let i = 0; i < input.files.length; i++) {
+
+          let reader = new FileReader()
+
+          reader.readAsDataURL(input.files[i])
+
+          let extension = input.files[i].name.match(/\.[0-9a-z]+$/i)[0].substring(1)
+
+          reader.onload = function (event) { importFile(extension, event.target.result) }
+
+        }
+
+      }
+
+    }
 
   }
 
