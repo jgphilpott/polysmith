@@ -22,12 +22,14 @@
     <script src="{{ url_for('static', filename='libs/csgWrapper.mjs') }}" type="module"></script>
     <script src="{{ url_for('static', filename='libs/meshOperations.mjs') }}" type="module"></script>
 
+    <script src="{{ url_for('static', filename='libs/exporters/OBJExporter.js') }}"></script>
+    <script src="{{ url_for('static', filename='libs/exporters/PLYExporter.js') }}"></script>
+    <script src="{{ url_for('static', filename='libs/exporters/STLExporter.js') }}"></script>
+
     <script src="{{ url_for('static', filename='libs/importers/OBJLoader.js') }}"></script>
+    <script src="{{ url_for('static', filename='libs/importers/PLYLoader.js') }}"></script>
     <script src="{{ url_for('static', filename='libs/importers/STLLoader.js') }}"></script>
     <script src="{{ url_for('static', filename='libs/importers/SVGLoader.js') }}"></script>
-
-    <script src="{{ url_for('static', filename='libs/exporters/OBJExporter.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/exporters/STLExporter.js') }}"></script>
 
     <script src="{{ url_for('static', filename='libs/FileSaver.js') }}"></script>
 

@@ -1,8 +1,7 @@
 import {addMesh} from "../../panels/mesh.mjs"
 import {addLine} from "../geometries/lines.mjs"
 
-import {exportSTL} from "../files/stl.mjs"
-import {exportOBJ} from "../files/obj.mjs"
+import {exportFile} from "../files/export.mjs"
 
 import {grayGlass, lightGrayGlass} from "../colors/glass/grayscale.mjs"
 
@@ -30,7 +29,7 @@ export function addEvents() {
       event.preventDefault()
       event.stopPropagation()
 
-      exportSTL()
+      exportFile("stl")
 
     // Shift + Enter
     } else if (event.shiftKey && event.keyCode == 13) {
@@ -38,7 +37,7 @@ export function addEvents() {
       event.preventDefault()
       event.stopPropagation()
 
-      exportOBJ()
+      exportFile("obj")
 
     }
 
