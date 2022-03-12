@@ -10,6 +10,7 @@ export function newTorus(radius=5, thickness=1, radialSegments=42, tubularSegmen
   let torus = new THREE.Mesh(geometry, meshMaterial(material, color))
 
   torus.position.set(position[0], position[1], position[2])
+  torus.rotation.y = degree2radian(90)
 
   return torus
 

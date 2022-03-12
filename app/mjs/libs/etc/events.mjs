@@ -1,5 +1,5 @@
 import {addMesh} from "../../panels/mesh.mjs"
-import {addLine} from "../geometries/lines.mjs"
+import {newLine} from "../geometries/lines.mjs"
 
 import {exportFile} from "../files/export.mjs"
 
@@ -185,9 +185,12 @@ export function dragable(element, origEvent=null) {
 
       for (let i = 0; i < data.tooltips.distanceLines.length; i++) { data.scene.remove(data.tooltips.distanceLines[i]) }
 
-      data.tooltips.distanceLines.push(addLine([[0, coordinates.y, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed"))
-      data.tooltips.distanceLines.push(addLine([[coordinates.x, 0, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed"))
-      data.tooltips.distanceLines.push(addLine([[coordinates.x, coordinates.y, 0], [coordinates.x, coordinates.y, coordinates.z]], "dashed"))
+      let xDistanceLine = newLine([[0, coordinates.y, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
+      let yDistanceLine = newLine([[coordinates.x, 0, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
+      let zDistanceLine = newLine([[coordinates.x, coordinates.y, 0], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
+
+      data.scene.add(xDistanceLine, yDistanceLine, zDistanceLine)
+      data.tooltips.distanceLines.push(xDistanceLine, yDistanceLine, zDistanceLine)
 
     }
 

@@ -21,6 +21,7 @@ import {newSphere, addSphere} from "./libs/geometries/spheres.mjs"
 import {newText, addText} from "./libs/geometries/text.mjs"
 import {newTorus, addTorus} from "./libs/geometries/toruses.mjs"
 import {newTriangle, addTriangle} from "./libs/geometries/triangles.mjs"
+import {newTube, addTube} from "./libs/geometries/tubes.mjs"
 
 import {exportFile} from "./libs/files/export.mjs"
 import {importFile} from "./libs/files/import.mjs"
