@@ -1,6 +1,7 @@
 // Link: https://threejs.org/docs/#api/en/geometries/TubeGeometry
 
 import {black} from "../colors/three/grayscale.mjs"
+import {addMesh} from "../../panels/mesh.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
 export function newPath(vertices=[[]]) {
@@ -29,8 +30,6 @@ export function addTube(vertices=[[10, 10, 10], [-10, -10, -10]], radius=1, radi
 
   let tube = newTube(vertices, radius, radialSegments, tubularSegments, closed, material, color)
 
-  data.scene.add(tube)
-
-  return tube
+  return addMesh(tube)
 
 }

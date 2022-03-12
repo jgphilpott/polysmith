@@ -1,6 +1,7 @@
 // Link: https://threejs.org/docs/#api/en/geometries/BoxGeometry
 
 import {black} from "../colors/three/grayscale.mjs"
+import {addMesh} from "../../panels/mesh.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
 export function newBox(width=10, height=10, depth=10, position=[0, 0, 0], material="normal", color=black) {
@@ -18,8 +19,6 @@ export function addBox(width=10, height=10, depth=10, position=[0, 0, 0], materi
 
   let box = newBox(width, height, depth, position, material, color)
 
-  data.scene.add(box)
-
-  return box
+  return addMesh(box)
 
 }

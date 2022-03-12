@@ -1,6 +1,7 @@
 // Link: https://threejs.org/docs/#api/en/geometries/RingGeometry
 
 import {black} from "../colors/three/grayscale.mjs"
+import {addMesh} from "../../panels/mesh.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
 export function newRing(innerRadius=5, outerRadius=10, radialSegments=42, position=[0, 0, 0], material="normal", color=black) {
@@ -18,8 +19,6 @@ export function addRing(innerRadius=5, outerRadius=10, radialSegments=42, positi
 
   let ring = newRing(innerRadius, outerRadius, radialSegments, position, material, color)
 
-  data.scene.add(ring)
-
-  return ring
+  return addMesh(ring)
 
 }

@@ -1,6 +1,7 @@
 // Link: https://threejs.org/docs/#api/en/geometries/TorusKnotGeometry
 
 import {black} from "../colors/three/grayscale.mjs"
+import {addMesh} from "../../panels/mesh.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
 export function newKnot(size=10, thickness=3, radialSegments=42, tubularSegments=42, position=[0, 0, 0], material="normal", color=black) {
@@ -18,8 +19,6 @@ export function addKnot(size=10, thickness=3, radialSegments=42, tubularSegments
 
   let knot = newKnot(size, thickness, radialSegments, tubularSegments, position, material, color)
 
-  data.scene.add(knot)
-
-  return knot
+  return addMesh(knot)
 
 }

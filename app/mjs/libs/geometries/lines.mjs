@@ -1,6 +1,7 @@
 // Link: https://threejs.org/docs/#api/en/objects/Line
 
 import {black} from "../colors/three/grayscale.mjs"
+import {addMesh} from "../../panels/mesh.mjs"
 import {lineMaterial} from "../materials/line.mjs"
 
 export function newVector(vertices=[[]]) {
@@ -27,8 +28,6 @@ export function addLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basi
 
   let line = newLine(vertices, material, color, linewidth, dashSize, gapSize)
 
-  data.scene.add(line)
-
-  return line
+  return addMesh(line)
 
 }

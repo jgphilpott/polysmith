@@ -1,6 +1,7 @@
 // Link: https://threejs.org/docs/#examples/en/geometries/TextGeometry
 
 import {black} from "../colors/three/grayscale.mjs"
+import {addMesh} from "../../panels/mesh.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
 export function newText(text="", size=12, height=2, bevel=false, font="ubuntu", material="normal", color=black, center=true, x=0, y=0, z=0, rotateX=0, rotateY=0, rotateZ=0) {
@@ -43,8 +44,7 @@ export function addText(text="", size=12, height=2, bevel=false, font="ubuntu", 
 
     textMesh.position.set(x, y, z)
 
-    data.meshes.push(textMesh)
-    data.scene.add(textMesh)
+    addMesh(textMesh)
 
   })
 

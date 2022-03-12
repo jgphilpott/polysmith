@@ -1,6 +1,7 @@
 // Link: https://threejs.org/docs/#api/en/geometries/SphereGeometry
 
 import {black} from "../colors/three/grayscale.mjs"
+import {addMesh} from "../../panels/mesh.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
 export function newSphere(radius=5, widthSegments=42, heightSegments=42, position=[0, 0, 0], material="normal", color=black) {
@@ -18,8 +19,6 @@ export function addSphere(radius=5, widthSegments=42, heightSegments=42, positio
 
   let sphere = newSphere(radius, widthSegments, heightSegments, position, material, color)
 
-  data.scene.add(sphere)
-
-  return sphere
+  return addMesh(sphere)
 
 }
