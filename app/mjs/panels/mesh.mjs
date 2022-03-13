@@ -2,10 +2,10 @@ import {addPanelEvents, dragable} from "../libs/etc/events.mjs"
 import {contextMenu} from "./context.mjs"
 import {focus} from "../libs/controls/focus.mjs"
 
-import {addBox} from "../libs/geometries/boxes.mjs"
-import {addCylinder} from "../libs/geometries/cylinders.mjs"
-import {addSphere} from "../libs/geometries/spheres.mjs"
-import {addTorus} from "../libs/geometries/toruses.mjs"
+import {newBox} from "../libs/geometries/boxes.mjs"
+import {newCylinder} from "../libs/geometries/cylinders.mjs"
+import {newSphere} from "../libs/geometries/spheres.mjs"
+import {newTorus} from "../libs/geometries/toruses.mjs"
 
 import {grayGlass, lightGrayGlass} from "../libs/colors/glass/grayscale.mjs"
 
@@ -116,87 +116,134 @@ export function addMesh(mesh=null, properties={}) {
     switch (properties.type) {
 
       case "cube":
-        mesh = addBox()
+
+        mesh = newBox()
+        mesh.rotation.x = degree2radian(0)
+
         break
 
       case "cylinder":
-        mesh = addCylinder().rotateX(degree2radian(90))
+
+        mesh = newCylinder()
+        mesh.rotation.x = degree2radian(90)
+
         break
 
       case "sphere":
-        mesh = addSphere()
+
+        mesh = newSphere()
+        mesh.rotation.x = degree2radian(0)
+
         break
 
       case "triangular-prism":
-        mesh = addCylinder(10, 5, 5, 3)
+
+        mesh = newCylinder(10, 5, 5, 3)
+        mesh.rotation.x = degree2radian(0)
+
         break
 
       case "rectangular-prism":
-        mesh = addCylinder(10, 5, 5, 4)
+
+        mesh = newCylinder(10, 5, 5, 4)
+        mesh.rotation.x = degree2radian(0)
+
         break
 
       case "pentagonal-prism":
-        mesh = addCylinder(10, 5, 5, 5)
+
+        mesh = newCylinder(10, 5, 5, 5)
+        mesh.rotation.x = degree2radian(0)
+
         break
 
       case "hexagonal-prism":
-        mesh = addCylinder(10, 5, 5, 6)
+
+        mesh = newCylinder(10, 5, 5, 6)
+        mesh.rotation.x = degree2radian(0)
+
         break
 
       case "heptagonal-prism":
-        mesh = addCylinder(10, 5, 5, 7)
+
+        mesh = newCylinder(10, 5, 5, 7)
+        mesh.rotation.x = degree2radian(0)
+
         break
 
       case "octagonal-prism":
-        mesh = addCylinder(10, 5, 5, 8)
+
+        mesh = newCylinder(10, 5, 5, 8)
+        mesh.rotation.x = degree2radian(0)
+
         break
 
       case "triangular-pyramid":
-        mesh = addCylinder(10, 0, 5, 3).rotateX(degree2radian(90))
+
+        mesh = newCylinder(10, 0, 5, 3)
+        mesh.rotation.x = degree2radian(90)
+
         break
 
       case "rectangular-pyramid":
-        mesh = addCylinder(10, 0, 5, 4).rotateX(degree2radian(90))
+
+        mesh = newCylinder(10, 0, 5, 4)
+        mesh.rotation.x = degree2radian(90)
+
         break
 
       case "pentagonal-pyramid":
-        mesh = addCylinder(10, 0, 5, 5).rotateX(degree2radian(90))
+
+        mesh = newCylinder(10, 0, 5, 5)
+        mesh.rotation.x = degree2radian(90)
+
         break
 
       case "cone":
-        mesh = addCylinder(10, 0, 5, 42).rotateX(degree2radian(90))
+
+        mesh = newCylinder(10, 0, 5, 42)
+        mesh.rotation.x = degree2radian(90)
+
         break
 
       case "torus":
-        mesh = addTorus().rotateY(degree2radian(90))
+
+        mesh = newTorus()
+        mesh.rotation.y = degree2radian(90)
+
         break
 
     }
 
-  } else if (mesh) { data.scene.add(mesh) }
-
-  data.events.addEventListener(mesh, "mousemove", function(event) { $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab") })
-  data.events.addEventListener(mesh, "mousedown", function(event) { dragable(mesh, event.origDomEvent) })
-  data.events.addEventListener(mesh, "mouseout", function(event) { $("body").css("cursor", "") })
-
-  data.events.addEventListener(mesh, "click", function(event) { updateMesh(mesh, "operation", data.events.operation.key, null) })
-  data.events.addEventListener(mesh, "dblclick", function(event) { focus({x: mesh.position.x, y: mesh.position.y, z: mesh.position.z}) })
-  data.events.addEventListener(mesh, "contextmenu", function(event) { contextMenu("mesh", mesh, event.origDomEvent) })
-
-  properties.type ? mesh.class = properties.type : mesh.class = "custom"
-
-  if (properties.position) {
-
-    mesh.position.x = properties.position.x
-    mesh.position.y = properties.position.y
-    mesh.position.z = properties.position.z
-
   }
 
-  mesh.surface = getSurfaceArea(mesh)
-  mesh.volume = getVolume(mesh)
+  if (mesh) {
 
-  data.meshes.push(mesh)
+    properties.type ? mesh.class = properties.type : mesh.class = "custom"
+
+    data.events.addEventListener(mesh, "mousemove", function(event) { $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab") })
+    data.events.addEventListener(mesh, "mousedown", function(event) { dragable(mesh, event.origDomEvent) })
+    data.events.addEventListener(mesh, "mouseout", function(event) { $("body").css("cursor", "") })
+
+    data.events.addEventListener(mesh, "click", function(event) { updateMesh(mesh, "operation", data.events.operation.key, null) })
+    data.events.addEventListener(mesh, "dblclick", function(event) { focus({x: mesh.position.x, y: mesh.position.y, z: mesh.position.z}) })
+    data.events.addEventListener(mesh, "contextmenu", function(event) { contextMenu("mesh", mesh, event.origDomEvent) })
+
+    if (properties.position) {
+
+      mesh.position.x = properties.position.x
+      mesh.position.y = properties.position.y
+      mesh.position.z = properties.position.z
+
+    }
+
+    mesh.surface = getSurfaceArea(mesh)
+    mesh.volume = getVolume(mesh)
+
+    data.meshes.push(mesh)
+    data.scene.add(mesh)
+
+  }
 
   return mesh
 
