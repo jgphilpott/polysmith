@@ -1,6 +1,6 @@
 function generator(thickness=10) {
 
-  data.name = "Flexing Test (" + thickness + " mm)"
+  data.title = "Flexing Test (" + thickness + " mm)"
 
   let box5 = newBox(50, thickness, thickness, [0, -30, 0])
   let box10 = newBox(100, thickness, thickness, [0, -10, 0])

@@ -62,7 +62,7 @@ export function exportFile(type) {
 
   let blob = new Blob([exporter.parse(data.scene)], {type: "text/plain"})
 
-  saveAs(blob, data.name + extension)
+  saveAs(blob, data.title + extension)
 
   addAxes()
 

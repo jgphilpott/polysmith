@@ -19,31 +19,33 @@ import {addAxes} from "../draw/axes.mjs"
 
 export function setup() {
 
-  data.name = "Polymaker"
-
-  data.scale = 100
-  data.meshes = []
-  data.tooltips = {}
-
   addSettings()
 
-  let renderer = new THREE.WebGLRenderer({alpha: true, antialias: true, logarithmicDepthBuffer: true})
+  data.title = title
+  data.scale = scale
+  data.meshes = meshes
+  data.tooltips = tooltips
+
+  renderer = new THREE.WebGLRenderer({alpha: true, antialias: true, logarithmicDepthBuffer: true})
   renderer.setSize(window.innerWidth, window.innerHeight)
   renderer.setPixelRatio(window.devicePixelRatio)
   data.renderer = renderer
 
-  let canvas = document.body.appendChild(renderer.domElement)
+  canvas = document.body.appendChild(renderer.domElement)
   canvas.setAttribute("id", "canvas")
   data.canvas = canvas
 
-  let scene = new THREE.Scene()
+  scene = new THREE.Scene()
   scene.background = white
   data.scene = scene
 
-  addAmbientLight()
-  addPointLight()
+  lights = []
+  lights.push(addAmbientLight())
+  lights.push(addPointLight())
+  data.lights = lights
 
-  addPerspectiveCamera()
+  camera = addPerspectiveCamera()
+  data.camera = camera
 
   addDragControls()
   addFlyControls()

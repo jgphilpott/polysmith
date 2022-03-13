@@ -13,7 +13,7 @@ let axisWidth = 0.3
 
 export function addAxes() {
 
-  data.axes = []
+  data.axes = axes
 
   let centroid = newSphere(data.scale / 100, segments, segments, [0, 0, 0], "standard", black)
 

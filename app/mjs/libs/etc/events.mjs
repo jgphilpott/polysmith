@@ -7,8 +7,9 @@ import {grayGlass, lightGrayGlass} from "../colors/glass/grayscale.mjs"
 
 export function addEvents() {
 
-  data.events = new THREEx.DomEvents(data.camera, data.canvas)
+  events = new THREEx.DomEvents(data.camera, data.canvas)
 
+  data.events = events
   data.events.zIndex = 0
   data.events.operation = {mesh: null, key: null}
 
@@ -230,6 +231,8 @@ export function dragable(element, origEvent=null) {
       $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab")
 
       for (let i = 0; i < data.tooltips.distanceLines.length; i++) { data.scene.remove(data.tooltips.distanceLines[i]) }
+
+      data.tooltips.distanceLines = []
 
     }
 

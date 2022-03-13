@@ -2,9 +2,7 @@ export function addSettings() {
 
   /// Core ///
 
-  data.settings = {}
-
-  let settings = data.settings
+  data.settings = settings
 
   /// Panels ///
 

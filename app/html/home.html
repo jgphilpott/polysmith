@@ -44,10 +44,23 @@
 
     <script>
 
+      let title = "Polymaker"
+
       const data = {}
       const socket = io()
 
-      console.log("Welcome to Polymaker!")
+      let scale = 100
+
+      let axes = []
+      let meshes = []
+
+      let settings = {}
+      let tooltips = {}
+
+      var renderer, canvas, scene
+      var lights, camera, events
+
+      console.log("Welcome to " + title + "!")
 
     </script>
 

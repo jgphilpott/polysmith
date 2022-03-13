@@ -2,7 +2,7 @@ function generator(maxLength=10) {
 
   for (let i = 1; i <= maxLength; i++) {
 
-    data.name = "Bridging Test (" + i + " cm)"
+    data.title = "Bridging Test (" + i + " cm)"
 
     let bridgeLength = i * 10
     let bridgeWidth = 5

@@ -9,8 +9,6 @@ export function addPerspectiveCamera(position=data.scale) {
   camera.target = {x: 0, y: 0, z: 0}
   camera.lookAt(camera.target.x, camera.target.y, camera.target.z)
 
-  data.camera = camera
-
   return camera
 
 }
