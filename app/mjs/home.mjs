@@ -30,6 +30,21 @@ $(document).ready(function() {
 
   setup()
 
+  box = addBox
+  circle = addCircle
+  cone = addCone
+  cylinder = addCylinder
+  knot = addKnot
+  line = addLine
+  plane = addPlane
+  quadrilateral = addQuadrilateral
+  ring = addRing
+  sphere = addSphere
+  text = addText
+  torus = addTorus
+  triangle = addTriangle
+  tube = addTube
+
   //|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|//
   //  Paste Generator Function Below  |//
   //|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|//

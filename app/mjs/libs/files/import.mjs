@@ -1,3 +1,4 @@
+import {addMesh} from "../../panels/mesh.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
 export function importFile(type, path, properties={}) {
@@ -72,10 +73,7 @@ export function importFile(type, path, properties={}) {
       let geometry = new THREE.ExtrudeBufferGeometry(shapes, properties)
       mesh = new THREE.Mesh(geometry, material)
 
-      data.meshes.push(mesh)
-      data.scene.add(mesh)
-
-      return mesh
+      return addMesh(mesh)
 
     })
 
@@ -102,10 +100,7 @@ export function importFile(type, path, properties={}) {
 
       }
 
-      data.meshes.push(mesh)
-      data.scene.add(mesh)
-
-      return mesh
+      return addMesh(mesh)
 
     })
 
