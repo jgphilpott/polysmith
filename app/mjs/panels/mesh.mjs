@@ -35,9 +35,9 @@ export function addMeshPanel(mesh, coordinates=null) {
     let rotation = ""
 
     position += "<div id='position'><h4><b>Position</b></h4>"
-    position += "<span id='position-x'><label><b>X</b> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>"
-    position += "<span id='position-y'><label><b>Y</b> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>"
-    position += "<span id='position-z'><label><b>Z</b> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span></div>"
+    position += "<span id='position-x'><label><b>X</b> <input type=number step=1 min=" + -(scale * 3) + " max=" + scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>"
+    position += "<span id='position-y'><label><b>Y</b> <input type=number step=1 min=" + -(scale * 3) + " max=" + scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>"
+    position += "<span id='position-z'><label><b>Z</b> <input type=number step=1 min=" + -(scale * 3) + " max=" + scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span></div>"
 
     rotation += "<div id='rotation'><h4><b>Rotation</b></h4>"
     rotation += "<span id='rotation-x'><label><b>X</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>"
@@ -221,13 +221,13 @@ export function addMesh(mesh=null, properties={}) {
 
     properties.type ? mesh.class = properties.type : mesh.class = "custom"
 
-    data.events.addEventListener(mesh, "mousemove", function(event) { $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab") })
-    data.events.addEventListener(mesh, "mousedown", function(event) { dragable(mesh, event.origDomEvent) })
-    data.events.addEventListener(mesh, "mouseout", function(event) { $("body").css("cursor", "") })
+    events.addEventListener(mesh, "mousemove", function(event) { $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab") })
+    events.addEventListener(mesh, "mousedown", function(event) { dragable(mesh, event.origDomEvent) })
+    events.addEventListener(mesh, "mouseout", function(event) { $("body").css("cursor", "") })
 
-    data.events.addEventListener(mesh, "click", function(event) { updateMesh(mesh, "operation", data.events.operation.key, null) })
-    data.events.addEventListener(mesh, "dblclick", function(event) { focus({x: mesh.position.x, y: mesh.position.y, z: mesh.position.z}) })
-    data.events.addEventListener(mesh, "contextmenu", function(event) { contextMenu("mesh", mesh, event.origDomEvent) })
+    events.addEventListener(mesh, "click", function(event) { updateMesh(mesh, "operation", events.operation.key, null) })
+    events.addEventListener(mesh, "dblclick", function(event) { focus({x: mesh.position.x, y: mesh.position.y, z: mesh.position.z}) })
+    events.addEventListener(mesh, "contextmenu", function(event) { contextMenu("mesh", mesh, event.origDomEvent) })
 
     if (properties.position) {
 
@@ -240,8 +240,8 @@ export function addMesh(mesh=null, properties={}) {
     mesh.surface = getSurfaceArea(mesh)
     mesh.volume = getVolume(mesh)
 
-    data.meshes.push(mesh)
-    data.scene.add(mesh)
+    meshes.push(mesh)
+    scene.add(mesh)
 
   }
 
@@ -270,44 +270,44 @@ export function updateMesh(mesh, type, key=null, value=null) {
 
       $("#canvas").css("cursor", "url('app/imgs/icons/cursors/copy.png'), copy")
 
-      data.events.operation.mesh = mesh
-      data.events.operation.key = key
+      events.operation.mesh = mesh
+      events.operation.key = key
 
-    } else if (data.events.operation.key && !data.camera.dragged) {
+    } else if (events.operation.key && !camera.dragged) {
 
-      if (data.events.operation.mesh.uuid != mesh.uuid) {
+      if (events.operation.mesh.uuid != mesh.uuid) {
 
         let result = null
 
         switch (key) {
 
           case "cut":
-            result = cutMesh(data.events.operation.mesh, mesh)
+            result = cutMesh(events.operation.mesh, mesh)
             break
 
           case "join":
-            result = joinMesh(data.events.operation.mesh, mesh)
+            result = joinMesh(events.operation.mesh, mesh)
             break
 
           case "intersect":
-            result = intersectMesh(data.events.operation.mesh, mesh)
+            result = intersectMesh(events.operation.mesh, mesh)
             break
 
         }
 
         addMesh(result)
 
-        let panel = $("#mesh." + data.events.operation.mesh.uuid + "")
+        let panel = $("#mesh." + events.operation.mesh.uuid + "")
         if (panel.length) addMeshPanel(result, {x: parseFloat(panel.css("left")), y: parseFloat(panel.css("top"))})
 
-        removeMesh(data.events.operation.mesh)
+        removeMesh(events.operation.mesh)
 
       }
 
       $("#canvas").css("cursor", "")
 
-      data.events.operation.mesh = null
-      data.events.operation.key = null
+      events.operation.mesh = null
+      events.operation.key = null
 
     }
 
@@ -321,16 +321,16 @@ export function removeMesh(mesh) {
 
   $("#mesh." + mesh.uuid + "").remove()
 
-  data.meshes = data.meshes.filter(obj => obj.uuid != mesh.uuid)
+  meshes = meshes.filter(obj => obj.uuid != mesh.uuid)
 
-  data.events.removeEventListener(mesh, "mousemove")
-  data.events.removeEventListener(mesh, "mousedown")
-  data.events.removeEventListener(mesh, "mouseout")
+  events.removeEventListener(mesh, "mousemove")
+  events.removeEventListener(mesh, "mousedown")
+  events.removeEventListener(mesh, "mouseout")
 
-  data.events.removeEventListener(mesh, "click")
-  data.events.removeEventListener(mesh, "dblclick")
-  data.events.removeEventListener(mesh, "contextmenu")
+  events.removeEventListener(mesh, "click")
+  events.removeEventListener(mesh, "dblclick")
+  events.removeEventListener(mesh, "contextmenu")
 
-  data.scene.remove(mesh)
+  scene.remove(mesh)
 
 }

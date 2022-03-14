@@ -72,7 +72,7 @@ export function contextMenu(type, element, event) {
 
   $("#context-menu.panel p").click(function() { contextMenu.remove() })
 
-  contextMenu.css("z-index", data.events.zIndex + 1)
+  contextMenu.css("z-index", events.zIndex + 1)
 
   positionMenu(contextMenu, event)
 
