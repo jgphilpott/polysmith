@@ -59,7 +59,7 @@ export function setup() {
 
     requestAnimationFrame(animate)
 
-    data.renderer.render(data.scene, data.camera)
+    renderer.render(scene, camera)
 
   }
 

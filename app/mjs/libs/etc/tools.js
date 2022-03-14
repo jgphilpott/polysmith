@@ -109,13 +109,13 @@ function screen2worldCoordinates(x, y, zTarget=0) {
 
   vector.set((x / window.innerWidth) * 2 - 1, - (y / window.innerHeight) * 2 + 1, 0)
 
-  vector.unproject(data.camera)
+  vector.unproject(camera)
 
-  vector.sub(data.camera.position).normalize()
+  vector.sub(camera.position).normalize()
 
-  let distance = (zTarget - data.camera.position.z) / vector.z
+  let distance = (zTarget - camera.position.z) / vector.z
 
-  coordinates.copy(data.camera.position).add(vector.multiplyScalar(distance))
+  coordinates.copy(camera.position).add(vector.multiplyScalar(distance))
 
   return coordinates
 
@@ -129,7 +129,7 @@ function world2screenCoordinates(x, y, z) {
 
   let coordinates = new THREE.Vector3(x, y, z)
 
-  coordinates.project(data.camera)
+  coordinates.project(camera)
 
   coordinates.x = (coordinates.x * halfWidth) + halfWidth
   coordinates.y = - (coordinates.y * halfHeight) + halfHeight

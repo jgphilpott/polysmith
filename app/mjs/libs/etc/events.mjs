@@ -7,18 +7,19 @@ import {grayGlass, lightGrayGlass} from "../colors/glass/grayscale.mjs"
 
 export function addEvents() {
 
-  events = new THREEx.DomEvents(data.camera, data.canvas)
+  events = new THREEx.DomEvents(camera, canvas)
 
   data.events = events
-  data.events.zIndex = 0
-  data.events.operation = {mesh: null, key: null}
+
+  events.zIndex = 0
+  events.operation = {mesh: null, key: null}
 
   $(window).on("resize", function() {
 
-    data.renderer.setSize(window.innerWidth, window.innerHeight)
+    renderer.setSize(window.innerWidth, window.innerHeight)
 
-    data.camera.aspect = window.innerWidth / window.innerHeight
-    data.camera.updateProjectionMatrix()
+    camera.aspect = window.innerWidth / window.innerHeight
+    camera.updateProjectionMatrix()
 
   })
 
@@ -48,13 +49,13 @@ export function addEvents() {
 
     $("input").blur()
 
-    if (data.events.operation.key && !data.camera.dragged) {
+    if (events.operation.key && !camera.dragged) {
 
       $("body").css("cursor", "")
       $("#canvas").css("cursor", "")
 
-      data.events.operation.mesh = null
-      data.events.operation.key = null
+      events.operation.mesh = null
+      events.operation.key = null
 
     }
 
@@ -72,9 +73,9 @@ export function addPanelEvents(panel) {
 
   panel.hover(function(event) {
 
-    data.events.zIndex += 1
+    events.zIndex += 1
 
-    panel.css("z-index", data.events.zIndex)
+    panel.css("z-index", events.zIndex)
 
   })
 
@@ -100,8 +101,8 @@ export function dragable(element, origEvent=null) {
 
   let dragged = null
   let xOffset, yOffset = 0
-  let max = data.scale * 3
-  let min = - (data.scale * 3)
+  let max = scale * 3
+  let min = - (scale * 3)
 
   function start(event) {
 
@@ -132,7 +133,7 @@ export function dragable(element, origEvent=null) {
       xOffset = origEvent.clientX - coordinates.x
       yOffset = origEvent.clientY - coordinates.y
 
-      data.tooltips.distanceLines = []
+      tooltips.distanceLines = []
 
     }
 
@@ -184,14 +185,14 @@ export function dragable(element, origEvent=null) {
       element.position.x = coordinates.x
       element.position.y = coordinates.y
 
-      for (let i = 0; i < data.tooltips.distanceLines.length; i++) { data.scene.remove(data.tooltips.distanceLines[i]) }
+      for (let i = 0; i < tooltips.distanceLines.length; i++) { scene.remove(tooltips.distanceLines[i]) }
 
       let xDistanceLine = newLine([[0, coordinates.y, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
       let yDistanceLine = newLine([[coordinates.x, 0, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
       let zDistanceLine = newLine([[coordinates.x, coordinates.y, 0], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
 
-      data.scene.add(xDistanceLine, yDistanceLine, zDistanceLine)
-      data.tooltips.distanceLines.push(xDistanceLine, yDistanceLine, zDistanceLine)
+      scene.add(xDistanceLine, yDistanceLine, zDistanceLine)
+      tooltips.distanceLines.push(xDistanceLine, yDistanceLine, zDistanceLine)
 
     }
 
@@ -230,9 +231,9 @@ export function dragable(element, origEvent=null) {
 
       $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab")
 
-      for (let i = 0; i < data.tooltips.distanceLines.length; i++) { data.scene.remove(data.tooltips.distanceLines[i]) }
+      for (let i = 0; i < tooltips.distanceLines.length; i++) { scene.remove(tooltips.distanceLines[i]) }
 
-      data.tooltips.distanceLines = []
+      tooltips.distanceLines = []
 
     }
 
@@ -243,6 +244,6 @@ export function dragable(element, origEvent=null) {
 
   }
 
-  element.type != "Mesh" ? element.mousedown(start) : !data.events.operation.key ? start() : null
+  element.type != "Mesh" ? element.mousedown(start) : !events.operation.key ? start() : null
 
 }
