@@ -2,12 +2,12 @@
 
 import {white} from "../colors/three/grayscale.mjs"
 
-export function addAmbientLight(position=data.scale) {
+export function addAmbientLight(position=scale) {
 
   let ambientLight = new THREE.AmbientLight(white, 1)
 
   ambientLight.position.set(0, 0, 0)
-  data.scene.add(ambientLight)
+  scene.add(ambientLight)
 
   return ambientLight
 

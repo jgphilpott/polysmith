@@ -2,12 +2,12 @@
 
 import {black, white} from "../colors/three/grayscale.mjs"
 
-export function addHemisphereLight(position=data.scale) {
+export function addHemisphereLight(position=scale) {
 
   let hemisphereLight = new THREE.HemisphereLight(white, black, 1)
 
   hemisphereLight.position.set(0, 0, 0)
-  data.scene.add(hemisphereLight)
+  scene.add(hemisphereLight)
 
   return hemisphereLight
 

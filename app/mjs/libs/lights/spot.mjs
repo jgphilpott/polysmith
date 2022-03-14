@@ -2,12 +2,12 @@
 
 import {white} from "../colors/three/grayscale.mjs"
 
-export function addSpotLight(position=data.scale) {
+export function addSpotLight(position=scale) {
 
   let spotLight = new THREE.SpotLight(white, 1)
 
   spotLight.position.set(position, position, position)
-  data.scene.add(spotLight)
+  scene.add(spotLight)
 
   return spotLight
 
