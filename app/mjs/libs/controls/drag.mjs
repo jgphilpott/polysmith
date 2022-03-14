@@ -3,9 +3,8 @@ export function addDragControls() {
   let radius3 = null
   let startX, startY = null
   let horizontalAngle, verticalAngle = null
-  let dragSpeed = data.settings.controls.dragSpeed
+  let dragSpeed = settings.controls.dragSpeed
 
-  let camera = data.camera
   let target = camera.target
   let position = camera.position
 
@@ -14,7 +13,7 @@ export function addDragControls() {
     event.preventDefault()
     event.stopPropagation()
 
-    data.camera.dragged = null
+    camera.dragged = null
 
     startX = event.pageX
     startY = event.pageY
@@ -43,7 +42,7 @@ export function addDragControls() {
     event.preventDefault()
     event.stopPropagation()
 
-    data.camera.dragged = true
+    camera.dragged = true
 
     let radius2 = side4sides(Math.abs(position.z - target.z), null, radius3)
 

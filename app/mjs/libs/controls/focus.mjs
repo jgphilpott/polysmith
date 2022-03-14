@@ -1,6 +1,5 @@
 export function focus(obj, duration=1000, steps=100) {
 
-  let camera = data.camera
   let target = camera.target
   let position = camera.position
 

@@ -5,12 +5,11 @@ export function addZoomControls() {
     event.preventDefault()
     event.stopPropagation()
 
-    let zoomMax = data.settings.controls.zoomMax
-    let zoomMin = data.settings.controls.zoomMin
-    let zoomSpeed = data.settings.controls.zoomSpeed
+    let zoomMax = settings.controls.zoomMax
+    let zoomMin = settings.controls.zoomMin
+    let zoomSpeed = settings.controls.zoomSpeed
     let zoomDelta = event.originalEvent.wheelDelta / zoomSpeed
 
-    let camera = data.camera
     let target = camera.target
     let position = camera.position
 
