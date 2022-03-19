@@ -1,8 +1,79 @@
+@import "../colors/glass/grayscale.sass"
+@import "../colors/solid/grayscale.sass"
+
 #meshes.panel
 
-  visibility: hidden
+  visibility: visible
 
   top: 50%
   left: calc(100% - 10px)
 
   transform: translate(-100%, -50%)
+
+  h3, #none
+
+    margin: 10px
+
+    text-align: center
+
+  table
+
+    margin: 10px
+
+    border-collapse: collapse
+
+    th, td
+
+      padding: 5px
+
+      border: 2px solid $black
+
+    tr:first-child th
+
+      border-top: 0
+
+    tr:last-child td
+
+      border-bottom: 0
+
+    tr td:first-child,
+    tr th:first-child
+
+      border-left: 0
+
+    tr td:last-child,
+    tr th:last-child
+
+      border-right: 0
+
+    tr:hover
+
+      background: $gray-glass
+
+    tr:first-child:hover
+
+      background: $light-gray-glass
+
+    img
+
+      margin: auto
+      display: block
+
+      width: 22.5px
+      height: 22.5px
+
+    img.trash
+
+      width: 16.5px
+
+    img.disabled
+
+      opacity: 0.5
+
+    img:hover
+
+      cursor: url('../imgs/icons/cursors/pointer.png'), pointer
+
+    img.disabled:hover
+
+      cursor: url('../imgs/icons/cursors/not-allowed.png'), not-allowed
