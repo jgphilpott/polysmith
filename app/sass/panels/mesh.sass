@@ -40,11 +40,19 @@
     width: 140px
     padding: 3px
 
-    -moz-appearance: textfield
+    appearance: textfield
 
   input:focus
 
     outline: none
+
+  input.disabled
+
+    color: $dark-gray
+
+  input.disabled:hover
+
+    cursor: url('../imgs/icons/cursors/not-allowed.png'), not-allowed
 
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button
@@ -59,6 +67,15 @@
 
     background-color: $red-glass
 
+  button#plus.disabled,
+  button#minus.disabled
+
+    background-color: $dark-gray-glass
+
   button:hover
 
     cursor: url('../imgs/icons/cursors/pointer.png'), pointer
+
+  button.disabled:hover
+
+    cursor: url('../imgs/icons/cursors/not-allowed.png'), not-allowed

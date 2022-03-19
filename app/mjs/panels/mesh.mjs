@@ -48,6 +48,13 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.append(position)
     panel.append(rotation)
 
+    if (mesh.lock == "locked") {
+
+      $("#mesh." + mesh.uuid + " input").addClass("disabled")
+      $("#mesh." + mesh.uuid + " button").addClass("disabled")
+
+    }
+
     $("#mesh." + mesh.uuid + " #position-x input").val(mesh.position.x.toFixed(2))
     $("#mesh." + mesh.uuid + " #position-y input").val(mesh.position.y.toFixed(2))
     $("#mesh." + mesh.uuid + " #position-z input").val(mesh.position.z.toFixed(2))
@@ -56,10 +63,10 @@ export function addMeshPanel(mesh, coordinates=null) {
     $("#mesh." + mesh.uuid + " #rotation-y input").val(radian2degree(mesh.rotation.y).toFixed(2))
     $("#mesh." + mesh.uuid + " #rotation-z input").val(radian2degree(mesh.rotation.z).toFixed(2))
 
-    $("#mesh." + mesh.uuid + " input").mousedown(function(event) { event.stopPropagation() })
+    $("#mesh." + mesh.uuid + " input").mousedown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
 
     $("#mesh." + mesh.uuid + " input").keypress(function(event) { event.stopPropagation(); if (event.keyCode == 13) this.blur() })
-    $("#mesh." + mesh.uuid + " input").keydown(function(event) { event.stopPropagation() })
+    $("#mesh." + mesh.uuid + " input").keydown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
     $("#mesh." + mesh.uuid + " input").keyup(function(event) {
 
       let selection = $(this).parent().parent().attr("id").split("-")
@@ -254,7 +261,7 @@ export function addMesh(mesh=null, properties={}) {
 
 export function updateMesh(mesh, type, key=null, value=null) {
 
-  if (type == "position" || type == "rotation") {
+  if ((type == "position" || type == "rotation") && mesh.lock != "locked") {
 
     let input = $("#mesh." + mesh.uuid + " #" + type + "-" + key + " input")
 
@@ -267,7 +274,7 @@ export function updateMesh(mesh, type, key=null, value=null) {
 
     mesh[type][key] = value
 
-  } else if (type == "operation") {
+  } else if (type == "operation" && mesh.lock != "locked") {
 
     if (value == "setup") {
 
@@ -320,12 +327,18 @@ export function updateMesh(mesh, type, key=null, value=null) {
 
       mesh.lock = "unlocked"
 
+      $("#mesh." + mesh.uuid + " input").removeClass("disabled")
+      $("#mesh." + mesh.uuid + " button").removeClass("disabled")
+
       $("#meshes.table tr#" + mesh.uuid + " .lock").attr("src", '/app/imgs/panels/lock/unlocked.png')
       $("#meshes.table tr#" + mesh.uuid + " .trash").removeClass("disabled")
 
     } else if (mesh.lock == "unlocked") {
 
       mesh.lock = "locked"
+
+      $("#mesh." + mesh.uuid + " input").addClass("disabled")
+      $("#mesh." + mesh.uuid + " button").addClass("disabled")
 
       $("#meshes.table tr#" + mesh.uuid + " .lock").attr("src", '/app/imgs/panels/lock/locked.png')
       $("#meshes.table tr#" + mesh.uuid + " .trash").addClass("disabled")
