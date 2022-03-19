@@ -9,9 +9,9 @@ export function addMeshesPanel() {
 
   panel.append("<h3>Meshes</h3>")
 
-  panel.append("<table id='meshes' class='table'><tr></tr></table>")
+  panel.append("<div class='table'><table id='meshes' class='table'><thead><tr></tr></thead><tbody></tbody></table></div>")
 
-  let tableHead = $("#meshes.table tr")
+  let tableHead = $("#meshes.table thead tr")
 
   tableHead.append("<th><h4>ID</h4></th>")
   tableHead.append("<th><h4>Type</h4></th>")
@@ -21,6 +21,12 @@ export function addMeshesPanel() {
 
   panel.append("<p id='none'><b>None</b></p>")
 
+  $("#meshes.panel div.table").on("scroll", function(event) {
+
+    $("#meshes.table tbody").css("clip-path", "inset(" + $(this).scrollTop() + "px 0px 0px 0px)")
+
+  })
+
   tooltips.meshCount = 0
 
   addPanelEvents(panel)
@@ -29,7 +35,7 @@ export function addMeshesPanel() {
 
 export function updateMeshesPanel(type, mesh) {
 
-  let table = $("#meshes.table")
+  let table = $("#meshes.table tbody")
 
   switch (type) {
 
@@ -40,6 +46,7 @@ export function updateMeshesPanel(type, mesh) {
       tooltips.meshCount += 1
 
       $("#none").css("display", "none")
+      $("div.table").css("display", "block")
 
       let row = "<tr id=" + mesh.uuid + ">"
 
@@ -72,7 +79,12 @@ export function updateMeshesPanel(type, mesh) {
 
       meshes = meshes.filter(obj => obj.uuid != mesh.uuid)
 
-      if (!meshes.length) $("#none").css("display", "block")
+      if (!meshes.length) {
+
+        $("#none").css("display", "block")
+        $("div.table").css("display", "none")
+
+      }
 
       break
 
