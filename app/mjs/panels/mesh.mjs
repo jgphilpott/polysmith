@@ -1,4 +1,5 @@
 import {addPanelEvents, dragable} from "../libs/etc/events.mjs"
+import {updateMeshesPanel} from "./meshes.mjs"
 import {contextMenu} from "./context.mjs"
 import {focus} from "../libs/controls/focus.mjs"
 
@@ -27,7 +28,7 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     panel.append("<h3>Mesh</h3>")
 
-    panel.append("<p id='type'><b>Type:</b> " + mesh.class.replace(/\b\w/g, function(char) { return char.toUpperCase() }) + "</p>")
+    panel.append("<p id='type'><b>Type:</b> " + mesh.class.replace(/\b\w/g, function(char) { return char.toUpperCase() }).replace("-", " ") + "</p>")
     panel.append("<p id='surface'><b>Surface:</b> " + mesh.surface.toFixed(2) + "</p>")
     panel.append("<p id='volume'><b>Volume:</b> " + mesh.volume.toFixed(2) + "</p>")
 
@@ -220,6 +221,7 @@ export function addMesh(mesh=null, properties={}) {
   if (mesh) {
 
     properties.type ? mesh.class = properties.type : mesh.class = "custom"
+    properties.lock ? mesh.lock = properties.lock : mesh.lock = "unlocked"
 
     events.addEventListener(mesh, "mousemove", function(event) { $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab") })
     events.addEventListener(mesh, "mousedown", function(event) { dragable(mesh, event.origDomEvent) })
@@ -240,7 +242,8 @@ export function addMesh(mesh=null, properties={}) {
     mesh.surface = getSurfaceArea(mesh)
     mesh.volume = getVolume(mesh)
 
-    meshes.push(mesh)
+    updateMeshesPanel("add", mesh)
+
     scene.add(mesh)
 
   }
@@ -311,26 +314,46 @@ export function updateMesh(mesh, type, key=null, value=null) {
 
     }
 
+  } else if (type == "lock") {
+
+    if (mesh.lock == "locked") {
+
+      mesh.lock = "unlocked"
+
+      $("#meshes.table tr#" + mesh.uuid + " .lock").attr("src", '/app/imgs/panels/lock/unlocked.png')
+      $("#meshes.table tr#" + mesh.uuid + " .trash").removeClass("disabled")
+
+    } else if (mesh.lock == "unlocked") {
+
+      mesh.lock = "locked"
+
+      $("#meshes.table tr#" + mesh.uuid + " .lock").attr("src", '/app/imgs/panels/lock/locked.png')
+      $("#meshes.table tr#" + mesh.uuid + " .trash").addClass("disabled")
+
+    }
+
   }
 
 }
 
 export function removeMesh(mesh) {
 
-  $("body").css("cursor", "")
+  if (mesh.lock != "locked") {
 
-  $("#mesh." + mesh.uuid + "").remove()
+    $("body").css("cursor", "")
 
-  meshes = meshes.filter(obj => obj.uuid != mesh.uuid)
+    events.removeEventListener(mesh, "mousemove")
+    events.removeEventListener(mesh, "mousedown")
+    events.removeEventListener(mesh, "mouseout")
 
-  events.removeEventListener(mesh, "mousemove")
-  events.removeEventListener(mesh, "mousedown")
-  events.removeEventListener(mesh, "mouseout")
+    events.removeEventListener(mesh, "click")
+    events.removeEventListener(mesh, "dblclick")
+    events.removeEventListener(mesh, "contextmenu")
 
-  events.removeEventListener(mesh, "click")
-  events.removeEventListener(mesh, "dblclick")
-  events.removeEventListener(mesh, "contextmenu")
+    updateMeshesPanel("remove", mesh)
 
-  scene.remove(mesh)
+    scene.remove(mesh)
+
+  }
 
 }
