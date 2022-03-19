@@ -106,7 +106,22 @@ export function dragable(element, origEvent=null) {
 
   function start(event) {
 
-    if (element.type != "Mesh") {
+    if (element.type == "Mesh") {
+
+      if (element.lock != "locked") {
+
+        $("body").css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
+
+        let coordinates = world2screenCoordinates(element.position.x, element.position.y, element.position.z)
+
+        xOffset = origEvent.clientX - coordinates.x
+        yOffset = origEvent.clientY - coordinates.y
+
+        tooltips.distanceLines = []
+
+      }
+
+    } else {
 
       event.stopPropagation()
 
@@ -126,15 +141,6 @@ export function dragable(element, origEvent=null) {
 
       }
 
-    } else {
-
-      let coordinates = world2screenCoordinates(element.position.x, element.position.y, element.position.z)
-
-      xOffset = origEvent.clientX - coordinates.x
-      yOffset = origEvent.clientY - coordinates.y
-
-      tooltips.distanceLines = []
-
     }
 
     document.onmousemove = drag
@@ -149,7 +155,38 @@ export function dragable(element, origEvent=null) {
     let eventX = event.clientX - xOffset
     let eventY = event.clientY - yOffset
 
-    if (element.type != "Mesh") {
+    if (element.type == "Mesh") {
+
+      if (element.lock != "locked") {
+
+        $("body").css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
+
+        let coordinates = screen2worldCoordinates(eventX, eventY, element.position.z)
+
+        if (coordinates.x > max) { coordinates.x = max}
+        if (coordinates.x < min) { coordinates.x = min}
+
+        if (coordinates.y > max) { coordinates.y = max}
+        if (coordinates.y < min) { coordinates.y = min}
+
+        $("#mesh." + element.uuid + " #position-x input").val(coordinates.x.toFixed(2))
+        $("#mesh." + element.uuid + " #position-y input").val(coordinates.y.toFixed(2))
+
+        element.position.x = coordinates.x
+        element.position.y = coordinates.y
+
+        for (let i = 0; i < tooltips.distanceLines.length; i++) { scene.remove(tooltips.distanceLines[i]) }
+
+        let xDistanceLine = newLine([[0, coordinates.y, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
+        let yDistanceLine = newLine([[coordinates.x, 0, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
+        let zDistanceLine = newLine([[coordinates.x, coordinates.y, 0], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
+
+        scene.add(xDistanceLine, yDistanceLine, zDistanceLine)
+        tooltips.distanceLines.push(xDistanceLine, yDistanceLine, zDistanceLine)
+
+      }
+
+    } else {
 
       event.stopPropagation()
 
@@ -167,40 +204,25 @@ export function dragable(element, origEvent=null) {
 
       }
 
-    } else {
-
-      $("body").css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
-
-      let coordinates = screen2worldCoordinates(eventX, eventY, element.position.z)
-
-      if (coordinates.x > max) { coordinates.x = max}
-      if (coordinates.x < min) { coordinates.x = min}
-
-      if (coordinates.y > max) { coordinates.y = max}
-      if (coordinates.y < min) { coordinates.y = min}
-
-      $("#mesh." + element.uuid + " #position-x input").val(coordinates.x.toFixed(2))
-      $("#mesh." + element.uuid + " #position-y input").val(coordinates.y.toFixed(2))
-
-      element.position.x = coordinates.x
-      element.position.y = coordinates.y
-
-      for (let i = 0; i < tooltips.distanceLines.length; i++) { scene.remove(tooltips.distanceLines[i]) }
-
-      let xDistanceLine = newLine([[0, coordinates.y, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
-      let yDistanceLine = newLine([[coordinates.x, 0, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
-      let zDistanceLine = newLine([[coordinates.x, coordinates.y, 0], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
-
-      scene.add(xDistanceLine, yDistanceLine, zDistanceLine)
-      tooltips.distanceLines.push(xDistanceLine, yDistanceLine, zDistanceLine)
-
     }
 
   }
 
   function stop(event) {
 
-    if (element.type != "Mesh") {
+    if (element.type == "Mesh") {
+
+      if (element.lock != "locked") {
+
+        $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab")
+
+        for (let i = 0; i < tooltips.distanceLines.length; i++) { scene.remove(tooltips.distanceLines[i]) }
+
+        tooltips.distanceLines = []
+
+      }
+
+    } else {
 
       event.stopPropagation()
 
@@ -226,14 +248,6 @@ export function dragable(element, origEvent=null) {
         ghost.remove()
 
       }
-
-    } else {
-
-      $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab")
-
-      for (let i = 0; i < tooltips.distanceLines.length; i++) { scene.remove(tooltips.distanceLines[i]) }
-
-      tooltips.distanceLines = []
 
     }
 

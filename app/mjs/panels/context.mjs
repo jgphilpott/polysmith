@@ -46,7 +46,8 @@ export function contextMenu(type, element, event) {
       contextMenu.append("<p id='cut'>Cut Mesh</p>")
       contextMenu.append("<p id='join'>Join Mesh</p>")
       contextMenu.append("<p id='intersect'>Intersect Mesh</p>")
-      contextMenu.append("<p id='remove'>Remove Mesh</p>")
+      element.lock != "locked" ? contextMenu.append("<p id='remove'>Remove Mesh</p>") : null
+      element.lock == "locked" ? contextMenu.append("<p id='lock'>Unlock Mesh</p>") : contextMenu.append("<p id='lock'>Lock Mesh</p>")
 
       $("#context-menu.panel #open").click(function() { addMeshPanel(element) })
       $("#context-menu.panel #look").click(function() { focus({x: element.position.x, y: element.position.y, z: element.position.z}) })
@@ -55,6 +56,7 @@ export function contextMenu(type, element, event) {
       $("#context-menu.panel #join").click(function() { updateMesh(element, "operation", "join", "setup") })
       $("#context-menu.panel #intersect").click(function() { updateMesh(element, "operation", "intersect", "setup") })
       $("#context-menu.panel #remove").click(function() { removeMesh(element) })
+      $("#context-menu.panel #lock").click(function() { updateMesh(element, "lock") })
 
       break
 

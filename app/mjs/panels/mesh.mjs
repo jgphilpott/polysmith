@@ -223,7 +223,7 @@ export function addMesh(mesh=null, properties={}) {
     properties.type ? mesh.class = properties.type : mesh.class = "custom"
     properties.lock ? mesh.lock = properties.lock : mesh.lock = "unlocked"
 
-    events.addEventListener(mesh, "mousemove", function(event) { $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab") })
+    events.addEventListener(mesh, "mousemove", function(event) { mesh.lock == "locked" ? $("body").css("cursor", "url('app/imgs/icons/cursors/not-allowed.png'), not-allowed") : $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab") })
     events.addEventListener(mesh, "mousedown", function(event) { dragable(mesh, event.origDomEvent) })
     events.addEventListener(mesh, "mouseout", function(event) { $("body").css("cursor", "") })
 
