@@ -2,8 +2,8 @@ export function addFlyControls() {
 
   $(document).keydown(function(event) {
 
-    let flySpeed = settings.controls.flySpeed
-    let spinSpeed = settings.controls.spinSpeed
+    let flySpeed = settings.controls.flySpeed / 10
+    let spinSpeed = settings.controls.spinSpeed / 10
 
     let target = camera.target
     let position = camera.position

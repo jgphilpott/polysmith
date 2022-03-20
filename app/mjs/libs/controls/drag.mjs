@@ -32,6 +32,8 @@ export function addDragControls() {
     verticalAngle = angle4sides(radius3, deltaZ)
     if (position.z < target.z) { verticalAngle = 180 - verticalAngle }
 
+    dragSpeed = settings.controls.dragSpeed / 500
+
     document.onmousemove = drag
     document.onmouseup = stop
 
@@ -46,10 +48,10 @@ export function addDragControls() {
 
     let radius2 = side4sides(Math.abs(position.z - target.z), null, radius3)
 
-    let newHorizontalAngle = horizontalAngle + ((startX - event.pageX) / dragSpeed)
+    let newHorizontalAngle = horizontalAngle + ((startX - event.pageX) * dragSpeed)
     if (newHorizontalAngle >= 180) { newHorizontalAngle = newHorizontalAngle - 360 }
 
-    let newVerticalAngle = verticalAngle + ((startY - event.pageY) / dragSpeed)
+    let newVerticalAngle = verticalAngle + ((startY - event.pageY) * dragSpeed)
     if (newVerticalAngle <= 0) { newVerticalAngle = 0.000001 } else if (newVerticalAngle >= 180) { newVerticalAngle = -180 - 0.000001 }
 
     let newX = side4angle(newHorizontalAngle, radius2, true, null) + target.x
