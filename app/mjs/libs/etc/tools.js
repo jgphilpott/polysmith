@@ -26,38 +26,6 @@ function signedVolumeOfTriangle(p1, p2, p3) {
   return p1.dot(p2.cross(p3)) / 6.0
 }
 
-function minValue(values=[]) {
-  return Math.min.apply(null, values)
-}
-
-function maxValue(values=[]) {
-  return Math.max.apply(null, values)
-}
-
-function absMinValue(values=[]) {
-  return Math.min.apply(null, values.map(Math.abs))
-}
-
-function absMaxValue(values=[]) {
-  return Math.max.apply(null, values.map(Math.abs))
-}
-
-function mm2inch(mm) {
-  return mm / 25.4
-}
-
-function inch2mm(inch) {
-  return inch * 25.4
-}
-
-function degree2radian(degree) {
-  return degree * (Math.PI / 180)
-}
-
-function radian2degree(radian) {
-  return radian * (180 / Math.PI)
-}
-
 function getBoundingBox(mesh) {
 
   if (!mesh.geometry.boundingBox) {
