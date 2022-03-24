@@ -1,3 +1,9 @@
+@import "../colors/glass/grayscale.sass"
+@import "../colors/glass/rainbow.sass"
+
+@import "../colors/solid/grayscale.sass"
+@import "../colors/solid/rainbow.sass"
+
 #camera.panel
 
   visibility: visible
@@ -5,33 +11,131 @@
   top: 50%
   left: 10px
 
+  width: 180px
+
   transform: translate(0%, -50%)
 
-  .camera
+  img.camera
 
     display: block
-
-    margin: 10px auto
 
     width: 100px
     height: 80px
 
-  h4
+    margin: 10px auto
 
-    text-align: center
+  .head
 
-    margin: 15px
-    margin-bottom: 10px
+    display: flex
+    align-items: center
 
-  input
+    img.fold
 
-    display: block
+      padding: 3px
 
-    margin: 15px
-    margin-top: 10px
+      width: 10px
+      height: 15px
 
-    width: 150px
+    h4
 
-  input:hover
+      margin: 5px
 
-    cursor: url('../imgs/icons/cursors/grab.png'), grab
+    img.fold:hover,
+    h4:hover
+
+      cursor: url('../imgs/icons/cursors/pointer.png'), pointer
+
+  .body
+
+    padding: 1px
+    display: none
+
+  #position,
+  #target
+
+    .body
+
+      span
+
+        margin: 0px 5px
+
+        display: flex
+        align-items: center
+        justify-content: center
+
+      input, button
+
+        border: 1px solid $black
+        border-radius: 5px
+
+        margin: 5px
+
+      input
+
+        width: 55px
+        padding: 3px
+
+        appearance: textfield
+
+      input:focus
+
+        outline: none
+
+      input.disabled
+
+        color: $dark-gray
+
+      input.disabled:hover
+
+        cursor: url('../imgs/icons/cursors/not-allowed.png'), not-allowed
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button
+
+        -webkit-appearance: none
+
+      button#plus
+
+        background-color: $green-glass
+
+      button#minus
+
+        background-color: $red-glass
+
+      button#plus.disabled,
+      button#minus.disabled
+
+        background-color: $dark-gray-glass
+
+      button:hover
+
+        cursor: url('../imgs/icons/cursors/pointer.png'), pointer
+
+      button.disabled:hover
+
+        cursor: url('../imgs/icons/cursors/not-allowed.png'), not-allowed
+
+  #speed
+
+    .body
+
+      display: block
+
+      p
+
+        margin: 5px
+
+        text-align: center
+
+      input
+
+        display: block
+
+        margin: 15px auto
+        margin-top: 10px
+
+        width: 135px
+
+      input:hover
+
+        cursor: url('../imgs/icons/cursors/grab.png'), grab
