@@ -35,38 +35,7 @@ export function addCameraPanel() {
   speed.append("<p>Spin Speed</p>")
   speed.append("<input type='range' id='spin' class='range' min='1' max=" + (spinSpeed * 3) + " value=" + spinSpeed + ">")
 
-  $("#camera.panel .fold, #camera.panel h4").click(function(event) {
-
-    let degree = 90
-    let duration = 1000
-
-    let id = $(this).parent().parent().attr("id")
-
-    let tool = $("#camera.panel #" + id + "")
-    let fold = $("#camera.panel #" + id + " .fold")
-    let head = $("#camera.panel #" + id + " .head")
-    let body = $("#camera.panel #" + id + " .body")
-
-    if (body.css("display") == "none") {
-
-      body.css("display", "block")
-      let height = body.height()
-      body.css("display", "none")
-
-      tool.animate({height: height + head.height()}, {duration: duration, queue: false})
-      body.css("display", "block")
-
-      rotate(fold, degree, duration)
-
-    } else {
-
-      tool.animate({height: head.height()}, {duration: duration, queue: false, complete: function() { body.css("display", "none") }})
-
-      rotate(fold, 0, duration)
-
-    }
-
-  })
+  $("#camera.panel .fold, #camera.panel h4").click(function(event) { fold(this) })
 
   $(".range").mousedown(function(event) {
 

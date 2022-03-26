@@ -22,6 +22,37 @@ $.fn.clickSingleDouble = function(single_click_callback, double_click_callback, 
   })
 }
 
+function fold(element, degree=90, duration=1000) {
+
+  let id = $(element).parent().parent().attr("id")
+  let panel = $(element).parent().parent().parent()
+
+  let tool = panel.find(" #" + id + "")
+  let fold = panel.find(" #" + id + " .fold")
+  let head = panel.find(" #" + id + " .head")
+  let body = panel.find(" #" + id + " .body")
+
+  if (body.css("display") == "none") {
+
+    body.css("display", "block")
+    let height = body.height()
+    body.css("display", "none")
+
+    tool.animate({height: height + head.height()}, {duration: duration, queue: false})
+    body.css("display", "block")
+
+    rotate(fold, degree, duration)
+
+  } else {
+
+    tool.animate({height: head.height()}, {duration: duration, queue: false, complete: function() { body.css("display", "none") }})
+
+    rotate(fold, 0, duration)
+
+  }
+
+}
+
 function signedVolumeOfTriangle(p1, p2, p3) {
   return p1.dot(p2.cross(p3)) / 6.0
 }

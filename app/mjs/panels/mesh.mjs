@@ -71,6 +71,8 @@ export function addMeshPanel(mesh, coordinates=null) {
     $("#mesh." + mesh.uuid + " #rotation-y input").val(radian2degree(mesh.rotation.y).toFixed(2))
     $("#mesh." + mesh.uuid + " #rotation-z input").val(radian2degree(mesh.rotation.z).toFixed(2))
 
+    $("#mesh." + mesh.uuid + ".panel .fold, #mesh." + mesh.uuid + ".panel h4").click(function(event) { fold(this) })
+
     $("#mesh." + mesh.uuid + " input").mousedown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
 
     $("#mesh." + mesh.uuid + " input").keypress(function(event) { event.stopPropagation(); if (event.keyCode == 13) this.blur() })
