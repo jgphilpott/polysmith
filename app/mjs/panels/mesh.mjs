@@ -28,25 +28,35 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     panel.append("<h3>Mesh</h3>")
 
-    panel.append("<p id='type'><b>Type:</b> " + mesh.class.replace(/\b\w/g, function(char) { return char.toUpperCase() }).replace("-", " ") + "</p>")
-    panel.append("<p id='surface'><b>Surface:</b> " + mesh.surface.toFixed(2) + "</p>")
-    panel.append("<p id='volume'><b>Volume:</b> " + mesh.volume.toFixed(2) + "</p>")
+    let operations = "<div id='operations'>"
 
-    let position = ""
-    let rotation = ""
+    let meta = "<div id='meta'>"
 
-    position += "<div id='position'><h4><b>Position</b></h4>"
+    let position = "<div id='position'><h4><b>Position</b></h4>"
+    let rotation = "<div id='rotation'><h4><b>Rotation</b></h4>"
+
+    operations += "<img title='Join' id='join' class='operation' src='/app/imgs/panels/ops/join.png'>"
+    operations += "<img title='Cut' id='cut' class='operation' src='/app/imgs/panels/ops/cut.png'>"
+    operations += "<img title='Intersect' id='intersect' class='operation' src='/app/imgs/panels/ops/intersect.png'>"
+
+    meta += "<p id='type'><b>Type:</b> " + mesh.class.replace(/\b\w/g, function(char) { return char.toUpperCase() }).replace("-", " ") + "</p>"
+    meta += "<p id='surface'><b>Surface:</b> " + mesh.surface.toFixed(2) + "</p>"
+    meta += "<p id='volume'><b>Volume:</b> " + mesh.volume.toFixed(2) + "</p>"
+
     position += "<span id='position-x'><label><b id='x'>X</b> <input type=number step=1 min=" + -(scale * 3) + " max=" + scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>"
     position += "<span id='position-y'><label><b id='y'>Y</b> <input type=number step=1 min=" + -(scale * 3) + " max=" + scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>"
-    position += "<span id='position-z'><label><b id='z'>Z</b> <input type=number step=1 min=" + -(scale * 3) + " max=" + scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span></div>"
+    position += "<span id='position-z'><label><b id='z'>Z</b> <input type=number step=1 min=" + -(scale * 3) + " max=" + scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>"
 
-    rotation += "<div id='rotation'><h4><b>Rotation</b></h4>"
     rotation += "<span id='rotation-x'><label><b id='x'>X</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>"
     rotation += "<span id='rotation-y'><label><b id='y'>Y</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>"
-    rotation += "<span id='rotation-z'><label><b id='z'>Z</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span></div>"
+    rotation += "<span id='rotation-z'><label><b id='z'>Z</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>"
 
-    panel.append(position)
-    panel.append(rotation)
+    panel.append(operations + "</div>")
+
+    panel.append(meta + "</div>")
+
+    panel.append(position + "</div>")
+    panel.append(rotation + "</div>")
 
     if (mesh.lock == "locked") {
 
