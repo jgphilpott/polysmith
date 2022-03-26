@@ -20,13 +20,13 @@ export function addCameraPanel() {
   let flySpeed = settings.controls.flySpeed
   let spinSpeed = settings.controls.spinSpeed
 
-  position.append("<span id='position-x'><label><b>X</b> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-  position.append("<span id='position-y'><label><b>Y</b> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-  position.append("<span id='position-z'><label><b>Z</b> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+  position.append("<span id='position-x'><label><b id='x'>X</b> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+  position.append("<span id='position-y'><label><b id='y'>Y</b> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+  position.append("<span id='position-z'><label><b id='z'>Z</b> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
 
-  target.append("<span id='position-x'><label><b>X</b> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-  target.append("<span id='position-y'><label><b>Y</b> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-  target.append("<span id='position-z'><label><b>Z</b> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+  target.append("<span id='position-x'><label><b id='x'>X</b> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+  target.append("<span id='position-y'><label><b id='y'>Y</b> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+  target.append("<span id='position-z'><label><b id='z'>Z</b> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
 
   speed.append("<p>Drag Speed</p>")
   speed.append("<input type='range' id='drag' class='range' min='1' max=" + (dragSpeed * 3) + " value=" + dragSpeed + ">")
@@ -60,8 +60,7 @@ export function addCameraPanel() {
 
     } else {
 
-      tool.animate({height: head.height()}, {duration: duration, queue: false})
-      body.css("display", "none")
+      tool.animate({height: head.height()}, {duration: duration, queue: false, complete: function() { body.css("display", "none") }})
 
       rotate(fold, 0, duration)
 
