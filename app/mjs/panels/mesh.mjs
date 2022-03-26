@@ -29,11 +29,7 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.append("<h3>Mesh</h3>")
 
     let operations = "<div id='operations'>"
-
     let meta = "<div id='meta'>"
-
-    let position = "<div id='position'><h4><b>Position</b></h4>"
-    let rotation = "<div id='rotation'><h4><b>Rotation</b></h4>"
 
     operations += "<img title='Join' id='join' class='operation' src='/app/imgs/panels/ops/join.png'>"
     operations += "<img title='Cut' id='cut' class='operation' src='/app/imgs/panels/ops/cut.png'>"
@@ -43,20 +39,22 @@ export function addMeshPanel(mesh, coordinates=null) {
     meta += "<p id='surface'><b>Surface:</b> " + mesh.surface.toFixed(2) + "</p>"
     meta += "<p id='volume'><b>Volume:</b> " + mesh.volume.toFixed(2) + "</p>"
 
-    position += "<span id='position-x'><label><b id='x'>X</b> <input type=number step=1 min=" + -(scale * 3) + " max=" + scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>"
-    position += "<span id='position-y'><label><b id='y'>Y</b> <input type=number step=1 min=" + -(scale * 3) + " max=" + scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>"
-    position += "<span id='position-z'><label><b id='z'>Z</b> <input type=number step=1 min=" + -(scale * 3) + " max=" + scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>"
-
-    rotation += "<span id='rotation-x'><label><b id='x'>X</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>"
-    rotation += "<span id='rotation-y'><label><b id='y'>Y</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>"
-    rotation += "<span id='rotation-z'><label><b id='z'>Z</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>"
-
     panel.append(operations + "</div>")
-
     panel.append(meta + "</div>")
 
-    panel.append(position + "</div>")
-    panel.append(rotation + "</div>")
+    panel.append("<div id='position'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Position</h4></div><div class='body'></div></div>")
+    panel.append("<div id='rotation'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Rotation</h4></div><div class='body'></div></div>")
+
+    let position = $("#mesh." + mesh.uuid + ".panel #position .body")
+    let rotation = $("#mesh." + mesh.uuid + ".panel #rotation .body")
+
+    position.append("<span id='position-x'><label><b id='x'>X</b> <input type=number step=1 min=" + -(scale * 3) + " max=" + scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+    position.append("<span id='position-y'><label><b id='y'>Y</b> <input type=number step=1 min=" + -(scale * 3) + " max=" + scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+    position.append("<span id='position-z'><label><b id='z'>Z</b> <input type=number step=1 min=" + -(scale * 3) + " max=" + scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+
+    rotation.append("<span id='rotation-x'><label><b id='x'>X</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+    rotation.append("<span id='rotation-y'><label><b id='y'>Y</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+    rotation.append("<span id='rotation-z'><label><b id='z'>Z</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>")
 
     if (mesh.lock == "locked") {
 
