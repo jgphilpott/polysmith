@@ -21,15 +21,16 @@ export function newPath(vertices=[[]]) {
 export function newTube(vertices=[[10, 10, 10], [-10, -10, -10]], radius=1, radialSegments=10, tubularSegments=10, closed=false, material="normal", color=black) {
 
   let geometry = new THREE.TubeGeometry(newPath(vertices), tubularSegments, radius, radialSegments, closed)
+  let tube = new THREE.Mesh(geometry, meshMaterial(material, color))
 
-  return new THREE.Mesh(geometry, meshMaterial(material, color))
+  tube.class = "tube"
+
+  return tube
 
 }
 
 export function addTube(vertices=[[10, 10, 10], [-10, -10, -10]], radius=1, radialSegments=10, tubularSegments=10, closed=false, material="normal", color=black) {
 
-  let tube = newTube(vertices, radius, radialSegments, tubularSegments, closed, material, color)
-
-  return addMesh(tube)
+  return addMesh(newTube(vertices, radius, radialSegments, tubularSegments, closed, material, color))
 
 }

@@ -26,6 +26,14 @@ export function newText(text="", size=12, height=2, bevel=false, font="ubuntu", 
 
   let textMesh = new THREE.Mesh(textGeometry, meshMaterial(material, color))
 
+  textMesh.rotateX(degree2radian(rotateX))
+  textMesh.rotateY(degree2radian(rotateY))
+  textMesh.rotateZ(degree2radian(rotateZ))
+
+  textMesh.position.set(x, y, z)
+
+  textMesh.class = "text"
+
   return textMesh
 
 }
@@ -34,17 +42,9 @@ export function addText(text="", size=12, height=2, bevel=false, font="ubuntu", 
 
   let loader = new THREE.FontLoader()
 
-  loader.load("./app/fonts/JSON/" + font + ".json", function (font) {
+  loader.load("./app/fonts/JSON/" + font + ".json", function(font) {
 
-    let textMesh = newText(text, size, height, bevel, font, material, color, center, x, y, z, rotateX, rotateY, rotateZ)
-
-    textMesh.rotateX(degree2radian(rotateX))
-    textMesh.rotateY(degree2radian(rotateY))
-    textMesh.rotateZ(degree2radian(rotateZ))
-
-    textMesh.position.set(x, y, z)
-
-    addMesh(textMesh)
+    addMesh(newText(text, size, height, bevel, font, material, color, center, x, y, z, rotateX, rotateY, rotateZ))
 
   })
 

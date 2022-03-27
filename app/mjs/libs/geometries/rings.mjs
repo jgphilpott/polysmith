@@ -10,6 +10,7 @@ export function newRing(innerRadius=5, outerRadius=10, radialSegments=42, positi
   let ring = new THREE.Mesh(geometry, meshMaterial(material, color))
 
   ring.position.set(position[0], position[1], position[2])
+  ring.class = "ring"
 
   return ring
 
@@ -17,8 +18,6 @@ export function newRing(innerRadius=5, outerRadius=10, radialSegments=42, positi
 
 export function addRing(innerRadius=5, outerRadius=10, radialSegments=42, position=[0, 0, 0], material="normal", color=black) {
 
-  let ring = newRing(innerRadius, outerRadius, radialSegments, position, material, color)
-
-  return addMesh(ring)
+  return addMesh(newRing(innerRadius, outerRadius, radialSegments, position, material, color))
 
 }

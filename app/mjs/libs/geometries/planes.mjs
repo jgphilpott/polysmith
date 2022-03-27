@@ -10,6 +10,7 @@ export function newPlane(width=10, height=10, position=[0, 0, 0], material="norm
   let plane = new THREE.Mesh(geometry, meshMaterial(material, color))
 
   plane.position.set(position[0], position[1], position[2])
+  plane.class = "plane"
 
   return plane
 
@@ -17,8 +18,6 @@ export function newPlane(width=10, height=10, position=[0, 0, 0], material="norm
 
 export function addPlane(width=10, height=10, position=[0, 0, 0], material="normal", color=black) {
 
-  let plane = newPlane(width, height, position, material, color)
-
-  return addMesh(plane)
+  return addMesh(newPlane(width, height, position, material, color))
 
 }

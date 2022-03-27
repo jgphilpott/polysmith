@@ -10,6 +10,7 @@ export function newBox(width=10, height=10, depth=10, position=[0, 0, 0], materi
   let box = new THREE.Mesh(geometry, meshMaterial(material, color))
 
   box.position.set(position[0], position[1], position[2])
+  box.class = "box"
 
   return box
 
@@ -17,8 +18,6 @@ export function newBox(width=10, height=10, depth=10, position=[0, 0, 0], materi
 
 export function addBox(width=10, height=10, depth=10, position=[0, 0, 0], material="normal", color=black) {
 
-  let box = newBox(width, height, depth, position, material, color)
-
-  return addMesh(box)
+  return addMesh(newBox(width, height, depth, position, material, color))
 
 }

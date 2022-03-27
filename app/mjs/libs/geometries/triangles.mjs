@@ -14,14 +14,14 @@ export function newTriangle(v1=[0, 0, 10 * Math.sqrt(3) / 4], v2=[0, 5, -10 * Ma
 
   let triangle = new THREE.Mesh(geometry, meshMaterial(material, color))
 
+  triangle.class = "triangle"
+
   return triangle
 
 }
 
 export function addTriangle(v1=[0, 0, 10 * Math.sqrt(3) / 4], v2=[0, 5, -10 * Math.sqrt(3) / 4], v3=[0, -5, -10 * Math.sqrt(3) / 4], material="normal", color=black) {
 
-  let triangle = newTriangle(v1, v2, v3, material, color)
-
-  return addMesh(triangle)
+  return addMesh(newTriangle(v1, v2, v3, material, color))
 
 }

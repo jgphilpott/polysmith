@@ -10,6 +10,7 @@ export function newKnot(size=10, thickness=3, radialSegments=42, tubularSegments
   let knot = new THREE.Mesh(geometry, meshMaterial(material, color))
 
   knot.position.set(position[0], position[1], position[2])
+  knot.class = "knot"
 
   return knot
 
@@ -17,8 +18,6 @@ export function newKnot(size=10, thickness=3, radialSegments=42, tubularSegments
 
 export function addKnot(size=10, thickness=3, radialSegments=42, tubularSegments=42, position=[0, 0, 0], material="normal", color=black) {
 
-  let knot = newKnot(size, thickness, radialSegments, tubularSegments, position, material, color)
-
-  return addMesh(knot)
+  return addMesh(newKnot(size, thickness, radialSegments, tubularSegments, position, material, color))
 
 }

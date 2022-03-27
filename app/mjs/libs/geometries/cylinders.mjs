@@ -11,6 +11,7 @@ export function newCylinder(length=10, positiveRadius=5, negativeRadius=5, radia
 
   cylinder.position.set(position[0], position[1], position[2])
   cylinder.rotation.x = degree2radian(90)
+  cylinder.class = "cylinder"
 
   return cylinder
 
@@ -18,8 +19,6 @@ export function newCylinder(length=10, positiveRadius=5, negativeRadius=5, radia
 
 export function addCylinder(length=10, positiveRadius=5, negativeRadius=5, radialSegments=42, position=[0, 0, 0], material="normal", color=black) {
 
-  let cylinder = newCylinder(length, positiveRadius, negativeRadius, radialSegments, position, material, color)
-
-  return addMesh(cylinder)
+  return addMesh(newCylinder(length, positiveRadius, negativeRadius, radialSegments, position, material, color))
 
 }

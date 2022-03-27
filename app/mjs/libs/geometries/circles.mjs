@@ -10,6 +10,7 @@ export function newCircle(radius=10, radialSegments=42, position=[0, 0, 0], mate
   let circle = new THREE.Mesh(geometry, meshMaterial(material, color))
 
   circle.position.set(position[0], position[1], position[2])
+  circle.class = "circle"
 
   return circle
 
@@ -17,8 +18,6 @@ export function newCircle(radius=10, radialSegments=42, position=[0, 0, 0], mate
 
 export function addCircle(radius=10, radialSegments=42, position=[0, 0, 0], material="normal", color=black) {
 
-  let circle = newCircle(radius, radialSegments, position, material, color)
-
-  return addMesh(circle)
+  return addMesh(newCircle(radius, radialSegments, position, material, color))
 
 }

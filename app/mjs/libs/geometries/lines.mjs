@@ -20,14 +20,16 @@ export function newVector(vertices=[[]]) {
 
 export function newLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=black, linewidth=1, dashSize=5, gapSize=3) {
 
-  return new THREE.Line(newVector(vertices), lineMaterial(material, color, linewidth, dashSize, gapSize)).computeLineDistances()
+  let line = new THREE.Line(newVector(vertices), lineMaterial(material, color, linewidth, dashSize, gapSize)).computeLineDistances()
+
+  line.class = "line"
+
+  return line
 
 }
 
 export function addLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=black, linewidth=1, dashSize=5, gapSize=3) {
 
-  let line = newLine(vertices, material, color, linewidth, dashSize, gapSize)
-
-  return addMesh(line)
+  return addMesh(newLine(vertices, material, color, linewidth, dashSize, gapSize))
 
 }

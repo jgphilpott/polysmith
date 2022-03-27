@@ -11,6 +11,7 @@ export function newTorus(radius=5, thickness=1, radialSegments=42, tubularSegmen
 
   torus.position.set(position[0], position[1], position[2])
   torus.rotation.y = degree2radian(90)
+  torus.class = "torus"
 
   return torus
 
@@ -18,8 +19,6 @@ export function newTorus(radius=5, thickness=1, radialSegments=42, tubularSegmen
 
 export function addTorus(radius=5, thickness=1, radialSegments=42, tubularSegments=42, position=[0, 0, 0], material="normal", color=black) {
 
-  let torus = newTorus(radius, thickness, radialSegments, tubularSegments, position, material, color)
-
-  return addMesh(torus)
+  return addMesh(newTorus(radius, thickness, radialSegments, tubularSegments, position, material, color))
 
 }

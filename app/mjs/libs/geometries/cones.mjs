@@ -11,6 +11,7 @@ export function newCone(radius=5, height=10, radialSegments=42, position=[0, 0, 
 
   cone.position.set(position[0], position[1], position[2])
   cone.rotation.x = degree2radian(90)
+  cone.class = "cone"
 
   return cone
 
@@ -18,8 +19,6 @@ export function newCone(radius=5, height=10, radialSegments=42, position=[0, 0, 
 
 export function addCone(radius=5, height=10, radialSegments=42, position=[0, 0, 0], material="normal", color=black) {
 
-  let cone = newCone(radius, height, radialSegments, position, material, color)
-
-  return addMesh(cone)
+  return addMesh(newCone(radius, height, radialSegments, position, material, color))
 
 }
