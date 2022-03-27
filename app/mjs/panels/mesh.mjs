@@ -42,19 +42,27 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.append(operations + "</div>")
     panel.append(meta + "</div>")
 
+    panel.append("<div id='properties'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Properties</h4></div><div class='body'></div></div>")
     panel.append("<div id='position'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Position</h4></div><div class='body'></div></div>")
     panel.append("<div id='rotation'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Rotation</h4></div><div class='body'></div></div>")
+    panel.append("<div id='scale'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Scale</h4></div><div class='body'></div></div>")
 
-    let position = $("#mesh." + mesh.uuid + ".panel #position .body")
-    let rotation = $("#mesh." + mesh.uuid + ".panel #rotation .body")
+    let properties = panel.find("#properties .body")
+    let position = panel.find("#position .body")
+    let rotation = panel.find("#rotation .body")
+    let scale = panel.find("#scale .body")
 
-    position.append("<span id='position-x'><label><b id='x'>X</b> <input type=number step=1 min=" + -(scale * 3) + " max=" + scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-    position.append("<span id='position-y'><label><b id='y'>Y</b> <input type=number step=1 min=" + -(scale * 3) + " max=" + scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-    position.append("<span id='position-z'><label><b id='z'>Z</b> <input type=number step=1 min=" + -(scale * 3) + " max=" + scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+    position.append("<span id='position-x'><label><b id='x'>X</b> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+    position.append("<span id='position-y'><label><b id='y'>Y</b> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+    position.append("<span id='position-z'><label><b id='z'>Z</b> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
 
     rotation.append("<span id='rotation-x'><label><b id='x'>X</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>")
     rotation.append("<span id='rotation-y'><label><b id='y'>Y</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>")
     rotation.append("<span id='rotation-z'><label><b id='z'>Z</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+
+    scale.append("<span id='scale-x'><label><b id='x'>X</b> <input type=number step=0.1 min=-100 max=100><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+    scale.append("<span id='scale-y'><label><b id='y'>Y</b> <input type=number step=0.1 min=-100 max=100><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+    scale.append("<span id='scale-z'><label><b id='z'>Z</b> <input type=number step=0.1 min=-100 max=100><button id='plus'>+</button><button id='minus'>-</button></label></span>")
 
     if (mesh.lock == "locked") {
 
