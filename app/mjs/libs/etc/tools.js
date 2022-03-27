@@ -27,10 +27,10 @@ function fold(element, degree=90, duration=1000) {
   let id = $(element).parent().parent().attr("id")
   let panel = $(element).parent().parent().parent()
 
-  let tool = panel.find(" #" + id + "")
-  let fold = panel.find(" #" + id + " .fold")
-  let head = panel.find(" #" + id + " .head")
-  let body = panel.find(" #" + id + " .body")
+  let tool = panel.find("#" + id + "")
+  let fold = panel.find("#" + id + " .fold")
+  let head = panel.find("#" + id + " .head")
+  let body = panel.find("#" + id + " .body")
 
   if (body.css("display") == "none") {
 
@@ -50,6 +50,18 @@ function fold(element, degree=90, duration=1000) {
     rotate(fold, 0, duration)
 
   }
+
+  panel.find(".body").parent().toArray().forEach((item, i) => {
+
+    if ($(item).attr("id") != id && $(item).find(".body").css("display") != "none") {
+
+      $(item).animate({height: head.height()}, {duration: duration, queue: false, complete: function() { $(item).find(".body").css("display", "none") }})
+
+      rotate($(item).find(".fold"), 0, duration)
+
+    }
+
+  })
 
 }
 
