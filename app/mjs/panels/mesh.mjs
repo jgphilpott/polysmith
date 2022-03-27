@@ -66,17 +66,53 @@ export function addMeshPanel(mesh, coordinates=null) {
     let rotation = panel.find("#rotation .body")
     let scale = panel.find("#scale .body")
 
-    position.append("<span id='position-x'><label><b id='x'>X</b> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-    position.append("<span id='position-y'><label><b id='y'>Y</b> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-    position.append("<span id='position-z'><label><b id='z'>Z</b> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+    // Adding mesh specific properties.
+    if (mesh.class == "box" || mesh.class == "cube") {
 
-    rotation.append("<span id='rotation-x'><label><b id='x'>X</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-    rotation.append("<span id='rotation-y'><label><b id='y'>Y</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-    rotation.append("<span id='rotation-z'><label><b id='z'>Z</b> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+      properties.append("<span id='properties-width'><label>Width</label> <input type=number step=0.1 min=0 max=" + data.scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+      properties.append("<span id='properties-height'><label>Height</label> <input type=number step=0.1 min=0 max=" + data.scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+      properties.append("<span id='properties-depth'><label>Depth</label> <input type=number step=0.1 min=0 max=" + data.scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
 
-    scale.append("<span id='scale-x'><label><b id='x'>X</b> <input type=number step=0.1 min=-100 max=100><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-    scale.append("<span id='scale-y'><label><b id='y'>Y</b> <input type=number step=0.1 min=-100 max=100><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-    scale.append("<span id='scale-z'><label><b id='z'>Z</b> <input type=number step=0.1 min=-100 max=100><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+    } else if (mesh.class == "cylinder") {
+
+      properties.append("<span id='properties-length'><label><p>Length</p> <input type=number step=0.1 min=0 max=" + data.scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+      properties.append("<span id='properties-radius-positive'><label><p>Positive Radius</p> <input type=number step=0.1 min=0 max=" + data.scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+      properties.append("<span id='properties-radius-negative'><label><p>Negative Radius</p> <input type=number step=0.1 min=0 max=" + data.scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+      properties.append("<span id='properties-radius-segments'><label><p>Radial Segments</p> <input type=number step=1 min=3 max=1000><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+
+    } else if (mesh.class == "sphere") {
+
+      properties.append("<span id='properties-radius'><label><p>Radius</p> <input type=number step=0.1 min=0 max=" + data.scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+      properties.append("<span id='properties-width-segments'><label><p>Width Segments</p> <input type=number step=1 min=3 max=1000><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+      properties.append("<span id='properties-height-segments'><label><p>Height Segments</p> <input type=number step=1 min=3 max=1000><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+
+    }
+
+    // Updating properties styling.
+    if (mesh.class == "box" || mesh.class == "cube") {
+
+      properties.find("label").css("width", "45px")
+      properties.find("input").css("width", "95px")
+
+    } else if (mesh.class == "cylinder" || mesh.class == "sphere") {
+
+      properties.find("label p").css("margin-bottom", "0px")
+      properties.find("label p").css("text-align", "left")
+      properties.find("input").css("width", "145px")
+
+    }
+
+    position.append("<span id='position-x'><label id='x'>X</label> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+    position.append("<span id='position-y'><label id='y'>Y</label> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+    position.append("<span id='position-z'><label id='z'>Z</label> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+
+    rotation.append("<span id='rotation-x'><label id='x'>X</label> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></span>")
+    rotation.append("<span id='rotation-y'><label id='y'>Y</label> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></span>")
+    rotation.append("<span id='rotation-z'><label id='z'>Z</label> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></span>")
+
+    scale.append("<span id='scale-x'><label id='x'>X</label> <input type=number step=0.1 min=-100 max=100><button id='plus'>+</button><button id='minus'>-</button></span>")
+    scale.append("<span id='scale-y'><label id='y'>Y</label> <input type=number step=0.1 min=-100 max=100><button id='plus'>+</button><button id='minus'>-</button></span>")
+    scale.append("<span id='scale-z'><label id='z'>Z</label> <input type=number step=0.1 min=-100 max=100><button id='plus'>+</button><button id='minus'>-</button></span>")
 
     if (mesh.lock == "locked") {
 
