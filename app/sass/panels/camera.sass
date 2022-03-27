@@ -24,31 +24,35 @@
 
     margin: 10px auto
 
-  .head
+  #position,
+  #target,
+  #speed
 
-    display: flex
-    align-items: center
+    .head
 
-    img.fold
+      display: flex
+      align-items: center
 
-      padding: 3px
+      img.fold
 
-      width: 10px
-      height: 15px
+        padding: 3px
 
-    h4
+        width: 10px
+        height: 15px
 
-      margin: 5px
+      h4
 
-    img.fold:hover,
-    h4:hover
+        margin: 5px
 
-      cursor: url('../imgs/icons/cursors/pointer.png'), pointer
+      img.fold:hover,
+      h4:hover
 
-  .body
+        cursor: url('../imgs/icons/cursors/pointer.png'), pointer
 
-    padding: 1px
-    display: none
+    .body
+
+      padding: 1px
+      display: none
 
   #position,
   #target
@@ -75,57 +79,57 @@
 
           color: $blue
 
-      input, button
+        input, button
 
-        border: 1px solid $black
-        border-radius: 5px
+          margin: 5px
 
-        margin: 5px
+          border: 1px solid $black
+          border-radius: 5px
 
-      input
+        input
 
-        width: 70px
-        padding: 3px
+          width: 55px
+          padding: 3px
 
-        appearance: textfield
+          appearance: textfield
 
-      input:focus
+        input:focus
 
-        outline: none
+          outline: none
 
-      input.disabled
+        input.disabled
 
-        color: $dark-gray
+          color: $dark-gray
 
-      input.disabled:hover
+        input.disabled:hover
 
-        cursor: url('../imgs/icons/cursors/not-allowed.png'), not-allowed
+          cursor: url('../imgs/icons/cursors/not-allowed.png'), not-allowed
 
-      input::-webkit-outer-spin-button,
-      input::-webkit-inner-spin-button
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button
 
-        -webkit-appearance: none
+          -webkit-appearance: none
 
-      button#plus
+        button#plus
 
-        background-color: $green-glass
+          background-color: $green-glass
 
-      button#minus
+        button#minus
 
-        background-color: $red-glass
+          background-color: $red-glass
 
-      button#plus.disabled,
-      button#minus.disabled
+        button#plus.disabled,
+        button#minus.disabled
 
-        background-color: $dark-gray-glass
+          background-color: $dark-gray-glass
 
-      button:hover
+        button:hover
 
-        cursor: url('../imgs/icons/cursors/pointer.png'), pointer
+          cursor: url('../imgs/icons/cursors/pointer.png'), pointer
 
-      button.disabled:hover
+        button.disabled:hover
 
-        cursor: url('../imgs/icons/cursors/not-allowed.png'), not-allowed
+          cursor: url('../imgs/icons/cursors/not-allowed.png'), not-allowed
 
   #speed
 
@@ -143,10 +147,10 @@
 
         display: block
 
+        width: 135px
+
         margin: 15px auto
         margin-top: 10px
-
-        width: 135px
 
       input:hover
 

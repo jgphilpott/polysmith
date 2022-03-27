@@ -20,13 +20,13 @@ export function addCameraPanel() {
   let flySpeed = settings.controls.flySpeed
   let spinSpeed = settings.controls.spinSpeed
 
-  position.append("<span id='position-x'><label><b id='x'>X</b> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-  position.append("<span id='position-y'><label><b id='y'>Y</b> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-  position.append("<span id='position-z'><label><b id='z'>Z</b> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+  position.append("<span id='position-x'><label id='x'>X</label> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+  position.append("<span id='position-y'><label id='y'>Y</label> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+  position.append("<span id='position-z'><label id='z'>Z</label> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
 
-  target.append("<span id='position-x'><label><b id='x'>X</b> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-  target.append("<span id='position-y'><label><b id='y'>Y</b> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-  target.append("<span id='position-z'><label><b id='z'>Z</b> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+  target.append("<span id='position-x'><label id='x'>X</label> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+  target.append("<span id='position-y'><label id='y'>Y</label> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+  target.append("<span id='position-z'><label id='z'>Z</label> <input type=number step=1 min=" + -(scale * 5) + " max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
 
   speed.append("<p>Drag Speed</p>")
   speed.append("<input type='range' id='drag' class='range' min='1' max=" + (dragSpeed * 3) + " value=" + dragSpeed + ">")
