@@ -29,17 +29,31 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.append("<h3>Mesh</h3>")
 
     let operations = "<div id='operations'>"
+    let colors = "<div id='colors'>"
     let meta = "<div id='meta'>"
 
     operations += "<img title='Join' id='join' class='operation' src='/app/imgs/panels/ops/join.png'>"
     operations += "<img title='Cut' id='cut' class='operation' src='/app/imgs/panels/ops/cut.png'>"
     operations += "<img title='Intersect' id='intersect' class='operation' src='/app/imgs/panels/ops/intersect.png'>"
 
+    colors += "<img id='multi' class='color' src='/app/imgs/panels/tools/colors.png'>"
+    colors += "<div id='red' class='color'></div>"
+    colors += "<div id='orange' class='color'></div>"
+    colors += "<div id='yellow' class='color'></div>"
+    colors += "<div id='green' class='color'></div>"
+    colors += "<div id='blue' class='color'></div>"
+    colors += "<div id='purple' class='color'></div>"
+    colors += "<div id='pink' class='color'></div>"
+    colors += "<div id='white' class='color'></div>"
+    colors += "<div id='gray' class='color'></div>"
+    colors += "<div id='black' class='color'></div>"
+
     meta += "<p id='type'><b>Type:</b> " + mesh.class.replace(/\b\w/g, function(char) { return char.toUpperCase() }).replace("-", " ") + "</p>"
     meta += "<p id='surface'><b>Surface:</b> " + mesh.surface.toFixed(2) + "</p>"
     meta += "<p id='volume'><b>Volume:</b> " + mesh.volume.toFixed(2) + "</p>"
 
     panel.append(operations + "</div>")
+    panel.append(colors + "</div>")
     panel.append(meta + "</div>")
 
     panel.append("<div id='properties'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Properties</h4></div><div class='body'></div></div>")
@@ -241,12 +255,15 @@ export function addMesh(mesh=null, properties={}) {
 
     }
 
+    properties.type ? mesh.class = properties.type : mesh.class = "custom"
+    properties.lock ? mesh.lock = properties.lock : mesh.lock = "unlocked"
+
   }
 
   if (mesh) {
 
-    properties.type ? mesh.class = properties.type : mesh.class = "custom"
-    properties.lock ? mesh.lock = properties.lock : mesh.lock = "unlocked"
+    mesh.class ? mesh.class = mesh.class : mesh.class = "custom"
+    mesh.lock ? mesh.lock = mesh.lock : mesh.lock = "unlocked"
 
     events.addEventListener(mesh, "mousemove", function(event) { mesh.lock == "locked" ? $("body").css("cursor", "url('app/imgs/icons/cursors/not-allowed.png'), not-allowed") : $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab") })
     events.addEventListener(mesh, "mousedown", function(event) { dragable(mesh, event.origDomEvent) })
