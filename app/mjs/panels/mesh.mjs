@@ -30,23 +30,29 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     let operations = "<div id='operations'>"
     let colors = "<div id='colors'>"
+    let tools = "<div id='tools'>"
     let meta = "<div id='meta'>"
 
     operations += "<img title='Join' id='join' class='operation' src='/app/imgs/panels/ops/join.png'>"
     operations += "<img title='Cut' id='cut' class='operation' src='/app/imgs/panels/ops/cut.png'>"
     operations += "<img title='Intersect' id='intersect' class='operation' src='/app/imgs/panels/ops/intersect.png'>"
 
-    colors += "<img id='multi' class='color' src='/app/imgs/panels/tools/colors.png'>"
-    colors += "<div id='red' class='color'></div>"
-    colors += "<div id='orange' class='color'></div>"
-    colors += "<div id='yellow' class='color'></div>"
-    colors += "<div id='green' class='color'></div>"
-    colors += "<div id='blue' class='color'></div>"
-    colors += "<div id='purple' class='color'></div>"
-    colors += "<div id='pink' class='color'></div>"
-    colors += "<div id='white' class='color'></div>"
-    colors += "<div id='gray' class='color'></div>"
-    colors += "<div id='black' class='color'></div>"
+    colors += "<img title='Multi' id='multi' class='color' src='/app/imgs/panels/tools/colors.png'>"
+    colors += "<div title='Red' id='red' class='color'></div>"
+    colors += "<div title='Orange' id='orange' class='color'></div>"
+    colors += "<div title='Yellow' id='yellow' class='color'></div>"
+    colors += "<div title='Green' id='green' class='color'></div>"
+    colors += "<div title='Blue' id='blue' class='color'></div>"
+    colors += "<div title='Purple' id='purple' class='color'></div>"
+    colors += "<div title='Pink' id='pink' class='color'></div>"
+    colors += "<div title='White' id='white' class='color'></div>"
+    colors += "<div title='Gray' id='gray' class='color'></div>"
+    colors += "<div title='Black' id='black' class='color'></div>"
+
+    tools += "<img title='Visibility' id='eye' class='tool' src='/app/imgs/panels/visibility/visible.png'>"
+    tools += "<input type='range' id='visibility' class='tool' min=0 max=100 value=50>"
+    tools += "<img title='Lock' id='lock' class='tool' src='/app/imgs/panels/lock/unlocked.png'>"
+    tools += "<img title='Trash' id='trash' class='tool' src='/app/imgs/panels/tools/trash.png'>"
 
     meta += "<p id='type'><b>Type:</b> " + mesh.class.replace(/\b\w/g, function(char) { return char.toUpperCase() }).replace("-", " ") + "</p>"
     meta += "<p id='surface'><b>Surface:</b> " + mesh.surface.toFixed(2) + "</p>"
@@ -54,6 +60,7 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     panel.append(operations + "</div>")
     panel.append(colors + "</div>")
+    panel.append(tools + "</div>")
     panel.append(meta + "</div>")
 
     panel.append("<div id='properties'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Properties</h4></div><div class='body'></div></div>")
@@ -66,7 +73,6 @@ export function addMeshPanel(mesh, coordinates=null) {
     let rotation = panel.find("#rotation .body")
     let scale = panel.find("#scale .body")
 
-    // Adding mesh specific properties.
     if (mesh.class == "box" || mesh.class == "cube") {
 
       properties.append("<span id='properties-width'><label>Width</label> <input type=number step=0.1 min=0 max=" + data.scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
@@ -88,7 +94,6 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     }
 
-    // Updating properties styling.
     if (mesh.class == "box" || mesh.class == "cube") {
 
       properties.find("label").css("width", "45px")

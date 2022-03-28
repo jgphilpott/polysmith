@@ -52,9 +52,9 @@ export function updateMeshesPanel(type, mesh) {
 
       row += "<td><p>" + tooltips.meshCount + "</p></td>"
       row += "<td><p>" + mesh.class.replace(/\b\w/g, function(char) { return char.toUpperCase() }).replace("-", " ") + "</p></td>"
-      row += "<td><img class='settings' src='/app/imgs/panels/tools/gear.png'></td></td>"
-      row += "<td><img class='lock' src='/app/imgs/panels/lock/" + mesh.lock + ".png'></td>"
-      row += "<td><img class='trash " + (mesh.lock == "locked" ? "disabled" : "") + "' src='/app/imgs/panels/tools/trash.png'></td>"
+      row += "<td><img title='Settings' class='settings' src='/app/imgs/panels/tools/gear.png'></td></td>"
+      row += "<td><img title='Lock' class='lock' src='/app/imgs/panels/lock/" + mesh.lock + ".png'></td>"
+      row += "<td><img title='Trash' class='trash " + (mesh.lock == "locked" ? "disabled" : "") + "' src='/app/imgs/panels/tools/trash.png'></td>"
 
       table.append(row + "</tr>")
 
