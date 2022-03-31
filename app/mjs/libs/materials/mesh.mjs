@@ -2,48 +2,54 @@ import {black} from "../colors/three/grayscale.mjs"
 
 export function meshMaterial(type="normal", color=black, side=THREE.DoubleSide) {
 
+  let material = null
+
   switch (type) {
 
     case "basic":
-      return new THREE.MeshBasicMaterial({color: color, side: side})
+      material = new THREE.MeshBasicMaterial({color: color, side: side})
       break
 
     case "depth":
-      return new THREE.MeshDepthMaterial({side: side})
+      material = new THREE.MeshDepthMaterial({side: side})
       break
 
     case "distance":
-      return new THREE.MeshDistanceMaterial({side: side})
+      material = new THREE.MeshDistanceMaterial({side: side})
       break
 
     case "lambert":
-      return new THREE.MeshLambertMaterial({color: color, side: side})
+      material = new THREE.MeshLambertMaterial({color: color, side: side})
       break
 
     case "matcap":
-      return new THREE.MeshMatcapMaterial({color: color, side: side})
+      material = new THREE.MeshMatcapMaterial({color: color, side: side})
       break
 
     case "normal":
-      return new THREE.MeshNormalMaterial({side: side})
+      material = new THREE.MeshNormalMaterial({side: side})
       break
 
     case "phong":
-      return new THREE.MeshPhongMaterial({color: color, side: side})
+      material = new THREE.MeshPhongMaterial({color: color, side: side})
       break
 
     case "physical":
-      return new THREE.MeshPhysicalMaterial({color: color, side: side})
+      material = new THREE.MeshPhysicalMaterial({color: color, side: side})
       break
 
     case "standard":
-      return new THREE.MeshStandardMaterial({color: color, side: side})
+      material = new THREE.MeshStandardMaterial({color: color, side: side})
       break
 
     case "toon":
-      return new THREE.MeshToonMaterial({color: color, side: side})
+      material = new THREE.MeshToonMaterial({color: color, side: side})
       break
 
   }
+
+  if (material) material.transparent = true
+
+  return material
 
 }
