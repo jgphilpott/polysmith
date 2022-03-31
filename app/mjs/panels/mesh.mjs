@@ -49,8 +49,8 @@ export function addMeshPanel(mesh, coordinates=null) {
     colors += "<div title='Gray' id='gray' class='color'></div>"
     colors += "<div title='Black' id='black' class='color'></div>"
 
-    tools += "<img title='Visibility' id='eye' class='tool' src='/app/imgs/panels/visibility/visible.png'>"
-    tools += "<input type='range' id='visibility' class='tool' min=0 max=100 value=50>"
+    tools += "<img title='Visibility' id='eye' class='tool' src=" + (mesh.material.opacity < 0.5 ? '/app/imgs/panels/visibility/hidden.png' : '/app/imgs/panels/visibility/visible.png') + ">"
+    tools += "<input type='range' id='visibility' class='tool' min=0 max=100 value=" + mesh.material.opacity * 100 + ">"
     tools += "<img title='Lock' id='lock' class='tool' src='/app/imgs/panels/lock/unlocked.png'>"
     tools += "<img title='Trash' id='trash' class='tool' src='/app/imgs/panels/tools/trash.png'>"
 
@@ -133,6 +133,54 @@ export function addMeshPanel(mesh, coordinates=null) {
     $("#mesh." + mesh.uuid + " #rotation-x input").val(radian2degree(mesh.rotation.x).toFixed(2))
     $("#mesh." + mesh.uuid + " #rotation-y input").val(radian2degree(mesh.rotation.y).toFixed(2))
     $("#mesh." + mesh.uuid + " #rotation-z input").val(radian2degree(mesh.rotation.z).toFixed(2))
+
+    $("#tools #eye").click(function(event) {
+
+      let visibility = /[^/]*$/.exec($(this).attr("src"))[0].split(".")[0]
+
+      if (visibility == "visible") {
+
+        mesh.material.opacity = 0
+        $("#tools #visibility").val(0)
+        $(this).attr("src", "/app/imgs/panels/visibility/hidden.png")
+
+      } else if (visibility == "hidden") {
+
+        mesh.material.opacity = 1
+        $("#tools #visibility").val(100)
+        $(this).attr("src", "/app/imgs/panels/visibility/visible.png")
+
+      }
+
+    })
+
+    $("#tools #visibility").mousedown(function(event) {
+
+      event.stopPropagation()
+
+      $(this).css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
+
+    })
+
+    $("#tools #visibility").on("input", function(event) {
+
+      let opacity = Number($(this).val()) / 100
+
+      opacity < 0.5 ? $("#tools #eye").attr("src", "/app/imgs/panels/visibility/hidden.png") : $("#tools #eye").attr("src", "/app/imgs/panels/visibility/visible.png")
+
+      mesh.material.opacity = opacity
+
+    })
+
+    $("#tools #visibility").mouseup(function(event) {
+
+      $(this).blur()
+
+      event.stopPropagation()
+
+      $(this).css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab")
+
+    })
 
     $("#mesh." + mesh.uuid + ".panel .fold, #mesh." + mesh.uuid + ".panel h4").click(function(event) { fold(this) })
 
@@ -440,6 +488,9 @@ export function removeMesh(mesh) {
     events.removeEventListener(mesh, "contextmenu")
 
     updateMeshesPanel("remove", mesh)
+
+    mesh.geometry.dispose()
+    mesh.material.dispose()
 
     scene.remove(mesh)
 
