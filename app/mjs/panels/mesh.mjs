@@ -10,7 +10,7 @@ import {newTorus} from "../libs/geometries/toruses.mjs"
 
 import {grayGlass, lightGrayGlass} from "../libs/colors/glass/grayscale.mjs"
 
-import {joinMesh, cutMesh, intersectMesh} from "../../libs/meshOperations.mjs"
+import {joinMesh, cutMesh, intersectMesh} from "../../libs/js/meshOperations.mjs"
 
 export function addMeshPanel(mesh, coordinates=null) {
 
