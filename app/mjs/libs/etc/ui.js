@@ -17,13 +17,13 @@ function sliderStyle(slider) {
 
   slider.find("span").mouseover(function() {
 
-    $(this).parent().css("background", function() { return sliderFill(slider, "#3273f6", "#e6e6e6") })
+    $(this).parent().css("background", function() { return sliderFill($(this), "#3273f6", "#e6e6e6") })
 
   })
 
   slider.find("span").mouseout(function() {
 
-    $(this).parent().css("background", function() { return sliderFill(slider) })
+    $(this).parent().css("background", function() { return sliderFill($(this)) })
 
   })
 

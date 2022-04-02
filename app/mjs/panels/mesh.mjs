@@ -28,10 +28,12 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     panel.append("<h3>Mesh</h3>")
 
-    let operations = "<div id='operations'>"
-    let colors = "<div id='colors'>"
-    let tools = "<div id='tools'>"
-    let meta = "<div id='meta'>"
+    panel.data("mesh", mesh)
+
+    let operations = "<div id='operations' class='controls'>"
+    let colors = "<div id='colors' class='controls'>"
+    let tools = "<div id='tools' class='controls'>"
+    let meta = "<div id='meta' class='controls'>"
 
     operations += "<img title='Join' id='join' class='operation' src='/app/imgs/panels/ops/join.png'>"
     operations += "<img title='Cut' id='cut' class='operation' src='/app/imgs/panels/ops/cut.png'>"
@@ -50,7 +52,7 @@ export function addMeshPanel(mesh, coordinates=null) {
     colors += "<div title='Black' id='black' class='color'></div>"
 
     tools += "<img title='Visibility' id='eye' class='tool' src=" + (mesh.material.opacity < 0.5 ? '/app/imgs/panels/visibility/hidden.png' : '/app/imgs/panels/visibility/visible.png') + ">"
-    tools += "<input type='range' id='visibility' class='tool' min=0 max=100 value=" + mesh.material.opacity * 100 + ">"
+    tools += "<div id='visibility' class='tool slider'></div>"
     tools += "<img title='Lock' id='lock' class='tool' src='/app/imgs/panels/lock/unlocked.png'>"
     tools += "<img title='Trash' id='trash' class='tool' src='/app/imgs/panels/tools/trash.png'>"
 
@@ -63,10 +65,12 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.append(tools + "</div>")
     panel.append(meta + "</div>")
 
-    panel.append("<div id='properties'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Properties</h4></div><div class='body'></div></div>")
-    panel.append("<div id='position'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Position</h4></div><div class='body'></div></div>")
-    panel.append("<div id='rotation'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Rotation</h4></div><div class='body'></div></div>")
-    panel.append("<div id='scale'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Scale</h4></div><div class='body'></div></div>")
+    panel.append("<div id='properties' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Properties</h4></div><div class='body'></div></div>")
+    panel.append("<div id='position' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Position</h4></div><div class='body'></div></div>")
+    panel.append("<div id='rotation' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Rotation</h4></div><div class='body'></div></div>")
+    panel.append("<div id='scale' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Scale</h4></div><div class='body'></div></div>")
+
+    panel.find("#visibility.slider").slider({min: 0, max: 100, value: mesh.material.opacity * 100, start: sliderStart, slide: sliderSlide, stop: sliderStop})
 
     let properties = panel.find("#properties .body")
     let position = panel.find("#position .body")
@@ -134,51 +138,30 @@ export function addMeshPanel(mesh, coordinates=null) {
     $("#mesh." + mesh.uuid + " #rotation-y input").val(radian2degree(mesh.rotation.y).toFixed(2))
     $("#mesh." + mesh.uuid + " #rotation-z input").val(radian2degree(mesh.rotation.z).toFixed(2))
 
-    $("#tools #eye").click(function(event) {
+    panel.find("#eye").click(function(event) {
 
       let visibility = /[^/]*$/.exec($(this).attr("src"))[0].split(".")[0]
+      let slider = panel.find("#visibility.slider")
 
       if (visibility == "visible") {
 
         mesh.material.opacity = 0
-        $("#tools #visibility").val(0)
+
+        slider.slider("value", 0)
+        slider.css("background", sliderFill(slider))
+
         $(this).attr("src", "/app/imgs/panels/visibility/hidden.png")
 
       } else if (visibility == "hidden") {
 
         mesh.material.opacity = 1
-        $("#tools #visibility").val(100)
+
+        slider.slider("value", 100)
+        slider.css("background", sliderFill(slider))
+
         $(this).attr("src", "/app/imgs/panels/visibility/visible.png")
 
       }
-
-    })
-
-    $("#tools #visibility").mousedown(function(event) {
-
-      event.stopPropagation()
-
-      $(this).css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
-
-    })
-
-    $("#tools #visibility").on("input", function(event) {
-
-      let opacity = Number($(this).val()) / 100
-
-      opacity < 0.5 ? $("#tools #eye").attr("src", "/app/imgs/panels/visibility/hidden.png") : $("#tools #eye").attr("src", "/app/imgs/panels/visibility/visible.png")
-
-      mesh.material.opacity = opacity
-
-    })
-
-    $("#tools #visibility").mouseup(function(event) {
-
-      $(this).blur()
-
-      event.stopPropagation()
-
-      $(this).css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab")
 
     })
 
@@ -224,6 +207,8 @@ export function addMeshPanel(mesh, coordinates=null) {
     })
 
     panel.mouseover(function() { $("#context-menu.panel").remove() })
+
+    sliderStyle(panel.find(".slider"))
 
     addPanelEvents(panel)
 
