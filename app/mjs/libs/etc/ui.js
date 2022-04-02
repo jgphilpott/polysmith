@@ -13,17 +13,17 @@ function sliderStyle(slider) {
 
   slider.find("span").unbind("keydown")
 
-  slider.css("background", function () { return sliderFill(slider) })
+  slider.css("background", sliderFill(slider))
 
   slider.find("span").mouseover(function() {
 
-    $(this).parent().css("background", function () { return sliderFill(slider, "#3273f6", "#e6e6e6") })
+    $(this).parent().css("background", function() { return sliderFill(slider, "#3273f6", "#e6e6e6") })
 
   })
 
   slider.find("span").mouseout(function() {
 
-    $(this).parent().css("background", function () { return sliderFill(slider) })
+    $(this).parent().css("background", function() { return sliderFill(slider) })
 
   })
 
@@ -41,11 +41,9 @@ function sliderStart(event, slider) {
 
 function sliderSlide(event, slider) {
 
-  let min = $(this).slider("option", "min")
-  let max = $(this).slider("option", "max")
   let value = $(this).slider("option", "value")
 
-  $(this).css("background", "linear-gradient(90deg, #3273f6 " + calculatePercent(min, max, value) + "%, #efefef 0%)")
+  $(this).css("background", sliderFill($(this), "#3273f6", "#e6e6e6"))
 
   if ($(this).closest(".controls").attr("id") == "speed") {
 
