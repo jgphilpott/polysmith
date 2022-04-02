@@ -2,11 +2,15 @@ function sliderStyle(slider) {
 
   slider.find("span").unbind("keydown")
 
-  let min = $(this).slider("option", "min")
-  let max = $(this).slider("option", "max")
-  let value = $(this).slider("option", "value")
+  slider.css("background", function () {
 
-  slider.css("background", "linear-gradient(90deg, #3273f6 " + calculatePercent(min, max, value) + "%, #efefef 0%)")
+    let min = $(this).slider("option", "min")
+    let max = $(this).slider("option", "max")
+    let value = $(this).slider("option", "value")
+
+    return "linear-gradient(90deg, #3273f6 " + calculatePercent(min, max, value) + "%, #efefef 0%)"
+
+  })
 
 }
 
@@ -26,9 +30,24 @@ function sliderSlide(event, slider) {
   let max = $(this).slider("option", "max")
   let value = $(this).slider("option", "value")
 
-  if ($(this).closest(".controls").attr("id") == "speed") settings.controls[this.id + "Speed"] = value
-
   $(this).css("background", "linear-gradient(90deg, #3273f6 " + calculatePercent(min, max, value) + "%, #efefef 0%)")
+
+  if ($(this).closest(".controls").attr("id") == "speed") {
+
+    settings.controls[this.id + "Speed"] = value
+
+  } else if (this.id == "visibility") {
+
+    let opacity = value / 100
+
+    let mesh = $(this).closest(".panel").data("mesh")
+    let eye = $(this).closest(".controls").find("#eye")
+
+    opacity < 0.5 ? eye.attr("src", "/app/imgs/panels/visibility/hidden.png") : eye.attr("src", "/app/imgs/panels/visibility/visible.png")
+
+    mesh.material.opacity = opacity
+
+  }
 
 }
 
