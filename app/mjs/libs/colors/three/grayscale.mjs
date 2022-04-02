@@ -4,4 +4,8 @@ export let gray = new THREE.Color("rgba(204, 204, 204)")
 export let lightGray = new THREE.Color("rgba(230, 230, 230)")
 export let white = new THREE.Color("rgba(255, 255, 255)")
 
-export let grayscale = [black, darkGray, gray, lightGray, white]
+export let grayscale = {black: black,
+                        darkGray: darkGray,
+                        gray: gray,
+                        lightGray: lightGray,
+                        white: white}

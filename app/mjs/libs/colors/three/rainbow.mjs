@@ -6,4 +6,10 @@ export let blue = new THREE.Color("rgba(0, 157, 220)")
 export let purple = new THREE.Color("rgba(150, 61, 151)")
 export let pink = new THREE.Color("rgba(225, 67, 117)")
 
-export let rainbow = [red, orange, yellow, green, blue, purple, pink]
+export let rainbow = {red: red,
+                      orange: orange,
+                      yellow: yellow,
+                      green: green,
+                      blue: blue,
+                      purple: purple,
+                      pink: pink}

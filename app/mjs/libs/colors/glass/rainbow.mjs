@@ -6,4 +6,10 @@ export let blueGlass = "rgba(0, 157, 220, 0.5)"
 export let purpleGlass = "rgba(150, 61, 151, 0.5)"
 export let pinkGlass = "rgba(225, 67, 117, 0.5)"
 
-export let rainbowGlass = [redGlass, orangeGlass, yellowGlass, greenGlass, blueGlass, purpleGlass, pinkGlass]
+export let rainbowGlass = {redGlass: redGlass,
+                           orangeGlass: orangeGlass,
+                           yellowGlass: yellowGlass,
+                           greenGlass: greenGlass,
+                           blueGlass: blueGlass,
+                           purpleGlass: purpleGlass,
+                           pinkGlass: pinkGlass}

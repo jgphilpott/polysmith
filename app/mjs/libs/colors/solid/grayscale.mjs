@@ -4,4 +4,8 @@ export let gray = "rgba(204, 204, 204, 1)"
 export let lightGray = "rgba(230, 230, 230, 1)"
 export let white = "rgba(255, 255, 255, 1)"
 
-export let grayscale = [black, darkGray, gray, lightGray, white]
+export let grayscale = {black: black,
+                        darkGray: darkGray,
+                        gray: gray,
+                        lightGray: lightGray,
+                        white: white}
