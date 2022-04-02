@@ -1,3 +1,5 @@
+import {joinMesh, cutMesh, intersectMesh} from "../../libs/js/meshOperations.mjs"
+
 import {addPanelEvents, dragable} from "../libs/etc/events.mjs"
 import {updateMeshesPanel} from "./meshes.mjs"
 import {contextMenu} from "./context.mjs"
@@ -8,9 +10,11 @@ import {newCylinder} from "../libs/geometries/cylinders.mjs"
 import {newSphere} from "../libs/geometries/spheres.mjs"
 import {newTorus} from "../libs/geometries/toruses.mjs"
 
-import {grayGlass, lightGrayGlass} from "../libs/colors/glass/grayscale.mjs"
+import {meshMaterial} from "../libs/materials/mesh.mjs"
 
-import {joinMesh, cutMesh, intersectMesh} from "../../libs/js/meshOperations.mjs"
+import * as glassGrayscale from "../libs/colors/glass/grayscale.mjs"
+import * as threeGrayscale from "../libs/colors/three/grayscale.mjs"
+import * as threeRainbow from "../libs/colors/three/rainbow.mjs"
 
 export function addMeshPanel(mesh, coordinates=null) {
 
@@ -65,12 +69,14 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.append(tools + "</div>")
     panel.append(meta + "</div>")
 
+    mesh.material.style ? panel.find("#" + mesh.material.style + ".color").addClass("selected") : panel.find("#multi.color").addClass("selected")
+
+    panel.find("#visibility.slider").slider({min: 0, max: 100, value: mesh.material.opacity * 100, start: sliderStart, slide: sliderSlide, stop: sliderStop})
+
     panel.append("<div id='properties' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Properties</h4></div><div class='body'></div></div>")
     panel.append("<div id='position' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Position</h4></div><div class='body'></div></div>")
     panel.append("<div id='rotation' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Rotation</h4></div><div class='body'></div></div>")
     panel.append("<div id='scale' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Scale</h4></div><div class='body'></div></div>")
-
-    panel.find("#visibility.slider").slider({min: 0, max: 100, value: mesh.material.opacity * 100, start: sliderStart, slide: sliderSlide, stop: sliderStop})
 
     let properties = panel.find("#properties .body")
     let position = panel.find("#position .body")
@@ -137,6 +143,33 @@ export function addMeshPanel(mesh, coordinates=null) {
     $("#mesh." + mesh.uuid + " #rotation-x input").val(radian2degree(mesh.rotation.x).toFixed(2))
     $("#mesh." + mesh.uuid + " #rotation-y input").val(radian2degree(mesh.rotation.y).toFixed(2))
     $("#mesh." + mesh.uuid + " #rotation-z input").val(radian2degree(mesh.rotation.z).toFixed(2))
+
+    panel.find(".color").click(function(event) {
+
+      let color = null
+      let opacity = mesh.material.opacity
+      let material = this.id == "multi" ? "normal" : "standard"
+
+      panel.find(".color").removeClass("selected")
+      $(this).addClass("selected")
+
+      if (["red", "orange", "yellow", "green", "blue", "purple", "pink"].includes(this.id)) {
+
+        color = threeRainbow.rainbow[this.id]
+
+      } else if (["white", "gray", "black"].includes(this.id)) {
+
+        color = threeGrayscale.grayscale[this.id]
+
+      }
+
+      mesh.material.dispose()
+      mesh.material = meshMaterial(material, color)
+
+      mesh.material.opacity = opacity
+      mesh.material.style = this.id
+
+    })
 
     panel.find("#eye").click(function(event) {
 
@@ -214,10 +247,10 @@ export function addMeshPanel(mesh, coordinates=null) {
 
   } else {
 
-    setTimeout(function() { panel.css("background", grayGlass) }, 0)
-    setTimeout(function() { panel.css("background", lightGrayGlass) }, 100)
-    setTimeout(function() { panel.css("background", grayGlass) }, 200)
-    setTimeout(function() { panel.css("background", lightGrayGlass) }, 300)
+    setTimeout(function() { panel.css("background", glassGrayscale.grayGlass) }, 0)
+    setTimeout(function() { panel.css("background", glassGrayscale.lightGrayGlass) }, 100)
+    setTimeout(function() { panel.css("background", glassGrayscale.grayGlass) }, 200)
+    setTimeout(function() { panel.css("background", glassGrayscale.lightGrayGlass) }, 300)
 
   }
 
