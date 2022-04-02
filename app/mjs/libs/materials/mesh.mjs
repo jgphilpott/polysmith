@@ -48,7 +48,23 @@ export function meshMaterial(type="normal", color=black, side=THREE.DoubleSide) 
 
   }
 
-  if (material) material.transparent = true
+  if (material) {
+
+    material.transparent = true
+
+    if (color == black) {
+
+      material.metalness = -20
+      material.roughness = 0.8
+
+    } else {
+
+      material.metalness = 0.5
+      material.roughness = 0.5
+
+    }
+
+  }
 
   return material
 
