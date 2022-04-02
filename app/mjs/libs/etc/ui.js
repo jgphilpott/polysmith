@@ -1,14 +1,29 @@
+function sliderFill(slider, colorOne="#3273f6", colorTwo="#efefef") {
+
+  let min = slider.slider("option", "min")
+  let max = slider.slider("option", "max")
+
+  let value = slider.slider("option", "value")
+
+  return "linear-gradient(90deg, " + colorOne + " " + calculatePercent(min, max, value) + "%, " + colorTwo + " 0%)"
+
+}
+
 function sliderStyle(slider) {
 
   slider.find("span").unbind("keydown")
 
-  slider.css("background", function () {
+  slider.css("background", function () { return sliderFill(slider) })
 
-    let min = $(this).slider("option", "min")
-    let max = $(this).slider("option", "max")
-    let value = $(this).slider("option", "value")
+  slider.find("span").mouseover(function() {
 
-    return "linear-gradient(90deg, #3273f6 " + calculatePercent(min, max, value) + "%, #efefef 0%)"
+    $(this).parent().css("background", function () { return sliderFill(slider, "#3273f6", "#e6e6e6") })
+
+  })
+
+  slider.find("span").mouseout(function() {
+
+    $(this).parent().css("background", function () { return sliderFill(slider) })
 
   })
 
