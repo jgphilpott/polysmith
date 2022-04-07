@@ -1,4 +1,3 @@
-from os import environ
 from pymongo import MongoClient
 
 def mongo_client():
