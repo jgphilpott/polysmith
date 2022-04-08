@@ -1,31 +1,30 @@
 function sliderFill(slider, colorOne="#3273f6", colorTwo="#efefef") {
 
+  if (slider.hasClass("disabled")) {
+
+    colorOne = "#848484"
+    colorTwo = "#efefef"
+
+  }
+
   let min = slider.slider("option", "min")
   let max = slider.slider("option", "max")
 
   let value = slider.slider("option", "value")
 
-  return "linear-gradient(90deg, " + colorOne + " " + calculatePercent(min, max, value) + "%, " + colorTwo + " 0%)"
+  slider.find("span").css("background", colorOne)
+  slider.css("background", "linear-gradient(90deg, " + colorOne + " " + calculatePercent(min, max, value) + "%, " + colorTwo + " 0%)")
 
 }
 
 function sliderStyle(slider) {
 
+  slider.find("span").mouseover(function() { sliderFill($(this).parent(), "#3273f6", "#e6e6e6") })
+  slider.find("span").mouseout(function() { sliderFill($(this).parent()) })
+
   slider.find("span").unbind("keydown")
 
-  slider.css("background", sliderFill(slider))
-
-  slider.find("span").mouseover(function() {
-
-    $(this).parent().css("background", function() { return sliderFill($(this), "#3273f6", "#e6e6e6") })
-
-  })
-
-  slider.find("span").mouseout(function() {
-
-    $(this).parent().css("background", function() { return sliderFill($(this)) })
-
-  })
+  sliderFill(slider)
 
 }
 
@@ -41,9 +40,9 @@ function sliderStart(event, slider) {
 
 function sliderSlide(event, slider) {
 
-  let value = $(this).slider("option", "value")
+  sliderFill($(this), "#3273f6", "#e6e6e6")
 
-  $(this).css("background", sliderFill($(this), "#3273f6", "#e6e6e6"))
+  let value = $(this).slider("option", "value")
 
   if ($(this).closest(".controls").attr("id") == "speed") {
 
