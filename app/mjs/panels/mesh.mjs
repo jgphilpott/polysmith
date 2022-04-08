@@ -178,25 +178,27 @@ export function addMeshPanel(mesh, coordinates=null) {
 
       if (visibility == "visible") {
 
+        $(this).attr("src", "/app/imgs/panels/visibility/hidden.png")
+
         mesh.material.opacity = 0
 
         slider.slider("value", 0)
-        slider.css("background", sliderFill(slider))
-
-        $(this).attr("src", "/app/imgs/panels/visibility/hidden.png")
+        sliderFill(slider)
 
       } else if (visibility == "hidden") {
+
+        $(this).attr("src", "/app/imgs/panels/visibility/visible.png")
 
         mesh.material.opacity = 1
 
         slider.slider("value", 100)
-        slider.css("background", sliderFill(slider))
-
-        $(this).attr("src", "/app/imgs/panels/visibility/visible.png")
+        sliderFill(slider)
 
       }
 
     })
+
+    panel.find("#lock").click(function(event) { updateMesh(mesh, "lock") })
 
     $("#mesh." + mesh.uuid + ".panel .fold, #mesh." + mesh.uuid + ".panel h4").click(function(event) { fold(this) })
 
@@ -465,25 +467,56 @@ export function updateMesh(mesh, type, key=null, value=null) {
 
   } else if (type == "lock") {
 
+    let meshPanel = $("#mesh." + mesh.uuid + "")
+    let meshesTableRow = $("#meshes.table tr#" + mesh.uuid + "")
+
     if (mesh.lock == "locked") {
 
       mesh.lock = "unlocked"
 
-      $("#mesh." + mesh.uuid + " input").removeClass("disabled")
-      $("#mesh." + mesh.uuid + " button").removeClass("disabled")
+      meshPanel.find("#join.operation").attr("src", '/app/imgs/panels/ops/join.png')
+      meshPanel.find("#cut.operation").attr("src", '/app/imgs/panels/ops/cut.png')
+      meshPanel.find("#intersect.operation").attr("src", '/app/imgs/panels/ops/intersect.png')
 
-      $("#meshes.table tr#" + mesh.uuid + " .lock").attr("src", '/app/imgs/panels/lock/unlocked.png')
-      $("#meshes.table tr#" + mesh.uuid + " .trash").removeClass("disabled")
+      meshPanel.find(".operation").removeClass("disabled")
+      meshPanel.find(".color").removeClass("disabled")
+
+      meshPanel.find("#eye").removeClass("disabled")
+      meshPanel.find("#visibility").removeClass("disabled")
+      meshPanel.find("#lock").attr("src", '/app/imgs/panels/lock/unlocked.png')
+      meshPanel.find("#trash").removeClass("disabled")
+
+      sliderStyle(meshPanel.find("#visibility"))
+
+      meshPanel.find("input").removeClass("disabled")
+      meshPanel.find("button").removeClass("disabled")
+
+      meshesTableRow.find(".lock").attr("src", '/app/imgs/panels/lock/unlocked.png')
+      meshesTableRow.find(".trash").removeClass("disabled")
 
     } else if (mesh.lock == "unlocked") {
 
       mesh.lock = "locked"
 
-      $("#mesh." + mesh.uuid + " input").addClass("disabled")
-      $("#mesh." + mesh.uuid + " button").addClass("disabled")
+      meshPanel.find("#join.operation").attr("src", '/app/imgs/panels/ops/disabled/join.png')
+      meshPanel.find("#cut.operation").attr("src", '/app/imgs/panels/ops/disabled/cut.png')
+      meshPanel.find("#intersect.operation").attr("src", '/app/imgs/panels/ops/disabled/intersect.png')
 
-      $("#meshes.table tr#" + mesh.uuid + " .lock").attr("src", '/app/imgs/panels/lock/locked.png')
-      $("#meshes.table tr#" + mesh.uuid + " .trash").addClass("disabled")
+      meshPanel.find(".operation").addClass("disabled")
+      meshPanel.find(".color").addClass("disabled")
+
+      meshPanel.find("#eye").addClass("disabled")
+      meshPanel.find("#visibility").addClass("disabled")
+      meshPanel.find("#lock").attr("src", '/app/imgs/panels/lock/locked.png')
+      meshPanel.find("#trash").addClass("disabled")
+
+      sliderStyle(meshPanel.find("#visibility"))
+
+      meshPanel.find("input").addClass("disabled")
+      meshPanel.find("button").addClass("disabled")
+
+      meshesTableRow.find(".lock").attr("src", '/app/imgs/panels/lock/locked.png')
+      meshesTableRow.find(".trash").addClass("disabled")
 
     }
 

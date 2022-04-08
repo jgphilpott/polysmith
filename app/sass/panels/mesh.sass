@@ -29,6 +29,10 @@
 
       cursor: url('../imgs/icons/cursors/pointer.png'), pointer
 
+    img.operation.disabled:hover
+
+      cursor: url('../imgs/icons/cursors/not-allowed.png'), not-allowed
+
   #colors
 
     display: block
@@ -56,6 +60,12 @@
     .color.selected
 
       border: 1px solid $black !important
+
+    .color.disabled
+
+      border: 1px solid $dark-gray !important
+
+      cursor: url('../imgs/icons/cursors/not-allowed.png'), not-allowed
 
     #red
 
@@ -123,11 +133,23 @@
 
       width: 16.5px
 
+    img#eye.disabled
+
+      opacity: 0.5
+
+    img#trash.disabled
+
+      opacity: 0.5
+
     img.tool:hover
 
       cursor: url('../imgs/icons/cursors/pointer.png'), pointer
 
-    .slider
+    img.disabled:hover
+
+      cursor: url('../imgs/icons/cursors/not-allowed.png'), not-allowed
+
+    #visibility
 
       width: 100px
 

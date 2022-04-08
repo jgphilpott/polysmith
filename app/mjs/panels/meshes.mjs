@@ -58,17 +58,11 @@ export function updateMeshesPanel(type, mesh) {
 
       table.append(row + "</tr>")
 
-      $("tr#" + mesh.uuid + " .settings").click(function(event) {
-        addMeshPanel(mesh)
-      })
+      let tableRow = table.find("tr#" + mesh.uuid + "")
 
-      $("tr#" + mesh.uuid + " .lock").click(function(event) {
-        updateMesh(mesh, "lock")
-      })
-
-      $("tr#" + mesh.uuid + " .trash").click(function(event) {
-        removeMesh(mesh)
-      })
+      tableRow.find(".settings").click(function() { addMeshPanel(mesh) })
+      tableRow.find(".lock").click(function() { updateMesh(mesh, "lock") })
+      tableRow.find(".trash").click(function() { removeMesh(mesh) })
 
       break
 
