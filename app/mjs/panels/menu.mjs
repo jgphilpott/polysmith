@@ -100,6 +100,12 @@ export function addMenuPanel() {
 
     let signup = "<div id='signup-panel' class='sub-panel'><h3 id='title'>Signup</h3>"
 
+    signup += "<input id='email' type='email' placeholder='Email'>"
+    signup += "<input id='password' type='password' placeholder='Password'>"
+    signup += "<input id='retype-password' type='password' placeholder='Retype Password'>"
+
+    signup += "<input id='submit' type='submit' placeholder='Submit'>"
+
     panel.append(signup + "</div>")
 
   }
@@ -115,6 +121,11 @@ export function addMenuPanel() {
   function appendLogin() {
 
     let login = "<div id='login-panel' class='sub-panel'><h3 id='title'>Login</h3>"
+
+    login += "<input id='email' type='email' placeholder='Email'>"
+    login += "<input id='password' type='password' placeholder='Password'>"
+
+    login += "<input id='submit' type='submit' placeholder='Submit'>"
 
     panel.append(login + "</div>")
 
@@ -156,7 +167,9 @@ export function addMenuPanel() {
       subPanel.css("display", "none")
 
       panel.animate({width: menuWidth + panelWidth}, {duration: duration, queue: false})
-      panel.animate({height: menuHeight}, {duration: duration, queue: false , complete: function() { subPanel.css("display", "inline-block") }})
+      panel.animate({height: menuHeight}, {duration: duration, queue: false})
+
+      subPanel.css("display", "inline-block")
 
     } else {
 

@@ -12,6 +12,8 @@
 
   .sub-panel
 
+    width: 220px
+
     display: none
     vertical-align: top
 
@@ -103,7 +105,44 @@
 
   #panels-panel
   #settings-panel
-  #signup-panel
-  #profile-panel
+
+  #signup-panel,
   #login-panel
+
+    input
+
+      display: block
+
+      text-align: center
+
+      margin: 20px auto
+      padding: 5px
+      height: 30px
+
+      border: 1px solid $black
+      border-radius: 15px
+
+      outline: none
+
+    input:focus
+
+      box-shadow: 0 0 5px $blue
+
+    input[type=email],
+    input[type=password]
+
+      width: 175px
+
+    input[type=submit]
+
+      padding: 5px 25px
+
+      border-radius: 5px
+
+      box-shadow: none
+      background: transparent
+
+      cursor: url('../imgs/icons/cursors/pointer.png'), pointer
+
+  #profile-panel
   #logout-panel
