@@ -100,13 +100,53 @@ export function addMenuPanel() {
 
     let signup = "<div id='signup-panel' class='sub-panel'><h3 id='title'>Signup</h3>"
 
-    signup += "<input id='email' type='email' placeholder='Email'>"
-    signup += "<input id='password' type='password' placeholder='Password'>"
-    signup += "<input id='retype-password' type='password' placeholder='Retype Password'>"
+    signup += "<input class='email' type='email' placeholder='Email'>"
+    signup += "<input class='password' type='password' placeholder='Password'>"
+    signup += "<input class='retype-password' type='password' placeholder='Retype Password'>"
 
-    signup += "<input id='submit' type='submit' placeholder='Submit'>"
+    signup += "<input class='submit' type='submit' placeholder='Submit'>"
 
     panel.append(signup + "</div>")
+
+    $("#signup-panel input").on("keydown", function(event) { event.stopPropagation() })
+    $("#signup-panel input").on("blur", function(event) {
+
+      if (!$(this).hasClass("submit")) $(this).val($(this).val().trim())
+
+      let invalidEmail = $(this).hasClass("email") && !(validEmail($(this).val())) && $(this).val() != ""
+      let invalidPassword = $(this).hasClass("password") && !($(this).val().length > 7) && $(this).val() != ""
+      let invalidPasswords = $(this).hasClass("retype-password") && !($("#signup-panel .password").val() === $("#signup-panel .retype-password").val()) && $(this).val() != ""
+
+      if (invalidEmail || invalidPassword || invalidPasswords) {
+
+        $(this).css("box-shadow", "0 0 5px rgba(224, 58, 62, 1)")
+
+      } else {
+
+        $(this).css("box-shadow", "none")
+
+      }
+
+    })
+
+    $("#signup-panel .submit").click(function() {
+
+      if (validEmail($("#signup-panel .email").val()) && $("#signup-panel .password").val().length > 7 && $("#signup-panel .password").val() === $("#signup-panel .retype-password").val()) {
+
+        socket.emit("signup", {"email": $("#signup-panel .email").val(), "password": sha256($("#signup-panel .password").val())})
+
+      } else {
+
+        if (!(validEmail($("#signup-panel .email").val()))) { $("#signup-panel .email").css("box-shadow", "0 0 5px rgba(224, 58, 62, 1)"); alert("Email invalid, please try again.") }
+        if (!($("#signup-panel .password").val().length > 7)) { $("#signup-panel .password").css("box-shadow", "0 0 5px rgba(224, 58, 62, 1)"); alert("Password to short, please try again.") }
+        if (!($("#signup-panel .password").val() === $("#signup-panel .retype-password").val())) { $("#signup-panel .retype-password").css("box-shadow", "0 0 5px rgba(224, 58, 62, 1)"); alert("Passwords must match, please try again.") }
+
+      }
+
+    })
+
+    socket.on("signup_failed", function() { alert("Email already exists, please try again.") })
+    socket.on("signup_success", function(id) { writeCookie("id", id); location.reload() })
 
   }
 
@@ -122,10 +162,10 @@ export function addMenuPanel() {
 
     let login = "<div id='login-panel' class='sub-panel'><h3 id='title'>Login</h3>"
 
-    login += "<input id='email' type='email' placeholder='Email'>"
-    login += "<input id='password' type='password' placeholder='Password'>"
+    login += "<input class='email' type='email' placeholder='Email'>"
+    login += "<input class='password' type='password' placeholder='Password'>"
 
-    login += "<input id='submit' type='submit' placeholder='Submit'>"
+    login += "<input class='submit' type='submit' placeholder='Submit'>"
 
     panel.append(login + "</div>")
 
