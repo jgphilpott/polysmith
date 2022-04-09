@@ -1,20 +1,21 @@
 import {joinMesh, cutMesh, intersectMesh} from "../../libs/js/meshOperations.mjs"
 
-import {addPanelEvents, dragable} from "../libs/etc/events.mjs"
-import {updateMeshesPanel} from "./meshes.mjs"
-import {contextMenu} from "./context.mjs"
-import {focus} from "../libs/controls/focus.mjs"
+import * as glassGrayscale from "../libs/colors/glass/grayscale.mjs"
+import * as threeGrayscale from "../libs/colors/three/grayscale.mjs"
+import * as threeRainbow from "../libs/colors/three/rainbow.mjs"
+
+import {meshMaterial} from "../libs/materials/mesh.mjs"
 
 import {newBox} from "../libs/geometries/boxes.mjs"
 import {newCylinder} from "../libs/geometries/cylinders.mjs"
 import {newSphere} from "../libs/geometries/spheres.mjs"
 import {newTorus} from "../libs/geometries/toruses.mjs"
 
-import {meshMaterial} from "../libs/materials/mesh.mjs"
-
-import * as glassGrayscale from "../libs/colors/glass/grayscale.mjs"
-import * as threeGrayscale from "../libs/colors/three/grayscale.mjs"
-import * as threeRainbow from "../libs/colors/three/rainbow.mjs"
+import {addPanelEvents, dragable} from "../libs/etc/events.mjs"
+import {updateMeshesPanel} from "./meshes.mjs"
+import {localMeshes} from "../libs/files/local.mjs"
+import {contextMenu} from "./context.mjs"
+import {focus} from "../libs/controls/focus.mjs"
 
 export function addMeshPanel(mesh, coordinates=null) {
 
@@ -384,9 +385,17 @@ export function addMesh(mesh=null, properties={}) {
 
     if (properties.position) {
 
-      mesh.position.x = properties.position.x
-      mesh.position.y = properties.position.y
-      mesh.position.z = properties.position.z
+      mesh.position.x = properties.position.x ? properties.position.x : properties.position._x ? properties.position._x : 0
+      mesh.position.y = properties.position.y ? properties.position.y : properties.position._y ? properties.position._y : 0
+      mesh.position.z = properties.position.z ? properties.position.z : properties.position._z ? properties.position._z : 0
+
+    }
+
+    if (properties.rotation) {
+
+      mesh.rotation.x = properties.rotation.x ? properties.rotation.x : properties.rotation._x ? properties.rotation._x : 0
+      mesh.rotation.y = properties.rotation.y ? properties.rotation.y : properties.rotation._y ? properties.rotation._y : 0
+      mesh.rotation.z = properties.rotation.z ? properties.rotation.z : properties.rotation._z ? properties.rotation._z : 0
 
     }
 
@@ -394,6 +403,7 @@ export function addMesh(mesh=null, properties={}) {
     mesh.volume = getVolume(mesh)
 
     updateMeshesPanel("add", mesh)
+    localMeshes("add", mesh)
 
     scene.add(mesh)
 
@@ -522,6 +532,8 @@ export function updateMesh(mesh, type, key=null, value=null) {
 
   }
 
+  localMeshes("update", mesh)
+
 }
 
 export function removeMesh(mesh) {
@@ -539,6 +551,7 @@ export function removeMesh(mesh) {
     events.removeEventListener(mesh, "contextmenu")
 
     updateMeshesPanel("remove", mesh)
+    localMeshes("remove", mesh)
 
     mesh.geometry.dispose()
     mesh.material.dispose()

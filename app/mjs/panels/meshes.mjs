@@ -66,6 +66,10 @@ export function updateMeshesPanel(type, mesh) {
 
       break
 
+    case "update":
+
+      break
+
     case "remove":
 
       $("#mesh." + mesh.uuid + "").remove()

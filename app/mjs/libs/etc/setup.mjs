@@ -1,4 +1,5 @@
 import {addSettings} from "./settings.mjs"
+import {localMeshes} from "../files/local.mjs"
 import {black, white} from "../colors/three/grayscale.mjs"
 
 import {addAmbientLight} from "../lights/ambient.mjs"
@@ -55,6 +56,10 @@ export function setup() {
   addEvents()
   addAxes()
 
+  animate()
+
+  localMeshes("load")
+
   function animate() {
 
     requestAnimationFrame(animate)
@@ -62,7 +67,5 @@ export function setup() {
     renderer.render(scene, camera)
 
   }
-
-  animate()
 
 }
