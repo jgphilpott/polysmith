@@ -169,6 +169,44 @@ export function addMenuPanel() {
 
     panel.append(login + "</div>")
 
+    $("#login-panel input").on("keydown", function(event) { event.stopPropagation() })
+    $("#login-panel input").on("blur", function(event) {
+
+      if (!$(this).hasClass("submit")) $(this).val($(this).val().trim())
+
+      let invalidEmail = $(this).hasClass("email") && !(validEmail($(this).val())) && $(this).val() != ""
+      let invalidPassword = $(this).hasClass("password") && !($(this).val().length > 7) && $(this).val() != ""
+
+      if (invalidEmail || invalidPassword) {
+
+        $(this).css("box-shadow", "0 0 5px rgba(224, 58, 62, 1)")
+
+      } else {
+
+        $(this).css("box-shadow", "none")
+
+      }
+
+    })
+
+    $("#login-panel .submit").click(function() {
+
+      if (validEmail($("#login-panel .email").val()) && $("#login-panel .password").val().length > 7) {
+
+        socket.emit("login", {"email": $("#login-panel .email").val(), "password": sha256($("#login-panel .password").val())})
+
+      } else {
+
+        if (!(validEmail($("#login-panel .email").val()))) { $("#login-panel .email").css("box-shadow", "0 0 5px rgba(224, 58, 62, 1)"); alert("Email invalid, please try again.") }
+        if (!($("#login-panel .password").val().length > 7)) { $("#login-panel .password").css("box-shadow", "0 0 5px rgba(224, 58, 62, 1)"); alert("Password to short, please try again.") }
+
+      }
+
+    })
+
+    socket.on("login_failed", function() { alert("Login failed, please try again.") })
+    socket.on("login_success", function(id) { writeCookie("id", id); location.reload() })
+
   }
 
   function appendLogout() {
