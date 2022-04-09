@@ -2,17 +2,17 @@ import {addMesh} from "../../panels/mesh.mjs"
 
 export async function localMeshes(action=null, mesh=null) {
 
+  let localMeshes = localRead("meshes")
+
   if (action == "load") {
 
-    let localMeshes = localRead("meshes")
-
-    if (localMeshes && localMeshes.length > 0) {
+    if (localMeshes instanceof Array && localMeshes.length > 0) {
 
       const loader = new THREE.ObjectLoader()
 
       localMeshes.forEach((mesh, index) => {
 
-        addMesh(loader.parse(mesh), {position: mesh.position, rotation: mesh.rotation})
+        addMesh(loader.parse(mesh))
 
       })
 
@@ -20,18 +20,29 @@ export async function localMeshes(action=null, mesh=null) {
 
   } else {
 
-    let localMeshes = []
+    mesh.updateMatrix()
 
-    meshes.forEach((mesh, index) => {
+    if (action == "add") {
 
-      let meshJSON = mesh.toJSON()
+      if (localMeshes instanceof Array) {
 
-      meshJSON.position = mesh.position
-      meshJSON.rotation = mesh.rotation
+        if (!localMeshes.find(localMesh => localMesh.object.uuid == mesh.uuid)) localMeshes.push(mesh.toJSON())
 
-      localMeshes.push(meshJSON)
+      } else {
 
-    });
+        localMeshes = [mesh.toJSON()]
+
+      }
+
+    } else if (action == "update") {
+
+      localMeshes[localMeshes.findIndex(localMesh => localMesh.object.uuid == mesh.uuid)] = mesh.toJSON()
+
+    } else if (action == "remove") {
+
+      localMeshes = localMeshes.filter(localMesh => localMesh.object.uuid != mesh.uuid)
+
+    }
 
     localWrite("meshes", localMeshes)
 
