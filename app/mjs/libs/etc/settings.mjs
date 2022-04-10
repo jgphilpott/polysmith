@@ -4,16 +4,25 @@ export function addSettings() {
 
   data.settings = settings
 
+  /// UI ///
+
+  settings.ui = {}
+
+  let ui = settings.ui
+
+  ui.nav = "black"
+  ui.forkme = true
+
   /// Panels ///
 
   settings.panels = {}
 
   let panels = settings.panels
 
-  panels.camera = false
+  panels.camera = true
   panels.geometries = false
   panels.menu = false
-  panels.meshes = false
+  panels.meshes = true
   panels.shapes = true
 
   /// Axes ///
