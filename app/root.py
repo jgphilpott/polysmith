@@ -3,23 +3,25 @@ from os import makedirs
 from os.path import exists
 from subprocess import Popen
 
-from flask import Flask, render_template
-from mongo.socket.plug import plugin
-
+from sass import compile
 from requests import get
 from urllib.request import urlretrieve
 
-from sass import compile
+from flask import Flask, request, render_template
 
-app = Flask("Polymaker", template_folder="app", static_folder="app")
+from mongo.socket.plug import plugin
+from mongo.data.collect.clients.mongo import valid_client
+
+title = "Polymaker"
+source_folder = "app"
+
+app = Flask(title, template_folder=source_folder, static_folder=source_folder)
 
 app.jinja_env.auto_reload = True
 app.config["SECRET_KEY"] = urandom(42).hex()
 
-@app.route("/")
-def home():
-
-    return render_template("html/home.html")
+Popen(["boussole", "watch"], cwd="app/config")
+compile(dirname=("app/sass", "app/css"), output_style="compressed")
 
 libs_dir = "app/libs"
 
@@ -92,7 +94,13 @@ if not exists(libs_dir):
 
         file.write(tools)
 
-compile(dirname=("app/sass", "app/css"), output_style="compressed")
-Popen(["boussole", "watch"], cwd="app/config")
+@app.route("/")
+def home():
+
+    data = {"title": title, "client": None}
+
+    if "id" in request.cookies: data["client"] = valid_client(request.cookies.get("id"))
+
+    return render_template("html/home.html", data=data)
 
 plugin(app).run(app, host="0.0.0.0", port=4000, debug=True)

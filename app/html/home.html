@@ -4,7 +4,7 @@
 
     <meta charset="utf-8">
 
-    <title>Polymaker</title>
+    <title>{{ data.title }}</title>
 
     <link rel="shortcut icon" href="{{ url_for('static', filename='imgs/theme/logo.png') }}">
 
@@ -48,12 +48,10 @@
 
     <script>
 
-      const data = {}
       const socket = io()
+      const data = {{ data | tojson | safe }}
 
-      let title = "Polymaker"
-
-      console.log("Welcome to " + title + "!")
+      console.log("Welcome to " + data.title + "!")
 
       let scale = 100
 
@@ -74,7 +72,7 @@
 
       <img id="menu" src="{{ url_for('static', filename='imgs/theme/menu/white.png') }}">
 
-      <h1 id='title'>POLYMAKER</h1>
+      <h1 id='title'>{{ data.title|upper }}</h1>
 
     </div>
 
