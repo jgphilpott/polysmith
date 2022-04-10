@@ -1,4 +1,4 @@
-import {addSettings} from "./settings.mjs"
+import {getSettings} from "./settings.mjs"
 import {localMeshes} from "../files/local.mjs"
 import {black, white} from "../colors/three/grayscale.mjs"
 
@@ -20,12 +20,11 @@ import {addAxes} from "../draw/axes.mjs"
 
 export function setup() {
 
-  addSettings()
-
-  data.title = title
   data.scale = scale
   data.meshes = meshes
   data.tooltips = tooltips
+
+  data.settings = getSettings()
 
   renderer = new THREE.WebGLRenderer({alpha: true, antialias: true, logarithmicDepthBuffer: true})
   renderer.setSize(window.innerWidth, window.innerHeight)

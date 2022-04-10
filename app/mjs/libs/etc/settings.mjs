@@ -1,60 +1,53 @@
-export function addSettings() {
+export function getSettings() {
 
-  /// Core ///
+  let localSettings = localRead("settings")
 
-  data.settings = settings
+  if (client && client.settings) {
 
-  /// UI ///
+    settings = client.settings
 
-  settings.ui = {}
+  } else if (localSettings) {
 
-  let ui = settings.ui
+    settings = localSettings
 
-  ui.nav = "black"
-  ui.forkme = true
+  } else {
 
-  /// Panels ///
+    settings = {
+                  "ui": {
+                    "nav": "black",
+                    "forkme": true
+                  },
+                  "panels": {
+                    "camera": true,
+                    "geometries": false,
+                    "menu": false,
+                    "meshes": true,
+                    "shapes": true
+                  },
+                  "axes": {
+                    "axesCaps": true,
+                    "xyPlane": false,
+                    "xzPlane": false,
+                    "yzPlane": false,
+                    "xyPlaneStep": 10,
+                    "xzPlaneStep": 10,
+                    "yzPlaneStep": 10,
+                    "gridSnap": 1
+                  },
+                  "controls": {
+                    "flySpeed": 50,
+                    "spinSpeed": 50,
+                    "dragSpeed": 50,
+                    "zoomSpeed": 1000,
+                    "zoomMax": 500,
+                    "zoomMin": 1
+                  }
+               }
 
-  settings.panels = {}
+  }
 
-  let panels = settings.panels
+  localWrite("settings", settings)
 
-  panels.camera = true
-  panels.geometries = false
-  panels.menu = false
-  panels.meshes = true
-  panels.shapes = true
-
-  /// Axes ///
-
-  settings.axes = {}
-
-  let axes = settings.axes
-
-  axes.axesCaps = true
-
-  axes.xyPlane = false
-  axes.xzPlane = false
-  axes.yzPlane = false
-
-  axes.xyPlaneStep = 10
-  axes.xzPlaneStep = 10
-  axes.yzPlaneStep = 10
-
-  axes.gridSnap = 1
-
-  /// Controls ///
-
-  settings.controls = {}
-
-  let controls = settings.controls
-
-  controls.flySpeed = 50
-  controls.spinSpeed = 50
-  controls.dragSpeed = 50
-  controls.zoomSpeed = 1000
-
-  controls.zoomMax = 500
-  controls.zoomMin = 1
+  return settings
 
 }

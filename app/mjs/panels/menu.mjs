@@ -9,8 +9,6 @@ export function addMenuPanel() {
 
   let panel = $("#menu.panel")
 
-  var client = false
-
   function appendMain() {
 
     let main = "<div id='main'>"
@@ -224,11 +222,15 @@ export function addMenuPanel() {
   appendSettings()
 
   if (client) {
+
     appendProfile()
     appendLogout()
+
   } else {
+
     appendSignup()
     appendLogin()
+
   }
 
   let menuWidth = panel.outerWidth()
