@@ -106,27 +106,6 @@ export function addMenuPanel() {
 
     panel.append(signup + "</div>")
 
-    $("#signup-panel input").on("keydown", function(event) { event.stopPropagation() })
-    $("#signup-panel input").on("blur", function(event) {
-
-      if (!$(this).hasClass("submit")) $(this).val($(this).val().trim())
-
-      let invalidEmail = $(this).hasClass("email") && !(validEmail($(this).val())) && $(this).val() != ""
-      let invalidPassword = $(this).hasClass("password") && !($(this).val().length > 7) && $(this).val() != ""
-      let invalidPasswords = $(this).hasClass("retype-password") && !($("#signup-panel .password").val() === $("#signup-panel .retype-password").val()) && $(this).val() != ""
-
-      if (invalidEmail || invalidPassword || invalidPasswords) {
-
-        $(this).css("box-shadow", "0 0 5px rgba(224, 58, 62, 1)")
-
-      } else {
-
-        $(this).css("box-shadow", "none")
-
-      }
-
-    })
-
     $("#signup-panel .submit").click(function() {
 
       if (validEmail($("#signup-panel .email").val()) && $("#signup-panel .password").val().length > 7 && $("#signup-panel .password").val() === $("#signup-panel .retype-password").val()) {
@@ -152,6 +131,11 @@ export function addMenuPanel() {
 
     let profile = "<div id='profile-panel' class='sub-panel'><h3 id='title'>Profile</h3>"
 
+    profile += "<img id='profile-image' src='/app/imgs/panels/main/profile.png'>"
+
+    profile += "<h4>Email</h4>"
+    profile += "<p>" + client.email + "</p>"
+
     panel.append(profile + "</div>")
 
   }
@@ -166,26 +150,6 @@ export function addMenuPanel() {
     login += "<input class='submit' type='submit' placeholder='Submit'>"
 
     panel.append(login + "</div>")
-
-    $("#login-panel input").on("keydown", function(event) { event.stopPropagation() })
-    $("#login-panel input").on("blur", function(event) {
-
-      if (!$(this).hasClass("submit")) $(this).val($(this).val().trim())
-
-      let invalidEmail = $(this).hasClass("email") && !(validEmail($(this).val())) && $(this).val() != ""
-      let invalidPassword = $(this).hasClass("password") && !($(this).val().length > 7) && $(this).val() != ""
-
-      if (invalidEmail || invalidPassword) {
-
-        $(this).css("box-shadow", "0 0 5px rgba(224, 58, 62, 1)")
-
-      } else {
-
-        $(this).css("box-shadow", "none")
-
-      }
-
-    })
 
     $("#login-panel .submit").click(function() {
 
@@ -209,9 +173,14 @@ export function addMenuPanel() {
 
   function appendLogout() {
 
-    let logout = "<div id='logout-panel' class='sub-panel'><h3 id='title'>Logout</h3>"
+    $("#logout").click(function() {
 
-    panel.append(logout + "</div>")
+      localDelete("settings")
+      deleteCookie("id")
+
+      location.reload()
+
+    })
 
   }
 
@@ -253,10 +222,10 @@ export function addMenuPanel() {
 
     } else {
 
-      subPanel.css("display", "none")
-
       panel.animate({width: menuWidth}, {duration: duration, queue: false})
       panel.animate({height: menuHeight}, {duration: duration, queue: false})
+
+      subPanel.css("display", "none")
 
     }
 
@@ -267,22 +236,44 @@ export function addMenuPanel() {
     let menu = $("#menu.panel")
 
     if (menu.css("visibility") == "hidden") {
+
       menu.css("visibility", "visible")
+
     } else if (menu.css("visibility") == "visible") {
+
       menu.css("visibility", "hidden")
+
     }
 
   }
 
-  $("#menu.panel #main .option").click(function(event) {
-    toggleSubPanel($("#menu.panel #" + this.id + "-panel.sub-panel"))
+  $("#menu.panel #main .option").click(function(event) { toggleSubPanel($("#menu.panel #" + this.id + "-panel.sub-panel")) })
+
+  $("#menu.panel input").on("keypress keydown", function(event) { event.stopPropagation() })
+  $("#menu.panel input").on("cut copy paste", function(event) { event.preventDefault() })
+  $("#menu.panel input").on("blur", function(event) {
+
+    if (!$(this).hasClass("submit")) $(this).val($(this).val().trim())
+
+    let invalidEmail = $(this).hasClass("email") && !(validEmail($(this).val())) && $(this).val() != ""
+    let invalidPassword = $(this).hasClass("password") && !($(this).val().length > 7) && $(this).val() != ""
+    let invalidPasswords = $(this).hasClass("retype-password") && !($("#signup-panel .password").val() === $("#signup-panel .retype-password").val()) && $(this).val() != ""
+
+    if (invalidEmail || invalidPassword || invalidPasswords) {
+
+      $(this).css("box-shadow", "0 0 5px rgba(224, 58, 62, 1)")
+
+    } else {
+
+      $(this).css("box-shadow", "none")
+
+    }
+
   })
+
+  $(document).keypress(function(event) { if (event.keyCode == 13) toggleMenu() })
 
   $("#nav #menu").click(function(event) { toggleMenu() })
-
-  $(document).keypress(function(event) {
-    if (event.keyCode == 13) { toggleMenu() }
-  })
 
   addPanelEvents(panel)
 

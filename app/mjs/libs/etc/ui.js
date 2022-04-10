@@ -90,6 +90,7 @@ function fold(element, degree=90, duration=1000) {
     body.css("display", "none")
 
     tool.animate({height: height + head.height()}, {duration: duration, queue: false})
+
     body.css("display", "block")
 
     rotate(fold, degree, duration)
