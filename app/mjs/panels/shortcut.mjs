@@ -32,7 +32,7 @@ export function addShortcutPanel() {
 
   let shortcuts = $("#shortcut.panel img.shape")
 
-  for (let i = 0; i < shortcuts.length; i++) { dragable($(shapes[i])) }
+  for (let i = 0; i < shortcuts.length; i++) { dragable($(shortcuts[i])) }
 
   shortcuts.dblclick(function(event) { addMesh(null, {type: $(this).attr("id")}) })
   shortcuts.contextmenu(function(event) { contextMenu("shortcut", $(this), event) })
