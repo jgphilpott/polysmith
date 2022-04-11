@@ -80,9 +80,15 @@ export function addMenuPanel() {
 
   function appendPanels() {
 
-    let panels = "<div id='panels-panel' class='sub-panel'><h3 id='title'>Panels</h3>"
+    let panels = "<div id='panels-panel' class='sub-panel'><h3 id='title'>Panels</h3><form>"
 
-    panel.append(panels + "</div>")
+    panels += "<div><input id='camera' class='checkbox' type='checkbox'><label>Camera</label></div>"
+    panels += "<div><input id='lights' class='checkbox' type='checkbox'><label>Lights</label></div>"
+    panels += "<div><input id='meshes' class='checkbox' type='checkbox'><label>Meshes</label></div>"
+    panels += "<div><input id='shapes' class='checkbox' type='checkbox'><label>Shapes</label></div>"
+    panels += "<div><input id='shortcut' class='checkbox' type='checkbox'><label>Shapes Shortcut</label></div>"
+
+    panel.append(panels + "</form></div>")
 
   }
 
@@ -212,7 +218,7 @@ export function addMenuPanel() {
       $(".sub-panel").css("display", "none")
 
       subPanel.css("display", "inline-block")
-      let panelWidth = subPanel.outerWidth() + 1
+      let panelWidth = subPanel.outerWidth() + 3
       subPanel.css("display", "none")
 
       panel.animate({width: menuWidth + panelWidth}, {duration: duration, queue: false})
