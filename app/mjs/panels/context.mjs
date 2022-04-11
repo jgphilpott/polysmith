@@ -23,19 +23,6 @@ export function contextMenu(type, element, event) {
 
       break
 
-    case "geometry":
-
-      let shape = $("#shapes.panel img#" + element.attr("id") + ".shape")
-
-      contextMenu.append("<p id='add'>Add Mesh</p>")
-      shape.css("display") == "none" ? contextMenu.append("<p id='show'>Show Shortcut</p>") : contextMenu.append("<p id='hide'>Hide Shortcut</p>")
-
-      $("#context-menu.panel #add").click(function() { addMesh(null, {type: element.attr("id")}) })
-      $("#context-menu.panel #show").click(function() { shape.css("display", "block") })
-      $("#context-menu.panel #hide").click(function() { shape.css("display", "none") })
-
-      break
-
     case "mesh":
 
       contextMenu.append("<h4>Basic</h4>")
@@ -61,6 +48,19 @@ export function contextMenu(type, element, event) {
       break
 
     case "shape":
+
+      let shape = $("#shortcut.panel img#" + element.attr("id") + ".shape")
+
+      contextMenu.append("<p id='add'>Add Mesh</p>")
+      shape.css("display") == "none" ? contextMenu.append("<p id='show'>Show Shortcut</p>") : contextMenu.append("<p id='hide'>Hide Shortcut</p>")
+
+      $("#context-menu.panel #add").click(function() { addMesh(null, {type: element.attr("id")}) })
+      $("#context-menu.panel #show").click(function() { shape.css("display", "block") })
+      $("#context-menu.panel #hide").click(function() { shape.css("display", "none") })
+
+      break
+
+    case "shortcut":
 
       contextMenu.append("<p id='add'>Add Mesh</p>")
       contextMenu.append("<p id='hide'>Hide Shortcut</p>")

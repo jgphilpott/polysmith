@@ -2,20 +2,18 @@ import {addMesh} from "./mesh.mjs"
 import {contextMenu} from "./context.mjs"
 import {addPanelEvents, dragable} from "../libs/etc/events.mjs"
 
-export function addGeometriesPanel() {
+import {grayGlass, lightGrayGlass} from "../libs/colors/glass/grayscale.mjs"
 
-  $("body").append("<div id='geometries' class='panel'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")
+export function addShortcutPanel() {
 
-  let panel = $("#geometries.panel")
+  $("body").append("<div id='shortcut' class='panel'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")
 
-  panel.append("<h3>Geometries</h3>")
+  let panel = $("#shortcut.panel")
 
-  panel.append("<h4 id='basic'>Basic</h4>")
   panel.append("<img title='Cube' id='cube' class='shape' src='/app/imgs/icons/shapes/basic/cube.png'>")
   panel.append("<img title='Cylinder' id='cylinder' class='shape' src='/app/imgs/icons/shapes/basic/cylinder.png'>")
   panel.append("<img title='Sphere' id='sphere' class='shape' src='/app/imgs/icons/shapes/basic/sphere.png'>")
 
-  panel.append("<h4 id='prisms'>Prisms</h4>")
   panel.append("<img title='Triangular Prism' id='triangular-prism' class='shape' src='/app/imgs/icons/shapes/prisms/prism-3.png'>")
   panel.append("<img title='Rectangular Prism' id='rectangular-prism' class='shape' src='/app/imgs/icons/shapes/prisms/prism-4.png'>")
   panel.append("<img title='Pentagonal Prism' id='pentagonal-prism' class='shape' src='/app/imgs/icons/shapes/prisms/prism-5.png'>")
@@ -23,32 +21,40 @@ export function addGeometriesPanel() {
   panel.append("<img title='Heptagonal Prism' id='heptagonal-prism' class='shape' src='/app/imgs/icons/shapes/prisms/prism-7.png'>")
   panel.append("<img title='Octagonal Prism' id='octagonal-prism' class='shape' src='/app/imgs/icons/shapes/prisms/prism-8.png'>")
 
-  panel.append("<h4 id='pyramids'>Pyramids</h4>")
   panel.append("<img title='Triangular Pyramid' id='triangular-pyramid' class='shape' src='/app/imgs/icons/shapes/pyramids/pyramid-3.png'>")
   panel.append("<img title='Rectangular Pyramid' id='rectangular-pyramid' class='shape' src='/app/imgs/icons/shapes/pyramids/pyramid-4.png'>")
   panel.append("<img title='Pentagonal Pyramid' id='pentagonal-pyramid' class='shape' src='/app/imgs/icons/shapes/pyramids/pyramid-5.png'>")
   panel.append("<img title='Cone' id='cone' class='shape' src='/app/imgs/icons/shapes/pyramids/pyramid-x.png'>")
 
-  panel.append("<h4 id='special'>Special</h4>")
   panel.append("<img title='Torus' id='torus' class='shape' src='/app/imgs/icons/shapes/special/torus.png'>")
 
-  let shapes = $("#geometries.panel img.shape")
+  panel.append("<img id='+' class='nav' src='/app/imgs/panels/nav/+.png'>")
 
-  for (let i = 0; i < shapes.length; i++) { dragable($(shapes[i])) }
+  let shortcuts = $("#shortcut.panel img.shape")
 
-  shapes.clickSingleDouble(function(event) {
+  for (let i = 0; i < shortcuts.length; i++) { dragable($(shapes[i])) }
 
-    let shape = $("#shapes.panel img#" + $(this).attr("id") + ".shape")
+  shortcuts.dblclick(function(event) { addMesh(null, {type: $(this).attr("id")}) })
+  shortcuts.contextmenu(function(event) { contextMenu("shortcut", $(this), event) })
 
-    shape.css("display") == "none" ? shape.css("display", "block") : shape.css("display", "none")
+  $("#shortcut.panel .nav").click(function(event) {
 
-  }, function(event) {
+    let shapesPanel = $("#shapes.panel")
 
-    addMesh(null, {type: $(this).attr("id")})
+    if (shapesPanel.css("visibility") == "hidden") {
+
+      shapesPanel.css("visibility", "visible")
+
+    } else if (shapesPanel.css("visibility") == "visible") {
+
+      setTimeout(function() { shapesPanel.css("background", grayGlass) }, 0)
+      setTimeout(function() { shapesPanel.css("background", lightGrayGlass) }, 100)
+      setTimeout(function() { shapesPanel.css("background", grayGlass) }, 200)
+      setTimeout(function() { shapesPanel.css("background", lightGrayGlass) }, 300)
+
+    }
 
   })
-
-  shapes.contextmenu(function(event) { contextMenu("geometry", $(this), event) })
 
   addPanelEvents(panel)
 
