@@ -1,0 +1,47 @@
+#shortcut.panel
+
+  visibility: visible
+
+  top: calc(100% - 10px)
+  left: 50%
+
+  transform: translate(-50%, -100%)
+
+  display: flex
+  align-items: center
+  justify-content: center
+
+  img.nav,
+  img.shape
+
+    margin: 10px
+
+  img.nav:hover,
+  img.shape:hover
+
+    cursor: url('../imgs/icons/cursors/pointer.png'), pointer
+
+  img.nav
+
+    width: 25px
+    height: 25px
+
+  img.shape
+
+    display: none
+
+    width: 65px
+    height: 65px
+
+  img#cube.shape,
+  img#cylinder.shape,
+  img#sphere.shape
+
+    display: block
+
+img.ghost-shape
+
+  width: 65px
+  height: 65px
+
+  position: fixed
