@@ -74,4 +74,4 @@ def connect_clients(app):
 
         except:
 
-            emit("update_settings_failed")
+            emit("update_settings_failed", {"category": update["category"], "setting": update["setting"], "value": update["value"]})

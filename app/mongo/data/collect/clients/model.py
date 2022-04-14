@@ -22,10 +22,11 @@ class Client():
                                 },
                                 "panels": {
                                     "camera": True,
-                                    "geometries": False,
+                                    "lights": False,
                                     "menu": False,
                                     "meshes": True,
-                                    "shapes": True
+                                    "shapes": False,
+                                    "shortcut": True
                                 },
                                 "axes": {
                                     "axesCaps": True,
