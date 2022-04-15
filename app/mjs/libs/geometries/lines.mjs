@@ -18,9 +18,9 @@ export function newVector(vertices=[[]]) {
 
 }
 
-export function newLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=black, linewidth=1, dashSize=5, gapSize=3) {
+export function newLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=black, linewidth=1, dashed=false, dashSize=5, gapSize=3) {
 
-  let line = new THREE.Line(newVector(vertices), lineMaterial(material, color, linewidth, dashSize, gapSize)).computeLineDistances()
+  let line = new THREE.Line(newVector(vertices), lineMaterial(material, color, linewidth, dashed, dashSize, gapSize)).computeLineDistances()
 
   line.class = "line"
 
@@ -28,8 +28,8 @@ export function newLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basi
 
 }
 
-export function addLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=black, linewidth=1, dashSize=5, gapSize=3) {
+export function addLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=black, linewidth=1, dashed=false, dashSize=5, gapSize=3) {
 
-  return addMesh(newLine(vertices, material, color, linewidth, dashSize, gapSize))
+  return addMesh(newLine(vertices, material, color, linewidth, dashed, dashSize, gapSize))
 
 }
