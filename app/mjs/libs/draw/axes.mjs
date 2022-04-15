@@ -2,20 +2,20 @@ import {focus} from "../controls/focus.mjs"
 import {contextMenu} from "../../panels/context.mjs"
 
 import {newLine} from "../geometries/lines.mjs"
-import {newTube} from "../geometries/tubes.mjs"
+import {newLine2} from "../geometries/lines2.mjs"
 import {newSphere} from "../geometries/spheres.mjs"
 
 import {black, white} from "../colors/three/grayscale.mjs"
 import {red, orange, yellow, green, blue, purple, pink} from "../colors/three/rainbow.mjs"
 
-let segments = 42
-let axisWidth = 0.3
+let segments = 25
+let radius = scale / 100
 
 export function addAxes() {
 
   data.axes = axes
 
-  let centroid = newSphere(scale / 100, segments, segments, [0, 0, 0], "standard", black)
+  let centroid = newSphere(radius, segments, segments, [0, 0, 0], "standard", black)
 
   axes.push(centroid)
   scene.add(centroid)
@@ -30,9 +30,9 @@ export function addAxes() {
 
 export function addAxisX(min=(-scale), max=scale) {
 
-  let maxCap = newSphere(scale / 100, segments, segments, [max, 0, 0], "standard", green)
-  let axis = newTube([[max, 0, 0], [min, 0, 0]], axisWidth, segments, 1, false, "standard", red)
-  let minCap = newSphere(scale / 100, segments, segments, [min, 0, 0], "standard", red)
+  let maxCap = newSphere(radius, segments, segments, [max, 0, 0], "standard", green)
+  let axis = newLine2([[max, 0, 0], [min, 0, 0]], "fat", red, 3)
+  let minCap = newSphere(radius, segments, segments, [min, 0, 0], "standard", red)
 
   axes.push(maxCap, axis, minCap)
   scene.add(maxCap, axis, minCap)
@@ -44,9 +44,9 @@ export function addAxisX(min=(-scale), max=scale) {
 
 export function addAxisY(min=(-scale), max=scale) {
 
-  let maxCap = newSphere(scale / 100, segments, segments, [0, max, 0], "standard", green)
-  let axis = newTube([[0, max, 0], [0, min, 0]], axisWidth, segments, 1, false, "standard", green)
-  let minCap = newSphere(scale / 100, segments, segments, [0, min, 0], "standard", red)
+  let maxCap = newSphere(radius, segments, segments, [0, max, 0], "standard", green)
+  let axis = newLine2([[0, max, 0], [0, min, 0]], "fat", green, 3)
+  let minCap = newSphere(radius, segments, segments, [0, min, 0], "standard", red)
 
   axes.push(maxCap, axis, minCap)
   scene.add(maxCap, axis, minCap)
@@ -58,9 +58,9 @@ export function addAxisY(min=(-scale), max=scale) {
 
 export function addAxisZ(min=(-scale), max=scale) {
 
-  let maxCap = newSphere(scale / 100, segments, segments, [0, 0, max], "standard", green)
-  let axis = newTube([[0, 0, max], [0, 0, min]], axisWidth, segments, 1, false, "standard", blue)
-  let minCap = newSphere(scale / 100, segments, segments, [0, 0, min], "standard", red)
+  let maxCap = newSphere(radius, segments, segments, [0, 0, max], "standard", green)
+  let axis = newLine2([[0, 0, max], [0, 0, min]], "fat", blue, 3)
+  let minCap = newSphere(radius, segments, segments, [0, 0, min], "standard", red)
 
   axes.push(maxCap, axis, minCap)
   scene.add(maxCap, axis, minCap)
