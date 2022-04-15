@@ -3,6 +3,31 @@ function calculatePercent(min, max, value) { return (value - min) / (max - min) 
 // Credit: https://stackoverflow.com/a/64777515/1544937
 const chunkArray = (a,n)=>[...Array(Math.ceil(a.length/n))].map((_,i)=>a.slice(n*i,n+n*i))
 
+// Credit: https://stackoverflow.com/a/5624139/1544937
+function component2hex(component) {
+
+  let hex = component.toString(16)
+
+  return hex.length == 1 ? "0" + hex : hex
+
+}
+
+// Credit: https://stackoverflow.com/a/5624139/1544937
+function rgb2hex(r, g, b) {
+
+  return "#" + component2hex(r) + component2hex(g) + component2hex(b)
+
+}
+
+// Credit: https://stackoverflow.com/a/5624139/1544937
+function hex2rgb(hex) {
+
+  let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+
+  return result ? {r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) } : null
+
+}
+
 // Credit: http://gist.github.com/399624
 // The click event will be fired with a small delay but will not fire upon a double click.
 $.fn.clickSingleDouble = function(single_click_callback, double_click_callback, delay=300) {
