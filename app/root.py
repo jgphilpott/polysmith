@@ -47,6 +47,11 @@ if not exists(libs_dir):
 
     urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js", js_libs_dir + "/three.js")
     urlretrieve("https://raw.githubusercontent.com/jgphilpott/threex.domevents/master/threex.domevents.js", js_libs_dir + "/threeX.js")
+    urlretrieve("https://gist.githubusercontent.com/jgphilpott/77709de890b806426089de1ff4e78758/raw/258c236be71bb4eac92db663f6c03f48673364bd/LineSegmentsGeometry.mjs", js_libs_dir + "/LineSegmentsGeometry.mjs")
+    urlretrieve("https://gist.githubusercontent.com/jgphilpott/ec71d7abcf504f85e01ffe9e297a682c/raw/ea603fbe5b81c0cdb7c9a273db51e8a766e65a10/LineGeometry.mjs", js_libs_dir + "/LineGeometry.mjs")
+    urlretrieve("https://gist.githubusercontent.com/jgphilpott/9e1cf7758b8d7cf02537bb15aacdba6a/raw/516978ad4c3f0c093b0acc1e8590dd3575dec11b/LineMaterial.mjs", js_libs_dir + "/LineMaterial.mjs")
+    urlretrieve("https://gist.githubusercontent.com/jgphilpott/605923031deec863802ca6f61ca9e688/raw/8e378814c93313efe8432d20e8405653adbd4b01/LineSegments.mjs", js_libs_dir + "/LineSegments.mjs")
+    urlretrieve("https://gist.githubusercontent.com/jgphilpott/ec6e0b40dbdd02c9d4cfae0dd2166c5e/raw/ec26c71d18a6ff0745ffed0d953f2e6e14ba4105/LineMesh.mjs", js_libs_dir + "/LineMesh.mjs")
 
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/03df747c3047504480e6dbeeddd27d68/raw/e6708feb515affff5884032d703ea67f03a283fe/csgWrapper.mjs", js_libs_dir + "/csgWrapper.mjs")
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/59ad8432ba8567e91176e669454b9afa/raw/4d115791d9d1d632cc758b07826c00add7ada3dd/meshOperations.mjs", js_libs_dir + "/meshOperations.mjs")
