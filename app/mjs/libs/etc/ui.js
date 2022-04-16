@@ -34,7 +34,7 @@ function sliderStart(event, slider) {
 
   event.stopPropagation()
 
-  $("body").css("cursor", "grabbing")
+  $("*").css("cursor", "grabbing")
 
 }
 
@@ -67,9 +67,11 @@ function sliderStop(event, slider) {
 
   $(this).blur()
 
+  sliderFill($(this))
+
   event.stopPropagation()
 
-  $("body").css("cursor", "")
+  $("*").css("cursor", "")
 
 }
 

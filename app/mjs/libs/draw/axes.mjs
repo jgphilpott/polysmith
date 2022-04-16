@@ -129,11 +129,11 @@ export function addPlaneYZ(min=(-scale), max=scale) {
 
 function addAxesEvents(mesh) {
 
-  events.addEventListener(mesh, "mousemove", function(event) { $("body").css("cursor", "pointer") })
-  events.addEventListener(mesh, "mouseout", function(event) { $("body").css("cursor", "") })
+  events.addEventListener(mesh, "mousemove", function(event) { $("#canvas").css("cursor", "pointer") })
+  events.addEventListener(mesh, "mouseout", function(event) { $("#canvas").css("cursor", "") })
 
   events.addEventListener(mesh, "mousedown", function(event) { event.stopPropagation() })
-  events.addEventListener(mesh, "dblclick", function(event) { if (focus(event.target.position)) $("body").css("cursor", "") })
+  events.addEventListener(mesh, "dblclick", function(event) { if (focus(event.target.position)) $("#canvas").css("cursor", "") })
   events.addEventListener(mesh, "contextmenu", function(event) { contextMenu("axisCap", mesh, event.origDomEvent) })
 
 }

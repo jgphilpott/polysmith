@@ -66,6 +66,12 @@ export function addEvents() {
 
   })
 
+  $("#nav, #forkme, .panel").mousemove(function(event) {
+
+    data.outlinePass.selectedObjects = []
+
+  })
+
 }
 
 export function addPanelEvents(panel) {
@@ -106,7 +112,7 @@ export function addMeshEvents(mesh) {
 
   events.addEventListener(mesh, "mousemove", function(event) {
 
-    mesh.lock == "locked" ? $("body").css("cursor", "not-allowed") : $("body").css("cursor", "grab")
+    mesh.lock == "locked" ? $("#canvas").css("cursor", "not-allowed") : $("#canvas").css("cursor", "grab")
 
     data.outlinePass.selectedObjects = [mesh]
 
@@ -122,7 +128,7 @@ export function addMeshEvents(mesh) {
 
     data.outlinePass.selectedObjects = []
 
-    $("body").css("cursor", "")
+    $("#canvas").css("cursor", "")
 
   })
 
@@ -159,7 +165,7 @@ export function makeDragable(element, origEvent=null) {
 
       if (element.lock != "locked") {
 
-        $("body").css("cursor", "grabbing")
+        $("#canvas").css("cursor", "grabbing")
 
         let coordinates = world2screenCoordinates(element.position.x, element.position.y, element.position.z)
 
@@ -174,6 +180,8 @@ export function makeDragable(element, origEvent=null) {
 
       event.stopPropagation()
 
+      $("body").css("cursor", "grabbing")
+
       if (element.hasClass("panel")) {
 
         let transform = element.css("transform").replace(/[{()}]/g, "").replace(/[a-zA-Z]/g, "").split(",")
@@ -184,6 +192,8 @@ export function makeDragable(element, origEvent=null) {
       } else if (element.hasClass("shape")) {
 
         $("body").append("<img class='ghost-shape' src='" + element.attr("src") + "'>")
+
+        $(".ghost-shape").css("z-index", events.zIndex + 1)
 
         xOffset = event.clientX - element.offset().left
         yOffset = event.clientY - element.offset().top
@@ -208,7 +218,7 @@ export function makeDragable(element, origEvent=null) {
 
       if (element.lock != "locked") {
 
-        $("body").css("cursor", "grabbing")
+        $("#canvas").css("cursor", "grabbing")
 
         let coordinates = screen2worldCoordinates(eventX, eventY, element.position.z)
 
@@ -265,7 +275,7 @@ export function makeDragable(element, origEvent=null) {
 
       if (element.lock != "locked") {
 
-        $("body").css("cursor", "grab")
+        $("#canvas").css("cursor", "grab")
 
         for (let i = 0; i < tooltips.distanceLines.length; i++) { scene.remove(tooltips.distanceLines[i]) }
 
@@ -276,6 +286,8 @@ export function makeDragable(element, origEvent=null) {
     } else {
 
       event.stopPropagation()
+
+      $("body").css("cursor", "")
 
       if (element.hasClass("panel")) {
 
@@ -290,9 +302,11 @@ export function makeDragable(element, origEvent=null) {
 
           let coordinates = screen2worldCoordinates(ghost.offset().left + (ghost.width() / 2), ghost.offset().top + (ghost.height() / 2), 0)
 
-          addMesh(null, {type: element.attr("id"), position: {x: coordinates.x, y: coordinates.y, z: coordinates.z}})
+          let mesh = addMesh(null, {type: element.attr("id"), position: {x: coordinates.x, y: coordinates.y, z: coordinates.z}})
 
-          $("body").css("cursor", "grab")
+          data.outlinePass.selectedObjects = [mesh]
+
+          $("#canvas").css("cursor", "grab")
 
         }
 

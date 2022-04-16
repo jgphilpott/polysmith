@@ -532,6 +532,7 @@ export function removeMesh(mesh) {
   if (mesh.lock != "locked") {
 
     $("body").css("cursor", "")
+    $("#canvas").css("cursor", "")
 
     events.removeEventListener(mesh, "mousemove")
     events.removeEventListener(mesh, "mousedown")
