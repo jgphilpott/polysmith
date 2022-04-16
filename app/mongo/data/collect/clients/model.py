@@ -25,6 +25,7 @@ class Client():
                                     "lights": False,
                                     "menu": False,
                                     "meshes": True,
+                                    "settings": False,
                                     "shapes": False,
                                     "shortcut": True
                                 },

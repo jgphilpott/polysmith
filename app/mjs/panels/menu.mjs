@@ -2,6 +2,7 @@ import {exportFile} from "../libs/files/export.mjs"
 import {importFile} from "../libs/files/import.mjs"
 
 import {addPanelEvents} from "../libs/etc/events.mjs"
+import {updateSettings} from "../libs/etc/settings.mjs"
 
 export function addMenuPanel() {
 
@@ -82,13 +83,19 @@ export function addMenuPanel() {
 
     let panels = "<div id='panels-panel' class='sub-panel'><h3 id='title'>Panels</h3><form>"
 
-    panels += "<div><input id='camera' class='checkbox' type='checkbox'><label>Camera</label></div>"
-    panels += "<div><input id='lights' class='checkbox' type='checkbox'><label>Lights</label></div>"
-    panels += "<div><input id='meshes' class='checkbox' type='checkbox'><label>Meshes</label></div>"
-    panels += "<div><input id='shapes' class='checkbox' type='checkbox'><label>Shapes</label></div>"
-    panels += "<div><input id='shortcut' class='checkbox' type='checkbox'><label>Shapes Shortcut</label></div>"
+    panels += "<div><input id='camera' class='checkbox' type='checkbox' " + (settings.panels.camera ? "checked" : "") + "><label>Camera</label></div>"
+    panels += "<div><input id='lights' class='checkbox' type='checkbox' " + (settings.panels.lights ? "checked" : "") + "><label>Lights</label></div>"
+    panels += "<div><input id='meshes' class='checkbox' type='checkbox' " + (settings.panels.meshes ? "checked" : "") + "><label>Meshes</label></div>"
+    panels += "<div><input id='shapes' class='checkbox' type='checkbox' " + (settings.panels.shapes ? "checked" : "") + "><label>Shapes</label></div>"
+    panels += "<div><input id='shortcut' class='checkbox' type='checkbox' " + (settings.panels.shortcut ? "checked" : "") + "><label>Shapes Shortcut</label></div>"
 
     panel.append(panels + "</form></div>")
+
+    $("#panels-panel .checkbox").click(function(event) {
+
+      updateSettings("panels", $(this).attr("id"), $(this).prop("checked"))
+
+    })
 
   }
 
@@ -244,10 +251,12 @@ export function addMenuPanel() {
     if (menu.css("visibility") == "hidden") {
 
       menu.css("visibility", "visible")
+      updateSettings("panels", "menu", true)
 
     } else if (menu.css("visibility") == "visible") {
 
       menu.css("visibility", "hidden")
+      updateSettings("panels", "menu", false)
 
     }
 

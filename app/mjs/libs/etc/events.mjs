@@ -1,10 +1,9 @@
-import {addMesh, updateMesh} from "../../panels/mesh.mjs"
-
 import {focus} from "../controls/focus.mjs"
 import {newLine} from "../geometries/lines.mjs"
 import {exportFile} from "../files/export.mjs"
 import {contextMenu} from "../../panels/context.mjs"
-
+import {updateSettings} from "./settings.mjs"
+import {addMesh, updateMesh} from "../../panels/mesh.mjs"
 import {grayGlass, lightGrayGlass} from "../colors/glass/grayscale.mjs"
 
 export function addEvents() {
@@ -91,18 +90,26 @@ export function addPanelEvents(panel) {
   })
 
   panel.mouseover(function(event) {
+
     close.animate({opacity: 1}, {duration: duration, queue: queue})
     panel.animate({backgroundColor: grayGlass}, {duration: duration, queue: queue})
+
   })
 
   panel.mouseout(function(event) {
+
     close.animate({opacity: 0}, {duration: duration, queue: queue})
     panel.animate({backgroundColor: lightGrayGlass}, {duration: duration, queue: queue})
+
   })
 
   close.click(function(event) {
-    id == "mesh" ? panel.remove() : panel.css("visibility", "hidden")
+
+    id == "mesh" ? panel.remove() : updateSettings("panels", id, false)
+
   })
+
+  if (id != "mesh") settings.panels[id] ? panel.css("visibility", "visible") : panel.css("visibility", "hidden")
 
   makeDragable(panel)
 

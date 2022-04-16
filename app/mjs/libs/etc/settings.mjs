@@ -22,6 +22,7 @@ export function getSettings() {
                     "lights": false,
                     "menu": false,
                     "meshes": true,
+                    "settings": false,
                     "shapes": false,
                     "shortcut": true
                   },
@@ -93,6 +94,29 @@ export function updateSuccess(update) {
   let value = update["value"]
 
   settings[category][setting] = value
+
+  switch (category) {
+
+    case "panels":
+
+      let panel = $("#" + setting + ".panel")
+      let checkbox = $("#panels-panel #" + setting + "")
+
+      if (value) {
+
+        panel.css("visibility", "visible")
+        checkbox.prop("checked", true)
+
+      } else {
+
+        panel.css("visibility", "hidden")
+        checkbox.prop("checked", false)
+
+      }
+
+      break
+
+  }
 
   localWrite("settings", settings)
 
