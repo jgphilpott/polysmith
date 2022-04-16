@@ -106,7 +106,7 @@ export function addMeshEvents(mesh) {
 
   events.addEventListener(mesh, "mousemove", function(event) {
 
-    mesh.lock == "locked" ? $("body").css("cursor", "url('app/imgs/icons/cursors/not-allowed.png'), not-allowed") : $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab")
+    mesh.lock == "locked" ? $("body").css("cursor", "not-allowed") : $("body").css("cursor", "grab")
 
     data.outlinePass.selectedObjects = [mesh]
 
@@ -114,7 +114,7 @@ export function addMeshEvents(mesh) {
 
   events.addEventListener(mesh, "mousedown", function(event) {
 
-    makeDragable(mesh, event.origDomEvent)
+    if (mesh.lock != "locked") makeDragable(mesh, event.origDomEvent)
 
   })
 
@@ -159,7 +159,7 @@ export function makeDragable(element, origEvent=null) {
 
       if (element.lock != "locked") {
 
-        $("body").css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
+        $("body").css("cursor", "grabbing")
 
         let coordinates = world2screenCoordinates(element.position.x, element.position.y, element.position.z)
 
@@ -208,7 +208,7 @@ export function makeDragable(element, origEvent=null) {
 
       if (element.lock != "locked") {
 
-        $("body").css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
+        $("body").css("cursor", "grabbing")
 
         let coordinates = screen2worldCoordinates(eventX, eventY, element.position.z)
 
@@ -245,13 +245,13 @@ export function makeDragable(element, origEvent=null) {
 
         element.css({top: eventY, left: eventX})
 
-        element.css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
-        element.children("*").css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
+        element.css("cursor", "grabbing")
+        element.children("*").css("cursor", "grabbing")
 
       } else if (element.hasClass("shape")) {
 
         $(".ghost-shape").css({top: eventY, left: eventX})
-        $("body").css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
+        $("body").css("cursor", "grabbing")
 
       }
 
@@ -265,7 +265,7 @@ export function makeDragable(element, origEvent=null) {
 
       if (element.lock != "locked") {
 
-        $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab")
+        $("body").css("cursor", "grab")
 
         for (let i = 0; i < tooltips.distanceLines.length; i++) { scene.remove(tooltips.distanceLines[i]) }
 
@@ -292,7 +292,7 @@ export function makeDragable(element, origEvent=null) {
 
           addMesh(null, {type: element.attr("id"), position: {x: coordinates.x, y: coordinates.y, z: coordinates.z}})
 
-          $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab")
+          $("body").css("cursor", "grab")
 
         }
 

@@ -34,7 +34,7 @@ function sliderStart(event, slider) {
 
   event.stopPropagation()
 
-  $("*").css("cursor", "url('app/imgs/icons/cursors/grabbing.png'), grabbing")
+  $("body").css("cursor", "grabbing")
 
 }
 
@@ -69,7 +69,7 @@ function sliderStop(event, slider) {
 
   event.stopPropagation()
 
-  $("*").css("cursor", "")
+  $("body").css("cursor", "")
 
 }
 

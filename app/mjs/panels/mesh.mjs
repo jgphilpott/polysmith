@@ -423,7 +423,7 @@ export function updateMesh(mesh, type, key=null, value=null) {
 
     if (value == "setup") {
 
-      $("#canvas").css("cursor", "url('app/imgs/icons/cursors/copy.png'), copy")
+      $("#canvas").css("cursor", "copy")
 
       events.operation.mesh = mesh
       events.operation.key = key
