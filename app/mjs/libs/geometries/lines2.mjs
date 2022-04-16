@@ -19,7 +19,7 @@ export function lineGeometry(vertices=[[10, 10, 10], [-10, -10, -10]]) {
 
 }
 
-export function newLine2(vertices=[[10, 10, 10], [-10, -10, -10]], material="fat", color=black, linewidth=1, dashed=false, dashSize=5, gapSize=3) {
+export function newLine2(vertices=[[10, 10, 10], [-10, -10, -10]], material="fat", color=black, linewidth=1, dashed=false, dashSize=3, gapSize=2) {
 
   let line = new LineMesh(lineGeometry(vertices), lineMaterial(material, color, linewidth, dashed, dashSize, gapSize)).computeLineDistances()
 
@@ -29,7 +29,7 @@ export function newLine2(vertices=[[10, 10, 10], [-10, -10, -10]], material="fat
 
 }
 
-export function addLine2(vertices=[[10, 10, 10], [-10, -10, -10]], material="fat", color=black, linewidth=1, dashed=false, dashSize=5, gapSize=3) {
+export function addLine2(vertices=[[10, 10, 10], [-10, -10, -10]], material="fat", color=black, linewidth=1, dashed=false, dashSize=3, gapSize=2) {
 
   return addMesh(newLine2(vertices, material, color, linewidth, dashed, dashSize, gapSize))
 

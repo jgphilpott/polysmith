@@ -1,7 +1,9 @@
-import {addMesh} from "../../panels/mesh.mjs"
-import {newLine} from "../geometries/lines.mjs"
+import {addMesh, updateMesh} from "../../panels/mesh.mjs"
 
+import {focus} from "../controls/focus.mjs"
+import {newLine} from "../geometries/lines.mjs"
 import {exportFile} from "../files/export.mjs"
+import {contextMenu} from "../../panels/context.mjs"
 
 import {grayGlass, lightGrayGlass} from "../colors/glass/grayscale.mjs"
 
@@ -100,6 +102,50 @@ export function addPanelEvents(panel) {
 
 }
 
+export function addMeshEvents(mesh) {
+
+  events.addEventListener(mesh, "mousemove", function(event) {
+
+    mesh.lock == "locked" ? $("body").css("cursor", "url('app/imgs/icons/cursors/not-allowed.png'), not-allowed") : $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab")
+
+    data.outlinePass.selectedObjects = [mesh]
+
+  })
+
+  events.addEventListener(mesh, "mousedown", function(event) {
+
+    dragable(mesh, event.origDomEvent)
+
+  })
+
+  events.addEventListener(mesh, "mouseout", function(event) {
+
+    data.outlinePass.selectedObjects = []
+
+    $("body").css("cursor", "")
+
+  })
+
+  events.addEventListener(mesh, "click", function(event) {
+
+    updateMesh(mesh, "operation", events.operation.key, null)
+
+  })
+
+  events.addEventListener(mesh, "dblclick", function(event) {
+
+    focus({x: mesh.position.x, y: mesh.position.y, z: mesh.position.z})
+
+  })
+
+  events.addEventListener(mesh, "contextmenu", function(event) {
+
+    contextMenu("mesh", mesh, event.origDomEvent)
+
+  })
+
+}
+
 export function dragable(element, origEvent=null) {
 
   let dragged = null
@@ -184,8 +230,10 @@ export function dragable(element, origEvent=null) {
         let yDistanceLine = newLine([[coordinates.x, 0, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
         let zDistanceLine = newLine([[coordinates.x, coordinates.y, 0], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
 
-        scene.add(xDistanceLine, yDistanceLine, zDistanceLine)
         tooltips.distanceLines.push(xDistanceLine, yDistanceLine, zDistanceLine)
+        scene.add(xDistanceLine, yDistanceLine, zDistanceLine)
+
+        data.outlinePass.selectedObjects = [element]
 
       }
 

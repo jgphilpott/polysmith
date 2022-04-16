@@ -18,7 +18,7 @@ export function lineGeometry(vertices=[[10, 10, 10], [-10, -10, -10]]) {
 
 }
 
-export function newLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=black, linewidth=1, dashed=false, dashSize=5, gapSize=3) {
+export function newLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=black, linewidth=1, dashed=false, dashSize=3, gapSize=2) {
 
   let line = new THREE.Line(lineGeometry(vertices), lineMaterial(material, color, linewidth, dashed, dashSize, gapSize)).computeLineDistances()
 
@@ -28,7 +28,7 @@ export function newLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basi
 
 }
 
-export function addLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=black, linewidth=1, dashed=false, dashSize=5, gapSize=3) {
+export function addLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=black, linewidth=1, dashed=false, dashSize=3, gapSize=2) {
 
   return addMesh(newLine(vertices, material, color, linewidth, dashed, dashSize, gapSize))
 

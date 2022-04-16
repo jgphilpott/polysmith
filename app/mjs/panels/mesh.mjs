@@ -11,11 +11,9 @@ import {newCylinder} from "../libs/geometries/cylinders.mjs"
 import {newSphere} from "../libs/geometries/spheres.mjs"
 import {newTorus} from "../libs/geometries/toruses.mjs"
 
-import {addPanelEvents, dragable} from "../libs/etc/events.mjs"
+import {addPanelEvents, addMeshEvents} from "../libs/etc/events.mjs"
 import {updateMeshesPanel} from "./meshes.mjs"
 import {localMeshes} from "../libs/files/local.mjs"
-import {contextMenu} from "./context.mjs"
-import {focus} from "../libs/controls/focus.mjs"
 
 export function addMeshPanel(mesh, coordinates=null) {
 
@@ -375,14 +373,6 @@ export function addMesh(mesh=null, properties={}) {
     mesh.class ? mesh.class = mesh.class : mesh.class = "custom"
     mesh.lock ? mesh.lock = mesh.lock : mesh.lock = "unlocked"
 
-    events.addEventListener(mesh, "mousemove", function(event) { mesh.lock == "locked" ? $("body").css("cursor", "url('app/imgs/icons/cursors/not-allowed.png'), not-allowed") : $("body").css("cursor", "url('app/imgs/icons/cursors/grab.png'), grab") })
-    events.addEventListener(mesh, "mousedown", function(event) { dragable(mesh, event.origDomEvent) })
-    events.addEventListener(mesh, "mouseout", function(event) { $("body").css("cursor", "") })
-
-    events.addEventListener(mesh, "click", function(event) { updateMesh(mesh, "operation", events.operation.key, null) })
-    events.addEventListener(mesh, "dblclick", function(event) { focus({x: mesh.position.x, y: mesh.position.y, z: mesh.position.z}) })
-    events.addEventListener(mesh, "contextmenu", function(event) { contextMenu("mesh", mesh, event.origDomEvent) })
-
     if (properties.position) {
 
       mesh.position.x = properties.position.x ? properties.position.x : properties.position._x ? properties.position._x : 0
@@ -404,6 +394,7 @@ export function addMesh(mesh=null, properties={}) {
 
     updateMeshesPanel("add", mesh)
     localMeshes("add", mesh)
+    addMeshEvents(mesh)
 
     scene.add(mesh)
 
