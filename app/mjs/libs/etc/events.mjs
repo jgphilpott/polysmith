@@ -98,7 +98,7 @@ export function addPanelEvents(panel) {
     id == "mesh" ? panel.remove() : panel.css("visibility", "hidden")
   })
 
-  dragable(panel)
+  makeDragable(panel)
 
 }
 
@@ -114,7 +114,7 @@ export function addMeshEvents(mesh) {
 
   events.addEventListener(mesh, "mousedown", function(event) {
 
-    dragable(mesh, event.origDomEvent)
+    makeDragable(mesh, event.origDomEvent)
 
   })
 
@@ -146,7 +146,7 @@ export function addMeshEvents(mesh) {
 
 }
 
-export function dragable(element, origEvent=null) {
+export function makeDragable(element, origEvent=null) {
 
   let dragged = null
   let xOffset, yOffset = 0

@@ -1,6 +1,6 @@
 import {addMesh} from "./mesh.mjs"
 import {contextMenu} from "./context.mjs"
-import {addPanelEvents, dragable} from "../libs/etc/events.mjs"
+import {addPanelEvents, makeDragable} from "../libs/etc/events.mjs"
 
 export function addShapesPanel() {
 
@@ -34,7 +34,7 @@ export function addShapesPanel() {
 
   let shapes = $("#shapes.panel img.shape")
 
-  for (let i = 0; i < shapes.length; i++) { dragable($(shapes[i])) }
+  for (let i = 0; i < shapes.length; i++) { makeDragable($(shapes[i])) }
 
   shapes.clickSingleDouble(function(event) {
 

@@ -1,6 +1,6 @@
 import {addMesh} from "./mesh.mjs"
 import {contextMenu} from "./context.mjs"
-import {addPanelEvents, dragable} from "../libs/etc/events.mjs"
+import {addPanelEvents, makeDragable} from "../libs/etc/events.mjs"
 
 import {grayGlass, lightGrayGlass} from "../libs/colors/glass/grayscale.mjs"
 
@@ -32,7 +32,7 @@ export function addShortcutPanel() {
 
   let shortcuts = $("#shortcut.panel img.shape")
 
-  for (let i = 0; i < shortcuts.length; i++) { dragable($(shortcuts[i])) }
+  for (let i = 0; i < shortcuts.length; i++) { makeDragable($(shortcuts[i])) }
 
   shortcuts.dblclick(function(event) { addMesh(null, {type: $(this).attr("id")}) })
   shortcuts.contextmenu(function(event) { contextMenu("shortcut", $(this), event) })
