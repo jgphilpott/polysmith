@@ -16,7 +16,10 @@ export function addEvents() {
 
   $(window).on("resize", function() {
 
-    renderer.setSize(window.innerWidth, window.innerHeight)
+    for (let i = 0; i < axes.length; i++) { if (axes[i].type == "Line2") axes[i].material.resolution.set(window.innerWidth, window.innerHeight) }
+
+    data.renderer.setSize(window.innerWidth, window.innerHeight)
+    data.composer.setSize(window.innerWidth, window.innerHeight)
 
     camera.aspect = window.innerWidth / window.innerHeight
     camera.updateProjectionMatrix()

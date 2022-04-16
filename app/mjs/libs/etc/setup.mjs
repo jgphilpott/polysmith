@@ -47,6 +47,8 @@ export function setup() {
   camera = addPerspectiveCamera()
   data.camera = camera
 
+  addPostProcessing()
+
   addDragControls()
   addFlyControls()
   addZoomControls()
@@ -63,7 +65,24 @@ export function setup() {
 
     requestAnimationFrame(animate)
 
-    renderer.render(scene, camera)
+    data.composer.render()
+
+  }
+
+  function addPostProcessing() {
+
+    data.composer = new THREE.EffectComposer(renderer)
+    data.renderPass = new THREE.RenderPass(scene, camera)
+    data.shaderPass = new THREE.ShaderPass(THREE.CopyShader)
+    data.outlinePass = new THREE.OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight ), scene, camera)
+
+    data.outlinePass.overlayMaterial.blending = THREE.CustomBlending
+    data.outlinePass.visibleEdgeColor.set("#000000")
+    data.outlinePass.hiddenEdgeColor.set("#FFFFFF")
+
+    data.composer.addPass(data.renderPass)
+    data.composer.addPass(data.shaderPass)
+    data.composer.addPass(data.outlinePass)
 
   }
 
