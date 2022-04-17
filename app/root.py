@@ -13,20 +13,19 @@ from mongo.socket.plug import plugin
 from mongo.data.collect.clients.mongo import valid_client
 
 title = "Polymaker"
-source_folder = "app"
 
-app = Flask(title, template_folder=source_folder, static_folder=source_folder)
+src_dir = "app"
+libs_dir = src_dir + "/libs"
+js_libs_dir = libs_dir + "/js"
+css_libs_dir = libs_dir + "/css"
+
+app = Flask(title, template_folder=src_dir, static_folder=src_dir)
 
 app.jinja_env.auto_reload = True
 app.config["SECRET_KEY"] = urandom(42).hex()
 
 Popen(["boussole", "watch"], cwd="app/config")
 compile(dirname=("app/sass", "app/css"), output_style="compressed")
-
-libs_dir = "app/libs"
-
-js_libs_dir = libs_dir + "/js"
-css_libs_dir = libs_dir + "/css"
 
 if not exists(libs_dir):
 

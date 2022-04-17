@@ -1,3 +1,1 @@
- - [Collection](https://www.thingiverse.com/jgphilpott/collections/calibration)
- - [Thing](https://www.thingiverse.com/thing:4623208)
- - [Make](https://www.thingiverse.com/make:856248)
+[Thingiverse Calibration Collection](https://www.thingiverse.com/jgphilpott/collections/calibration)
