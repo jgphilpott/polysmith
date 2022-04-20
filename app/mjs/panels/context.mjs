@@ -72,7 +72,13 @@ export function contextMenu(type, element, event) {
 
   }
 
-  $("#context-menu.panel p").click(function() { contextMenu.remove() })
+  $("#context-menu.panel p").click(function() {
+
+    contextMenu.remove()
+
+    data.outlinePass.selectedObjects = []
+
+  })
 
   contextMenu.css("z-index", events.zIndex + 1)
 

@@ -19,8 +19,8 @@ function sliderFill(slider, colorOne="#3273f6", colorTwo="#efefef") {
 
 function sliderStyle(slider) {
 
-  slider.find("span").mouseover(function() { sliderFill($(this).parent(), "#3273f6", "#e6e6e6") })
-  slider.find("span").mouseout(function() { sliderFill($(this).parent()) })
+  slider.find("span").mouseover(function() { if (!events.slider) sliderFill($(this).parent(), "#3273f6", "#e6e6e6") })
+  slider.find("span").mouseout(function() { if (!events.slider) sliderFill($(this).parent()) })
 
   slider.find("span").unbind("keydown")
 
@@ -32,9 +32,14 @@ function sliderStart(event, slider) {
 
   $(this).focus()
 
+  events.slider = true
+
   event.stopPropagation()
 
-  $("*").css("cursor", "grabbing")
+  let panel = $(this).closest(".panel")
+
+  panel.css("cursor", "grabbing")
+  panel.find("*").css("cursor", "grabbing")
 
 }
 
@@ -69,9 +74,14 @@ function sliderStop(event, slider) {
 
   sliderFill($(this))
 
+  events.slider = false
+
   event.stopPropagation()
 
-  $("*").css("cursor", "")
+  let panel = $(this).closest(".panel")
+
+  panel.css("cursor", "")
+  panel.find("*").css("cursor", "")
 
 }
 

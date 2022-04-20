@@ -119,9 +119,25 @@ export function addMeshEvents(mesh) {
 
   events.addEventListener(mesh, "mousemove", function(event) {
 
-    mesh.lock == "locked" ? $("#canvas").css("cursor", "not-allowed") : $("#canvas").css("cursor", "grab")
+    if (!events.operation.key) {
 
-    data.outlinePass.selectedObjects = [mesh]
+      if (mesh.lock == "locked") {
+
+        $("#canvas").css("cursor", "not-allowed")
+
+      } else {
+
+        $("#canvas").css("cursor", "grab")
+
+        data.outlinePass.selectedObjects = [mesh]
+
+      }
+
+    } else {
+
+      events.operation.mesh.uuid == mesh.uuid || mesh.lock == "locked" ? $("#canvas").css("cursor", "not-allowed") : data.outlinePass.selectedObjects = [mesh]
+
+    }
 
   })
 
@@ -135,7 +151,7 @@ export function addMeshEvents(mesh) {
 
     data.outlinePass.selectedObjects = []
 
-    $("#canvas").css("cursor", "")
+    !events.operation.key ? $("#canvas").css("cursor", "") : $("#canvas").css("cursor", "copy")
 
   })
 
@@ -263,7 +279,7 @@ export function makeDragable(element, origEvent=null) {
         element.css({top: eventY, left: eventX})
 
         element.css("cursor", "grabbing")
-        element.children("*").css("cursor", "grabbing")
+        element.find("*").css("cursor", "grabbing")
 
       } else if (element.hasClass("shape")) {
 
@@ -299,7 +315,7 @@ export function makeDragable(element, origEvent=null) {
       if (element.hasClass("panel")) {
 
         element.css("cursor", "")
-        element.children("*").css("cursor", "")
+        element.find("*").css("cursor", "")
 
       } else if (element.hasClass("shape")) {
 
