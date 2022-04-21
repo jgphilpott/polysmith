@@ -24,6 +24,7 @@ app = Flask(title, template_folder=src_dir, static_folder=src_dir)
 app.jinja_env.auto_reload = True
 app.config["SECRET_KEY"] = urandom(42).hex()
 
+Popen(["coffee", "-cbw", src_dir])
 Popen(["boussole", "watch"], cwd="app/config")
 compile(dirname=("app/sass", "app/css"), output_style="compressed")
 

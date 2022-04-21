@@ -1,6 +1,6 @@
 import {getSettings} from "./settings.mjs"
 import {localMeshes} from "../files/local.mjs"
-import {black, white} from "../colors/three/grayscale.mjs"
+import {black, white} from "../colors/three/grayscale.js"
 
 import {addAmbientLight} from "../lights/ambient.mjs"
 import {addDirectionalLight} from "../lights/directional.mjs"

@@ -1,4 +1,4 @@
-import {black} from "../colors/three/grayscale.mjs"
+import {black} from "../colors/three/grayscale.js"
 import {addMesh} from "../../panels/mesh.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 

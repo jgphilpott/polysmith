@@ -1,8 +1,9 @@
 ### Config ###
-.env
-venv
-.DS_Store
+.bash_history
 .sonarlint
+.DS_Store
+venv
+.env
 
 ### Models ###
 *.gcode
@@ -14,11 +15,15 @@ venv
 app/libs
 
 ### Python ###
-__pycache__
 *.ipynb_checkpoints
+__pycache__
 
-### Styling ###
-app/css
-*.css.map
-*.sass.map
+### Styles ###
 .sass-cache
+*.sass.map
+*.css.map
+app/css
+
+### Scripts ###
+app/mjs/libs/colors/*/*.js
+.npm

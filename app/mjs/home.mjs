@@ -2,8 +2,8 @@ import {setup} from "./libs/etc/setup.mjs"
 
 import {joinMesh, cutMesh, intersectMesh} from "../libs/js/meshOperations.mjs"
 
-import {black, white, grayscale} from "./libs/colors/three/grayscale.mjs"
-import {red, orange, yellow, green, blue, purple, pink, rainbow} from "./libs/colors/three/rainbow.mjs"
+import {black, white, grayscale} from "./libs/colors/three/grayscale.js"
+import {red, orange, yellow, green, blue, purple, pink, rainbow} from "./libs/colors/three/rainbow.js"
 
 import {lineMaterial} from "./libs/materials/line.mjs"
 import {meshMaterial} from "./libs/materials/mesh.mjs"

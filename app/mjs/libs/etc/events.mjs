@@ -4,7 +4,7 @@ import {exportFile} from "../files/export.mjs"
 import {contextMenu} from "../../panels/context.mjs"
 import {updateSettings} from "./settings.mjs"
 import {addMesh, updateMesh} from "../../panels/mesh.mjs"
-import {grayGlass, lightGrayGlass} from "../colors/glass/grayscale.mjs"
+import {grayGlass, lightGrayGlass} from "../colors/glass/grayscale.js"
 
 export function addEvents() {
 

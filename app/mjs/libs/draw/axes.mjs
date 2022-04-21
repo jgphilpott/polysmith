@@ -5,8 +5,8 @@ import {newLine} from "../geometries/lines.mjs"
 import {newLine2} from "../geometries/lines2.mjs"
 import {newSphere} from "../geometries/spheres.mjs"
 
-import {black, white} from "../colors/three/grayscale.mjs"
-import {red, orange, yellow, green, blue, purple, pink} from "../colors/three/rainbow.mjs"
+import {black, white} from "../colors/three/grayscale.js"
+import {red, orange, yellow, green, blue, purple, pink} from "../colors/three/rainbow.js"
 
 let segments = 25
 let radius = scale / 100

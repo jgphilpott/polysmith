@@ -2,7 +2,7 @@ import {LineGeometry} from "../../../libs/js/LineGeometry.mjs"
 import {lineMaterial} from "../materials/line.mjs"
 import {LineMesh} from "../../../libs/js/LineMesh.mjs"
 
-import {black} from "../colors/solid/grayscale.mjs"
+import {black} from "../colors/solid/grayscale.js"
 import {addMesh} from "../../panels/mesh.mjs"
 
 export function lineGeometry(vertices=[[10, 10, 10], [-10, -10, -10]]) {

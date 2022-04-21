@@ -1,6 +1,6 @@
 // Link: https://threejs.org/docs/#api/en/objects/Line
 
-import {black} from "../colors/three/grayscale.mjs"
+import {black} from "../colors/three/grayscale.js"
 import {addMesh} from "../../panels/mesh.mjs"
 import {lineMaterial} from "../materials/line.mjs"
 

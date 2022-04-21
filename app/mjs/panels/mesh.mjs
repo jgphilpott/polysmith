@@ -1,8 +1,8 @@
 import {joinMesh, cutMesh, intersectMesh} from "../../libs/js/meshOperations.mjs"
 
-import * as glassGrayscale from "../libs/colors/glass/grayscale.mjs"
-import * as threeGrayscale from "../libs/colors/three/grayscale.mjs"
-import * as threeRainbow from "../libs/colors/three/rainbow.mjs"
+import * as glassGrayscale from "../libs/colors/glass/grayscale.js"
+import * as threeGrayscale from "../libs/colors/three/grayscale.js"
+import * as threeRainbow from "../libs/colors/three/rainbow.js"
 
 import {meshMaterial} from "../libs/materials/mesh.mjs"
 

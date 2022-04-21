@@ -1,6 +1,6 @@
 // Link: https://threejs.org/docs/#api/en/lights/PointLight
 
-import {white} from "../colors/three/grayscale.mjs"
+import {white} from "../colors/three/grayscale.js"
 
 export function addPointLight(position=scale) {
 
