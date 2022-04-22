@@ -3,184 +3,186 @@
 
 #menu.panel
 
-  visibility: hidden
+    visibility: hidden
 
-  top: 33%
-  left: 50%
+    top: 33%
+    left: 50%
 
-  transform: translate(-50%, -50%)
+    width: 240px
 
-  .sub-panel
+    transform: translate(-50%, -50%)
 
-    width: 220px
+    .sub-panel
 
-    display: none
-    vertical-align: top
+        width: 220px
 
-    #title, h3
+        display: none
+        vertical-align: top
 
-      padding: 30px
+        #title, h3
 
-      text-align: center
+            padding: 30px
 
-  .option
+            text-align: center
 
-    text-align: center
+    .option
 
-    border: 1px solid $black
-    border-radius: 5px
+        text-align: center
 
-    padding: 5px
-
-    margin: 10px
-    margin-top: 20px
-
-  .option:hover
-
-    cursor: pointer
-
-  .opt
-
-    width: 40%
-
-    margin-top: 10px
-
-  #main
-
-    display: inline-block
-
-    .head
-
-      display: flex
-      align-items: center
-      justify-content: center
-
-      padding: 5px
-
-      #logo
-
-        float: left
-
-        width: 75px
-        height: 75px
+        border: 1px solid $black
+        border-radius: 5px
 
         padding: 5px
 
-      #title
+        margin: 10px
+        margin-top: 20px
 
-        float: left
+    .option:hover
 
-        padding: 5px
+        cursor: pointer
 
-    #signup,
-    #profile
+    .opt
 
-      float: left
+        width: 40%
 
-    #login,
-    #logout
+        margin-top: 10px
 
-      float: right
+    #main
 
-  #export-import-panel
+        display: inline-block
 
-    #stl,
-    #obj,
-    #import
+        .head
 
-      width: 90px
+            padding: 5px
 
-    #stl,
-    #obj
+            display: flex
+            align-items: center
+            justify-content: center
 
-      display: inline-block
+            #logo
 
-    #import
+                float: left
 
-      margin: auto
+                width: 75px
+                height: 75px
 
-    input[type=file]
+                padding: 5px
 
-      display: none
+            #title
 
-  #panels-panel
+                float: left
 
-    form
+                padding: 5px
 
-      margin: 14px
+        #signup,
+        #profile
 
-      div
+            float: left
 
-        display: flex
-        align-items: center
+        #login,
+        #logout
+
+            float: right
+
+    #export-import-panel
+
+        #stl,
+        #obj,
+        #import
+
+            width: 90px
+
+        #stl,
+        #obj
+
+            display: inline-block
+
+        #import
+
+            margin: auto
+
+        input[type=file]
+
+            display: none
+
+    #panels-panel
+
+        form
+
+            margin: 14px
+
+            div
+
+                display: flex
+                align-items: center
+
+                input
+
+                    cursor: pointer
+
+                label
+
+                    margin: 7px
+
+                    cursor: grab
+
+    #settings-panel
+
+    #signup-panel,
+    #login-panel
 
         input
 
-          cursor: pointer
+            display: block
 
-        label
+            text-align: center
 
-          margin: 7px
+            margin: 20px auto
+            padding: 5px
+            height: 30px
 
-          cursor: grab
+            border: 1px solid $black
+            border-radius: 15px
 
-  #settings-panel
+            box-shadow: none
+            outline: none
 
-  #signup-panel,
-  #login-panel
+        input:focus
 
-    input
+            box-shadow: 0 0 5px $blue !important
 
-      display: block
+        input[type=email],
+        input[type=password]
 
-      text-align: center
+            width: 175px
 
-      margin: 20px auto
-      padding: 5px
-      height: 30px
+        input[type=submit]
 
-      border: 1px solid $black
-      border-radius: 15px
+            padding: 5px 25px
 
-      box-shadow: none
-      outline: none
+            border-radius: 5px
 
-    input:focus
+            box-shadow: none !important
+            background: transparent
 
-      box-shadow: 0 0 5px $blue !important
+            cursor: pointer
 
-    input[type=email],
-    input[type=password]
+    #profile-panel
 
-      width: 175px
+        text-align: center
 
-    input[type=submit]
+        img
 
-      padding: 5px 25px
+            width: 75px
+            height: 75px
 
-      border-radius: 5px
+            display: block
+            margin: 20px auto
 
-      box-shadow: none !important
-      background: transparent
+        h4
 
-      cursor: pointer
+            margin: 10px auto
 
-  #profile-panel
+        p
 
-    text-align: center
-
-    img
-
-      width: 75px
-      height: 75px
-
-      display: block
-      margin: 20px auto
-
-    h4
-
-      margin: 10px auto
-
-    p
-
-      margin: 5px auto
+            margin: 5px auto

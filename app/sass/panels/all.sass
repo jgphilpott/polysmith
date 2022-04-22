@@ -16,63 +16,63 @@
 
 .panel
 
-  position: fixed
-
-  background: $light-gray-glass
-  backdrop-filter: blur(3px)
-
-  border: 1px solid $black
-  border-radius: 5px
-
-  padding: 5px
-
-  .close
-
     position: fixed
 
-    margin: 5px
+    background: $light-gray-glass
+    backdrop-filter: blur(3px)
 
-    opacity: 0
+    border: 1px solid $black
+    border-radius: 5px
 
-    top: 0px
-    left: 0px
+    padding: 5px
 
-    width: 7px
-    height: 7px
+    .close
 
-  .close:hover
+        position: fixed
 
-    cursor: pointer
+        margin: 5px
 
-  .slider
+        opacity: 0
 
-    height: 7px
+        top: 0px
+        left: 0px
 
-    outline: none
-    pointer-events: none
+        width: 7px
+        height: 7px
 
-    border: 1px solid $dark-gray !important
-    border-radius: 5px !important
+    .close:hover
 
-    span
+        cursor: pointer
 
-      width: 15px
-      height: 15px
+    .slider
 
-      outline: none
-      pointer-events: auto
+        height: 7px
 
-      border: none !important
-      border-radius: 50% !important
+        outline: none
+        pointer-events: none
 
-      cursor: pointer
+        border: 1px solid $dark-gray !important
+        border-radius: 5px !important
 
-  .slider.disabled
+        span
 
-    span
+            width: 15px
+            height: 15px
 
-      cursor: not-allowed
+            outline: none
+            pointer-events: auto
+
+            border: none !important
+            border-radius: 50% !important
+
+            cursor: pointer
+
+    .slider.disabled
+
+        span
+
+            cursor: not-allowed
 
 .panel:hover
 
-  cursor: grab
+    cursor: grab

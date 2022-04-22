@@ -6,256 +6,250 @@
 
 #mesh.panel
 
-  width: 250px
+    width: 250px
 
-  text-align: center
+    text-align: center
 
-  transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%)
 
-  h3, h4, p, input, button
-
-    margin: 5px
-
-  #operations
-
-    img.operation
-
-      margin: 5px
-
-      width: 25px
-      height: 25px
-
-    img.operation:hover
-
-      cursor: pointer
-
-    img.operation.disabled:hover
-
-      cursor: not-allowed
-
-  #colors
-
-    display: block
-
-    margin: 5px
-
-    .color
-
-      display: inline-block
-
-      margin: 2px
-
-      width: 15px
-      height: 15px
-
-      border: 1px solid $dark-gray
-      border-radius: 50%
-
-    .color:hover
-
-      border: 1px dotted $black
-
-      cursor: pointer
-
-    .color.selected
-
-      border: 1px solid $black !important
-
-    .color.disabled
-
-      border: 1px solid $dark-gray !important
-
-      cursor: not-allowed
-
-    #red
-
-      background-color: $red
-
-    #orange
-
-      background-color: $orange
-
-    #yellow
-
-      background-color: $yellow
-
-    #green
-
-      background-color: $green
-
-    #blue
-
-      background-color: $blue
-
-    #purple
-
-      background-color: $purple
-
-    #pink
-
-      background-color: $pink
-
-    #white
-
-      background-color: $white
-
-    #gray
-
-      background-color: $gray
-
-    #black
-
-      background-color: $black
-
-  #tools
-
-    display: flex
-    align-items: center
-    justify-content: center
-
-    margin: 5px
-    margin-top: 14px
-    margin-bottom: 12px
-
-    img.tool
-
-      margin: auto
-      display: block
-
-      width: 22.5px
-      height: 22.5px
-
-    img#eye
-
-      height: 17.5px
-
-    img#trash
-
-      width: 16.5px
-
-    img#eye.disabled
-
-      opacity: 0.5
-
-    img#trash.disabled
-
-      opacity: 0.5
-
-    img.tool:hover
-
-      cursor: pointer
-
-    img.disabled:hover
-
-      cursor: not-allowed
-
-    #visibility
-
-      width: 100px
-
-      margin-left: 5px
-      margin-right: 5px
-
-  #meta
-
-    text-align: left
-
-  #properties,
-  #position,
-  #rotation,
-  #scale
-
-    .head
-
-      display: flex
-      align-items: center
-
-      img.fold
-
-        padding: 3px
-
-        width: 10px
-        height: 15px
-
-      h4
+    h3, h4, p, label, input, button
 
         margin: 5px
 
-      img.fold:hover,
-      h4:hover
+    #operations
 
-        cursor: pointer
+        img.operation
 
-    .body
+            margin: 5px
 
-      display: none
+            width: 25px
+            height: 25px
 
-      span
+        img.operation:hover
 
-        margin: 0px 5px
+            cursor: pointer
+
+        img.operation.disabled:hover
+
+            cursor: not-allowed
+
+    #colors
+
+        margin: 5px
+
+        display: block
+
+        .color
+
+            display: inline-block
+
+            margin: 2px
+
+            width: 15px
+            height: 15px
+
+            border: 1px solid $dark-gray
+            border-radius: 50%
+
+        .color:hover
+
+            border: 1px dotted $black
+
+            cursor: pointer
+
+        .color.selected
+
+            border: 1px solid $black !important
+
+        .color.disabled
+
+            border: 1px solid $dark-gray !important
+
+            cursor: not-allowed
+
+        #red
+
+            background-color: $red
+
+        #orange
+
+            background-color: $orange
+
+        #yellow
+
+            background-color: $yellow
+
+        #green
+
+            background-color: $green
+
+        #blue
+
+            background-color: $blue
+
+        #purple
+
+            background-color: $purple
+
+        #pink
+
+            background-color: $pink
+
+        #white
+
+            background-color: $white
+
+        #gray
+
+            background-color: $gray
+
+        #black
+
+            background-color: $black
+
+    #tools
+
+        margin: 12px 5px
 
         display: flex
         align-items: center
         justify-content: center
 
-        #x
+        img.tool
 
-          color: $red
+            margin: auto
+            display: block
 
-        #y
+            width: 22.5px
+            height: 22.5px
 
-          color: $green
+        img#eye
 
-        #z
+            height: 17.5px
 
-          color: $blue
+        img#trash
 
-        input, button
+            width: 16.5px
 
-          border: 1px solid $black
-          border-radius: 5px
+        img.disabled
 
-        input
+            opacity: 0.5
 
-          width: 125px
-          padding: 3px
+        img.tool:hover
 
-          appearance: textfield
+            cursor: pointer
 
-        input:focus
+        img.disabled:hover
 
-          outline: none
+            cursor: not-allowed
 
-        input.disabled
+        #visibility
 
-          color: $dark-gray
+            margin: 0px 5px
 
-        input.disabled:hover
+            width: 100px
 
-          cursor: not-allowed
+    #meta
 
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button
+        text-align: left
 
-          -webkit-appearance: none
+    #properties,
+    #position,
+    #rotation,
+    #scale
 
-        button#plus
+        .head
 
-          background-color: $green-glass
+            display: flex
+            align-items: center
 
-        button#minus
+            img.fold
 
-          background-color: $red-glass
+                padding: 3px
 
-        button#plus.disabled,
-        button#minus.disabled
+                width: 10px
+                height: 15px
 
-          background-color: $dark-gray-glass
+            img.fold:hover,
+            h4:hover
 
-        button:hover
+                cursor: pointer
 
-          cursor: pointer
+        .body
 
-        button.disabled:hover
+            padding: 1px
+            display: none
 
-          cursor: not-allowed
+            span
+
+                margin: 0px 5px
+
+                display: flex
+                align-items: center
+                justify-content: center
+
+                #x
+
+                    color: $red
+
+                #y
+
+                    color: $green
+
+                #z
+
+                    color: $blue
+
+                label
+
+                    cursor: grab
+
+                input, button
+
+                    border: 1px solid $black
+                    border-radius: 5px
+
+                input
+
+                    width: 125px
+                    padding: 3px
+
+                    appearance: textfield
+
+                input:focus
+
+                    outline: none
+
+                input.disabled
+
+                    color: $dark-gray
+
+                input.disabled:hover
+
+                    cursor: not-allowed
+
+                input::-webkit-outer-spin-button,
+                input::-webkit-inner-spin-button
+
+                    -webkit-appearance: none
+
+                button#plus
+
+                    background-color: $green-glass
+
+                button#minus
+
+                    background-color: $red-glass
+
+                button#plus.disabled,
+                button#minus.disabled
+
+                    background-color: $dark-gray-glass
+
+                button:hover
+
+                    cursor: pointer
+
+                button.disabled:hover
+
+                    cursor: not-allowed

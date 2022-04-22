@@ -6,146 +6,145 @@
 
 #camera.panel
 
-  visibility: visible
+    visibility: visible
 
-  top: 50%
-  left: 10px
+    top: 50%
+    left: 10px
 
-  width: 180px
+    width: 180px
 
-  transform: translate(0%, -50%)
+    transform: translate(0%, -50%)
 
-  img.camera
-
-    display: block
-
-    width: 100px
-    height: 80px
-
-    margin: 10px auto
-
-  #position,
-  #target,
-  #speed
-
-    .head
-
-      display: flex
-      align-items: center
-
-      img.fold
-
-        padding: 3px
-
-        width: 10px
-        height: 15px
-
-      h4
+    h3, h4, p, label, input, button
 
         margin: 5px
 
-      img.fold:hover,
-      h4:hover
+    img.camera
 
-        cursor: pointer
+        display: block
 
-    .body
+        margin: 10px auto
 
-      padding: 1px
-      display: none
+        width: 100px
+        height: 80px
 
-  #position,
-  #target
+    #position,
+    #target,
+    #speed
 
-    .body
+        .head
 
-      span
+            display: flex
+            align-items: center
 
-        margin: 0px 5px
+            img.fold
 
-        display: flex
-        align-items: center
-        justify-content: center
+                padding: 3px
 
-        #x
+                width: 10px
+                height: 15px
 
-          color: $red
+            img.fold:hover,
+            h4:hover
 
-        #y
+                cursor: pointer
 
-          color: $green
+        .body
 
-        #z
+            padding: 1px
+            display: none
 
-          color: $blue
+    #position,
+    #target
 
-        input, button
+        .body
 
-          margin: 5px
+            span
 
-          border: 1px solid $black
-          border-radius: 5px
+                margin: 0px 5px
 
-        input
+                display: flex
+                align-items: center
+                justify-content: center
 
-          width: 55px
-          padding: 3px
+                #x
 
-          appearance: textfield
+                    color: $red
 
-        input:focus
+                #y
 
-          outline: none
+                    color: $green
 
-        input.disabled
+                #z
 
-          color: $dark-gray
+                    color: $blue
 
-        input.disabled:hover
+                label
 
-          cursor: not-allowed
+                    cursor: grab
 
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button
+                input, button
 
-          -webkit-appearance: none
+                    border: 1px solid $black
+                    border-radius: 5px
 
-        button#plus
+                input
 
-          background-color: $green-glass
+                    width: 55px
+                    padding: 3px
 
-        button#minus
+                    appearance: textfield
 
-          background-color: $red-glass
+                input:focus
 
-        button#plus.disabled,
-        button#minus.disabled
+                    outline: none
 
-          background-color: $dark-gray-glass
+                input.disabled
 
-        button:hover
+                    color: $dark-gray
 
-          cursor: pointer
+                input.disabled:hover
 
-        button.disabled:hover
+                    cursor: not-allowed
 
-          cursor: not-allowed
+                input::-webkit-outer-spin-button,
+                input::-webkit-inner-spin-button
 
-  #speed
+                    -webkit-appearance: none
 
-    .body
+                button#plus
 
-      display: block
+                    background-color: $green-glass
 
-      p
+                button#minus
 
-        margin: 5px
+                    background-color: $red-glass
 
-        text-align: center
+                button#plus.disabled,
+                button#minus.disabled
 
-      .slider
+                    background-color: $dark-gray-glass
 
-        width: 130px
+                button:hover
 
-        margin: 15px auto
-        margin-top: 10px
+                    cursor: pointer
+
+                button.disabled:hover
+
+                    cursor: not-allowed
+
+    #speed
+
+        .body
+
+            display: block
+
+            p
+
+                text-align: center
+
+            .slider
+
+                width: 130px
+
+                margin: 15px auto

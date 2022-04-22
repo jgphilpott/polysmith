@@ -5,125 +5,126 @@
 
 *
 
-  margin: 0px
-  box-sizing: border-box
+    margin: 0px
+    box-sizing: border-box
 
 ::-webkit-scrollbar
 
-  display: none
+    display: none
 
 @font-face
 
-  font-family: "polyfont"
-  src: url("../fonts/TTF/polyfont.ttf") format("truetype")
+    font-family: "polyfont"
+    src: url("../fonts/TTF/polyfont.ttf") format("truetype")
 
 body
 
-  font-family: "polyfont"
-  cursor: default
+    font-family: "polyfont"
+    cursor: default
 
 canvas
 
-  outline: none
-  cursor: move
+    outline: none
+    cursor: move
 
 label, input, img, h1, h2, h3, h4, h5, h6, p, a
 
-  -webkit-user-select: none
-  -khtml-user-select: none
-  -moz-user-select: none
-  -o-user-select: none
-  user-select: none
+    -webkit-user-select: none
+    -khtml-user-select: none
+    -moz-user-select: none
+    -o-user-select: none
+    user-select: none
 
-  -webkit-user-drag: none
-  -khtml-user-drag: none
-  -moz-user-drag: none
-  -o-user-drag: none
-  user-drag: none
+    -webkit-user-drag: none
+    -khtml-user-drag: none
+    -moz-user-drag: none
+    -o-user-drag: none
+    user-drag: none
 
 h1
 
-  font-size: 34px
+    font-size: 34px
 
 h2
 
-  font-size: 28px
+    font-size: 28px
 
 h3
 
-  font-size: 22px
+    font-size: 22px
 
 h4
 
-  font-size: 16px
+    font-size: 16px
 
 p, label
 
-  font-size: 14px
+    font-size: 14px
 
 a:hover
 
-  cursor: pointer
+    cursor: pointer
 
 #nav
 
-  width: 100%
+    width: 100%
 
-  display: flex
-  position: fixed
-  align-items: center
+    display: flex
+    position: fixed
+    align-items: center
 
-  background-color: $black
+    background-color: $black
 
-  #menu
+    #menu
 
-    width: 50px
-    height: 50px
+        width: 50px
+        height: 50px
 
-  #menu:hover
+    #menu:hover
 
-    cursor: pointer
+        cursor: context-menu
 
-  #title
+    #title
 
-    color: $white
-    position: absolute
+        color: $white
 
-    left: 50%
-    transform: translate(-50%, 0%)
+        position: absolute
+
+        left: 50%
+        transform: translate(-50%, 0%)
 
 #forkme
 
-  position: fixed
+    position: fixed
 
-  top: 0px
-  right: 0px
+    top: 0px
+    right: 0px
 
-  width: 150px
-  height: 150px
+    width: 150px
+    height: 150px
 
-  z-index: 999999999
+    z-index: 999999999
 
-  clip-path: polygon(15px 0px, 60px 0px, 150px 90px, 150px 135px)
+    clip-path: polygon(15px 0px, 60px 0px, 150px 90px, 150px 135px)
 
 #metabox
 
-  position: fixed
+    position: fixed
 
-  left: 0%
-  top: 100%
+    left: 0%
+    top: 100%
 
-  transform: translate(0%, -100%)
+    transform: translate(0%, -100%)
 
 #help
 
-  cursor: pointer
-  position: fixed
+    cursor: pointer
+    position: fixed
 
-  width: 30px
-  height: 30px
+    width: 27px
+    height: 27px
 
-  top: calc(100% - 30px)
-  left: calc(100% - 30px)
+    top: calc(100% - 27px)
+    left: calc(100% - 27px)
 
-  transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%)
