@@ -2,7 +2,6 @@ import {exportFile} from "../libs/files/export.mjs"
 import {importFile} from "../libs/files/import.mjs"
 
 import {addPanelEvents} from "../libs/etc/events.mjs"
-import {updateSettings} from "../libs/etc/settings.mjs"
 
 export function addMenuPanel() {
 

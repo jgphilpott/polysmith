@@ -25,6 +25,8 @@ export function focus(obj, duration=1000, steps=100) {
 
     }
 
+    updateSettings("camera", "target", {x: obj.x, y: obj.y, z: obj.z})
+
     return true
 
   } else {

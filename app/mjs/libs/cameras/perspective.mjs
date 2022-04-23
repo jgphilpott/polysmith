@@ -1,13 +1,16 @@
 // Link: https://threejs.org/docs/#api/en/cameras/PerspectiveCamera
-export function addPerspectiveCamera(position=scale) {
+export function addPerspectiveCamera() {
 
-  let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+  let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, scale / 1000, scale * 10)
+
+  let position = settings.camera.position
+  let target = settings.camera.target
 
   camera.up.set(0, 0, 1)
-  camera.position.set(position * 1.35, position * 1.35, position * 0.55)
+  camera.target = target
 
-  camera.target = {x: 0, y: 0, z: 0}
-  camera.lookAt(camera.target.x, camera.target.y, camera.target.z)
+  camera.position.set(position.x, position.y, position.z)
+  camera.lookAt(target.x, target.y, target.z)
 
   return camera
 

@@ -71,6 +71,8 @@ export function addDragControls() {
     document.onmouseup = null
     document.onmousemove = null
 
+    updateSettings("camera", "position", position)
+
   }
 
   $("#canvas").mousedown(start)

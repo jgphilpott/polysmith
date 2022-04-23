@@ -1,4 +1,4 @@
-export function getSettings() {
+function getSettings() {
 
   let localSettings = localRead("settings")
 
@@ -13,36 +13,39 @@ export function getSettings() {
   } else {
 
     settings = {
-                  "ui": {
-                    "nav": "black",
-                    "forkme": true
+                  ui: {
+                    nav: "black",
+                    forkme: true
                   },
-                  "panels": {
-                    "camera": true,
-                    "lights": false,
-                    "menu": false,
-                    "meshes": true,
-                    "settings": false,
-                    "shapes": false,
-                    "shortcut": true
+                  panels: {
+                    camera: true,
+                    lights: false,
+                    menu: false,
+                    meshes: true,
+                    settings: false,
+                    shapes: false,
+                    shortcut: true
                   },
-                  "axes": {
-                    "axesCaps": true,
-                    "xyPlane": false,
-                    "xzPlane": false,
-                    "yzPlane": false,
-                    "xyPlaneStep": 10,
-                    "xzPlaneStep": 10,
-                    "yzPlaneStep": 10,
-                    "gridSnap": 1
+                  axes: {
+                    axesCaps: true,
+                    xyPlane: false,
+                    xzPlane: false,
+                    yzPlane: false,
+                    xyPlaneStep: 10,
+                    xzPlaneStep: 10,
+                    yzPlaneStep: 10,
+                    gridSnap: 1
                   },
-                  "controls": {
-                    "flySpeed": 50,
-                    "spinSpeed": 50,
-                    "dragSpeed": 50,
-                    "zoomSpeed": 1000,
-                    "zoomMax": 500,
-                    "zoomMin": 1
+                  camera: {
+                    position: {x: 135, y: 135, z: 55},
+                    target: {x: 0, y: 0, z: 0}
+                  },
+                  controls: {
+                    dragSpeed: 25,
+                    flySpeed: 25,
+                    zoomSpeed: 25,
+                    zoomMax: 500,
+                    zoomMin: 1
                   }
                }
 
@@ -57,7 +60,7 @@ export function getSettings() {
 
 }
 
-export function updateSettings(category, setting, value) {
+function updateSettings(category, setting, value) {
 
   try {
 
@@ -87,7 +90,7 @@ export function updateSettings(category, setting, value) {
 
 }
 
-export function updateSuccess(update) {
+function updateSuccess(update) {
 
   let category = update["category"]
   let setting = update["setting"]
@@ -124,7 +127,7 @@ export function updateSuccess(update) {
 
 }
 
-export function updateFailed(update) {
+function updateFailed(update) {
 
   let category = update["category"]
   let setting = update["setting"]

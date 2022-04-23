@@ -39,11 +39,14 @@ class Client():
                                     "yzPlaneStep": 10,
                                     "gridSnap": 1
                                 },
+                                "camera": {
+                                    "position": {"x": 135, "y": 135, "z": 55},
+                                    "target": {"x": 0, "y": 0, "z": 0}
+                                },
                                 "controls": {
-                                    "flySpeed": 50,
-                                    "spinSpeed": 50,
-                                    "dragSpeed": 50,
-                                    "zoomSpeed": 1000,
+                                    "dragSpeed": 25,
+                                    "flySpeed": 25,
+                                    "zoomSpeed": 25,
                                     "zoomMax": 500,
                                     "zoomMin": 1
                                 }

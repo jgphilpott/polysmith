@@ -2,7 +2,6 @@ import {focus} from "../controls/focus.mjs"
 import {newLine} from "../geometries/lines.mjs"
 import {exportFile} from "../files/export.mjs"
 import {contextMenu} from "../../panels/context.mjs"
-import {updateSettings} from "./settings.mjs"
 import {addMesh, updateMesh} from "../../panels/mesh.mjs"
 import {grayGlass, lightGrayGlass} from "../colors/glass/grayscale.js"
 

@@ -1,14 +1,18 @@
 export function addZoomControls() {
 
+  let zoomTimeout = null
+
   $("#canvas").on("wheel", function(event) {
 
     event.preventDefault()
     event.stopPropagation()
 
+    clearTimeout(zoomTimeout)
+
     let zoomMax = settings.controls.zoomMax
     let zoomMin = settings.controls.zoomMin
-    let zoomSpeed = settings.controls.zoomSpeed
-    let zoomDelta = event.originalEvent.wheelDelta / zoomSpeed
+    let zoomSpeed = settings.controls.zoomSpeed / 50000
+    let zoomDelta = event.originalEvent.wheelDelta * zoomSpeed
 
     let target = camera.target
     let position = camera.position
@@ -19,12 +23,12 @@ export function addZoomControls() {
 
     // Zoom In
     if (zoomDelta > 0) {
-      if (position.distanceTo(target) >= zoomMin) { zoom() }
+      if (position.distanceTo(target) >= zoomMin) zoom()
     }
 
     // Zoom Out
     else if (zoomDelta < 0) {
-      if (position.distanceTo(target) <= zoomMax) { zoom() }
+      if (position.distanceTo(target) <= zoomMax) zoom()
     }
 
     function zoom() {
@@ -34,6 +38,12 @@ export function addZoomControls() {
       position.z -= stepZ * zoomDelta
 
     }
+
+    zoomTimeout = setTimeout(function() {
+
+      updateSettings("camera", "position", position)
+
+    }, 100)
 
   })
 
