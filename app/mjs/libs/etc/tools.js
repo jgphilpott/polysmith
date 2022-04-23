@@ -30,7 +30,7 @@ function hex2rgb(hex) {
 
 // Credit: http://gist.github.com/399624
 // The click event will be fired with a small delay but will not fire upon a double click.
-$.fn.clickSingleDouble = function(single_click_callback, double_click_callback, delay=300) {
+$.fn.clickSingleDouble = function(single_click_callback, double_click_callback, delay=250) {
   return this.each(function(){
     var clicks = 0, self = this
     jQuery(this).click(function(event){

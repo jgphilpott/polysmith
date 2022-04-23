@@ -119,6 +119,30 @@ function updateSuccess(update) {
 
       break
 
+    case "camera":
+
+      let cameraPanel = $("#camera.panel")
+
+      if (setting == "position") {
+
+        let position = cameraPanel.find("#position .body")
+
+        position.find("#position-x input").val(value.x.toFixed(2))
+        position.find("#position-y input").val(value.y.toFixed(2))
+        position.find("#position-z input").val(value.z.toFixed(2))
+
+      } else if (setting == "target") {
+
+        let target = cameraPanel.find("#target .body")
+
+        target.find("#target-x input").val(value.x.toFixed(2))
+        target.find("#target-y input").val(value.y.toFixed(2))
+        target.find("#target-z input").val(value.z.toFixed(2))
+
+      }
+
+      break
+
   }
 
   localWrite("settings", settings)

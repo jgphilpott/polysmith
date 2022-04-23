@@ -19,6 +19,9 @@ export function addCameraPanel() {
   let target = panel.find("#target .body")
   let speed = panel.find("#speed .body")
 
+  let holdInterval = null
+  let holdTimeout = null
+
   let min = -scale * 5
   let max = scale * 5
 
@@ -37,6 +40,69 @@ export function addCameraPanel() {
   speed.find("#drag.slider").slider({min: 1, max: 100, value: settings.controls.dragSpeed, start: sliderStart, slide: sliderSlide, stop: sliderStop})
   speed.find("#fly.slider").slider({min: 1, max: 100, value: settings.controls.flySpeed, start: sliderStart, slide: sliderSlide, stop: sliderStop})
   speed.find("#zoom.slider").slider({min: 1, max: 100, value: settings.controls.zoomSpeed, start: sliderStart, slide: sliderSlide, stop: sliderStop})
+
+  panel.find("button").mousedown(function(event) {
+
+    event.stopPropagation()
+
+    let operation = $(this).attr("id")
+    let selection = $(this).parent().attr("id").split("-")
+
+    let input = $(this).parent().find("input")
+    let step = Number(input.attr("step"))
+
+    step = operation == "plus" ? step : operation == "minus" ? -step : 0
+
+    function updateCamera() {
+
+      input.val(Number(input.val()) + step)
+
+      if (selection[0] == "position") {
+
+        let position = camera.position
+
+        position[selection[1]] += step
+
+        position.set(position.x, position.y, position.z)
+
+      } else if (selection[0] == "target") {
+
+        let target = camera.target
+
+        target[selection[1]] += step
+
+        camera.lookAt(target.x, target.y, target.z)
+
+      }
+
+    }
+
+    updateCamera()
+
+    holdTimeout = setTimeout(function() {
+
+      holdInterval = setInterval(function() { updateCamera() }, 100)
+
+    }, 1000)
+
+  }).mouseup(function(event) {
+
+    clearTimeout(holdTimeout)
+    clearInterval(holdInterval)
+
+    let selection = $(this).parent().attr("id").split("-")[0]
+
+    if (selection == "position") {
+
+      updateSettings("camera", selection, camera.position)
+
+    } else if (selection == "target") {
+
+      updateSettings("camera", selection, camera.target)
+
+    }
+
+  })
 
   sliderStyle(speed.find("#drag.slider"))
   sliderStyle(speed.find("#fly.slider"))
