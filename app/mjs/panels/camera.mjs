@@ -41,6 +41,55 @@ export function addCameraPanel() {
   speed.find("#fly.slider").slider({min: 1, max: 100, value: settings.controls.flySpeed, start: sliderStart, slide: sliderSlide, stop: sliderStop})
   speed.find("#zoom.slider").slider({min: 1, max: 100, value: settings.controls.zoomSpeed, start: sliderStart, slide: sliderSlide, stop: sliderStop})
 
+  panel.find("input").keypress(function(event) { event.stopPropagation(); if (event.keyCode == 13) this.blur() })
+  panel.find("input").keydown(function(event) { event.stopPropagation() })
+  panel.find("input").keyup(function(event) {
+
+    let selection = $(this).parent().attr("id").split("-")
+
+    let min = Number($(this).attr("min"))
+    let max = Number($(this).attr("max"))
+
+    let value = Number($(this).val())
+
+    value = value < min ? min : value > max ? max : value
+
+    if (selection[0] == "position") {
+
+      let position = camera.position
+
+      position[selection[1]] = value
+
+      position.set(position.x, position.y, position.z)
+
+    } else if (selection[0] == "target") {
+
+      let target = camera.target
+
+      target[selection[1]] = value
+
+      camera.lookAt(target.x, target.y, target.z)
+
+    }
+
+  })
+
+  panel.find("input").blur(function(event) {
+
+    let selection = $(this).parent().attr("id").split("-")[0]
+
+    if (selection == "position") {
+
+      updateSettings("camera", selection, camera.position)
+
+    } else if (selection == "target") {
+
+      updateSettings("camera", selection, target.position)
+
+    }
+
+  })
+
   panel.find("button").mousedown(function(event) {
 
     event.stopPropagation()
@@ -86,6 +135,8 @@ export function addCameraPanel() {
     }, 1000)
 
   }).mouseup(function(event) {
+
+    this.blur()
 
     clearTimeout(holdTimeout)
     clearInterval(holdInterval)

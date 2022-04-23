@@ -50,7 +50,7 @@ export function addEvents() {
 
   $("#canvas").click(function(event) {
 
-    $("input").blur()
+    $("input").toArray().forEach(input => { if ($(input).is(":focus")) $(input).blur() })
 
     if (events.operation.key && !camera.dragged) {
 
