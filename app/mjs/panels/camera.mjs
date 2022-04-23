@@ -41,6 +41,18 @@ export function addCameraPanel() {
   speed.find("#fly.slider").slider({min: 1, max: 100, value: settings.controls.flySpeed, start: sliderStart, slide: sliderSlide, stop: sliderStop})
   speed.find("#zoom.slider").slider({min: 1, max: 100, value: settings.controls.zoomSpeed, start: sliderStart, slide: sliderSlide, stop: sliderStop})
 
+  panel.find(".refresh").click(function(event) {
+
+    camera.target = {x: 0, y: 0, z: 0}
+
+    camera.position.set(135, 135, 55)
+    camera.lookAt(0, 0, 0)
+
+    updateSettings("camera", "position", camera.position)
+    updateSettings("camera", "target", camera.target)
+
+  })
+
   panel.find("input").keypress(function(event) { event.stopPropagation(); if (event.keyCode == 13) this.blur() })
   panel.find("input").keydown(function(event) { event.stopPropagation() })
   panel.find("input").keyup(function(event) {
