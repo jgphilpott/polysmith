@@ -17,7 +17,7 @@ export function addCameraPanel() {
     let display = controls.find(".body").css("display")
     let id = controls.attr("id")
 
-    display == "none" ? updateSettings("camera", "open", id) : updateSettings("camera", "open", null)
+    display == "none" ? updateSettings("camera", "open", id) : updateSettings("camera", "open", false)
 
     fold(this)
 
@@ -87,8 +87,8 @@ export function addCameraPanel() {
 
   panel.find("input").keypress(function(event) { event.stopPropagation(); if (event.keyCode == 13) this.blur() })
   panel.find("input").keydown(function(event) { event.stopPropagation() })
-  panel.find("input").keyup(function(event) { updateCamera(this, event) })
-  panel.find("input").change(function(event) { updateCamera(this, event) })
+  panel.find("input").keyup(function(event) { event.stopPropagation(); updateCamera(this, event) })
+  panel.find("input").change(function(event) { event.stopPropagation(); updateCamera(this, event) })
   panel.find("input").mousedown(function(event) { event.stopPropagation() })
   panel.find("input").dblclick(function(event) { $(this).select() })
   panel.find("input").blur(function(event) {
@@ -138,31 +138,21 @@ export function addCameraPanel() {
     let min = Number(input.attr("min"))
     let max = Number(input.attr("max"))
 
+    let position = camera.position
+    let target = camera.target
+
     step = operation == "plus" ? step : operation == "minus" ? -step : 0
 
     let value = Number(input.val()) + step
 
     value = value < min ? min : value > max ? max : value
 
+    camera[selection[0]][selection[1]] = value
+
+    position.set(position.x, position.y, position.z)
+    camera.lookAt(target.x, target.y, target.z)
+
     if (event.type != "keyup" || value == min || value == max) input.val(value.toFixed(2))
-
-    if (selection[0] == "position") {
-
-      let position = camera.position
-
-      position[selection[1]] = value
-
-      position.set(position.x, position.y, position.z)
-
-    } else if (selection[0] == "target") {
-
-      let target = camera.target
-
-      target[selection[1]] = value
-
-      camera.lookAt(target.x, target.y, target.z)
-
-    }
 
   }
 
