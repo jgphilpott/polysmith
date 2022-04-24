@@ -11,7 +11,27 @@ export function addCameraPanel() {
   panel.append("<div id='target' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Target</h4></div><div class='body'></div></div>")
   panel.append("<div id='speed' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Speed</h4></div><div class='body'></div></div>")
 
-  panel.find(".fold, h4").click(function(event) { fold(this) })
+  panel.find(".fold, h4").click(function(event) {
+
+    let controls = $(this).closest(".controls")
+    let display = controls.find(".body").css("display")
+    let id = controls.attr("id")
+
+    display == "none" ? updateSettings("camera", "open", id) : updateSettings("camera", "open", null)
+
+    fold(this)
+
+  })
+
+  if (settings.camera.open) {
+
+    let controls = panel.find("#" + settings.camera.open + ".controls")
+
+    controls.find(".body").css("display", "block")
+
+    rotate(controls.find(".fold"), 90, 0)
+
+  }
 
   let position = panel.find("#position .body")
   let target = panel.find("#target .body")
@@ -39,6 +59,10 @@ export function addCameraPanel() {
   speed.find("#fly.slider").slider({min: 1, max: 100, value: settings.controls.flySpeed, start: sliderStart, slide: sliderSlide, stop: sliderStop})
   speed.find("#zoom.slider").slider({min: 1, max: 100, value: settings.controls.zoomSpeed, start: sliderStart, slide: sliderSlide, stop: sliderStop})
 
+  sliderStyle(speed.find("#drag.slider"))
+  sliderStyle(speed.find("#fly.slider"))
+  sliderStyle(speed.find("#zoom.slider"))
+
   panel.find(".refresh").click(function(event) {
 
     speed.find(".slider").slider("value", 25)
@@ -65,6 +89,8 @@ export function addCameraPanel() {
   panel.find("input").keydown(function(event) { event.stopPropagation() })
   panel.find("input").keyup(function(event) { updateCamera(this, event) })
   panel.find("input").change(function(event) { updateCamera(this, event) })
+  panel.find("input").mousedown(function(event) { event.stopPropagation() })
+  panel.find("input").dblclick(function(event) { $(this).select() })
   panel.find("input").blur(function(event) {
 
     let selection = $(this).parent().attr("id").split("-")[0]
@@ -139,12 +165,6 @@ export function addCameraPanel() {
     }
 
   }
-
-  sliderStyle(speed.find("#drag.slider"))
-  sliderStyle(speed.find("#fly.slider"))
-  sliderStyle(speed.find("#zoom.slider"))
-
-  rotate(panel.find("#speed .fold"), 90, 0)
 
   return panel
 

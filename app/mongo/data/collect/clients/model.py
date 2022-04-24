@@ -41,7 +41,8 @@ class Client():
                                 },
                                 "camera": {
                                     "position": {"x": 135, "y": 135, "z": 55},
-                                    "target": {"x": 0, "y": 0, "z": 0}
+                                    "target": {"x": 0, "y": 0, "z": 0},
+                                    "open": "speed"
                                 },
                                 "controls": {
                                     "dragSpeed": 25,
