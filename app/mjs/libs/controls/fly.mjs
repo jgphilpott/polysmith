@@ -4,8 +4,8 @@ export function addFlyControls() {
 
     if ([37, 38, 39, 40, 65, 68, 83, 87].includes(event.keyCode)) {
 
-      let target = camera.target
       let position = camera.position
+      let target = camera.target
 
       let deltaX = Math.abs(position.x - target.x)
       let deltaY = Math.abs(position.y - target.y)
@@ -93,8 +93,13 @@ export function addFlyControls() {
 
         }
 
-        updateSettings("camera", "position", position)
-        updateSettings("camera", "target", target)
+        $("#camera.panel #position-x input").val(position.x.toFixed(2))
+        $("#camera.panel #position-y input").val(position.y.toFixed(2))
+        $("#camera.panel #position-z input").val(position.z.toFixed(2))
+
+        $("#camera.panel #target-x input").val(target.x.toFixed(2))
+        $("#camera.panel #target-y input").val(target.y.toFixed(2))
+        $("#camera.panel #target-z input").val(target.z.toFixed(2))
 
       }
 
@@ -142,13 +147,20 @@ export function addFlyControls() {
 
         }
 
-        updateSettings("camera", "target", target)
+        $("#camera.panel #target-x input").val(target.x.toFixed(2))
+        $("#camera.panel #target-y input").val(target.y.toFixed(2))
+        $("#camera.panel #target-z input").val(target.z.toFixed(2))
 
       }
 
       camera.lookAt(target.x, target.y, target.z)
 
     }
+
+  }).keyup(function(event) {
+
+    updateSettings("camera", "position", camera.position)
+    updateSettings("camera", "target", camera.target)
 
   })
 

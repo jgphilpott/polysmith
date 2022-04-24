@@ -37,6 +37,10 @@ export function addZoomControls() {
       position.y -= stepY * zoomDelta
       position.z -= stepZ * zoomDelta
 
+      $("#camera.panel #position-x input").val(position.x.toFixed(2))
+      $("#camera.panel #position-y input").val(position.y.toFixed(2))
+      $("#camera.panel #position-z input").val(position.z.toFixed(2))
+
     }
 
     zoomTimeout = setTimeout(function() {

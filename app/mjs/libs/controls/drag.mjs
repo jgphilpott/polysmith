@@ -2,11 +2,8 @@ export function addDragControls() {
 
   let radius3 = null
   let startX, startY = null
+  let target, position, dragSpeed = null
   let horizontalAngle, verticalAngle = null
-  let dragSpeed = settings.controls.dragSpeed
-
-  let target = camera.target
-  let position = camera.position
 
   function start(event) {
 
@@ -14,6 +11,11 @@ export function addDragControls() {
     event.stopPropagation()
 
     camera.dragged = null
+
+    target = camera.target
+    position = camera.position
+
+    dragSpeed = settings.controls.dragSpeed
 
     startX = event.pageX
     startY = event.pageY
@@ -57,6 +59,10 @@ export function addDragControls() {
     let newX = side4angle(newHorizontalAngle, radius2, true, null) + target.x
     let newY = side4angle(newHorizontalAngle, radius2, null, true) + target.y
     let newZ = side4angle(newVerticalAngle, radius3, true, null) + target.z
+
+    $("#camera.panel #position-x input").val(newX.toFixed(2))
+    $("#camera.panel #position-y input").val(newY.toFixed(2))
+    $("#camera.panel #position-z input").val(newZ.toFixed(2))
 
     position.set(newX, newY, newZ)
     camera.lookAt(target.x, target.y, target.z)
