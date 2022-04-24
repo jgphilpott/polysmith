@@ -11,8 +11,8 @@ import {newCylinder} from "../libs/geometries/cylinders.mjs"
 import {newSphere} from "../libs/geometries/spheres.mjs"
 import {newTorus} from "../libs/geometries/toruses.mjs"
 
-import {addPanelEvents, addMeshEvents} from "../libs/etc/events.mjs"
 import {updateMeshesPanel} from "./meshes.mjs"
+import {addMeshEvents} from "../libs/etc/events.mjs"
 import {localMeshes} from "../libs/files/local.mjs"
 
 export function addMeshPanel(mesh, coordinates=null) {
@@ -244,7 +244,7 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     sliderStyle(panel.find(".slider"))
 
-    addPanelEvents(panel)
+    return panel
 
   } else {
 

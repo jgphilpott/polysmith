@@ -1,8 +1,6 @@
 import {exportFile} from "../libs/files/export.mjs"
 import {importFile} from "../libs/files/import.mjs"
 
-import {addPanelEvents} from "../libs/etc/events.mjs"
-
 export function addMenuPanel() {
 
   $("body").append("<div id='menu' class='panel'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")
@@ -289,6 +287,6 @@ export function addMenuPanel() {
 
   $("#nav #menu").click(function(event) { toggleMenu() })
 
-  addPanelEvents(panel)
+  return panel
 
 }

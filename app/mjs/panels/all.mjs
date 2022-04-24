@@ -1,3 +1,5 @@
+import {addPanelEvents} from "../libs/etc/events.mjs"
+
 import {addCameraPanel} from "./camera.mjs"
 import {addContextPanel} from "./context.mjs"
 import {addLightsPanel} from "./lights.mjs"
@@ -9,13 +11,13 @@ import {addShortcutPanel} from "./shortcut.mjs"
 
 export function addPanels() {
 
-  addCameraPanel()
-  addLightsPanel()
-  addMenuPanel()
-  addMeshesPanel()
-  addSettingsPanel()
-  addShapesPanel()
-  addShortcutPanel()
+  addPanelEvents(addCameraPanel())
+  addPanelEvents(addLightsPanel())
+  addPanelEvents(addMenuPanel())
+  addPanelEvents(addMeshesPanel())
+  addPanelEvents(addSettingsPanel())
+  addPanelEvents(addShapesPanel())
+  addPanelEvents(addShortcutPanel())
 
   addContextPanel()
 

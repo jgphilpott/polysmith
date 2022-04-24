@@ -1,5 +1,3 @@
-import {addPanelEvents} from "../libs/etc/events.mjs"
-
 export function addCameraPanel() {
 
   $("body").append("<div id='camera' class='panel'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")
@@ -43,6 +41,12 @@ export function addCameraPanel() {
 
   panel.find(".refresh").click(function(event) {
 
+    speed.find(".slider").slider("value", 25)
+
+    sliderStyle(speed.find("#drag.slider"))
+    sliderStyle(speed.find("#fly.slider"))
+    sliderStyle(speed.find("#zoom.slider"))
+
     camera.target = {x: 0, y: 0, z: 0}
 
     camera.position.set(135, 135, 55)
@@ -51,20 +55,70 @@ export function addCameraPanel() {
     updateSettings("camera", "position", camera.position)
     updateSettings("camera", "target", camera.target)
 
+    updateSettings("controls", "dragSpeed", 25)
+    updateSettings("controls", "flySpeed", 25)
+    updateSettings("controls", "zoomSpeed", 25)
+
   })
 
   panel.find("input").keypress(function(event) { event.stopPropagation(); if (event.keyCode == 13) this.blur() })
   panel.find("input").keydown(function(event) { event.stopPropagation() })
-  panel.find("input").keyup(function(event) {
+  panel.find("input").keyup(function(event) { updateCamera(this, event) })
+  panel.find("input").change(function(event) { updateCamera(this, event) })
+  panel.find("input").blur(function(event) {
 
-    let selection = $(this).parent().attr("id").split("-")
+    let selection = $(this).parent().attr("id").split("-")[0]
 
-    let min = Number($(this).attr("min"))
-    let max = Number($(this).attr("max"))
+    updateSettings("camera", selection, camera[selection])
 
-    let value = Number($(this).val())
+  })
+
+  panel.find("button").mousedown(function(event) {
+
+    event.stopPropagation()
+
+    let controller = $(this)
+
+    updateCamera(controller, event)
+
+    holdTimeout = setTimeout(function() {
+
+      holdInterval = setInterval(function() { updateCamera(controller, event) }, 100)
+
+    }, 1000)
+
+  }).mouseup(function(event) {
+
+    this.blur()
+
+    event.stopPropagation()
+
+    clearTimeout(holdTimeout)
+    clearInterval(holdInterval)
+
+    let selection = $(this).parent().attr("id").split("-")[0]
+
+    updateSettings("camera", selection, camera[selection])
+
+  })
+
+  function updateCamera(controller, event) {
+
+    let selection = $(controller).parent().attr("id").split("-")
+    let input = $(controller).parent().find("input")
+    let operation = $(controller).attr("id")
+    let step = Number(input.attr("step"))
+
+    let min = Number(input.attr("min"))
+    let max = Number(input.attr("max"))
+
+    step = operation == "plus" ? step : operation == "minus" ? -step : 0
+
+    let value = Number(input.val()) + step
 
     value = value < min ? min : value > max ? max : value
+
+    if (event.type != "keyup" || value == min || value == max) input.val(value.toFixed(2))
 
     if (selection[0] == "position") {
 
@@ -84,88 +138,7 @@ export function addCameraPanel() {
 
     }
 
-  })
-
-  panel.find("input").blur(function(event) {
-
-    let selection = $(this).parent().attr("id").split("-")[0]
-
-    if (selection == "position") {
-
-      updateSettings("camera", selection, camera.position)
-
-    } else if (selection == "target") {
-
-      updateSettings("camera", selection, target.position)
-
-    }
-
-  })
-
-  panel.find("button").mousedown(function(event) {
-
-    event.stopPropagation()
-
-    let operation = $(this).attr("id")
-    let selection = $(this).parent().attr("id").split("-")
-
-    let input = $(this).parent().find("input")
-    let step = Number(input.attr("step"))
-
-    step = operation == "plus" ? step : operation == "minus" ? -step : 0
-
-    function updateCamera() {
-
-      input.val(Number(input.val()) + step)
-
-      if (selection[0] == "position") {
-
-        let position = camera.position
-
-        position[selection[1]] += step
-
-        position.set(position.x, position.y, position.z)
-
-      } else if (selection[0] == "target") {
-
-        let target = camera.target
-
-        target[selection[1]] += step
-
-        camera.lookAt(target.x, target.y, target.z)
-
-      }
-
-    }
-
-    updateCamera()
-
-    holdTimeout = setTimeout(function() {
-
-      holdInterval = setInterval(function() { updateCamera() }, 100)
-
-    }, 1000)
-
-  }).mouseup(function(event) {
-
-    this.blur()
-
-    clearTimeout(holdTimeout)
-    clearInterval(holdInterval)
-
-    let selection = $(this).parent().attr("id").split("-")[0]
-
-    if (selection == "position") {
-
-      updateSettings("camera", selection, camera.position)
-
-    } else if (selection == "target") {
-
-      updateSettings("camera", selection, camera.target)
-
-    }
-
-  })
+  }
 
   sliderStyle(speed.find("#drag.slider"))
   sliderStyle(speed.find("#fly.slider"))
@@ -173,6 +146,6 @@ export function addCameraPanel() {
 
   rotate(panel.find("#speed .fold"), 90, 0)
 
-  addPanelEvents(panel)
+  return panel
 
 }

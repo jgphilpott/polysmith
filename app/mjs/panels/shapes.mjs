@@ -1,6 +1,6 @@
 import {addMesh} from "./mesh.mjs"
 import {contextMenu} from "./context.mjs"
-import {addPanelEvents, makeDragable} from "../libs/etc/events.mjs"
+import {makeDragable} from "../libs/etc/events.mjs"
 
 export function addShapesPanel() {
 
@@ -50,6 +50,6 @@ export function addShapesPanel() {
 
   shapes.contextmenu(function(event) { contextMenu("shape", $(this), event) })
 
-  addPanelEvents(panel)
+  return panel
 
 }

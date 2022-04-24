@@ -1,6 +1,6 @@
 import {addMesh} from "./mesh.mjs"
 import {contextMenu} from "./context.mjs"
-import {addPanelEvents, makeDragable} from "../libs/etc/events.mjs"
+import {makeDragable} from "../libs/etc/events.mjs"
 
 import {grayGlass, lightGrayGlass} from "../libs/colors/glass/grayscale.js"
 
@@ -56,6 +56,6 @@ export function addShortcutPanel() {
 
   })
 
-  addPanelEvents(panel)
+  return panel
 
 }

@@ -1,4 +1,3 @@
-import {addPanelEvents} from "../libs/etc/events.mjs"
 import {addMeshPanel, updateMesh, removeMesh} from "./mesh.mjs"
 
 export function addMeshesPanel() {
@@ -29,7 +28,7 @@ export function addMeshesPanel() {
 
   tooltips.meshCount = 0
 
-  addPanelEvents(panel)
+  return panel
 
 }
 
