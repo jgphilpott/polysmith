@@ -25,5 +25,6 @@ __pycache__
 app/css
 
 ### Scripts ###
+app/mjs/libs/etc/settings.js
 app/mjs/libs/colors/*/*.js
 .npm

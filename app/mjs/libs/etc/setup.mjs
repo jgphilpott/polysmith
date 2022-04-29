@@ -23,7 +23,7 @@ export function setup() {
   data.meshes = meshes
   data.tooltips = tooltips
 
-  data.settings = getSettings()
+  settings = getSettings()
 
   renderer = new THREE.WebGLRenderer({alpha: true, antialias: true, logarithmicDepthBuffer: true})
   renderer.setSize(window.innerWidth, window.innerHeight)
