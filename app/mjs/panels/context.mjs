@@ -1,4 +1,5 @@
 import {focus} from "../libs/controls/focus.mjs"
+import {toggleShortcut} from "./shortcuts.mjs"
 import {addMeshPanel, addMesh, updateMesh, removeMesh} from "./mesh.mjs"
 
 export function addContextPanel() {
@@ -55,8 +56,8 @@ export function contextMenu(type, element, event) {
       shape.css("display") == "none" ? contextMenu.append("<p id='show'>Show Shortcut</p>") : contextMenu.append("<p id='hide'>Hide Shortcut</p>")
 
       $("#context-menu.panel #add").click(function() { addMesh(null, {type: element.attr("id")}) })
-      $("#context-menu.panel #show").click(function() { shape.css("display", "block") })
-      $("#context-menu.panel #hide").click(function() { shape.css("display", "none") })
+      $("#context-menu.panel #show").click(function() { toggleShortcut(element.attr("id")) })
+      $("#context-menu.panel #hide").click(function() { toggleShortcut(element.attr("id")) })
 
       break
 
@@ -66,7 +67,7 @@ export function contextMenu(type, element, event) {
       contextMenu.append("<p id='hide'>Hide Shortcut</p>")
 
       $("#context-menu.panel #add").click(function() { addMesh(null, {type: element.attr("id")}) })
-      $("#context-menu.panel #hide").click(function() { element.css("display", "none") })
+      $("#context-menu.panel #hide").click(function() { toggleShortcut(element.attr("id")) })
 
       break
 

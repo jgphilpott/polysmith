@@ -35,10 +35,19 @@ export function addShortcutsPanel() {
 
     makeDragable($(shape))
 
-    $(shape).dblclick(function(event) { addMesh(null, {type: shape.id}) })
-    $(shape).contextmenu(function(event) { contextMenu("shortcut", $(shape), event) })
+    $(shape).clickSingleDouble(function(event) {
 
-    if (settings.ui.shortcuts.includes(shape.id)) { $(shape).css("display", "block") }
+      if (shapesPanel.css("visibility") == "visible") toggleShortcut(shape.id)
+
+    }, function(event) {
+
+      addMesh(null, {type: shape.id})
+
+    })
+
+    $(shape).contextmenu(function(event) { contextMenu("shortcut", $(this), event) })
+
+    if (settings.ui.shortcuts.includes(shape.id)) $(shape).css("display", "block")
 
   })
 
@@ -51,5 +60,30 @@ export function addShortcutsPanel() {
   })
 
   return panel
+
+}
+
+export function toggleShortcut(id) {
+
+  let shortcut = $("#shortcuts.panel img#" + id + ".shape")
+  let shape = $("#shapes.panel img#" + id + ".shape")
+
+  if (shortcut.css("display") == "block") {
+
+    settings.ui.shortcuts = settings.ui.shortcuts.filter(item => item != id)
+
+    shortcut.css("display", "none")
+    shape.css("opacity", 1)
+
+  } else {
+
+    settings.ui.shortcuts.push(id)
+
+    shortcut.css("display", "block")
+    shape.css("opacity", 0.5)
+
+  }
+
+  updateSettings("ui", "shortcuts", settings.ui.shortcuts)
 
 }

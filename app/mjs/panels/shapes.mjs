@@ -1,6 +1,7 @@
 import {addMesh} from "./mesh.mjs"
 import {contextMenu} from "./context.mjs"
 import {makeDragable} from "../libs/etc/events.mjs"
+import {toggleShortcut} from "./shortcuts.mjs"
 
 export function addShapesPanel() {
 
@@ -32,23 +33,25 @@ export function addShapesPanel() {
   panel.append("<h4 id='special'>Special</h4>")
   panel.append("<img title='Torus' id='torus' class='shape' src='/app/imgs/icons/shapes/special/torus.png'>")
 
-  let shapes = $("#shapes.panel img.shape")
+  panel.find("img.shape").toArray().forEach(shape => {
 
-  for (let i = 0; i < shapes.length; i++) { makeDragable($(shapes[i])) }
+    makeDragable($(shape))
 
-  shapes.clickSingleDouble(function(event) {
+    $(shape).clickSingleDouble(function(event) {
 
-    let shape = $("#shortcuts.panel img#" + $(this).attr("id") + ".shape")
+      toggleShortcut(shape.id)
 
-    shape.css("display") == "none" ? shape.css("display", "block") : shape.css("display", "none")
+    }, function(event) {
 
-  }, function(event) {
+      addMesh(null, {type: shape.id})
 
-    addMesh(null, {type: $(this).attr("id")})
+    })
+
+    $(shape).contextmenu(function(event) { contextMenu("shape", $(this), event) })
+
+    if (settings.ui.shortcuts.includes(shape.id)) $(shape).css("opacity", 0.5)
 
   })
-
-  shapes.contextmenu(function(event) { contextMenu("shape", $(this), event) })
 
   return panel
 
