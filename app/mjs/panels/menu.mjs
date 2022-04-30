@@ -84,7 +84,7 @@ export function addMenuPanel() {
     panels += "<div><input id='lights' class='checkbox' type='checkbox' " + (settings.panels.lights ? "checked" : "") + "><label>Lights</label></div>"
     panels += "<div><input id='meshes' class='checkbox' type='checkbox' " + (settings.panels.meshes ? "checked" : "") + "><label>Meshes</label></div>"
     panels += "<div><input id='shapes' class='checkbox' type='checkbox' " + (settings.panels.shapes ? "checked" : "") + "><label>Shapes</label></div>"
-    panels += "<div><input id='shortcut' class='checkbox' type='checkbox' " + (settings.panels.shortcut ? "checked" : "") + "><label>Shapes Shortcut</label></div>"
+    panels += "<div><input id='shortcuts' class='checkbox' type='checkbox' " + (settings.panels.shortcuts ? "checked" : "") + "><label>Shortcuts</label></div>"
 
     panel.append(panels + "</form></div>")
 

@@ -38,7 +38,7 @@ export function addShapesPanel() {
 
   shapes.clickSingleDouble(function(event) {
 
-    let shape = $("#shortcut.panel img#" + $(this).attr("id") + ".shape")
+    let shape = $("#shortcuts.panel img#" + $(this).attr("id") + ".shape")
 
     shape.css("display") == "none" ? shape.css("display", "block") : shape.css("display", "none")
 

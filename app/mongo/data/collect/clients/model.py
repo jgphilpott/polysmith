@@ -18,7 +18,8 @@ class Client():
             self.settings = {
                                 "ui": {
                                     "nav": "black",
-                                    "forkme": False
+                                    "forkme": False,
+                                    "shortcuts": ["cube", "cylinder", "sphere"]
                                 },
                                 "panels": {
                                     "camera": True,
@@ -27,7 +28,7 @@ class Client():
                                     "meshes": True,
                                     "settings": False,
                                     "shapes": False,
-                                    "shortcut": True
+                                    "shortcuts": True
                                 },
                                 "axes": {
                                     "axesCaps": True,

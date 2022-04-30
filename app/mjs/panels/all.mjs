@@ -7,7 +7,7 @@ import {addMenuPanel} from "./menu.mjs"
 import {addMeshesPanel} from "./meshes.mjs"
 import {addSettingsPanel} from "./settings.mjs"
 import {addShapesPanel} from "./shapes.mjs"
-import {addShortcutPanel} from "./shortcut.mjs"
+import {addShortcutsPanel} from "./shortcuts.mjs"
 
 export function addPanels() {
 
@@ -17,7 +17,7 @@ export function addPanels() {
   addPanelEvents(addMeshesPanel())
   addPanelEvents(addSettingsPanel())
   addPanelEvents(addShapesPanel())
-  addPanelEvents(addShortcutPanel())
+  addPanelEvents(addShortcutsPanel())
 
   addContextPanel()
 

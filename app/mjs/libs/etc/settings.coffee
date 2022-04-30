@@ -18,6 +18,7 @@ getSettings = () ->
 
                 nav: "black"
                 forkme: true
+                shortcuts: ["cube", "cylinder", "sphere"]
 
             panels:
 
@@ -27,7 +28,7 @@ getSettings = () ->
                 meshes: true
                 settings: false
                 shapes: false
-                shortcut: true
+                shortcuts: true
 
             axes:
 
@@ -102,13 +103,17 @@ updateSuccess = (update) ->
 
             if value
 
-                panel.css "visibility", "visible"
                 checkbox.prop "checked", true
+                panel.css "visibility", "visible"
+
+                if setting == "shapes" then $("#shortcuts.panel #toggle").attr "src", "/app/imgs/panels/nav/x.png"
 
             else
 
-                panel.css "visibility", "hidden"
                 checkbox.prop "checked", false
+                panel.css "visibility", "hidden"
+
+                if setting == "shapes" then $("#shortcuts.panel #toggle").attr "src", "/app/imgs/panels/nav/+.png"
 
             break
 

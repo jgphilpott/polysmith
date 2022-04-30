@@ -2,13 +2,14 @@ import {addMesh} from "./mesh.mjs"
 import {contextMenu} from "./context.mjs"
 import {makeDragable} from "../libs/etc/events.mjs"
 
-import {grayGlass, lightGrayGlass} from "../libs/colors/glass/grayscale.js"
+export function addShortcutsPanel() {
 
-export function addShortcutPanel() {
+  $("body").append("<div id='shortcuts' class='panel'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")
 
-  $("body").append("<div id='shortcut' class='panel'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")
+  let panel = $("#shortcuts.panel")
 
-  let panel = $("#shortcut.panel")
+  let shapesPanel = $("#shapes.panel")
+  let shapesVisible = shapesPanel.css("visibility") == "visible" ? true : false
 
   panel.append("<img title='Cube' id='cube' class='shape' src='/app/imgs/icons/shapes/basic/cube.png'>")
   panel.append("<img title='Cylinder' id='cylinder' class='shape' src='/app/imgs/icons/shapes/basic/cylinder.png'>")
@@ -28,31 +29,24 @@ export function addShortcutPanel() {
 
   panel.append("<img title='Torus' id='torus' class='shape' src='/app/imgs/icons/shapes/special/torus.png'>")
 
-  panel.append("<img id='+' class='nav' src='/app/imgs/panels/nav/+.png'>")
+  panel.append("<img id='toggle' class='nav' src='/app/imgs/panels/nav/" + (shapesVisible ? "x" : "+") + ".png'>")
 
-  let shortcuts = $("#shortcut.panel img.shape")
+  panel.find("img.shape").toArray().forEach(shape => {
 
-  for (let i = 0; i < shortcuts.length; i++) { makeDragable($(shortcuts[i])) }
+    makeDragable($(shape))
 
-  shortcuts.dblclick(function(event) { addMesh(null, {type: $(this).attr("id")}) })
-  shortcuts.contextmenu(function(event) { contextMenu("shortcut", $(this), event) })
+    $(shape).dblclick(function(event) { addMesh(null, {type: shape.id}) })
+    $(shape).contextmenu(function(event) { contextMenu("shortcut", $(shape), event) })
 
-  $("#shortcut.panel .nav").click(function(event) {
+    if (settings.ui.shortcuts.includes(shape.id)) { $(shape).css("display", "block") }
 
-    let shapesPanel = $("#shapes.panel")
+  })
 
-    if (shapesPanel.css("visibility") == "hidden") {
+  panel.find("#toggle").click(function(event) {
 
-      shapesPanel.css("visibility", "visible")
+    shapesVisible = shapesPanel.css("visibility") == "visible" ? true : false
 
-    } else if (shapesPanel.css("visibility") == "visible") {
-
-      setTimeout(function() { shapesPanel.css("background", grayGlass) }, 0)
-      setTimeout(function() { shapesPanel.css("background", lightGrayGlass) }, 100)
-      setTimeout(function() { shapesPanel.css("background", grayGlass) }, 200)
-      setTimeout(function() { shapesPanel.css("background", lightGrayGlass) }, 300)
-
-    }
+    updateSettings("panels", "shapes", !shapesVisible)
 
   })
 

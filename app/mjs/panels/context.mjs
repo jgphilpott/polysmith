@@ -49,7 +49,7 @@ export function contextMenu(type, element, event) {
 
     case "shape":
 
-      let shape = $("#shortcut.panel img#" + element.attr("id") + ".shape")
+      let shape = $("#shortcuts.panel img#" + element.attr("id") + ".shape")
 
       contextMenu.append("<p id='add'>Add Mesh</p>")
       shape.css("display") == "none" ? contextMenu.append("<p id='show'>Show Shortcut</p>") : contextMenu.append("<p id='hide'>Hide Shortcut</p>")
