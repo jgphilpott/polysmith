@@ -51,6 +51,7 @@ export function addEvents() {
   $("#canvas").click(function(event) {
 
     $("input").toArray().forEach(input => { if ($(input).is(":focus")) $(input).blur() })
+    $("[contenteditable]").toArray().forEach(editor => { if ($(editor).is(":focus")) $(editor).blur() })
 
     if (events.operation.key && !camera.dragged) {
 

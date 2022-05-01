@@ -30,7 +30,7 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     panel = $("#mesh." + mesh.uuid + "")
 
-    panel.append("<input id='name' type='text' value=" + mesh.name + "></input>")
+    panel.append("<h3 id='name'><span contenteditable='true'>" + mesh.name + "</span></h3>")
 
     panel.data("mesh", mesh)
 
