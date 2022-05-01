@@ -52,7 +52,7 @@ export function updateMeshesPanel(type, mesh) {
 
       row += "<td><p title='ID' class='id'>" + tooltips.meshCount + "</p></td>"
       row += "<td><p title='Name' class='name'><span class='" + (mesh.lock == "locked" ? "disabled" : "") + "' contenteditable='true'>" + mesh.name + "</span></p></td>"
-      row += "<td><img title='Settings' class='settings' src='/app/imgs/panels/tools/gear.png'></td></td>"
+      row += "<td><img title='Settings' class='settings' src='/app/imgs/panels/tools/toggle/off.png'></td></td>"
       row += "<td><img title='Lock' class='lock' src='/app/imgs/panels/lock/" + mesh.lock + ".png'></td>"
       row += "<td><img title='Trash' class='trash " + (mesh.lock == "locked" ? "disabled" : "") + "' src='/app/imgs/panels/tools/trash.png'></td>"
 
@@ -70,7 +70,26 @@ export function updateMeshesPanel(type, mesh) {
 
       tableRow.find(".name span").blur(function(event) { updateMesh(mesh, "name", null, $(this)[0].innerText) })
 
-      tableRow.find(".settings").click(function() { addMeshPanel(mesh) })
+      tableRow.find(".settings").click(function() {
+
+        let panel = $("#mesh." + mesh.uuid + "")
+
+        if (panel.length == 0) {
+
+          $(this).attr("src", "/app/imgs/panels/tools/toggle/on.png")
+
+          addMeshPanel(mesh)
+
+        } else {
+
+          $(this).attr("src", "/app/imgs/panels/tools/toggle/off.png")
+
+          panel.remove()
+
+        }
+
+      })
+
       tableRow.find(".lock").click(function() { updateMesh(mesh, "lock") })
       tableRow.find(".trash").click(function() { removeMesh(mesh) })
 

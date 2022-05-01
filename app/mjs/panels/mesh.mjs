@@ -379,9 +379,9 @@ export function addMesh(mesh=null, properties={}) {
 
   if (mesh) {
 
-    "name" in properties ? mesh.name = properties.name : "name" in mesh ? mesh.name = mesh.name : mesh.name = "Unnamed"
-    "lock" in properties ? mesh.lock = properties.lock : "lock" in mesh ? mesh.lock = mesh.lock : mesh.lock = "unlocked"
-    "class" in properties ? mesh.class = properties.class : "class" in mesh ? mesh.class = mesh.class : mesh.class = "custom"
+    "name" in properties ? mesh.name = properties.name : mesh.name ? mesh.name = mesh.name : mesh.name = "Unnamed"
+    "lock" in properties ? mesh.lock = properties.lock : mesh.lock ? mesh.lock = mesh.lock : mesh.lock = "unlocked"
+    "class" in properties ? mesh.class = properties.class : mesh.class ? mesh.class = mesh.class : mesh.class = "custom"
 
     if (properties.position) {
 

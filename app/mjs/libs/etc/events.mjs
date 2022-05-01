@@ -109,7 +109,19 @@ export function addPanelEvents(panel) {
 
   close.click(function(event) {
 
-    id == "mesh" ? panel.remove() : updateSettings("panels", id, false)
+    if (id == "mesh") {
+
+      let uuid = panel.data("mesh").uuid
+
+      $("#meshes.table tr#" + uuid + " .settings").attr("src", "/app/imgs/panels/tools/toggle/off.png")
+
+      panel.remove()
+
+    } else {
+
+      updateSettings("panels", id, false)
+
+    }
 
   })
 
