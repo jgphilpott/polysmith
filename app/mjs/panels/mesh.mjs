@@ -149,8 +149,8 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.find("#name span").keydown(function(event) { event.stopPropagation() })
     panel.find("#name span").keyup(function(event) { event.stopPropagation(); updateMesh(mesh, "name", "mesh", $(this)[0].innerText) })
 
-    panel.find("#name span").dblclick(function(event) { document.execCommand("selectAll") })
-    panel.find("#name span").mousedown(function(event) { event.stopPropagation() })
+    panel.find("#name span").dblclick(function(event) { if (mesh.lock != "locked") document.execCommand("selectAll") })
+    panel.find("#name span").mousedown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
     panel.find("#name span").mouseup(function(event) { event.stopPropagation() })
 
     panel.find("#name span").blur(function(event) { updateMesh(mesh, "name", null, $(this)[0].innerText) })
@@ -271,7 +271,7 @@ export function addMeshPanel(mesh, coordinates=null) {
 
 export function addMesh(mesh=null, properties={}) {
 
-  if (properties.class) {
+  if (!mesh && properties.class) {
 
     switch (properties.class) {
 
@@ -375,17 +375,13 @@ export function addMesh(mesh=null, properties={}) {
 
     }
 
-    properties.class ? mesh.class = properties.class : mesh.class = "custom"
-    properties.lock ? mesh.lock = properties.lock : mesh.lock = "unlocked"
-    properties.name ? mesh.name = properties.name : mesh.name = "Unnamed"
-
   }
 
   if (mesh) {
 
-    mesh.class ? mesh.class = mesh.class : mesh.class = "custom"
-    mesh.lock ? mesh.lock = mesh.lock : mesh.lock = "unlocked"
-    mesh.name ? mesh.name = mesh.name : mesh.name = "Unnamed"
+    "name" in properties ? mesh.name = properties.name : "name" in mesh ? mesh.name = mesh.name : mesh.name = "Unnamed"
+    "lock" in properties ? mesh.lock = properties.lock : "lock" in mesh ? mesh.lock = mesh.lock : mesh.lock = "unlocked"
+    "class" in properties ? mesh.class = properties.class : "class" in mesh ? mesh.class = mesh.class : mesh.class = "custom"
 
     if (properties.position) {
 
@@ -507,6 +503,7 @@ export function updateMesh(mesh, type, key=null, value=null) {
       meshPanel.find("#cut.operation").attr("src", '/app/imgs/panels/ops/cut.png')
       meshPanel.find("#intersect.operation").attr("src", '/app/imgs/panels/ops/intersect.png')
 
+      meshPanel.find("#name span").removeClass("disabled")
       meshPanel.find(".operation").removeClass("disabled")
       meshPanel.find(".color").removeClass("disabled")
 
@@ -520,6 +517,7 @@ export function updateMesh(mesh, type, key=null, value=null) {
       meshPanel.find("input").removeClass("disabled")
       meshPanel.find("button").removeClass("disabled")
 
+      meshesTableRow.find(".name span").removeClass("disabled")
       meshesTableRow.find(".lock").attr("src", '/app/imgs/panels/lock/unlocked.png')
       meshesTableRow.find(".trash").removeClass("disabled")
 
@@ -531,6 +529,7 @@ export function updateMesh(mesh, type, key=null, value=null) {
       meshPanel.find("#cut.operation").attr("src", '/app/imgs/panels/ops/disabled/cut.png')
       meshPanel.find("#intersect.operation").attr("src", '/app/imgs/panels/ops/disabled/intersect.png')
 
+      meshPanel.find("#name span").addClass("disabled")
       meshPanel.find(".operation").addClass("disabled")
       meshPanel.find(".color").addClass("disabled")
 
@@ -544,6 +543,7 @@ export function updateMesh(mesh, type, key=null, value=null) {
       meshPanel.find("input").addClass("disabled")
       meshPanel.find("button").addClass("disabled")
 
+      meshesTableRow.find(".name span").addClass("disabled")
       meshesTableRow.find(".lock").attr("src", '/app/imgs/panels/lock/locked.png')
       meshesTableRow.find(".trash").addClass("disabled")
 

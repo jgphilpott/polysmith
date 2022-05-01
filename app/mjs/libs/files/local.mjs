@@ -10,9 +10,11 @@ export async function localMeshes(action=null, mesh=null) {
 
       const loader = new THREE.ObjectLoader()
 
-      localMeshes.forEach((mesh, index) => {
+      localMeshes.forEach(localMesh => {
 
-        addMesh(loader.parse(mesh))
+        addMesh(loader.parse(localMesh), {name: localMesh.object.name,
+                                          lock: localMesh.object.lock,
+                                          class: localMesh.object.class})
 
       })
 
@@ -22,21 +24,27 @@ export async function localMeshes(action=null, mesh=null) {
 
     mesh.updateMatrix()
 
+    let meshJSON = mesh.toJSON()
+
+    meshJSON.object.name = mesh.name
+    meshJSON.object.lock = mesh.lock
+    meshJSON.object.class = mesh.class
+
     if (action == "add") {
 
       if (localMeshes instanceof Array) {
 
-        if (!localMeshes.find(localMesh => localMesh.object.uuid == mesh.uuid)) localMeshes.push(mesh.toJSON())
+        if (!localMeshes.find(localMesh => localMesh.object.uuid == mesh.uuid)) localMeshes.push(meshJSON)
 
       } else {
 
-        localMeshes = [mesh.toJSON()]
+        localMeshes = [meshJSON]
 
       }
 
     } else if (action == "update") {
 
-      localMeshes[localMeshes.findIndex(localMesh => localMesh.object.uuid == mesh.uuid)] = mesh.toJSON()
+      localMeshes[localMeshes.findIndex(localMesh => localMesh.object.uuid == mesh.uuid)] = meshJSON
 
     } else if (action == "remove") {
 
