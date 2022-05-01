@@ -12,6 +12,7 @@ import {newSphere} from "../libs/geometries/spheres.mjs"
 import {newTorus} from "../libs/geometries/toruses.mjs"
 
 import {updateMeshesPanel} from "./meshes.mjs"
+import {addPanelEvents} from "../libs/etc/events.mjs"
 import {addMeshEvents} from "../libs/etc/events.mjs"
 import {localMeshes} from "../libs/files/local.mjs"
 
@@ -29,7 +30,7 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     panel = $("#mesh." + mesh.uuid + "")
 
-    panel.append("<h3>Mesh</h3>")
+    panel.append("<input id='name' type='text' value=" + mesh.name + "></input>")
 
     panel.data("mesh", mesh)
 
@@ -244,7 +245,7 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     sliderStyle(panel.find(".slider"))
 
-    return panel
+    addPanelEvents(panel)
 
   } else {
 
@@ -259,9 +260,9 @@ export function addMeshPanel(mesh, coordinates=null) {
 
 export function addMesh(mesh=null, properties={}) {
 
-  if (properties.type) {
+  if (properties.class) {
 
-    switch (properties.type) {
+    switch (properties.class) {
 
       case "cube":
 
@@ -363,8 +364,9 @@ export function addMesh(mesh=null, properties={}) {
 
     }
 
-    properties.type ? mesh.class = properties.type : mesh.class = "custom"
+    properties.class ? mesh.class = properties.class : mesh.class = "custom"
     properties.lock ? mesh.lock = properties.lock : mesh.lock = "unlocked"
+    properties.name ? mesh.name = properties.name : mesh.name = "Unnamed"
 
   }
 
@@ -372,6 +374,7 @@ export function addMesh(mesh=null, properties={}) {
 
     mesh.class ? mesh.class = mesh.class : mesh.class = "custom"
     mesh.lock ? mesh.lock = mesh.lock : mesh.lock = "unlocked"
+    mesh.name ? mesh.name = mesh.name : mesh.name = "Unnamed"
 
     if (properties.position) {
 

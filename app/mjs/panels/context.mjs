@@ -55,7 +55,7 @@ export function contextMenu(type, element, event) {
       contextMenu.append("<p id='add'>Add Mesh</p>")
       shape.css("display") == "none" ? contextMenu.append("<p id='show'>Show Shortcut</p>") : contextMenu.append("<p id='hide'>Hide Shortcut</p>")
 
-      $("#context-menu.panel #add").click(function() { addMesh(null, {type: element.attr("id")}) })
+      $("#context-menu.panel #add").click(function() { addMesh(null, {class: element.attr("id")}) })
       $("#context-menu.panel #show").click(function() { toggleShortcut(element.attr("id")) })
       $("#context-menu.panel #hide").click(function() { toggleShortcut(element.attr("id")) })
 
@@ -66,7 +66,7 @@ export function contextMenu(type, element, event) {
       contextMenu.append("<p id='add'>Add Mesh</p>")
       contextMenu.append("<p id='hide'>Hide Shortcut</p>")
 
-      $("#context-menu.panel #add").click(function() { addMesh(null, {type: element.attr("id")}) })
+      $("#context-menu.panel #add").click(function() { addMesh(null, {class: element.attr("id")}) })
       $("#context-menu.panel #hide").click(function() { toggleShortcut(element.attr("id")) })
 
       break

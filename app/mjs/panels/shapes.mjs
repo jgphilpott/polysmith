@@ -43,7 +43,7 @@ export function addShapesPanel() {
 
     }, function(event) {
 
-      addMesh(null, {type: shape.id})
+      addMesh(null, {class: shape.id})
 
     })
 

@@ -324,7 +324,7 @@ export function makeDragable(element, origEvent=null) {
 
           let coordinates = screen2worldCoordinates(ghost.offset().left + (ghost.width() / 2), ghost.offset().top + (ghost.height() / 2), 0)
 
-          let mesh = addMesh(null, {type: element.attr("id"), position: {x: coordinates.x, y: coordinates.y, z: coordinates.z}})
+          let mesh = addMesh(null, {class: element.attr("id"), position: {x: coordinates.x, y: coordinates.y, z: coordinates.z}})
 
           data.outlinePass.selectedObjects = [mesh]
 
