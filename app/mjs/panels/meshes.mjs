@@ -50,8 +50,8 @@ export function updateMeshesPanel(type, mesh) {
 
       let row = "<tr id=" + mesh.uuid + ">"
 
-      row += "<td><p class='id'>" + tooltips.meshCount + "</p></td>"
-      row += "<td><p class='name'><span " + (mesh.lock == "locked" ? "class='disabled'" : "") + " contenteditable='true'>" + mesh.name + "</span></p></td>"
+      row += "<td><p title='ID' class='id'>" + tooltips.meshCount + "</p></td>"
+      row += "<td><p title='Name' class='name'><span class='" + (mesh.lock == "locked" ? "disabled" : "") + "' contenteditable='true'>" + mesh.name + "</span></p></td>"
       row += "<td><img title='Settings' class='settings' src='/app/imgs/panels/tools/gear.png'></td></td>"
       row += "<td><img title='Lock' class='lock' src='/app/imgs/panels/lock/" + mesh.lock + ".png'></td>"
       row += "<td><img title='Trash' class='trash " + (mesh.lock == "locked" ? "disabled" : "") + "' src='/app/imgs/panels/tools/trash.png'></td>"
@@ -59,6 +59,14 @@ export function updateMeshesPanel(type, mesh) {
       table.append(row + "</tr>")
 
       let tableRow = table.find("tr#" + mesh.uuid + "")
+
+      tableRow.find(".name span").keypress(function(event) { event.stopPropagation() })
+      tableRow.find(".name span").keydown(function(event) { event.stopPropagation() })
+      tableRow.find(".name span").keyup(function(event) { event.stopPropagation(); updateMesh(mesh, "name", null, $(this).text()) })
+
+      tableRow.find(".name span").dblclick(function(event) { document.execCommand("selectAll") })
+      tableRow.find(".name span").mousedown(function(event) { event.stopPropagation() })
+      tableRow.find(".name span").mouseup(function(event) { event.stopPropagation() })
 
       tableRow.find(".settings").click(function() { addMeshPanel(mesh) })
       tableRow.find(".lock").click(function() { updateMesh(mesh, "lock") })
@@ -73,14 +81,14 @@ export function updateMeshesPanel(type, mesh) {
     case "remove":
 
       $("#mesh." + mesh.uuid + "").remove()
-      $("#meshes.table tr#" + mesh.uuid + "").remove()
+      table.find("tr#" + mesh.uuid + "").remove()
 
-      meshes = meshes.filter(obj => obj.uuid != mesh.uuid)
+      data.meshes = meshes.filter(obj => obj.uuid != mesh.uuid)
 
-      if (!meshes.length) {
+      if (meshes.length == 0) {
 
-        $("#none").css("display", "block")
-        $("div.table").css("display", "none")
+        panel.find("#none").css("display", "block")
+        panel.find("div.table").css("display", "none")
 
       }
 

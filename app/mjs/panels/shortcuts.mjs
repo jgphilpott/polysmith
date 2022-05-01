@@ -29,7 +29,7 @@ export function addShortcutsPanel() {
 
   panel.append("<img title='Torus' id='torus' class='shape' src='/app/imgs/icons/shapes/special/torus.png'>")
 
-  panel.append("<img id='toggle' class='nav' src='/app/imgs/panels/nav/" + (shapesVisible ? "x" : "+") + ".png'>")
+  panel.append("<img title='Toggle Shapes Panel' id='toggle' class='nav' src='/app/imgs/panels/nav/" + (shapesVisible ? "x" : "+") + ".png'>")
 
   panel.find("img.shape").toArray().forEach(shape => {
 

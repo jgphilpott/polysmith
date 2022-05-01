@@ -5,7 +5,7 @@ export function addCameraPanel() {
   let panel = $("#camera.panel")
 
   panel.append("<img class='camera' src='/app/imgs/panels/main/camera.png'>")
-  panel.append("<img class='refresh' src='/app/imgs/panels/tools/refresh.png'>")
+  panel.append("<img title='Reset Camera' class='reset' src='/app/imgs/panels/tools/reset.png'>")
 
   panel.append("<div id='position' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Position</h4></div><div class='body'></div></div>")
   panel.append("<div id='target' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Target</h4></div><div class='body'></div></div>")
@@ -63,7 +63,7 @@ export function addCameraPanel() {
   sliderStyle(speed.find("#fly.slider"))
   sliderStyle(speed.find("#zoom.slider"))
 
-  panel.find(".refresh").click(function(event) {
+  panel.find(".reset").click(function(event) {
 
     speed.find(".slider").slider("value", 25)
 
@@ -89,8 +89,11 @@ export function addCameraPanel() {
   panel.find("input").keydown(function(event) { event.stopPropagation() })
   panel.find("input").keyup(function(event) { event.stopPropagation(); updateCamera(this, event) })
   panel.find("input").change(function(event) { event.stopPropagation(); updateCamera(this, event) })
+
+  panel.find("input").dblclick(function(event) { document.execCommand("selectAll") })
   panel.find("input").mousedown(function(event) { event.stopPropagation() })
-  panel.find("input").dblclick(function(event) { $(this).select() })
+  panel.find("input").mouseup(function(event) { event.stopPropagation() })
+
   panel.find("input").blur(function(event) {
 
     let selection = $(this).parent().attr("id").split("-")[0]
