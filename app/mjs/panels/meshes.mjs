@@ -10,19 +10,19 @@ export function addMeshesPanel() {
 
   panel.append("<div class='table'><table id='meshes' class='table'><thead><tr></tr></thead><tbody></tbody></table></div>")
 
-  let tableHead = $("#meshes.table thead tr")
+  let tableHead = panel.find("#meshes.table thead tr")
 
   tableHead.append("<th><h4>ID</h4></th>")
-  tableHead.append("<th><h4>Type</h4></th>")
+  tableHead.append("<th><h4>Name</h4></th>")
   tableHead.append("<th><h4>Settings</h4></th>")
   tableHead.append("<th><h4>Lock</h4></th>")
   tableHead.append("<th><h4>Trash</h4></th>")
 
   panel.append("<p id='none'><b>None</b></p>")
 
-  $("#meshes.panel div.table").on("scroll", function(event) {
+  panel.find("div.table").on("scroll", function(event) {
 
-    $("#meshes.table tbody").css("clip-path", "inset(" + $(this).scrollTop() + "px 0px 0px 0px)")
+    panel.find("#meshes.table tbody").css("clip-path", "inset(" + $(this).scrollTop() + "px 0px 0px 0px)")
 
   })
 
@@ -34,7 +34,8 @@ export function addMeshesPanel() {
 
 export function updateMeshesPanel(type, mesh) {
 
-  let table = $("#meshes.table tbody")
+  let panel = $("#meshes.panel")
+  let table = panel.find("#meshes.table tbody")
 
   switch (type) {
 
@@ -44,13 +45,13 @@ export function updateMeshesPanel(type, mesh) {
 
       tooltips.meshCount += 1
 
-      $("#none").css("display", "none")
-      $("div.table").css("display", "block")
+      panel.find("#none").css("display", "none")
+      panel.find("div.table").css("display", "block")
 
       let row = "<tr id=" + mesh.uuid + ">"
 
-      row += "<td><p>" + tooltips.meshCount + "</p></td>"
-      row += "<td><p>" + mesh.class.replace(/\b\w/g, function(char) { return char.toUpperCase() }).replace("-", " ") + "</p></td>"
+      row += "<td><p class='id'>" + tooltips.meshCount + "</p></td>"
+      row += "<td><p class='name'><span " + (mesh.lock == "locked" ? "class='disabled'" : "") + " contenteditable='true'>" + mesh.name + "</span></p></td>"
       row += "<td><img title='Settings' class='settings' src='/app/imgs/panels/tools/gear.png'></td></td>"
       row += "<td><img title='Lock' class='lock' src='/app/imgs/panels/lock/" + mesh.lock + ".png'></td>"
       row += "<td><img title='Trash' class='trash " + (mesh.lock == "locked" ? "disabled" : "") + "' src='/app/imgs/panels/tools/trash.png'></td>"
