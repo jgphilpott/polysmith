@@ -30,7 +30,8 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     panel = $("#mesh." + mesh.uuid + "")
 
-    panel.append("<h3 id='name'><span contenteditable='true'>" + mesh.name + "</span></h3>")
+    panel.append("<h3 id='name'><span contenteditable='true'></span></h3>")
+    panel.find("#name span")[0].innerText = mesh.name
 
     panel.data("mesh", mesh)
 
@@ -143,6 +144,16 @@ export function addMeshPanel(mesh, coordinates=null) {
     $("#mesh." + mesh.uuid + " #rotation-x input").val(radian2degree(mesh.rotation.x).toFixed(2))
     $("#mesh." + mesh.uuid + " #rotation-y input").val(radian2degree(mesh.rotation.y).toFixed(2))
     $("#mesh." + mesh.uuid + " #rotation-z input").val(radian2degree(mesh.rotation.z).toFixed(2))
+
+    panel.find("#name span").keypress(function(event) { event.stopPropagation() })
+    panel.find("#name span").keydown(function(event) { event.stopPropagation() })
+    panel.find("#name span").keyup(function(event) { event.stopPropagation(); updateMesh(mesh, "name", "mesh", $(this)[0].innerText) })
+
+    panel.find("#name span").dblclick(function(event) { document.execCommand("selectAll") })
+    panel.find("#name span").mousedown(function(event) { event.stopPropagation() })
+    panel.find("#name span").mouseup(function(event) { event.stopPropagation() })
+
+    panel.find("#name span").blur(function(event) { updateMesh(mesh, "name", null, $(this)[0].innerText) })
 
     panel.find(".color").click(function(event) {
 
@@ -409,7 +420,21 @@ export function addMesh(mesh=null, properties={}) {
 
 export function updateMesh(mesh, type, key=null, value=null) {
 
-  if ((type == "position" || type == "rotation") && mesh.lock != "locked") {
+  if (type == "name") {
+
+    value = value.trim()
+
+    mesh.name = value
+
+    let meshPanelName = $("#mesh." + mesh.uuid + " #name span")
+    let meshesPanelName = $("#meshes.table tr#" + mesh.uuid + " .name span")
+
+    if (meshPanelName[0] && key != "mesh") meshPanelName[0].innerText = value
+    if (meshesPanelName[0] && key != "meshes") meshesPanelName[0].innerText = value
+
+    value == "" && key != "mesh" ? meshPanelName.css("display", "none") : meshPanelName.css("display", "block")
+
+  } else if ((type == "position" || type == "rotation") && mesh.lock != "locked") {
 
     let input = $("#mesh." + mesh.uuid + " #" + type + "-" + key + " input")
 

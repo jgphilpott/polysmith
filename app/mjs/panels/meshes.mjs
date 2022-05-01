@@ -62,11 +62,13 @@ export function updateMeshesPanel(type, mesh) {
 
       tableRow.find(".name span").keypress(function(event) { event.stopPropagation() })
       tableRow.find(".name span").keydown(function(event) { event.stopPropagation() })
-      tableRow.find(".name span").keyup(function(event) { event.stopPropagation(); updateMesh(mesh, "name", null, $(this).text()) })
+      tableRow.find(".name span").keyup(function(event) { event.stopPropagation(); updateMesh(mesh, "name", "meshes", $(this)[0].innerText) })
 
       tableRow.find(".name span").dblclick(function(event) { document.execCommand("selectAll") })
       tableRow.find(".name span").mousedown(function(event) { event.stopPropagation() })
       tableRow.find(".name span").mouseup(function(event) { event.stopPropagation() })
+
+      tableRow.find(".name span").blur(function(event) { updateMesh(mesh, "name", null, $(this)[0].innerText) })
 
       tableRow.find(".settings").click(function() { addMeshPanel(mesh) })
       tableRow.find(".lock").click(function() { updateMesh(mesh, "lock") })
@@ -83,7 +85,7 @@ export function updateMeshesPanel(type, mesh) {
       $("#mesh." + mesh.uuid + "").remove()
       table.find("tr#" + mesh.uuid + "").remove()
 
-      data.meshes = meshes.filter(obj => obj.uuid != mesh.uuid)
+      meshes.filterInPlace(obj => obj.uuid != mesh.uuid)
 
       if (meshes.length == 0) {
 
