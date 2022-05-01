@@ -40,7 +40,7 @@ export async function localMeshes(action=null, mesh=null) {
 
     } else if (action == "remove") {
 
-      localMeshes = localMeshes.filter(localMesh => localMesh.object.uuid != mesh.uuid)
+      localMeshes.filterInPlace(localMesh => localMesh.object.uuid != mesh.uuid)
 
     }
 

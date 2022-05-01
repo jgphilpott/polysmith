@@ -70,7 +70,7 @@ export function toggleShortcut(id) {
 
   if (shortcut.css("display") == "block") {
 
-    settings.ui.shortcuts = settings.ui.shortcuts.filter(item => item != id)
+    settings.ui.shortcuts.filterInPlace(item => item != id)
 
     shortcut.css("display", "none")
     shape.css("opacity", 1)

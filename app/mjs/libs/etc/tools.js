@@ -49,6 +49,29 @@ $.fn.clickSingleDouble = function(single_click_callback, double_click_callback, 
   })
 }
 
+// Credit: https://stackoverflow.com/a/57067151/1544937
+Array.prototype.filterInPlace = function(condition, item) {
+
+    let i = 0
+
+    this.forEach((element, index) => {
+
+        if (condition.call(item, element, index, this)) {
+
+            if (index !== i) this[i] = element
+
+            i++
+
+        }
+
+    })
+
+    this.length = i
+
+    return this
+
+}
+
 function signedVolumeOfTriangle(p1, p2, p3) {
   return p1.dot(p2.cross(p3)) / 6.0
 }
