@@ -84,7 +84,7 @@ updateSettings = (category, setting, value) ->
 
         return updateFailed category: category, setting: setting, value: value
 
-    return true
+    return
 
 updateSuccess = (update) ->
 

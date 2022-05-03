@@ -149,7 +149,7 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.find("#name span").keydown(function(event) { event.stopPropagation() })
     panel.find("#name span").keyup(function(event) { event.stopPropagation(); updateMesh(mesh, "name", "mesh", $(this)[0].innerText) })
 
-    panel.find("#name span").dblclick(function(event) { if (mesh.lock != "locked") document.execCommand("selectAll") })
+    panel.find("#name span").dblclick(function(event) { event.stopPropagation(); if (mesh.lock != "locked") document.execCommand("selectAll") })
     panel.find("#name span").mousedown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
     panel.find("#name span").mouseup(function(event) { event.stopPropagation() })
 
