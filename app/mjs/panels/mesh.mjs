@@ -252,6 +252,8 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     })
 
+    $("#meshes.table tr#" + mesh.uuid + " .settings").attr("src", "/app/imgs/panels/tools/toggle/on.png")
+
     panel.mouseover(function() { $("#context-menu.panel").remove() })
 
     sliderStyle(panel.find(".slider"))

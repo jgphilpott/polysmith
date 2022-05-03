@@ -83,7 +83,7 @@ export function addPanelEvents(panel) {
   let duration = 1000
 
   let id = panel.attr("id")
-  let close = $("#" + id + ".panel .close")
+  let close = panel.find(".close")
 
   panel.hover(function(event) {
 
