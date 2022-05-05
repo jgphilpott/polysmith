@@ -27,7 +27,7 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     if (!coordinates) coordinates = world2screenCoordinates(mesh.position.x, mesh.position.y, mesh.position.z)
 
-    panel.css({top: coordinates.y, left: coordinates.x})
+    panel.css({left: coordinates.x, top: coordinates.y})
 
     panel.append("<h3 id='name'><span contenteditable='true'></span></h3>")
     panel.find("#name span")[0].innerText = mesh.name
@@ -39,9 +39,9 @@ export function addMeshPanel(mesh, coordinates=null) {
     let tools = "<div id='tools' class='controls'>"
     let meta = "<div id='meta' class='controls'>"
 
-    operations += "<img title='Join' id='join' class='operation' src='/app/imgs/panels/ops/join.png'>"
-    operations += "<img title='Cut' id='cut' class='operation' src='/app/imgs/panels/ops/cut.png'>"
-    operations += "<img title='Intersect' id='intersect' class='operation' src='/app/imgs/panels/ops/intersect.png'>"
+    operations += "<img title='Join' id='join' class='operation' src='/app/imgs/panels/ops" + (mesh.lock == "locked" ? "/disabled" : "") + "/join.png'>"
+    operations += "<img title='Cut' id='cut' class='operation' src='/app/imgs/panels/ops" + (mesh.lock == "locked" ? "/disabled" : "") + "/cut.png'>"
+    operations += "<img title='Intersect' id='intersect' class='operation' src='/app/imgs/panels/ops" + (mesh.lock == "locked" ? "/disabled" : "") + "/intersect.png'>"
 
     colors += "<img title='Multi' id='multi' class='color' src='/app/imgs/panels/tools/colors.png'>"
     colors += "<div title='Red' id='red' class='color'></div>"
@@ -57,7 +57,7 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     tools += "<img title='Visibility' id='eye' class='tool' src=" + (mesh.material.opacity < 0.5 ? '/app/imgs/panels/visibility/hidden.png' : '/app/imgs/panels/visibility/visible.png') + ">"
     tools += "<div id='visibility' class='tool slider'></div>"
-    tools += "<img title='Lock' id='lock' class='tool' src='/app/imgs/panels/lock/unlocked.png'>"
+    tools += "<img title='Lock' id='lock' class='tool' src='/app/imgs/panels/lock/" + mesh.lock + ".png'>"
     tools += "<img title='Trash' id='trash' class='tool' src='/app/imgs/panels/tools/trash.png'>"
 
     meta += "<p id='type'><b>Type:</b> " + mesh.class.replace(/\b\w/g, function(char) { return char.toUpperCase() }).replace("-", " ") + "</p>"
@@ -131,8 +131,14 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     if (mesh.lock == "locked") {
 
-      $("#mesh." + mesh.uuid + " input").addClass("disabled")
-      $("#mesh." + mesh.uuid + " button").addClass("disabled")
+      panel.find("#name span").addClass("disabled")
+
+      panel.find(".operation").addClass("disabled")
+      panel.find(".color").addClass("disabled")
+      panel.find(".tool").not("#lock").addClass("disabled")
+
+      panel.find("input").addClass("disabled")
+      panel.find("button").addClass("disabled")
 
     }
 
