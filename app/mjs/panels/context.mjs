@@ -20,14 +20,17 @@ export function contextMenu(type, element, event) {
 
       contextMenu.append("<p id='look'>Look Here</p>")
 
-      $("#context-menu.panel #look").click(function() { focus({x: element.position.x, y: element.position.y, z: element.position.z}) })
+      contextMenu.find("#look").click(function() { focus({x: element.position.x, y: element.position.y, z: element.position.z}) })
 
       break
 
     case "mesh":
 
+      let meshPanel = $("#mesh." + element.uuid + "")
+      let meshTableRow = $("#meshes.table tr#" + element.uuid + "")
+
       contextMenu.append("<h4>Basic</h4>")
-      contextMenu.append("<p id='open'>Open Panel</p>")
+      contextMenu.append("<p id='panel'>" + (meshPanel.length && meshPanel.css("visibility") == "visible" ? "Close" : "Open") + " Panel</p>")
       contextMenu.append("<p id='look'>Look Here</p>")
 
       contextMenu.append("<h4>Mesh</h4>")
@@ -37,14 +40,37 @@ export function contextMenu(type, element, event) {
       element.lock != "locked" ? contextMenu.append("<p id='remove'>Remove Mesh</p>") : null
       element.lock == "locked" ? contextMenu.append("<p id='lock'>Unlock Mesh</p>") : contextMenu.append("<p id='lock'>Lock Mesh</p>")
 
-      $("#context-menu.panel #open").click(function() { addMeshPanel(element) })
-      $("#context-menu.panel #look").click(function() { focus({x: element.position.x, y: element.position.y, z: element.position.z}) })
+      contextMenu.find("#panel").click(function() {
 
-      $("#context-menu.panel #cut").click(function() { updateMesh(element, "operation", "cut", "setup") })
-      $("#context-menu.panel #join").click(function() { updateMesh(element, "operation", "join", "setup") })
-      $("#context-menu.panel #intersect").click(function() { updateMesh(element, "operation", "intersect", "setup") })
-      $("#context-menu.panel #remove").click(function() { removeMesh(element) })
-      $("#context-menu.panel #lock").click(function() { updateMesh(element, "lock") })
+        if (meshPanel.length && meshPanel.css("visibility") == "visible") {
+
+          meshTableRow.find(".settings").attr("src", "/app/imgs/panels/tools/toggle/off.png")
+
+          meshPanel.css("visibility", "hidden")
+
+        } else if (meshPanel.length) {
+
+          meshTableRow.find(".settings").attr("src", "/app/imgs/panels/tools/toggle/on.png")
+
+          meshPanel.css("visibility", "visible")
+
+        } else {
+
+          meshTableRow.find(".settings").attr("src", "/app/imgs/panels/tools/toggle/on.png")
+
+          addMeshPanel(element)
+
+        }
+
+      })
+
+      contextMenu.find("#look").click(function() { focus({x: element.position.x, y: element.position.y, z: element.position.z}) })
+
+      contextMenu.find("#cut").click(function() { updateMesh(element, "operation", "cut", "setup") })
+      contextMenu.find("#join").click(function() { updateMesh(element, "operation", "join", "setup") })
+      contextMenu.find("#intersect").click(function() { updateMesh(element, "operation", "intersect", "setup") })
+      contextMenu.find("#remove").click(function() { removeMesh(element) })
+      contextMenu.find("#lock").click(function() { updateMesh(element, "lock") })
 
       break
 
@@ -55,9 +81,9 @@ export function contextMenu(type, element, event) {
       contextMenu.append("<p id='add'>Add Mesh</p>")
       shape.css("display") == "none" ? contextMenu.append("<p id='show'>Show Shortcut</p>") : contextMenu.append("<p id='hide'>Hide Shortcut</p>")
 
-      $("#context-menu.panel #add").click(function() { addMesh(null, {class: element.attr("id")}) })
-      $("#context-menu.panel #show").click(function() { toggleShortcut(element.attr("id")) })
-      $("#context-menu.panel #hide").click(function() { toggleShortcut(element.attr("id")) })
+      contextMenu.find("#add").click(function() { addMesh(null, {class: element.attr("id")}) })
+      contextMenu.find("#show").click(function() { toggleShortcut(element.attr("id")) })
+      contextMenu.find("#hide").click(function() { toggleShortcut(element.attr("id")) })
 
       break
 
@@ -66,14 +92,14 @@ export function contextMenu(type, element, event) {
       contextMenu.append("<p id='add'>Add Mesh</p>")
       contextMenu.append("<p id='hide'>Hide Shortcut</p>")
 
-      $("#context-menu.panel #add").click(function() { addMesh(null, {class: element.attr("id")}) })
-      $("#context-menu.panel #hide").click(function() { toggleShortcut(element.attr("id")) })
+      contextMenu.find("#add").click(function() { addMesh(null, {class: element.attr("id")}) })
+      contextMenu.find("#hide").click(function() { toggleShortcut(element.attr("id")) })
 
       break
 
   }
 
-  $("#context-menu.panel p").click(function() {
+  contextMenu.find("p").click(function() {
 
     contextMenu.remove()
 

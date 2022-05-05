@@ -74,17 +74,23 @@ export function updateMeshesPanel(type, mesh) {
 
         let panel = $("#mesh." + mesh.uuid + "")
 
-        if (panel.length == 0) {
+        if (panel.length && panel.css("visibility") == "visible") {
+
+          $(this).attr("src", "/app/imgs/panels/tools/toggle/off.png")
+
+          panel.css("visibility", "hidden")
+
+        } else if (panel.length) {
+
+          $(this).attr("src", "/app/imgs/panels/tools/toggle/on.png")
+
+          panel.css("visibility", "visible")
+
+        } else {
 
           $(this).attr("src", "/app/imgs/panels/tools/toggle/on.png")
 
           addMeshPanel(mesh)
-
-        } else {
-
-          $(this).attr("src", "/app/imgs/panels/tools/toggle/off.png")
-
-          panel.remove()
 
         }
 

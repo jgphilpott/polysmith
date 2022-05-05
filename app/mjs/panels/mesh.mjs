@@ -1,6 +1,5 @@
 import {joinMesh, cutMesh, intersectMesh} from "../../libs/js/meshOperations.mjs"
 
-import * as glassGrayscale from "../libs/colors/glass/grayscale.js"
 import * as threeGrayscale from "../libs/colors/three/grayscale.js"
 import * as threeRainbow from "../libs/colors/three/rainbow.js"
 
@@ -24,11 +23,11 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     $("body").append("<div id='mesh' class='panel " + mesh.uuid + "'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")
 
+    panel = $("#mesh." + mesh.uuid + "")
+
     if (!coordinates) coordinates = world2screenCoordinates(mesh.position.x, mesh.position.y, mesh.position.z)
 
-    $("#mesh." + mesh.uuid + "").css({top: coordinates.y, left: coordinates.x})
-
-    panel = $("#mesh." + mesh.uuid + "")
+    panel.css({top: coordinates.y, left: coordinates.x})
 
     panel.append("<h3 id='name'><span contenteditable='true'></span></h3>")
     panel.find("#name span")[0].innerText = mesh.name
@@ -252,20 +251,11 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     })
 
-    $("#meshes.table tr#" + mesh.uuid + " .settings").attr("src", "/app/imgs/panels/tools/toggle/on.png")
-
     panel.mouseover(function() { $("#context-menu.panel").remove() })
 
     sliderStyle(panel.find(".slider"))
 
     addPanelEvents(panel)
-
-  } else {
-
-    setTimeout(function() { panel.css("background", glassGrayscale.grayGlass) }, 0)
-    setTimeout(function() { panel.css("background", glassGrayscale.lightGrayGlass) }, 100)
-    setTimeout(function() { panel.css("background", glassGrayscale.grayGlass) }, 200)
-    setTimeout(function() { panel.css("background", glassGrayscale.lightGrayGlass) }, 300)
 
   }
 
