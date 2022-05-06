@@ -62,13 +62,13 @@ export function updateMeshesPanel(type, mesh) {
 
       tableRow.find(".name span").keypress(function(event) { event.stopPropagation() })
       tableRow.find(".name span").keydown(function(event) { event.stopPropagation() })
-      tableRow.find(".name span").keyup(function(event) { event.stopPropagation(); updateMesh(mesh, "name", "meshes", $(this)[0].innerText) })
+      tableRow.find(".name span").keyup(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "name", "meshes", $(this)[0].innerText) })
 
       tableRow.find(".name span").dblclick(function(event) { event.stopPropagation(); if (mesh.lock != "locked") document.execCommand("selectAll") })
       tableRow.find(".name span").mousedown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
       tableRow.find(".name span").mouseup(function(event) { event.stopPropagation() })
 
-      tableRow.find(".name span").blur(function(event) { updateMesh(mesh, "name", null, $(this)[0].innerText) })
+      tableRow.find(".name span").blur(function(event) { if (mesh.lock != "locked") updateMesh(mesh, "name", null, $(this)[0].innerText) })
 
       tableRow.find(".settings").click(function() {
 

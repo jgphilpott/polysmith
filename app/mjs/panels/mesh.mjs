@@ -25,12 +25,12 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     panel = $("#mesh." + mesh.uuid + "")
 
-    if (!coordinates) coordinates = world2screenCoordinates(mesh.position.x, mesh.position.y, mesh.position.z)
-
-    panel.css({left: coordinates.x, top: coordinates.y})
+    if (coordinates) panel.css({left: coordinates.x, top: coordinates.y})
 
     panel.append("<h3 id='name'><span contenteditable='true'></span></h3>")
     panel.find("#name span")[0].innerText = mesh.name
+
+    panel.css("z-index", events.zIndex + 1)
 
     panel.data("mesh", mesh)
 
@@ -69,11 +69,11 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.append(tools + "</div>")
     panel.append(meta + "</div>")
 
-    mesh.material.style ? panel.find("#" + mesh.material.style + ".color").addClass("selected") : panel.find("#multi.color").addClass("selected")
+    panel.find("#" + mesh.material.style + ".color").addClass("selected")
 
     panel.find("#visibility.slider").slider({min: 0, max: 100, value: mesh.material.opacity * 100, start: sliderStart, slide: sliderSlide, stop: sliderStop})
 
-    panel.append("<div id='properties' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Properties</h4></div><div class='body'></div></div>")
+    if (mesh.class != "custom") panel.append("<div id='properties' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Properties</h4></div><div class='body'></div></div>")
     panel.append("<div id='position' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Position</h4></div><div class='body'></div></div>")
     panel.append("<div id='rotation' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Rotation</h4></div><div class='body'></div></div>")
     panel.append("<div id='scale' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Scale</h4></div><div class='body'></div></div>")
@@ -152,40 +152,15 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     panel.find("#name span").keypress(function(event) { event.stopPropagation() })
     panel.find("#name span").keydown(function(event) { event.stopPropagation() })
-    panel.find("#name span").keyup(function(event) { event.stopPropagation(); updateMesh(mesh, "name", "mesh", $(this)[0].innerText) })
+    panel.find("#name span").keyup(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "name", "mesh", $(this)[0].innerText) })
 
     panel.find("#name span").dblclick(function(event) { event.stopPropagation(); if (mesh.lock != "locked") document.execCommand("selectAll") })
     panel.find("#name span").mousedown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
     panel.find("#name span").mouseup(function(event) { event.stopPropagation() })
 
-    panel.find("#name span").blur(function(event) { updateMesh(mesh, "name", null, $(this)[0].innerText) })
+    panel.find("#name span").blur(function(event) { if (mesh.lock != "locked") updateMesh(mesh, "name", null, $(this)[0].innerText) })
 
-    panel.find(".color").click(function(event) {
-
-      let color = null
-      let opacity = mesh.material.opacity
-      let material = this.id == "multi" ? "normal" : "standard"
-
-      panel.find(".color").removeClass("selected")
-      $(this).addClass("selected")
-
-      if (["red", "orange", "yellow", "green", "blue", "purple", "pink"].includes(this.id)) {
-
-        color = threeRainbow.rainbow[this.id]
-
-      } else if (["white", "gray", "black"].includes(this.id)) {
-
-        color = threeGrayscale.grayscale[this.id]
-
-      }
-
-      mesh.material.dispose()
-      mesh.material = meshMaterial(material, color)
-
-      mesh.material.opacity = opacity
-      mesh.material.style = this.id
-
-    })
+    panel.find(".color").click(function(event) { if (mesh.lock != "locked") updateMesh(mesh, "color", null, this.id) })
 
     panel.find("#eye").click(function(event) {
 
@@ -377,9 +352,11 @@ export function addMesh(mesh=null, properties={}) {
 
   if (mesh) {
 
-    "name" in properties ? mesh.name = properties.name : mesh.name ? mesh.name = mesh.name : mesh.name = "Unnamed"
-    "lock" in properties ? mesh.lock = properties.lock : mesh.lock ? mesh.lock = mesh.lock : mesh.lock = "unlocked"
-    "class" in properties ? mesh.class = properties.class : mesh.class ? mesh.class = mesh.class : mesh.class = "custom"
+    mesh.name = "name" in properties ? properties.name : mesh.name ? mesh.name : "Unnamed"
+    mesh.lock = "lock" in properties ? properties.lock : mesh.lock ? mesh.lock : "unlocked"
+    mesh.class = "class" in properties ? properties.class : mesh.class ? mesh.class : "custom"
+
+    mesh.material.style = "style" in properties ? properties.style : mesh.material.style ? mesh.material.style : "multi"
 
     if (properties.position) {
 
@@ -414,6 +391,8 @@ export function addMesh(mesh=null, properties={}) {
 
 export function updateMesh(mesh, type, key=null, value=null) {
 
+  let panel = $("#mesh." + mesh.uuid + "")
+
   if (type == "name") {
 
     value = value.trim()
@@ -427,6 +406,31 @@ export function updateMesh(mesh, type, key=null, value=null) {
     if (meshesPanelName[0] && key != "meshes") meshesPanelName[0].innerText = value
 
     value == "" && key != "mesh" ? meshPanelName.css("display", "none") : meshPanelName.css("display", "block")
+
+  } else if (type == "color") {
+
+    let color = null
+    let opacity = mesh.material.opacity
+    let material = value == "multi" ? "normal" : "standard"
+
+    panel.find(".color").removeClass("selected")
+    panel.find("#" + value + ".color").addClass("selected")
+
+    if (["red", "orange", "yellow", "green", "blue", "purple", "pink"].includes(value)) {
+
+      color = threeRainbow.rainbow[value]
+
+    } else if (["white", "gray", "black"].includes(value)) {
+
+      color = threeGrayscale.grayscale[value]
+
+    }
+
+    mesh.material.dispose()
+    mesh.material = meshMaterial(material, color)
+
+    mesh.material.opacity = opacity
+    mesh.material.style = value
 
   } else if ((type == "position" || type == "rotation") && mesh.lock != "locked") {
 

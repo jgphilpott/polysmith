@@ -12,9 +12,10 @@ export async function localMeshes(action=null, mesh=null) {
 
       localMeshes.forEach(localMesh => {
 
-        addMesh(loader.parse(localMesh), {name: localMesh.object.name,
-                                          lock: localMesh.object.lock,
-                                          class: localMesh.object.class})
+        addMesh(loader.parse(localMesh), {name: localMesh.metadata.name,
+                                          lock: localMesh.metadata.lock,
+                                          class: localMesh.metadata.class,
+                                          style: localMesh.metadata.style})
 
       })
 
@@ -26,9 +27,11 @@ export async function localMeshes(action=null, mesh=null) {
 
     let meshJSON = mesh.toJSON()
 
-    meshJSON.object.name = mesh.name
-    meshJSON.object.lock = mesh.lock
-    meshJSON.object.class = mesh.class
+    meshJSON.metadata.name = mesh.name
+    meshJSON.metadata.lock = mesh.lock
+    meshJSON.metadata.class = mesh.class
+
+    meshJSON.metadata.style = mesh.material.style
 
     if (action == "add") {
 
