@@ -4,9 +4,9 @@ import {black} from "../colors/three/grayscale.js"
 import {addMesh} from "../../panels/mesh.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
-export function newBox(width=10, height=10, depth=10, position=[0, 0, 0], material="normal", color=black) {
+export function newBox(length=10, width=10, height=10, position=[0, 0, 0], material="normal", color=black) {
 
-  let geometry = new THREE.BoxGeometry(width, height, depth)
+  let geometry = new THREE.BoxGeometry(length, width, height)
   let box = new THREE.Mesh(geometry, meshMaterial(material, color))
 
   box.position.set(position[0], position[1], position[2])
@@ -16,8 +16,8 @@ export function newBox(width=10, height=10, depth=10, position=[0, 0, 0], materi
 
 }
 
-export function addBox(width=10, height=10, depth=10, position=[0, 0, 0], material="normal", color=black) {
+export function addBox(length=10, width=10, height=10, position=[0, 0, 0], material="normal", color=black) {
 
-  return addMesh(newBox(width, height, depth, position, material, color))
+  return addMesh(newBox(length, width, height, position, material, color))
 
 }

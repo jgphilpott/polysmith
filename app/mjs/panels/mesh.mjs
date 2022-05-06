@@ -83,35 +83,55 @@ export function addMeshPanel(mesh, coordinates=null) {
     let rotation = panel.find("#rotation .body")
     let scale = panel.find("#scale .body")
 
-    if (mesh.class == "box" || mesh.class == "cube") {
+    if (mesh.class == "box") {
 
-      properties.append("<span id='properties-width'><label>Width</label> <input type=number step=0.1 min=0 max=" + data.scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
-      properties.append("<span id='properties-height'><label>Height</label> <input type=number step=0.1 min=0 max=" + data.scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
-      properties.append("<span id='properties-depth'><label>Depth</label> <input type=number step=0.1 min=0 max=" + data.scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+      properties.append("<span id='properties-length'><label>Length</label> <input type=number step=0.1 min=0.1 max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+      properties.append("<span id='properties-width'><label>Width</label> <input type=number step=0.1 min=0.1 max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+      properties.append("<span id='properties-height'><label>Height</label> <input type=number step=0.1 min=0.1 max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
 
-    } else if (mesh.class == "cylinder") {
+    }  else if (mesh.class == "sphere") {
 
-      properties.append("<span id='properties-length'><label><p>Length</p> <input type=number step=0.1 min=0 max=" + data.scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-      properties.append("<span id='properties-radius-positive'><label><p>Positive Radius</p> <input type=number step=0.1 min=0 max=" + data.scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-      properties.append("<span id='properties-radius-negative'><label><p>Negative Radius</p> <input type=number step=0.1 min=0 max=" + data.scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-      properties.append("<span id='properties-radius-segments'><label><p>Radial Segments</p> <input type=number step=1 min=3 max=1000><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-
-    } else if (mesh.class == "sphere") {
-
-      properties.append("<span id='properties-radius'><label><p>Radius</p> <input type=number step=0.1 min=0 max=" + data.scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+      properties.append("<span id='properties-radius'><label><p>Radius</p> <input type=number step=0.1 min=0.1 max=" + scale * 2.5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
       properties.append("<span id='properties-width-segments'><label><p>Width Segments</p> <input type=number step=1 min=3 max=1000><button id='plus'>+</button><button id='minus'>-</button></label></span>")
       properties.append("<span id='properties-height-segments'><label><p>Height Segments</p> <input type=number step=1 min=3 max=1000><button id='plus'>+</button><button id='minus'>-</button></label></span>")
 
+    } else if (mesh.class == "torus") {
+
+      properties.append("<span id='properties-radius'><label><p>Radius</p> <input type=number step=0.1 min=0.1 max=" + scale * 2.5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+      properties.append("<span id='properties-thickness'><label><p>Thickness</p> <input type=number step=0.1 min=0.1 max=" + scale * 2.5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+      properties.append("<span id='properties-radius-segments'><label><p>Radial Segments</p> <input type=number step=1 min=3 max=1000><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+      properties.append("<span id='properties-tube-segments'><label><p>Tubular Segments</p> <input type=number step=1 min=3 max=1000><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+
+    } else if (mesh.class == "cylinder" || mesh.class.split("-")[1] == "prism") {
+
+      properties.append("<span id='properties-length'><label><p>Length</p> <input type=number step=0.1 min=0.1 max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+      properties.append("<span id='properties-radius-positive'><label><p>Positive Radius</p> <input type=number step=0.1 min=0.1 max=" + scale * 2.5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+      properties.append("<span id='properties-radius-negative'><label><p>Negative Radius</p> <input type=number step=0.1 min=0.1 max=" + scale * 2.5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+
+      if (mesh.class == "cylinder") properties.append("<span id='properties-radius-segments'><label><p>Radial Segments</p> <input type=number step=1 min=3 max=1000><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+
+    } else if (mesh.class == "cone") {
+
+      properties.append("<span id='properties-radius'><label><p>Radius</p> <input type=number step=0.1 min=0.1 max=" + scale * 2.5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+      properties.append("<span id='properties-height'><label><p>Height</p> <input type=number step=0.1 min=0.1 max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+      properties.append("<span id='properties-radius-segments'><label><p>Radial Segments</p> <input type=number step=1 min=3 max=1000><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+
+    } else if (mesh.class.split("-")[1] == "pyramid") {
+
+      properties.append("<span id='properties-radius'><label>Radius</label> <input type=number step=0.1 min=0.1 max=" + scale * 2.5 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+      properties.append("<span id='properties-height'><label>Height</label> <input type=number step=0.1 min=0.1 max=" + scale * 5 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+
     }
 
-    if (mesh.class == "box" || mesh.class == "cube") {
+    if (mesh.class == "box" || mesh.class.split("-")[1] == "pyramid") {
 
       properties.find("label").css("width", "45px")
-      properties.find("input").css("width", "95px")
+      properties.find("input").css("width", "90px")
 
-    } else if (mesh.class == "cylinder" || mesh.class == "sphere") {
+    } else if (mesh.class == "sphere" || mesh.class == "torus" || mesh.class == "cylinder" || mesh.class == "cone" || mesh.class.split("-")[1] == "prism") {
 
-      properties.find("label p").css("margin-bottom", "0px")
+      properties.find("label").css("margin", "3px 5px")
+      properties.find("label p").css("margin", "0px 5px")
       properties.find("label p").css("text-align", "left")
       properties.find("input").css("width", "145px")
 
@@ -248,7 +268,7 @@ export function addMesh(mesh=null, properties={}) {
 
     switch (properties.class) {
 
-      case "cube":
+      case "box":
 
         mesh = newBox()
         mesh.rotation.x = degree2radian(0)

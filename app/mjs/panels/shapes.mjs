@@ -12,7 +12,7 @@ export function addShapesPanel() {
   panel.append("<h3>Shapes</h3>")
 
   panel.append("<h4 id='basic'>Basic</h4>")
-  panel.append("<img title='Cube' id='cube' class='shape' src='/app/imgs/icons/shapes/basic/cube.png'>")
+  panel.append("<img title='Box' id='box' class='shape' src='/app/imgs/icons/shapes/basic/box.png'>")
   panel.append("<img title='Cylinder' id='cylinder' class='shape' src='/app/imgs/icons/shapes/basic/cylinder.png'>")
   panel.append("<img title='Sphere' id='sphere' class='shape' src='/app/imgs/icons/shapes/basic/sphere.png'>")
 

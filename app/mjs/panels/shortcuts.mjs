@@ -11,7 +11,7 @@ export function addShortcutsPanel() {
   let shapesPanel = $("#shapes.panel")
   let shapesVisible = shapesPanel.css("visibility") == "visible" ? true : false
 
-  panel.append("<img title='Cube' id='cube' class='shape' src='/app/imgs/icons/shapes/basic/cube.png'>")
+  panel.append("<img title='Box' id='box' class='shape' src='/app/imgs/icons/shapes/basic/box.png'>")
   panel.append("<img title='Cylinder' id='cylinder' class='shape' src='/app/imgs/icons/shapes/basic/cylinder.png'>")
   panel.append("<img title='Sphere' id='sphere' class='shape' src='/app/imgs/icons/shapes/basic/sphere.png'>")
 

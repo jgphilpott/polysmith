@@ -19,7 +19,7 @@ class Client():
                                 "ui": {
                                     "nav": "black",
                                     "forkme": False,
-                                    "shortcuts": ["cube", "cylinder", "sphere"]
+                                    "shortcuts": ["box", "cylinder", "sphere"]
                                 },
                                 "panels": {
                                     "camera": True,

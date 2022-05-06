@@ -18,7 +18,7 @@ getSettings = () ->
 
                 nav: "black"
                 forkme: true
-                shortcuts: ["cube", "cylinder", "sphere"]
+                shortcuts: ["box", "cylinder", "sphere"]
 
             panels:
 
