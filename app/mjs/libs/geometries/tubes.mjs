@@ -18,7 +18,7 @@ export function newPath(vertices=[[]]) {
 
 }
 
-export function newTube(vertices=[[10, 10, 10], [-10, -10, -10]], radius=1, radialSegments=10, tubularSegments=10, closed=false, material="normal", color=black) {
+export function newTube(vertices=[[10, 10, 10], [-10, -10, -10]], radius=1, radialSegments=42, tubularSegments=1, closed=false, material="normal", color=black) {
 
   let geometry = new THREE.TubeGeometry(newPath(vertices), tubularSegments, radius, radialSegments, closed)
   let tube = new THREE.Mesh(geometry, meshMaterial(material, color))
@@ -29,7 +29,7 @@ export function newTube(vertices=[[10, 10, 10], [-10, -10, -10]], radius=1, radi
 
 }
 
-export function addTube(vertices=[[10, 10, 10], [-10, -10, -10]], radius=1, radialSegments=10, tubularSegments=10, closed=false, material="normal", color=black) {
+export function addTube(vertices=[[10, 10, 10], [-10, -10, -10]], radius=1, radialSegments=42, tubularSegments=1, closed=false, material="normal", color=black) {
 
   return addMesh(newTube(vertices, radius, radialSegments, tubularSegments, closed, material, color))
 
