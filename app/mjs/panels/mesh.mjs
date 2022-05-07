@@ -83,69 +83,103 @@ export function addMeshPanel(mesh, coordinates=null) {
     let rotation = panel.find("#rotation .body")
     let scale = panel.find("#scale .body")
 
-    let regularStep = 1
-    let regularMin = 0.5
-    let regularMax = scale * 3
+    if (mesh.class != "custom") {
 
-    let radialStep = 0.5
-    let radialMin = 0.25
-    let radialMax = scale * 1.5
+      let regularStep = 1
+      let regularMin = 0.5
+      let regularMax = scale * 3
 
-    let segmentsStep = 1
-    let segmentsMin = 3
-    let segmentsMax = 100
+      let radialStep = 0.5
+      let radialMin = 0.25
+      let radialMax = scale * 1.5
 
-    if (mesh.class == "box") {
+      let segmentsStep = 1
+      let segmentsMin = 3
+      let segmentsMax = 100
 
-      properties.append("<span id='properties-length'><label>Length</label> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
-      properties.append("<span id='properties-width'><label>Width</label> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
-      properties.append("<span id='properties-height'><label>Height</label> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+      if (mesh.class == "box") {
 
-    }  else if (mesh.class == "sphere") {
+        properties.append("<span id='properties-length'><label>Length</label> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+        properties.append("<span id='properties-width'><label>Width</label> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+        properties.append("<span id='properties-height'><label>Height</label> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
 
-      properties.append("<span id='properties-radius'><label><p>Radius</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-      properties.append("<span id='properties-width-segments'><label><p>Width Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-      properties.append("<span id='properties-height-segments'><label><p>Height Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.find("#properties-length input").val(mesh.geometry.parameters.width)
+        properties.find("#properties-width input").val(mesh.geometry.parameters.height)
+        properties.find("#properties-height input").val(mesh.geometry.parameters.depth)
 
-    } else if (mesh.class == "cylinder" || mesh.class.split("-")[1] == "prism") {
+      }  else if (mesh.class == "sphere") {
 
-      properties.append("<span id='properties-length'><label><p>Length</p> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-      properties.append("<span id='properties-radius-positive'><label><p>Positive Radius</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-      properties.append("<span id='properties-radius-negative'><label><p>Negative Radius</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.append("<span id='properties-radius'><label><p>Radius</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.append("<span id='properties-width-segments'><label><p>Width Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.append("<span id='properties-height-segments'><label><p>Height Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
 
-      if (mesh.class == "cylinder") properties.append("<span id='properties-radius-segments'><label><p>Radial Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.find("#properties-radius input").val(mesh.geometry.parameters.radius)
+        properties.find("#properties-width-segments input").val(mesh.geometry.parameters.widthSegments)
+        properties.find("#properties-height-segments input").val(mesh.geometry.parameters.heightSegments)
 
-    } else if (mesh.class.split("-")[1] == "pyramid") {
+      } else if (mesh.class == "cylinder" || mesh.class.split("-")[1] == "prism") {
 
-      properties.append("<span id='properties-radius'><label>Radius</label> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
-      properties.append("<span id='properties-height'><label>Height</label> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+        properties.append("<span id='properties-length'><label><p>Length</p> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.append("<span id='properties-radius-positive'><label><p>Positive Radius</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.append("<span id='properties-radius-negative'><label><p>Negative Radius</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
 
-    } else if (mesh.class == "cone") {
+        properties.find("#properties-length input").val(mesh.geometry.parameters.height)
+        properties.find("#properties-radius-positive input").val(mesh.geometry.parameters.radiusTop)
+        properties.find("#properties-radius-negative input").val(mesh.geometry.parameters.radiusBottom)
 
-      properties.append("<span id='properties-radius'><label><p>Radius</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-      properties.append("<span id='properties-height'><label><p>Height</p> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-      properties.append("<span id='properties-radius-segments'><label><p>Radial Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        if (mesh.class == "cylinder") {
 
-    } else if (mesh.class == "torus") {
+          properties.append("<span id='properties-radius-segments'><label><p>Radial Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
 
-      properties.append("<span id='properties-radius'><label><p>Radius</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-      properties.append("<span id='properties-thickness'><label><p>Thickness</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-      properties.append("<span id='properties-radius-segments'><label><p>Radial Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-      properties.append("<span id='properties-tube-segments'><label><p>Tubular Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+          properties.find("#properties-radius-segments input").val(mesh.geometry.parameters.radialSegments)
 
-    }
+        }
 
-    if (mesh.class == "box" || mesh.class.split("-")[1] == "pyramid") {
+      } else if (mesh.class.split("-")[1] == "pyramid") {
 
-      properties.find("label").css("width", "45px")
-      properties.find("input").css("width", "90px")
+        properties.append("<span id='properties-height'><label>Height</label> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+        properties.append("<span id='properties-radius'><label>Radius</label> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
 
-    } else if (mesh.class == "cylinder" || mesh.class == "sphere" || mesh.class == "cone" || mesh.class == "torus" || mesh.class.split("-")[1] == "prism") {
+        properties.find("#properties-height input").val(mesh.geometry.parameters.height)
+        properties.find("#properties-radius input").val(mesh.geometry.parameters.radiusBottom)
 
-      properties.find("label").css("margin", "3px 5px")
-      properties.find("label p").css("margin", "0px 5px")
-      properties.find("label p").css("text-align", "left")
-      properties.find("input").css("width", "145px")
+      } else if (mesh.class == "cone") {
+
+        properties.append("<span id='properties-height'><label><p>Height</p> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.append("<span id='properties-radius'><label><p>Radius</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.append("<span id='properties-radius-segments'><label><p>Radial Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+
+        properties.find("#properties-height input").val(mesh.geometry.parameters.height)
+        properties.find("#properties-radius input").val(mesh.geometry.parameters.radiusBottom)
+        properties.find("#properties-radius-segments input").val(mesh.geometry.parameters.radialSegments)
+
+      } else if (mesh.class == "torus") {
+
+        properties.append("<span id='properties-thickness'><label><p>Thickness</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.append("<span id='properties-radius'><label><p>Radius</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.append("<span id='properties-tube-segments'><label><p>Tubular Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.append("<span id='properties-radius-segments'><label><p>Radial Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+
+        properties.find("#properties-thickness input").val(mesh.geometry.parameters.tube)
+        properties.find("#properties-radius input").val(mesh.geometry.parameters.radius)
+        properties.find("#properties-tube-segments input").val(mesh.geometry.parameters.tubularSegments)
+        properties.find("#properties-radius-segments input").val(mesh.geometry.parameters.radialSegments)
+
+      }
+
+      if (mesh.class == "box" || mesh.class.split("-")[1] == "pyramid") {
+
+        properties.find("label").css("width", "45px")
+        properties.find("input").css("width", "90px")
+
+      } else if (mesh.class == "cylinder" || mesh.class == "sphere" || mesh.class == "cone" || mesh.class == "torus" || mesh.class.split("-")[1] == "prism") {
+
+        properties.find("label").css("margin", "3px 5px")
+        properties.find("label p").css("margin", "0px 5px")
+        properties.find("label p").css("text-align", "left")
+        properties.find("input").css("width", "145px")
+
+      }
 
     }
 
