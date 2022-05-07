@@ -183,17 +183,41 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     }
 
-    position.append("<span id='position-x'><label id='x'>X</label> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
-    position.append("<span id='position-y'><label id='y'>Y</label> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
-    position.append("<span id='position-z'><label id='z'>Z</label> <input type=number step=1 min=" + -(data.scale * 3) + " max=" + data.scale * 3 + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+    let positionStep = 1
+    let positionMin = -scale * 3
+    let positionMax = scale * 3
 
-    rotation.append("<span id='rotation-x'><label id='x'>X</label> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></span>")
-    rotation.append("<span id='rotation-y'><label id='y'>Y</label> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></span>")
-    rotation.append("<span id='rotation-z'><label id='z'>Z</label> <input type=number step=1 min=-360 max=360><button id='plus'>+</button><button id='minus'>-</button></span>")
+    let rotationStep = 1
+    let rotationMin = -360
+    let rotationMax = 360
 
-    scale.append("<span id='scale-x'><label id='x'>X</label> <input type=number step=0.1 min=-100 max=100><button id='plus'>+</button><button id='minus'>-</button></span>")
-    scale.append("<span id='scale-y'><label id='y'>Y</label> <input type=number step=0.1 min=-100 max=100><button id='plus'>+</button><button id='minus'>-</button></span>")
-    scale.append("<span id='scale-z'><label id='z'>Z</label> <input type=number step=0.1 min=-100 max=100><button id='plus'>+</button><button id='minus'>-</button></span>")
+    let scaleStep = 0.1
+    let scaleMin = -100
+    let scaleMax = 100
+
+    position.append("<span id='position-x'><label id='x'>X</label> <input type=number step=" + positionStep + " min=" + positionMin + " max=" + positionMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+    position.append("<span id='position-y'><label id='y'>Y</label> <input type=number step=" + positionStep + " min=" + positionMin + " max=" + positionMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+    position.append("<span id='position-z'><label id='z'>Z</label> <input type=number step=" + positionStep + " min=" + positionMin + " max=" + positionMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+
+    rotation.append("<span id='rotation-x'><label id='x'>X</label> <input type=number step=" + rotationStep + " min=" + rotationMin + " max=" + rotationMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+    rotation.append("<span id='rotation-y'><label id='y'>Y</label> <input type=number step=" + rotationStep + " min=" + rotationMin + " max=" + rotationMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+    rotation.append("<span id='rotation-z'><label id='z'>Z</label> <input type=number step=" + rotationStep + " min=" + rotationMin + " max=" + rotationMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+
+    scale.append("<span id='scale-x'><label id='x'>X</label> <input type=number step=" + scaleStep + " min=" + scaleMin + " max=" + scaleMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+    scale.append("<span id='scale-y'><label id='y'>Y</label> <input type=number step=" + scaleStep + " min=" + scaleMin + " max=" + scaleMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+    scale.append("<span id='scale-z'><label id='z'>Z</label> <input type=number step=" + scaleStep + " min=" + scaleMin + " max=" + scaleMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+
+    position.find("#position-x input").val(mesh.position.x.toFixed(2))
+    position.find("#position-y input").val(mesh.position.y.toFixed(2))
+    position.find("#position-z input").val(mesh.position.z.toFixed(2))
+
+    rotation.find("#rotation-x input").val(radian2degree(mesh.rotation.x).toFixed(2))
+    rotation.find("#rotation-y input").val(radian2degree(mesh.rotation.y).toFixed(2))
+    rotation.find("#rotation-z input").val(radian2degree(mesh.rotation.z).toFixed(2))
+
+    scale.find("#scale-x input").val(mesh.scale.x.toFixed(2))
+    scale.find("#scale-y input").val(mesh.scale.y.toFixed(2))
+    scale.find("#scale-z input").val(mesh.scale.z.toFixed(2))
 
     if (mesh.lock == "locked") {
 
@@ -207,14 +231,6 @@ export function addMeshPanel(mesh, coordinates=null) {
       panel.find("button").addClass("disabled")
 
     }
-
-    $("#mesh." + mesh.uuid + " #position-x input").val(mesh.position.x.toFixed(2))
-    $("#mesh." + mesh.uuid + " #position-y input").val(mesh.position.y.toFixed(2))
-    $("#mesh." + mesh.uuid + " #position-z input").val(mesh.position.z.toFixed(2))
-
-    $("#mesh." + mesh.uuid + " #rotation-x input").val(radian2degree(mesh.rotation.x).toFixed(2))
-    $("#mesh." + mesh.uuid + " #rotation-y input").val(radian2degree(mesh.rotation.y).toFixed(2))
-    $("#mesh." + mesh.uuid + " #rotation-z input").val(radian2degree(mesh.rotation.z).toFixed(2))
 
     panel.find("#name span").keypress(function(event) { event.stopPropagation() })
     panel.find("#name span").keydown(function(event) { event.stopPropagation() })
