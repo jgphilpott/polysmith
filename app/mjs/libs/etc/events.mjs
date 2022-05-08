@@ -50,15 +50,7 @@ export function addEvents() {
 
   $("#canvas").click(function(event) {
 
-    if (events.operation.key && !camera.dragged) {
-
-      $("body").css("cursor", "")
-      $("#canvas").css("cursor", "")
-
-      events.operation.mesh = null
-      events.operation.key = null
-
-    }
+    if (events.operation.key && !camera.dragged) { clearMeshOperation() }
 
   })
 

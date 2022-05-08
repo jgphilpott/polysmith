@@ -28,7 +28,8 @@ export function addMeshPanel(mesh, coordinates=null) {
     if (coordinates) panel.css({left: coordinates.x, top: coordinates.y})
 
     panel.append("<h3 id='name'><span contenteditable='true'></span></h3>")
-    panel.find("#name span")[0].innerText = mesh.name
+    let name = panel.find("#name span"); name[0].innerText = mesh.name
+    if (mesh.name == "") name.css("display", "none")
 
     panel.css("z-index", events.zIndex + 1)
 
@@ -39,9 +40,13 @@ export function addMeshPanel(mesh, coordinates=null) {
     let tools = "<div id='tools' class='controls'>"
     let meta = "<div id='meta' class='controls'>"
 
-    operations += "<img title='Join' id='join' class='operation' src='/app/imgs/panels/ops" + (mesh.lock == "locked" ? "/disabled" : "") + "/join.png'>"
-    operations += "<img title='Cut' id='cut' class='operation' src='/app/imgs/panels/ops" + (mesh.lock == "locked" ? "/disabled" : "") + "/cut.png'>"
-    operations += "<img title='Intersect' id='intersect' class='operation' src='/app/imgs/panels/ops" + (mesh.lock == "locked" ? "/disabled" : "") + "/intersect.png'>"
+    let joinStatus = mesh.lock == "locked" ? "disabled" : events.operation.mesh == mesh && events.operation.key == "join" ? "selected" : "default"
+    let cutStatus = mesh.lock == "locked" ? "disabled" : events.operation.mesh == mesh && events.operation.key == "cut" ? "selected" : "default"
+    let intersectStatus = mesh.lock == "locked" ? "disabled" : events.operation.mesh == mesh && events.operation.key == "intersect" ? "selected" : "default"
+
+    operations += "<img title='Join' id='join' class='operation' src='/app/imgs/panels/ops/" + joinStatus + "/join.png'>"
+    operations += "<img title='Cut' id='cut' class='operation' src='/app/imgs/panels/ops/" + cutStatus + "/cut.png'>"
+    operations += "<img title='Intersect' id='intersect' class='operation' src='/app/imgs/panels/ops/" + intersectStatus + "/intersect.png'>"
 
     colors += "<img title='Multi' id='multi' class='color' src='/app/imgs/panels/tools/colors.png'>"
     colors += "<div title='Red' id='red' class='color'></div>"
@@ -242,7 +247,11 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     panel.find("#name span").blur(function(event) { if (mesh.lock != "locked") updateMesh(mesh, "name", null, $(this)[0].innerText) })
 
+    panel.find(".operation").click(function(event) { if (mesh.lock != "locked") updateMesh(mesh, "operation", this.id, "setup") })
+    panel.find(".operation").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
+
     panel.find(".color").click(function(event) { if (mesh.lock != "locked") updateMesh(mesh, "color", null, this.id) })
+    panel.find(".color").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
     panel.find("#eye").click(function(event) {
 
@@ -272,6 +281,8 @@ export function addMeshPanel(mesh, coordinates=null) {
     })
 
     panel.find("#lock").click(function(event) { updateMesh(mesh, "lock") })
+
+    panel.find("img.tool").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
     $("#mesh." + mesh.uuid + ".panel .fold, #mesh." + mesh.uuid + ".panel h4").click(function(event) { fold(this) })
 
@@ -529,7 +540,18 @@ export function updateMesh(mesh, type, key=null, value=null) {
 
   } else if (type == "operation" && mesh.lock != "locked") {
 
+    let operationIcon = panel.find("#" + key + ".operation")
+    let operationIcons = $("#mesh.panel img.operation")
+
+    operationIcons.toArray().forEach(icon => {
+
+      if (!$(icon).hasClass("disabled")) $(icon).attr("src", "/app/imgs/panels/ops/default/" + icon.id + ".png")
+
+    })
+
     if (value == "setup") {
+
+      operationIcon.attr("src", "/app/imgs/panels/ops/selected/" + key + ".png")
 
       $("#canvas").css("cursor", "copy")
 
@@ -583,9 +605,9 @@ export function updateMesh(mesh, type, key=null, value=null) {
 
       mesh.lock = "unlocked"
 
-      meshPanel.find("#join.operation").attr("src", '/app/imgs/panels/ops/join.png')
-      meshPanel.find("#cut.operation").attr("src", '/app/imgs/panels/ops/cut.png')
-      meshPanel.find("#intersect.operation").attr("src", '/app/imgs/panels/ops/intersect.png')
+      meshPanel.find("#join.operation").attr("src", "/app/imgs/panels/ops/default/join.png")
+      meshPanel.find("#cut.operation").attr("src", "/app/imgs/panels/ops/default/cut.png")
+      meshPanel.find("#intersect.operation").attr("src", "/app/imgs/panels/ops/default/intersect.png")
 
       meshPanel.find("#name span").removeClass("disabled")
       meshPanel.find(".operation").removeClass("disabled")
@@ -609,9 +631,11 @@ export function updateMesh(mesh, type, key=null, value=null) {
 
       mesh.lock = "locked"
 
-      meshPanel.find("#join.operation").attr("src", '/app/imgs/panels/ops/disabled/join.png')
-      meshPanel.find("#cut.operation").attr("src", '/app/imgs/panels/ops/disabled/cut.png')
-      meshPanel.find("#intersect.operation").attr("src", '/app/imgs/panels/ops/disabled/intersect.png')
+      if (events.operation.mesh == mesh) { clearMeshOperation() }
+
+      meshPanel.find("#join.operation").attr("src", "/app/imgs/panels/ops/disabled/join.png")
+      meshPanel.find("#cut.operation").attr("src", "/app/imgs/panels/ops/disabled/cut.png")
+      meshPanel.find("#intersect.operation").attr("src", "/app/imgs/panels/ops/disabled/intersect.png")
 
       meshPanel.find("#name span").addClass("disabled")
       meshPanel.find(".operation").addClass("disabled")
@@ -653,6 +677,8 @@ export function removeMesh(mesh) {
     events.removeEventListener(mesh, "click")
     events.removeEventListener(mesh, "dblclick")
     events.removeEventListener(mesh, "contextmenu")
+
+    if (events.operation.mesh == mesh) { clearMeshOperation() }
 
     updateMeshesPanel("remove", mesh)
     localMeshes("remove", mesh)
