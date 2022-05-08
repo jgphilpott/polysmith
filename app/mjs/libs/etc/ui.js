@@ -49,13 +49,11 @@ function sliderSlide(event, slider) {
 
   if (this.id == "visibility") {
 
-    let value = $(this).slider("option", "value")
-    let opacity = value / 100
-
-    let mesh = $(this).closest(".panel").data("mesh")
     let eye = $(this).closest(".controls").find("#eye")
+    let mesh = $(this).closest(".panel").data("mesh")
+    let opacity = $(this).slider("option", "value") / 100
 
-    opacity <= 0.5 ? eye.attr("src", "/app/imgs/panels/visibility/hidden.png") : eye.attr("src", "/app/imgs/panels/visibility/visible.png")
+    eye.attr("src", "/app/imgs/panels/visibility/" + (opacity < 0.5 ? "hidden" : "visible") + ".png")
 
     mesh.material.opacity = opacity
 
@@ -84,6 +82,10 @@ function sliderStop(event, slider) {
     settings.controls[this.id + "Speed"] = value
 
     updateSettings("controls", this.id + "Speed", value)
+
+  } else if (panel.attr("id") == "mesh") {
+
+    window.updateMesh(panel.data("mesh"), "visibility", "slider", value)
 
   }
 

@@ -15,6 +15,10 @@ import {addPanelEvents} from "../libs/etc/events.mjs"
 import {addMeshEvents} from "../libs/etc/events.mjs"
 import {localMeshes} from "../libs/files/local.mjs"
 
+window.addMesh = addMesh
+window.updateMesh = updateMesh
+window.removeMesh = removeMesh
+
 export function addMeshPanel(mesh, coordinates=null) {
 
   let panel = $("#mesh." + mesh.uuid + "")
@@ -253,32 +257,7 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.find(".color").click(function(event) { if (mesh.lock != "locked") updateMesh(mesh, "color", null, this.id) })
     panel.find(".color").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
-    panel.find("#eye").click(function(event) {
-
-      let visibility = /[^/]*$/.exec($(this).attr("src"))[0].split(".")[0]
-      let slider = panel.find("#visibility.slider")
-
-      if (visibility == "visible") {
-
-        $(this).attr("src", "/app/imgs/panels/visibility/hidden.png")
-
-        mesh.material.opacity = 0
-
-        slider.slider("value", 0)
-        sliderFill(slider)
-
-      } else if (visibility == "hidden") {
-
-        $(this).attr("src", "/app/imgs/panels/visibility/visible.png")
-
-        mesh.material.opacity = 1
-
-        slider.slider("value", 100)
-        sliderFill(slider)
-
-      }
-
-    })
+    panel.find("#eye").click(function(event) { if (mesh.lock != "locked") updateMesh(mesh, "visibility", "eye", this.src) })
 
     panel.find("#lock").click(function(event) { updateMesh(mesh, "lock") })
 
@@ -524,6 +503,35 @@ export function updateMesh(mesh, type, key=null, value=null) {
 
     mesh.material.opacity = opacity
     mesh.material.style = value
+
+  } else if (type == "visibility") {
+
+    if (key == "eye") {
+
+      let visibility = /[^/]*$/.exec(value)[0].split(".")[0]
+      let slider = panel.find("#visibility.slider")
+
+      if (visibility == "visible") {
+
+        panel.find("#eye").attr("src", "/app/imgs/panels/visibility/hidden.png")
+
+        mesh.material.opacity = 0
+
+        slider.slider("value", 0)
+        sliderFill(slider)
+
+      } else if (visibility == "hidden") {
+
+        panel.find("#eye").attr("src", "/app/imgs/panels/visibility/visible.png")
+
+        mesh.material.opacity = 1
+
+        slider.slider("value", 100)
+        sliderFill(slider)
+
+      }
+
+    }
 
   } else if ((type == "position" || type == "rotation") && mesh.lock != "locked") {
 
