@@ -115,7 +115,7 @@ export function addPanelEvents(panel) {
 
     }
 
-  })
+  }).mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
   if (id != "mesh") settings.panels[id] ? panel.css("visibility", "visible") : panel.css("visibility", "hidden")
 

@@ -21,7 +21,7 @@ export function addCameraPanel() {
 
     fold(this)
 
-  })
+  }).mousedown(function(event) { event.stopPropagation() }) .mouseup(function(event) { event.stopPropagation() })
 
   if (settings.camera.open) {
 
@@ -83,7 +83,7 @@ export function addCameraPanel() {
     updateSettings("controls", "flySpeed", 25)
     updateSettings("controls", "zoomSpeed", 25)
 
-  })
+  }).mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
   panel.find("input").keypress(function(event) { event.stopPropagation(); if (event.keyCode == 13) this.blur() })
   panel.find("input").keydown(function(event) { event.stopPropagation() })

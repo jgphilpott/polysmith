@@ -258,26 +258,17 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.find(".color").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
     panel.find("#eye").click(function(event) { if (mesh.lock != "locked") updateMesh(mesh, "visibility", "eye", this.src) })
-
     panel.find("#lock").click(function(event) { updateMesh(mesh, "lock") })
-
+    panel.find("#trash").click(function(event) { if (mesh.lock != "locked") removeMesh(mesh) })
     panel.find("img.tool").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
-    $("#mesh." + mesh.uuid + ".panel .fold, #mesh." + mesh.uuid + ".panel h4").click(function(event) { fold(this) })
+    panel.find(".fold, h4").click(function(event) { fold(this) }).mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
-    $("#mesh." + mesh.uuid + " input").mousedown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
+    panel.find("input").mousedown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
 
-    $("#mesh." + mesh.uuid + " input").keypress(function(event) { event.stopPropagation(); if (event.keyCode == 13) this.blur() })
-    $("#mesh." + mesh.uuid + " input").keydown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
-    $("#mesh." + mesh.uuid + " input").keyup(function(event) {
-
-      let selection = $(this).parent().parent().attr("id").split("-")
-
-      updateMesh(mesh, selection[0], selection[1], Number($(this).val()))
-
-    })
-
-    $("#mesh." + mesh.uuid + " input").on("change", function(event) {
+    panel.find("input").keypress(function(event) { event.stopPropagation(); if (event.keyCode == 13) this.blur() })
+    panel.find("input").keydown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
+    panel.find("input").keyup(function(event) {
 
       let selection = $(this).parent().parent().attr("id").split("-")
 
@@ -285,7 +276,15 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     })
 
-    $("#mesh." + mesh.uuid + " button").mousedown(function(event) {
+    panel.find("input").on("change", function(event) {
+
+      let selection = $(this).parent().parent().attr("id").split("-")
+
+      updateMesh(mesh, selection[0], selection[1], Number($(this).val()))
+
+    })
+
+    panel.find("button").mousedown(function(event) {
 
       event.stopPropagation()
 

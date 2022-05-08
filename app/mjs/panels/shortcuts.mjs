@@ -57,7 +57,7 @@ export function addShortcutsPanel() {
 
     updateSettings("panels", "shapes", !shapesVisible)
 
-  })
+  }).mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
   return panel
 

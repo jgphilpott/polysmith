@@ -50,9 +50,11 @@ export function addMenuPanel() {
     panel.append(porting + "</div>")
 
     $("#stl, #obj").click(function() { exportFile(this.id) })
+    $("#stl, #obj").mousedown(function(event) { event.stopPropagation() }) .mouseup(function(event) { event.stopPropagation() })
 
     $("#file").on("change", function() { importFiles(this) })
     $("#import").click(function() { $("#file").trigger("click") })
+    $("#import").mousedown(function(event) { event.stopPropagation() }) .mouseup(function(event) { event.stopPropagation() })
 
     function importFiles(input) {
 
@@ -92,7 +94,7 @@ export function addMenuPanel() {
 
       updateSettings("panels", $(this).attr("id"), $(this).prop("checked"))
 
-    })
+    }).mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
   }
 
@@ -131,6 +133,8 @@ export function addMenuPanel() {
       }
 
     })
+
+    $("#signup-panel input").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
     socket.on("signup_failed", function() { alert("Email already exists, please try again.") })
     socket.on("signup_success", function(id) { writeCookie("id", id); location.reload() })
@@ -175,6 +179,8 @@ export function addMenuPanel() {
       }
 
     })
+
+    $("#login-panel input").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
     socket.on("login_failed", function() { alert("Login failed, please try again.") })
     socket.on("login_success", function(id) { writeCookie("id", id); location.reload() })
@@ -260,6 +266,7 @@ export function addMenuPanel() {
   }
 
   $("#menu.panel #main .option").click(function(event) { toggleSubPanel($("#menu.panel #" + this.id + "-panel.sub-panel")) })
+  $("#menu.panel #main .option").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
   $("#menu.panel input").on("keypress keydown", function(event) { event.stopPropagation() })
   $("#menu.panel input").on("cut copy paste", function(event) { event.preventDefault() })

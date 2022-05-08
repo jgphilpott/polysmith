@@ -97,7 +97,8 @@ export function updateMeshesPanel(type, mesh) {
       })
 
       tableRow.find(".lock").click(function() { updateMesh(mesh, "lock") })
-      tableRow.find(".trash").click(function() { removeMesh(mesh) })
+      tableRow.find(".trash").click(function() { if (mesh.lock != "locked") removeMesh(mesh) })
+      tableRow.find(".settings, .lock, .trash").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
       break
 
