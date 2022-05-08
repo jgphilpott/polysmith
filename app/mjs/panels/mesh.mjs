@@ -234,6 +234,7 @@ export function addMeshPanel(mesh, coordinates=null) {
 
       panel.find(".operation").addClass("disabled")
       panel.find(".color").addClass("disabled")
+      panel.find(".slider").slider("disable")
       panel.find(".tool").not("#lock").addClass("disabled")
 
       panel.find("input").addClass("disabled")
@@ -260,7 +261,7 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.find("#eye").click(function(event) { if (mesh.lock != "locked") updateMesh(mesh, "visibility", "eye", this.src) })
     panel.find("#lock").click(function(event) { updateMesh(mesh, "lock") })
     panel.find("#trash").click(function(event) { if (mesh.lock != "locked") removeMesh(mesh) })
-    panel.find("img.tool").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
+    panel.find(".tool").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
     panel.find(".fold, h4").click(function(event) { fold(this) }).mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
@@ -621,7 +622,7 @@ export function updateMesh(mesh, type, key=null, value=null) {
       meshPanel.find(".color").removeClass("disabled")
 
       meshPanel.find("#eye").removeClass("disabled")
-      meshPanel.find("#visibility").removeClass("disabled")
+      meshPanel.find("#visibility").removeClass("disabled").slider("enable")
       meshPanel.find("#lock").attr("src", '/app/imgs/panels/lock/unlocked.png')
       meshPanel.find("#trash").removeClass("disabled")
 
@@ -649,7 +650,7 @@ export function updateMesh(mesh, type, key=null, value=null) {
       meshPanel.find(".color").addClass("disabled")
 
       meshPanel.find("#eye").addClass("disabled")
-      meshPanel.find("#visibility").addClass("disabled")
+      meshPanel.find("#visibility").addClass("disabled").slider("disable")
       meshPanel.find("#lock").attr("src", '/app/imgs/panels/lock/locked.png')
       meshPanel.find("#trash").addClass("disabled")
 
