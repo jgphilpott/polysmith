@@ -265,25 +265,14 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     panel.find(".fold, h4").click(function(event) { fold(this) }).mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
-    panel.find("input").mousedown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
-
     panel.find("input").keypress(function(event) { event.stopPropagation(); if (event.keyCode == 13) this.blur() })
     panel.find("input").keydown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
-    panel.find("input").keyup(function(event) {
+    panel.find("input").keyup(function(event) { event.stopPropagation(); let id = $(this).closest("span").attr("id"); updateMesh(mesh, id.split("-")[0], id.split("-").splice(1).join("-"), Number($(this).val())) })
+    panel.find("input").change(function(event) { event.stopPropagation(); let id = $(this).closest("span").attr("id"); updateMesh(mesh, id.split("-")[0], id.split("-").splice(1).join("-"), Number($(this).val())) })
 
-      let selection = $(this).parent().parent().attr("id").split("-")
-
-      updateMesh(mesh, selection[0], selection[1], Number($(this).val()))
-
-    })
-
-    panel.find("input").on("change", function(event) {
-
-      let selection = $(this).parent().parent().attr("id").split("-")
-
-      updateMesh(mesh, selection[0], selection[1], Number($(this).val()))
-
-    })
+    panel.find("input").dblclick(function(event) { event.stopPropagation(); if (mesh.lock != "locked") document.execCommand("selectAll") })
+    panel.find("input").mousedown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
+    panel.find("input").mouseup(function(event) { event.stopPropagation() })
 
     panel.find("button").mousedown(function(event) {
 

@@ -56,6 +56,8 @@ export function addEvents() {
 
   $("#canvas").mousedown(function(event) {
 
+    window.getSelection().removeAllRanges()
+
     $("input").toArray().forEach(input => { if ($(input).is(":focus")) $(input).blur() })
     $("[contenteditable]").toArray().forEach(editor => { if ($(editor).is(":focus")) $(editor).blur() })
 

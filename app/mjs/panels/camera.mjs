@@ -90,7 +90,7 @@ export function addCameraPanel() {
   panel.find("input").keyup(function(event) { event.stopPropagation(); updateCamera(this, event) })
   panel.find("input").change(function(event) { event.stopPropagation(); updateCamera(this, event) })
 
-  panel.find("input").dblclick(function(event) { document.execCommand("selectAll") })
+  panel.find("input").dblclick(function(event) { event.stopPropagation(); document.execCommand("selectAll") })
   panel.find("input").mousedown(function(event) { event.stopPropagation() })
   panel.find("input").mouseup(function(event) { event.stopPropagation() })
 
