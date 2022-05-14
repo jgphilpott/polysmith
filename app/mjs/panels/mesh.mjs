@@ -484,7 +484,7 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
   let panel = $("#mesh." + mesh.uuid + "")
 
-  if (type == "name") {
+  if (type == "name" && mesh.lock != "locked") {
 
     value = value.trim()
 
@@ -499,6 +499,64 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
     if (meshesPanelName[0] && key != "meshes") meshesPanelName[0].innerText = value
 
     value == "" && key != "mesh" ? meshPanelName.css("display", "none") : meshPanelName.css("display", "block")
+
+  } else if (type == "operation") {
+
+    let operationIcon = panel.find("#" + key + ".operation")
+    let operationIcons = $("#mesh.panel img.operation")
+
+    operationIcons.toArray().forEach(icon => {
+
+      if (!$(icon).hasClass("disabled")) $(icon).attr("src", "/app/imgs/panels/ops/default/" + icon.id + ".png")
+
+    })
+
+    if (value == "setup" && mesh.lock != "locked") {
+
+      operationIcon.attr("src", "/app/imgs/panels/ops/selected/" + key + ".png")
+
+      $("#canvas").css("cursor", "copy")
+
+      events.operation.mesh = mesh
+      events.operation.key = key
+
+    } else if (events.operation.key && !camera.dragged) {
+
+      if (events.operation.mesh.uuid != mesh.uuid) {
+
+        var result
+
+        switch (key) {
+
+          case "cut":
+            result = cutMesh(events.operation.mesh, mesh)
+            break
+
+          case "join":
+            result = joinMesh(events.operation.mesh, mesh)
+            break
+
+          case "intersect":
+            result = intersectMesh(events.operation.mesh, mesh)
+            break
+
+        }
+
+        let srcPanel = $("#mesh." + events.operation.mesh.uuid + "")
+
+        if (srcPanel.length) addMeshPanel(result, {x: parseFloat(srcPanel.css("left")), y: parseFloat(srcPanel.css("top"))})
+
+        removeMesh(events.operation.mesh)
+        addMesh(result)
+
+      }
+
+        $("#canvas").css("cursor", "")
+
+        events.operation.mesh = null
+        events.operation.key = null
+
+    }
 
   } else if (type == "color") {
 
@@ -566,64 +624,6 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
     if (type == "rotation") { value = degree2radian(value) }
 
     mesh[type][key] = value
-
-  } else if (type == "operation" && mesh.lock != "locked") {
-
-    let operationIcon = panel.find("#" + key + ".operation")
-    let operationIcons = $("#mesh.panel img.operation")
-
-    operationIcons.toArray().forEach(icon => {
-
-      if (!$(icon).hasClass("disabled")) $(icon).attr("src", "/app/imgs/panels/ops/default/" + icon.id + ".png")
-
-    })
-
-    if (value == "setup") {
-
-      operationIcon.attr("src", "/app/imgs/panels/ops/selected/" + key + ".png")
-
-      $("#canvas").css("cursor", "copy")
-
-      events.operation.mesh = mesh
-      events.operation.key = key
-
-    } else if (events.operation.key && !camera.dragged) {
-
-      if (events.operation.mesh.uuid != mesh.uuid) {
-
-        let result = null
-
-        switch (key) {
-
-          case "cut":
-            result = cutMesh(events.operation.mesh, mesh)
-            break
-
-          case "join":
-            result = joinMesh(events.operation.mesh, mesh)
-            break
-
-          case "intersect":
-            result = intersectMesh(events.operation.mesh, mesh)
-            break
-
-        }
-
-        addMesh(result)
-
-        let panel = $("#mesh." + events.operation.mesh.uuid + "")
-        if (panel.length) addMeshPanel(result, {x: parseFloat(panel.css("left")), y: parseFloat(panel.css("top"))})
-
-        removeMesh(events.operation.mesh)
-
-      }
-
-      $("#canvas").css("cursor", "")
-
-      events.operation.mesh = null
-      events.operation.key = null
-
-    }
 
   } else if (type == "lock") {
 

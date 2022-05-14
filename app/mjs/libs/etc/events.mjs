@@ -169,7 +169,7 @@ export function addMeshEvents(mesh) {
 
   events.addEventListener(mesh, "click", function(event) {
 
-    updateMesh(mesh, "operation", events.operation.key, null)
+    updateMesh(mesh, "operation", events.operation.key, null, true)
 
   })
 
