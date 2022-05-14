@@ -68,7 +68,7 @@ export function updateMeshesPanel(type, mesh) {
       tableRow.find(".name span").mousedown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
       tableRow.find(".name span").mouseup(function(event) { event.stopPropagation() })
 
-      tableRow.find(".name span").blur(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "name", null, $(this)[0].innerText) })
+      tableRow.find(".name span").blur(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "name", null, $(this)[0].innerText, true) })
 
       tableRow.find(".settings").click(function() {
 

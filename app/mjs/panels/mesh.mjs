@@ -253,7 +253,7 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.find("#name span").mousedown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
     panel.find("#name span").mouseup(function(event) { event.stopPropagation() })
 
-    panel.find("#name span").blur(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "name", null, $(this)[0].innerText) })
+    panel.find("#name span").blur(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "name", null, $(this)[0].innerText, true) })
 
     panel.find(".operation").click(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "operation", this.id, "setup") })
     panel.find(".operation").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
@@ -480,7 +480,7 @@ export function addMesh(mesh=null, properties={}) {
 
 }
 
-export function updateMesh(mesh, type, key=null, value=null) {
+export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
   let panel = $("#mesh." + mesh.uuid + "")
 
@@ -489,6 +489,8 @@ export function updateMesh(mesh, type, key=null, value=null) {
     value = value.trim()
 
     mesh.name = value
+
+    if (save) localMeshes("update", mesh)
 
     let meshPanelName = $("#mesh." + mesh.uuid + " #name span")
     let meshesPanelName = $("#meshes.table tr#" + mesh.uuid + " .name span")
@@ -685,8 +687,6 @@ export function updateMesh(mesh, type, key=null, value=null) {
     }
 
   }
-
-  localMeshes("update", mesh)
 
 }
 
