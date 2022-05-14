@@ -15,6 +15,9 @@ import {addPanelEvents} from "../libs/etc/events.mjs"
 import {addMeshEvents} from "../libs/etc/events.mjs"
 import {localMeshes} from "../libs/files/local.mjs"
 
+let holdTimeout = null
+let holdInterval = null
+
 window.addMesh = addMesh
 window.updateMesh = updateMesh
 window.removeMesh = removeMesh
@@ -250,20 +253,20 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.find("#name span").mousedown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
     panel.find("#name span").mouseup(function(event) { event.stopPropagation() })
 
-    panel.find("#name span").blur(function(event) { if (mesh.lock != "locked") updateMesh(mesh, "name", null, $(this)[0].innerText) })
+    panel.find("#name span").blur(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "name", null, $(this)[0].innerText) })
 
-    panel.find(".operation").click(function(event) { if (mesh.lock != "locked") updateMesh(mesh, "operation", this.id, "setup") })
+    panel.find(".operation").click(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "operation", this.id, "setup") })
     panel.find(".operation").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
-    panel.find(".color").click(function(event) { if (mesh.lock != "locked") updateMesh(mesh, "color", null, this.id) })
+    panel.find(".color").click(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "color", null, this.id) })
     panel.find(".color").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
-    panel.find("#eye").click(function(event) { if (mesh.lock != "locked") updateMesh(mesh, "visibility", "eye", this.src) })
-    panel.find("#lock").click(function(event) { updateMesh(mesh, "lock") })
-    panel.find("#trash").click(function(event) { if (mesh.lock != "locked") removeMesh(mesh) })
+    panel.find("#eye").click(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "visibility", "eye", this.src) })
+    panel.find("#lock").click(function(event) { event.stopPropagation(); updateMesh(mesh, "lock") })
+    panel.find("#trash").click(function(event) { event.stopPropagation(); if (mesh.lock != "locked") removeMesh(mesh) })
     panel.find(".tool").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
-    panel.find(".fold, h4").click(function(event) { fold(this) }).mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
+    panel.find(".fold, h4").click(function(event) { event.stopPropagation(); fold(this) }).mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
     panel.find("input").keypress(function(event) { event.stopPropagation(); if (event.keyCode == 13) this.blur() })
     panel.find("input").keydown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
@@ -274,26 +277,53 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.find("input").mousedown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
     panel.find("input").mouseup(function(event) { event.stopPropagation() })
 
+    panel.find("input").blur(function(event) { event.stopPropagation(); let id = $(this).closest("span").attr("id"); updateMesh(mesh, id.split("-")[0], id.split("-").splice(1).join("-"), Number($(this).val())) })
+
     panel.find("button").mousedown(function(event) {
 
       event.stopPropagation()
 
       let operation = $(this).attr("id")
-      let selection = $(this).parent().parent().attr("id")
-      let value = Number($("#mesh." + mesh.uuid + " #" + selection + " input").val())
-      let step = Number($("#mesh." + mesh.uuid + " #" + selection + " input").attr("step"))
+      let selection = $(this).closest("span").attr("id")
 
-      if (operation == "plus") {
-        value += step
-      } else if (operation == "minus") {
-        value -= step
+      let input = $(this).closest("span").find("input")
+
+      let step = Number(input.attr("step"))
+      let min = Number(input.attr("min"))
+      let max = Number(input.attr("max"))
+
+      step = operation == "plus" ? step : operation == "minus" ? -step : 0
+
+      function updateButton() {
+
+        let value = Number(input.val()) + step
+
+        value = value < min ? min : value > max ? max : value
+
+        updateMesh(mesh, selection.split("-")[0], selection.split("-").splice(1).join("-"), value)
+
+        input.val(value.toFixed(2))
+
       }
 
-      updateMesh(mesh, selection.split("-")[0], selection.split("-")[1], value)
+      holdTimeout = setTimeout(function() {
+
+        holdInterval = setInterval(function() { updateButton() }, 100)
+
+      }, 1000)
+
+      updateButton()
+
+    }).mouseup(function(event) {
+
+      this.blur()
+
+      event.stopPropagation()
+
+      clearTimeout(holdTimeout)
+      clearInterval(holdInterval)
 
     })
-
-    panel.mouseover(function() { $("#context-menu.panel").remove() })
 
     sliderStyle(panel.find(".slider"))
 

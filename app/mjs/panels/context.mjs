@@ -4,7 +4,7 @@ import {addMeshPanel, addMesh, updateMesh, removeMesh} from "./mesh.mjs"
 
 export function addContextPanel() {
 
-  $("#nav, #forkme, #canvas, .panel").mouseover(function() { $("#context-menu.panel").remove() })
+  $("#nav, #forkme, #canvas").mouseover(function() { $("#context-menu.panel").remove() })
 
 }
 

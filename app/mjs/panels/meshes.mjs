@@ -68,9 +68,11 @@ export function updateMeshesPanel(type, mesh) {
       tableRow.find(".name span").mousedown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
       tableRow.find(".name span").mouseup(function(event) { event.stopPropagation() })
 
-      tableRow.find(".name span").blur(function(event) { if (mesh.lock != "locked") updateMesh(mesh, "name", null, $(this)[0].innerText) })
+      tableRow.find(".name span").blur(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "name", null, $(this)[0].innerText) })
 
       tableRow.find(".settings").click(function() {
+
+        event.stopPropagation()
 
         let panel = $("#mesh." + mesh.uuid + "")
 
@@ -96,8 +98,8 @@ export function updateMeshesPanel(type, mesh) {
 
       })
 
-      tableRow.find(".lock").click(function() { updateMesh(mesh, "lock") })
-      tableRow.find(".trash").click(function() { if (mesh.lock != "locked") removeMesh(mesh) })
+      tableRow.find(".lock").click(function() { event.stopPropagation(); updateMesh(mesh, "lock") })
+      tableRow.find(".trash").click(function() { event.stopPropagation(); if (mesh.lock != "locked") removeMesh(mesh) })
       tableRow.find(".settings, .lock, .trash").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
       break

@@ -83,6 +83,8 @@ export function addPanelEvents(panel) {
 
     events.zIndex += 1
 
+    $("#context-menu.panel").remove()
+
     panel.css("z-index", events.zIndex)
 
   })

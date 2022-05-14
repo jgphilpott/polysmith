@@ -13,6 +13,8 @@ export function addCameraPanel() {
 
   panel.find(".fold, h4").click(function(event) {
 
+    event.stopPropagation()
+
     let controls = $(this).closest(".controls")
     let display = controls.find(".body").css("display")
     let id = controls.attr("id")
@@ -65,6 +67,8 @@ export function addCameraPanel() {
 
   panel.find(".reset").click(function(event) {
 
+    event.stopPropagation()
+
     speed.find(".slider").slider("value", 25)
 
     sliderStyle(speed.find("#drag.slider"))
@@ -95,6 +99,8 @@ export function addCameraPanel() {
   panel.find("input").mouseup(function(event) { event.stopPropagation() })
 
   panel.find("input").blur(function(event) {
+
+    event.stopPropagation()
 
     let selection = $(this).parent().attr("id").split("-")[0]
 
@@ -133,11 +139,12 @@ export function addCameraPanel() {
 
   function updateCamera(controller, event) {
 
-    let selection = $(controller).parent().attr("id").split("-")
-    let input = $(controller).parent().find("input")
     let operation = $(controller).attr("id")
-    let step = Number(input.attr("step"))
+    let selection = $(controller).parent().attr("id").split("-")
 
+    let input = $(controller).parent().find("input")
+
+    let step = Number(input.attr("step"))
     let min = Number(input.attr("min"))
     let max = Number(input.attr("max"))
 
