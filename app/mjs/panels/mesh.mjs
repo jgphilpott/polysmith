@@ -258,7 +258,7 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.find(".operation").click(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "operation", this.id, "setup") })
     panel.find(".operation").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
-    panel.find(".color").click(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "color", null, this.id) })
+    panel.find(".color").click(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "color", null, this.id, true) })
     panel.find(".color").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
     panel.find("#eye").click(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "visibility", "eye", this.src) })
@@ -551,14 +551,14 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
       }
 
-        $("#canvas").css("cursor", "")
+      $("#canvas").css("cursor", "")
 
-        events.operation.mesh = null
-        events.operation.key = null
+      events.operation.mesh = null
+      events.operation.key = null
 
     }
 
-  } else if (type == "color") {
+  } else if (type == "color" && mesh.lock != "locked") {
 
     let color = null
     let opacity = mesh.material.opacity
@@ -579,9 +579,10 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
     mesh.material.dispose()
     mesh.material = meshMaterial(material, color)
-
     mesh.material.opacity = opacity
     mesh.material.style = value
+
+    if (save) localMeshes("update", mesh)
 
   } else if (type == "visibility") {
 
