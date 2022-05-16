@@ -85,7 +85,7 @@ function sliderStop(event, slider) {
 
   } else if (panel.attr("id") == "mesh") {
 
-    window.updateMesh(panel.data("mesh"), "visibility", "slider", value)
+    window.updateMesh(panel.data("mesh"), "visibility", "slider", value, true)
 
   }
 

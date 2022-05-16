@@ -261,7 +261,7 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.find(".color").click(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "color", null, this.id, true) })
     panel.find(".color").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
-    panel.find("#eye").click(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "visibility", "eye", this.src) })
+    panel.find("#eye").click(function(event) { event.stopPropagation(); if (mesh.lock != "locked") updateMesh(mesh, "visibility", "eye", this.src, true) })
     panel.find("#lock").click(function(event) { event.stopPropagation(); updateMesh(mesh, "lock") })
     panel.find("#trash").click(function(event) { event.stopPropagation(); if (mesh.lock != "locked") removeMesh(mesh) })
     panel.find(".tool").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
@@ -584,7 +584,7 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
     if (save) localMeshes("update", mesh)
 
-  } else if (type == "visibility") {
+  } else if (type == "visibility" && mesh.lock != "locked") {
 
     if (key == "eye") {
 
@@ -612,6 +612,8 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
       }
 
     }
+
+    if (save) localMeshes("update", mesh)
 
   } else if ((type == "position" || type == "rotation") && mesh.lock != "locked") {
 
