@@ -615,19 +615,6 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
     if (save) localMeshes("update", mesh)
 
-  } else if ((type == "position" || type == "rotation") && mesh.lock != "locked") {
-
-    let input = $("#mesh." + mesh.uuid + " #" + type + "-" + key + " input")
-
-    if (value > input.attr("max")) { value = input.attr("max") }
-    if (value < input.attr("min")) { value = input.attr("min") }
-
-    input.val(value)
-
-    if (type == "rotation") { value = degree2radian(value) }
-
-    mesh[type][key] = value
-
   } else if (type == "lock") {
 
     let meshPanel = $("#mesh." + mesh.uuid + "")
@@ -647,7 +634,7 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
       meshPanel.find("#eye").removeClass("disabled")
       meshPanel.find("#visibility").removeClass("disabled").slider("enable")
-      meshPanel.find("#lock").attr("src", '/app/imgs/panels/lock/unlocked.png')
+      meshPanel.find("#lock").attr("src", "/app/imgs/panels/lock/" + mesh.lock + ".png")
       meshPanel.find("#trash").removeClass("disabled")
 
       sliderStyle(meshPanel.find("#visibility"))
@@ -656,7 +643,7 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
       meshPanel.find("button").removeClass("disabled")
 
       meshesTableRow.find(".name span").removeClass("disabled")
-      meshesTableRow.find(".lock").attr("src", '/app/imgs/panels/lock/unlocked.png')
+      meshesTableRow.find(".lock").attr("src", "/app/imgs/panels/lock/" + mesh.lock + ".png")
       meshesTableRow.find(".trash").removeClass("disabled")
 
     } else if (mesh.lock == "unlocked") {
@@ -675,7 +662,7 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
       meshPanel.find("#eye").addClass("disabled")
       meshPanel.find("#visibility").addClass("disabled").slider("disable")
-      meshPanel.find("#lock").attr("src", '/app/imgs/panels/lock/locked.png')
+      meshPanel.find("#lock").attr("src", "/app/imgs/panels/lock/" + mesh.lock + ".png")
       meshPanel.find("#trash").addClass("disabled")
 
       sliderStyle(meshPanel.find("#visibility"))
@@ -684,10 +671,25 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
       meshPanel.find("button").addClass("disabled")
 
       meshesTableRow.find(".name span").addClass("disabled")
-      meshesTableRow.find(".lock").attr("src", '/app/imgs/panels/lock/locked.png')
+      meshesTableRow.find(".lock").attr("src", "/app/imgs/panels/lock/" + mesh.lock + ".png")
       meshesTableRow.find(".trash").addClass("disabled")
 
     }
+
+    localMeshes("update", mesh)
+
+  } else if ((type == "position" || type == "rotation") && mesh.lock != "locked") {
+
+    let input = $("#mesh." + mesh.uuid + " #" + type + "-" + key + " input")
+
+    if (value > input.attr("max")) { value = input.attr("max") }
+    if (value < input.attr("min")) { value = input.attr("min") }
+
+    input.val(value)
+
+    if (type == "rotation") { value = degree2radian(value) }
+
+    mesh[type][key] = value
 
   }
 
