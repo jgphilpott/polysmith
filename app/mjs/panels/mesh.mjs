@@ -749,9 +749,7 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
       case "rotation":
 
-        value = degree2radian(value)
-
-        mesh[type][key] = value
+        mesh[type][key] = degree2radian(value)
 
         break
 
