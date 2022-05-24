@@ -204,7 +204,7 @@ export function addMeshPanel(mesh, coordinates=null) {
     let rotationMax = 360
 
     let scaleStep = 0.1
-    let scaleMin = -100
+    let scaleMin = 0
     let scaleMax = 100
 
     position.append("<span id='position-x'><label id='x'>X</label> <input type=number step=" + positionStep + " min=" + positionMin + " max=" + positionMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
@@ -754,6 +754,8 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
         break
 
       case "scale":
+
+        mesh[type][key] = value
 
         break
 
