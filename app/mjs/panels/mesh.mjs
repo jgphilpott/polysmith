@@ -354,7 +354,7 @@ export function addMesh(mesh=null, properties={}) {
       case "sphere":
 
         mesh = newSphere()
-        mesh.rotation.x = degree2radian(0)
+        mesh.rotation.x = degree2radian(90)
 
         break
 
@@ -685,11 +685,62 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
     value = value < min ? min : value > max ? max : key.includes("segments") ? value.toFixed(0) : value
 
-    if (save === "temp" || key.includes("segments") || value == min || value == max) input.val(value)
+    if (save == "temp" || key.includes("segments") || value == min || value == max) input.val(value)
 
     switch (type) {
 
       case "properties":
+
+        mesh.geometry.dispose()
+
+        let parameters = mesh.geometry.parameters
+
+        if (mesh.class == "box") {
+
+          let length = key == "length" ? value : parameters.width
+          let width = key == "width" ? value : parameters.height
+          let height = key == "height" ? value : parameters.depth
+
+          mesh.geometry = new THREE.BoxGeometry(length, width, height)
+
+        } else if (mesh.class == "sphere") {
+
+          let radius = key == "radius" ? value : parameters.radius
+          let widthSegments = key == "width-segments" ? value : parameters.widthSegments
+          let heightSegments = key == "height-segments" ? value : parameters.heightSegments
+
+          mesh.geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments)
+
+        } else if (mesh.class == "cylinder" || mesh.class.split("-")[1] == "prism") {
+
+          let length = key == "length" ? value : parameters.height
+          let positiveRadius = key == "radius-positive" ? value : parameters.radiusTop
+          let negativeRadius = key == "radius-negative" ? value : parameters.radiusBottom
+          let radialSegments = key == "radius-segments" ? value : parameters.radialSegments
+
+          mesh.geometry = new THREE.CylinderGeometry(positiveRadius, negativeRadius, length, radialSegments)
+
+        } else if (mesh.class == "cone" || mesh.class.split("-")[1] == "pyramid") {
+
+          let height = key == "height" ? value : parameters.height
+          let radius = key == "radius" ? value : parameters.radiusBottom
+          let radialSegments = key == "radius-segments" ? value : parameters.radialSegments
+
+          mesh.geometry = new THREE.CylinderGeometry(0, radius, height, radialSegments)
+
+        } else if (mesh.class == "torus") {
+
+          let radius = key == "radius" ? value : parameters.radius
+          let thickness = key == "thickness" ? value : parameters.tube
+          let radialSegments = key == "radius-segments" ? value : parameters.radialSegments
+          let tubularSegments = key == "tube-segments" ? value : parameters.tubularSegments
+
+          mesh.geometry = new THREE.TorusGeometry(radius, thickness, radialSegments, tubularSegments)
+
+        }
+
+        if (save === true) localMeshes("update", mesh)
+
         break
 
       case "position":
@@ -707,6 +758,7 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
         break
 
       case "scale":
+
         break
 
     }
