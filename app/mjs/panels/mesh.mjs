@@ -98,12 +98,12 @@ export function addMeshPanel(mesh, coordinates=null) {
     if (mesh.class != "custom") {
 
       let regularStep = 1
-      let regularMin = 0.5
-      let regularMax = scale * 3
+      let regularMin = 1
+      let regularMax = data.scale * 3
 
       let radialStep = 0.5
-      let radialMin = 0.25
-      let radialMax = scale * 1.5
+      let radialMin = 0.5
+      let radialMax = data.scale * 1.5
 
       let segmentsStep = 1
       let segmentsMin = 3
@@ -115,9 +115,9 @@ export function addMeshPanel(mesh, coordinates=null) {
         properties.append("<span id='properties-width'><label>Width</label> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
         properties.append("<span id='properties-height'><label>Height</label> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
 
-        properties.find("#properties-length input").val(mesh.geometry.parameters.width)
-        properties.find("#properties-width input").val(mesh.geometry.parameters.height)
-        properties.find("#properties-height input").val(mesh.geometry.parameters.depth)
+        properties.find("#properties-length input").val(mesh.geometry.parameters.width.toFixed(2))
+        properties.find("#properties-width input").val(mesh.geometry.parameters.height.toFixed(2))
+        properties.find("#properties-height input").val(mesh.geometry.parameters.depth.toFixed(2))
 
       }  else if (mesh.class == "sphere") {
 
@@ -125,7 +125,7 @@ export function addMeshPanel(mesh, coordinates=null) {
         properties.append("<span id='properties-width-segments'><label><p>Width Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
         properties.append("<span id='properties-height-segments'><label><p>Height Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
 
-        properties.find("#properties-radius input").val(mesh.geometry.parameters.radius)
+        properties.find("#properties-radius input").val(mesh.geometry.parameters.radius.toFixed(2))
         properties.find("#properties-width-segments input").val(mesh.geometry.parameters.widthSegments)
         properties.find("#properties-height-segments input").val(mesh.geometry.parameters.heightSegments)
 
@@ -135,9 +135,9 @@ export function addMeshPanel(mesh, coordinates=null) {
         properties.append("<span id='properties-radius-positive'><label><p>Positive Radius</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
         properties.append("<span id='properties-radius-negative'><label><p>Negative Radius</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
 
-        properties.find("#properties-length input").val(mesh.geometry.parameters.height)
-        properties.find("#properties-radius-positive input").val(mesh.geometry.parameters.radiusTop)
-        properties.find("#properties-radius-negative input").val(mesh.geometry.parameters.radiusBottom)
+        properties.find("#properties-length input").val(mesh.geometry.parameters.height.toFixed(2))
+        properties.find("#properties-radius-positive input").val(mesh.geometry.parameters.radiusTop.toFixed(2))
+        properties.find("#properties-radius-negative input").val(mesh.geometry.parameters.radiusBottom.toFixed(2))
 
         if (mesh.class == "cylinder") {
 
@@ -152,8 +152,8 @@ export function addMeshPanel(mesh, coordinates=null) {
         properties.append("<span id='properties-height'><label>Height</label> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
         properties.append("<span id='properties-radius'><label>Radius</label> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
 
-        properties.find("#properties-height input").val(mesh.geometry.parameters.height)
-        properties.find("#properties-radius input").val(mesh.geometry.parameters.radiusBottom)
+        properties.find("#properties-height input").val(mesh.geometry.parameters.height.toFixed(2))
+        properties.find("#properties-radius input").val(mesh.geometry.parameters.radiusBottom.toFixed(2))
 
       } else if (mesh.class == "cone") {
 
@@ -161,8 +161,8 @@ export function addMeshPanel(mesh, coordinates=null) {
         properties.append("<span id='properties-radius'><label><p>Radius</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
         properties.append("<span id='properties-radius-segments'><label><p>Radial Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
 
-        properties.find("#properties-height input").val(mesh.geometry.parameters.height)
-        properties.find("#properties-radius input").val(mesh.geometry.parameters.radiusBottom)
+        properties.find("#properties-height input").val(mesh.geometry.parameters.height.toFixed(2))
+        properties.find("#properties-radius input").val(mesh.geometry.parameters.radiusBottom.toFixed(2))
         properties.find("#properties-radius-segments input").val(mesh.geometry.parameters.radialSegments)
 
       } else if (mesh.class == "torus") {
@@ -172,8 +172,8 @@ export function addMeshPanel(mesh, coordinates=null) {
         properties.append("<span id='properties-tube-segments'><label><p>Tubular Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
         properties.append("<span id='properties-radius-segments'><label><p>Radial Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
 
-        properties.find("#properties-thickness input").val(mesh.geometry.parameters.tube)
-        properties.find("#properties-radius input").val(mesh.geometry.parameters.radius)
+        properties.find("#properties-thickness input").val(mesh.geometry.parameters.tube.toFixed(2))
+        properties.find("#properties-radius input").val(mesh.geometry.parameters.radius.toFixed(2))
         properties.find("#properties-tube-segments input").val(mesh.geometry.parameters.tubularSegments)
         properties.find("#properties-radius-segments input").val(mesh.geometry.parameters.radialSegments)
 
@@ -196,8 +196,8 @@ export function addMeshPanel(mesh, coordinates=null) {
     }
 
     let positionStep = 1
-    let positionMin = -scale * 3
-    let positionMax = scale * 3
+    let positionMin = -data.scale * 3
+    let positionMax = data.scale * 3
 
     let rotationStep = 1
     let rotationMin = -360
@@ -271,48 +271,44 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.find("input").keypress(function(event) { event.stopPropagation(); if (event.keyCode == 13) this.blur() })
     panel.find("input").keydown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
     panel.find("input").keyup(function(event) { event.stopPropagation(); let id = $(this).closest("span").attr("id"); updateMesh(mesh, id.split("-")[0], id.split("-").splice(1).join("-"), Number($(this).val())) })
-    panel.find("input").change(function(event) { event.stopPropagation(); let id = $(this).closest("span").attr("id"); updateMesh(mesh, id.split("-")[0], id.split("-").splice(1).join("-"), Number($(this).val())) })
+    panel.find("input").change(function(event) { event.stopPropagation(); let id = $(this).closest("span").attr("id"); updateMesh(mesh, id.split("-")[0], id.split("-").splice(1).join("-"), Number($(this).val()), "temp") })
 
     panel.find("input").dblclick(function(event) { event.stopPropagation(); if (mesh.lock != "locked") document.execCommand("selectAll") })
     panel.find("input").mousedown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
     panel.find("input").mouseup(function(event) { event.stopPropagation() })
 
-    panel.find("input").blur(function(event) { event.stopPropagation(); let id = $(this).closest("span").attr("id"); updateMesh(mesh, id.split("-")[0], id.split("-").splice(1).join("-"), Number($(this).val())) })
+    panel.find("input").blur(function(event) { event.stopPropagation(); let id = $(this).closest("span").attr("id"); updateMesh(mesh, id.split("-")[0], id.split("-").splice(1).join("-"), Number($(this).val()), true) })
 
     panel.find("button").mousedown(function(event) {
 
       event.stopPropagation()
 
-      let operation = $(this).attr("id")
-      let selection = $(this).closest("span").attr("id")
+      if (mesh.lock != "locked") {
 
-      let input = $(this).closest("span").find("input")
+        let operation = $(this).attr("id")
+        let selection = $(this).closest("span").attr("id")
+        let input = $(this).closest("span").find("input")
+        let step = Number(input.attr("step"))
 
-      let step = Number(input.attr("step"))
-      let min = Number(input.attr("min"))
-      let max = Number(input.attr("max"))
+        step = operation == "plus" ? step : operation == "minus" ? -step : 0
 
-      step = operation == "plus" ? step : operation == "minus" ? -step : 0
+        function updateButton() {
 
-      function updateButton() {
+          let value = Number(input.val()) + step
 
-        let value = Number(input.val()) + step
+          updateMesh(mesh, selection.split("-")[0], selection.split("-").splice(1).join("-"), value, "temp")
 
-        value = value < min ? min : value > max ? max : value
+        }
 
-        updateMesh(mesh, selection.split("-")[0], selection.split("-").splice(1).join("-"), value)
+        holdTimeout = setTimeout(function() {
 
-        input.val(value.toFixed(2))
+          holdInterval = setInterval(function() { updateButton() }, 100)
+
+        }, 1000)
+
+        updateButton()
 
       }
-
-      holdTimeout = setTimeout(function() {
-
-        holdInterval = setInterval(function() { updateButton() }, 100)
-
-      }, 1000)
-
-      updateButton()
 
     }).mouseup(function(event) {
 
@@ -322,6 +318,8 @@ export function addMeshPanel(mesh, coordinates=null) {
 
       clearTimeout(holdTimeout)
       clearInterval(holdInterval)
+
+      $(this).closest("span").find("input").blur()
 
     })
 
@@ -678,18 +676,40 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
     localMeshes("update", mesh)
 
-  } else if ((type == "position" || type == "rotation") && mesh.lock != "locked") {
+  } else if ((type == "properties" || type == "position" || type == "rotation" || type == "scale") && mesh.lock != "locked") {
 
-    let input = $("#mesh." + mesh.uuid + " #" + type + "-" + key + " input")
+    let input = panel.find("span#" + type + "-" + key + " input")
 
-    if (value > input.attr("max")) { value = input.attr("max") }
-    if (value < input.attr("min")) { value = input.attr("min") }
+    let min = Number(input.attr("min"))
+    let max = Number(input.attr("max"))
 
-    input.val(value)
+    value = value < min ? min : value > max ? max : key.includes("segments") ? value.toFixed(0) : value
 
-    if (type == "rotation") { value = degree2radian(value) }
+    if (save === "temp" || key.includes("segments") || value == min || value == max) input.val(value)
 
-    mesh[type][key] = value
+    switch (type) {
+
+      case "properties":
+        break
+
+      case "position":
+
+        mesh[type][key] = value
+
+        break
+
+      case "rotation":
+
+        value = degree2radian(value)
+
+        mesh[type][key] = value
+
+        break
+
+      case "scale":
+        break
+
+    }
 
   }
 
