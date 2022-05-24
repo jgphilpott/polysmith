@@ -739,8 +739,6 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
         }
 
-        if (save === true) localMeshes("update", mesh)
-
         break
 
       case "position":
@@ -762,6 +760,8 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
         break
 
     }
+
+    if (save === true) localMeshes("update", mesh)
 
   }
 

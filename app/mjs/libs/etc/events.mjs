@@ -1,6 +1,7 @@
 import {focus} from "../controls/focus.mjs"
 import {newLine} from "../geometries/lines.mjs"
 import {exportFile} from "../files/export.mjs"
+import {localMeshes} from "../files/local.mjs"
 import {contextMenu} from "../../panels/context.mjs"
 import {addMesh, updateMesh} from "../../panels/mesh.mjs"
 import {grayGlass, lightGrayGlass} from "../colors/glass/grayscale.js"
@@ -257,11 +258,8 @@ export function makeDragable(element, origEvent=null) {
 
         let coordinates = screen2worldCoordinates(eventX, eventY, element.position.z)
 
-        if (coordinates.x > max) { coordinates.x = max}
-        if (coordinates.x < min) { coordinates.x = min}
-
-        if (coordinates.y > max) { coordinates.y = max}
-        if (coordinates.y < min) { coordinates.y = min}
+        coordinates.x = coordinates.x < min ? min : coordinates.x > max ? max : coordinates.x
+        coordinates.y = coordinates.y < min ? min : coordinates.y > max ? max : coordinates.y
 
         $("#mesh." + element.uuid + " #position-x input").val(coordinates.x.toFixed(2))
         $("#mesh." + element.uuid + " #position-y input").val(coordinates.y.toFixed(2))
@@ -310,6 +308,8 @@ export function makeDragable(element, origEvent=null) {
 
       if (element.lock != "locked") {
 
+        localMeshes("update", element)
+
         $("#canvas").css("cursor", "grab")
 
         for (let i = 0; i < tooltips.distanceLines.length; i++) { scene.remove(tooltips.distanceLines[i]) }
@@ -337,7 +337,11 @@ export function makeDragable(element, origEvent=null) {
 
           let coordinates = screen2worldCoordinates(ghost.offset().left + (ghost.width() / 2), ghost.offset().top + (ghost.height() / 2), 0)
 
-          let mesh = addMesh(null, {class: element.attr("id"), position: {x: coordinates.x, y: coordinates.y, z: coordinates.z}})
+          let x = coordinates.x < min ? min : coordinates.x > max ? max : coordinates.x
+          let y = coordinates.y < min ? min : coordinates.y > max ? max : coordinates.y
+          let z = coordinates.z < min ? min : coordinates.z > max ? max : coordinates.z
+
+          let mesh = addMesh(null, {class: element.attr("id"), position: {x: x, y: y, z: z}})
 
           data.outlinePass.selectedObjects = [mesh]
 
