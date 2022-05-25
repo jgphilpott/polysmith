@@ -224,6 +224,7 @@ export function addMenuPanel() {
   }
 
   panel.find("input[type=email]").on("dblclick", function(event) { document.execCommand("selectAll") })
+
   panel.find("input").on("mousedown mouseup", function(event) { event.stopPropagation() })
   panel.find("input").on("keypress keydown", function(event) { event.stopPropagation() })
   panel.find("input").on("cut copy paste", function(event) { event.preventDefault() })
@@ -247,6 +248,10 @@ export function addMenuPanel() {
     retypePasswordCheck ? retypePassword.removeClass("invalid") : retypePassword.addClass("invalid")
 
   })
+
+  $(document).keypress(function(event) { if (event.keyCode == 13) togglePanel() })
+
+  $("#nav #menu").click(function(event) { togglePanel() })
 
   function toggleSubPanel(subPanel, duration=1000) {
 
@@ -289,10 +294,6 @@ export function addMenuPanel() {
     }
 
   }
-
-  $(document).keypress(function(event) { if (event.keyCode == 13) togglePanel() })
-
-  $("#nav #menu").click(function(event) { togglePanel() })
 
   return panel
 
