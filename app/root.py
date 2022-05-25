@@ -97,7 +97,7 @@ if not exists(libs_dir):
         rotation = get("https://gist.githubusercontent.com/jgphilpott/1bc17b82063f14fabb8f3e38825f6f10/raw/b5ddf5f386213f47ac4fd4b9f41bc116b37f29a3/rotation.js").content.decode("utf-8")
         distance = get("https://gist.githubusercontent.com/jgphilpott/da9da7d8bdfb32982f99d9910efb1410/raw/51b50b26fc144e3cd2e2849ad47b280d5d1152f5/distanceConversion.js").content.decode("utf-8")
         cookieFuncs = get("https://gist.githubusercontent.com/jgphilpott/b9ce64b9ef8b04c5ac58902b133b1a28/raw/8931a5cd26c48945e932a7399f853b593687f557/cookieFunctions.js").content.decode("utf-8")
-        localStorage = get("https://gist.githubusercontent.com/jgphilpott/e26b92eb41b64e9565032d5c4d3c2878/raw/593ae1721ca986210862da158db663f21dec42af/localStorage.js").content.decode("utf-8")
+        localStorage = get("https://gist.githubusercontent.com/jgphilpott/e26b92eb41b64e9565032d5c4d3c2878/raw/ffa6a3798ac2adceb1ea3aa15c8a379f8349d83a/localStorage.js").content.decode("utf-8")
         validEmail = get("https://gist.githubusercontent.com/jgphilpott/a1ffedea1d1a70320b8075597df1943a/raw/29b8f25b2a439a117783523f209ba42ef5e9cf9d/validEmail.js").content.decode("utf-8")
         format = get("https://gist.githubusercontent.com/jgphilpott/787659ac4ea57a9971da58a76191079b/raw/d87c450947083ab134999408cec38fb70756593a/numberFormater.js").content.decode("utf-8")
         subset = get("https://gist.githubusercontent.com/jgphilpott/a1367ca419ac2807ed4340d69356b7f1/raw/48ad3970a6a370853d18157142421ab02b1e2398/subset.js").content.decode("utf-8")

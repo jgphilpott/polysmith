@@ -129,7 +129,7 @@ export function addMenuPanel() {
     })
 
     socket.on("signup_failed", function() { alert("Signup failed, please try again.") })
-    socket.on("signup_success", function(id) { writeCookie("id", id); location.reload() })
+    socket.on("signup_success", function(id) { writeCookie("id", id); localDump(); location.reload() })
 
   }
 
@@ -151,38 +151,45 @@ export function addMenuPanel() {
     let login = "<div id='login-panel' class='sub-panel'><h3 id='title'>Login</h3>"
 
     login += "<input class='email' type='email' placeholder='Email'>"
-    login += "<input class='password' type='password' placeholder='Password'>"
+    login += "<input class='password' type='password' data-min='8' placeholder='Password'>"
 
     login += "<input class='submit' type='submit' placeholder='Submit'>"
 
     panel.append(login + "</div>")
 
-    $("#login-panel .submit").click(function() {
+    let subPanel = panel.find("#login-panel.sub-panel")
 
-      if (validEmail($("#login-panel .email").val()) && $("#login-panel .password").val().length > 7) {
+    let email = subPanel.find(".email")
+    let password = subPanel.find(".password")
 
-        socket.emit("login", {"email": $("#login-panel .email").val(), "password": sha256($("#login-panel .password").val())})
+    subPanel.find(".submit").click(function() {
+
+      let emailCheck = validEmail(email.val())
+      let passwordCheck = password.val().length >= password.data("min")
+
+      if (emailCheck && passwordCheck) {
+
+        socket.emit("login", {email: email.val(), password: sha256(password.val())})
 
       } else {
 
-        if (!(validEmail($("#login-panel .email").val()))) { $("#login-panel .email").css("box-shadow", "0 0 5px rgba(224, 58, 62, 1)"); alert("Email invalid, please try again.") }
-        if (!($("#login-panel .password").val().length > 7)) { $("#login-panel .password").css("box-shadow", "0 0 5px rgba(224, 58, 62, 1)"); alert("Password to short, please try again.") }
+        if (!emailCheck) { email.addClass("invalid"); alert("Email invalid, please try again.") }
+        if (!passwordCheck) { password.addClass("invalid"); alert("Password to short, please try again.") }
 
       }
 
     })
 
     socket.on("login_failed", function() { alert("Login failed, please try again.") })
-    socket.on("login_success", function(id) { writeCookie("id", id); location.reload() })
+    socket.on("login_success", function(id) { writeCookie("id", id); localDump(); location.reload() })
 
   }
 
   function appendLogout() {
 
-    $("#logout").click(function() {
+    panel.find("#logout").click(function() {
 
-      localDelete("settings")
-      deleteCookie("id")
+      deleteCookie("id"); localDump()
 
       location.reload()
 
