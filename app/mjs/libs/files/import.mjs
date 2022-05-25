@@ -107,3 +107,23 @@ export function importFile(type, path, properties={}) {
   }
 
 }
+
+export function importFiles(input) {
+
+  if (input.files && input.files[0]) {
+
+    for (let i = 0; i < input.files.length; i++) {
+
+      let reader = new FileReader()
+
+      reader.readAsDataURL(input.files[i])
+
+      let extension = input.files[i].name.match(/\.[0-9a-z]+$/i)[0].substring(1)
+
+      reader.onload = function(event) { importFile(extension, event.target.result) }
+
+    }
+
+  }
+
+}

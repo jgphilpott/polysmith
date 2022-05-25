@@ -67,3 +67,5 @@ export function exportFile(type) {
   addAxes()
 
 }
+
+export function exportFiles(type) {}
