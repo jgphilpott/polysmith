@@ -1,5 +1,5 @@
-import {exportFile} from "../libs/files/export.mjs"
-import {importFile} from "../libs/files/import.mjs"
+import {exportFile, exportFiles} from "../libs/files/export.mjs"
+import {importFile, importFiles} from "../libs/files/import.mjs"
 
 export function addMenuPanel() {
 
@@ -11,7 +11,7 @@ export function addMenuPanel() {
 
     let main = "<div id='main'>"
 
-    main += "<div class='head'><img id='logo' src='/app/imgs/theme/logo.png'><h2 id='title'>Polymaker</h2></div>"
+    main += "<div class='head'><img id='logo' src='/app/imgs/theme/logo.png'><h2 id='title'>" + data.title + "</h2></div>"
 
     main += "<div id='export-import' class='option'><h4>Export / Import</h4></div>"
     main += "<div id='panels' class='option'><h4>Panels</h4></div>"
@@ -37,44 +37,26 @@ export function addMenuPanel() {
 
     let porting = "<div id='export-import-panel' class='sub-panel'>"
 
-    porting += "<div><h3>Export</h3></div>"
+    porting += "<div><h3 id='title'>Export</h3></div>"
 
     porting += "<div id='stl' class='option'><h4>STL<h4></div>"
     porting += "<div id='obj' class='option'><h4>OBJ<h4></div>"
 
-    porting += "<div><h3>Import</h3></div>"
+    porting += "<div><h3 id='title'>Import</h3></div>"
 
-    porting += "<input id='file' type='file' accept='.obj, .ply, .stl' multiple>"
     porting += "<div id='import' class='option'><h4>Choose File</h4></div>"
+    porting += "<input id='file' type='file' accept='.obj, .ply, .stl' multiple>"
 
     panel.append(porting + "</div>")
 
-    $("#stl, #obj").click(function() { exportFile(this.id) })
-    $("#stl, #obj").mousedown(function(event) { event.stopPropagation() }) .mouseup(function(event) { event.stopPropagation() })
+    let subPanel = panel.find("#export-import-panel.sub-panel")
 
-    $("#file").on("change", function() { importFiles(this) })
-    $("#import").click(function() { $("#file").trigger("click") })
-    $("#import").mousedown(function(event) { event.stopPropagation() }) .mouseup(function(event) { event.stopPropagation() })
+    subPanel.find("#stl, #obj").click(function() { exportFile(this.id) })
+    subPanel.find("#stl, #obj").mousedown(function(event) { event.stopPropagation() }) .mouseup(function(event) { event.stopPropagation() })
 
-    function importFiles(input) {
-
-      if (input.files && input.files[0]) {
-
-        for (let i = 0; i < input.files.length; i++) {
-
-          let reader = new FileReader()
-
-          reader.readAsDataURL(input.files[i])
-
-          let extension = input.files[i].name.match(/\.[0-9a-z]+$/i)[0].substring(1)
-
-          reader.onload = function (event) { importFile(extension, event.target.result) }
-
-        }
-
-      }
-
-    }
+    subPanel.find("#file").on("change", function() { importFiles(this) })
+    subPanel.find("#import").click(function() { subPanel.find("#file").trigger("click") })
+    subPanel.find("#import").mousedown(function(event) { event.stopPropagation() }) .mouseup(function(event) { event.stopPropagation() })
 
   }
 
@@ -90,7 +72,9 @@ export function addMenuPanel() {
 
     panel.append(panels + "</form></div>")
 
-    $("#panels-panel .checkbox").click(function(event) {
+    let subPanel = panel.find("#panels-panel.sub-panel")
+
+    subPanel.find(".checkbox").click(function(event) {
 
       updateSettings("panels", $(this).attr("id"), $(this).prop("checked"))
 
