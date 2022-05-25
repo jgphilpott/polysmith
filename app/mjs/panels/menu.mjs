@@ -31,6 +31,11 @@ export function addMenuPanel() {
 
     panel.append(main + "</div>")
 
+    let mainPanel = panel.find("#main")
+
+    mainPanel.find(".option").on("mousedown mouseup", function(event) { event.stopPropagation() })
+    mainPanel.find(".option").click(function(event) { toggleSubPanel(panel.find("#" + this.id + "-panel.sub-panel")) })
+
   }
 
   function appendExportImport() {
@@ -52,11 +57,11 @@ export function addMenuPanel() {
     let subPanel = panel.find("#export-import-panel.sub-panel")
 
     subPanel.find("#stl, #obj").click(function() { exportFile(this.id) })
-    subPanel.find("#stl, #obj").mousedown(function(event) { event.stopPropagation() }) .mouseup(function(event) { event.stopPropagation() })
+    subPanel.find("#stl, #obj").on("mousedown mouseup", function(event) { event.stopPropagation() })
 
     subPanel.find("#file").on("change", function() { importFiles(this) })
     subPanel.find("#import").click(function() { subPanel.find("#file").trigger("click") })
-    subPanel.find("#import").mousedown(function(event) { event.stopPropagation() }) .mouseup(function(event) { event.stopPropagation() })
+    subPanel.find("#import").on("mousedown mouseup", function(event) { event.stopPropagation() })
 
   }
 
@@ -78,7 +83,7 @@ export function addMenuPanel() {
 
       updateSettings("panels", $(this).attr("id"), $(this).prop("checked"))
 
-    }).mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
+    }).on("mousedown mouseup", function(event) { event.stopPropagation() })
 
   }
 
@@ -215,6 +220,31 @@ export function addMenuPanel() {
 
   }
 
+  panel.find("input[type=email]").on("dblclick", function(event) { document.execCommand("selectAll") })
+  panel.find("input").on("mousedown mouseup", function(event) { event.stopPropagation() })
+  panel.find("input").on("keypress keydown", function(event) { event.stopPropagation() })
+  panel.find("input").on("cut copy paste", function(event) { event.preventDefault() })
+
+  panel.find("#signup-panel input, #login-panel input").on("blur", function(event) {
+
+    if (!$(this).hasClass("submit")) $(this).val($(this).val().trim())
+
+    let subPanel = $(this).closest(".sub-panel")
+
+    let email = subPanel.find(".email")
+    let password = subPanel.find(".password")
+    let retypePassword = subPanel.find(".retype-password")
+
+    let emailCheck = validEmail(email.val()) || email.val() == ""
+    let passwordCheck = password.val().length >= password.data("min") || password.val() == ""
+    let retypePasswordCheck = retypePassword.val() === password.val() || retypePassword.val() == ""
+
+    emailCheck ? email.removeClass("invalid") : email.addClass("invalid")
+    passwordCheck ? password.removeClass("invalid") : password.addClass("invalid")
+    retypePasswordCheck ? retypePassword.removeClass("invalid") : retypePassword.addClass("invalid")
+
+  })
+
   let menuWidth = panel.outerWidth()
   let menuHeight = panel.outerHeight()
 
@@ -261,32 +291,6 @@ export function addMenuPanel() {
     }
 
   }
-
-  $("#menu.panel #main .option").click(function(event) { toggleSubPanel($("#menu.panel #" + this.id + "-panel.sub-panel")) })
-  $("#menu.panel #main .option").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
-
-  $("#menu.panel input").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
-  $("#menu.panel input").on("keypress keydown", function(event) { event.stopPropagation() })
-  $("#menu.panel input").on("cut copy paste", function(event) { event.preventDefault() })
-  $("#menu.panel input").on("blur", function(event) {
-
-    if (!$(this).hasClass("submit")) $(this).val($(this).val().trim())
-
-    let invalidEmail = $(this).hasClass("email") && !(validEmail($(this).val())) && $(this).val() != ""
-    let invalidPassword = $(this).hasClass("password") && !($(this).val().length > 7) && $(this).val() != ""
-    let invalidPasswords = $(this).hasClass("retype-password") && !($("#signup-panel .password").val() === $("#signup-panel .retype-password").val()) && $(this).val() != ""
-
-    if (invalidEmail || invalidPassword || invalidPasswords) {
-
-      $(this).addClass("invalid")
-
-    } else {
-
-      $(this).removeClass("invalid")
-
-    }
-
-  })
 
   $(document).keypress(function(event) { if (event.keyCode == 13) toggleMenu() })
 
