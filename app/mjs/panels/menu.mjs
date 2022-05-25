@@ -95,32 +95,40 @@ export function addMenuPanel() {
     let signup = "<div id='signup-panel' class='sub-panel'><h3 id='title'>Signup</h3>"
 
     signup += "<input class='email' type='email' placeholder='Email'>"
-    signup += "<input class='password' type='password' placeholder='Password'>"
-    signup += "<input class='retype-password' type='password' placeholder='Retype Password'>"
+    signup += "<input class='password' type='password' data-min='8' placeholder='Password'>"
+    signup += "<input class='retype-password' type='password' data-min='8' placeholder='Retype Password'>"
 
     signup += "<input class='submit' type='submit' placeholder='Submit'>"
 
     panel.append(signup + "</div>")
 
-    $("#signup-panel .submit").click(function() {
+    let subPanel = panel.find("#signup-panel.sub-panel")
 
-      if (validEmail($("#signup-panel .email").val()) && $("#signup-panel .password").val().length > 7 && $("#signup-panel .password").val() === $("#signup-panel .retype-password").val()) {
+    let email = subPanel.find(".email")
+    let password = subPanel.find(".password")
+    let retypePassword = subPanel.find(".retype-password")
 
-        socket.emit("signup", {"email": $("#signup-panel .email").val(), "password": sha256($("#signup-panel .password").val())})
+    subPanel.find(".submit").click(function() {
+
+      let emailCheck = validEmail(email.val())
+      let passwordCheck = password.val().length >= password.data("min")
+      let retypePasswordCheck = retypePassword.val() === password.val()
+
+      if (emailCheck && passwordCheck && retypePasswordCheck) {
+
+        socket.emit("signup", {email: email.val(), password: sha256(password.val())})
 
       } else {
 
-        if (!(validEmail($("#signup-panel .email").val()))) { $("#signup-panel .email").css("box-shadow", "0 0 5px rgba(224, 58, 62, 1)"); alert("Email invalid, please try again.") }
-        if (!($("#signup-panel .password").val().length > 7)) { $("#signup-panel .password").css("box-shadow", "0 0 5px rgba(224, 58, 62, 1)"); alert("Password to short, please try again.") }
-        if (!($("#signup-panel .password").val() === $("#signup-panel .retype-password").val())) { $("#signup-panel .retype-password").css("box-shadow", "0 0 5px rgba(224, 58, 62, 1)"); alert("Passwords must match, please try again.") }
+        if (!emailCheck) { email.addClass("invalid"); alert("Email invalid, please try again.") }
+        if (!passwordCheck) { password.addClass("invalid"); alert("Password to short, please try again.") }
+        if (!retypePasswordCheck) { retypePassword.addClass("invalid"); alert("Passwords dont match, please try again.") }
 
       }
 
     })
 
-    $("#signup-panel input").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
-
-    socket.on("signup_failed", function() { alert("Email already exists, please try again.") })
+    socket.on("signup_failed", function() { alert("Signup failed, please try again.") })
     socket.on("signup_success", function(id) { writeCookie("id", id); location.reload() })
 
   }
@@ -163,8 +171,6 @@ export function addMenuPanel() {
       }
 
     })
-
-    $("#login-panel input").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
     socket.on("login_failed", function() { alert("Login failed, please try again.") })
     socket.on("login_success", function(id) { writeCookie("id", id); location.reload() })
@@ -252,6 +258,7 @@ export function addMenuPanel() {
   $("#menu.panel #main .option").click(function(event) { toggleSubPanel($("#menu.panel #" + this.id + "-panel.sub-panel")) })
   $("#menu.panel #main .option").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
+  $("#menu.panel input").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
   $("#menu.panel input").on("keypress keydown", function(event) { event.stopPropagation() })
   $("#menu.panel input").on("cut copy paste", function(event) { event.preventDefault() })
   $("#menu.panel input").on("blur", function(event) {
@@ -264,11 +271,11 @@ export function addMenuPanel() {
 
     if (invalidEmail || invalidPassword || invalidPasswords) {
 
-      $(this).css("box-shadow", "0 0 5px rgba(224, 58, 62, 1)")
+      $(this).addClass("invalid")
 
     } else {
 
-      $(this).css("box-shadow", "none")
+      $(this).removeClass("invalid")
 
     }
 
