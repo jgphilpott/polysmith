@@ -204,6 +204,9 @@ export function addMenuPanel() {
 
   appendMain()
 
+  let menuWidth = panel.outerWidth()
+  let menuHeight = panel.outerHeight()
+
   appendExportImport()
   appendPanels()
   appendSettings()
@@ -245,17 +248,14 @@ export function addMenuPanel() {
 
   })
 
-  let menuWidth = panel.outerWidth()
-  let menuHeight = panel.outerHeight()
-
   function toggleSubPanel(subPanel, duration=1000) {
 
     if (subPanel.css("display") == "none") {
 
-      $(".sub-panel").css("display", "none")
+      panel.find(".sub-panel").css("display", "none")
 
       subPanel.css("display", "inline-block")
-      let panelWidth = subPanel.outerWidth() + 3
+      let panelWidth = subPanel.outerWidth() + 1
       subPanel.css("display", "none")
 
       panel.animate({width: menuWidth + panelWidth}, {duration: duration, queue: false})
@@ -274,27 +274,25 @@ export function addMenuPanel() {
 
   }
 
-  function toggleMenu() {
+  function togglePanel() {
 
-    let menu = $("#menu.panel")
+    if (panel.css("visibility") == "hidden") {
 
-    if (menu.css("visibility") == "hidden") {
-
-      menu.css("visibility", "visible")
+      panel.css("visibility", "visible")
       updateSettings("panels", "menu", true)
 
-    } else if (menu.css("visibility") == "visible") {
+    } else if (panel.css("visibility") == "visible") {
 
-      menu.css("visibility", "hidden")
+      panel.css("visibility", "hidden")
       updateSettings("panels", "menu", false)
 
     }
 
   }
 
-  $(document).keypress(function(event) { if (event.keyCode == 13) toggleMenu() })
+  $(document).keypress(function(event) { if (event.keyCode == 13) togglePanel() })
 
-  $("#nav #menu").click(function(event) { toggleMenu() })
+  $("#nav #menu").click(function(event) { togglePanel() })
 
   return panel
 
