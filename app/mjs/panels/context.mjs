@@ -4,7 +4,7 @@ import {addMeshPanel, addMesh, updateMesh, removeMesh} from "./mesh.mjs"
 
 export function addContextPanel() {
 
-  $("#nav, #forkme, #canvas").mouseover(function() { $("#context-menu.panel").remove() })
+  $("#nav, #forkme, #canvas, #metabox, #help").mouseenter(function() { $("#context-menu.panel").remove() })
 
 }
 
@@ -12,15 +12,15 @@ export function contextMenu(type, element, event) {
 
   $("body").append("<div id='context-menu' class='panel'></div>")
 
-  let contextMenu = $("#context-menu.panel")
+  let panel = $("#context-menu.panel")
 
   switch (type) {
 
     case "axisCap":
 
-      contextMenu.append("<p id='look'>Look Here</p>")
+      panel.append("<p id='look'>Look Here</p>")
 
-      contextMenu.find("#look").click(function() { focus({x: element.position.x, y: element.position.y, z: element.position.z}) })
+      panel.find("#look").click(function() { focus({x: element.position.x, y: element.position.y, z: element.position.z}) })
 
       break
 
@@ -29,18 +29,18 @@ export function contextMenu(type, element, event) {
       let meshPanel = $("#mesh." + element.uuid + "")
       let meshTableRow = $("#meshes.table tr#" + element.uuid + "")
 
-      contextMenu.append("<h4>Basic</h4>")
-      contextMenu.append("<p id='panel'>" + (meshPanel.length && meshPanel.css("visibility") == "visible" ? "Close" : "Open") + " Panel</p>")
-      contextMenu.append("<p id='look'>Look Here</p>")
+      panel.append("<h4>Basic</h4>")
+      panel.append("<p id='panel'>" + (meshPanel.length && meshPanel.css("visibility") == "visible" ? "Close" : "Open") + " Panel</p>")
+      panel.append("<p id='look'>Look Here</p>")
 
-      contextMenu.append("<h4>Mesh</h4>")
-      element.lock != "locked" ? contextMenu.append("<p id='join'>Join Mesh</p>") : null
-      element.lock != "locked" ? contextMenu.append("<p id='cut'>Cut Mesh</p>") : null
-      element.lock != "locked" ? contextMenu.append("<p id='intersect'>Intersect Mesh</p>") : null
-      element.lock != "locked" ? contextMenu.append("<p id='remove'>Remove Mesh</p>") : null
-      element.lock == "locked" ? contextMenu.append("<p id='lock'>Unlock Mesh</p>") : contextMenu.append("<p id='lock'>Lock Mesh</p>")
+      panel.append("<h4>Mesh</h4>")
+      element.lock != "locked" ? panel.append("<p id='join'>Join Mesh</p>") : null
+      element.lock != "locked" ? panel.append("<p id='cut'>Cut Mesh</p>") : null
+      element.lock != "locked" ? panel.append("<p id='intersect'>Intersect Mesh</p>") : null
+      element.lock != "locked" ? panel.append("<p id='remove'>Remove Mesh</p>") : null
+      element.lock != "locked" ? panel.append("<p id='lock'>Lock Mesh</p>") : panel.append("<p id='lock'>Unlock Mesh</p>")
 
-      contextMenu.find("#panel").click(function() {
+      panel.find("#panel").click(function() {
 
         if (meshPanel.length && meshPanel.css("visibility") == "visible") {
 
@@ -48,7 +48,7 @@ export function contextMenu(type, element, event) {
 
           meshPanel.css("visibility", "hidden")
 
-        } else if (meshPanel.length) {
+        } else if (meshPanel.length && meshPanel.css("visibility") == "hidden") {
 
           meshTableRow.find(".settings").attr("src", "/app/imgs/panels/tools/toggle/on.png")
 
@@ -64,72 +64,60 @@ export function contextMenu(type, element, event) {
 
       })
 
-      contextMenu.find("#look").click(function() { focus({x: element.position.x, y: element.position.y, z: element.position.z}) })
-
-      contextMenu.find("#cut").click(function() { updateMesh(element, "operation", "cut", "setup") })
-      contextMenu.find("#join").click(function() { updateMesh(element, "operation", "join", "setup") })
-      contextMenu.find("#intersect").click(function() { updateMesh(element, "operation", "intersect", "setup") })
-      contextMenu.find("#remove").click(function() { removeMesh(element) })
-      contextMenu.find("#lock").click(function() { updateMesh(element, "lock") })
+      panel.find("#look").click(function() { focus({x: element.position.x, y: element.position.y, z: element.position.z}) })
+      panel.find("#cut").click(function() { updateMesh(element, "operation", "cut", "setup") })
+      panel.find("#join").click(function() { updateMesh(element, "operation", "join", "setup") })
+      panel.find("#intersect").click(function() { updateMesh(element, "operation", "intersect", "setup") })
+      panel.find("#remove").click(function() { removeMesh(element) })
+      panel.find("#lock").click(function() { updateMesh(element, "lock") })
 
       break
 
     case "shape":
 
-      let shape = $("#shortcuts.panel img#" + element.attr("id") + ".shape")
+      let shortcut = $("#shortcuts.panel img#" + element.attr("id") + ".shape")
 
-      contextMenu.append("<p id='add'>Add Mesh</p>")
-      shape.css("display") == "none" ? contextMenu.append("<p id='show'>Show Shortcut</p>") : contextMenu.append("<p id='hide'>Hide Shortcut</p>")
+      panel.append("<p id='add'>Add Mesh</p>")
+      shortcut.css("display") == "none" ? panel.append("<p id='show'>Show Shortcut</p>") : panel.append("<p id='hide'>Hide Shortcut</p>")
 
-      contextMenu.find("#add").click(function() { addMesh(null, {class: element.attr("id")}) })
-      contextMenu.find("#show").click(function() { toggleShortcut(element.attr("id")) })
-      contextMenu.find("#hide").click(function() { toggleShortcut(element.attr("id")) })
-
-      break
-
-    case "shortcut":
-
-      contextMenu.append("<p id='add'>Add Mesh</p>")
-      contextMenu.append("<p id='hide'>Hide Shortcut</p>")
-
-      contextMenu.find("#add").click(function() { addMesh(null, {class: element.attr("id")}) })
-      contextMenu.find("#hide").click(function() { toggleShortcut(element.attr("id")) })
+      panel.find("#add").click(function() { addMesh(null, {class: element.attr("id")}) })
+      panel.find("#show, #hide").click(function() { toggleShortcut(element.attr("id")) })
 
       break
 
   }
 
-  contextMenu.find("p").click(function() {
+  panel.find("p").click(function() {
 
-    contextMenu.remove()
+    panel.remove()
 
     data.outlinePass.selectedObjects = []
 
   })
 
-  contextMenu.css("z-index", events.zIndex + 1)
+  panel.css("z-index", events.zIndex + 1)
 
-  positionMenu(contextMenu, event)
+  positionContextMenu(panel, event)
 
 }
 
-function positionMenu(menu, event) {
+function positionContextMenu(panel, event) {
 
   let padding = 5
 
-  let contextMenuWidth = menu.outerWidth()
-  let contextMenuHeight = menu.outerHeight()
+  let contextMenuWidth = panel.outerWidth()
+  let contextMenuHeight = panel.outerHeight()
 
   if (event.pageX >= window.innerWidth / 2) {
-    menu.css("left", event.pageX - contextMenuWidth + padding)
+    panel.css("left", event.pageX - contextMenuWidth + padding)
   } else if (event.pageX < window.innerWidth / 2) {
-    menu.css("left", event.pageX - padding)
+    panel.css("left", event.pageX - padding)
   }
 
   if (event.pageY >= window.innerHeight / 2) {
-    menu.css("top", event.pageY - contextMenuHeight + padding)
+    panel.css("top", event.pageY - contextMenuHeight + padding)
   } else if (event.pageY < window.innerHeight / 2) {
-    menu.css("top", event.pageY - padding)
+    panel.css("top", event.pageY - padding)
   }
 
 }

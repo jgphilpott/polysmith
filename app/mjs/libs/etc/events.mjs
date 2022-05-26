@@ -80,7 +80,7 @@ export function addPanelEvents(panel) {
   let id = panel.attr("id")
   let close = panel.find(".close")
 
-  panel.hover(function(event) {
+  panel.mouseenter(function(event) {
 
     events.zIndex += 1
 
@@ -88,16 +88,12 @@ export function addPanelEvents(panel) {
 
     panel.css("z-index", events.zIndex)
 
-  })
-
-  panel.mouseover(function(event) {
+  }).mouseover(function(event) {
 
     close.animate({opacity: 1}, {duration: duration, queue: queue})
     panel.animate({backgroundColor: grayGlass}, {duration: duration, queue: queue})
 
-  })
-
-  panel.mouseout(function(event) {
+  }).mouseout(function(event) {
 
     close.animate({opacity: 0}, {duration: duration, queue: queue})
     panel.animate({backgroundColor: lightGrayGlass}, {duration: duration, queue: queue})

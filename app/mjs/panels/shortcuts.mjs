@@ -45,7 +45,7 @@ export function addShortcutsPanel() {
 
     })
 
-    $(shape).contextmenu(function(event) { contextMenu("shortcut", $(this), event) })
+    $(shape).contextmenu(function(event) { contextMenu("shape", $(this), event) })
 
     if (settings.ui.shortcuts.includes(shape.id)) $(shape).css("display", "block")
 
