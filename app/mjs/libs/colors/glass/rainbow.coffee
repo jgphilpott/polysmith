@@ -6,7 +6,6 @@ export blueGlass = "rgba(0, 157, 220, 0.5)"
 export purpleGlass = "rgba(150, 61, 151, 0.5)"
 export pinkGlass = "rgba(225, 67, 117, 0.5)"
 
-
 export rainbowGlass =
        redGlass: redGlass
        orangeGlass: orangeGlass
