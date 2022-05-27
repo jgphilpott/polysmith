@@ -566,13 +566,11 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
     panel.find("#" + value + ".color").addClass("selected")
 
     if (["red", "orange", "yellow", "green", "blue", "purple", "pink"].includes(value)) {
-
       color = threeRainbow.rainbow[value]
-
     } else if (["white", "gray", "black"].includes(value)) {
-
       color = threeGrayscale.grayscale[value]
-
+    } else {
+      color = threeGrayscale.grayscale.black
     }
 
     mesh.material.dispose()
