@@ -34,7 +34,7 @@ def connect_clients(app):
             client["password"] = sha256(client["password"].encode("utf-8")).hexdigest()
             client = Client(client).refresh_id()
 
-            new_client(client.__dict__)
+            new_client(vars(client))
 
             emit("signup_success", client.id)
 
@@ -49,7 +49,7 @@ def connect_clients(app):
 
                 client = Client(match).refresh_id()
 
-                update_client(client.__dict__)
+                update_client(vars(client))
 
                 emit("login_success", client.id)
 
@@ -68,7 +68,7 @@ def connect_clients(app):
 
             client = Client(find_client({"id": update["id"]})).update_settings(update["category"], update["setting"], update["value"])
 
-            update_client(client.__dict__)
+            update_client(vars(client))
 
             emit("update_settings_success", {"category": update["category"], "setting": update["setting"], "value": update["value"]})
 
