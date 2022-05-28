@@ -41,22 +41,26 @@ export function removeAxes() {
 
 export function addAxesCaps(min=(-scale), max=scale) {
 
-  if (settings.axes.xAxis || settings.axes.yAxis || settings.axes.zAxis) {
+  if (settings.axes.axesCaps) {
 
-    let centroid = newSphere(radius, segments, segments, [0, 0, 0], "basic", black)
+    if (settings.axes.xAxis || settings.axes.yAxis || settings.axes.zAxis) {
 
-    centroid.name = "centroid-cap"
+      let centroid = newSphere(radius, segments, segments, [0, 0, 0], "basic", black)
 
-    addAxisCapEvents(centroid)
+      centroid.name = "centroid-cap"
 
-    axes.push(centroid)
-    scene.add(centroid)
+      addAxisCapEvents(centroid)
+
+      axes.push(centroid)
+      scene.add(centroid)
+
+    }
+
+    if (settings.axes.xAxis) addAxisCapsX(min, max)
+    if (settings.axes.yAxis) addAxisCapsY(min, max)
+    if (settings.axes.zAxis) addAxisCapsZ(min, max)
 
   }
-
-  if (settings.axes.xAxis) addAxisCapsX(min, max)
-  if (settings.axes.yAxis) addAxisCapsY(min, max)
-  if (settings.axes.zAxis) addAxisCapsZ(min, max)
 
 }
 
@@ -112,14 +116,28 @@ export function removeAxisCapsX() {
 
 export function addAxisX(min=(-scale), max=scale) {
 
-  let axisX = newLine2([[min, 0, 0], [max, 0, 0]], "fat", red, 3)
+  if (settings.axes.xAxis) {
 
-  axes.push(axisX)
-  scene.add(axisX)
+    let axisX = newLine2([[min, 0, 0], [max, 0, 0]], "fat", red, 3)
+
+    axisX.name = "axis-x"
+
+    axes.push(axisX)
+    scene.add(axisX)
+
+  }
 
 }
 
-export function removeAxisX() {}
+export function removeAxisX() {
+
+  axes.forEach(axis => {
+
+    if (axis.name.includes("axis") && axis.name.includes("-x")) scene.remove(axis)
+
+  })
+
+}
 
 export function addAxisCapsY(min=(-scale), max=scale) {
 
@@ -158,14 +176,28 @@ export function removeAxisCapsY() {
 
 export function addAxisY(min=(-scale), max=scale) {
 
-  let axisY = newLine2([[0, min, 0], [0, max, 0]], "fat", green, 3)
+  if (settings.axes.yAxis) {
 
-  axes.push(axisY)
-  scene.add(axisY)
+    let axisY = newLine2([[0, min, 0], [0, max, 0]], "fat", green, 3)
+
+    axisY.name = "axis-y"
+
+    axes.push(axisY)
+    scene.add(axisY)
+
+  }
 
 }
 
-export function removeAxisY() {}
+export function removeAxisY() {
+
+  axes.forEach(axis => {
+
+    if (axis.name.includes("axis") && axis.name.includes("-y")) scene.remove(axis)
+
+  })
+
+}
 
 export function addAxisCapsZ(min=(-scale), max=scale) {
 
@@ -204,14 +236,28 @@ export function removeAxisCapsZ() {
 
 export function addAxisZ(min=(-scale), max=scale) {
 
-  let axisZ = newLine2([[0, 0, min], [0, 0, max]], "fat", blue, 3)
+  if (settings.axes.zAxis) {
 
-  axes.push(axisZ)
-  scene.add(axisZ)
+    let axisZ = newLine2([[0, 0, min], [0, 0, max]], "fat", blue, 3)
+
+    axisZ.name = "axis-z"
+
+    axes.push(axisZ)
+    scene.add(axisZ)
+
+  }
 
 }
 
-export function removeAxisZ() {}
+export function removeAxisZ() {
+
+  axes.forEach(axis => {
+
+    if (axis.name.includes("axis") && axis.name.includes("-z")) scene.remove(axis)
+
+  })
+
+}
 
 export function addPlaneXY(min=(-scale), max=scale) {
 
