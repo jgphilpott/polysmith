@@ -43,8 +43,7 @@ export function setup() {
   lights.push(addPointLight())
   data.lights = lights
 
-  camera = addPerspectiveCamera()
-  data.camera = camera
+  data.camera = addPerspectiveCamera()
 
   addPostProcessing()
 
@@ -52,9 +51,9 @@ export function setup() {
   addFlyControls()
   addZoomControls()
 
-  addPanels()
-  addEvents()
-  addAxes()
+  data.panels = addPanels()
+  data.events = addEvents()
+  data.axes = addAxes()
 
   animate()
 

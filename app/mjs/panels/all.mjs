@@ -11,14 +11,16 @@ import {addShortcutsPanel} from "./shortcuts.mjs"
 
 export function addPanels() {
 
-  addPanelEvents(addCameraPanel())
-  addPanelEvents(addLightsPanel())
-  addPanelEvents(addMenuPanel())
-  addPanelEvents(addMeshesPanel())
-  addPanelEvents(addSettingsPanel())
-  addPanelEvents(addShapesPanel())
-  addPanelEvents(addShortcutsPanel())
+  panels.push(addPanelEvents(addCameraPanel()))
+  panels.push(addPanelEvents(addLightsPanel()))
+  panels.push(addPanelEvents(addMenuPanel()))
+  panels.push(addPanelEvents(addMeshesPanel()))
+  panels.push(addPanelEvents(addSettingsPanel()))
+  panels.push(addPanelEvents(addShapesPanel()))
+  panels.push(addPanelEvents(addShortcutsPanel()))
 
   addContextPanel()
+
+  return panels
 
 }

@@ -8,12 +8,10 @@ import {newSphere} from "../geometries/spheres.mjs"
 import {black, white} from "../colors/three/grayscale.js"
 import {red, orange, yellow, green, blue, purple, pink} from "../colors/three/rainbow.js"
 
-let segments = 25
 let radius = scale / 100
+let segments = 25
 
 export function addAxes() {
-
-  data.axes = axes
 
   let centroid = newSphere(radius, segments, segments, [0, 0, 0], "basic", black)
 
@@ -26,16 +24,22 @@ export function addAxes() {
   addAxisY()
   addAxisZ()
 
+  if (settings.axes.xyPlane) addPlaneXY()
+  if (settings.axes.xzPlane) addPlaneXZ()
+  if (settings.axes.yzPlane) addPlaneYZ()
+
+  return axes
+
 }
 
 export function addAxisX(min=(-scale), max=scale) {
 
   let maxCap = newSphere(radius, segments, segments, [max, 0, 0], "basic", green)
-  let axis = newLine2([[max, 0, 0], [min, 0, 0]], "fat", red, 3)
   let minCap = newSphere(radius, segments, segments, [min, 0, 0], "basic", red)
+  let axis = newLine2([[max, 0, 0], [min, 0, 0]], "fat", red, 3)
 
-  axes.push(maxCap, axis, minCap)
-  scene.add(maxCap, axis, minCap)
+  axes.push(maxCap, minCap, axis)
+  scene.add(maxCap, minCap, axis)
 
   addAxesEvents(maxCap)
   addAxesEvents(minCap)
@@ -45,11 +49,11 @@ export function addAxisX(min=(-scale), max=scale) {
 export function addAxisY(min=(-scale), max=scale) {
 
   let maxCap = newSphere(radius, segments, segments, [0, max, 0], "basic", green)
-  let axis = newLine2([[0, max, 0], [0, min, 0]], "fat", green, 3)
   let minCap = newSphere(radius, segments, segments, [0, min, 0], "basic", red)
+  let axis = newLine2([[0, max, 0], [0, min, 0]], "fat", green, 3)
 
-  axes.push(maxCap, axis, minCap)
-  scene.add(maxCap, axis, minCap)
+  axes.push(maxCap, minCap, axis)
+  scene.add(maxCap, minCap, axis)
 
   addAxesEvents(maxCap)
   addAxesEvents(minCap)
@@ -59,11 +63,11 @@ export function addAxisY(min=(-scale), max=scale) {
 export function addAxisZ(min=(-scale), max=scale) {
 
   let maxCap = newSphere(radius, segments, segments, [0, 0, max], "basic", green)
-  let axis = newLine2([[0, 0, max], [0, 0, min]], "fat", blue, 3)
   let minCap = newSphere(radius, segments, segments, [0, 0, min], "basic", red)
+  let axis = newLine2([[0, 0, max], [0, 0, min]], "fat", blue, 3)
 
-  axes.push(maxCap, axis, minCap)
-  scene.add(maxCap, axis, minCap)
+  axes.push(maxCap, minCap, axis)
+  scene.add(maxCap, minCap, axis)
 
   addAxesEvents(maxCap)
   addAxesEvents(minCap)
@@ -74,18 +78,24 @@ export function addPlaneXY(min=(-scale), max=scale) {
 
   let setp = settings.axes.xyPlaneStep
 
-  scene.add(newLine([[max, 0, 0], [min, 0, 0]], "basic", black))
-  scene.add(newLine([[0, max, 0], [0, min, 0]], "basic", black))
+  let xTick = newLine([[max, 0, 0], [min, 0, 0]], "basic", black)
+  let yTick = newLine([[0, max, 0], [0, min, 0]], "basic", black)
 
   for (let i = setp; i <= max; i += setp) {
 
-    scene.add(newLine([[max, i, 0], [min, i, 0]], "basic", black))
-    scene.add(newLine([[max, -i, 0], [min, -i, 0]], "basic", black))
+    let xTickPositive = newLine([[max, i, 0], [min, i, 0]], "basic", black)
+    let xTickNegative = newLine([[max, -i, 0], [min, -i, 0]], "basic", black)
 
-    scene.add(newLine([[i, max, 0], [i, min, 0]], "basic", black))
-    scene.add(newLine([[-i, max, 0], [-i, min, 0]], "basic", black))
+    let yTickPositive = newLine([[i, max, 0], [i, min, 0]], "basic", black)
+    let yTickNegative = newLine([[-i, max, 0], [-i, min, 0]], "basic", black)
+
+    axes.push(xTickPositive, xTickNegative, yTickPositive, yTickNegative)
+    scene.add(xTickPositive, xTickNegative, yTickPositive, yTickNegative)
 
   }
+
+  axes.push(xTick, yTick)
+  scene.add(xTick, yTick)
 
 }
 
@@ -93,18 +103,24 @@ export function addPlaneXZ(min=(-scale), max=scale) {
 
   let setp = settings.axes.xzPlaneStep
 
-  scene.add(newLine([[max, 0, 0], [min, 0, 0]], "basic", black))
-  scene.add(newLine([[0, 0, max], [0, 0, min]], "basic", black))
+  let xTick = newLine([[max, 0, 0], [min, 0, 0]], "basic", black)
+  let zTick = newLine([[0, 0, max], [0, 0, min]], "basic", black)
 
   for (let i = setp; i <= max; i += setp) {
 
-    scene.add(newLine([[max, 0, i], [min, 0, i]], "basic", black))
-    scene.add(newLine([[max, 0, -i], [min, 0, -i]], "basic", black))
+    let xTickPositive = newLine([[max, 0, i], [min, 0, i]], "basic", black)
+    let xTickNegative = newLine([[max, 0, -i], [min, 0, -i]], "basic", black)
 
-    scene.add(newLine([[i, 0, max], [i, 0, min]], "basic", black))
-    scene.add(newLine([[-i, 0, max], [-i, 0, min]], "basic", black))
+    let zTickPositive = newLine([[i, 0, max], [i, 0, min]], "basic", black)
+    let zTickNegative = newLine([[-i, 0, max], [-i, 0, min]], "basic", black)
+
+    axes.push(xTickPositive, xTickNegative, zTickPositive, zTickNegative)
+    scene.add(xTickPositive, xTickNegative, zTickPositive, zTickNegative)
 
   }
+
+  axes.push(xTick, zTick)
+  scene.add(xTick, zTick)
 
 }
 
@@ -112,18 +128,24 @@ export function addPlaneYZ(min=(-scale), max=scale) {
 
   let setp = settings.axes.yzPlaneStep
 
-  scene.add(newLine([[0, max, 0], [0, min, 0]], "basic", black))
-  scene.add(newLine([[0, 0, max], [0, 0, min]], "basic", black))
+  let yTick = newLine([[0, max, 0], [0, min, 0]], "basic", black)
+  let zTick = newLine([[0, 0, max], [0, 0, min]], "basic", black)
 
   for (let i = setp; i <= max; i += setp) {
 
-    scene.add(newLine([[0, max, i], [0, min, i]], "basic", black))
-    scene.add(newLine([[0, max, -i], [0, min, -i]], "basic", black))
+    let yTickPositive = newLine([[0, max, i], [0, min, i]], "basic", black)
+    let yTickNegative = newLine([[0, max, -i], [0, min, -i]], "basic", black)
 
-    scene.add(newLine([[0, i, max], [0, i, min]], "basic", black))
-    scene.add(newLine([[0, -i, max], [0, -i, min]], "basic", black))
+    let zTickPositive = newLine([[0, i, max], [0, i, min]], "basic", black)
+    let zTickNegative = newLine([[0, -i, max], [0, -i, min]], "basic", black)
+
+    axes.push(yTickPositive, yTickNegative, zTickPositive, zTickNegative)
+    scene.add(yTickPositive, yTickNegative, zTickPositive, zTickNegative)
 
   }
+
+  axes.push(yTick, zTick)
+  scene.add(yTick, zTick)
 
 }
 

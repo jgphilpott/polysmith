@@ -10,10 +10,8 @@ export function addEvents() {
 
   events = new THREEx.DomEvents(camera, canvas)
 
-  data.events = events
-
-  events.zIndex = 0
   events.operation = {mesh: null, key: null}
+  events.zIndex = 0
 
   $(window).on("resize", function() {
 
@@ -70,6 +68,8 @@ export function addEvents() {
 
   })
 
+  return events
+
 }
 
 export function addPanelEvents(panel) {
@@ -121,6 +121,8 @@ export function addPanelEvents(panel) {
   if (id != "mesh") settings.panels[id] ? panel.css("visibility", "visible") : panel.css("visibility", "hidden")
 
   makeDragable(panel)
+
+  return panel
 
 }
 
