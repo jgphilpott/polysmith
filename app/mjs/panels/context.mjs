@@ -80,7 +80,7 @@ export function contextMenu(type, element, event) {
       panel.append("<p id='add'>Add Mesh</p>")
       shortcut.css("display") == "none" ? panel.append("<p id='show'>Show Shortcut</p>") : panel.append("<p id='hide'>Hide Shortcut</p>")
 
-      panel.find("#add").click(function() { addMesh(null, {class: element.attr("id")}) })
+      panel.find("#add").click(function() { addMesh(null, {name: element.attr("title"), class: element.attr("id")}) })
       panel.find("#show, #hide").click(function() { toggleShortcut(element.attr("id")) })
 
       break

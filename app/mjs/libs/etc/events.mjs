@@ -339,7 +339,7 @@ export function makeDragable(element, origEvent=null) {
           let y = coordinates.y < min ? min : coordinates.y > max ? max : coordinates.y
           let z = coordinates.z < min ? min : coordinates.z > max ? max : coordinates.z
 
-          let mesh = addMesh(null, {class: element.attr("id"), position: {x: x, y: y, z: z}})
+          let mesh = addMesh(null, {name: element.attr("title"), class: element.attr("id"), position: {x: x, y: y, z: z}})
 
           data.outlinePass.selectedObjects = [mesh]
 

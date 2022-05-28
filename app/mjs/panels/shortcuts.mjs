@@ -41,7 +41,7 @@ export function addShortcutsPanel() {
 
     }, function(event) {
 
-      addMesh(null, {class: shape.id})
+      addMesh(null, {name: shape.title, class: shape.id})
 
     })
 

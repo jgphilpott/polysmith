@@ -145,7 +145,7 @@ export function addPlaneXY(min=(-scale), max=scale) {
   let xTick = newLine([[max, 0, 0], [min, 0, 0]], "basic", black)
   let yTick = newLine([[0, max, 0], [0, min, 0]], "basic", black)
 
-  for (let i = setp; i <= max; i += setp) {
+  for (let i = setp; i < max; i += setp) {
 
     let xTickPositive = newLine([[max, i, 0], [min, i, 0]], "basic", black)
     let xTickNegative = newLine([[max, -i, 0], [min, -i, 0]], "basic", black)
@@ -172,7 +172,7 @@ export function addPlaneXZ(min=(-scale), max=scale) {
   let xTick = newLine([[max, 0, 0], [min, 0, 0]], "basic", black)
   let zTick = newLine([[0, 0, max], [0, 0, min]], "basic", black)
 
-  for (let i = setp; i <= max; i += setp) {
+  for (let i = setp; i < max; i += setp) {
 
     let xTickPositive = newLine([[max, 0, i], [min, 0, i]], "basic", black)
     let xTickNegative = newLine([[max, 0, -i], [min, 0, -i]], "basic", black)
@@ -199,7 +199,7 @@ export function addPlaneYZ(min=(-scale), max=scale) {
   let yTick = newLine([[0, max, 0], [0, min, 0]], "basic", black)
   let zTick = newLine([[0, 0, max], [0, 0, min]], "basic", black)
 
-  for (let i = setp; i <= max; i += setp) {
+  for (let i = setp; i < max; i += setp) {
 
     let yTickPositive = newLine([[0, max, i], [0, min, i]], "basic", black)
     let yTickNegative = newLine([[0, max, -i], [0, min, -i]], "basic", black)
