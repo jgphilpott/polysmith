@@ -81,7 +81,7 @@ export function removeAxesCaps() {
 
 export function addAxisCapsX(min=(-scale), max=scale) {
 
-  if (settings.axes.xAxis) {
+  if (settings.axes.axesCaps && settings.axes.xAxis) {
 
     let minCapX = newSphere(radius, segments, segments, [min, 0, 0], "basic", red)
     let maxCapX = newSphere(radius, segments, segments, [max, 0, 0], "basic", green)
@@ -89,11 +89,11 @@ export function addAxisCapsX(min=(-scale), max=scale) {
     minCapX.name = "min-cap-x"
     maxCapX.name = "max-cap-x"
 
-    axes.push(minCapX, maxCapX)
-    scene.add(minCapX, maxCapX)
-
     addAxisCapEvents(minCapX)
     addAxisCapEvents(maxCapX)
+
+    axes.push(minCapX, maxCapX)
+    scene.add(minCapX, maxCapX)
 
   }
 
@@ -141,7 +141,7 @@ export function removeAxisX() {
 
 export function addAxisCapsY(min=(-scale), max=scale) {
 
-  if (settings.axes.yAxis) {
+  if (settings.axes.axesCaps && settings.axes.yAxis) {
 
     let minCapY = newSphere(radius, segments, segments, [0, min, 0], "basic", red)
     let maxCapY = newSphere(radius, segments, segments, [0, max, 0], "basic", green)
@@ -149,11 +149,11 @@ export function addAxisCapsY(min=(-scale), max=scale) {
     minCapY.name = "min-cap-y"
     maxCapY.name = "max-cap-y"
 
-    axes.push(minCapY, maxCapY)
-    scene.add(minCapY, maxCapY)
-
     addAxisCapEvents(minCapY)
     addAxisCapEvents(maxCapY)
+
+    axes.push(minCapY, maxCapY)
+    scene.add(minCapY, maxCapY)
 
   }
 
@@ -201,7 +201,7 @@ export function removeAxisY() {
 
 export function addAxisCapsZ(min=(-scale), max=scale) {
 
-  if (settings.axes.zAxis) {
+  if (settings.axes.axesCaps && settings.axes.zAxis) {
 
     let minCapZ = newSphere(radius, segments, segments, [0, 0, min], "basic", red)
     let maxCapZ = newSphere(radius, segments, segments, [0, 0, max], "basic", green)
@@ -209,11 +209,11 @@ export function addAxisCapsZ(min=(-scale), max=scale) {
     minCapZ.name = "min-cap-z"
     maxCapZ.name = "max-cap-z"
 
-    axes.push(minCapZ, maxCapZ)
-    scene.add(minCapZ, maxCapZ)
-
     addAxisCapEvents(minCapZ)
     addAxisCapEvents(maxCapZ)
+
+    axes.push(minCapZ, maxCapZ)
+    scene.add(minCapZ, maxCapZ)
 
   }
 
