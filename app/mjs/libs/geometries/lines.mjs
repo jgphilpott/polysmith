@@ -23,6 +23,7 @@ export function newLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basi
   let line = new THREE.Line(lineGeometry(vertices), lineMaterial(material, color, linewidth, dashed, dashSize, gapSize)).computeLineDistances()
 
   line.class = "line"
+  line.name = "Line"
 
   return line
 

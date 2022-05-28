@@ -24,6 +24,7 @@ export function newLine2(vertices=[[10, 10, 10], [-10, -10, -10]], material="fat
   let line = new LineMesh(lineGeometry(vertices), lineMaterial(material, color, linewidth, dashed, dashSize, gapSize)).computeLineDistances()
 
   line.class = "line"
+  line.name = "Fat Line"
 
   return line
 

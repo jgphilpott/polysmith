@@ -10,7 +10,9 @@ export function newBox(length=10, width=10, height=10, position=[0, 0, 0], mater
   let box = new THREE.Mesh(geometry, meshMaterial(material, color))
 
   box.position.set(position[0], position[1], position[2])
+
   box.class = "box"
+  box.name = "Box"
 
   return box
 

@@ -11,7 +11,9 @@ export function newCone(radius=5, height=10, radialSegments=42, position=[0, 0, 
 
   cone.position.set(position[0], position[1], position[2])
   cone.rotation.x = degree2radian(90)
+
   cone.class = "cone"
+  cone.name = "Cone"
 
   return cone
 

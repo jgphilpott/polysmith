@@ -15,6 +15,7 @@ export function newTriangle(v1=[0, 0, 10 * Math.sqrt(3) / 4], v2=[0, 5, -10 * Ma
   let triangle = new THREE.Mesh(geometry, meshMaterial(material, color))
 
   triangle.class = "triangle"
+  triangle.name = "Triangle"
 
   return triangle
 

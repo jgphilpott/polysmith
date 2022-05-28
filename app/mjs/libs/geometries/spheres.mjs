@@ -10,7 +10,9 @@ export function newSphere(radius=5, widthSegments=42, heightSegments=42, positio
   let sphere = new THREE.Mesh(geometry, meshMaterial(material, color))
 
   sphere.position.set(position[0], position[1], position[2])
+
   sphere.class = "sphere"
+  sphere.name = "Sphere"
 
   return sphere
 

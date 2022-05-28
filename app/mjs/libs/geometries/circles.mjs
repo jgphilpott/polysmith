@@ -10,7 +10,9 @@ export function newCircle(radius=10, radialSegments=42, position=[0, 0, 0], mate
   let circle = new THREE.Mesh(geometry, meshMaterial(material, color))
 
   circle.position.set(position[0], position[1], position[2])
+
   circle.class = "circle"
+  circle.name = "Circle"
 
   return circle
 

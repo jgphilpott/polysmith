@@ -24,6 +24,7 @@ export function newTube(vertices=[[10, 10, 10], [-10, -10, -10]], radius=1, radi
   let tube = new THREE.Mesh(geometry, meshMaterial(material, color))
 
   tube.class = "tube"
+  tube.name = "Tube"
 
   return tube
 

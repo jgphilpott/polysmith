@@ -11,7 +11,9 @@ export function newTorus(radius=5, thickness=1, radialSegments=42, tubularSegmen
 
   torus.position.set(position[0], position[1], position[2])
   torus.rotation.y = degree2radian(90)
+
   torus.class = "torus"
+  torus.name = "Torus"
 
   return torus
 

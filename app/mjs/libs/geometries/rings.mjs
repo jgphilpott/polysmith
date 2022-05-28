@@ -10,7 +10,9 @@ export function newRing(innerRadius=5, outerRadius=10, radialSegments=42, positi
   let ring = new THREE.Mesh(geometry, meshMaterial(material, color))
 
   ring.position.set(position[0], position[1], position[2])
+
   ring.class = "ring"
+  ring.name = "Ring"
 
   return ring
 

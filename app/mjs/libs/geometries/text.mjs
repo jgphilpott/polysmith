@@ -33,6 +33,7 @@ export function newText(text="", size=12, height=3, bevel=false, font="ubuntu", 
   textMesh.position.set(x, y, z)
 
   textMesh.class = "text"
+  textMesh.name = "Text"
 
   return textMesh
 
