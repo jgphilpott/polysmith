@@ -15,9 +15,9 @@ export function addAxes(min=(-scale), max=scale) {
 
   if (settings.axes.axesCaps) addAxesCaps(min, max)
 
-  if (settings.axes.xyPlane||true) addPlaneXY(min, max)
-  if (settings.axes.xzPlane||true) addPlaneXZ(min, max)
-  if (settings.axes.yzPlane||true) addPlaneYZ(min, max)
+  if (settings.axes.xyPlane) addPlaneXY(min, max)
+  if (settings.axes.xzPlane) addPlaneXZ(min, max)
+  if (settings.axes.yzPlane) addPlaneYZ(min, max)
 
   if (settings.axes.xAxis) addAxisX(min, max)
   if (settings.axes.yAxis) addAxisY(min, max)
