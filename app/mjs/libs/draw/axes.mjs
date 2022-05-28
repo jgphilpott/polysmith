@@ -27,6 +27,18 @@ export function addAxes(min=(-scale), max=scale) {
 
 }
 
+export function removeAxes() {
+
+  axes.forEach(axis => {
+
+    if (axis.type == "Mesh") removeAxisCapEvents(axis)
+
+    scene.remove(axis)
+
+  })
+
+}
+
 export function addAxesCaps(min=(-scale), max=scale) {
 
   if (settings.axes.xAxis || settings.axes.yAxis || settings.axes.zAxis) {
@@ -46,6 +58,8 @@ export function addAxesCaps(min=(-scale), max=scale) {
 
 }
 
+export function removeAxesCaps() {}
+
 export function addAxisCapsX(min=(-scale), max=scale) {
 
   let minCapX = newSphere(radius, segments, segments, [min, 0, 0], "basic", red)
@@ -59,6 +73,8 @@ export function addAxisCapsX(min=(-scale), max=scale) {
 
 }
 
+export function removeAxisCapsX() {}
+
 export function addAxisX(min=(-scale), max=scale) {
 
   let axisX = newLine2([[min, 0, 0], [max, 0, 0]], "fat", red, 3)
@@ -67,6 +83,8 @@ export function addAxisX(min=(-scale), max=scale) {
   scene.add(axisX)
 
 }
+
+export function removeAxisX() {}
 
 export function addAxisCapsY(min=(-scale), max=scale) {
 
@@ -81,6 +99,8 @@ export function addAxisCapsY(min=(-scale), max=scale) {
 
 }
 
+export function removeAxisCapsY() {}
+
 export function addAxisY(min=(-scale), max=scale) {
 
   let axisY = newLine2([[0, min, 0], [0, max, 0]], "fat", green, 3)
@@ -89,6 +109,8 @@ export function addAxisY(min=(-scale), max=scale) {
   scene.add(axisY)
 
 }
+
+export function removeAxisY() {}
 
 export function addAxisCapsZ(min=(-scale), max=scale) {
 
@@ -103,6 +125,8 @@ export function addAxisCapsZ(min=(-scale), max=scale) {
 
 }
 
+export function removeAxisCapsZ() {}
+
 export function addAxisZ(min=(-scale), max=scale) {
 
   let axisZ = newLine2([[0, 0, min], [0, 0, max]], "fat", blue, 3)
@@ -111,6 +135,8 @@ export function addAxisZ(min=(-scale), max=scale) {
   scene.add(axisZ)
 
 }
+
+export function removeAxisZ() {}
 
 export function addPlaneXY(min=(-scale), max=scale) {
 
@@ -137,6 +163,8 @@ export function addPlaneXY(min=(-scale), max=scale) {
 
 }
 
+export function removePlaneXY() {}
+
 export function addPlaneXZ(min=(-scale), max=scale) {
 
   let setp = settings.axes.xzPlaneStep
@@ -161,6 +189,8 @@ export function addPlaneXZ(min=(-scale), max=scale) {
   scene.add(xTick, zTick)
 
 }
+
+export function removePlaneXZ() {}
 
 export function addPlaneYZ(min=(-scale), max=scale) {
 
@@ -187,28 +217,7 @@ export function addPlaneYZ(min=(-scale), max=scale) {
 
 }
 
-export function removeAxes() {
-
-  for (let i = 0; i < axes.length; i++) {
-
-    if (axes[i].type == "Mesh") {
-
-      events.removeEventListener(axes[i], "mousemove")
-      events.removeEventListener(axes[i], "mouseout")
-
-      events.removeEventListener(axes[i], "mousedown")
-      events.removeEventListener(axes[i], "mouseup")
-
-      events.removeEventListener(axes[i], "dblclick")
-      events.removeEventListener(axes[i], "contextmenu")
-
-    }
-
-    scene.remove(axes[i])
-
-  }
-
-}
+export function removePlaneYZ() {}
 
 function addAxisCapEvents(cap) {
 
@@ -220,5 +229,18 @@ function addAxisCapEvents(cap) {
 
   events.addEventListener(cap, "dblclick", function(event) { if (focus(event.target.position)) $("#canvas").css("cursor", "") })
   events.addEventListener(cap, "contextmenu", function(event) { contextMenu("axisCap", cap, event.origDomEvent) })
+
+}
+
+function removeAxisCapEvents(cap) {
+
+  events.removeEventListener(cap, "mousemove")
+  events.removeEventListener(cap, "mouseout")
+
+  events.removeEventListener(cap, "mousedown")
+  events.removeEventListener(cap, "mouseup")
+
+  events.removeEventListener(cap, "dblclick")
+  events.removeEventListener(cap, "contextmenu")
 
 }
