@@ -187,17 +187,6 @@ export function addPlaneYZ(min=(-scale), max=scale) {
 
 }
 
-function addAxisCapEvents(mesh) {
-
-  events.addEventListener(mesh, "mousemove", function(event) { if (!events.operation.key) $("#canvas").css("cursor", "pointer") })
-  events.addEventListener(mesh, "mouseout", function(event) { if (!events.operation.key) $("#canvas").css("cursor", "") })
-
-  events.addEventListener(mesh, "mousedown", function(event) { event.stopPropagation() })
-  events.addEventListener(mesh, "dblclick", function(event) { if (focus(event.target.position)) $("#canvas").css("cursor", "") })
-  events.addEventListener(mesh, "contextmenu", function(event) { contextMenu("axisCap", mesh, event.origDomEvent) })
-
-}
-
 export function removeAxes() {
 
   for (let i = 0; i < axes.length; i++) {
@@ -208,6 +197,8 @@ export function removeAxes() {
       events.removeEventListener(axes[i], "mouseout")
 
       events.removeEventListener(axes[i], "mousedown")
+      events.removeEventListener(axes[i], "mouseup")
+
       events.removeEventListener(axes[i], "dblclick")
       events.removeEventListener(axes[i], "contextmenu")
 
@@ -216,5 +207,18 @@ export function removeAxes() {
     scene.remove(axes[i])
 
   }
+
+}
+
+function addAxisCapEvents(cap) {
+
+  events.addEventListener(cap, "mousemove", function(event) { if (!events.operation.key) $("#canvas").css("cursor", "pointer") })
+  events.addEventListener(cap, "mouseout", function(event) { if (!events.operation.key) $("#canvas").css("cursor", "") })
+
+  events.addEventListener(cap, "mousedown", function(event) { event.stopPropagation() })
+  events.addEventListener(cap, "mouseup", function(event) { event.stopPropagation() })
+
+  events.addEventListener(cap, "dblclick", function(event) { if (focus(event.target.position)) $("#canvas").css("cursor", "") })
+  events.addEventListener(cap, "contextmenu", function(event) { contextMenu("axisCap", cap, event.origDomEvent) })
 
 }
