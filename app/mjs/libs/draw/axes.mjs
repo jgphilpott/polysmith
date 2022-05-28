@@ -31,7 +31,7 @@ export function removeAxes() {
 
   axes.forEach(axis => {
 
-    if (axis.type == "Mesh") removeAxisCapEvents(axis)
+    if (axis.name.includes("cap")) removeAxisCapEvents(axis)
 
     scene.remove(axis)
 
@@ -44,6 +44,8 @@ export function addAxesCaps(min=(-scale), max=scale) {
   if (settings.axes.xAxis || settings.axes.yAxis || settings.axes.zAxis) {
 
     let centroid = newSphere(radius, segments, segments, [0, 0, 0], "basic", black)
+
+    centroid.name = "centroid-cap"
 
     addAxisCapEvents(centroid)
 
@@ -62,14 +64,21 @@ export function removeAxesCaps() {}
 
 export function addAxisCapsX(min=(-scale), max=scale) {
 
-  let minCapX = newSphere(radius, segments, segments, [min, 0, 0], "basic", red)
-  let maxCapX = newSphere(radius, segments, segments, [max, 0, 0], "basic", green)
+  if (settings.axes.xAxis) {
 
-  axes.push(minCapX, maxCapX)
-  scene.add(minCapX, maxCapX)
+    let minCapX = newSphere(radius, segments, segments, [min, 0, 0], "basic", red)
+    let maxCapX = newSphere(radius, segments, segments, [max, 0, 0], "basic", green)
 
-  addAxisCapEvents(minCapX)
-  addAxisCapEvents(maxCapX)
+    minCapX.name = "min-cap-x"
+    maxCapX.name = "max-cap-x"
+
+    axes.push(minCapX, maxCapX)
+    scene.add(minCapX, maxCapX)
+
+    addAxisCapEvents(minCapX)
+    addAxisCapEvents(maxCapX)
+
+  }
 
 }
 
@@ -88,14 +97,21 @@ export function removeAxisX() {}
 
 export function addAxisCapsY(min=(-scale), max=scale) {
 
-  let minCapY = newSphere(radius, segments, segments, [0, min, 0], "basic", red)
-  let maxCapY = newSphere(radius, segments, segments, [0, max, 0], "basic", green)
+  if (settings.axes.yAxis) {
 
-  axes.push(minCapY, maxCapY)
-  scene.add(minCapY, maxCapY)
+    let minCapY = newSphere(radius, segments, segments, [0, min, 0], "basic", red)
+    let maxCapY = newSphere(radius, segments, segments, [0, max, 0], "basic", green)
 
-  addAxisCapEvents(minCapY)
-  addAxisCapEvents(maxCapY)
+    minCapY.name = "min-cap-y"
+    maxCapY.name = "max-cap-y"
+
+    axes.push(minCapY, maxCapY)
+    scene.add(minCapY, maxCapY)
+
+    addAxisCapEvents(minCapY)
+    addAxisCapEvents(maxCapY)
+
+  }
 
 }
 
@@ -114,14 +130,21 @@ export function removeAxisY() {}
 
 export function addAxisCapsZ(min=(-scale), max=scale) {
 
-  let minCapZ = newSphere(radius, segments, segments, [0, 0, min], "basic", red)
-  let maxCapZ = newSphere(radius, segments, segments, [0, 0, max], "basic", green)
+  if (settings.axes.zAxis) {
 
-  axes.push(minCapZ, maxCapZ)
-  scene.add(minCapZ, maxCapZ)
+    let minCapZ = newSphere(radius, segments, segments, [0, 0, min], "basic", red)
+    let maxCapZ = newSphere(radius, segments, segments, [0, 0, max], "basic", green)
 
-  addAxisCapEvents(minCapZ)
-  addAxisCapEvents(maxCapZ)
+    minCapZ.name = "min-cap-z"
+    maxCapZ.name = "max-cap-z"
+
+    axes.push(minCapZ, maxCapZ)
+    scene.add(minCapZ, maxCapZ)
+
+    addAxisCapEvents(minCapZ)
+    addAxisCapEvents(maxCapZ)
+
+  }
 
 }
 
