@@ -15,9 +15,9 @@ export function addAxes(min=(-scale), max=scale) {
 
   if (settings.axes.axesCaps) addAxesCaps(min, max)
 
-  if (settings.axes.xyPlane) addPlaneXY(min, max)
-  if (settings.axes.xzPlane) addPlaneXZ(min, max)
-  if (settings.axes.yzPlane) addPlaneYZ(min, max)
+  if (settings.axes.xyPlane||true) addPlaneXY(min, max)
+  if (settings.axes.xzPlane||true) addPlaneXZ(min, max)
+  if (settings.axes.yzPlane||true) addPlaneYZ(min, max)
 
   if (settings.axes.xAxis) addAxisX(min, max)
   if (settings.axes.yAxis) addAxisY(min, max)
@@ -261,26 +261,37 @@ export function removeAxisZ() {
 
 export function addPlaneXY(min=(-scale), max=scale) {
 
-  let setp = settings.axes.xyPlaneStep
+  if (settings.axes.xyPlane) {
 
-  let xTick = newLine([[max, 0, 0], [min, 0, 0]], "basic", black)
-  let yTick = newLine([[0, max, 0], [0, min, 0]], "basic", black)
+      let setp = settings.axes.xyPlaneStep
 
-  for (let i = setp; i < max; i += setp) {
+      for (let i = setp; i < max; i += setp) {
 
-    let xTickPositive = newLine([[max, i, 0], [min, i, 0]], "basic", black)
-    let xTickNegative = newLine([[max, -i, 0], [min, -i, 0]], "basic", black)
+        let xTickPositive = newLine([[max, i, 0], [min, i, 0]], "basic", black)
+        let xTickNegative = newLine([[max, -i, 0], [min, -i, 0]], "basic", black)
+        let yTickPositive = newLine([[i, max, 0], [i, min, 0]], "basic", black)
+        let yTickNegative = newLine([[-i, max, 0], [-i, min, 0]], "basic", black)
 
-    let yTickPositive = newLine([[i, max, 0], [i, min, 0]], "basic", black)
-    let yTickNegative = newLine([[-i, max, 0], [-i, min, 0]], "basic", black)
+        xTickPositive.name = "plane-xy-x-+-" + setp + ""
+        xTickNegative.name = "plane-xy-x---" + setp + ""
+        yTickPositive.name = "plane-xy-y-+-" + setp + ""
+        yTickNegative.name = "plane-xy-y---" + setp + ""
 
-    axes.push(xTickPositive, xTickNegative, yTickPositive, yTickNegative)
-    scene.add(xTickPositive, xTickNegative, yTickPositive, yTickNegative)
+        axes.push(xTickPositive, xTickNegative, yTickPositive, yTickNegative)
+        scene.add(xTickPositive, xTickNegative, yTickPositive, yTickNegative)
+
+      }
+
+      let xTick = newLine([[max, 0, 0], [min, 0, 0]], "basic", black)
+      let yTick = newLine([[0, max, 0], [0, min, 0]], "basic", black)
+
+      xTick.name = "plane-xy-x-0"
+      yTick.name = "plane-xy-y-0"
+
+      axes.push(xTick, yTick)
+      scene.add(xTick, yTick)
 
   }
-
-  axes.push(xTick, yTick)
-  scene.add(xTick, yTick)
 
 }
 
@@ -288,26 +299,37 @@ export function removePlaneXY() {}
 
 export function addPlaneXZ(min=(-scale), max=scale) {
 
-  let setp = settings.axes.xzPlaneStep
+  if (settings.axes.xzPlane) {
 
-  let xTick = newLine([[max, 0, 0], [min, 0, 0]], "basic", black)
-  let zTick = newLine([[0, 0, max], [0, 0, min]], "basic", black)
+    let setp = settings.axes.xzPlaneStep
 
-  for (let i = setp; i < max; i += setp) {
+    for (let i = setp; i < max; i += setp) {
 
-    let xTickPositive = newLine([[max, 0, i], [min, 0, i]], "basic", black)
-    let xTickNegative = newLine([[max, 0, -i], [min, 0, -i]], "basic", black)
+      let xTickPositive = newLine([[max, 0, i], [min, 0, i]], "basic", black)
+      let xTickNegative = newLine([[max, 0, -i], [min, 0, -i]], "basic", black)
+      let zTickPositive = newLine([[i, 0, max], [i, 0, min]], "basic", black)
+      let zTickNegative = newLine([[-i, 0, max], [-i, 0, min]], "basic", black)
 
-    let zTickPositive = newLine([[i, 0, max], [i, 0, min]], "basic", black)
-    let zTickNegative = newLine([[-i, 0, max], [-i, 0, min]], "basic", black)
+      xTickPositive.name = "plane-xz-x-+-" + setp + ""
+      xTickNegative.name = "plane-xz-x---" + setp + ""
+      yTickPositive.name = "plane-xz-y-+-" + setp + ""
+      yTickNegative.name = "plane-xz-y---" + setp + ""
 
-    axes.push(xTickPositive, xTickNegative, zTickPositive, zTickNegative)
-    scene.add(xTickPositive, xTickNegative, zTickPositive, zTickNegative)
+      axes.push(xTickPositive, xTickNegative, zTickPositive, zTickNegative)
+      scene.add(xTickPositive, xTickNegative, zTickPositive, zTickNegative)
+
+    }
+
+    let xTick = newLine([[max, 0, 0], [min, 0, 0]], "basic", black)
+    let zTick = newLine([[0, 0, max], [0, 0, min]], "basic", black)
+
+    xTick.name = "plane-xz-x-0"
+    yTick.name = "plane-xz-y-0"
+
+    axes.push(xTick, zTick)
+    scene.add(xTick, zTick)
 
   }
-
-  axes.push(xTick, zTick)
-  scene.add(xTick, zTick)
 
 }
 
@@ -315,26 +337,37 @@ export function removePlaneXZ() {}
 
 export function addPlaneYZ(min=(-scale), max=scale) {
 
-  let setp = settings.axes.yzPlaneStep
+  if (settings.axes.yzPlane) {
 
-  let yTick = newLine([[0, max, 0], [0, min, 0]], "basic", black)
-  let zTick = newLine([[0, 0, max], [0, 0, min]], "basic", black)
+    let setp = settings.axes.yzPlaneStep
 
-  for (let i = setp; i < max; i += setp) {
+    for (let i = setp; i < max; i += setp) {
 
-    let yTickPositive = newLine([[0, max, i], [0, min, i]], "basic", black)
-    let yTickNegative = newLine([[0, max, -i], [0, min, -i]], "basic", black)
+      let yTickPositive = newLine([[0, max, i], [0, min, i]], "basic", black)
+      let yTickNegative = newLine([[0, max, -i], [0, min, -i]], "basic", black)
+      let zTickPositive = newLine([[0, i, max], [0, i, min]], "basic", black)
+      let zTickNegative = newLine([[0, -i, max], [0, -i, min]], "basic", black)
 
-    let zTickPositive = newLine([[0, i, max], [0, i, min]], "basic", black)
-    let zTickNegative = newLine([[0, -i, max], [0, -i, min]], "basic", black)
+      xTickPositive.name = "plane-yz-x-+-" + setp + ""
+      xTickNegative.name = "plane-yz-x---" + setp + ""
+      yTickPositive.name = "plane-yz-y-+-" + setp + ""
+      yTickNegative.name = "plane-yz-y---" + setp + ""
 
-    axes.push(yTickPositive, yTickNegative, zTickPositive, zTickNegative)
-    scene.add(yTickPositive, yTickNegative, zTickPositive, zTickNegative)
+      axes.push(yTickPositive, yTickNegative, zTickPositive, zTickNegative)
+      scene.add(yTickPositive, yTickNegative, zTickPositive, zTickNegative)
+
+    }
+
+    let yTick = newLine([[0, max, 0], [0, min, 0]], "basic", black)
+    let zTick = newLine([[0, 0, max], [0, 0, min]], "basic", black)
+
+    xTick.name = "plane-yz-x-0"
+    yTick.name = "plane-yz-y-0"
+
+    axes.push(yTick, zTick)
+    scene.add(yTick, zTick)
 
   }
-
-  axes.push(yTick, zTick)
-  scene.add(yTick, zTick)
 
 }
 
