@@ -8,69 +8,107 @@ import {newSphere} from "../geometries/spheres.mjs"
 import {black, white} from "../colors/three/grayscale.js"
 import {red, orange, yellow, green, blue, purple, pink} from "../colors/three/rainbow.js"
 
-let radius = scale / 100
-let segments = 25
+const radius = scale / 100
+const segments = 25
 
-export function addAxes() {
+export function addAxes(min=(-scale), max=scale) {
 
-  let centroid = newSphere(radius, segments, segments, [0, 0, 0], "basic", black)
+  if (settings.axes.axesCaps) addAxesCaps(min, max)
 
-  axes.push(centroid)
-  scene.add(centroid)
+  if (settings.axes.xyPlane) addPlaneXY(min, max)
+  if (settings.axes.xzPlane) addPlaneXZ(min, max)
+  if (settings.axes.yzPlane) addPlaneYZ(min, max)
 
-  addAxesEvents(centroid)
-
-  addAxisX()
-  addAxisY()
-  addAxisZ()
-
-  if (settings.axes.xyPlane) addPlaneXY()
-  if (settings.axes.xzPlane) addPlaneXZ()
-  if (settings.axes.yzPlane) addPlaneYZ()
+  if (settings.axes.xAxis) addAxisX(min, max)
+  if (settings.axes.yAxis) addAxisY(min, max)
+  if (settings.axes.zAxis) addAxisZ(min, max)
 
   return axes
 
 }
 
+export function addAxesCaps(min=(-scale), max=scale) {
+
+  if (settings.axes.xAxis || settings.axes.yAxis || settings.axes.zAxis) {
+
+    let centroid = newSphere(radius, segments, segments, [0, 0, 0], "basic", black)
+
+    addAxisCapEvents(centroid)
+
+    axes.push(centroid)
+    scene.add(centroid)
+
+  }
+
+  if (settings.axes.xAxis) addAxisCapsX(min, max)
+  if (settings.axes.yAxis) addAxisCapsY(min, max)
+  if (settings.axes.zAxis) addAxisCapsZ(min, max)
+
+}
+
+export function addAxisCapsX(min=(-scale), max=scale) {
+
+  let minCapX = newSphere(radius, segments, segments, [min, 0, 0], "basic", red)
+  let maxCapX = newSphere(radius, segments, segments, [max, 0, 0], "basic", green)
+
+  axes.push(minCapX, maxCapX)
+  scene.add(minCapX, maxCapX)
+
+  addAxisCapEvents(minCapX)
+  addAxisCapEvents(maxCapX)
+
+}
+
 export function addAxisX(min=(-scale), max=scale) {
 
-  let maxCap = newSphere(radius, segments, segments, [max, 0, 0], "basic", green)
-  let minCap = newSphere(radius, segments, segments, [min, 0, 0], "basic", red)
-  let axis = newLine2([[max, 0, 0], [min, 0, 0]], "fat", red, 3)
+  let axisX = newLine2([[min, 0, 0], [max, 0, 0]], "fat", red, 3)
 
-  axes.push(maxCap, minCap, axis)
-  scene.add(maxCap, minCap, axis)
+  axes.push(axisX)
+  scene.add(axisX)
 
-  addAxesEvents(maxCap)
-  addAxesEvents(minCap)
+}
+
+export function addAxisCapsY(min=(-scale), max=scale) {
+
+  let minCapY = newSphere(radius, segments, segments, [0, min, 0], "basic", red)
+  let maxCapY = newSphere(radius, segments, segments, [0, max, 0], "basic", green)
+
+  axes.push(minCapY, maxCapY)
+  scene.add(minCapY, maxCapY)
+
+  addAxisCapEvents(minCapY)
+  addAxisCapEvents(maxCapY)
 
 }
 
 export function addAxisY(min=(-scale), max=scale) {
 
-  let maxCap = newSphere(radius, segments, segments, [0, max, 0], "basic", green)
-  let minCap = newSphere(radius, segments, segments, [0, min, 0], "basic", red)
-  let axis = newLine2([[0, max, 0], [0, min, 0]], "fat", green, 3)
+  let axisY = newLine2([[0, min, 0], [0, max, 0]], "fat", green, 3)
 
-  axes.push(maxCap, minCap, axis)
-  scene.add(maxCap, minCap, axis)
+  axes.push(axisY)
+  scene.add(axisY)
 
-  addAxesEvents(maxCap)
-  addAxesEvents(minCap)
+}
+
+export function addAxisCapsZ(min=(-scale), max=scale) {
+
+  let minCapZ = newSphere(radius, segments, segments, [0, 0, min], "basic", red)
+  let maxCapZ = newSphere(radius, segments, segments, [0, 0, max], "basic", green)
+
+  axes.push(minCapZ, maxCapZ)
+  scene.add(minCapZ, maxCapZ)
+
+  addAxisCapEvents(minCapZ)
+  addAxisCapEvents(maxCapZ)
 
 }
 
 export function addAxisZ(min=(-scale), max=scale) {
 
-  let maxCap = newSphere(radius, segments, segments, [0, 0, max], "basic", green)
-  let minCap = newSphere(radius, segments, segments, [0, 0, min], "basic", red)
-  let axis = newLine2([[0, 0, max], [0, 0, min]], "fat", blue, 3)
+  let axisZ = newLine2([[0, 0, min], [0, 0, max]], "fat", blue, 3)
 
-  axes.push(maxCap, minCap, axis)
-  scene.add(maxCap, minCap, axis)
-
-  addAxesEvents(maxCap)
-  addAxesEvents(minCap)
+  axes.push(axisZ)
+  scene.add(axisZ)
 
 }
 
@@ -149,7 +187,7 @@ export function addPlaneYZ(min=(-scale), max=scale) {
 
 }
 
-function addAxesEvents(mesh) {
+function addAxisCapEvents(mesh) {
 
   events.addEventListener(mesh, "mousemove", function(event) { if (!events.operation.key) $("#canvas").css("cursor", "pointer") })
   events.addEventListener(mesh, "mouseout", function(event) { if (!events.operation.key) $("#canvas").css("cursor", "") })

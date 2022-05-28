@@ -33,6 +33,9 @@ getSettings = () ->
             axes:
 
                 axesCaps: true
+                xAxis: true
+                yAxis: true
+                zAxis: true
                 xyPlane: false
                 xzPlane: false
                 yzPlane: false

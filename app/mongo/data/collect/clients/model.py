@@ -32,6 +32,9 @@ class Client():
                                 },
                                 "axes": {
                                     "axesCaps": True,
+                                    "xAxis": True,
+                                    "yAxis": True,
+                                    "zAxis": True,
                                     "xyPlane": False,
                                     "xzPlane": False,
                                     "yzPlane": False,
