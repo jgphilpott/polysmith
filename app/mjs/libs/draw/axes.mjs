@@ -60,7 +60,20 @@ export function addAxesCaps(min=(-scale), max=scale) {
 
 }
 
-export function removeAxesCaps() {}
+export function removeAxesCaps() {
+
+  axes.forEach(axis => {
+
+    if (axis.name.includes("cap")) {
+
+      removeAxisCapEvents(axis)
+      scene.remove(axis)
+
+    }
+
+  })
+
+}
 
 export function addAxisCapsX(min=(-scale), max=scale) {
 
@@ -82,7 +95,20 @@ export function addAxisCapsX(min=(-scale), max=scale) {
 
 }
 
-export function removeAxisCapsX() {}
+export function removeAxisCapsX() {
+
+  axes.forEach(axis => {
+
+    if (axis.name.includes("cap") && axis.name.includes("-x")) {
+
+      removeAxisCapEvents(axis)
+      scene.remove(axis)
+
+    }
+
+  })
+
+}
 
 export function addAxisX(min=(-scale), max=scale) {
 
@@ -115,7 +141,20 @@ export function addAxisCapsY(min=(-scale), max=scale) {
 
 }
 
-export function removeAxisCapsY() {}
+export function removeAxisCapsY() {
+
+  axes.forEach(axis => {
+
+    if (axis.name.includes("cap") && axis.name.includes("-y")) {
+
+      removeAxisCapEvents(axis)
+      scene.remove(axis)
+
+    }
+
+  })
+
+}
 
 export function addAxisY(min=(-scale), max=scale) {
 
@@ -148,7 +187,20 @@ export function addAxisCapsZ(min=(-scale), max=scale) {
 
 }
 
-export function removeAxisCapsZ() {}
+export function removeAxisCapsZ() {
+
+  axes.forEach(axis => {
+
+    if (axis.name.includes("cap") && axis.name.includes("-z")) {
+
+      removeAxisCapEvents(axis)
+      scene.remove(axis)
+
+    }
+
+  })
+
+}
 
 export function addAxisZ(min=(-scale), max=scale) {
 
