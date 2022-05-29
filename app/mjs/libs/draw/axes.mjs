@@ -29,13 +29,14 @@ export function addAxes(min=(-scale), max=scale) {
 
 export function removeAxes() {
 
-  axes.forEach(axis => {
+  for (let i = axes.length - 1; i >= 0; i--) {
 
-    if (axis.name.includes("cap")) removeAxisCapEvents(axis)
+    if (axes[i].name.includes("cap")) removeAxisCapEvents(axes[i])
 
-    scene.remove(axis)
+    scene.remove(axes[i])
+    axes.splice(i, 1)
 
-  })
+  }
 
 }
 
@@ -66,16 +67,18 @@ export function addAxesCaps(min=(-scale), max=scale) {
 
 export function removeAxesCaps() {
 
-  axes.forEach(axis => {
+  for (let i = axes.length - 1; i >= 0; i--) {
 
-    if (axis.name.includes("cap")) {
+    if (axes[i].name.includes("cap")) {
 
-      removeAxisCapEvents(axis)
-      scene.remove(axis)
+      removeAxisCapEvents(axes[i])
+
+      scene.remove(axes[i])
+      axes.splice(i, 1)
 
     }
 
-  })
+  }
 
 }
 
@@ -101,16 +104,18 @@ export function addAxisCapsX(min=(-scale), max=scale) {
 
 export function removeAxisCapsX() {
 
-  axes.forEach(axis => {
+  for (let i = axes.length - 1; i >= 0; i--) {
 
-    if (axis.name.includes("cap") && axis.name.includes("-x")) {
+    if (axes[i].name.includes("cap") && axes[i].name.includes("-x")) {
 
-      removeAxisCapEvents(axis)
-      scene.remove(axis)
+      removeAxisCapEvents(axes[i])
+
+      scene.remove(axes[i])
+      axes.splice(i, 1)
 
     }
 
-  })
+  }
 
 }
 
@@ -131,11 +136,16 @@ export function addAxisX(min=(-scale), max=scale) {
 
 export function removeAxisX() {
 
-  axes.forEach(axis => {
+  for (let i = axes.length - 1; i >= 0; i--) {
 
-    if (axis.name.includes("axis") && axis.name.includes("-x")) scene.remove(axis)
+    if (axes[i].name.includes("axis") && axes[i].name.includes("-x")) {
 
-  })
+      scene.remove(axes[i])
+      axes.splice(i, 1)
+
+    }
+
+  }
 
 }
 
@@ -161,16 +171,18 @@ export function addAxisCapsY(min=(-scale), max=scale) {
 
 export function removeAxisCapsY() {
 
-  axes.forEach(axis => {
+  for (let i = axes.length - 1; i >= 0; i--) {
 
-    if (axis.name.includes("cap") && axis.name.includes("-y")) {
+    if (axes[i].name.includes("cap") && axes[i].name.includes("-y")) {
 
-      removeAxisCapEvents(axis)
-      scene.remove(axis)
+      removeAxisCapEvents(axes[i])
+
+      scene.remove(axes[i])
+      axes.splice(i, 1)
 
     }
 
-  })
+  }
 
 }
 
@@ -191,11 +203,16 @@ export function addAxisY(min=(-scale), max=scale) {
 
 export function removeAxisY() {
 
-  axes.forEach(axis => {
+  for (let i = axes.length - 1; i >= 0; i--) {
 
-    if (axis.name.includes("axis") && axis.name.includes("-y")) scene.remove(axis)
+    if (axes[i].name.includes("axis") && axes[i].name.includes("-y")) {
 
-  })
+      scene.remove(axes[i])
+      axes.splice(i, 1)
+
+    }
+
+  }
 
 }
 
@@ -221,16 +238,18 @@ export function addAxisCapsZ(min=(-scale), max=scale) {
 
 export function removeAxisCapsZ() {
 
-  axes.forEach(axis => {
+  for (let i = axes.length - 1; i >= 0; i--) {
 
-    if (axis.name.includes("cap") && axis.name.includes("-z")) {
+    if (axes[i].name.includes("cap") && axes[i].name.includes("-z")) {
 
-      removeAxisCapEvents(axis)
-      scene.remove(axis)
+      removeAxisCapEvents(axes[i])
+
+      scene.remove(axes[i])
+      axes.splice(i, 1)
 
     }
 
-  })
+  }
 
 }
 
@@ -251,11 +270,16 @@ export function addAxisZ(min=(-scale), max=scale) {
 
 export function removeAxisZ() {
 
-  axes.forEach(axis => {
+  for (let i = axes.length - 1; i >= 0; i--) {
 
-    if (axis.name.includes("axis") && axis.name.includes("-z")) scene.remove(axis)
+    if (axes[i].name.includes("axis") && axes[i].name.includes("-z")) {
 
-  })
+      scene.remove(axes[i])
+      axes.splice(i, 1)
+
+    }
+
+  }
 
 }
 
@@ -297,11 +321,16 @@ export function addPlaneXY(min=(-scale), max=scale) {
 
 export function removePlaneXY() {
 
-  axes.forEach(axis => {
+  for (let i = axes.length - 1; i >= 0; i--) {
 
-    if (axis.name.includes("tick") && axis.name.includes("-xy-")) scene.remove(axis)
+    if (axes[i].name.includes("tick") && axes[i].name.includes("-xy-")) {
 
-  })
+      scene.remove(axes[i])
+      axes.splice(i, 1)
+
+    }
+
+  }
 
 }
 
@@ -343,11 +372,16 @@ export function addPlaneXZ(min=(-scale), max=scale) {
 
 export function removePlaneXZ() {
 
-  axes.forEach(axis => {
+  for (let i = axes.length - 1; i >= 0; i--) {
 
-    if (axis.name.includes("tick") && axis.name.includes("-xz-")) scene.remove(axis)
+    if (axes[i].name.includes("tick") && axes[i].name.includes("-xz-")) {
 
-  })
+      scene.remove(axes[i])
+      axes.splice(i, 1)
+
+    }
+
+  }
 
 }
 
@@ -389,11 +423,16 @@ export function addPlaneYZ(min=(-scale), max=scale) {
 
 export function removePlaneYZ() {
 
-  axes.forEach(axis => {
+  for (let i = axes.length - 1; i >= 0; i--) {
 
-    if (axis.name.includes("tick") && axis.name.includes("-yz-")) scene.remove(axis)
+    if (axes[i].name.includes("tick") && axes[i].name.includes("-yz-")) {
 
-  })
+      scene.remove(axes[i])
+      axes.splice(i, 1)
+
+    }
+
+  }
 
 }
 
