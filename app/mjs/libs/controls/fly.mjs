@@ -1,53 +1,35 @@
 export function addFlyControls() {
 
+  const satoshi = 0.000001
+  const panel = $("#camera.panel")
+
   $(document).keydown(function(event) {
 
     if ([37, 38, 39, 40, 65, 68, 83, 87].includes(event.keyCode)) {
 
+      let flySpeed = settings.controls.flySpeed / 10
       let position = camera.position
       let target = camera.target
 
       let deltaX = Math.abs(position.x - target.x)
-      let deltaY = Math.abs(position.y - target.y)
       let deltaZ = Math.abs(position.z - target.z)
-
-      let flySpeed = settings.controls.flySpeed / 10
 
       let radius3 = position.distanceTo(target)
       let radius2 = side4sides(deltaZ, null, radius3)
 
       let horizontalAngle = angle4sides(radius2, deltaX)
-      if (position.x < target.x) { horizontalAngle = 180 - horizontalAngle }
-      if (position.y < target.y) { horizontalAngle = -horizontalAngle }
+      if (position.x < target.x) horizontalAngle = 180 - horizontalAngle
+      if (position.y < target.y) horizontalAngle = - horizontalAngle
 
       let verticalAngle = angle4sides(radius3, deltaZ)
-      if (position.z < target.z) { verticalAngle = 180 - verticalAngle }
+      if (position.z < target.z) verticalAngle = 180 - verticalAngle
 
       if ([37, 38, 39, 40].includes(event.keyCode)) {
 
-        if (event.keyCode == 38) { // Up
+        if (event.keyCode == 38 || event.keyCode == 40) { // Up or Down
 
-          let inverter = -1
-          if (verticalAngle > 90) { verticalAngle = 180 - verticalAngle; inverter = -inverter }
-
-          let radius2 = side4angle(verticalAngle, flySpeed, true, null)
-
-          let stepX = side4angle(horizontalAngle, radius2, true, null) * inverter
-          let stepY = side4angle(horizontalAngle, radius2, null, true) * inverter
-          let stepZ = side4angle(verticalAngle, flySpeed, null, true)
-
-          position.x += stepX
-          position.y += stepY
-          position.z += stepZ
-
-          target.x += stepX
-          target.y += stepY
-          target.z += stepZ
-
-        } else if (event.keyCode == 40) { // Down
-
-          let inverter = -1
-          if (verticalAngle > 90) { verticalAngle = 180 - verticalAngle; inverter = -inverter }
+          let inverter = - 1
+          if (verticalAngle > 90) { verticalAngle = 180 - verticalAngle; inverter = - inverter }
 
           let radius2 = side4angle(verticalAngle, flySpeed, true, null)
 
@@ -55,51 +37,65 @@ export function addFlyControls() {
           let stepY = side4angle(horizontalAngle, radius2, null, true) * inverter
           let stepZ = side4angle(verticalAngle, flySpeed, null, true)
 
-          position.x -= stepX
-          position.y -= stepY
-          position.z -= stepZ
+          if (event.keyCode == 38) { // Up
 
-          target.x -= stepX
-          target.y -= stepY
-          target.z -= stepZ
+            position.x += stepX
+            position.y += stepY
+            position.z += stepZ
 
-        } else if (event.keyCode == 37) { // Left
+            target.x += stepX
+            target.y += stepY
+            target.z += stepZ
 
-          let newHorizontalAngle = horizontalAngle + 90
-          if (newHorizontalAngle >= 180) { newHorizontalAngle = newHorizontalAngle - 360 }
+          } else if (event.keyCode == 40) { // Down
 
-          let stepX = side4angle(newHorizontalAngle, flySpeed, true, null)
-          let stepY = side4angle(newHorizontalAngle, flySpeed, null, true)
+            position.x -= stepX
+            position.y -= stepY
+            position.z -= stepZ
 
-          position.x -= stepX
-          position.y -= stepY
+            target.x -= stepX
+            target.y -= stepY
+            target.z -= stepZ
 
-          target.x -= stepX
-          target.y -= stepY
-
-        } else if (event.keyCode == 39) { // Right
-
-          let newHorizontalAngle = horizontalAngle + 90
-          if (newHorizontalAngle >= 180) { newHorizontalAngle = newHorizontalAngle - 360 }
-
-          let stepX = side4angle(newHorizontalAngle, flySpeed, true, null)
-          let stepY = side4angle(newHorizontalAngle, flySpeed, null, true)
-
-          position.x += stepX
-          position.y += stepY
-
-          target.x += stepX
-          target.y += stepY
+          }
 
         }
 
-        $("#camera.panel #position-x input").val(position.x.toFixed(2))
-        $("#camera.panel #position-y input").val(position.y.toFixed(2))
-        $("#camera.panel #position-z input").val(position.z.toFixed(2))
+        if (event.keyCode == 37 || event.keyCode == 39) { // Left or Right
 
-        $("#camera.panel #target-x input").val(target.x.toFixed(2))
-        $("#camera.panel #target-y input").val(target.y.toFixed(2))
-        $("#camera.panel #target-z input").val(target.z.toFixed(2))
+          let newHorizontalAngle = horizontalAngle + 90
+          if (newHorizontalAngle >= 180) newHorizontalAngle = newHorizontalAngle - 360
+
+          let stepX = side4angle(newHorizontalAngle, flySpeed, true, null)
+          let stepY = side4angle(newHorizontalAngle, flySpeed, null, true)
+
+          if (event.keyCode == 37) { // Left
+
+            position.x -= stepX
+            position.y -= stepY
+
+            target.x -= stepX
+            target.y -= stepY
+
+          } else if (event.keyCode == 39) { // Right
+
+            position.x += stepX
+            position.y += stepY
+
+            target.x += stepX
+            target.y += stepY
+
+          }
+
+        }
+
+        panel.find("#position-x input").val(position.x.toFixed(2))
+        panel.find("#position-y input").val(position.y.toFixed(2))
+        panel.find("#position-z input").val(position.z.toFixed(2))
+
+        panel.find("#target-x input").val(target.x.toFixed(2))
+        panel.find("#target-y input").val(target.y.toFixed(2))
+        panel.find("#target-z input").val(target.z.toFixed(2))
 
       }
 
@@ -108,7 +104,7 @@ export function addFlyControls() {
         if (event.keyCode == 87) { // W
 
           let newVerticalAngle = verticalAngle + flySpeed
-          if (newVerticalAngle <= 0) { newVerticalAngle = 0.000001 } else if (newVerticalAngle >= 180) { newVerticalAngle = -180 - 0.000001 }
+          if (newVerticalAngle <= 0) { newVerticalAngle = satoshi } else if (newVerticalAngle >= 180) { newVerticalAngle = - 180 - satoshi }
 
           target.z = position.z - side4angle(newVerticalAngle, radius3, true, null)
 
@@ -120,7 +116,7 @@ export function addFlyControls() {
         } else if (event.keyCode == 83) { // S
 
           let newVerticalAngle = verticalAngle - flySpeed
-          if (newVerticalAngle <= 0) { newVerticalAngle = 0.000001 } else if (newVerticalAngle >= 180) { newVerticalAngle = -180 - 0.000001 }
+          if (newVerticalAngle <= 0) { newVerticalAngle = satoshi } else if (newVerticalAngle >= 180) { newVerticalAngle = - 180 - satoshi }
 
           target.z = position.z - side4angle(newVerticalAngle, radius3, true, null)
 
@@ -147,9 +143,9 @@ export function addFlyControls() {
 
         }
 
-        $("#camera.panel #target-x input").val(target.x.toFixed(2))
-        $("#camera.panel #target-y input").val(target.y.toFixed(2))
-        $("#camera.panel #target-z input").val(target.z.toFixed(2))
+        panel.find("#target-x input").val(target.x.toFixed(2))
+        panel.find("#target-y input").val(target.y.toFixed(2))
+        panel.find("#target-z input").val(target.z.toFixed(2))
 
       }
 
@@ -159,8 +155,13 @@ export function addFlyControls() {
 
   }).keyup(function(event) {
 
-    updateSettings("camera", "position", camera.position)
-    updateSettings("camera", "target", camera.target)
+    if ([37, 38, 39, 40, 65, 68, 83, 87].includes(event.keyCode)) {
+
+      if ([37, 38, 39, 40].includes(event.keyCode)) updateSettings("camera", "position", camera.position)
+
+      updateSettings("camera", "target", camera.target)
+
+    }
 
   })
 
