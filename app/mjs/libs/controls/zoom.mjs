@@ -9,10 +9,7 @@ export function addZoomControls() {
 
     clearTimeout(zoomTimeout)
 
-    let zoomMax = settings.controls.zoomMax
-    let zoomMin = settings.controls.zoomMin
-    let zoomSpeed = settings.controls.zoomSpeed / 50000
-    let zoomDelta = event.originalEvent.wheelDelta * zoomSpeed
+    let panel = $("#camera.panel")
 
     let target = camera.target
     let position = camera.position
@@ -20,6 +17,11 @@ export function addZoomControls() {
     let stepX = position.x - target.x
     let stepY = position.y - target.y
     let stepZ = position.z - target.z
+
+    let zoomMax = settings.controls.zoomMax
+    let zoomMin = settings.controls.zoomMin
+    let zoomSpeed = settings.controls.zoomSpeed / 50000
+    let zoomDelta = event.originalEvent.wheelDelta * zoomSpeed
 
     // Zoom In
     if (zoomDelta > 0) {
@@ -37,9 +39,9 @@ export function addZoomControls() {
       position.y -= stepY * zoomDelta
       position.z -= stepZ * zoomDelta
 
-      $("#camera.panel #position-x input").val(position.x.toFixed(2))
-      $("#camera.panel #position-y input").val(position.y.toFixed(2))
-      $("#camera.panel #position-z input").val(position.z.toFixed(2))
+      panel.find("#position-x input").val(position.x.toFixed(2))
+      panel.find("#position-y input").val(position.y.toFixed(2))
+      panel.find("#position-z input").val(position.z.toFixed(2))
 
     }
 
