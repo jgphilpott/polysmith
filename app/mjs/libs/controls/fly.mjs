@@ -1,11 +1,11 @@
 export function addFlyControls() {
 
-  const satoshi = 0.000001
-  const panel = $("#camera.panel")
-
   $(document).keydown(function(event) {
 
     if ([37, 38, 39, 40, 65, 68, 83, 87].includes(event.keyCode)) {
+
+      const satoshi = 0.000001
+      const panel = $("#camera.panel")
 
       let flySpeed = settings.controls.flySpeed / 10
       let position = camera.position

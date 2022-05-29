@@ -1,8 +1,5 @@
 export function addDragControls() {
 
-  const satoshi = 0.000001
-  const panel = $("#camera.panel")
-
   let radius3, startX, startY = null
   let target, position, dragSpeed = null
   let horizontalAngle, verticalAngle = null
@@ -46,6 +43,9 @@ export function addDragControls() {
 
     event.preventDefault()
     event.stopPropagation()
+
+    const satoshi = 0.000001
+    const panel = $("#camera.panel")
 
     let radius2 = side4sides(Math.abs(position.z - target.z), null, radius3)
 

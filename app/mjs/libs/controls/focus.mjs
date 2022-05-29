@@ -1,12 +1,13 @@
-export function focus(obj, duration=1000, steps=100) {
+export function focus(point, duration=1000, steps=100) {
 
   let target = camera.target
+  let panel = $("#camera.panel")
 
-  if (obj.x != target.x || obj.y != target.y || obj.z != target.z) {
+  if (point.x != target.x || point.y != target.y || point.z != target.z) {
 
-    let stepX = (obj.x - target.x) / steps
-    let stepY = (obj.y - target.y) / steps
-    let stepZ = (obj.z - target.z) / steps
+    let stepX = (point.x - target.x) / steps
+    let stepY = (point.y - target.y) / steps
+    let stepZ = (point.z - target.z) / steps
 
     for (let i = 1; i <= steps; i++) {
 
@@ -22,13 +23,13 @@ export function focus(obj, duration=1000, steps=100) {
 
       camera.lookAt(target.x, target.y, target.z)
 
-      $("#camera.panel #target-x input").val(target.x.toFixed(2))
-      $("#camera.panel #target-y input").val(target.y.toFixed(2))
-      $("#camera.panel #target-z input").val(target.z.toFixed(2))
+      panel.find("#target-x input").val(target.x.toFixed(2))
+      panel.find("#target-y input").val(target.y.toFixed(2))
+      panel.find("#target-z input").val(target.z.toFixed(2))
 
     }
 
-    updateSettings("camera", "target", {x: obj.x, y: obj.y, z: obj.z})
+    updateSettings("camera", "target", {x: point.x, y: point.y, z: point.z})
 
     return true
 
