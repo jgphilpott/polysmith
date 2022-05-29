@@ -12,7 +12,7 @@ export function newTriangle(v1=[0, 0, 10 * Math.sqrt(3) / 4], v2=[0, 5, -10 * Ma
 
   geometry.faces.push(new THREE.Face3(0, 1, 2))
 
-  let triangle = new THREE.Mesh(geometry, meshMaterial(material, color))
+  let triangle = new THREE.Mesh(new THREE.BufferGeometry().fromGeometry(geometry), meshMaterial(material, color))
 
   triangle.class = "triangle"
   triangle.name = "Triangle"

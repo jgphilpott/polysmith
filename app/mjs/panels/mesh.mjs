@@ -85,7 +85,14 @@ export function addMeshPanel(mesh, coordinates=null) {
 
     panel.find("#visibility.slider").slider({min: 0, max: 100, value: mesh.material.opacity * 100, start: sliderStart, slide: sliderSlide, stop: sliderStop})
 
-    if (mesh.class != "custom") panel.append("<div id='properties' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Properties</h4></div><div class='body'></div></div>")
+    let geometriesWithProperties = ["box", "cylinder", "sphere", "prism", "pyramid", "cone", "torus"]
+
+    if (geometriesWithProperties.includes(mesh.class) || geometriesWithProperties.includes(mesh.class.split("-")[1])) {
+
+      panel.append("<div id='properties' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Properties</h4></div><div class='body'></div></div>")
+
+    }
+
     panel.append("<div id='position' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Position</h4></div><div class='body'></div></div>")
     panel.append("<div id='rotation' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Rotation</h4></div><div class='body'></div></div>")
     panel.append("<div id='scale' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Scale</h4></div><div class='body'></div></div>")
@@ -95,7 +102,7 @@ export function addMeshPanel(mesh, coordinates=null) {
     let rotation = panel.find("#rotation .body")
     let scale = panel.find("#scale .body")
 
-    if (mesh.class != "custom") {
+    if (geometriesWithProperties.includes(mesh.class) || geometriesWithProperties.includes(mesh.class.split("-")[1])) {
 
       let regularStep = 1
       let regularMin = 1
@@ -463,8 +470,8 @@ export function addMesh(mesh=null, properties={}) {
 
     }
 
-    mesh.surface = getSurfaceArea(mesh)
-    mesh.volume = getVolume(mesh)
+    mesh.surface = mesh.class != "line" ? getSurfaceArea(mesh) : 0
+    mesh.volume = mesh.class != "line" ? getVolume(mesh) : 0
 
     updateMeshesPanel("add", mesh)
     localMeshes("add", mesh)

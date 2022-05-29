@@ -237,7 +237,7 @@ function getVolume(mesh) {
 
       console.warn("The 'geometry' must be an indexed or non-indexed buffer geometry.")
 
-      return null
+      return volume
 
     }
 
