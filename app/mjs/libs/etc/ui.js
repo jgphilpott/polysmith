@@ -121,13 +121,13 @@ function fold(element, degree=90, duration=1000) {
 
   }
 
-  panel.find(".body").parent().toArray().forEach((item, i) => {
+  panel.find(".body").parent().toArray().forEach(tool => {
 
-    if ($(item).attr("id") != id && $(item).find(".body").css("display") != "none") {
+    if ($(tool).attr("id") != id && $(tool).find(".body").css("display") != "none") {
 
-      $(item).animate({height: head.height()}, {duration: duration, queue: false, complete: function() { $(item).find(".body").css("display", "none") }})
+      $(tool).animate({height: head.height()}, {duration: duration, queue: false, complete: function() { $(tool).find(".body").css("display", "none") }})
 
-      rotate($(item).find(".fold"), 0, duration)
+      rotate($(tool).find(".fold"), 0, duration)
 
     }
 
