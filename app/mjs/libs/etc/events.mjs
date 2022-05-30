@@ -8,7 +8,7 @@ import {grayGlass, lightGrayGlass} from "../colors/glass/grayscale.js"
 
 export function addEvents() {
 
-  events = new THREEx.DomEvents(camera, canvas)
+  let events = new THREEx.DomEvents(camera, canvas)
 
   events.operation = {mesh: null, key: null}
   events.zIndex = 0
@@ -64,7 +64,7 @@ export function addEvents() {
 
   $("#nav, #forkme, .panel").mousemove(function(event) {
 
-    data.outlinePass.selectedObjects = []
+    composer.outlinePass.selectedObjects = []
 
   })
 
@@ -140,13 +140,13 @@ export function addMeshEvents(mesh) {
 
         $("#canvas").css("cursor", "grab")
 
-        data.outlinePass.selectedObjects = [mesh]
+        composer.outlinePass.selectedObjects = [mesh]
 
       }
 
     } else {
 
-      events.operation.mesh.uuid == mesh.uuid || mesh.lock == "locked" ? $("#canvas").css("cursor", "not-allowed") : data.outlinePass.selectedObjects = [mesh]
+      events.operation.mesh.uuid == mesh.uuid || mesh.lock == "locked" ? $("#canvas").css("cursor", "not-allowed") : composer.outlinePass.selectedObjects = [mesh]
 
     }
 
@@ -160,7 +160,7 @@ export function addMeshEvents(mesh) {
 
   events.addEventListener(mesh, "mouseout", function(event) {
 
-    data.outlinePass.selectedObjects = []
+    composer.outlinePass.selectedObjects = []
 
     !events.operation.key ? $("#canvas").css("cursor", "") : $("#canvas").css("cursor", "copy")
 
@@ -274,7 +274,7 @@ export function makeDragable(element, origEvent=null) {
         tooltips.distanceLines.push(xDistanceLine, yDistanceLine, zDistanceLine)
         scene.add(xDistanceLine, yDistanceLine, zDistanceLine)
 
-        data.outlinePass.selectedObjects = [element]
+        composer.outlinePass.selectedObjects = [element]
 
       }
 
@@ -341,7 +341,7 @@ export function makeDragable(element, origEvent=null) {
 
           let mesh = addMesh(null, {name: element.attr("title"), class: element.attr("id"), position: {x: x, y: y, z: z}})
 
-          data.outlinePass.selectedObjects = [mesh]
+          composer.outlinePass.selectedObjects = [mesh]
 
           $("#canvas").css("cursor", "grab")
 

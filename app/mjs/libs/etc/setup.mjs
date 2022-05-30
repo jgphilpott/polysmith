@@ -2,10 +2,7 @@ import {localMeshes} from "../files/local.mjs"
 import {black, white} from "../colors/three/grayscale.js"
 
 import {addAmbientLight} from "../lights/ambient.mjs"
-import {addDirectionalLight} from "../lights/directional.mjs"
-import {addHemisphereLight} from "../lights/hemisphere.mjs"
 import {addPointLight} from "../lights/point.mjs"
-import {addSpotLight} from "../lights/spot.mjs"
 
 import {addPerspectiveCamera} from "../cameras/perspective.mjs"
 
@@ -23,65 +20,62 @@ export function setup() {
   data.meshes = meshes
   data.tooltips = tooltips
 
-  settings = getSettings()
+  data.settings = settings = getSettings()
 
-  renderer = new THREE.WebGLRenderer({alpha: true, antialias: true, logarithmicDepthBuffer: true})
+  data.renderer = renderer = new THREE.WebGLRenderer({alpha: true, antialias: true, logarithmicDepthBuffer: true})
   renderer.setSize(window.innerWidth, window.innerHeight)
   renderer.setPixelRatio(window.devicePixelRatio)
-  data.renderer = renderer
 
-  canvas = document.body.appendChild(renderer.domElement)
+  data.canvas = canvas = document.body.appendChild(renderer.domElement)
   canvas.setAttribute("id", "canvas")
-  data.canvas = canvas
 
-  scene = new THREE.Scene()
+  data.scene = scene = new THREE.Scene()
   scene.background = white
-  data.scene = scene
 
-  lights = []
-  lights.push(addAmbientLight())
+  data.lights = lights = []
   lights.push(addPointLight())
-  data.lights = lights
+  lights.push(addAmbientLight())
 
-  data.camera = addPerspectiveCamera()
+  data.camera = camera = addPerspectiveCamera()
 
-  addPostProcessing()
+  data.controls = controls = addDragControls()
+  data.controls = controls = addFlyControls()
+  data.controls = controls = addZoomControls()
 
-  addDragControls()
-  addFlyControls()
-  addZoomControls()
-
-  data.panels = addPanels()
-  data.events = addEvents()
-  data.axes = addAxes()
-
-  animate()
+  data.panels = panels = addPanels()
+  data.events = events = addEvents()
+  data.axes = axes =addAxes()
 
   localMeshes("load")
+
+  addComposer()
+  animate()
+
+  function addComposer() {
+
+    data.composer = composer = new THREE.EffectComposer(renderer)
+    composer.renderPass = new THREE.RenderPass(scene, camera)
+    composer.shaderPass = new THREE.ShaderPass(THREE.CopyShader)
+    composer.outlinePass = new THREE.OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight ), scene, camera)
+
+    composer.outlinePass.hiddenEdgeColor.set(white)
+    composer.outlinePass.visibleEdgeColor.set(black)
+    composer.outlinePass.overlayMaterial.blending = THREE.CustomBlending
+
+    composer.addPass(composer.renderPass)
+    composer.addPass(composer.shaderPass)
+    composer.addPass(composer.outlinePass)
+
+  }
 
   function animate() {
 
     requestAnimationFrame(animate)
 
-    data.composer.render()
+    composer.render()
 
   }
 
-  function addPostProcessing() {
-
-    data.composer = new THREE.EffectComposer(renderer)
-    data.renderPass = new THREE.RenderPass(scene, camera)
-    data.shaderPass = new THREE.ShaderPass(THREE.CopyShader)
-    data.outlinePass = new THREE.OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight ), scene, camera)
-
-    data.outlinePass.overlayMaterial.blending = THREE.CustomBlending
-    data.outlinePass.visibleEdgeColor.set("#000000")
-    data.outlinePass.hiddenEdgeColor.set("#FFFFFF")
-
-    data.composer.addPass(data.renderPass)
-    data.composer.addPass(data.shaderPass)
-    data.composer.addPass(data.outlinePass)
-
-  }
+  return data
 
 }

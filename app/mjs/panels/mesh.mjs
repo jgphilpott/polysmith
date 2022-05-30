@@ -549,10 +549,10 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
         let srcPanel = $("#mesh." + events.operation.mesh.uuid + "")
 
-        if (srcPanel.length) addMeshPanel(result, {x: parseFloat(srcPanel.css("left")), y: parseFloat(srcPanel.css("top"))})
-
         removeMesh(events.operation.mesh)
         addMesh(result)
+
+        if (srcPanel.length) addMeshPanel(result, {x: parseFloat(srcPanel.css("left")), y: parseFloat(srcPanel.css("top"))})
 
       }
 

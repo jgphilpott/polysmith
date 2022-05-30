@@ -91,7 +91,7 @@ export function contextMenu(type, element, event) {
 
     panel.remove()
 
-    data.outlinePass.selectedObjects = []
+    composer.outlinePass.selectedObjects = []
 
   })
 

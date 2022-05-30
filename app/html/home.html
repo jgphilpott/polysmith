@@ -57,10 +57,9 @@
 
     <script>
 
-      const socket = io()
       const data = {{ data | tojson | safe }}
-
-      console.log("Welcome to " + data.title + "!")
+      const client = data.client
+      const socket = io()
 
       let scale = 100
 
@@ -68,15 +67,13 @@
       let meshes = []
       let panels = []
 
-      let settings = {}
-      let tooltips = {}
-
-      let client = data.client
-
       var lights, camera, events
-      var renderer, canvas, scene
+      var renderer, composer, canvas, scene
+      let settings, controls, tooltips = {}
 
       var box, circle, cone, cylinder, knot, line, line2, plane, quadrilateral, ring, sphere, text, torus, triangle, tube
+
+      console.log("Welcome to " + data.title + "!")
 
     </script>
 
