@@ -92,15 +92,13 @@ export function addPanelEvents(panel) {
 
     panel.css("z-index", events.zIndex)
 
-  }).mouseover(function(event) {
-
     close.animate({opacity: 1}, {duration: duration, queue: queue})
-    panel.animate({backgroundColor: grayGlass}, {duration: duration, queue: queue})
+    panel.animate({backgroundColor: grayGlass}, {duration: duration * 3, queue: queue})
 
-  }).mouseout(function(event) {
+  }).mouseleave(function(event) {
 
     close.animate({opacity: 0}, {duration: duration, queue: queue})
-    panel.animate({backgroundColor: lightGrayGlass}, {duration: duration, queue: queue})
+    panel.animate({backgroundColor: lightGrayGlass}, {duration: duration * 3, queue: queue})
 
   })
 
@@ -110,9 +108,7 @@ export function addPanelEvents(panel) {
 
       panel.css("visibility", "hidden")
 
-      let uuid = panel.data("mesh").uuid
-
-      $("#meshes.table tr#" + uuid + " .settings").attr("src", "/app/imgs/panels/tools/toggle/off.png")
+      $("#meshes.table tr#" + panel.data("mesh").uuid + " .settings").attr("src", "/app/imgs/panels/tools/toggle/off.png")
 
     } else {
 
@@ -120,7 +116,7 @@ export function addPanelEvents(panel) {
 
     }
 
-  }).mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
+  }).on("mousedown mouseup", function(event) { event.stopPropagation() })
 
   if (id != "mesh") settings.panels[id] ? panel.css("visibility", "visible") : panel.css("visibility", "hidden")
 

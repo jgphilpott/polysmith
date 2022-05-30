@@ -18,7 +18,9 @@
 
     position: fixed
 
-    background: $light-gray-glass
+    background-color: $light-gray-glass
+
+    transition: backdrop-filter 1s
     backdrop-filter: blur(3px)
 
     border: 1px solid $black
@@ -82,3 +84,5 @@
 .panel:hover
 
     cursor: grab
+
+    backdrop-filter: blur(5px)
