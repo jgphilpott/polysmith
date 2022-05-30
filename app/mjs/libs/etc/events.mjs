@@ -15,12 +15,19 @@ export function addEvents() {
 
   $(window).on("resize", function() {
 
-    for (let i = 0; i < axes.length; i++) { if (axes[i].type == "Line2") axes[i].material.resolution.set(window.innerWidth, window.innerHeight) }
+    let innerWidth = window.innerWidth
+    let innerHeight = window.innerHeight
 
-    data.renderer.setSize(window.innerWidth, window.innerHeight)
-    data.composer.setSize(window.innerWidth, window.innerHeight)
+    for (let i = 0; i < axes.length; i++) {
 
-    camera.aspect = window.innerWidth / window.innerHeight
+      if (axes[i].type == "Line2") axes[i].material.resolution.set(innerWidth, innerHeight)
+
+    }
+
+    renderer.setSize(innerWidth, innerHeight)
+    composer.setSize(innerWidth, innerHeight)
+
+    camera.aspect = innerWidth / innerHeight
     camera.updateProjectionMatrix()
 
   })
@@ -47,22 +54,19 @@ export function addEvents() {
 
   })
 
-  $("#canvas").click(function(event) {
-
-    if (events.operation.key && !camera.dragged) { clearMeshOperation() }
-
-  })
-
   $("#canvas").mousedown(function(event) {
 
     window.getSelection().removeAllRanges()
 
-    $("input").toArray().forEach(input => { if ($(input).is(":focus")) $(input).blur() })
-    $("[contenteditable]").toArray().forEach(editor => { if ($(editor).is(":focus")) $(editor).blur() })
+    $("input, [contenteditable]").toArray().forEach(input => { if ($(input).is(":focus")) $(input).blur() })
+
+  }).mouseup(function(event) {
+
+    if (events.operation.key && !camera.dragged) clearMeshOperation()
 
   })
 
-  $("#nav, #forkme, .panel").mousemove(function(event) {
+  $("#nav, #forkme, #metabox, #help, .panel").mousemove(function(event) {
 
     composer.outlinePass.selectedObjects = []
 
