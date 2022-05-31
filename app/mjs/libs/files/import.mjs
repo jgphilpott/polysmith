@@ -59,52 +59,59 @@ export function importFile(type, path, properties={}) {
 
   }
 
-  if (type == "svg") {
+  if (loader) {
 
-    $.get(path, function(svg) {
+    if (type == "svg") {
 
-      let shapes = []
-      let paths = loader.parse(svg).paths
+      $.get(path, function(svg) {
 
-      for (let i = 0; i < paths.length; i ++) {
-        Array.prototype.push.apply(shapes, paths[i].toShapes())
-      }
+        let shapes = []
+        let paths = loader.parse(svg).paths
 
-      let geometry = new THREE.ExtrudeBufferGeometry(shapes, properties)
-      mesh = new THREE.Mesh(geometry, material)
+        for (let i = 0; i < paths.length; i ++) {
 
-      return addMesh(mesh)
+          Array.prototype.push.apply(shapes, paths[i].toShapes())
 
-    })
+        }
 
-  } else {
+        let geometry = new THREE.ExtrudeBufferGeometry(shapes, properties)
 
-    loader.load(path, function(object) {
+        mesh = new THREE.Mesh(geometry, material)
 
-      if (type == "obj") {
+      })
 
-        object.traverse(function(property) {
+    } else {
 
-            if (property instanceof THREE.Mesh) {
+      loader.load(path, function(object) {
 
-                mesh = property
-                mesh.material = material
+        if (type == "obj") {
 
-            }
+          object.traverse(function(property) {
 
-        })
+              if (property instanceof THREE.Mesh) {
 
-      } else {
+                  mesh = property
+                  mesh.material = material
 
-        mesh = new THREE.Mesh(object, material)
+              }
 
-      }
+          })
 
-      return addMesh(mesh)
+        } else {
 
-    })
+          mesh = new THREE.Mesh(object, material)
+
+        }
+
+      })
+
+    }
+
+    return addMesh(mesh)
 
   }
+
+  return mesh
 
 }
 

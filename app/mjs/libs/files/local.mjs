@@ -1,12 +1,12 @@
 import {addMesh} from "../../panels/mesh.mjs"
 
-export async function localMeshes(action=null, mesh=null) {
+export async function localMeshes(action, mesh) {
 
   let localMeshes = localRead("meshes")
 
   if (action == "load") {
 
-    if (localMeshes instanceof Array && localMeshes.length > 0) {
+    if (localMeshes instanceof Array && localMeshes.length) {
 
       const loader = new THREE.ObjectLoader()
 
@@ -30,7 +30,6 @@ export async function localMeshes(action=null, mesh=null) {
     meshJSON.metadata.name = mesh.name
     meshJSON.metadata.lock = mesh.lock
     meshJSON.metadata.class = mesh.class
-
     meshJSON.metadata.style = mesh.material.style
 
     if (action == "add") {

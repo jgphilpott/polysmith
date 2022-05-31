@@ -4,6 +4,7 @@ export function exportFile(type) {
 
   removeAxes()
 
+  let file = null
   let exporter = null
   let extension = null
 
@@ -12,57 +13,56 @@ export function exportFile(type) {
     case "collada":
 
       exporter = new THREE.ColladaExporter()
-      extension = ".dae"
+      extension = "dae"
 
       break
 
     case "draco":
 
       exporter = new THREE.DRACOExporter()
-      extension = ".drc"
+      extension = "drc"
 
       break
 
     case "gltf":
 
       exporter = new THREE.GLTFExporter()
-      extension = ".gltf"
+      extension = "gltf"
 
       break
 
     case "mmd":
 
       exporter = new THREE.MMDExporter()
-      extension = ".mmd"
+      extension = "mmd"
 
       break
 
     case "obj":
 
       exporter = new THREE.OBJExporter()
-      extension = ".obj"
+      extension = "obj"
 
       break
 
     case "ply":
 
       exporter = new THREE.PLYExporter()
-      extension = ".ply"
+      extension = "ply"
 
       break
 
     case "stl":
 
       exporter = new THREE.STLExporter()
-      extension = ".stl"
+      extension = "stl"
 
       break
 
   }
 
-  let blob = new Blob([exporter.parse(scene)], {type: "text/plain"})
-
-  saveAs(blob, data.title.toLowerCase() + extension)
+  if (exporter) file = new Blob([exporter.parse(scene)], {type: "text/plain"})
+  if (file && extension) saveAs(file, data.title.toLowerCase() + "." + extension)
 
   addAxes()
 
