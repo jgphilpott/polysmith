@@ -49,7 +49,7 @@ if not exists(libs_dir):
     urlretrieve("https://raw.githubusercontent.com/jgphilpott/threex.domevents/master/threex.domevents.js", js_libs_dir + "/threeX.js")
 
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/03df747c3047504480e6dbeeddd27d68/raw/610e6908804af69ba765dc086b7018acbcdc4aa9/csgWrapper.js", js_libs_dir + "/csgWrapper.js")
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/59ad8432ba8567e91176e669454b9afa/raw/ae5b0ff25539c2d7ded7d2512376c3c3f1e08617/meshOperations.coffee", js_libs_dir + "/meshOperations.coffee")
+    urlretrieve("https://gist.githubusercontent.com/jgphilpott/59ad8432ba8567e91176e669454b9afa/raw/c4a923ffa25aa673adadc846482539ee2b7a4dd0/morph.coffee", js_libs_dir + "/morph.coffee")
 
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/77709de890b806426089de1ff4e78758/raw/258c236be71bb4eac92db663f6c03f48673364bd/LineSegmentsGeometry.mjs", js_libs_dir + "/LineSegmentsGeometry.mjs")
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/ec71d7abcf504f85e01ffe9e297a682c/raw/ea603fbe5b81c0cdb7c9a273db51e8a766e65a10/LineGeometry.mjs", js_libs_dir + "/LineGeometry.mjs")

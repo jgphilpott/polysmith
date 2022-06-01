@@ -126,6 +126,21 @@ function getBoundingBox(mesh) {
 
 }
 
+function updateMetrics(mesh) {
+
+  mesh.updateMatrix()
+
+  let panel = $("#mesh." + mesh.uuid + "")
+  let controls = panel.find("#meta.controls")
+
+  mesh.surface = mesh.class != "line" ? getSurfaceArea(mesh) : 0
+  mesh.volume = mesh.class != "line" ? getVolume(mesh) : 0
+
+  controls.find("#surface span").text(mesh.surface.toFixed(2))
+  controls.find("#volume span").text(mesh.volume.toFixed(2))
+
+}
+
 // Credit: https://stackoverflow.com/a/13091694/1544937
 function screen2worldCoordinates(x, y, zTarget=0) {
 
@@ -177,9 +192,9 @@ function getSurfaceArea(mesh) {
       let v2 = geometry.vertices[geometry.faces[i].b]
       let v3 = geometry.vertices[geometry.faces[i].c]
 
-      let p1 = new THREE.Vector3(v1.x, v1.y, v1.z)
-      let p2 = new THREE.Vector3(v2.x, v2.y, v2.z)
-      let p3 = new THREE.Vector3(v3.x, v3.y, v3.z)
+      let p1 = new THREE.Vector3(v1.x, v1.y, v1.z).applyMatrix4(mesh.matrix)
+      let p2 = new THREE.Vector3(v2.x, v2.y, v2.z).applyMatrix4(mesh.matrix)
+      let p3 = new THREE.Vector3(v3.x, v3.y, v3.z).applyMatrix4(mesh.matrix)
 
       let triangle = new THREE.Triangle(p1, p2, p3)
       let area = triangle.getArea()
@@ -200,9 +215,9 @@ function getSurfaceArea(mesh) {
       let v2 = vertices[1]
       let v3 = vertices[2]
 
-      let p1 = new THREE.Vector3(v1[0], v1[1], v1[2])
-      let p2 = new THREE.Vector3(v2[0], v2[1], v2[2])
-      let p3 = new THREE.Vector3(v3[0], v3[1], v3[2])
+      let p1 = new THREE.Vector3(v1[0], v1[1], v1[2]).applyMatrix4(mesh.matrix)
+      let p2 = new THREE.Vector3(v2[0], v2[1], v2[2]).applyMatrix4(mesh.matrix)
+      let p3 = new THREE.Vector3(v3[0], v3[1], v3[2]).applyMatrix4(mesh.matrix)
 
       let triangle = new THREE.Triangle(p1, p2, p3)
       let area = triangle.getArea()
@@ -212,6 +227,8 @@ function getSurfaceArea(mesh) {
     }
 
   }
+
+  mesh.surface = surface
 
   return surface
 
@@ -252,9 +269,9 @@ function getVolume(mesh) {
 
     for (let i = 0; i < faces; i++) {
 
-      p1.fromBufferAttribute(position, i * 3 + 0)
-      p2.fromBufferAttribute(position, i * 3 + 1)
-      p3.fromBufferAttribute(position, i * 3 + 2)
+      p1.fromBufferAttribute(position, i * 3 + 0).applyMatrix4(mesh.matrix)
+      p2.fromBufferAttribute(position, i * 3 + 1).applyMatrix4(mesh.matrix)
+      p3.fromBufferAttribute(position, i * 3 + 2).applyMatrix4(mesh.matrix)
 
       volume += signedVolumeOfTriangle(p1, p2, p3)
 
@@ -267,15 +284,17 @@ function getVolume(mesh) {
 
     for (let i = 0; i < faces; i++) {
 
-      p1.fromBufferAttribute(position, index.array[i * 3 + 0])
-      p2.fromBufferAttribute(position, index.array[i * 3 + 1])
-      p3.fromBufferAttribute(position, index.array[i * 3 + 2])
+      p1.fromBufferAttribute(position, index.array[i * 3 + 0]).applyMatrix4(mesh.matrix)
+      p2.fromBufferAttribute(position, index.array[i * 3 + 1]).applyMatrix4(mesh.matrix)
+      p3.fromBufferAttribute(position, index.array[i * 3 + 2]).applyMatrix4(mesh.matrix)
 
       volume += signedVolumeOfTriangle(p1, p2, p3)
 
     }
 
   }
+
+  mesh.volume = volume
 
   return volume
 
