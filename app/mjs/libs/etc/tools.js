@@ -133,9 +133,10 @@ function updateMetrics(mesh) {
   let panel = $("#mesh." + mesh.uuid + "")
   let controls = panel.find("#meta.controls")
 
-  mesh.surface = mesh.class != "line" ? getSurfaceArea(mesh) : 0
   mesh.volume = mesh.class != "line" ? getVolume(mesh) : 0
+  mesh.surface = mesh.class != "line" ? getSurfaceArea(mesh) : 0
 
+  controls.find("#type span").text(mesh.class.replace("-", " ").replace(/\b\w/g, function(char) { return char.toUpperCase() }))
   controls.find("#surface span").text(mesh.surface.toFixed(2))
   controls.find("#volume span").text(mesh.volume.toFixed(2))
 

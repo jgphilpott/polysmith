@@ -1,5 +1,3 @@
-import {joinMesh, cutMesh, intersectMesh} from "../../libs/js/meshOperations.mjs"
-
 import * as threeGrayscale from "../libs/colors/three/grayscale.js"
 import * as threeRainbow from "../libs/colors/three/rainbow.js"
 
@@ -72,9 +70,9 @@ export function addMeshPanel(mesh, coordinates=null) {
     tools += "<img title='Lock' id='lock' class='tool' src='/app/imgs/panels/lock/" + mesh.lock + ".png'>"
     tools += "<img title='Trash' id='trash' class='tool' src='/app/imgs/panels/tools/trash.png'>"
 
-    meta += "<p id='type'><b>Type:</b> " + mesh.class.replace("-", " ").replace(/\b\w/g, function(char) { return char.toUpperCase() }) + "</p>"
-    meta += "<p id='surface'><b>Surface:</b> " + mesh.surface.toFixed(2) + "</p>"
-    meta += "<p id='volume'><b>Volume:</b> " + mesh.volume.toFixed(2) + "</p>"
+    meta += "<p id='type'><b>Type:</b> <span>" + mesh.class.replace("-", " ").replace(/\b\w/g, function(char) { return char.toUpperCase() }) + "</span></p>"
+    meta += "<p id='surface'><b>Surface:</b> <span>" + mesh.surface.toFixed(2) + "</span></p>"
+    meta += "<p id='volume'><b>Volume:</b> <span>" + mesh.volume.toFixed(2) + "</span></p>"
 
     panel.append(operations + "</div>")
     panel.append(colors + "</div>")
@@ -470,12 +468,11 @@ export function addMesh(mesh=null, properties={}) {
 
     }
 
-    mesh.surface = mesh.class != "line" ? getSurfaceArea(mesh) : 0
-    mesh.volume = mesh.class != "line" ? getVolume(mesh) : 0
-
-    updateMeshesPanel("add", mesh)
-    localMeshes("add", mesh)
+    updateMetrics(mesh)
     addMeshEvents(mesh)
+
+    localMeshes("add", mesh)
+    updateMeshesPanel("add", mesh)
 
     scene.add(mesh)
 
@@ -529,30 +526,19 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
       if (events.operation.mesh.uuid != mesh.uuid) {
 
-        var result
+        let morphed = morph(key, events.operation.mesh, mesh)
 
-        switch (key) {
+        if (morphed) {
 
-          case "cut":
-            result = cutMesh(events.operation.mesh, mesh)
-            break
+          events.operation.mesh.class = "custom"
+          events.operation.mesh.geometry = morphed.geometry
 
-          case "join":
-            result = joinMesh(events.operation.mesh, mesh)
-            break
+          updateMetrics(events.operation.mesh)
+          localMeshes("update", events.operation.mesh)
 
-          case "intersect":
-            result = intersectMesh(events.operation.mesh, mesh)
-            break
+          $("#mesh." + events.operation.mesh.uuid + " #properties.controls").remove()
 
         }
-
-        let srcPanel = $("#mesh." + events.operation.mesh.uuid + "")
-
-        removeMesh(events.operation.mesh)
-        addMesh(result)
-
-        if (srcPanel.length) addMeshPanel(result, {x: parseFloat(srcPanel.css("left")), y: parseFloat(srcPanel.css("top"))})
 
       }
 
@@ -627,6 +613,8 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
       mesh.lock = "unlocked"
 
+      composer.outlinePass.visibleEdgeColor.set(threeGrayscale.black)
+
       meshPanel.find("#join.operation").attr("src", "/app/imgs/panels/ops/default/join.png")
       meshPanel.find("#cut.operation").attr("src", "/app/imgs/panels/ops/default/cut.png")
       meshPanel.find("#intersect.operation").attr("src", "/app/imgs/panels/ops/default/intersect.png")
@@ -652,6 +640,8 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
     } else if (mesh.lock == "unlocked") {
 
       mesh.lock = "locked"
+
+      composer.outlinePass.visibleEdgeColor.set(threeRainbow.red)
 
       if (events.operation.mesh == mesh) { clearMeshOperation() }
 
@@ -744,11 +734,15 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
         }
 
+        updateMetrics(mesh)
+
         break
 
       case "position":
 
         mesh[type][key] = value
+
+        mesh.updateMatrix()
 
         break
 
@@ -756,11 +750,15 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
         mesh[type][key] = degree2radian(value)
 
+        mesh.updateMatrix()
+
         break
 
       case "scale":
 
         mesh[type][key] = value
+
+        updateMetrics(mesh)
 
         break
 
