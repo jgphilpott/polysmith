@@ -103,11 +103,11 @@ export function importFile(type, path, properties={}) {
 
         }
 
+        addMesh(mesh)
+
       })
 
     }
-
-    return addMesh(mesh)
 
   }
 

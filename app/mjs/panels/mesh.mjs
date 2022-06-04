@@ -778,8 +778,8 @@ export function removeMesh(mesh) {
     $("#canvas").css("cursor", "")
 
     events.removeEventListener(mesh, "mousemove")
-    events.removeEventListener(mesh, "mousedown")
     events.removeEventListener(mesh, "mouseout")
+    events.removeEventListener(mesh, "mousedown")
 
     events.removeEventListener(mesh, "click")
     events.removeEventListener(mesh, "dblclick")

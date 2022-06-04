@@ -6,6 +6,9 @@ import {contextMenu} from "../../panels/context.mjs"
 import {addMesh, updateMesh} from "../../panels/mesh.mjs"
 import {grayGlass, lightGrayGlass} from "../colors/glass/grayscale.js"
 
+import {red, green, blue} from "../colors/three/rainbow.js"
+import {black, white} from "../colors/three/grayscale.js"
+
 export function addEvents() {
 
   let events = new THREEx.DomEvents(camera, canvas)
@@ -60,13 +63,13 @@ export function addEvents() {
 
     $("input, [contenteditable]").toArray().forEach(input => { if ($(input).is(":focus")) $(input).blur() })
 
-  }).mouseup(function(event) {
+  }).click(function(event) {
 
     if (events.operation.key && !camera.dragged) clearMeshOperation()
 
   })
 
-  $("#nav, #forkme, #metabox, #help, .panel").mousemove(function(event) {
+  $("#nav, #forkme, #metabox, #help").mouseenter(function(event) {
 
     composer.outlinePass.selectedObjects = []
 
@@ -92,10 +95,26 @@ export function addPanelEvents(panel) {
 
     panel.css("z-index", events.zIndex)
 
+    if (id == "mesh") {
+
+      let mesh = panel.data("mesh")
+      let visibleEdgeColor = mesh.lock == "locked" ? red : black
+
+      composer.outlinePass.visibleEdgeColor.set(visibleEdgeColor)
+      composer.outlinePass.selectedObjects = [mesh]
+
+    } else {
+
+      composer.outlinePass.selectedObjects = []
+
+    }
+
     close.animate({opacity: 1}, {duration: duration, queue: queue})
     panel.animate({backgroundColor: grayGlass}, {duration: duration * 3, queue: queue})
 
   }).mouseleave(function(event) {
+
+    composer.outlinePass.selectedObjects = []
 
     close.animate({opacity: 0}, {duration: duration, queue: queue})
     panel.animate({backgroundColor: lightGrayGlass}, {duration: duration * 3, queue: queue})
@@ -130,39 +149,35 @@ export function addMeshEvents(mesh) {
 
   events.addEventListener(mesh, "mousemove", function(event) {
 
-    if (!events.operation.key) {
+    if (events.operation.key) {
 
-      if (mesh.lock == "locked") {
+      events.operation.mesh.uuid == mesh.uuid ? composer.outlinePass.visibleEdgeColor.set(red) : composer.outlinePass.visibleEdgeColor.set(green)
+      events.operation.mesh.uuid == mesh.uuid ? $("#canvas").css("cursor", "not-allowed") : $("#canvas").css("cursor", "copy")
 
-        $("#canvas").css("cursor", "not-allowed")
-
-      } else {
-
-        $("#canvas").css("cursor", "grab")
-
-        composer.outlinePass.selectedObjects = [mesh]
-
-      }
 
     } else {
 
-      events.operation.mesh.uuid == mesh.uuid || mesh.lock == "locked" ? $("#canvas").css("cursor", "not-allowed") : composer.outlinePass.selectedObjects = [mesh]
+      mesh.lock == "locked" ? composer.outlinePass.visibleEdgeColor.set(red) : composer.outlinePass.visibleEdgeColor.set(black)
+      mesh.lock == "locked" ? $("#canvas").css("cursor", "not-allowed") : $("#canvas").css("cursor", "grab")
+
 
     }
+
+    composer.outlinePass.selectedObjects = [mesh]
+
+  })
+
+  events.addEventListener(mesh, "mouseout", function(event) {
+
+    events.operation.key ? $("#canvas").css("cursor", "copy") : $("#canvas").css("cursor", "")
+
+    composer.outlinePass.selectedObjects = []
 
   })
 
   events.addEventListener(mesh, "mousedown", function(event) {
 
     if (mesh.lock != "locked") makeDragable(mesh, event.origDomEvent)
-
-  })
-
-  events.addEventListener(mesh, "mouseout", function(event) {
-
-    composer.outlinePass.selectedObjects = []
-
-    !events.operation.key ? $("#canvas").css("cursor", "") : $("#canvas").css("cursor", "copy")
 
   })
 
