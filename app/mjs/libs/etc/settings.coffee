@@ -16,8 +16,10 @@ getSettings = () ->
 
             ui:
 
-                nav: "black"
+                title = "POLYMORPH"
+                navbar: true
                 forkme: true
+                help: true
                 shortcuts: ["box", "cylinder", "sphere"]
 
             panels:

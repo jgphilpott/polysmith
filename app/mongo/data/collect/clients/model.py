@@ -17,8 +17,10 @@ class Client():
 
             self.settings = {
                                 "ui": {
-                                    "nav": "black",
+                                    "title": "POLYMORPH",
+                                    "navbar": True,
                                     "forkme": False,
+                                    "help": False,
                                     "shortcuts": ["box", "cylinder", "sphere"]
                                 },
                                 "panels": {
@@ -49,9 +51,9 @@ class Client():
                                     "open": "speed"
                                 },
                                 "controls": {
-                                    "dragSpeed": 25,
-                                    "flySpeed": 25,
-                                    "zoomSpeed": 25,
+                                    "dragSpeed": 50,
+                                    "flySpeed": 50,
+                                    "zoomSpeed": 50,
                                     "zoomMax": 500,
                                     "zoomMin": 1
                                 }
