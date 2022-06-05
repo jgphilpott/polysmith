@@ -265,6 +265,7 @@ export function makeDragable(element, origEvent=null) {
 
         $("#canvas").css("cursor", "grabbing")
 
+        let panel = $("#mesh." + element.uuid + "")
         let coordinates = screen2worldCoordinates(eventX, eventY, element.position.z)
 
         coordinates.x = coordinates.x < min ? min : coordinates.x > max ? max : coordinates.x
@@ -276,11 +277,11 @@ export function makeDragable(element, origEvent=null) {
 
         for (let i = 0; i < tooltips.distanceLines.length; i++) { scene.remove(tooltips.distanceLines[i]) }
 
-        $("#mesh." + element.uuid + " #position-x input").val(coordinates.x.toFixed(2))
-        $("#mesh." + element.uuid + " #position-y input").val(coordinates.y.toFixed(2))
-
         tooltips.distanceLines.push(xDistanceLine, yDistanceLine, zDistanceLine)
         scene.add(xDistanceLine, yDistanceLine, zDistanceLine)
+
+        panel.find("#position-x input").val(coordinates.x.toFixed(2))
+        panel.find("#position-y input").val(coordinates.y.toFixed(2))
 
         composer.outlinePass.visibleEdgeColor.set(blackThree)
         composer.outlinePass.selectedObjects = [element]
