@@ -1,6 +1,6 @@
 ---
 name: Question
-about: Any question about Polymaker
+about: Any question about Polymorph
 title: ''
 labels: 'question'
 assignees: jgphilpott

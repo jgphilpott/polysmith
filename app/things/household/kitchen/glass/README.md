@@ -10,7 +10,7 @@ Available in two generic models:
 ## STL Files
 
  - [Cults3D](https://cults3d.com/en/3d-model/home/cups-glasses-low-polygon-style)
- - [GitHub](https://github.com/jgphilpott/polymaker/tree/master/app/things/kitchen/glass)
+ - [GitHub](https://github.com/jgphilpott/polymorph/tree/master/app/things/kitchen/glass)
  - [GrabCAD](https://grabcad.com/library/cups-glasses-low-polygon-style-1)
  - [MyMiniFactory](https://www.myminifactory.com/object/3d-print-171770)
  - [Pinshape](https://pinshape.com/items/106293-3d-printed-cupsglasses-low-polygon-style)

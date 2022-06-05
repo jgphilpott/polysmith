@@ -1,7 +1,7 @@
 from mongo.client import mongo_client
 
 client = mongo_client()
-database = client.polymaker
+database = client.polymorph
 
 def mongo_database():
 

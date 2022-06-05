@@ -2,7 +2,7 @@ version: "2"
 services:
 
   application:
-    container_name: polymaker
+    container_name: polymorph
     restart: always
     build: .
     volumes:

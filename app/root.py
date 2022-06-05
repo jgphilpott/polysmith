@@ -12,7 +12,7 @@ from flask import Flask, request, render_template
 from mongo.socket.plug import plugin
 from mongo.data.collect.clients.mongo import valid_client
 
-title = "Polymaker"
+title = "Polymorph"
 
 src_dir = "app"
 libs_dir = src_dir + "/libs"

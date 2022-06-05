@@ -11,7 +11,7 @@ The Bagged Milk Jug is a jug designed to carry plastic milk bags. The designs ar
 ## STL Files
 
  - [Cults3D](https://cults3d.com/en/3d-model/home/bagged-milk-jug-low-polygon)
- - [GitHub](https://github.com/jgphilpott/polymaker/tree/master/app/things/kitchen/bagged_milk_jug/stl)
+ - [GitHub](https://github.com/jgphilpott/polymorph/tree/master/app/things/kitchen/bagged_milk_jug/stl)
  - [GrabCAD](https://grabcad.com/library/bagged-milk-jug-low-polygon-1)
  - [MyMiniFactory](https://www.myminifactory.com/object/3d-print-bagged-milk-jug-low-polygon-134143)
  - [Pinshape](https://pinshape.com/items/102097-3d-printed-bagged-milk-jug-low-polygon)
