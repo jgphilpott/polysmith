@@ -1,6 +1,3 @@
-import * as threeGrayscale from "../libs/colors/three/grayscale.js"
-import * as threeRainbow from "../libs/colors/three/rainbow.js"
-
 import {meshMaterial} from "../libs/materials/mesh.mjs"
 
 import {newBox} from "../libs/geometries/boxes.mjs"
@@ -559,11 +556,11 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
     panel.find("#" + value + ".color").addClass("selected")
 
     if (["red", "orange", "yellow", "green", "blue", "purple", "pink"].includes(value)) {
-      color = threeRainbow.rainbow[value]
+      color = rainbowThree[value + "Three"]
     } else if (["white", "gray", "black"].includes(value)) {
-      color = threeGrayscale.grayscale[value]
+      color = grayscaleThree[value + "Three"]
     } else {
-      color = threeGrayscale.grayscale.black
+      color = blackThree
     }
 
     mesh.material.dispose()
@@ -613,7 +610,7 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
       mesh.lock = "unlocked"
 
-      composer.outlinePass.visibleEdgeColor.set(threeGrayscale.black)
+      composer.outlinePass.visibleEdgeColor.set(blackThree)
 
       meshPanel.find("#join.operation").attr("src", "/app/imgs/panels/ops/default/join.png")
       meshPanel.find("#cut.operation").attr("src", "/app/imgs/panels/ops/default/cut.png")
@@ -641,7 +638,7 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
       mesh.lock = "locked"
 
-      composer.outlinePass.visibleEdgeColor.set(threeRainbow.red)
+      composer.outlinePass.visibleEdgeColor.set(redThree)
 
       if (events.operation.mesh == mesh) { clearMeshOperation() }
 

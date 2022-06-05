@@ -1,10 +1,9 @@
 // Link: https://threejs.org/docs/#api/en/geometries/CircleGeometry
 
-import {black} from "../colors/three/grayscale.js"
 import {addMesh} from "../../panels/mesh.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
-export function newCircle(radius=10, radialSegments=42, position=[0, 0, 0], material="normal", color=black) {
+export function newCircle(radius=10, radialSegments=42, position=[0, 0, 0], material="normal", color=blackThree) {
 
   let geometry = new THREE.CircleGeometry(radius, radialSegments)
   let circle = new THREE.Mesh(geometry, meshMaterial(material, color))
@@ -18,7 +17,7 @@ export function newCircle(radius=10, radialSegments=42, position=[0, 0, 0], mate
 
 }
 
-export function addCircle(radius=10, radialSegments=42, position=[0, 0, 0], material="normal", color=black) {
+export function addCircle(radius=10, radialSegments=42, position=[0, 0, 0], material="normal", color=blackThree) {
 
   return addMesh(newCircle(radius, radialSegments, position, material, color))
 

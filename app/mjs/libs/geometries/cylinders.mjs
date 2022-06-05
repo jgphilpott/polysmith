@@ -1,10 +1,9 @@
 // Link: https://threejs.org/docs/#api/en/geometries/CylinderGeometry
 
-import {black} from "../colors/three/grayscale.js"
 import {addMesh} from "../../panels/mesh.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
-export function newCylinder(length=10, positiveRadius=5, negativeRadius=5, radialSegments=42, position=[0, 0, 0], material="normal", color=black) {
+export function newCylinder(length=10, positiveRadius=5, negativeRadius=5, radialSegments=42, position=[0, 0, 0], material="normal", color=blackThree) {
 
   let geometry = new THREE.CylinderGeometry(positiveRadius, negativeRadius, length, radialSegments)
   let cylinder = new THREE.Mesh(geometry, meshMaterial(material, color))
@@ -19,7 +18,7 @@ export function newCylinder(length=10, positiveRadius=5, negativeRadius=5, radia
 
 }
 
-export function addCylinder(length=10, positiveRadius=5, negativeRadius=5, radialSegments=42, position=[0, 0, 0], material="normal", color=black) {
+export function addCylinder(length=10, positiveRadius=5, negativeRadius=5, radialSegments=42, position=[0, 0, 0], material="normal", color=blackThree) {
 
   return addMesh(newCylinder(length, positiveRadius, negativeRadius, radialSegments, position, material, color))
 

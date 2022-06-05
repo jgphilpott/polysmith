@@ -1,6 +1,3 @@
-import * as threeRainbow from "../libs/colors/three/rainbow.js"
-import * as threeGrayscale from "../libs/colors/three/grayscale.js"
-
 import {addMeshPanel, updateMesh, removeMesh} from "./mesh.mjs"
 
 export function addMeshesPanel() {
@@ -65,7 +62,7 @@ export function updateMeshesPanel(type, mesh) {
 
       tableRow.mouseenter(function(event) {
 
-        let visibleEdgeColor = mesh.lock == "locked" ? threeRainbow.red : threeGrayscale.black
+        let visibleEdgeColor = mesh.lock == "locked" ? redThree : blackThree
 
         data.composer.outlinePass.visibleEdgeColor.set(visibleEdgeColor)
         data.composer.outlinePass.selectedObjects = [mesh]

@@ -1,10 +1,9 @@
 // Link: https://threejs.org/docs/#api/en/geometries/ConeGeometry
 
-import {black} from "../colors/three/grayscale.js"
 import {addMesh} from "../../panels/mesh.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
-export function newCone(radius=5, height=10, radialSegments=42, position=[0, 0, 0], material="normal", color=black) {
+export function newCone(radius=5, height=10, radialSegments=42, position=[0, 0, 0], material="normal", color=blackThree) {
 
   let geometry = new THREE.ConeGeometry(radius, height, radialSegments)
   let cone = new THREE.Mesh(geometry, meshMaterial(material, color))
@@ -19,7 +18,7 @@ export function newCone(radius=5, height=10, radialSegments=42, position=[0, 0, 
 
 }
 
-export function addCone(radius=5, height=10, radialSegments=42, position=[0, 0, 0], material="normal", color=black) {
+export function addCone(radius=5, height=10, radialSegments=42, position=[0, 0, 0], material="normal", color=blackThree) {
 
   return addMesh(newCone(radius, height, radialSegments, position, material, color))
 

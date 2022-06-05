@@ -1,6 +1,4 @@
-import {black} from "../colors/three/grayscale.js"
-
-export function meshMaterial(type="normal", color=black, side=THREE.DoubleSide) {
+export function meshMaterial(type="normal", color=blackThree, side=THREE.DoubleSide) {
 
   let material = null
 
@@ -52,7 +50,7 @@ export function meshMaterial(type="normal", color=black, side=THREE.DoubleSide) 
 
     material.transparent = true
 
-    if (color == black) {
+    if (color == blackThree) {
       material.metalness = -25
       material.roughness = 0.75
     } else {

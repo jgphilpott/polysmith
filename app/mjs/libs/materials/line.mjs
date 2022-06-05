@@ -1,7 +1,6 @@
-import {black} from "../colors/three/grayscale.js"
 import {LineMaterial} from "../../../libs/js/LineMaterial.mjs"
 
-export function lineMaterial(type="basic", color=black, linewidth=1, dashed=false, dashSize=3, gapSize=2, vertexColors=false, alphaToCoverage=false) {
+export function lineMaterial(type="basic", color=blackThree, linewidth=1, dashed=false, dashSize=3, gapSize=2, vertexColors=false, alphaToCoverage=false) {
 
   let material = null
 

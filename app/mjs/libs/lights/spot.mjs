@@ -1,8 +1,6 @@
 // Link: https://threejs.org/docs/#api/en/lights/SpotLight
 
-import {white} from "../colors/three/grayscale.js"
-
-export function addSpotLight(color=white, intensity=1, position={x: scale, y: scale, z: scale}) {
+export function addSpotLight(color=whiteThree, intensity=1, position={x: scale, y: scale, z: scale}) {
 
   let spotLight = new THREE.SpotLight(color, intensity)
 

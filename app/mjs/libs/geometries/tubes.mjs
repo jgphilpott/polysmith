@@ -1,6 +1,5 @@
 // Link: https://threejs.org/docs/#api/en/geometries/TubeGeometry
 
-import {black} from "../colors/three/grayscale.js"
 import {addMesh} from "../../panels/mesh.mjs"
 import {meshMaterial} from "../materials/mesh.mjs"
 
@@ -18,7 +17,7 @@ export function newPath(vertices=[[]]) {
 
 }
 
-export function newTube(vertices=[[10, 10, 10], [-10, -10, -10]], radius=1, radialSegments=42, tubularSegments=1, closed=false, material="normal", color=black) {
+export function newTube(vertices=[[10, 10, 10], [-10, -10, -10]], radius=1, radialSegments=42, tubularSegments=1, closed=false, material="normal", color=blackThree) {
 
   let geometry = new THREE.TubeGeometry(newPath(vertices), tubularSegments, radius, radialSegments, closed)
   let tube = new THREE.Mesh(geometry, meshMaterial(material, color))
@@ -30,7 +29,7 @@ export function newTube(vertices=[[10, 10, 10], [-10, -10, -10]], radius=1, radi
 
 }
 
-export function addTube(vertices=[[10, 10, 10], [-10, -10, -10]], radius=1, radialSegments=42, tubularSegments=1, closed=false, material="normal", color=black) {
+export function addTube(vertices=[[10, 10, 10], [-10, -10, -10]], radius=1, radialSegments=42, tubularSegments=1, closed=false, material="normal", color=blackThree) {
 
   return addMesh(newTube(vertices, radius, radialSegments, tubularSegments, closed, material, color))
 

@@ -1,5 +1,4 @@
 import {localMeshes} from "../files/local.mjs"
-import {black, white} from "../colors/three/grayscale.js"
 
 import {addAmbientLight} from "../lights/ambient.mjs"
 import {addPointLight} from "../lights/point.mjs"
@@ -30,7 +29,7 @@ export function setup() {
   canvas.setAttribute("id", "canvas")
 
   data.scene = scene = new THREE.Scene()
-  scene.background = white
+  scene.background = whiteThree
 
   data.lights = lights = []
   lights.push(addPointLight())
@@ -58,8 +57,8 @@ export function setup() {
     composer.shaderPass = new THREE.ShaderPass(THREE.CopyShader)
     composer.outlinePass = new THREE.OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight ), scene, camera)
 
-    composer.outlinePass.hiddenEdgeColor.set(white)
-    composer.outlinePass.visibleEdgeColor.set(black)
+    composer.outlinePass.hiddenEdgeColor.set(whiteThree)
+    composer.outlinePass.visibleEdgeColor.set(blackThree)
     composer.outlinePass.overlayMaterial.blending = THREE.CustomBlending
 
     composer.addPass(composer.renderPass)

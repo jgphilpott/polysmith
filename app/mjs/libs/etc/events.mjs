@@ -4,10 +4,6 @@ import {exportFile} from "../files/export.mjs"
 import {localMeshes} from "../files/local.mjs"
 import {contextMenu} from "../../panels/context.mjs"
 import {addMesh, updateMesh} from "../../panels/mesh.mjs"
-import {grayGlass, lightGrayGlass} from "../colors/glass/grayscale.js"
-
-import {red, green, blue} from "../colors/three/rainbow.js"
-import {black, white} from "../colors/three/grayscale.js"
 
 export function addEvents() {
 
@@ -98,7 +94,7 @@ export function addPanelEvents(panel) {
     if (id == "mesh") {
 
       let mesh = panel.data("mesh")
-      let visibleEdgeColor = mesh.lock == "locked" ? red : black
+      let visibleEdgeColor = mesh.lock == "locked" ? redThree : blackThree
 
       composer.outlinePass.visibleEdgeColor.set(visibleEdgeColor)
       composer.outlinePass.selectedObjects = [mesh]
@@ -151,13 +147,13 @@ export function addMeshEvents(mesh) {
 
     if (events.operation.key) {
 
-      events.operation.mesh.uuid == mesh.uuid ? composer.outlinePass.visibleEdgeColor.set(red) : composer.outlinePass.visibleEdgeColor.set(green)
+      events.operation.mesh.uuid == mesh.uuid ? composer.outlinePass.visibleEdgeColor.set(redThree) : composer.outlinePass.visibleEdgeColor.set(greenThree)
       events.operation.mesh.uuid == mesh.uuid ? $("#canvas").css("cursor", "not-allowed") : $("#canvas").css("cursor", "copy")
 
 
     } else {
 
-      mesh.lock == "locked" ? composer.outlinePass.visibleEdgeColor.set(red) : composer.outlinePass.visibleEdgeColor.set(black)
+      mesh.lock == "locked" ? composer.outlinePass.visibleEdgeColor.set(redThree) : composer.outlinePass.visibleEdgeColor.set(blackThree)
       mesh.lock == "locked" ? $("#canvas").css("cursor", "not-allowed") : $("#canvas").css("cursor", "grab")
 
 
@@ -286,7 +282,7 @@ export function makeDragable(element, origEvent=null) {
         tooltips.distanceLines.push(xDistanceLine, yDistanceLine, zDistanceLine)
         scene.add(xDistanceLine, yDistanceLine, zDistanceLine)
 
-        composer.outlinePass.visibleEdgeColor.set(black)
+        composer.outlinePass.visibleEdgeColor.set(blackThree)
         composer.outlinePass.selectedObjects = [element]
 
         element.position.x = coordinates.x
@@ -358,7 +354,7 @@ export function makeDragable(element, origEvent=null) {
 
           let mesh = addMesh(null, {name: element.attr("title"), class: element.attr("id"), position: {x: x, y: y, z: z}})
 
-          composer.outlinePass.visibleEdgeColor.set(black)
+          composer.outlinePass.visibleEdgeColor.set(blackThree)
           composer.outlinePass.selectedObjects = [mesh]
 
           $("#canvas").css("cursor", "grab")

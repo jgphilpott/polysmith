@@ -1,6 +1,5 @@
 // Link: https://threejs.org/docs/#api/en/objects/Line
 
-import {black} from "../colors/three/grayscale.js"
 import {addMesh} from "../../panels/mesh.mjs"
 import {lineMaterial} from "../materials/line.mjs"
 
@@ -18,7 +17,7 @@ export function lineGeometry(vertices=[[10, 10, 10], [-10, -10, -10]]) {
 
 }
 
-export function newLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=black, linewidth=1, dashed=false, dashSize=3, gapSize=2) {
+export function newLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=blackThree, linewidth=1, dashed=false, dashSize=3, gapSize=2) {
 
   let line = new THREE.Line(lineGeometry(vertices), lineMaterial(material, color, linewidth, dashed, dashSize, gapSize)).computeLineDistances()
 
@@ -29,7 +28,7 @@ export function newLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basi
 
 }
 
-export function addLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=black, linewidth=1, dashed=false, dashSize=3, gapSize=2) {
+export function addLine(vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=blackThree, linewidth=1, dashed=false, dashSize=3, gapSize=2) {
 
   return addMesh(newLine(vertices, material, color, linewidth, dashed, dashSize, gapSize))
 
