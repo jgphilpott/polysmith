@@ -53,6 +53,17 @@ export function addEvents() {
 
   })
 
+  $("#nav #title span").on("keypress keydown keyup", function(event) { event.stopPropagation() }).blur(function(event) {
+
+    let text = $(this)[0].innerText.replace(/[^a-zA-Z0-9-_ ]/g, "").trim()
+    let title = text ? text : data.title.toUpperCase()
+
+    updateSettings("ui", "title", title)
+
+    $(this).text(title)
+
+  })
+
   $("#canvas").mousedown(function(event) {
 
     window.getSelection().removeAllRanges()

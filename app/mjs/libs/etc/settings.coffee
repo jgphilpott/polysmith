@@ -16,7 +16,7 @@ getSettings = () ->
 
             ui:
 
-                title = "POLYMORPH"
+                title: "POLYMORPH"
                 navbar: true
                 forkme: true
                 help: true

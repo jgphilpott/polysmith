@@ -62,7 +62,7 @@ export function exportFile(type) {
   }
 
   if (exporter) file = new Blob([exporter.parse(scene)], {type: "text/plain"})
-  if (file && extension) saveAs(file, data.title.toLowerCase() + "." + extension)
+  if (file && extension) saveAs(file, settings.ui.title.toLowerCase() + "." + extension)
 
   addAxes()
 
