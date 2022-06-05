@@ -70,8 +70,6 @@ export function updateMeshesPanel(type, mesh) {
         data.composer.outlinePass.visibleEdgeColor.set(visibleEdgeColor)
         data.composer.outlinePass.selectedObjects = [mesh]
 
-        event.stopPropagation()
-
       }).mouseleave(function(event) {
 
         data.composer.outlinePass.selectedObjects = []

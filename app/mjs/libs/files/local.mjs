@@ -25,6 +25,7 @@ export async function localMeshes(action, mesh) {
 
     mesh.updateMatrix()
 
+    let meshIndex = null
     let meshJSON = mesh.toJSON()
 
     meshJSON.metadata.name = mesh.name
@@ -46,7 +47,9 @@ export async function localMeshes(action, mesh) {
 
     } else if (action == "update") {
 
-      localMeshes[localMeshes.findIndex(localMesh => localMesh.object.uuid == mesh.uuid)] = meshJSON
+      meshIndex = localMeshes.findIndex(localMesh => localMesh.object.uuid == mesh.uuid)
+
+      localMeshes[meshIndex] = meshJSON
 
     } else if (action == "remove") {
 
@@ -54,7 +57,11 @@ export async function localMeshes(action, mesh) {
 
     }
 
-    localWrite("meshes", localMeshes)
+    if (!localWrite("meshes", localMeshes) || (action == "update" && meshIndex < 0)) {
+
+      console.warn("You have reached the maximum local storage allowance, some of your changes may not be saved. To access more storage space please signup and/or login.")
+
+    }
 
   }
 

@@ -204,9 +204,9 @@ export function addMeshEvents(mesh) {
 export function makeDragable(element, origEvent=null) {
 
   let dragged = null
-  let xOffset, yOffset = 0
   let max = scale * 3
   let min = - (scale * 3)
+  let xOffset, yOffset = 0
 
   function start(event) {
 
@@ -214,12 +214,12 @@ export function makeDragable(element, origEvent=null) {
 
       if (element.lock != "locked") {
 
-        $("#canvas").css("cursor", "grabbing")
-
         let coordinates = world2screenCoordinates(element.position.x, element.position.y, element.position.z)
 
         xOffset = origEvent.clientX - coordinates.x
         yOffset = origEvent.clientY - coordinates.y
+
+        $("#canvas").css("cursor", "grabbing")
 
         tooltips.distanceLines = []
 
@@ -274,22 +274,23 @@ export function makeDragable(element, origEvent=null) {
         coordinates.x = coordinates.x < min ? min : coordinates.x > max ? max : coordinates.x
         coordinates.y = coordinates.y < min ? min : coordinates.y > max ? max : coordinates.y
 
-        $("#mesh." + element.uuid + " #position-x input").val(coordinates.x.toFixed(2))
-        $("#mesh." + element.uuid + " #position-y input").val(coordinates.y.toFixed(2))
-
-        element.position.x = coordinates.x
-        element.position.y = coordinates.y
-
-        for (let i = 0; i < tooltips.distanceLines.length; i++) { scene.remove(tooltips.distanceLines[i]) }
-
         let xDistanceLine = newLine([[0, coordinates.y, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
         let yDistanceLine = newLine([[coordinates.x, 0, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
         let zDistanceLine = newLine([[coordinates.x, coordinates.y, 0], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
 
+        for (let i = 0; i < tooltips.distanceLines.length; i++) { scene.remove(tooltips.distanceLines[i]) }
+
+        $("#mesh." + element.uuid + " #position-x input").val(coordinates.x.toFixed(2))
+        $("#mesh." + element.uuid + " #position-y input").val(coordinates.y.toFixed(2))
+
         tooltips.distanceLines.push(xDistanceLine, yDistanceLine, zDistanceLine)
         scene.add(xDistanceLine, yDistanceLine, zDistanceLine)
 
+        composer.outlinePass.visibleEdgeColor.set(black)
         composer.outlinePass.selectedObjects = [element]
+
+        element.position.x = coordinates.x
+        element.position.y = coordinates.y
 
       }
 
@@ -299,15 +300,16 @@ export function makeDragable(element, origEvent=null) {
 
       if (element.hasClass("panel")) {
 
-        element.css({top: eventY, left: eventX})
-
         element.css("cursor", "grabbing")
         element.find("*").css("cursor", "grabbing")
 
+        element.css({top: eventY, left: eventX})
+
       } else if (element.hasClass("shape")) {
 
+        $(".ghost-shape").css("cursor", "grabbing")
+
         $(".ghost-shape").css({top: eventY, left: eventX})
-        $("body").css("cursor", "grabbing")
 
       }
 
@@ -321,11 +323,11 @@ export function makeDragable(element, origEvent=null) {
 
       if (element.lock != "locked") {
 
-        localMeshes("update", element)
+        for (let i = 0; i < tooltips.distanceLines.length; i++) { scene.remove(tooltips.distanceLines[i]) }
 
         $("#canvas").css("cursor", "grab")
 
-        for (let i = 0; i < tooltips.distanceLines.length; i++) { scene.remove(tooltips.distanceLines[i]) }
+        localMeshes("update", element)
 
         tooltips.distanceLines = []
 
@@ -356,6 +358,7 @@ export function makeDragable(element, origEvent=null) {
 
           let mesh = addMesh(null, {name: element.attr("title"), class: element.attr("id"), position: {x: x, y: y, z: z}})
 
+          composer.outlinePass.visibleEdgeColor.set(black)
           composer.outlinePass.selectedObjects = [mesh]
 
           $("#canvas").css("cursor", "grab")
