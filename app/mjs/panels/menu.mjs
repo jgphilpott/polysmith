@@ -260,7 +260,7 @@ export function addMenuPanel() {
       panel.find(".sub-panel").css("display", "none")
 
       subPanel.css("display", "inline-block")
-      let panelWidth = subPanel.outerWidth() + 3
+      let panelWidth = subPanel.outerWidth()
       subPanel.css("display", "none")
 
       panel.animate({width: menuWidth + panelWidth}, {duration: duration, queue: false})
