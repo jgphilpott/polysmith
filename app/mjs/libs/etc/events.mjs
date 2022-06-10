@@ -154,6 +154,12 @@ export function addPanelEvents(panel) {
 
 export function addMeshEvents(mesh) {
 
+  events.addEventListener(mesh, "mouseover", function(event) {
+
+    drawMetabox("mouseover", mesh)
+
+  })
+
   events.addEventListener(mesh, "mousemove", function(event) {
 
     if (events.operation.key) {
@@ -179,6 +185,8 @@ export function addMeshEvents(mesh) {
     events.operation.key ? $("#canvas").css("cursor", "copy") : $("#canvas").css("cursor", "")
 
     composer.outlinePass.selectedObjects = []
+
+    eraseMetabox()
 
   })
 
