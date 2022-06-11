@@ -80,6 +80,12 @@ export function addEvents() {
 
     composer.outlinePass.selectedObjects = []
 
+    $("#metabox").css("display", "none")
+
+  }).mouseleave(function(event) {
+
+    $("#metabox").css("display", "block")
+
   })
 
   return events
@@ -99,6 +105,7 @@ export function addPanelEvents(panel) {
     events.zIndex += 1
 
     $("#context-menu.panel").remove()
+    $("#metabox").css("display", "none")
 
     panel.css("z-index", events.zIndex)
 
@@ -120,6 +127,8 @@ export function addPanelEvents(panel) {
     panel.animate({backgroundColor: grayGlass}, {duration: duration * 3, queue: queue})
 
   }).mouseleave(function(event) {
+
+    $("#metabox").css("display", "block")
 
     composer.outlinePass.selectedObjects = []
 
@@ -156,7 +165,7 @@ export function addMeshEvents(mesh) {
 
   events.addEventListener(mesh, "mouseover", function(event) {
 
-    drawMetabox("mouseover", mesh)
+    drawMetabox(mesh, event)
 
   })
 
@@ -177,6 +186,8 @@ export function addMeshEvents(mesh) {
     }
 
     composer.outlinePass.selectedObjects = [mesh]
+
+    drawMetabox(mesh, event)
 
   })
 
