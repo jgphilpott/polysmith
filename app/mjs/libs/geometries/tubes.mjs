@@ -1,7 +1,6 @@
 // Link: https://threejs.org/docs/#api/en/geometries/TubeGeometry
 
 import {addMesh} from "../../panels/mesh.mjs"
-import {meshMaterial} from "../materials/mesh.mjs"
 
 export function newPath(vertices=[[]]) {
 

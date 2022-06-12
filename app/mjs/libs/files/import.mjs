@@ -1,5 +1,4 @@
 import {addMesh} from "../../panels/mesh.mjs"
-import {meshMaterial} from "../materials/mesh.mjs"
 
 export function importFile(type, path, properties={}) {
 

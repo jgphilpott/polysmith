@@ -1,7 +1,6 @@
 // Link: https://threejs.org/docs/#api/en/geometries/PlaneGeometry
 
 import {addMesh} from "../../panels/mesh.mjs"
-import {meshMaterial} from "../materials/mesh.mjs"
 
 export function newPlane(width=10, height=10, position=[0, 0, 0], material="normal", color=blackThree) {
 

@@ -1,5 +1,3 @@
-import {meshMaterial} from "../libs/materials/mesh.mjs"
-
 import {newBox} from "../libs/geometries/boxes.mjs"
 import {newCylinder} from "../libs/geometries/cylinders.mjs"
 import {newSphere} from "../libs/geometries/spheres.mjs"

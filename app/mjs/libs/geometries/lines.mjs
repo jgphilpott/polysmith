@@ -1,7 +1,6 @@
 // Link: https://threejs.org/docs/#api/en/objects/Line
 
 import {addMesh} from "../../panels/mesh.mjs"
-import {lineMaterial} from "../materials/line.mjs"
 
 export function lineGeometry(vertices=[[10, 10, 10], [-10, -10, -10]]) {
 

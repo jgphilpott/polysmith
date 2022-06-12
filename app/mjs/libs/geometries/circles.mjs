@@ -1,7 +1,6 @@
 // Link: https://threejs.org/docs/#api/en/geometries/CircleGeometry
 
 import {addMesh} from "../../panels/mesh.mjs"
-import {meshMaterial} from "../materials/mesh.mjs"
 
 export function newCircle(radius=10, radialSegments=42, position=[0, 0, 0], material="normal", color=blackThree) {
 

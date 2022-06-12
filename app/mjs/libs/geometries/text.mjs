@@ -1,7 +1,6 @@
 // Link: https://threejs.org/docs/#examples/en/geometries/TextGeometry
 
 import {addMesh} from "../../panels/mesh.mjs"
-import {meshMaterial} from "../materials/mesh.mjs"
 
 export function newText(text="", size=12, height=3, bevel=false, font="ubuntu", material="normal", color=blackThree, center=true, x=0, y=0, z=0, rotateX=0, rotateY=0, rotateZ=0) {
 

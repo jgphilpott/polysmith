@@ -1,8 +1,5 @@
 import {setup} from "./libs/etc/setup.mjs"
 
-import {lineMaterial} from "./libs/materials/line.mjs"
-import {meshMaterial} from "./libs/materials/mesh.mjs"
-
 import {newBox, addBox} from "./libs/geometries/boxes.mjs"
 import {newCircle, addCircle} from "./libs/geometries/circles.mjs"
 import {newCone, addCone} from "./libs/geometries/cones.mjs"

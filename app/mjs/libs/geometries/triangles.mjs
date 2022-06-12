@@ -1,5 +1,4 @@
 import {addMesh} from "../../panels/mesh.mjs"
-import {meshMaterial} from "../materials/mesh.mjs"
 
 export function newTriangle(v1=[0, 0, 10 * Math.sqrt(3) / 4], v2=[0, 5, -10 * Math.sqrt(3) / 4], v3=[0, -5, -10 * Math.sqrt(3) / 4], material="normal", color=blackThree) {
 

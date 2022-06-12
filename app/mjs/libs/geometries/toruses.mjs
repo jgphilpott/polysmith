@@ -1,7 +1,6 @@
 // Link: https://threejs.org/docs/#api/en/geometries/TorusGeometry
 
 import {addMesh} from "../../panels/mesh.mjs"
-import {meshMaterial} from "../materials/mesh.mjs"
 
 export function newTorus(radius=5, thickness=1, radialSegments=42, tubularSegments=42, position=[0, 0, 0], material="normal", color=blackThree) {
 
