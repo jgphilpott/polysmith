@@ -1,8 +1,5 @@
 import {localMeshes} from "../files/local.mjs"
 
-import {addAmbientLight} from "../lights/ambient.mjs"
-import {addPointLight} from "../lights/point.mjs"
-
 import {addPerspectiveCamera} from "../cameras/perspective.mjs"
 
 import {addDragControls} from "../controls/drag.mjs"

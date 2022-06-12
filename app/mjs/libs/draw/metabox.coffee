@@ -43,10 +43,12 @@ drawMetabox = (object, event) ->
             yIntersection.text intersects[0].point.y.toFixed 2
             zIntersection.text intersects[0].point.z.toFixed 2
 
+    return metabox
+
 eraseMetabox = () ->
 
     metabox = $ "#metabox"
 
-    data = metabox.find "*"
+    metabox.find("*").remove()
 
-    data.remove()
+    return metabox
