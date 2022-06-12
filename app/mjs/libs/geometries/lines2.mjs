@@ -1,7 +1,5 @@
-import {LineGeometry} from "../../../libs/js/LineGeometry.mjs"
-import {lineMaterial} from "../materials/line.mjs"
-import {LineMesh} from "../../../libs/js/LineMesh.mjs"
 import {addMesh} from "../../panels/mesh.mjs"
+import {lineMaterial} from "../materials/line.mjs"
 
 export function lineGeometry(vertices=[[10, 10, 10], [-10, -10, -10]]) {
 
