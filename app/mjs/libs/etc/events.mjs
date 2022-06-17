@@ -165,7 +165,7 @@ export function addMeshEvents(mesh) {
 
   events.addEventListener(mesh, "mouseover", function(event) {
 
-    if (settings.ui.metabox) drawMetabox(mesh, event)
+    if (settings.ui.metabox) drawMetabox("draw", mesh, event.origDomEvent)
 
   })
 
@@ -187,7 +187,7 @@ export function addMeshEvents(mesh) {
 
     composer.outlinePass.selectedObjects = [mesh]
 
-    drawMetabox(mesh, event)
+    if (settings.ui.metabox) drawMetabox("update", mesh, event.origDomEvent)
 
   })
 

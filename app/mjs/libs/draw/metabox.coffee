@@ -1,19 +1,19 @@
-drawMetabox = (object, event) ->
+drawMetabox = (type, object, event) ->
 
     metabox = $ "#metabox"
 
     mouse = new THREE.Vector2()
     raycaster = new THREE.Raycaster()
 
-    mouse.x = (event.origDomEvent.clientX / window.innerWidth) * 2 - 1
-    mouse.y = - (event.origDomEvent.clientY / window.innerHeight) * 2 + 1
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1
+    mouse.y = - (event.clientY / window.innerHeight) * 2 + 1
 
     raycaster.setFromCamera mouse, camera
     intersects = raycaster.intersectObjects scene.children
 
-    switch event.type
+    switch type
 
-        when "mouseover"
+        when "draw"
 
             metabox.append "<h4 id='name'>" + object.name + "</h4>"
 
@@ -33,7 +33,7 @@ drawMetabox = (object, event) ->
             eventBox.append "<p id='y' class='intersection'><span class='label'>Y:</span> <span class='value'>" + intersects[0].point.y.toFixed 2 + "</span></p>"
             eventBox.append "<p id='z' class='intersection'><span class='label'>Z:</span> <span class='value'>" + intersects[0].point.z.toFixed 2 + "</span></p>"
 
-        when "mousemove"
+        when "update"
 
             xIntersection = metabox.find "#x.intersection span.value"
             yIntersection = metabox.find "#y.intersection span.value"
