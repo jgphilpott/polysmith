@@ -53,7 +53,7 @@ export function addEvents() {
 
   })
 
-  $("#nav #title span").on("keypress keydown keyup", function(event) { event.stopPropagation() }).blur(function(event) {
+  $("#navbar #title span").on("keypress keydown keyup", function(event) { event.stopPropagation() }).blur(function(event) {
 
     let text = $(this)[0].innerText.replace(/[^a-zA-Z0-9-_ ]/g, "").trim()
     let title = text ? text : data.title.toUpperCase()
@@ -76,7 +76,7 @@ export function addEvents() {
 
   })
 
-  $("#nav, #forkme, #metabox, #help").mouseenter(function(event) {
+  $("#navbar, #forkme, #metabox, #help").mouseenter(function(event) {
 
     composer.outlinePass.selectedObjects = []
 
@@ -165,7 +165,7 @@ export function addMeshEvents(mesh) {
 
   events.addEventListener(mesh, "mouseover", function(event) {
 
-    drawMetabox(mesh, event)
+    if (settings.ui.metabox) drawMetabox(mesh, event)
 
   })
 

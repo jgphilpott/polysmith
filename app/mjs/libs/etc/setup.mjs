@@ -17,7 +17,13 @@ export function setup() {
   data.tooltips = tooltips
 
   data.settings = settings = getSettings()
-  $("#nav #title span").text(settings.ui.title)
+
+  $("#navbar #title span").text(settings.ui.title)
+
+  $("#navbar").css("display", settings.ui.navbar ? "" : "none")
+  $("#forkme").css("display", settings.ui.forkme ? "" : "none")
+  $("#metabox").css("display", settings.ui.metabox ? "" : "none")
+  $("#help").css("display", settings.ui.help ? "" : "none")
 
   data.renderer = renderer = new THREE.WebGLRenderer({alpha: true, antialias: true, logarithmicDepthBuffer: true})
   renderer.setSize(window.innerWidth, window.innerHeight)

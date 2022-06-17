@@ -26,7 +26,7 @@ getSettings = () ->
                 forkme: true
                 metabox: true
                 help: true
-                shortcuts: "box", "cylinder", "sphere"
+                shortcuts: ["box", "cylinder", "sphere"]
 
             panels:
 
@@ -106,6 +106,10 @@ updateSuccess = (update) ->
 
     switch category
 
+        when "ui"
+
+            $("#" + setting + "").css "display", if value then "" else "none"
+
         when "panels"
 
             panel = $ "#" + setting + ".panel"
@@ -126,6 +130,10 @@ updateSuccess = (update) ->
                 if setting == "shapes" then $("#shortcuts.panel #toggle").attr "src", "/app/imgs/panels/nav/+.png"
 
             break
+
+        when "axes"
+
+            console.log setting, value
 
         when "camera"
 
