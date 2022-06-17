@@ -67,7 +67,7 @@ export function addMenuPanel() {
 
   function appendPanels() {
 
-    let panels = "<div id='panels-panel' class='sub-panel'><h3 id='title'>Panels</h3><form>"
+    let panels = "<div id='panels-panel' class='sub-panel'><h3 id='title'>Panels</h3>"
 
     panels += "<div><input id='camera' class='checkbox' type='checkbox' " + (settings.panels.camera ? "checked" : "") + "><label>Camera</label></div>"
     panels += "<div><input id='lights' class='checkbox' type='checkbox' " + (settings.panels.lights ? "checked" : "") + "><label>Lights</label></div>"
@@ -75,7 +75,7 @@ export function addMenuPanel() {
     panels += "<div><input id='shapes' class='checkbox' type='checkbox' " + (settings.panels.shapes ? "checked" : "") + "><label>Shapes</label></div>"
     panels += "<div><input id='shortcuts' class='checkbox' type='checkbox' " + (settings.panels.shortcuts ? "checked" : "") + "><label>Shortcuts</label></div>"
 
-    panel.append(panels + "</form></div>")
+    panel.append(panels + "</div>")
 
     let subPanel = panel.find("#panels-panel.sub-panel")
 
@@ -89,9 +89,36 @@ export function addMenuPanel() {
 
   function appendSettings() {
 
-    let settings = "<div id='settings-panel' class='sub-panel'><h3 id='title'>Settings</h3>"
+    panel.append("<div id='settings-panel' class='sub-panel'><h3 id='title'>Settings</h3></div>")
 
-    panel.append(settings + "</div>")
+    let settingsPanel = panel.find("#settings-panel.sub-panel")
+
+    settingsPanel.append("<img title='Advanced Settings' class='gear' src='/app/imgs/panels/tools/gear.png'>")
+
+    let general = "<div id='general-settings' class='settings-category'><h4>General</h4>"
+    let ui = "<div id='ui-settings' class='settings-category'><h4>UI</h4>"
+    let axes = "<div id='axes-settings' class='settings-category'><h4>Axes</h4>"
+
+    general += "<div><label>Scale</label><select id='general-scale'><option value='metric'>Metric</option><option value='imperial'>Imperial</option></select></div>"
+
+    ui += "<div><input id='ui-navbar' class='checkbox' type='checkbox' " + (settings.ui.navbar ? "checked" : "") + "><label>Navbar</label></div>"
+    ui += "<div><input id='ui-forkme' class='checkbox' type='checkbox' " + (settings.ui.forkme ? "checked" : "") + "><label>Forkme</label></div>"
+    ui += "<div><input id='ui-metabox' class='checkbox' type='checkbox' " + (settings.ui.metabox ? "checked" : "") + "><label>Metabox</label></div>"
+    ui += "<div><input id='ui-help' class='checkbox' type='checkbox' " + (settings.ui.help ? "checked" : "") + "><label>Help</label></div>"
+
+    axes += "<div><input id='axes-caps' class='checkbox' type='checkbox' " + (settings.axes.axesCaps ? "checked" : "") + "><label>Axes Caps</label></div>"
+
+    axes += "<div><input id='axes-x' class='checkbox' type='checkbox' " + (settings.axes.xAxis ? "checked" : "") + "><label>X Axis</label></div>"
+    axes += "<div><input id='axes-y' class='checkbox' type='checkbox' " + (settings.axes.yAxis ? "checked" : "") + "><label>Y Axis</label></div>"
+    axes += "<div><input id='axes-z' class='checkbox' type='checkbox' " + (settings.axes.zAxis ? "checked" : "") + "><label>Z Axis</label></div>"
+
+    axes += "<div><input id='axes-plane-xy' class='checkbox' type='checkbox' " + (settings.axes.xyPlane ? "checked" : "") + "><label>XY Plane</label></div>"
+    axes += "<div><input id='axes-plane-xz' class='checkbox' type='checkbox' " + (settings.axes.xzPlane ? "checked" : "") + "><label>XZ Plane</label></div>"
+    axes += "<div><input id='axes-plane-yz' class='checkbox' type='checkbox' " + (settings.axes.yzPlane ? "checked" : "") + "><label>YZ Plane</label></div>"
+
+    settingsPanel.append(general + "</div>")
+    settingsPanel.append(ui + "</div>")
+    settingsPanel.append(axes + "</div>")
 
   }
 

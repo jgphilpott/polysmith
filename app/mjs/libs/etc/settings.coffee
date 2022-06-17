@@ -14,13 +14,19 @@ getSettings = () ->
 
         data.settings =
 
+            general:
+
+                scale: tpye: "metric", size: 100
+                snap: grid: false, size: 1
+
             ui:
 
                 title: "POLYMORPH"
                 navbar: true
                 forkme: true
+                metabox: true
                 help: true
-                shortcuts: ["box", "cylinder", "sphere"]
+                shortcuts: "box", "cylinder", "sphere"
 
             panels:
 
@@ -44,12 +50,11 @@ getSettings = () ->
                 xyPlaneStep: 10
                 xzPlaneStep: 10
                 yzPlaneStep: 10
-                gridSnap: 1
 
             camera:
 
-                position: {x: 135, y: 135, z: 55}
-                target: {x: 0, y: 0, z: 0}
+                position: x: 135, y: 135, z: 55
+                target: x: 0, y: 0, z: 0
                 open: "speed"
 
             controls:

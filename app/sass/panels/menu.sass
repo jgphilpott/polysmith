@@ -111,26 +111,80 @@
 
     #panels-panel
 
-        form
+        padding: 14px
 
-            margin: 14px
+        div
+
+            display: flex
+            align-items: center
+
+            input
+
+                cursor: pointer
+
+            label
+
+                margin: 7px
+
+                cursor: grab
+
+    #settings-panel
+
+        width: 450px
+
+        #title, h3
+
+            padding-bottom: 0px
+
+        img.gear
+
+            position: fixed
+
+            margin: 7px
+
+            top: 0px
+            right: 0px
+
+            width: 14px
+            height: 14px
+
+            cursor: pointer
+
+            opacity: 0.5
+
+        .settings-category
+
+            display: inline-block
+            vertical-align: top
+
+            width: 150px
+            padding: 5px
+
+            h4
+
+                margin: 14px
+                text-align: center
 
             div
 
                 display: flex
                 align-items: center
 
-                input
-
-                    cursor: pointer
-
                 label
 
-                    margin: 7px
+                    margin: 5px
 
                     cursor: grab
 
-    #settings-panel
+                input,
+                select
+
+                    cursor: pointer
+
+                select
+
+                    outline: none
+                    border-radius: 5px
 
     #signup-panel,
     #login-panel

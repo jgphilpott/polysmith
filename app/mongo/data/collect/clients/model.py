@@ -16,10 +16,15 @@ class Client():
         else:
 
             self.settings = {
+                                "general": {
+                                    "scale": {"tpye": "metric", "size": 100},
+                                    "snap": {"grid": False, "size": 1}
+                                },
                                 "ui": {
                                     "title": "POLYMORPH",
                                     "navbar": True,
                                     "forkme": False,
+                                    "metabox": True,
                                     "help": False,
                                     "shortcuts": ["box", "cylinder", "sphere"]
                                 },
@@ -42,8 +47,7 @@ class Client():
                                     "yzPlane": False,
                                     "xyPlaneStep": 10,
                                     "xzPlaneStep": 10,
-                                    "yzPlaneStep": 10,
-                                    "gridSnap": 1
+                                    "yzPlaneStep": 10
                                 },
                                 "camera": {
                                     "position": {"x": 135, "y": 135, "z": 55},
