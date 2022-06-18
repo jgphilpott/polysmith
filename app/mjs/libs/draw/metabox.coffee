@@ -29,9 +29,9 @@ drawMetabox = (type, object, event) ->
             objectBox.append "<p id='volume' class='meta'><span class='label'>Volume:</span> <span class='value'>" + object.volume.toFixed 2 + "</span></p>"
 
             eventBox.append "<p class='title'>Event</p>"
-            eventBox.append "<p id='x' class='intersection'><span class='label'>X:</span> <span class='value'>" + intersects[0].point.x.toFixed 2 + "</span></p>"
-            eventBox.append "<p id='y' class='intersection'><span class='label'>Y:</span> <span class='value'>" + intersects[0].point.y.toFixed 2 + "</span></p>"
-            eventBox.append "<p id='z' class='intersection'><span class='label'>Z:</span> <span class='value'>" + intersects[0].point.z.toFixed 2 + "</span></p>"
+            eventBox.append "<p id='x' class='intersection'><span class='label'>X</span> <span class='value'>" + intersects[0].point.x.toFixed 2 + "</span></p>"
+            eventBox.append "<p id='y' class='intersection'><span class='label'>Y</span> <span class='value'>" + intersects[0].point.y.toFixed 2 + "</span></p>"
+            eventBox.append "<p id='z' class='intersection'><span class='label'>Z</span> <span class='value'>" + intersects[0].point.z.toFixed 2 + "</span></p>"
 
         when "update"
 

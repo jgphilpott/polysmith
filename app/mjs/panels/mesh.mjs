@@ -1,8 +1,3 @@
-import {newBox} from "../libs/geometries/boxes.mjs"
-import {newCylinder} from "../libs/geometries/cylinders.mjs"
-import {newSphere} from "../libs/geometries/spheres.mjs"
-import {newTorus} from "../libs/geometries/toruses.mjs"
-
 import {updateMeshesPanel} from "./meshes.mjs"
 import {addPanelEvents} from "../libs/etc/events.mjs"
 import {addMeshEvents} from "../libs/etc/events.mjs"

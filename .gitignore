@@ -28,6 +28,7 @@ app/css
 app/mjs/libs/colors/*/*.js
 app/mjs/libs/draw/*.js
 app/mjs/libs/etc/settings.js
+app/mjs/libs/geometries/*.js
 app/mjs/libs/lights/*.js
 app/mjs/libs/materials/*.js
 .npm

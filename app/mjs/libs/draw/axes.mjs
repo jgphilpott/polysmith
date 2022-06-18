@@ -1,10 +1,6 @@
 import {focus} from "../controls/focus.mjs"
 import {contextMenu} from "../../panels/context.mjs"
 
-import {newLine} from "../geometries/lines.mjs"
-import {newLine2} from "../geometries/lines2.mjs"
-import {newSphere} from "../geometries/spheres.mjs"
-
 const radius = scale / 100
 const segments = 25
 

@@ -62,6 +62,22 @@
     <script src="{{ url_for('static', filename='mjs/libs/materials/line.js') }}"></script>
     <script src="{{ url_for('static', filename='mjs/libs/materials/mesh.js') }}"></script>
 
+    <script src="{{ url_for('static', filename='mjs/libs/geometries/boxes.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/libs/geometries/circles.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/libs/geometries/cones.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/libs/geometries/cylinders.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/libs/geometries/knots.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/libs/geometries/lines.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/libs/geometries/lines2.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/libs/geometries/planes.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/libs/geometries/quadrilaterals.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/libs/geometries/rings.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/libs/geometries/spheres.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/libs/geometries/text.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/libs/geometries/toruses.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/libs/geometries/triangles.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/libs/geometries/tubes.js') }}"></script>
+
     <script src="{{ url_for('static', filename='mjs/libs/draw/metabox.js') }}"></script>
     <script src="{{ url_for('static', filename='mjs/libs/etc/settings.js') }}"></script>
     <script src="{{ url_for('static', filename='mjs/libs/etc/tools.js') }}"></script>
@@ -94,7 +110,21 @@
       var renderer, composer, canvas, scene
       let settings, controls, tooltips = {}
 
-      var box, circle, cone, cylinder, knot, line, line2, plane, quadrilateral, ring, sphere, text, torus, triangle, tube
+      let box = addBox
+      let circle = addCircle
+      let cone = addCone
+      let cylinder = addCylinder
+      let knot = addKnot
+      let line = addLine
+      let line2 = addLine2
+      let plane = addPlane
+      let quadrilateral = addQuadrilateral
+      let ring = addRing
+      let sphere = addSphere
+      let text = addText
+      let torus = addTorus
+      let triangle = addTriangle
+      let tube = addTube
 
       console.log("Welcome to " + data.title + "!")
 
