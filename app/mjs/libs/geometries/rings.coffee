@@ -2,16 +2,16 @@
 
 newRing = (innerRadius = 5, outerRadius = 10, radialSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
-  geometry = new THREE.RingGeometry innerRadius, outerRadius, radialSegments
-  ring = new THREE.Mesh geometry, meshMaterial material, color
+    geometry = new THREE.RingGeometry innerRadius, outerRadius, radialSegments
+    ring = new THREE.Mesh geometry, meshMaterial material, color
 
-  ring.position.set position[0], position[1], position[2]
+    ring.position.set position[0], position[1], position[2]
 
-  ring.class = "ring"
-  ring.name = "Ring"
+    ring.class = "ring"
+    ring.name = "Ring"
 
-  return ring
+    return ring
 
 addRing = (innerRadius = 5, outerRadius = 10, radialSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
-  return window.addMesh newRing innerRadius, outerRadius, radialSegments, position, material, color
+    return window.addMesh newRing innerRadius, outerRadius, radialSegments, position, material, color

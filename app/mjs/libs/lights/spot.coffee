@@ -2,10 +2,10 @@
 
 addSpotLight = (color = whiteThree, intensity = 1, position = x: scale, y: scale, z: scale) ->
 
-  spotLight = new THREE.SpotLight color, intensity
+    spotLight = new THREE.SpotLight color, intensity
 
-  spotLight.position.set position.x, position.y, position.z
+    spotLight.position.set position.x, position.y, position.z
 
-  scene.add spotLight
+    scene.add spotLight
 
-  return spotLight
+    return spotLight

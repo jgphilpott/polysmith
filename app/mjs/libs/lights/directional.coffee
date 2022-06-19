@@ -2,10 +2,10 @@
 
 addDirectionalLight = (color = whiteThree, intensity = 1, position = x: scale, y: scale, z: scale) ->
 
-  directionalLight = new THREE.DirectionalLight color, intensity
+    directionalLight = new THREE.DirectionalLight color, intensity
 
-  directionalLight.position.set position.x, position.y, position.z
+    directionalLight.position.set position.x, position.y, position.z
 
-  scene.add directionalLight
+    scene.add directionalLight
 
-  return directionalLight
+    return directionalLight

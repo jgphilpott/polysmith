@@ -2,10 +2,10 @@
 
 addPointLight = (color = whiteThree, intensity = 1, position = x: scale, y: scale, z: scale) ->
 
-  pointLight = new THREE.PointLight color, intensity
+    pointLight = new THREE.PointLight color, intensity
 
-  pointLight.position.set position.x, position.y, position.z
+    pointLight.position.set position.x, position.y, position.z
 
-  scene.add pointLight
+    scene.add pointLight
 
-  return pointLight
+    return pointLight

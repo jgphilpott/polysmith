@@ -2,16 +2,16 @@
 
 newCircle = (radius = 10, radialSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
-  geometry = new THREE.CircleGeometry radius, radialSegments
-  circle = new THREE.Mesh geometry, meshMaterial material, color
+    geometry = new THREE.CircleGeometry radius, radialSegments
+    circle = new THREE.Mesh geometry, meshMaterial material, color
 
-  circle.position.set position[0], position[1], position[2]
+    circle.position.set position[0], position[1], position[2]
 
-  circle.class = "circle"
-  circle.name = "Circle"
+    circle.class = "circle"
+    circle.name = "Circle"
 
-  return circle
+    return circle
 
 addCircle = (radius = 10, radialSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
-  return window.addMesh newCircle radius, radialSegments, position, material, color
+    return window.addMesh newCircle radius, radialSegments, position, material, color
