@@ -10,7 +10,7 @@ newQuadrilateral = (v1 = [0, 5, 5], v2 = [0, 5, -5], v3 = [0, -5, -5], v4 = [0, 
   geometry.faces.push new THREE.Face3 0, 1, 2
   geometry.faces.push new THREE.Face3 2, 3, 0
 
-  quadrilateral = new THREE.Mesh(new THREE.BufferGeometry().fromGeometry(geometry), meshMaterial(material, color))
+  quadrilateral = new THREE.Mesh new THREE.BufferGeometry().fromGeometry(geometry), meshMaterial(material, color)
 
   quadrilateral.class = "quadrilateral"
   quadrilateral.name = "Quadrilateral"
