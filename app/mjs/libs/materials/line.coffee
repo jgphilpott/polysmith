@@ -1,4 +1,4 @@
-lineMaterial = (type="basic", color=blackThree, linewidth=1, dashed=false, dashSize=3, gapSize=2, vertexColors=false, alphaToCoverage=false) ->
+lineMaterial = (type = "basic", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2, vertexColors = false, alphaToCoverage = false) ->
 
     material = null
 

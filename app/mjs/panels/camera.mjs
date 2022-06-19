@@ -83,9 +83,9 @@ export function addCameraPanel() {
     updateSettings("camera", "position", camera.position)
     updateSettings("camera", "target", camera.target)
 
-    updateSettings("controls", "dragSpeed", 25)
-    updateSettings("controls", "flySpeed", 25)
-    updateSettings("controls", "zoomSpeed", 25)
+    updateSettings("controls", "dragSpeed", 50)
+    updateSettings("controls", "flySpeed", 50)
+    updateSettings("controls", "zoomSpeed", 50)
 
   }).mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 

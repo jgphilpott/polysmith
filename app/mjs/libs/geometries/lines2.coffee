@@ -1,4 +1,4 @@
-line2Geometry = (vertices=[[10, 10, 10], [-10, -10, -10]]) ->
+line2Geometry = (vertices = [[10, 10, 10], [-10, -10, -10]]) ->
 
   positions = []
 
@@ -8,7 +8,7 @@ line2Geometry = (vertices=[[10, 10, 10], [-10, -10, -10]]) ->
 
   return new LineGeometry().setPositions positions
 
-newLine2 = (vertices=[[10, 10, 10], [-10, -10, -10]], material="fat", color=blackThree, linewidth=1, dashed=false, dashSize=3, gapSize=2) ->
+newLine2 = (vertices = [[10, 10, 10], [-10, -10, -10]], material = "fat", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2) ->
 
   line = new LineMesh(line2Geometry(vertices), lineMaterial(material, color, linewidth, dashed, dashSize, gapSize)).computeLineDistances()
 
@@ -17,6 +17,6 @@ newLine2 = (vertices=[[10, 10, 10], [-10, -10, -10]], material="fat", color=blac
 
   return line
 
-addLine2 = (vertices=[[10, 10, 10], [-10, -10, -10]], material="fat", color=blackThree, linewidth=1, dashed=false, dashSize=3, gapSize=2) ->
+addLine2 = (vertices = [[10, 10, 10], [-10, -10, -10]], material = "fat", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2) ->
 
   return window.addMesh newLine2 vertices, material, color, linewidth, dashed, dashSize, gapSize

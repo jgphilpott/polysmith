@@ -1,6 +1,6 @@
 # Link: https://threejs.org/docs/#api/en/geometries/ConeGeometry
 
-newCone = (radius=5, height=10, radialSegments=42, position=[0, 0, 0], material="normal", color=blackThree) ->
+newCone = (radius = 5, height = 10, radialSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
   geometry = new THREE.ConeGeometry radius, height, radialSegments
   cone = new THREE.Mesh geometry, meshMaterial material, color
@@ -13,6 +13,6 @@ newCone = (radius=5, height=10, radialSegments=42, position=[0, 0, 0], material=
 
   return cone
 
-addCone = (radius=5, height=10, radialSegments=42, position=[0, 0, 0], material="normal", color=blackThree) ->
+addCone = (radius = 5, height = 10, radialSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
   return window.addMesh newCone radius, height, radialSegments, position, material, color

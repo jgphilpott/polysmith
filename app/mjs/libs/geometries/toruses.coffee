@@ -1,6 +1,6 @@
 # Link: https://threejs.org/docs/#api/en/geometries/TorusGeometry
 
-newTorus = (radius=5, thickness=1, radialSegments=42, tubularSegments=42, position=[0, 0, 0], material="normal", color=blackThree) ->
+newTorus = (radius = 5, thickness = 1, radialSegments = 42, tubularSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
   geometry = new THREE.TorusGeometry radius, thickness, radialSegments, tubularSegments
   torus = new THREE.Mesh geometry, meshMaterial material, color
@@ -13,6 +13,6 @@ newTorus = (radius=5, thickness=1, radialSegments=42, tubularSegments=42, positi
 
   return torus
 
-addTorus = (radius=5, thickness=1, radialSegments=42, tubularSegments=42, position=[0, 0, 0], material="normal", color=blackThree) ->
+addTorus = (radius = 5, thickness = 1, radialSegments = 42, tubularSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
   return window.addMesh newTorus radius, thickness, radialSegments, tubularSegments, position, material, color

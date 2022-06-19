@@ -1,6 +1,6 @@
 # Link: https://threejs.org/docs/#api/en/lights/PointLight
 
-addPointLight = (color=whiteThree, intensity=1, position=x: scale, y: scale, z: scale) ->
+addPointLight = (color = whiteThree, intensity = 1, position = x: scale, y: scale, z: scale) ->
 
   pointLight = new THREE.PointLight color, intensity
 

@@ -1,6 +1,6 @@
 # Link: https://threejs.org/docs/#api/en/geometries/TubeGeometry
 
-newPath = (vertices=[[]]) ->
+newPath = (vertices = [[]]) ->
 
   path = []
 
@@ -10,7 +10,7 @@ newPath = (vertices=[[]]) ->
 
   return new THREE.CatmullRomCurve3 path
 
-newTube = (vertices=[[10, 10, 10], [-10, -10, -10]], radius=1, radialSegments=42, tubularSegments=1, closed=false, material="normal", color=blackThree) ->
+newTube = (vertices = [[10, 10, 10], [-10, -10, -10]], radius = 1, radialSegments = 42, tubularSegments = 1, closed = false, material = "normal", color = blackThree) ->
 
   geometry = new THREE.TubeGeometry newPath(vertices), tubularSegments, radius, radialSegments, closed
   tube = new THREE.Mesh geometry, meshMaterial material, color
@@ -20,6 +20,6 @@ newTube = (vertices=[[10, 10, 10], [-10, -10, -10]], radius=1, radialSegments=42
 
   return tube
 
-addTube = (vertices=[[10, 10, 10], [-10, -10, -10]], radius=1, radialSegments=42, tubularSegments=1, closed=false, material="normal", color=blackThree) ->
+addTube = (vertices = [[10, 10, 10], [-10, -10, -10]], radius = 1, radialSegments = 42, tubularSegments = 1, closed = false, material = "normal", color = blackThree) ->
 
   return window.addMesh newTube vertices, radius, radialSegments, tubularSegments, closed, material, color

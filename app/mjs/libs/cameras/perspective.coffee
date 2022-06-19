@@ -1,8 +1,8 @@
 # Link: https://threejs.org/docs/#api/en/cameras/PerspectiveCamera
 
-addPerspectiveCamera = () ->
+addPerspectiveCamera = (near = scale / 1000, far = scale * 10, fov = 75, aspect = window.innerWidth / window.innerHeight) ->
 
-    perspectiveCamera = new THREE.PerspectiveCamera 75, window.innerWidth / window.innerHeight, scale / 1000, scale * 10
+    perspectiveCamera = new THREE.PerspectiveCamera fov, aspect, near, far
 
     perspectiveCamera.up.set 0, 0, 1
 

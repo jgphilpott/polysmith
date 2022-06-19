@@ -1,6 +1,6 @@
 # Link: https://threejs.org/docs/#api/en/geometries/CylinderGeometry
 
-newCylinder = (length=10, positiveRadius=5, negativeRadius=5, radialSegments=42, position=[0, 0, 0], material="normal", color=blackThree) ->
+newCylinder = (length = 10, positiveRadius = 5, negativeRadius = 5, radialSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
   geometry = new THREE.CylinderGeometry positiveRadius, negativeRadius, length, radialSegments
   cylinder = new THREE.Mesh geometry, meshMaterial material, color
@@ -13,6 +13,6 @@ newCylinder = (length=10, positiveRadius=5, negativeRadius=5, radialSegments=42,
 
   return cylinder
 
-addCylinder = (length=10, positiveRadius=5, negativeRadius=5, radialSegments=42, position=[0, 0, 0], material="normal", color=blackThree) ->
+addCylinder = (length = 10, positiveRadius = 5, negativeRadius = 5, radialSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
   return window.addMesh newCylinder length, positiveRadius, negativeRadius, radialSegments, position, material, color

@@ -1,4 +1,4 @@
-meshMaterial = (type="normal", color=blackThree, side=THREE.DoubleSide) ->
+meshMaterial = (type = "normal", color = blackThree, side = THREE.DoubleSide) ->
 
     material = null
 

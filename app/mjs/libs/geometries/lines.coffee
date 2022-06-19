@@ -1,6 +1,6 @@
 # Link: https://threejs.org/docs/#api/en/objects/Line
 
-lineGeometry = (vertices=[[10, 10, 10], [-10, -10, -10]]) ->
+lineGeometry = (vertices = [[10, 10, 10], [-10, -10, -10]]) ->
 
   geometry = new THREE.Geometry()
 
@@ -10,7 +10,7 @@ lineGeometry = (vertices=[[10, 10, 10], [-10, -10, -10]]) ->
 
   return geometry
 
-newLine = (vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=blackThree, linewidth=1, dashed=false, dashSize=3, gapSize=2) ->
+newLine = (vertices = [[10, 10, 10], [-10, -10, -10]], material = "basic", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2) ->
 
   line = new THREE.Line(lineGeometry(vertices), lineMaterial(material, color, linewidth, dashed, dashSize, gapSize)).computeLineDistances()
 
@@ -19,6 +19,6 @@ newLine = (vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=bla
 
   return line
 
-addLine = (vertices=[[10, 10, 10], [-10, -10, -10]], material="basic", color=blackThree, linewidth=1, dashed=false, dashSize=3, gapSize=2) ->
+addLine = (vertices = [[10, 10, 10], [-10, -10, -10]], material = "basic", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2) ->
 
   return window.addMesh newLine vertices, material, color, linewidth, dashed, dashSize, gapSize

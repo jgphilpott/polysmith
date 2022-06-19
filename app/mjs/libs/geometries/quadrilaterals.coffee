@@ -1,4 +1,4 @@
-newQuadrilateral = (v1=[0, 5, 5], v2=[0, 5, -5], v3=[0, -5, -5], v4=[0, -5, 5], material="normal", color=blackThree) ->
+newQuadrilateral = (v1 = [0, 5, 5], v2 = [0, 5, -5], v3 = [0, -5, -5], v4 = [0, -5, 5], material = "normal", color = blackThree) ->
 
   geometry = new THREE.Geometry()
 
@@ -17,6 +17,6 @@ newQuadrilateral = (v1=[0, 5, 5], v2=[0, 5, -5], v3=[0, -5, -5], v4=[0, -5, 5], 
 
   return quadrilateral
 
-addQuadrilateral = (v1=[0, 5, 5], v2=[0, 5, -5], v3=[0, -5, -5], v4=[0, -5, 5], material="normal", color=blackThree) ->
+addQuadrilateral = (v1 = [0, 5, 5], v2 = [0, 5, -5], v3 = [0, -5, -5], v4 = [0, -5, 5], material = "normal", color = blackThree) ->
 
   return window.addMesh newQuadrilateral v1, v2, v3, v4, material, color

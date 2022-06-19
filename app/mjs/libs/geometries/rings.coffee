@@ -1,6 +1,6 @@
 # Link: https://threejs.org/docs/#api/en/geometries/RingGeometry
 
-newRing = (innerRadius=5, outerRadius=10, radialSegments=42, position=[0, 0, 0], material="normal", color=blackThree) ->
+newRing = (innerRadius = 5, outerRadius = 10, radialSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
   geometry = new THREE.RingGeometry innerRadius, outerRadius, radialSegments
   ring = new THREE.Mesh geometry, meshMaterial material, color
@@ -12,6 +12,6 @@ newRing = (innerRadius=5, outerRadius=10, radialSegments=42, position=[0, 0, 0],
 
   return ring
 
-addRing = (innerRadius=5, outerRadius=10, radialSegments=42, position=[0, 0, 0], material="normal", color=blackThree) ->
+addRing = (innerRadius = 5, outerRadius = 10, radialSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
   return window.addMesh newRing innerRadius, outerRadius, radialSegments, position, material, color

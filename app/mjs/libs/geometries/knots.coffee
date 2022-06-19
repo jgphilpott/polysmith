@@ -1,6 +1,6 @@
 # Link: https://threejs.org/docs/#api/en/geometries/TorusKnotGeometry
 
-newKnot = (size=10, thickness=3, radialSegments=42, tubularSegments=42, position=[0, 0, 0], material="normal", color=blackThree) ->
+newKnot = (size = 10, thickness = 3, radialSegments = 42, tubularSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
   geometry = new THREE.TorusKnotGeometry size, thickness, tubularSegments, radialSegments
   knot = new THREE.Mesh geometry, meshMaterial material, color
@@ -12,6 +12,6 @@ newKnot = (size=10, thickness=3, radialSegments=42, tubularSegments=42, position
 
   return knot
 
-addKnot = (size=10, thickness=3, radialSegments=42, tubularSegments=42, position=[0, 0, 0], material="normal", color=blackThree) ->
+addKnot = (size = 10, thickness = 3, radialSegments = 42, tubularSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
   return window.addMesh newKnot size, thickness, radialSegments, tubularSegments, position, material, color
