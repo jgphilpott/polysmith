@@ -1,7 +1,5 @@
 import {localMeshes} from "../files/local.mjs"
 
-import {addPerspectiveCamera} from "../cameras/perspective.mjs"
-
 import {addDragControls} from "../controls/drag.mjs"
 import {addFlyControls} from "../controls/fly.mjs"
 import {addZoomControls} from "../controls/zoom.mjs"
