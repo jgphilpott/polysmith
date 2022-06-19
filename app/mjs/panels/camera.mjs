@@ -21,7 +21,7 @@ export function addCameraPanel() {
 
     display == "none" ? updateSettings("camera", "open", id) : updateSettings("camera", "open", false)
 
-    fold(this)
+    foldPanel(this)
 
   }).mousedown(function(event) { event.stopPropagation() }) .mouseup(function(event) { event.stopPropagation() })
 
@@ -69,7 +69,7 @@ export function addCameraPanel() {
 
     event.stopPropagation()
 
-    speed.find(".slider").slider("value", 25)
+    speed.find(".slider").slider("value", 50)
 
     sliderStyle(speed.find("#drag.slider"))
     sliderStyle(speed.find("#fly.slider"))

@@ -261,7 +261,7 @@ export function addMeshPanel(mesh, coordinates=null) {
     panel.find("#trash").click(function(event) { event.stopPropagation(); if (mesh.lock != "locked") removeMesh(mesh) })
     panel.find(".tool").mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
-    panel.find(".fold, h4").click(function(event) { event.stopPropagation(); fold(this) }).mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
+    panel.find(".fold, h4").click(function(event) { event.stopPropagation(); foldPanel(this) }).mousedown(function(event) { event.stopPropagation() }).mouseup(function(event) { event.stopPropagation() })
 
     panel.find("input").keypress(function(event) { event.stopPropagation(); if (event.keyCode == 13) this.blur() })
     panel.find("input").keydown(function(event) { event.stopPropagation(); if (mesh.lock == "locked") event.preventDefault() })
