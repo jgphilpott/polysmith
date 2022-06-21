@@ -234,7 +234,7 @@ getVolume = (mesh) ->
     p2 = new THREE.Vector3()
     p3 = new THREE.Vector3()
 
-    if !geometry.isBufferGeometry
+    if not geometry.isBufferGeometry
 
         try
 
