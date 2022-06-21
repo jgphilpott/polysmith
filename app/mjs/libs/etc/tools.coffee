@@ -92,7 +92,7 @@ centerZ = (boundingBox) ->
 
 getBoundingBox = (mesh) ->
 
-    if !mesh.geometry.boundingBox
+    if not mesh.geometry.boundingBox
 
         xVertices = []
         yVertices = []
