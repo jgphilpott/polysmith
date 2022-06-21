@@ -1,4 +1,3 @@
-import {focus} from "../controls/focus.mjs"
 import {contextMenu} from "../../panels/context.mjs"
 
 const radius = scale / 100
@@ -116,7 +115,7 @@ export function addAxisX(min=(-scale), max=scale) {
 
   if (settings.axes.xAxis) {
 
-    let axisX = newLine2([[min, 0, 0], [max, 0, 0]], "fat", redThree, 3)
+    let axisX = newLine2([[min, 0, 0], [max, 0, 0]], "thick", redThree, 3)
 
     axisX.name = "axis-x"
 
@@ -183,7 +182,7 @@ export function addAxisY(min=(-scale), max=scale) {
 
   if (settings.axes.yAxis) {
 
-    let axisY = newLine2([[0, min, 0], [0, max, 0]], "fat", greenThree, 3)
+    let axisY = newLine2([[0, min, 0], [0, max, 0]], "thick", greenThree, 3)
 
     axisY.name = "axis-y"
 
@@ -250,7 +249,7 @@ export function addAxisZ(min=(-scale), max=scale) {
 
   if (settings.axes.zAxis) {
 
-    let axisZ = newLine2([[0, 0, min], [0, 0, max]], "fat", blueThree, 3)
+    let axisZ = newLine2([[0, 0, min], [0, 0, max]], "thick", blueThree, 3)
 
     axisZ.name = "axis-z"
 

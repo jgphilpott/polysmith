@@ -12,7 +12,7 @@ lineMaterial = (type = "basic", color = blackThree, linewidth = 1, dashed = fals
 
             material = new THREE.LineDashedMaterial color: color, linewidth: linewidth, dashSize: dashSize, gapSize: gapSize; break
 
-        when "fat"
+        when "thick"
 
             material = new LineMaterial color: color, linewidth: linewidth, dashed: dashed, vertexColors: vertexColors, alphaToCoverage: alphaToCoverage; break
 
@@ -20,7 +20,7 @@ lineMaterial = (type = "basic", color = blackThree, linewidth = 1, dashed = fals
 
         material.transparent = true
 
-        if type == "fat"
+        if type == "thick"
 
             material.resolution.set window.innerWidth, window.innerHeight
 

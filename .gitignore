@@ -27,6 +27,7 @@ app/css
 ### Scripts ###
 app/mjs/libs/cameras/*.js
 app/mjs/libs/colors/*/*.js
+app/mjs/libs/controls/*.js
 app/mjs/libs/draw/*.js
 app/mjs/libs/etc/*.js
 app/mjs/libs/geometries/*.js

@@ -119,7 +119,7 @@ clearMeshOperation = () ->
 
     for icon in operationIcons.toArray()
 
-        if !$(icon).hasClass "disabled"
+        if not $(icon).hasClass "disabled"
 
             $(icon).attr "src", "/app/imgs/panels/ops/default/" + icon.id + ".png"
 
@@ -181,7 +181,7 @@ getSurfaceArea = (mesh) ->
     surface = 0
     geometry = mesh.geometry
 
-    if geometry.faces && geometry.vertices
+    if geometry.faces and geometry.vertices
 
         for face in geometry.faces
 

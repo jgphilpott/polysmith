@@ -1,4 +1,3 @@
-import {focus} from "../libs/controls/focus.mjs"
 import {toggleShortcut} from "./shortcuts.mjs"
 import {addMeshPanel, addMesh, updateMesh, removeMesh} from "./mesh.mjs"
 
