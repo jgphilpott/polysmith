@@ -1,6 +1,8 @@
 import {toggleShortcut} from "./shortcuts.mjs"
 import {addMeshPanel, addMesh, updateMesh, removeMesh} from "./mesh.mjs"
 
+window.contextMenu = contextMenu
+
 export function addContextPanel() {
 
   $("#navbar, #forkme, #canvas, #metabox, #help").mouseenter(function() { $("#context-menu.panel").remove() })

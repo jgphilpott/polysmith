@@ -116,7 +116,7 @@ foldPanel = (element, duration = 1000) ->
 
     for tool in panel.find(".body").parent().toArray()
 
-        if $(tool).attr("id") != id && $(tool).find(".body").css("display") != "none"
+        if $(tool).attr("id") != id and $(tool).find(".body").css("display") != "none"
 
             $(tool).animate {height: head.height()}, {duration: duration, queue: false}
 

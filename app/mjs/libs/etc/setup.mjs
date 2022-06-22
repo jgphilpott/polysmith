@@ -2,7 +2,6 @@ import {localMeshes} from "../files/local.mjs"
 
 import {addPanels} from "../../panels/all.mjs"
 import {addEvents} from "../etc/events.mjs"
-import {addAxes} from "../draw/axes.mjs"
 
 export function setup() {
 

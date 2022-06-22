@@ -1,5 +1,3 @@
-import {addAxes, removeAxes} from "../draw/axes.mjs"
-
 export function exportFile(type) {
 
   removeAxes()
