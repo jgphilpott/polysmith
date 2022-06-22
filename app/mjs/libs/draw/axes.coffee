@@ -372,9 +372,7 @@ removeAxisCapEvents = (cap) ->
 
     events.removeEventListener cap, "mousemove"
     events.removeEventListener cap, "mouseout"
-
     events.removeEventListener cap, "mousedown"
     events.removeEventListener cap, "mouseup"
-
     events.removeEventListener cap, "dblclick"
     events.removeEventListener cap, "contextmenu"
