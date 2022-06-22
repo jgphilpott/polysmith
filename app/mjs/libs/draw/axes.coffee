@@ -67,8 +67,8 @@ removeAxisY = () ->
 
         if axis.name.includes("axis") and axis.name.includes("-y")
 
-            scene.remove axis
             axes.splice index, 1
+            scene.remove axis
 
 addAxisZ = (min = - scale, max = scale) ->
 
@@ -207,35 +207,48 @@ removePlaneYZ = () ->
             axes.splice index, 1
             scene.remove axis
 
-
-
 addAxesCaps = (min = - scale, max = scale) ->
 
-    if settings.axes.axesCaps
+    if settings.axes.axesCaps and (settings.axes.xAxis or settings.axes.yAxis or settings.axes.zAxis)
 
-        if settings.axes.xAxis or settings.axes.yAxis or settings.axes.zAxis
+        if settings.axes.xAxis
+            addAxisCapsX min, max
+        if settings.axes.yAxis
+            addAxisCapsY min, max
+        if settings.axes.zAxis
+            addAxisCapsZ min, max
 
-            centroid = newSphere 1, 25, 25, [0, 0, 0], "basic", blackThree
-
-            centroid.name = "centroid-cap"
-
-            addAxisCapEvents centroid
-
-            axes.push centroid
-            scene.add centroid
-
-            if settings.axes.xAxis
-                addAxisCapsX min, max
-            if settings.axes.yAxis
-                addAxisCapsY min, max
-            if settings.axes.zAxis
-                addAxisCapsZ min, max
+        addCentroidCap()
 
 removeAxesCaps = () ->
 
     for axis, index in axes by -1
 
-        if axis.name.includes "cap"
+        if axis.name.includes("cap")
+
+            removeAxisCapEvents axis
+
+            axes.splice index, 1
+            scene.remove axis
+
+addCentroidCap = () ->
+
+    if settings.axes.axesCaps and (settings.axes.xAxis or settings.axes.yAxis or settings.axes.zAxis)
+
+        centroid = newSphere 1, 25, 25, [0, 0, 0], "basic", blackThree
+
+        centroid.name = "centroid-cap"
+
+        addAxisCapEvents centroid
+
+        axes.push centroid
+        scene.add centroid
+
+removeCentroidCap = () ->
+
+    for axis, index in axes by -1
+
+        if axis.name.includes("cap") and axis.name.includes("centroid")
 
             removeAxisCapEvents axis
 
