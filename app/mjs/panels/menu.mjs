@@ -1,6 +1,3 @@
-import {exportFile, exportFiles} from "../libs/files/export.mjs"
-import {importFile, importFiles} from "../libs/files/import.mjs"
-
 export function addMenuPanel() {
 
   $("body").append("<div id='menu' class='panel'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")

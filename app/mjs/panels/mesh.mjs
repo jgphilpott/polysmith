@@ -1,7 +1,6 @@
 import {updateMeshesPanel} from "./meshes.mjs"
 import {addPanelEvents} from "../libs/etc/events.mjs"
 import {addMeshEvents} from "../libs/etc/events.mjs"
-import {localMeshes} from "../libs/files/local.mjs"
 
 let holdTimeout = null
 let holdInterval = null
