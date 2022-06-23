@@ -74,6 +74,8 @@ importFile = (type, path, properties = {}) ->
 
             loader.load path, (object) ->
 
+                objects = []
+
                 if type == "obj"
 
                     object.traverse (property) ->
@@ -81,13 +83,15 @@ importFile = (type, path, properties = {}) ->
                         if property instanceof THREE.Mesh
 
                             property.material = material
-                            mesh = property
+                            objects.push property
 
                 else
 
-                    mesh = new THREE.Mesh object, material
+                    objects.push new THREE.Mesh object, material
 
-                window.addMesh mesh
+                for object in objects
+
+                    window.addMesh object
 
     return mesh
 
