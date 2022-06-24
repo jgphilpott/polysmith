@@ -108,7 +108,15 @@ updateSuccess = (update) ->
 
         when "ui"
 
-            $("#" + setting + "").css "display", if value then "" else "none"
+            if setting == "navbar"
+
+                top = if value then 0 else -50
+
+                $("#navbar").animate {top: top}, {duration: 1000, queue: false}
+
+            else
+
+                $("#" + setting + "").css "display", if value then "" else "none"
 
         when "panels"
 

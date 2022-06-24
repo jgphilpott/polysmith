@@ -11,7 +11,7 @@ export function setup() {
 
   $("#navbar #title span").text(settings.ui.title)
 
-  $("#navbar").css("display", settings.ui.navbar ? "" : "none")
+  $("#navbar").css("top", settings.ui.navbar ? 0 : -50)
   $("#forkme").css("display", settings.ui.forkme ? "" : "none")
   $("#metabox").css("display", settings.ui.metabox ? "" : "none")
   $("#help").css("display", settings.ui.help ? "" : "none")
