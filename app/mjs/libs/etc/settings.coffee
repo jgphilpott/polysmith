@@ -133,7 +133,90 @@ updateSuccess = (update) ->
 
         when "axes"
 
-            console.log setting, value
+            if setting == "axesCaps"
+
+                if value then addAxesCaps() else removeAxesCaps()
+
+            if setting == "xAxis" or setting == "yAxis" or setting == "zAxis"
+
+                if value
+
+                    if setting == "xAxis"
+
+                        addAxisX()
+
+                        if settings.axes.axesCaps
+
+                            addAxisCapsX()
+
+                        if not settings.axes.yAxis and not settings.axes.zAxis
+
+                            addCentroidCap()
+
+                    if setting == "yAxis"
+
+                        addAxisY()
+
+                        if settings.axes.axesCaps
+
+                            addAxisCapsY()
+
+                        if not settings.axes.xAxis and not settings.axes.zAxis
+
+                            addCentroidCap()
+
+                    if setting == "zAxis"
+
+                        addAxisZ()
+
+                        if settings.axes.axesCaps
+
+                            addAxisCapsZ()
+
+                        if not settings.axes.xAxis and not settings.axes.yAxis
+
+                            addCentroidCap()
+
+                else
+
+                    if setting == "xAxis"
+
+                        removeAxisX()
+                        removeAxisCapsX()
+
+                        if not settings.axes.yAxis and not settings.axes.zAxis
+
+                            removeCentroidCap()
+
+                    if setting == "yAxis"
+
+                        removeAxisY()
+                        removeAxisCapsY()
+
+                        if not settings.axes.xAxis and not settings.axes.zAxis
+
+                            removeCentroidCap()
+
+                    if setting == "zAxis"
+
+                        removeAxisZ()
+                        removeAxisCapsZ()
+
+                        if not settings.axes.xAxis and not settings.axes.yAxis
+
+                            removeCentroidCap()
+
+            if setting == "xyPlane"
+
+                if value then addPlaneXY() else removePlaneXY()
+
+            if setting == "xzPlane"
+
+                if value then addPlaneXZ() else removePlaneXZ()
+
+            if setting == "yzPlane"
+
+                if value then addPlaneYZ() else removePlaneYZ()
 
         when "camera"
 
