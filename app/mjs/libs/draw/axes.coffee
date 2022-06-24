@@ -338,11 +338,11 @@ removeAxisCapsZ = () ->
 
 addAxisCapEvents = (cap) ->
 
-    events.addEventListener cap, "mousemove", (event) ->
+    events.addEventListener cap, "mouseover", (event) ->
 
         if not events.operation.key
 
-            $("#canvas").css "cursor", "pointer"
+            $("#canvas").css("cursor", "pointer")
 
     events.addEventListener cap, "mouseout", (event) ->
 
@@ -370,7 +370,7 @@ addAxisCapEvents = (cap) ->
 
 removeAxisCapEvents = (cap) ->
 
-    events.removeEventListener cap, "mousemove"
+    events.removeEventListener cap, "mouseover"
     events.removeEventListener cap, "mouseout"
     events.removeEventListener cap, "mousedown"
     events.removeEventListener cap, "mouseup"
