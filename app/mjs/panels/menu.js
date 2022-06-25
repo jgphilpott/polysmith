@@ -1,4 +1,4 @@
-export function addMenuPanel() {
+function addMenuPanel() {
 
   $("body").append("<div id='menu' class='panel'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")
 

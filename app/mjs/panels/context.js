@@ -1,15 +1,10 @@
-import {toggleShortcut} from "./shortcuts.mjs"
-import {addMeshPanel, addMesh, updateMesh, removeMesh} from "./mesh.mjs"
-
-window.contextMenu = contextMenu
-
-export function addContextPanel() {
+function addContextPanel() {
 
   $("#navbar, #forkme, #canvas, #metabox, #help").mouseenter(function() { $("#context-menu.panel").remove() })
 
 }
 
-export function contextMenu(type, element, event) {
+function contextMenu(type, element, event) {
 
   $("body").append("<div id='context-menu' class='panel'></div>")
 

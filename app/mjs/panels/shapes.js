@@ -1,9 +1,4 @@
-import {addMesh} from "./mesh.mjs"
-import {contextMenu} from "./context.mjs"
-import {makeDragable} from "../libs/etc/events.mjs"
-import {toggleShortcut} from "./shortcuts.mjs"
-
-export function addShapesPanel() {
+function addShapesPanel() {
 
   $("body").append("<div id='shapes' class='panel'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")
 

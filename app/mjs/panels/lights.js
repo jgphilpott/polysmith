@@ -1,4 +1,4 @@
-export function addLightsPanel() {
+function addLightsPanel() {
 
   $("body").append("<div id='lights' class='panel'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")
 

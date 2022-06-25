@@ -1,15 +1,7 @@
-import {updateMeshesPanel} from "./meshes.mjs"
-import {addPanelEvents} from "../libs/etc/events.mjs"
-import {addMeshEvents} from "../libs/etc/events.mjs"
-
 let holdTimeout = null
 let holdInterval = null
 
-window.addMesh = addMesh
-window.updateMesh = updateMesh
-window.removeMesh = removeMesh
-
-export function addMeshPanel(mesh, coordinates=null) {
+function addMeshPanel(mesh, coordinates=null) {
 
   let panel = $("#mesh." + mesh.uuid + "")
 
@@ -325,7 +317,7 @@ export function addMeshPanel(mesh, coordinates=null) {
 
 }
 
-export function addMesh(mesh=null, properties={}) {
+function addMesh(mesh=null, properties={}) {
 
   if (!mesh && properties.class) {
 
@@ -471,7 +463,7 @@ export function addMesh(mesh=null, properties={}) {
 
 }
 
-export function updateMesh(mesh, type, key=null, value=null, save=false) {
+function updateMesh(mesh, type, key=null, value=null, save=false) {
 
   let panel = $("#mesh." + mesh.uuid + "")
 
@@ -759,7 +751,7 @@ export function updateMesh(mesh, type, key=null, value=null, save=false) {
 
 }
 
-export function removeMesh(mesh) {
+function removeMesh(mesh) {
 
   if (mesh.lock != "locked") {
 

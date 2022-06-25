@@ -1,4 +1,4 @@
-export function addCameraPanel() {
+function addCameraPanel() {
 
   $("body").append("<div id='camera' class='panel'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")
 

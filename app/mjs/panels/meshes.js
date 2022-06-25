@@ -1,6 +1,4 @@
-import {addMeshPanel, updateMesh, removeMesh} from "./mesh.mjs"
-
-export function addMeshesPanel() {
+function addMeshesPanel() {
 
   $("body").append("<div id='meshes' class='panel'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")
 
@@ -32,7 +30,7 @@ export function addMeshesPanel() {
 
 }
 
-export function updateMeshesPanel(type, mesh) {
+function updateMeshesPanel(type, mesh) {
 
   let panel = $("#meshes.panel")
   let table = panel.find("#meshes.table tbody")

@@ -1,4 +1,4 @@
-export function addSettingsPanel() {
+function addSettingsPanel() {
 
   $("body").append("<div id='settings' class='panel'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")
 
