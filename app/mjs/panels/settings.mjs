@@ -4,7 +4,7 @@ export function addSettingsPanel() {
 
   let panel = $("#settings.panel")
 
-  panel.append("<h3>Settings</h3>")
+  panel.append("<h3>Advanced Settings</h3>")
 
   return panel
 

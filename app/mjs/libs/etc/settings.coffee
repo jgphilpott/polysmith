@@ -125,17 +125,19 @@ updateSuccess = (update) ->
 
             if value
 
-                checkbox.prop "checked", true
-                panel.css "visibility", "visible"
+                panel.css "z-index", events.zIndex += 1
 
-                if setting == "shapes" then $("#shortcuts.panel #toggle").attr "src", "/app/imgs/panels/nav/x.png"
+            checkbox.prop "checked", if value then true else false
+            panel.css "visibility", if value then "visible" else "hidden"
 
-            else
+            if setting == "settings"
 
-                checkbox.prop "checked", false
-                panel.css "visibility", "hidden"
+                $("#settings-panel.sub-panel img.gear").css "opacity", if value then 1 else 0.5
 
-                if setting == "shapes" then $("#shortcuts.panel #toggle").attr "src", "/app/imgs/panels/nav/+.png"
+            if setting == "shapes"
+
+                $("#shortcuts.panel #toggle").attr "src", "/app/imgs/panels/nav/" + (if value then "x" else "+") + ".png"
+
 
             break
 

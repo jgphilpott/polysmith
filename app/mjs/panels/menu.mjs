@@ -69,6 +69,7 @@ export function addMenuPanel() {
     panels += "<div><input id='camera' class='checkbox' type='checkbox' " + (settings.panels.camera ? "checked" : "") + "><label>Camera</label></div>"
     panels += "<div><input id='lights' class='checkbox' type='checkbox' " + (settings.panels.lights ? "checked" : "") + "><label>Lights</label></div>"
     panels += "<div><input id='meshes' class='checkbox' type='checkbox' " + (settings.panels.meshes ? "checked" : "") + "><label>Meshes</label></div>"
+    panels += "<div><input id='settings' class='checkbox' type='checkbox' " + (settings.panels.settings ? "checked" : "") + "><label>Settings</label></div>"
     panels += "<div><input id='shapes' class='checkbox' type='checkbox' " + (settings.panels.shapes ? "checked" : "") + "><label>Shapes</label></div>"
     panels += "<div><input id='shortcuts' class='checkbox' type='checkbox' " + (settings.panels.shortcuts ? "checked" : "") + "><label>Shortcuts</label></div>"
 
@@ -118,6 +119,12 @@ export function addMenuPanel() {
     subPanel.append(general + "</div>")
     subPanel.append(ui + "</div>")
     subPanel.append(axes + "</div>")
+
+    subPanel.find("img.gear").click(function(event) {
+
+      updateSettings("panels", "settings", !settings.panels.settings)
+
+    }).css("opacity", settings.panels.settings ? 1 : 0.5)
 
     subPanel.find(".checkbox").click(function(event) {
 

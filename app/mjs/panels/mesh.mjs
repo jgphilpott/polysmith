@@ -25,7 +25,7 @@ export function addMeshPanel(mesh, coordinates=null) {
     let name = panel.find("#name span"); name[0].innerText = mesh.name
     if (mesh.name == "") name.css("display", "none")
 
-    panel.css("z-index", events.zIndex + 1)
+    panel.css("z-index", events.zIndex += 1)
 
     panel.data("mesh", mesh)
 

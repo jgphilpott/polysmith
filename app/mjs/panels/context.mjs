@@ -53,6 +53,7 @@ export function contextMenu(type, element, event) {
 
           meshTableRow.find(".settings").attr("src", "/app/imgs/panels/tools/toggle/on.png")
 
+          meshPanel.css("z-index", events.zIndex += 1)
           meshPanel.css("visibility", "visible")
 
         } else {

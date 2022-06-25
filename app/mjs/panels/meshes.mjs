@@ -99,6 +99,7 @@ export function updateMeshesPanel(type, mesh) {
 
           $(this).attr("src", "/app/imgs/panels/tools/toggle/on.png")
 
+          panel.css("z-index", events.zIndex += 1)
           panel.css("visibility", "visible")
 
         } else {

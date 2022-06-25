@@ -98,12 +98,10 @@ export function addPanelEvents(panel) {
 
   panel.mouseenter(function(event) {
 
-    events.zIndex += 1
-
     $("#context-menu.panel").remove()
     $("#metabox").css("display", "none")
 
-    panel.css("z-index", events.zIndex)
+    panel.css("z-index", events.zIndex += 1)
 
     if (id == "mesh") {
 
