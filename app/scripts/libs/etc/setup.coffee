@@ -1,10 +1,10 @@
 setup = () ->
 
-    localMeshes "load"
+    if generate? then generate() else localMeshes "load"
 
     composer.renderPass = new THREE.RenderPass scene, camera
     composer.shaderPass = new THREE.ShaderPass THREE.CopyShader
-    composer.outlinePass = new THREE.OutlinePass new THREE.Vector2(window.innerWidth, window.innerHeight ), scene, camera
+    composer.outlinePass = new THREE.OutlinePass new THREE.Vector2(window.innerWidth, window.innerHeight), scene, camera
 
     composer.outlinePass.hiddenEdgeColor.set whiteThree
     composer.outlinePass.visibleEdgeColor.set blackThree
@@ -21,11 +21,3 @@ setup = () ->
         composer.render()
 
     animate()
-
-    try
-
-        generate()
-
-    catch error
-
-        generate = error

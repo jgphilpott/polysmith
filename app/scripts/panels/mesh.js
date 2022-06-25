@@ -1,6 +1,3 @@
-let holdTimeout = null
-let holdInterval = null
-
 function addMeshPanel(mesh, coordinates=null) {
 
   let panel = $("#mesh." + mesh.uuid + "")
@@ -8,6 +5,9 @@ function addMeshPanel(mesh, coordinates=null) {
   if (panel.length == 0) {
 
     $("body").append("<div id='mesh' class='panel " + mesh.uuid + "'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")
+
+    let holdTimeout = null
+    let holdInterval = null
 
     panel = $("#mesh." + mesh.uuid + "")
 

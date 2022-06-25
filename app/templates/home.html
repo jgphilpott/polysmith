@@ -10,8 +10,8 @@
 
     <link rel="shortcut icon" href="{{ url_for('static', filename='imgs/theme/logo.png') }}">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='libs/css/jQuery-UI.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css') }}">
 
     <script src="{{ url_for('static', filename='libs/js/sha256.js') }}"></script>
     <script src="{{ url_for('static', filename='libs/js/socket.js') }}"></script>
@@ -24,6 +24,9 @@
 
     <script src="{{ url_for('static', filename='libs/js/csgWrapper.js') }}"></script>
     <script src="{{ url_for('static', filename='libs/js/morph.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='libs/js/math.js') }}"></script>
+    <script src="{{ url_for('static', filename='libs/js/tools.js') }}"></script>
 
     <script src="{{ url_for('static', filename='libs/js/EffectComposer.js') }}"></script>
     <script src="{{ url_for('static', filename='libs/js/OutlinePass.js') }}"></script>
@@ -39,6 +42,12 @@
     <script src="{{ url_for('static', filename='libs/js/importers/PLYLoader.js') }}"></script>
     <script src="{{ url_for('static', filename='libs/js/importers/STLLoader.js') }}"></script>
     <script src="{{ url_for('static', filename='libs/js/importers/SVGLoader.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='libs/js/FileSaver.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/libs/files/export.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/libs/files/import.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/libs/files/local.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/libs/files/server.js') }}"></script>
 
     <script src="{{ url_for('static', filename='scripts/libs/colors/glass/grayscale.js') }}"></script>
     <script src="{{ url_for('static', filename='scripts/libs/colors/glass/rainbow.js') }}"></script>
@@ -64,14 +73,14 @@
     <script src="{{ url_for('static', filename='scripts/libs/controls/focus.js') }}"></script>
     <script src="{{ url_for('static', filename='scripts/libs/controls/zoom.js') }}"></script>
 
+    <script src="{{ url_for('static', filename='scripts/libs/materials/line.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/libs/materials/mesh.js') }}"></script>
+
     <script src="{{ url_for('static', filename='libs/js/LineSegmentsGeometry.js') }}"></script>
     <script src="{{ url_for('static', filename='libs/js/LineSegments.js') }}"></script>
     <script src="{{ url_for('static', filename='libs/js/LineGeometry.js') }}"></script>
     <script src="{{ url_for('static', filename='libs/js/LineMaterial.js') }}"></script>
     <script src="{{ url_for('static', filename='libs/js/LineMesh.js') }}"></script>
-
-    <script src="{{ url_for('static', filename='scripts/libs/materials/line.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/materials/mesh.js') }}"></script>
 
     <script src="{{ url_for('static', filename='scripts/libs/geometries/boxes.js') }}"></script>
     <script src="{{ url_for('static', filename='scripts/libs/geometries/circles.js') }}"></script>
@@ -97,16 +106,6 @@
 
     <script src="{{ url_for('static', filename='scripts/libs/draw/axes.js') }}"></script>
     <script src="{{ url_for('static', filename='scripts/libs/draw/metabox.js') }}"></script>
-
-    <script src="{{ url_for('static', filename='libs/js/FileSaver.js') }}"></script>
-
-    <script src="{{ url_for('static', filename='scripts/libs/files/export.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/files/import.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/files/local.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/files/server.js') }}"></script>
-
-    <script src="{{ url_for('static', filename='libs/js/math.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/tools.js') }}"></script>
 
     <script src="{{ url_for('static', filename='scripts/panels/all.js') }}"></script>
     <script src="{{ url_for('static', filename='scripts/panels/camera.js') }}"></script>
@@ -139,9 +138,9 @@
 
     </a>
 
-    <div id=metabox></div>
-
     <img title="Help" id="help" src="{{ url_for('static', filename='imgs/panels/nav/?.png') }}">
+
+    <div id=metabox></div>
 
     <script>
 
