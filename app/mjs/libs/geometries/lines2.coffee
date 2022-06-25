@@ -19,4 +19,4 @@ newLine2 = (vertices = [[10, 10, 10], [-10, -10, -10]], material = "thick", colo
 
 addLine2 = (vertices = [[10, 10, 10], [-10, -10, -10]], material = "thick", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2) ->
 
-    return window.addMesh newLine2 vertices, material, color, linewidth, dashed, dashSize, gapSize
+    return addMesh newLine2 vertices, material, color, linewidth, dashed, dashSize, gapSize

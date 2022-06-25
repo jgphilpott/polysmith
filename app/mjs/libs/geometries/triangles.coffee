@@ -17,4 +17,4 @@ newTriangle = (v1 = [0, 0, 10 * Math.sqrt(3) / 4], v2 = [0, 5, -10 * Math.sqrt(3
 
 addTriangle = (v1 = [0, 0, 10 * Math.sqrt(3) / 4], v2 = [0, 5, -10 * Math.sqrt(3) / 4], v3 = [0, -5, -10 * Math.sqrt(3) / 4], material = "normal", color = blackThree) ->
 
-    return window.addMesh newTriangle v1, v2, v3, material, color
+    return addMesh newTriangle v1, v2, v3, material, color

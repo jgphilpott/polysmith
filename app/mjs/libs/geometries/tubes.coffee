@@ -22,4 +22,4 @@ newTube = (vertices = [[10, 10, 10], [-10, -10, -10]], radius = 1, radialSegment
 
 addTube = (vertices = [[10, 10, 10], [-10, -10, -10]], radius = 1, radialSegments = 42, tubularSegments = 1, closed = false, material = "normal", color = blackThree) ->
 
-    return window.addMesh newTube vertices, radius, radialSegments, tubularSegments, closed, material, color
+    return addMesh newTube vertices, radius, radialSegments, tubularSegments, closed, material, color

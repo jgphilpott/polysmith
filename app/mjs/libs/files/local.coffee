@@ -10,7 +10,7 @@ localMeshes = (action, mesh) ->
 
             for mesh in meshes
 
-                window.addMesh loader.parse(mesh),
+                addMesh loader.parse(mesh),
 
                     name: mesh.metadata.name
                     lock: mesh.metadata.lock

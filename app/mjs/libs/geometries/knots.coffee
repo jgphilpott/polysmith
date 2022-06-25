@@ -14,4 +14,4 @@ newKnot = (size = 10, thickness = 3, radialSegments = 42, tubularSegments = 42, 
 
 addKnot = (size = 10, thickness = 3, radialSegments = 42, tubularSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
-    return window.addMesh newKnot size, thickness, radialSegments, tubularSegments, position, material, color
+    return addMesh newKnot size, thickness, radialSegments, tubularSegments, position, material, color

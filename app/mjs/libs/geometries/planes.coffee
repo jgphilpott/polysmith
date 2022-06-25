@@ -14,4 +14,4 @@ newPlane = (width = 10, height = 10, position = [0, 0, 0], material = "normal", 
 
 addPlane = (width = 10, height = 10, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
-    return window.addMesh newPlane width, height, position, material, color
+    return addMesh newPlane width, height, position, material, color

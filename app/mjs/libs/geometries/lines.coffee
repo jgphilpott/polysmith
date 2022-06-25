@@ -21,4 +21,4 @@ newLine = (vertices = [[10, 10, 10], [-10, -10, -10]], material = "basic", color
 
 addLine = (vertices = [[10, 10, 10], [-10, -10, -10]], material = "basic", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2) ->
 
-    return window.addMesh newLine vertices, material, color, linewidth, dashed, dashSize, gapSize
+    return addMesh newLine vertices, material, color, linewidth, dashed, dashSize, gapSize

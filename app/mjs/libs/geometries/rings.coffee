@@ -14,4 +14,4 @@ newRing = (innerRadius = 5, outerRadius = 10, radialSegments = 42, position = [0
 
 addRing = (innerRadius = 5, outerRadius = 10, radialSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
-    return window.addMesh newRing innerRadius, outerRadius, radialSegments, position, material, color
+    return addMesh newRing innerRadius, outerRadius, radialSegments, position, material, color

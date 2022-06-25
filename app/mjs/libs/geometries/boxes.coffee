@@ -14,4 +14,4 @@ newBox = (length = 10, width = 10, height = 10, position = [0, 0, 0], material =
 
 addBox = (length = 10, width = 10, height = 10, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
-    return window.addMesh newBox length, width, height, position, material, color
+    return addMesh newBox length, width, height, position, material, color

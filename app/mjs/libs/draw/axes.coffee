@@ -366,7 +366,7 @@ addAxisCapEvents = (cap) ->
 
     events.addEventListener cap, "contextmenu", (event) ->
 
-        window.contextMenu "axisCap", cap, event.origDomEvent
+        contextMenu "axisCap", cap, event.origDomEvent
 
 removeAxisCapEvents = (cap) ->
 

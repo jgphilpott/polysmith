@@ -39,4 +39,4 @@ addText = (text = "Text", size = 12, height = 3, bevel = false, font = "ubuntu",
 
     loader.load "./app/fonts/JSON/" + font + ".json", (font) ->
 
-        window.addMesh newText text, size, height, bevel, font, material, color, center, x, y, z, rotateX, rotateY, rotateZ
+        addMesh newText text, size, height, bevel, font, material, color, center, x, y, z, rotateX, rotateY, rotateZ

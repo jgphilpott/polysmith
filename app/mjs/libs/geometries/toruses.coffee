@@ -15,4 +15,4 @@ newTorus = (radius = 5, thickness = 1, radialSegments = 42, tubularSegments = 42
 
 addTorus = (radius = 5, thickness = 1, radialSegments = 42, tubularSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
-    return window.addMesh newTorus radius, thickness, radialSegments, tubularSegments, position, material, color
+    return addMesh newTorus radius, thickness, radialSegments, tubularSegments, position, material, color

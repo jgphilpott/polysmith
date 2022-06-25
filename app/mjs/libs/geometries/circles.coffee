@@ -14,4 +14,4 @@ newCircle = (radius = 10, radialSegments = 42, position = [0, 0, 0], material = 
 
 addCircle = (radius = 10, radialSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
-    return window.addMesh newCircle radius, radialSegments, position, material, color
+    return addMesh newCircle radius, radialSegments, position, material, color

@@ -15,4 +15,4 @@ newCone = (radius = 5, height = 10, radialSegments = 42, position = [0, 0, 0], m
 
 addCone = (radius = 5, height = 10, radialSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
-    return window.addMesh newCone radius, height, radialSegments, position, material, color
+    return addMesh newCone radius, height, radialSegments, position, material, color

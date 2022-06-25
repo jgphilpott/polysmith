@@ -14,4 +14,4 @@ newSphere = (radius = 5, widthSegments = 42, heightSegments = 42, position = [0,
 
 addSphere = (radius = 5, widthSegments = 42, heightSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
-    return window.addMesh newSphere radius, widthSegments, heightSegments, position, material, color
+    return addMesh newSphere radius, widthSegments, heightSegments, position, material, color

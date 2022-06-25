@@ -82,7 +82,7 @@ sliderStop = (event, slider) ->
 
     else if panel.attr("id") == "mesh"
 
-        window.updateMesh panel.data("mesh"), "visibility", "slider", value, true
+        updateMesh panel.data("mesh"), "visibility", "slider", value, true
 
 foldPanel = (element, duration = 1000) ->
 

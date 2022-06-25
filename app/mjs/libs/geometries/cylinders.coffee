@@ -15,4 +15,4 @@ newCylinder = (length = 10, positiveRadius = 5, negativeRadius = 5, radialSegmen
 
 addCylinder = (length = 10, positiveRadius = 5, negativeRadius = 5, radialSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
 
-    return window.addMesh newCylinder length, positiveRadius, negativeRadius, radialSegments, position, material, color
+    return addMesh newCylinder length, positiveRadius, negativeRadius, radialSegments, position, material, color

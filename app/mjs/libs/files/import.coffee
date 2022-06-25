@@ -91,7 +91,7 @@ importFile = (type, path, properties = {}) ->
 
                 for object in objects
 
-                    window.addMesh object
+                    addMesh object
 
     return mesh
 
