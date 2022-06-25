@@ -12,22 +12,25 @@ from flask import Flask, request, render_template
 from mongo.socket.plug import plugin
 from mongo.data.collect.clients.mongo import valid_client
 
+src_dir = "app"
 title = "Polymorph"
 
-src_dir = "app"
 libs_dir = src_dir + "/libs"
 js_libs_dir = libs_dir + "/js"
 css_libs_dir = libs_dir + "/css"
+
+styles_dir = src_dir + "/styles"
+scripts_dir = src_dir + "/scripts"
 
 app = Flask(title, template_folder=src_dir, static_folder=src_dir)
 
 app.jinja_env.auto_reload = True
 app.config["SECRET_KEY"] = urandom(42).hex()
 
-Popen(["coffee", "-cbw", src_dir + "/scripts"])
-Popen(["tsc", "-w", src_dir + "/scripts/home.ts"])
+Popen(["coffee", "-cbw", scripts_dir])
+Popen(["tsc", "-w", scripts_dir + "/home.ts"])
 Popen(["boussole", "watch"], cwd="app/config")
-compile(dirname=("app/styles", "app/styles"), output_style="compressed")
+compile(dirname=(styles_dir, styles_dir), output_style="compressed")
 
 if not exists(libs_dir):
 

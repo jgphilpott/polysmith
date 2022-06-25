@@ -2,8 +2,9 @@
 .bash_history
 .sonarlint
 .DS_Store
-venv
+.npm
 .env
+venv
 
 ### Models ###
 *.gcode
@@ -19,13 +20,14 @@ app/libs
 __pycache__
 
 ### Styles ###
-.sass-cache
-*.sass.map
 *.css.map
-*.css
+*.sass.map
+*.sass-cache
+app/styles/*.css
+app/styles/*/*.css
+app/styles/*/*/*.css
 
 ### Scripts ###
 app/scripts/libs/*.js
 app/scripts/libs/*/*.js
 app/scripts/libs/*/*/*.js
-.npm
