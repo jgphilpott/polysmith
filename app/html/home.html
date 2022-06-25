@@ -175,7 +175,45 @@
       let triangle = addTriangle
       let tube = addTube
 
+      data.scale = scale
+      data.meshes = meshes
+      data.tooltips = tooltips
+
+      data.settings = settings = getSettings()
+
       console.log("Welcome to " + data.title + "!")
+
+      $("#navbar #title span").text(settings.ui.title)
+
+      $("#navbar").css("top", settings.ui.navbar ? 0 : -50)
+      $("#forkme").css("display", settings.ui.forkme ? "" : "none")
+      $("#metabox").css("display", settings.ui.metabox ? "" : "none")
+      $("#help").css("display", settings.ui.help ? "" : "none")
+
+      data.renderer = renderer = new THREE.WebGLRenderer({alpha: true, antialias: true, logarithmicDepthBuffer: true})
+      renderer.setSize(window.innerWidth, window.innerHeight)
+      renderer.setPixelRatio(window.devicePixelRatio)
+      data.composer = composer = new THREE.EffectComposer(renderer)
+
+      data.canvas = canvas = document.body.appendChild(renderer.domElement)
+      canvas.setAttribute("id", "canvas")
+
+      data.scene = scene = new THREE.Scene()
+      scene.background = whiteThree
+
+      data.lights = lights = []
+      lights.push(addPointLight())
+      lights.push(addAmbientLight())
+
+      data.camera = camera = addPerspectiveCamera()
+
+      data.controls = controls = addDragControls()
+      data.controls = controls = addFlyControls()
+      data.controls = controls = addZoomControls()
+
+      data.panels = panels = addPanels()
+      data.events = events = addEvents()
+      data.axes = axes = addAxes()
 
       setup()
 
