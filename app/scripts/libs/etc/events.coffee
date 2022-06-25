@@ -1,28 +1,26 @@
 addEvents = () ->
 
-    events = new THREEx.DomEvents(camera, canvas)
+    events = new THREEx.DomEvents camera, canvas
 
-    events.operation = {mesh: null, key: null}
+    events.operation = mesh: null, key: null
     events.zIndex = 0
 
-    $(window).on("resize", () ->
+    $(window).on "resize", () ->
 
         innerWidth = window.innerWidth
         innerHeight = window.innerHeight
 
         for axis in axes
 
-            if axis.type == "Line2" then axes.material.resolution.set innerWidth, innerHeight
+            if axis.type == "Line2" then axis.material.resolution.set innerWidth, innerHeight
 
-        renderer.setSize(innerWidth, innerHeight)
-        composer.setSize(innerWidth, innerHeight)
+        renderer.setSize innerWidth, innerHeight
+        composer.setSize innerWidth, innerHeight
 
         camera.aspect = innerWidth / innerHeight
         camera.updateProjectionMatrix()
 
-    )
-
-    $("body").keypress((event) ->
+    $("body").keypress (event) ->
 
         # Ctrl + Enter
         if event.ctrlKey and (event.keyCode == 13 or event.keyCode == 10)
@@ -30,7 +28,7 @@ addEvents = () ->
             event.preventDefault()
             event.stopPropagation()
 
-            exportFile("stl")
+            exportFile "stl"
 
         # Shift + Enter
         else if event.shiftKey and event.keyCode == 13
@@ -38,44 +36,38 @@ addEvents = () ->
             event.preventDefault()
             event.stopPropagation()
 
-            exportFile("obj")
+            exportFile "obj"
 
-    )
-
-    $("#navbar #title span").on("keypress keydown keyup", (event) -> event.stopPropagation()).blur((event) ->
+    $("#navbar #title span").on("keypress keydown keyup", (event) -> event.stopPropagation()).blur (event) ->
 
         text = $(this)[0].innerText.replace(/[^a-zA-Z0-9-_ ]/g, "").trim()
-        title = text ? text : data.title.toUpperCase()
+        title = if text then text else data.title.toUpperCase()
 
-        updateSettings("ui", "title", title)
+        updateSettings "ui", "title", title
 
-        $(this).text(title)
-
-    )
+        $(this).text title
 
     $("#canvas").mousedown((event) ->
 
         window.getSelection().removeAllRanges()
 
-        $("input, [contenteditable]").toArray().forEach((input) -> if $(input).is(":focus") then $(input).blur())
+        for input in $("input, [contenteditable]")
 
-    ).click((event) ->
+            if $(input).is ":focus" then $(input).blur()
+
+    ).click (event) ->
 
         if events.operation.key and not camera.dragged then clearMeshOperation()
-
-    )
 
     $("#navbar, #forkme, #metabox, #help").mouseenter((event) ->
 
         composer.outlinePass.selectedObjects = []
 
-        $("#metabox").css("display", "none")
+        $("#metabox").css "display", "none"
 
-    ).mouseleave((event) ->
+    ).mouseleave (event) ->
 
-        $("#metabox").css("display", "block")
-
-    )
+        $("#metabox").css "display", "block"
 
     return events
 
@@ -84,132 +76,116 @@ addPanelEvents = (panel) ->
     queue = false
     duration = 1000
 
-    id = panel.attr("id")
-    close = panel.find(".close")
+    id = panel.attr "id"
+    close = panel.find ".close"
 
     panel.mouseenter((event) ->
 
         $("#context-menu.panel").remove()
-        $("#metabox").css("display", "none")
+        $("#metabox").css "display", "none"
 
-        panel.css("z-index", events.zIndex += 1)
+        panel.css "z-index", events.zIndex += 1
 
         if id == "mesh"
 
-            mesh = panel.data("mesh")
-            visibleEdgeColor = mesh.lock == "locked" ? redThree : blackThree
+            mesh = panel.data "mesh"
+            visibleEdgeColor = if mesh.lock == "locked" then redThree else blackThree
 
-            composer.outlinePass.visibleEdgeColor.set(visibleEdgeColor)
+            composer.outlinePass.visibleEdgeColor.set visibleEdgeColor
             composer.outlinePass.selectedObjects = [mesh]
 
         else
 
             composer.outlinePass.selectedObjects = []
 
-        close.animate({opacity: 1}, {duration: duration, queue: queue})
-        panel.animate({backgroundColor: grayGlass}, {duration: duration * 3, queue: queue})
+        close.animate {opacity: 1}, {duration: duration, queue: queue}
+        panel.animate {backgroundColor: grayGlass}, {duration: duration * 3, queue: queue}
 
-    ).mouseleave((event) ->
+    ).mouseleave (event) ->
 
-        $("#metabox").css("display", "block")
+        $("#metabox").css "display", "block"
 
         composer.outlinePass.selectedObjects = []
 
-        close.animate({opacity: 0}, {duration: duration, queue: queue})
-        panel.animate({backgroundColor: lightGrayGlass}, {duration: duration * 3, queue: queue})
-
-    )
+        close.animate {opacity: 0}, {duration: duration, queue: queue}
+        panel.animate {backgroundColor: lightGrayGlass}, {duration: duration * 3, queue: queue}
 
     close.click((event) ->
 
         if id == "mesh"
 
-            panel.css("visibility", "hidden")
+            panel.css "visibility", "hidden"
 
-            $("#meshes.table tr#" + panel.data("mesh").uuid + " .settings").attr("src", "/app/imgs/panels/tools/toggle/off.png")
+            $("#meshes.table tr#" + panel.data("mesh").uuid + " .settings").attr "src", "/app/imgs/panels/tools/toggle/off.png"
 
         else
 
-            updateSettings("panels", id, false)
+            updateSettings "panels", id, false
 
-    ).on("mousedown mouseup", (event) -> event.stopPropagation())
+    ).on "mousedown mouseup", (event) -> event.stopPropagation()
 
     if id != "mesh"
 
-        if settings.panels[id] then panel.css("visibility", "visible") else panel.css("visibility", "hidden")
+        if settings.panels[id] then panel.css "visibility", "visible" else panel.css "visibility", "hidden"
 
-    makeDragable(panel)
+    makeDragable panel
 
     return panel
 
 addMeshEvents = (mesh) ->
 
-    events.addEventListener(mesh, "mouseover", (event) ->
+    events.addEventListener mesh, "mouseover", (event) ->
 
-        if settings.ui.metabox then drawMetabox("draw", mesh, event.origDomEvent)
+        if settings.ui.metabox then drawMetabox "draw", mesh, event.origDomEvent
 
-    )
-
-    events.addEventListener(mesh, "mousemove", (event) ->
+    events.addEventListener mesh, "mousemove", (event) ->
 
         if events.operation.key
 
-            if events.operation.mesh.uuid == mesh.uuid then composer.outlinePass.visibleEdgeColor.set(redThree) else composer.outlinePass.visibleEdgeColor.set(greenThree)
-            if events.operation.mesh.uuid == mesh.uuid then $("#canvas").css("cursor", "not-allowed") else $("#canvas").css("cursor", "copy")
+            if events.operation.mesh.uuid == mesh.uuid then composer.outlinePass.visibleEdgeColor.set redThree else composer.outlinePass.visibleEdgeColor.set greenThree
+            if events.operation.mesh.uuid == mesh.uuid then $("#canvas").css "cursor", "not-allowed" else $("#canvas").css "cursor", "copy"
 
 
         else
 
-            if mesh.lock == "locked" then composer.outlinePass.visibleEdgeColor.set(redThree) else composer.outlinePass.visibleEdgeColor.set(blackThree)
-            if mesh.lock == "locked" then $("#canvas").css("cursor", "not-allowed") else $("#canvas").css("cursor", "grab")
+            if mesh.lock == "locked" then composer.outlinePass.visibleEdgeColor.set redThree else composer.outlinePass.visibleEdgeColor.set blackThree
+            if mesh.lock == "locked" then $("#canvas").css "cursor", "not-allowed" else $("#canvas").css "cursor", "grab"
 
         composer.outlinePass.selectedObjects = [mesh]
 
-        if settings.ui.metabox then drawMetabox("update", mesh, event.origDomEvent)
+        if settings.ui.metabox then drawMetabox "update", mesh, event.origDomEvent
 
-    )
+    events.addEventListener mesh, "mouseout", (event) ->
 
-    events.addEventListener(mesh, "mouseout", (event) ->
-
-        if events.operation.key then $("#canvas").css("cursor", "copy") else $("#canvas").css("cursor", "")
+        if events.operation.key then $("#canvas").css "cursor", "copy" else $("#canvas").css "cursor", ""
 
         composer.outlinePass.selectedObjects = []
 
         eraseMetabox()
 
-    )
+    events.addEventListener mesh, "mousedown", (event) ->
 
-    events.addEventListener(mesh, "mousedown", (event) ->
+        if mesh.lock != "locked" then makeDragable mesh, event.origDomEvent
 
-        if mesh.lock != "locked" then makeDragable(mesh, event.origDomEvent)
+    events.addEventListener mesh, "click", (event) ->
 
-    )
+        updateMesh mesh, "operation", events.operation.key, null, true
 
-    events.addEventListener(mesh, "click", (event) ->
+    events.addEventListener mesh, "dblclick", (event) ->
 
-        updateMesh(mesh, "operation", events.operation.key, null, true)
+        focus x: mesh.position.x, y: mesh.position.y, z: mesh.position.z
 
-    )
+    events.addEventListener mesh, "contextmenu", (event) ->
 
-    events.addEventListener(mesh, "dblclick", (event) ->
-
-        focus({x: mesh.position.x, y: mesh.position.y, z: mesh.position.z})
-
-    )
-
-    events.addEventListener(mesh, "contextmenu", (event) ->
-
-        contextMenu("mesh", mesh, event.origDomEvent)
-
-    )
+        contextMenu "mesh", mesh, event.origDomEvent
 
 makeDragable = (element, origEvent = null) ->
 
+    xOffset = 0
+    yOffset = 0
     dragged = null
     max = scale * 3
     min = - (scale * 3)
-    xOffset = 0
-    yOffset = 0
 
     start = (event) ->
 
@@ -217,12 +193,12 @@ makeDragable = (element, origEvent = null) ->
 
             if element.lock != "locked"
 
-                coordinates = world2screenCoordinates(element.position.x, element.position.y, element.position.z)
+                coordinates = world2screenCoordinates element.position.x, element.position.y, element.position.z
 
                 xOffset = origEvent.clientX - coordinates.x
                 yOffset = origEvent.clientY - coordinates.y
 
-                $("#canvas").css("cursor", "grabbing")
+                $("#canvas").css "cursor", "grabbing"
 
                 tooltips.distanceLines = []
 
@@ -230,20 +206,20 @@ makeDragable = (element, origEvent = null) ->
 
             event.stopPropagation()
 
-            $("body").css("cursor", "grabbing")
+            $("body").css "cursor", "grabbing"
 
-            if element.hasClass("panel")
+            if element.hasClass "panel"
 
                 transform = element.css("transform").replace(/[{()}]/g, "").replace(/[a-zA-Z]/g, "").split(",")
 
-                xOffset = event.clientX - element.position().left + Number(transform[4])
-                yOffset = event.clientY - element.position().top + Number(transform[5])
+                xOffset = event.clientX - element.position().left + Number transform[4]
+                yOffset = event.clientY - element.position().top + Number transform[5]
 
-            else if element.hasClass("shape")
+            else if element.hasClass "shape"
 
-                $("body").append("<img class='ghost-shape' src='" + element.attr("src") + "'>")
+                $("body").append "<img class='ghost-shape' src='" + element.attr("src") + "'>"
 
-                $(".ghost-shape").css("z-index", events.zIndex + 1)
+                $(".ghost-shape").css "z-index", events.zIndex + 1
 
                 xOffset = event.clientX - element.offset().left
                 yOffset = event.clientY - element.offset().top
@@ -262,29 +238,29 @@ makeDragable = (element, origEvent = null) ->
 
             if element.lock != "locked"
 
-                $("#canvas").css("cursor", "grabbing")
+                $("#canvas").css "cursor", "grabbing"
 
-                panel = $("#mesh." + element.uuid + "")
-                coordinates = screen2worldCoordinates(eventX, eventY, element.position.z)
+                panel = $ "#mesh." + element.uuid + ""
+                coordinates = screen2worldCoordinates eventX, eventY, element.position.z
 
                 coordinates.x = if coordinates.x < min then min else if coordinates.x > max then max else coordinates.x
                 coordinates.y = if coordinates.y < min then min else if coordinates.y > max then max else coordinates.y
 
-                xDistanceLine = newLine([[0, coordinates.y, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
-                yDistanceLine = newLine([[coordinates.x, 0, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
-                zDistanceLine = newLine([[coordinates.x, coordinates.y, 0], [coordinates.x, coordinates.y, coordinates.z]], "dashed")
+                xDistanceLine = newLine [[0, coordinates.y, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed"
+                yDistanceLine = newLine [[coordinates.x, 0, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed"
+                zDistanceLine = newLine [[coordinates.x, coordinates.y, 0], [coordinates.x, coordinates.y, coordinates.z]], "dashed"
 
                 for distanceLine in tooltips.distanceLines
 
-                    scene.remove(distanceLine)
+                    scene.remove distanceLine
 
-                tooltips.distanceLines.push(xDistanceLine, yDistanceLine, zDistanceLine)
-                scene.add(xDistanceLine, yDistanceLine, zDistanceLine)
+                tooltips.distanceLines.push xDistanceLine, yDistanceLine, zDistanceLine
+                scene.add xDistanceLine, yDistanceLine, zDistanceLine
 
-                panel.find("#position-x input").val(coordinates.x.toFixed(2))
-                panel.find("#position-y input").val(coordinates.y.toFixed(2))
+                panel.find("#position-x input").val coordinates.x.toFixed 2
+                panel.find("#position-y input").val coordinates.y.toFixed 2
 
-                composer.outlinePass.visibleEdgeColor.set(blackThree)
+                composer.outlinePass.visibleEdgeColor.set blackThree
                 composer.outlinePass.selectedObjects = [element]
 
                 element.position.x = coordinates.x
@@ -294,18 +270,18 @@ makeDragable = (element, origEvent = null) ->
 
             event.stopPropagation()
 
-            if element.hasClass("panel")
+            if element.hasClass "panel"
 
-                element.css("cursor", "grabbing")
-                element.find("*").css("cursor", "grabbing")
+                element.css "cursor", "grabbing"
+                element.find("*").css "cursor", "grabbing"
 
-                element.css({top: eventY, left: eventX})
+                element.css top: eventY, left: eventX
 
-            else if element.hasClass("shape")
+            else if element.hasClass "shape"
 
-                $(".ghost-shape").css("cursor", "grabbing")
+                $(".ghost-shape").css "cursor", "grabbing"
 
-                $(".ghost-shape").css({top: eventY, left: eventX})
+                $(".ghost-shape").css top: eventY, left: eventX
 
     stop = (event) ->
 
@@ -315,11 +291,11 @@ makeDragable = (element, origEvent = null) ->
 
                 for distanceLine in tooltips.distanceLines
 
-                    scene.remove(distanceLine)
+                    scene.remove distanceLine
 
-                $("#canvas").css("cursor", "grab")
+                $("#canvas").css "cursor", "grab"
 
-                localMeshes("update", element)
+                localMeshes "update", element
 
                 tooltips.distanceLines = []
 
@@ -327,31 +303,31 @@ makeDragable = (element, origEvent = null) ->
 
             event.stopPropagation()
 
-            $("body").css("cursor", "")
+            $("body").css "cursor", ""
 
-            if element.hasClass("panel")
+            if element.hasClass "panel"
 
-                element.css("cursor", "")
-                element.find("*").css("cursor", "")
+                element.css "cursor", ""
+                element.find("*").css "cursor", ""
 
-            else if element.hasClass("shape")
+            else if element.hasClass "shape"
 
-                ghost = $(".ghost-shape")
+                ghost = $ ".ghost-shape"
 
                 if dragged
 
-                    coordinates = screen2worldCoordinates(ghost.offset().left + (ghost.width() / 2), ghost.offset().top + (ghost.height() / 2), 0)
+                    coordinates = screen2worldCoordinates ghost.offset().left + (ghost.width() / 2), ghost.offset().top + (ghost.height() / 2), 0
 
                     x = if coordinates.x < min then min else if coordinates.x > max then max else coordinates.x
                     y = if coordinates.y < min then min else if coordinates.y > max then max else coordinates.y
                     z = if coordinates.z < min then min else if coordinates.z > max then max else coordinates.z
 
-                    mesh = addMesh(null, {name: element.attr("title"), class: element.attr("id"), position: {x: x, y: y, z: z}})
+                    mesh = addMesh null, {name: element.attr("title"), class: element.attr("id"), position: {x: x, y: y, z: z}}
 
-                    composer.outlinePass.visibleEdgeColor.set(blackThree)
+                    composer.outlinePass.visibleEdgeColor.set blackThree
                     composer.outlinePass.selectedObjects = [mesh]
 
-                    $("#canvas").css("cursor", "grab")
+                    $("#canvas").css "cursor", "grab"
 
                 ghost.remove()
 
@@ -360,4 +336,4 @@ makeDragable = (element, origEvent = null) ->
 
         dragged = null
 
-    if element.type != "Mesh" then element.mousedown(start) else if not events.operation.key then start() else null
+    if element.type != "Mesh" then element.mousedown start else if not events.operation.key then start() else null
