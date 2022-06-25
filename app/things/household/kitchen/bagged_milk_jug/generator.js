@@ -1,4 +1,4 @@
-function generator(language="english") {
+function polygen(language="english") {
 
   let topAngle = 7
 

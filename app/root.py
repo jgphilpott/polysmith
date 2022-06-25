@@ -117,6 +117,6 @@ def home():
 
     if "id" in request.cookies: data["client"] = valid_client(request.cookies.get("id"))
 
-    return render_template("templates/home.html", data=data)
+    return render_template("templates/root.html", data=data)
 
 plugin(app).run(app, host="0.0.0.0", port=4000, debug=True)

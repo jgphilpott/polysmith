@@ -20,7 +20,7 @@ docker-compose up
 
 # Usage
 
-To create/view a 3D model you will need to add a generator function to the home JavaScript file, [home.js](https://github.com/jgphilpott/polymorph/blob/master/app/scripts/home.js). You can either create a new model from scratch or copy and paste a generator function from one of the '[things](https://github.com/jgphilpott/polymorph/tree/master/app/things)'.
+To create/view a 3D model you will need to add a polygen function to the root JavaScript file, [root.js](https://github.com/jgphilpott/polymorph/blob/master/app/scripts/root.js). You can either create a new generator from scratch or copy and paste from one of the '[things](https://github.com/jgphilpott/polymorph/tree/master/app/things)'.
 
 Once you see the desired model in the view you can use `Ctrl + Enter` to download it as an STL file or `Shift + Enter` to download it as an OBJ file. You can use any software you like to slice the STL/OBJ files but [Cura](https://github.com/Ultimaker/Cura) is recommended.
 

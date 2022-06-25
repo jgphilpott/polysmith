@@ -1,4 +1,4 @@
-function generator(collar=false) {
+function polygen(collar=false) {
 
   let shaftLength = 8
   let shaftRadius = 2.5

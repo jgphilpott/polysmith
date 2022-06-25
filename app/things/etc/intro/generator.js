@@ -1,4 +1,4 @@
-function generator() {
+function polygen() {
 
   let geometry = new THREE.BoxGeometry(50, 50, 50)
   let material = new THREE.MeshStandardMaterial({"color": black})

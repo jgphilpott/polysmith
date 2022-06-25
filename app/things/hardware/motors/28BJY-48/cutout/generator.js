@@ -1,4 +1,4 @@
-function generator(collar=false) {
+function polygen(collar=false) {
 
   let cutoutSize = 15
 

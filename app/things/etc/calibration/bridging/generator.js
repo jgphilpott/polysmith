@@ -1,4 +1,4 @@
-function generator(maxLength=10) {
+function polygen(maxLength=10) {
 
   for (let i = 1; i <= maxLength; i++) {
 

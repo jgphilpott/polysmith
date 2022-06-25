@@ -1,1 +1,1 @@
-function generator() {}
+function polygen() {}

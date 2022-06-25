@@ -1,4 +1,4 @@
-function generator(sides=3, size=75) {
+function polygen(sides=3, size=75) {
 
   let thickness = 2
   let lipSize = 10

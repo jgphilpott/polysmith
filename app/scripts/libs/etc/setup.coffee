@@ -1,6 +1,6 @@
 setup = () ->
 
-    if generate? then generate() else localMeshes "load"
+    if polygen? then polygen() else localMeshes "load"
 
     composer.renderPass = new THREE.RenderPass scene, camera
     composer.shaderPass = new THREE.ShaderPass THREE.CopyShader

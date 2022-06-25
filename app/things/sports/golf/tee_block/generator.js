@@ -1,4 +1,4 @@
-function generator(name=true, logo=true, spikes=5) {
+function polygen(name=true, logo=true, spikes=5) {
 
   let width = 80
   let height = 100

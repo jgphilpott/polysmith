@@ -1,4 +1,4 @@
-function generator(thickness=10) {
+function polygen(thickness=10) {
 
   data.title = "Flexing Test (" + thickness + " mm)"
 

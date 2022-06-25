@@ -1,4 +1,4 @@
-function generator() {
+function polygen() {
 
   let cup = null
 

@@ -1,4 +1,4 @@
-function generator(degree=10, size=50) {
+function polygen(degree=10, size=50) {
 
   data.title = "Overhang Test (" + degree + "° Steps)"
 

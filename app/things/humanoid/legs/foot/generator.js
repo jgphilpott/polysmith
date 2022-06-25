@@ -1,4 +1,4 @@
-function generator() {
+function polygen() {
 
   let width = 100
   let length = 220

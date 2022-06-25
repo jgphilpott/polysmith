@@ -1,4 +1,4 @@
-function generator(type="classic") {
+function polygen(type="classic") {
 
   let radius = 75
   let thickness = 2

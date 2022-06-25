@@ -1,4 +1,4 @@
-function generator(dimensions=1) {
+function polygen(dimensions=1) {
 
   let size = 10
   let cutoutSize = 5

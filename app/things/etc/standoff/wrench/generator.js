@@ -1,4 +1,4 @@
-function generator(size) {
+function polygen(size) {
 
   let wrench = newCylinder(size, size * 2, size * 2, [0, 0, 0], black, 6)
   let bolt = newCylinder(size, size, size, [0, 0, 0], black, 6)
