@@ -24,9 +24,10 @@ app = Flask(title, template_folder=src_dir, static_folder=src_dir)
 app.jinja_env.auto_reload = True
 app.config["SECRET_KEY"] = urandom(42).hex()
 
-Popen(["coffee", "-cbw", src_dir])
+Popen(["coffee", "-cbw", src_dir + "/scripts"])
+Popen(["tsc", "-w", src_dir + "/scripts/home.ts"])
 Popen(["boussole", "watch"], cwd="app/config")
-compile(dirname=("app/sass", "app/css"), output_style="compressed")
+compile(dirname=("app/styles", "app/styles"), output_style="compressed")
 
 if not exists(libs_dir):
 
@@ -113,6 +114,6 @@ def home():
 
     if "id" in request.cookies: data["client"] = valid_client(request.cookies.get("id"))
 
-    return render_template("html/home.html", data=data)
+    return render_template("templates/home.html", data=data)
 
 plugin(app).run(app, host="0.0.0.0", port=4000, debug=True)

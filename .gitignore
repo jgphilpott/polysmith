@@ -22,10 +22,10 @@ __pycache__
 .sass-cache
 *.sass.map
 *.css.map
-app/css
+*.css
 
 ### Scripts ###
-app/mjs/libs/*.js
-app/mjs/libs/*/*.js
-app/mjs/libs/*/*/*.js
+app/scripts/libs/*.js
+app/scripts/libs/*/*.js
+app/scripts/libs/*/*/*.js
 .npm

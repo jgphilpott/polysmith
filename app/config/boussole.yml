@@ -1,6 +1,6 @@
 EXCLUDES: []
 LIBRARY_PATHS: []
 OUTPUT_STYLES: compressed
-SOURCES_PATH: ../sass
+SOURCES_PATH: ../styles
 SOURCE_COMMENTS: false
-TARGET_PATH: ../css
+TARGET_PATH: ../styles
