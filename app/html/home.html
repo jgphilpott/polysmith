@@ -89,7 +89,9 @@
     <script src="{{ url_for('static', filename='mjs/libs/geometries/triangles.js') }}"></script>
     <script src="{{ url_for('static', filename='mjs/libs/geometries/tubes.js') }}"></script>
 
+    <script src="{{ url_for('static', filename='mjs/libs/etc/events.js') }}"></script>
     <script src="{{ url_for('static', filename='mjs/libs/etc/settings.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/libs/etc/setup.js') }}"></script>
     <script src="{{ url_for('static', filename='mjs/libs/etc/tools.js') }}"></script>
     <script src="{{ url_for('static', filename='mjs/libs/etc/ui.js') }}"></script>
 
@@ -106,11 +108,40 @@
     <script src="{{ url_for('static', filename='libs/js/math.js') }}"></script>
     <script src="{{ url_for('static', filename='libs/js/tools.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='mjs/home.mjs') }}" type="module"></script>
+    <script src="{{ url_for('static', filename='mjs/panels/all.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/panels/camera.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/panels/context.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/panels/lights.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/panels/menu.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/panels/mesh.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/panels/meshes.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/panels/settings.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/panels/shapes.js') }}"></script>
+    <script src="{{ url_for('static', filename='mjs/panels/shortcuts.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='mjs/home.js') }}"></script>
 
   </head>
 
   <body oncontextmenu="return false">
+
+    <div id='navbar'>
+
+      <img id="menu" src="{{ url_for('static', filename='imgs/theme/menu/white.png') }}">
+
+      <h1 id='title'><span contenteditable='true'>{{ data.title|upper }}</span></h1>
+
+    </div>
+
+    <a href="https://github.com/jgphilpott/polymorph" target="_blank">
+
+      <img id="forkme" src="{{ url_for('static', filename='imgs/theme/forkme/right/red.png') }}">
+
+    </a>
+
+    <div id=metabox></div>
+
+    <img title="Help" id="help" src="{{ url_for('static', filename='imgs/panels/nav/?.png') }}">
 
     <script>
 
@@ -146,25 +177,9 @@
 
       console.log("Welcome to " + data.title + "!")
 
+      setup()
+
     </script>
-
-    <div id='navbar'>
-
-      <img id="menu" src="{{ url_for('static', filename='imgs/theme/menu/white.png') }}">
-
-      <h1 id='title'><span contenteditable='true'>{{ data.title|upper }}</span></h1>
-
-    </div>
-
-    <a href="https://github.com/jgphilpott/polymorph" target="_blank">
-
-      <img id="forkme" src="{{ url_for('static', filename='imgs/theme/forkme/right/red.png') }}">
-
-    </a>
-
-    <div id=metabox></div>
-
-    <img title="Help" id="help" src="{{ url_for('static', filename='imgs/panels/nav/?.png') }}">
 
   </body>
 

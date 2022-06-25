@@ -11,5 +11,6 @@ RUN apt-get install -y curl \
     && apt-get install -y nodejs \
     && curl -L https://www.npmjs.com/install.sh | sh \
     && npm install --global coffeescript
+    && npm install --global typescript
 
 CMD python3 app/root.py

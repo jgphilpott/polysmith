@@ -28,3 +28,4 @@ app/css
 app/mjs/libs/*.js
 app/mjs/libs/*/*.js
 app/mjs/libs/*/*/*.js
+.npm
