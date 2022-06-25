@@ -1,31 +1,31 @@
 setup = () ->
 
-  localMeshes "load"
+    localMeshes "load"
 
-  composer.renderPass = new THREE.RenderPass scene, camera
-  composer.shaderPass = new THREE.ShaderPass THREE.CopyShader
-  composer.outlinePass = new THREE.OutlinePass new THREE.Vector2(window.innerWidth, window.innerHeight ), scene, camera
+    composer.renderPass = new THREE.RenderPass scene, camera
+    composer.shaderPass = new THREE.ShaderPass THREE.CopyShader
+    composer.outlinePass = new THREE.OutlinePass new THREE.Vector2(window.innerWidth, window.innerHeight ), scene, camera
 
-  composer.outlinePass.hiddenEdgeColor.set whiteThree
-  composer.outlinePass.visibleEdgeColor.set blackThree
-  composer.outlinePass.overlayMaterial.blending = THREE.CustomBlending
+    composer.outlinePass.hiddenEdgeColor.set whiteThree
+    composer.outlinePass.visibleEdgeColor.set blackThree
+    composer.outlinePass.overlayMaterial.blending = THREE.CustomBlending
 
-  composer.addPass composer.renderPass
-  composer.addPass composer.shaderPass
-  composer.addPass composer.outlinePass
+    composer.addPass composer.renderPass
+    composer.addPass composer.shaderPass
+    composer.addPass composer.outlinePass
 
-  animate = () ->
+    animate = () ->
 
-    requestAnimationFrame animate
+        requestAnimationFrame animate
 
-    composer.render()
+        composer.render()
 
-  animate()
+    animate()
 
-  try
+    try
 
-    generate()
+        generate()
 
-  catch error
+    catch error
 
-    generate = error
+        generate = error
