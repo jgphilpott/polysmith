@@ -172,7 +172,7 @@ addFlyControls = () ->
 
             camera.lookAt target.x, target.y, target.z
 
-    ).keyup((event) ->
+    ).keyup (event) ->
 
         if [37, 38, 39, 40, 65, 68, 83, 87].includes event.keyCode
 
@@ -181,5 +181,3 @@ addFlyControls = () ->
                 updateSettings "camera", "position", camera.position
 
             updateSettings "camera", "target", camera.target
-
-    )

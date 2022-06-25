@@ -1,7 +1,5 @@
 setup = () ->
 
-    if polygen? then polygen() else localMeshes "load"
-
     composer.renderPass = new THREE.RenderPass scene, camera
     composer.shaderPass = new THREE.ShaderPass THREE.CopyShader
     composer.outlinePass = new THREE.OutlinePass new THREE.Vector2(window.innerWidth, window.innerHeight), scene, camera
@@ -19,5 +17,15 @@ setup = () ->
         requestAnimationFrame animate
 
         composer.render()
+
+    if polygen?
+
+        localDelete "meshes"
+
+        polygen()
+
+    else
+
+        localMeshes "load"
 
     animate()
