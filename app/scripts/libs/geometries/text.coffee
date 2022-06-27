@@ -2,7 +2,7 @@
 
 newText = (text = "Text", size = 12, height = 3, bevel = false, font = "ubuntu", material = "normal", color = blackThree, center = true, x = 0, y = 0, z = 0, rotateX = 0, rotateY = 0, rotateZ = 180) ->
 
-    textGeometry = new THREE.TextGeometry text,
+    textGeometry = new THREE.TextBufferGeometry text,
 
         font: font
 

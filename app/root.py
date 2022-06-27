@@ -55,6 +55,7 @@ if not exists(libs_dir):
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/03df747c3047504480e6dbeeddd27d68/raw/610e6908804af69ba765dc086b7018acbcdc4aa9/csgWrapper.js", js_libs_dir + "/csgWrapper.js")
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/59ad8432ba8567e91176e669454b9afa/raw/f608f772665fc6e76b999b8e266a479ce1c7fe6f/morph.coffee", js_libs_dir + "/morph.coffee")
 
+    urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/utils/BufferGeometryUtils.js", js_libs_dir + "/BufferGeometryUtils.js")
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/77709de890b806426089de1ff4e78758/raw/ee6c712af2e73bd8db799506d7863c45c493e744/LineSegmentsGeometry.js", js_libs_dir + "/LineSegmentsGeometry.js")
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/ec71d7abcf504f85e01ffe9e297a682c/raw/28bde3afab2cb8df3a46d84e689774b243a6c8c2/LineGeometry.js", js_libs_dir + "/LineGeometry.js")
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/9e1cf7758b8d7cf02537bb15aacdba6a/raw/58b8b125dce8ff6bc1000b810ee46de13898fb71/LineMaterial.js", js_libs_dir + "/LineMaterial.js")
