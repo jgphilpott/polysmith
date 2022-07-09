@@ -72,8 +72,11 @@ polygen = () ->
     spiralMaterial = new THREE.MeshLambertMaterial color: 0xff8000
     spiralMesh = new THREE.Mesh spiralGeometry, spiralMaterial
 
-    topCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [0, 0, spiralRadius * 2.5 + spiralThickness])
-    bottomCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [0, 0, - spiralRadius * 2.5 - spiralRadius - (spiralThickness / 2)])
+    spiralStartTopCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [0, 0, spiralRadius * 2.5 + spiralThickness])
+    spiralStartBottomCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [0, 0, - spiralRadius * 2.5 - spiralRadius - (spiralThickness / 2)])
+
+    spiralStopTopCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [spiralStop.x, 0, spiralRadius * 2.5])
+    spiralStopSideCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [spiralStop.x, - spiralRadius * 2.5 - golden, 0])
 
     spiralStartCapEx = newSphere spiralRadius * 2 + (spiralThickness / 2), spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStart.x, spiralStart.y, spiralStart.z + spiralRadius]
     spiralStopCapEx = newSphere spiralRadius + (spiralThickness / 2), spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStop.x, spiralStop.y, spiralStop.z]
@@ -90,17 +93,26 @@ polygen = () ->
     spiralStartCapEx.scale.y = golden
     spiralStartCapIn.scale.y = golden
 
-    spiralStartCapEx = cut spiralStartCapEx, topCuter
-    spiralStartCapIn = cut spiralStartCapIn, topCuter
+    spiralStopCapEx.scale.z = golden
+    spiralStopCapIn.scale.z = golden
 
-    spiralStartCapEx = cut spiralStartCapEx, bottomCuter
-    bottomCuter.position.z += spiralThickness
-    spiralStartCapIn = cut spiralStartCapIn, bottomCuter
+    spiralStartCapEx = cut spiralStartCapEx, spiralStartTopCuter
+
+    spiralStartCapEx = cut spiralStartCapEx, spiralStartBottomCuter
+    spiralStartBottomCuter.position.z += spiralThickness
+    spiralStartCapIn = cut spiralStartCapIn, spiralStartBottomCuter
+
+    spiralStopCapEx = cut spiralStopCapEx, spiralStopTopCuter
+    spiralStopCapEx = cut spiralStopCapEx, spiralStopSideCuter
 
     spiralStartCap = cut spiralStartCapEx, spiralStartCapIn
     spiralStopCap = cut spiralStopCapEx, spiralStopCapIn
 
+    spiralStopSideCuter.position.x += spiralRadius * 1.5 + (spiralThickness / 2)
+    spiralStopSideCuter.position.y += spiralRadius * 5
+
     spiralMesh = cut spiralMesh, spiralStartCapEx
+    spiralMesh = cut spiralMesh, spiralStopSideCuter
 
     spiralStartCap.name = "Start Cap"
     spiralStopCap.name = "Stop Cap"
