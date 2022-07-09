@@ -19,49 +19,67 @@ class ArchimedeanSpiral extends THREE.Curve
 polygen = () ->
 
     golden = 1.618033988749895
-
     spiral = new ArchimedeanSpiral 10, degree2radian 720
 
     spiralStart = spiral.getPoint 0
     spiralStop = spiral.getPoint 1
 
-    spiralThickness = golden * 2
-    spiralRadius = spiralStop.x / 4
-    spiralRadiusSegments = golden * 10
-
+    shapePathEx = []
+    shapePathIn = []
     spiralPoints = []
+    spiralThickness = 3
+    spiralSegments = 180
+    spiralRadiusSegments = 18
+    spiralRadius = spiralStop.x / 4
 
-    for point in [0...1.01] by golden / 100
+    for point in [0.21...1.01] by golden / 100
 
         spiralPoints.push spiral.getPoint point
 
     extrudeSettings =
 
-        steps: 180
         bevelEnabled: false
+        steps: spiralSegments
         extrudePath: new THREE.CatmullRomCurve3 spiralPoints
+
+    for degree in [- 90 ... 91] by 90 / spiralRadiusSegments
+
+        radius = spiralRadius + (spiralThickness / 2)
+
+        x = radius * Math.cos degree2radian degree
+        y = radius * Math.sin degree2radian degree
+
+        shapePathEx.push new THREE.Vector2 x, y
+
+    for degree in [90 ... - 91] by - 90 / spiralRadiusSegments
+
+        radius = spiralRadius - (spiralThickness / 2)
+
+        x = radius * Math.cos degree2radian degree
+        y = radius * Math.sin degree2radian degree
+
+        shapePathIn.push new THREE.Vector2 x, y
 
     shape = new THREE.Shape()
 
-    shape.moveTo 0, - spiralRadius
-    shape.quadraticCurveTo spiralRadius, - spiralRadius, spiralRadius, 0
-    shape.quadraticCurveTo spiralRadius, spiralRadius, 0, spiralRadius
-    shape.lineTo 0, spiralRadius - spiralThickness
-    shape.quadraticCurveTo spiralRadius - spiralThickness, spiralRadius - spiralThickness, spiralRadius - spiralThickness, 0
-    shape.quadraticCurveTo spiralRadius - spiralThickness, - spiralRadius + spiralThickness, 0, - spiralRadius + spiralThickness
-    shape.lineTo 0, - spiralRadius
+    shape.moveTo 0, - spiralRadius - (spiralThickness / 2)
+    shape.setFromPoints shapePathEx
+    shape.lineTo 0, spiralRadius - (spiralThickness / 2)
+    shape.setFromPoints shapePathIn
+    shape.lineTo 0, - spiralRadius - (spiralThickness / 2)
 
     spiralGeometry = new THREE.ExtrudeGeometry shape, extrudeSettings
     spiralMaterial = new THREE.MeshLambertMaterial color: 0xff8000
     spiralMesh = new THREE.Mesh spiralGeometry, spiralMaterial
 
-    topCuter = newBox(spiralRadius * 4, spiralRadius * 4, spiralRadius * 4, [0, 0, spiralRadius * 2 + spiralThickness])
+    topCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [0, 0, spiralRadius * 2.5 + spiralThickness])
+    bottomCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [0, 0, - spiralRadius * 2.5 - spiralRadius - (spiralThickness / 2)])
 
-    spiralStartCapEx = newSphere spiralRadius * 2, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStart.x, spiralStart.y, spiralStart.z + spiralRadius]
-    spiralStopCapEx = newSphere spiralRadius, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStop.x, spiralStop.y, spiralStop.z]
+    spiralStartCapEx = newSphere spiralRadius * 2 + (spiralThickness / 2), spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStart.x, spiralStart.y, spiralStart.z + spiralRadius]
+    spiralStopCapEx = newSphere spiralRadius + (spiralThickness / 2), spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStop.x, spiralStop.y, spiralStop.z]
 
-    spiralStartCapIn = newSphere spiralRadius * 2 - spiralThickness, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStart.x, spiralStart.y, spiralStart.z + spiralRadius]
-    spiralStopCapIn = newSphere spiralRadius - spiralThickness, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStop.x, spiralStop.y, spiralStop.z]
+    spiralStartCapIn = newSphere spiralRadius * 2 + (spiralThickness / 2) - spiralThickness, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStart.x, spiralStart.y, spiralStart.z + spiralRadius]
+    spiralStopCapIn = newSphere spiralRadius + (spiralThickness / 2) - spiralThickness, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStop.x, spiralStop.y, spiralStop.z]
 
     spiralStartCapEx.rotateX degree2radian 90
     spiralStopCapEx.rotateX degree2radian 90
@@ -69,13 +87,20 @@ polygen = () ->
     spiralStartCapIn.rotateX degree2radian 90
     spiralStopCapIn.rotateX degree2radian 90
 
+    spiralStartCapEx.scale.y = golden
+    spiralStartCapIn.scale.y = golden
+
     spiralStartCapEx = cut spiralStartCapEx, topCuter
     spiralStartCapIn = cut spiralStartCapIn, topCuter
+
+    spiralStartCapEx = cut spiralStartCapEx, bottomCuter
+    bottomCuter.position.z += spiralThickness
+    spiralStartCapIn = cut spiralStartCapIn, bottomCuter
 
     spiralStartCap = cut spiralStartCapEx, spiralStartCapIn
     spiralStopCap = cut spiralStopCapEx, spiralStopCapIn
 
-    spiralMesh = cut spiralMesh, spiralStartCapIn
+    spiralMesh = cut spiralMesh, spiralStartCapEx
 
     spiralStartCap.name = "Start Cap"
     spiralStopCap.name = "Stop Cap"
