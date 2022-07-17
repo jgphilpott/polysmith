@@ -26,16 +26,19 @@ polygen = () ->
     spiralStart = spiral.getPoint 0
     spiralStop = spiral.getPoint 1
 
-    shapePathEx = []
-    shapePathIn = []
+    spiralPathEx = []
+    spiralPathIn = []
     spiralPoints = []
     spiralInvertPoints = []
+
     spiralThickness = 3
     spiralSegments = 180
     spiralRadiusSegments = 18
     spiralRadius = spiralStop.x / 4
+    spiralStartPoint = 0.21
+    spiralStopPoint = 1.021
 
-    for point in [0.21...1.01] by golden / 100
+    for point in [spiralStartPoint ... spiralStopPoint] by golden / 100
 
         spiralPoints.push spiral.getPoint point
         spiralInvertPoints.push spiralInvert.getPoint point
@@ -49,112 +52,114 @@ polygen = () ->
     spiralInvertExtrudeSettings =
 
         bevelEnabled: false
-        steps: spiralSegments
+        steps: spiralSegments * 2
         extrudePath: new THREE.CatmullRomCurve3 spiralInvertPoints
 
     for degree in [- 90 ... 91] by 90 / spiralRadiusSegments
 
-        radius = spiralRadius + (spiralThickness / 2)
+        radius = spiralRadius + spiralThickness / 3
 
         x = radius * Math.cos degree2radian degree
         y = radius * Math.sin degree2radian degree
 
-        shapePathEx.push new THREE.Vector2 x, y
+        spiralPathEx.push new THREE.Vector2 x, y
 
     for degree in [90 ... - 91] by - 90 / spiralRadiusSegments
 
-        radius = spiralRadius - (spiralThickness / 2)
+        radius = spiralRadius - spiralThickness / 2
 
         x = radius * Math.cos degree2radian degree
         y = radius * Math.sin degree2radian degree
 
-        shapePathIn.push new THREE.Vector2 x, y
+        spiralPathIn.push new THREE.Vector2 x, y
 
-    shape = new THREE.Shape()
+    spiralPath = new THREE.Shape()
+    spiralTrimPath = new THREE.Shape()
 
-    shape.moveTo 0, - spiralRadius - (spiralThickness / 2)
-    shape.setFromPoints shapePathEx
-    shape.lineTo 0, spiralRadius - (spiralThickness / 2)
-    shape.setFromPoints shapePathIn
-    shape.lineTo 0, - spiralRadius - (spiralThickness / 2)
+    spiralPath.moveTo 0, - spiralRadius - (spiralThickness / 3)
+    spiralPath.setFromPoints spiralPathEx
+    spiralPath.lineTo 0, spiralRadius - (spiralThickness / 2)
+    spiralPath.setFromPoints spiralPathIn
+    spiralPath.lineTo 0, - spiralRadius - (spiralThickness / 3)
 
-    shape2 = new THREE.Shape();
+    spiralTrimPath.moveTo spiralThickness / golden, 0
+    spiralTrimPath.absarc 0, 0, spiralThickness / golden, 0, 2 * Math.PI, false
 
-    shape2.moveTo spiralThickness / 2, 0
-    shape2.absarc 0, 0, spiralThickness / 2, 0, 2 * Math.PI, false
-
-    spiralGeometry = new THREE.ExtrudeGeometry shape, spiralExtrudeSettings
+    spiralGeometry = new THREE.ExtrudeGeometry spiralPath, spiralExtrudeSettings
     spiralMaterial = new THREE.MeshLambertMaterial color: 0xff8000
     spiralMesh = new THREE.Mesh spiralGeometry, spiralMaterial
 
-    sg = new THREE.ExtrudeGeometry shape2, spiralInvertExtrudeSettings
-    sm = new THREE.MeshLambertMaterial color: 0xff0000
-    smesh = new THREE.Mesh sg, sm
+    spiralTrimGeometry = new THREE.ExtrudeGeometry spiralTrimPath, spiralInvertExtrudeSettings
+    spiralTrimMaterial = new THREE.MeshLambertMaterial color: 0xff0000
+    spiralTrimMesh = new THREE.Mesh spiralTrimGeometry, spiralTrimMaterial
+    spiralTrimMesh.rotateZ degree2radian 180
 
-    smesh.rotateZ degree2radian 180
-    scene.add smesh
-
-    spiralStartTopCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [0, 0, spiralRadius * 2.5 + spiralThickness])
-    spiralStartBottomCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [0, 0, - spiralRadius * 2.5 - spiralRadius - (spiralThickness / 2)])
-
-    spiralStopTopCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [spiralStop.x, 0, spiralRadius * 2.5])
-    spiralStopSideCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [spiralStop.x, - spiralRadius * 2.5 - golden, 0])
-
-    spiralStartCapEx = newSphere spiralRadius * 2 + (spiralThickness / 2), spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStart.x, spiralStart.y, spiralStart.z]
-    spiralStopCapEx = newSphere spiralRadius + (spiralThickness / 2), spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStop.x, spiralStop.y, spiralStop.z]
-
-    spiralStartCapIn = newSphere spiralRadius * 2 + (spiralThickness / 2) - spiralThickness, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStart.x, spiralStart.y, spiralStart.z]
-    spiralStopCapIn = newSphere spiralRadius + (spiralThickness / 2) - spiralThickness, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStop.x, spiralStop.y, spiralStop.z]
-
-    spiralStartCapTrim = newTorus spiralRadius * 2, spiralThickness / 2, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [0, 0, spiralThickness]
-    spiralStartCapTrim.rotateY degree2radian 90
-    scene.add spiralStartCapTrim
-
-    spiralStopCapTrim = newTorus(spiralRadius, spiralThickness / 2, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStop.x, spiralStop.y, spiralStop.z])
-    spiralStopCapTrim.scale.y = golden
-    spiralStopCapTrim.rotateY degree2radian 90
-
-    spiralStartCapEx.rotateX degree2radian 90
-    spiralStopCapEx.rotateX degree2radian 90
-
-    spiralStartCapIn.rotateX degree2radian 90
-    spiralStopCapIn.rotateX degree2radian 90
-
-    spiralStartCapEx.scale.y = golden
-    spiralStartCapIn.scale.y = golden
-
-    spiralStopCapEx.scale.z = golden
-    spiralStopCapIn.scale.z = golden
-
-    spiralStartCapEx = cut spiralStartCapEx, spiralStartTopCuter
-
-    spiralStartCapEx = cut spiralStartCapEx, spiralStartBottomCuter
-    spiralStartBottomCuter.position.z += spiralThickness
-    spiralStartCapIn = cut spiralStartCapIn, spiralStartBottomCuter
-
-    spiralStopCapEx = cut spiralStopCapEx, spiralStopTopCuter
-    spiralStopCapEx = cut spiralStopCapEx, spiralStopSideCuter
-
-    spiralStopCapTrim = cut spiralStopCapTrim, spiralStopSideCuter
-
-    spiralStartCap = cut spiralStartCapEx, spiralStartCapIn
-    spiralStopCap = cut spiralStopCapEx, spiralStopCapIn
-
-    spiralStopSideCuter.position.x += spiralRadius * 1.5 + (spiralThickness / 2)
-    spiralStopSideCuter.position.y += spiralRadius * 5
-
-    # spiralMesh = cut spiralMesh, spiralStartCapEx
-    spiralMesh = cut spiralMesh, spiralStopSideCuter
-
-    spiralStartCap.name = "Start Cap"
-    spiralStopCap.name = "Stop Cap"
-    spiralStartCap.lock = "locked"
-    spiralStopCap.lock = "locked"
+#     spiralStartTopCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [0, 0, spiralRadius * 2.5 + spiralThickness])
+#     spiralStartBottomCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [0, 0, - spiralRadius * 2.5 - spiralRadius - (spiralThickness / 2)])
+#
+#     spiralStopTopCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [spiralStop.x, 0, spiralRadius * 2.5])
+#     spiralStopSideCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [spiralStop.x, - spiralRadius * 2.5 - golden, 0])
+#
+#     spiralStartCapEx = newSphere spiralRadius * 2 + (spiralThickness / 2), spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStart.x, spiralStart.y, spiralStart.z]
+#     spiralStopCapEx = newSphere spiralRadius + (spiralThickness / 2), spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStop.x, spiralStop.y, spiralStop.z]
+#
+#     spiralStartCapIn = newSphere spiralRadius * 2 + (spiralThickness / 2) - spiralThickness, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStart.x, spiralStart.y, spiralStart.z]
+#     spiralStopCapIn = newSphere spiralRadius + (spiralThickness / 2) - spiralThickness, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStop.x, spiralStop.y, spiralStop.z]
+#
+#     spiralStartCapTrim = newTorus spiralRadius * 2, spiralThickness / 2, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [0, 0, spiralThickness]
+#     spiralStartCapTrim.rotateY degree2radian 90
+#     scene.add spiralStartCapTrim
+#
+#     spiralStopCapTrim = newTorus(spiralRadius, spiralThickness / 2, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStop.x, spiralStop.y, spiralStop.z])
+#     spiralStopCapTrim.scale.y = golden
+#     spiralStopCapTrim.rotateY degree2radian 90
+#
+#     spiralStartCapEx.rotateX degree2radian 90
+#     spiralStopCapEx.rotateX degree2radian 90
+#
+#     spiralStartCapIn.rotateX degree2radian 90
+#     spiralStopCapIn.rotateX degree2radian 90
+#
+#     spiralStartCapEx.scale.y = golden
+#     spiralStartCapIn.scale.y = golden
+#
+#     spiralStopCapEx.scale.z = golden
+#     spiralStopCapIn.scale.z = golden
+#
+#     spiralStartCapEx = cut spiralStartCapEx, spiralStartTopCuter
+#
+#     spiralStartCapEx = cut spiralStartCapEx, spiralStartBottomCuter
+#     spiralStartBottomCuter.position.z += spiralThickness
+#     spiralStartCapIn = cut spiralStartCapIn, spiralStartBottomCuter
+#
+#     spiralStopCapEx = cut spiralStopCapEx, spiralStopTopCuter
+#     spiralStopCapEx = cut spiralStopCapEx, spiralStopSideCuter
+#
+#     spiralStopCapTrim = cut spiralStopCapTrim, spiralStopSideCuter
+#
+#     spiralStartCap = cut spiralStartCapEx, spiralStartCapIn
+#     spiralStopCap = cut spiralStopCapEx, spiralStopCapIn
+#
+#     spiralStopSideCuter.position.x += spiralRadius * 1.5 + (spiralThickness / 2)
+#     spiralStopSideCuter.position.y += spiralRadius * 5
+#
+#     spiralMesh = cut spiralMesh, spiralStartCapEx
+#     spiralMesh = cut spiralMesh, spiralStopSideCuter
+#
+#     spiralStartCap.name = "Start Cap"
+#     spiralStopCap.name = "Stop Cap"
+#     spiralStartCap.lock = "locked"
+#     spiralStopCap.lock = "locked"
+#
+#     addMesh spiralStartCap
+#     addMesh spiralStopCap
+#     addMesh spiralStopCapTrim
 
     spiralMesh.name = "Spiral"
-    spiralMesh.lock = "locked"
+    spiralTrimMesh.name = "Spiral Trim"
 
-    addMesh spiralStartCap
-    addMesh spiralStopCap
-    addMesh spiralStopCapTrim
+    spiralMesh.lock = "locked"
+    spiralTrimMesh.lock = "locked"
+
+    addMesh spiralTrimMesh
     addMesh spiralMesh
