@@ -103,18 +103,18 @@ polygen = () ->
     spiralStartCapIn = newSphere spiralRadius * 2 - (spiralThickness / 2), spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStart.x, spiralStart.y, spiralStart.z]
     spiralStopCapIn = newSphere spiralRadius - (spiralThickness / 2.15), spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStop.x - spiralStopCapOffset, spiralStop.y, spiralStop.z]
 
-    spiralStartCapTrim = newTorus spiralRadius * 2, spiralThickness / golden, spiralRadiusSegments * 2, spiralRadiusSegments * 2
+    spiralStartCapTrim = newTorus spiralRadius * 2, spiralThickness / golden, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [0, 0, 0]
     spiralStartCapTrim.rotateY degree2radian 90
 
     spiralStopCapTrim = newTorus(spiralRadius, spiralThickness / golden, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStop.x - spiralStopCapOffset, spiralStop.y, spiralStop.z])
     spiralStopCapTrim.rotateY degree2radian 90
     spiralStopCapTrim.scale.y = golden
 
-    spiralStartTopCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [0, 0, spiralRadius * 2.5])
-    spiralStartBottomCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [0, 0, - spiralRadius * 2.5 - spiralRadius - (spiralThickness / 3)])
+    spiralStartTopCuter = newBox spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [0, 0, spiralRadius * 2.5]
+    spiralStartBottomCuter = newBox spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [0, 0, - spiralRadius * 2.5 - spiralRadius - (spiralThickness / 3)]
 
-    spiralStopTopCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [spiralStop.x, 0, spiralRadius * 2.5])
-    spiralStopSideCuter = newBox(spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [spiralStop.x, - spiralRadius * 2.5, 0])
+    spiralStopTopCuter = newBox spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [spiralStop.x, 0, spiralRadius * 2.5]
+    spiralStopSideCuter = newBox spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [spiralStop.x, - spiralRadius * 2.5, 0]
 
     spiralStartCapEx.rotateX degree2radian 90
     spiralStopCapEx.rotateX degree2radian 90
@@ -136,33 +136,33 @@ polygen = () ->
     spiralStopCapEx = cut spiralStopCapEx, spiralStopTopCuter
     spiralStopCapEx = cut spiralStopCapEx, spiralStopSideCuter
 
-    spiralStopCapTrim = cut spiralStopCapTrim, spiralStopSideCuter
-
-    spiralStopSideCuter.position.x += spiralRadius * 1.5 + (spiralThickness / 2)
-    spiralStopSideCuter.position.y += spiralRadius * 5
-
     spiralStartCap = cut spiralStartCapEx, spiralStartCapIn
     spiralStopCap = cut spiralStopCapEx, spiralStopCapIn
 
-    # spiralMesh = cut spiralMesh, spiralStartCapEx
+    spiralStopCapTrim = cut spiralStopCapTrim, spiralStopSideCuter
+
+    spiralStopSideCuter.position.x += spiralRadius * 2.5 - spiralRadius + (spiralThickness / 2.15)
+    spiralStopSideCuter.position.y += spiralRadius * 5
+
+    spiralMesh = cut spiralMesh, spiralStartCapEx
     spiralMesh = cut spiralMesh, spiralStopSideCuter
-    # spiralTrimMesh = cut spiralTrimMesh, spiralStartCapEx
+    spiralTrimMesh = cut spiralTrimMesh, newSphere spiralRadius * 2, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStart.x, spiralStart.y, spiralStart.z]
     spiralTrimMesh = cut spiralTrimMesh, spiralStopSideCuter
 
     spiralMesh.name = "Spiral"; spiralMesh.lock = "locked"
     spiralTrimMesh.name = "Spiral Trim"; spiralTrimMesh.lock = "locked"
 
     spiralStartCap.name = "Start Cap"; spiralStartCap.lock = "locked"
-    spiralStartCapTrim = "Start Trim"; spiralStartCapTrim.lock = "locked"
+    spiralStartCapTrim.name = "Start Trim"; spiralStartCapTrim.lock = "locked"
 
     spiralStopCap.name = "Stop Cap"; spiralStopCap.lock = "locked"
-    spiralStopCapTrim = "Stop Trim"; spiralStopCapTrim.lock = "locked"
+    spiralStopCapTrim.name = "Stop Trim"; spiralStopCapTrim.lock = "locked"
 
     addMesh spiralMesh
-    # addMesh spiralTrimMesh
+    addMesh spiralTrimMesh
 
     addMesh spiralStartCap
-    # addMesh spiralStartCapTrim
+    addMesh spiralStartCapTrim
 
     addMesh spiralStopCap
-    # addMesh spiralStopCapTrim
+    addMesh spiralStopCapTrim
