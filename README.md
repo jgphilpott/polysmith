@@ -20,7 +20,7 @@ docker-compose up
 
 # Usage
 
-To create/view a 3D model you will need to add a polygen function to the root JavaScript file, [root.js](https://github.com/jgphilpott/polymorph/blob/master/app/scripts/root.js). You can either create a new generator from scratch or copy and paste from one of the '[things](https://github.com/jgphilpott/polymorph/tree/master/app/things)'.
+To create/view a 3D model you will need to add a polygen function to the root JavaScript file, [root.js](https://github.com/jgphilpott/polymorph/blob/master/app/scripts/root.js). You can either create a new generator from scratch or copy and paste from one of the _**[things](https://github.com/jgphilpott/polymorph/tree/master/app/things)**_.
 
 Once you see the desired model in the view you can use `Ctrl + Enter` to download it as an STL file or `Shift + Enter` to download it as an OBJ file. You can use any software you like to slice the STL/OBJ files but [Cura](https://github.com/Ultimaker/Cura) is recommended.
 
@@ -28,7 +28,7 @@ If you have any problems with the software or ideas for new features please [ope
 
 # Connect
 
-**I'd love to see all the things you create with Polymorph so please connect and share!** I ([Jacob Philpott](https://github.com/jgphilpott)) have used this software for all of my personal 3D models. You can view and download my creations on several different websites listed here:
+**I'd love to see all the things you create with Polymorph so please connect and share!** [I](https://github.com/jgphilpott) have used this software for all of my personal 3D models, you can view and download my creations on several different websites listed here:
 
 ### <img align="left" width="25" height="25" src="https://www.thingiverse.com/favicon.ico"> [Thingiverse](https://www.thingiverse.com/jgphilpott)
 ### <img align="left" width="25" height="25" src="https://pinshape.com/favicon.ico"> [Pinshape](https://pinshape.com/users/964002)
