@@ -2,7 +2,7 @@
 
 # Intro
 
-Polymorph is a JavaScript based 3D modeling software that uses [three.js](https://github.com/mrdoob/three.js) and [csg.js](https://github.com/evanw/csg.js) in the background. It can export [STL](https://en.wikipedia.org/wiki/STL_(file_format)) and [OBJ](https://en.wikipedia.org/wiki/Wavefront_.obj_file) files to be used for 3D printing.
+Polymorph is a [JavaScript](https://en.wikipedia.org/wiki/JavaScript) based 3D modeling software that uses [three.js](https://github.com/mrdoob/three.js) and [csg.js](https://github.com/evanw/csg.js) in the background. It can export [STL](https://en.wikipedia.org/wiki/STL_(file_format)) and [OBJ](https://en.wikipedia.org/wiki/Wavefront_.obj_file) files to be used for 3D printing.
 
 # Quick Start
 
@@ -20,7 +20,7 @@ docker-compose up
 
 # Usage
 
-To create/view a 3D model you will need to add a polygen function to the root JavaScript file, [root.js](https://github.com/jgphilpott/polymorph/blob/master/app/scripts/root.js). You can either create a new generator from scratch or copy and paste from one of the _**[things](https://github.com/jgphilpott/polymorph/tree/master/app/things)**_.
+To create/view a 3D model you will need to add a polygen function to one of the root files in the [scripts directory](https://github.com/jgphilpott/polymorph/tree/master/app/scripts). You can either create a new function from scratch or copy and paste from one of the _**[things](https://github.com/jgphilpott/polymorph/tree/master/app/things)**_.
 
 Once you see the desired model in the view you can use `Ctrl + Enter` to download it as an STL file or `Shift + Enter` to download it as an OBJ file. You can use any software you like to slice the STL/OBJ files but [Cura](https://github.com/Ultimaker/Cura) is recommended.
 
