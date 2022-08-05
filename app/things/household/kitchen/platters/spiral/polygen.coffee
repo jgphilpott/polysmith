@@ -115,7 +115,7 @@ polygen = () ->
     spiralStartBottomCutter = newBox spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [0, 0, - spiralRadius * 2.5 - spiralRadius - (spiralThickness / 3)]
 
     spiralStopTopCutter = newBox spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [spiralStop.x, 0, spiralRadius * 2.5]
-    spiralStopSideCutter = newBox spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [spiralStop.x, - spiralRadius * 2.5, 0]
+    spiralStopSideCutter = newBox spiralRadius * 5, spiralRadius * 5, spiralRadius * 2 + spiralThickness, [spiralStop.x, - spiralRadius * 2.5, 0]
 
     spiralStartTrimCutter = newCylinder spiralRadius, spiralRadius * 2, spiralRadius * 2
     spiralStopTrimCutter = newCylinder spiralRadius, spiralStop.x - spiralRadius + (spiralThickness / 2), spiralStop.x - spiralRadius + (spiralThickness / 2)
