@@ -13,22 +13,34 @@ class Light
             when "ambient"
 
                 @light = new AmbientLight this.intensity, this.colorOne
+                this.setPosition 0, 0, 0
+                break
 
             when "directional"
 
                 @light = new DirectionalLight this.intensity, this.colorOne
+                this.setPosition scale, scale, scale
+                break
 
             when "hemisphere"
 
                 @light = new HemisphereLight this.intensity, this.colorOne, this.colorTwo
+                this.setPosition 0, 0, 0
+                break
 
             when "point"
 
                 @light = new PointLight this.intensity, this.colorOne
+                this.setPosition scale, scale, scale
+                break
 
             when "spot"
 
                 @light = new SpotLight this.intensity, this.colorOne
+                this.setPosition scale, scale, scale
+                break
+
+        this.add()
 
     setX : (x = 0) ->
 
@@ -74,10 +86,10 @@ class Light
 
         scene.add self.light
 
-        lights.push self.light
+        lights.push self
 
     remove : (self = this) ->
 
         scene.remove self.light
 
-        lights.filterInPlace (light) -> light.uuid != self.light.uuid
+        lights.filterInPlace (item) -> item.light.uuid != self.light.uuid

@@ -56,11 +56,12 @@
     <script src="{{ url_for('static', filename='scripts/libs/colors/three/grayscale.js') }}"></script>
     <script src="{{ url_for('static', filename='scripts/libs/colors/three/rainbow.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='scripts/libs/lights/ambient.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/lights/directional.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/lights/hemisphere.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/lights/point.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/lights/spot.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/libs/lights/ambient/light.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/libs/lights/directional/light.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/libs/lights/hemisphere/light.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/libs/lights/point/light.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/libs/lights/spot/light.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/libs/lights/light.js') }}"></script>
 
     <script src="{{ url_for('static', filename='scripts/libs/cameras/array.js') }}"></script>
     <script src="{{ url_for('static', filename='scripts/libs/cameras/cube.js') }}"></script>
@@ -149,15 +150,16 @@
       const client = data.client
       const socket = io()
 
-      let scale = 100
+      data.scale = scale = 100
 
-      let axes = []
-      let meshes = []
-      let panels = []
+      data.axes = axes = []
+      data.meshes = meshes = []
+      data.lights = lights = []
+      data.panels = panels = []
 
-      var lights, camera, events
-      var renderer, composer, canvas, scene
-      let settings, controls, tooltips = {}
+      data.settings = settings = {}
+      data.controls = controls = {}
+      data.tooltips = tooltips = {}
 
       let box = addBox
       let circle = addCircle
@@ -175,10 +177,6 @@
       let triangle = addTriangle
       let tube = addTube
 
-      data.scale = scale
-      data.meshes = meshes
-      data.tooltips = tooltips
-
       data.settings = settings = getSettings()
 
       console.log("Welcome to " + data.title + "!")
@@ -190,6 +188,8 @@
       $("#metabox").css("display", settings.ui.metabox ? "" : "none")
       $("#help").css("display", settings.ui.help ? "" : "none")
 
+      var renderer, composer, canvas, scene, camera, events
+
       data.renderer = renderer = new THREE.WebGLRenderer({alpha: true, antialias: true, logarithmicDepthBuffer: true})
       renderer.setSize(window.innerWidth, window.innerHeight)
       renderer.setPixelRatio(window.devicePixelRatio)
@@ -199,11 +199,8 @@
       canvas.setAttribute("id", "canvas")
 
       data.scene = scene = new THREE.Scene()
-      scene.background = whiteThree
 
-      data.lights = lights = []
-      lights.push(addPointLight())
-      lights.push(addAmbientLight())
+      new Light("ambient"); new Light("point")
 
       data.camera = camera = addPerspectiveCamera()
 
