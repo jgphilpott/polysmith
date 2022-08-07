@@ -29,12 +29,19 @@ function contextMenu(type, element, event) {
       panel.append("<p id='panel'>" + (meshPanel.length && meshPanel.css("visibility") == "visible" ? "Close" : "Open") + " Panel</p>")
       panel.append("<p id='look'>Look Here</p>")
 
+      if (element.lock != "locked") {
+
+        panel.append("<h4>Ops</h4>")
+        panel.append("<p id='join'>Join Mesh</p>")
+        panel.append("<p id='cut'>Cut Mesh</p>")
+        panel.append("<p id='intersect'>Intersect Mesh</p>")
+
+      }
+
       panel.append("<h4>Mesh</h4>")
-      element.lock != "locked" ? panel.append("<p id='join'>Join Mesh</p>") : null
-      element.lock != "locked" ? panel.append("<p id='cut'>Cut Mesh</p>") : null
-      element.lock != "locked" ? panel.append("<p id='intersect'>Intersect Mesh</p>") : null
-      element.lock != "locked" ? panel.append("<p id='remove'>Remove Mesh</p>") : null
       element.lock != "locked" ? panel.append("<p id='lock'>Lock Mesh</p>") : panel.append("<p id='lock'>Unlock Mesh</p>")
+      element.lock != "locked" ? panel.append("<p id='wireframe'>Wireframe " + (element.material.wireframe ? "Off" : "On") + "</p>") : null
+      element.lock != "locked" ? panel.append("<p id='remove'>Remove Mesh</p>") : null
 
       panel.find("#panel").click(function() {
 
@@ -65,8 +72,9 @@ function contextMenu(type, element, event) {
       panel.find("#cut").click(function() { updateMesh(element, "operation", "cut", "setup") })
       panel.find("#join").click(function() { updateMesh(element, "operation", "join", "setup") })
       panel.find("#intersect").click(function() { updateMesh(element, "operation", "intersect", "setup") })
-      panel.find("#remove").click(function() { removeMesh(element) })
       panel.find("#lock").click(function() { updateMesh(element, "lock") })
+      panel.find("#wireframe").click(function() { element.material.wireframe = !element.material.wireframe })
+      panel.find("#remove").click(function() { removeMesh(element) })
 
       break
 

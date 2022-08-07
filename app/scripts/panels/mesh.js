@@ -432,6 +432,7 @@ function addMesh(mesh=null, properties={}) {
     mesh.class = "class" in properties ? properties.class : mesh.class ? mesh.class : "custom"
 
     mesh.material.style = "style" in properties ? properties.style : mesh.material.style ? mesh.material.style : "multi"
+    mesh.material.wireframe = "wireframe" in properties ? properties.wireframe : mesh.material.wireframe ? mesh.material.wireframe : false
 
     if (properties.position) {
 
@@ -534,6 +535,7 @@ function updateMesh(mesh, type, key=null, value=null, save=false) {
 
     let color = null
     let opacity = mesh.material.opacity
+    let wireframe = mesh.material.wireframe
     let material = value == "multi" ? "normal" : "standard"
 
     panel.find(".color").removeClass("selected")
@@ -549,6 +551,7 @@ function updateMesh(mesh, type, key=null, value=null, save=false) {
 
     mesh.material.dispose()
     mesh.material = meshMaterial(material, color)
+    mesh.material.wireframe = wireframe
     mesh.material.opacity = opacity
     mesh.material.style = value
 

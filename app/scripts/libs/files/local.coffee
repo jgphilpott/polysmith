@@ -16,6 +16,7 @@ localMeshes = (action, mesh) ->
                     lock: mesh.metadata.lock
                     class: mesh.metadata.class
                     style: mesh.metadata.style
+                    wireframe: mesh.metadata.wireframe
 
     else
 
@@ -28,6 +29,7 @@ localMeshes = (action, mesh) ->
         meshJSON.metadata.lock = mesh.lock
         meshJSON.metadata.class = mesh.class
         meshJSON.metadata.style = mesh.material.style
+        meshJSON.metadata.wireframe = mesh.material.wireframe
 
         if action == "add"
 
