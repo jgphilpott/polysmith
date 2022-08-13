@@ -1,10 +1,10 @@
 function addCameraPanel() {
 
-  $("body").append("<div id='camera' class='panel'><img class='close' src='/app/imgs/panels/nav/close.png'></div>")
+  $("body").append("<div id='camera' class='panel'><img title='Close' class='close' src='/app/imgs/panels/nav/close.png'></div>")
 
   let panel = $("#camera.panel")
 
-  panel.append("<img class='camera' src='/app/imgs/panels/main/camera.png'>")
+  panel.append("<img title='Camera' class='camera' src='/app/imgs/panels/main/camera.png'>")
   panel.append("<img title='Reset Camera' class='reset' src='/app/imgs/panels/tools/reset.png'>")
 
   panel.append("<div id='position' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Position</h4></div><div class='body'></div></div>")
