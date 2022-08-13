@@ -19,7 +19,8 @@ class ArchimedeanSpiral extends THREE.Curve
 polygen = () ->
 
     golden = 1.618
-    settings.ui.title = "spiral_platter"
+
+    settings.ui.title = "Spiral Platter"
 
     spiral = new ArchimedeanSpiral 10, degree2radian 720
     spiralTrim = new ArchimedeanSpiral 10, degree2radian 900
@@ -132,12 +133,12 @@ polygen = () ->
     spiralStopCapEx.scale.z = golden
     spiralStopCapIn.scale.z = golden
 
-    spiralMesh = cut spiralMesh, spiralStartCapEx
+    spiralMesh = cut spiralMesh, spiralStartCapIn
     spiralTrimMesh = cut spiralTrimMesh, spiralStartCapEx
 
     spiralStartCapEx = cut spiralStartCapEx, spiralStartTopCutter
     spiralStartCapEx = cut spiralStartCapEx, spiralStartBottomCutter
-    spiralStartBottomCutter.position.z += spiralThickness
+    spiralStartBottomCutter.position.z += spiralThickness + golden
     spiralStartCapIn = cut spiralStartCapIn, spiralStartBottomCutter
 
     spiralStopCapEx = cut spiralStopCapEx, spiralStopTopCutter
