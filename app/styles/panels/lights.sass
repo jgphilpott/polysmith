@@ -1,3 +1,9 @@
+@import "../colors/glass/grayscale.sass"
+@import "../colors/glass/rainbow.sass"
+
+@import "../colors/solid/grayscale.sass"
+@import "../colors/solid/rainbow.sass"
+
 #lights.panel
 
     visibility: hidden
@@ -31,6 +37,32 @@
         height: 14px
 
         cursor: pointer
+
+    #list
+
+        .head
+
+            display: flex
+            align-items: center
+
+            img.fold
+
+                padding: 3px
+
+                width: 10px
+                height: 15px
+
+                cursor: pointer
+
+            select
+
+                margin: 5px
+                outline: none
+
+                border-radius: 5px
+                background: $light-gray-glass
+
+                cursor: pointer
 
     p#none
 
