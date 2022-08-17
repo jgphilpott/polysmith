@@ -28,7 +28,7 @@ app.jinja_env.auto_reload = True
 app.config["SECRET_KEY"] = urandom(42).hex()
 
 Popen(["coffee", "-cbw", scripts_dir])
-Popen(["tsc", "-w", scripts_dir + "/home.ts"])
+Popen(["tsc", "-w", scripts_dir + "/root.ts"])
 Popen(["boussole", "watch"], cwd="app/config")
 compile(dirname=(styles_dir, styles_dir), output_style="compressed")
 
