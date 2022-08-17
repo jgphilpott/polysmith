@@ -1,3 +1,23 @@
+### Libs ###
+app/libs
+
+### Python ###
+__pycache__
+*.ipynb_checkpoints
+
+### Scripts ###
+app/scripts/libs/*.js
+app/scripts/libs/*/*.js
+app/scripts/libs/*/*/*.js
+
+### Styles ###
+*.css.map
+*.sass.map
+*.sass-cache
+app/styles/*.css
+app/styles/*/*.css
+app/styles/*/*/*.css
+
 ### Config ###
 .bash_history
 .sonarlint
@@ -11,23 +31,3 @@ venv
 *.scad
 *.stp
 *.ipt
-
-### Libs ###
-app/libs
-
-### Python ###
-*.ipynb_checkpoints
-__pycache__
-
-### Styles ###
-*.css.map
-*.sass.map
-*.sass-cache
-app/styles/*.css
-app/styles/*/*.css
-app/styles/*/*/*.css
-
-### Scripts ###
-app/scripts/libs/*.js
-app/scripts/libs/*/*.js
-app/scripts/libs/*/*/*.js
