@@ -15,6 +15,9 @@ function addLightsPanel() {
 
     lights.forEach((light) => {
 
+      let min = - scale * 2
+      let max = scale * 2
+
       let template =
 
         `<div id='light-` + light.uuid + `'>
@@ -32,6 +35,13 @@ function addLightsPanel() {
                 <div id='intensity' class='slider'></div>
 
                 <img title='Delete Light' class='trash' src='/app/imgs/panels/tools/trash.png'>
+
+            </div>
+            <div class='body'>
+
+              <span id='position-x'><label id='x'>X</label><input type=number step=1 min=` + min + ` max=` + max + ` value=` + light.getX().toFixed(2) + `><button id='plus'>+</button><button id='minus'>-</button></span>
+              <span id='position-y'><label id='y'>Y</label><input type=number step=1 min=` + min + ` max=` + max + ` value=` + light.getY().toFixed(2) + `><button id='plus'>+</button><button id='minus'>-</button></span>
+              <span id='position-z'><label id='z'>Z</label><input type=number step=1 min=` + min + ` max=` + max + ` value=` + light.getZ().toFixed(2) + `><button id='plus'>+</button><button id='minus'>-</button></span>
 
             </div>
         </div>`

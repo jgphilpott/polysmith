@@ -81,6 +81,89 @@
 
                 cursor: pointer
 
+        .body
+
+            display: none
+
+            span
+
+                margin: 0px 10px
+
+                display: flex
+                align-items: center
+
+                #x
+
+                    color: $red-solid
+
+                #y
+
+                    color: $green-solid
+
+                #z
+
+                    color: $blue-solid
+
+                label, input, button
+
+                    margin: 5px
+
+                label
+
+                    cursor: grab
+
+                input, button
+
+                    border: 1px solid $black-solid
+                    border-radius: 5px
+
+                input
+
+                    width: 50px
+                    padding: 3px
+
+                    margin-right: 12px
+
+                    appearance: textfield
+
+                input:focus
+
+                    outline: none
+
+                input.disabled
+
+                    color: $dark-gray-solid
+
+                input.disabled:hover
+
+                    cursor: not-allowed
+
+                input::-webkit-outer-spin-button,
+                input::-webkit-inner-spin-button
+
+                    -webkit-appearance: none
+
+                button#plus
+
+                    background-color: $green-glass
+
+                button#minus
+
+                    background-color: $red-glass
+
+                button#plus.disabled,
+                button#minus.disabled
+
+                    background-color: $dark-gray-glass
+
+                button:hover
+
+                    cursor: pointer
+
+                button.disabled:hover
+
+                    cursor: not-allowed
+
     p#none
 
         margin: 10px auto
