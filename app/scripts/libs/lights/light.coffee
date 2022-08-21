@@ -40,6 +40,8 @@ class Light
                 this.setPosition scale, scale, scale
                 break
 
+        @uuid = this.light.uuid
+
         this.add()
 
     setX : (x = 0) ->
