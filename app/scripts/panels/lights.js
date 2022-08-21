@@ -31,7 +31,7 @@ function addLightsPanel() {
 
                 <div id='intensity' class='slider'></div>
 
-                <img title='Trash' class='trash' src='/app/imgs/panels/tools/trash.png'>
+                <img title='Delete Light' class='trash' src='/app/imgs/panels/tools/trash.png'>
 
             </div>
         </div>`

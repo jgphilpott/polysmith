@@ -51,8 +51,8 @@ function updateMeshesPanel(type, mesh) {
       row += "<td><p title='ID' class='id'>" + tooltips.meshCount + "</p></td>"
       row += "<td><p title='Name' class='name'><span class='" + (mesh.lock == "locked" ? "disabled" : "") + "' contenteditable='true'>" + mesh.name + "</span></p></td>"
       row += "<td><img title='Settings' class='settings' src='/app/imgs/panels/tools/toggle/off.png'></td></td>"
-      row += "<td><img title='Lock' class='lock' src='/app/imgs/panels/lock/" + mesh.lock + ".png'></td>"
-      row += "<td><img title='Trash' class='trash " + (mesh.lock == "locked" ? "disabled" : "") + "' src='/app/imgs/panels/tools/trash.png'></td>"
+      row += "<td><img title='Lock Mesh' class='lock' src='/app/imgs/panels/lock/" + mesh.lock + ".png'></td>"
+      row += "<td><img title='Delete Mesh' class='trash " + (mesh.lock == "locked" ? "disabled" : "") + "' src='/app/imgs/panels/tools/trash.png'></td>"
 
       table.append(row + "</tr>")
 

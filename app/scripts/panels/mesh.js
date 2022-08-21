@@ -48,8 +48,8 @@ function addMeshPanel(mesh, coordinates=null) {
 
     tools += "<img title='Visibility' id='eye' class='tool' src='/app/imgs/panels/visibility/" + (mesh.material.opacity < 0.5 ? "hidden" : "visible") + ".png'>"
     tools += "<div id='visibility' class='tool slider'></div>"
-    tools += "<img title='Lock' id='lock' class='tool' src='/app/imgs/panels/lock/" + mesh.lock + ".png'>"
-    tools += "<img title='Trash' id='trash' class='tool' src='/app/imgs/panels/tools/trash.png'>"
+    tools += "<img title='Lock Mesh' id='lock' class='tool' src='/app/imgs/panels/lock/" + mesh.lock + ".png'>"
+    tools += "<img title='Delete Mesh' id='trash' class='tool' src='/app/imgs/panels/tools/trash.png'>"
 
     meta += "<p id='type'><b>Type:</b> <span>" + mesh.class.replace("-", " ").replace(/\b\w/g, function(char) { return char.toUpperCase() }) + "</span></p>"
     meta += "<p id='surface'><b>Surface:</b> <span>" + mesh.surface.toFixed(2) + "</span></p>"
@@ -68,13 +68,13 @@ function addMeshPanel(mesh, coordinates=null) {
 
     if (geometriesWithProperties.includes(mesh.class) || geometriesWithProperties.includes(mesh.class.split("-")[1])) {
 
-      panel.append("<div id='properties' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Properties</h4></div><div class='body'></div></div>")
+      panel.append("<div id='properties' class='controls'><div class='head'><img title='Fold Properties' class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Properties</h4></div><div class='body'></div></div>")
 
     }
 
-    panel.append("<div id='position' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Position</h4></div><div class='body'></div></div>")
-    panel.append("<div id='rotation' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Rotation</h4></div><div class='body'></div></div>")
-    panel.append("<div id='scale' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Scale</h4></div><div class='body'></div></div>")
+    panel.append("<div id='position' class='controls'><div class='head'><img title='Fold Position' class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Position</h4></div><div class='body'></div></div>")
+    panel.append("<div id='rotation' class='controls'><div class='head'><img title='Fold Rotation' class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Rotation</h4></div><div class='body'></div></div>")
+    panel.append("<div id='scale' class='controls'><div class='head'><img title='Fold Scale' class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Scale</h4></div><div class='body'></div></div>")
 
     let properties = panel.find("#properties .body")
     let position = panel.find("#position .body")

@@ -7,9 +7,9 @@ function addCameraPanel() {
   panel.append("<img title='Camera' class='camera' src='/app/imgs/panels/main/camera.png'>")
   panel.append("<img title='Reset Camera' class='reset' src='/app/imgs/panels/tools/reset.png'>")
 
-  panel.append("<div id='position' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Position</h4></div><div class='body'></div></div>")
-  panel.append("<div id='target' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Target</h4></div><div class='body'></div></div>")
-  panel.append("<div id='speed' class='controls'><div class='head'><img class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Speed</h4></div><div class='body'></div></div>")
+  panel.append("<div id='position' class='controls'><div class='head'><img title='Fold Position' class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Position</h4></div><div class='body'></div></div>")
+  panel.append("<div id='target' class='controls'><div class='head'><img title='Fold Target' class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Target</h4></div><div class='body'></div></div>")
+  panel.append("<div id='speed' class='controls'><div class='head'><img title='Fold Speed' class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Speed</h4></div><div class='body'></div></div>")
 
   panel.find(".fold, h4").click(function(event) {
 
