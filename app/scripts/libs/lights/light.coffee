@@ -1,12 +1,14 @@
 class Light
 
-    constructor : (type, intensity = 1, colorOne = whiteThree, colorTwo = blackThree) ->
+    constructor : (type, intensity = 1, colorOne = whiteThree, colorTwo = blackThree, lock = false) ->
 
         @type = type.toLowerCase().trim()
         @intensity = intensity
 
         @colorOne = colorOne
         @colorTwo = colorTwo
+
+        @lock = lock
 
         switch this.type
 
@@ -84,6 +86,18 @@ class Light
 
         return self.light.intensity
 
+    setLock : (lock = false) ->
+
+        this.lock = lock
+
+    getLock : (self = this) ->
+
+        return self.lock
+
+    toggleLock : (self = this) ->
+
+        this.lock = not self.lock
+
     add : (self = this) ->
 
         scene.add self.light
@@ -94,4 +108,4 @@ class Light
 
         scene.remove self.light
 
-        lights.filterInPlace (item) -> item.light.uuid != self.light.uuid
+        lights.filterInPlace (item) -> item.light.uuid isnt self.light.uuid

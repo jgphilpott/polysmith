@@ -34,6 +34,7 @@ function addLightsPanel() {
 
                 <div id='intensity' class='slider'></div>
 
+                <img title='Lock Light' class='lock' src='/app/imgs/panels/lock/` + (light.lock ? "locked" : "unlocked") + `.png'>
                 <img title='Delete Light' class='trash' src='/app/imgs/panels/tools/trash.png'>
 
             </div>
@@ -58,6 +59,14 @@ function addLightsPanel() {
       sliderStyle(intensity)
 
     })
+
+    panel.find(".fold").click(function(event) {
+
+      event.stopPropagation()
+
+      foldPanel(this)
+
+    }).on("mousedown mouseup", function(event) { event.stopPropagation() })
 
   } else {
 
