@@ -20,7 +20,7 @@ function addLightsPanel() {
 
       let template =
 
-        `<div id='light-` + light.uuid + `'>
+        `<div id='light-` + light.uuid + `' class='light'>
             <div class='head'>
 
                 <img title='Fold Light' class='fold' src='/app/imgs/panels/nav/fold.png'>
@@ -56,17 +56,11 @@ function addLightsPanel() {
 
       intensity.slider({min: 0, max: 100, value: light.intensity * 100, start: sliderStart, slide: sliderSlide, stop: sliderStop})
 
+      template.data("light", light)
+
       sliderStyle(intensity)
 
     })
-
-    panel.find(".fold").click(function(event) {
-
-      event.stopPropagation()
-
-      foldPanel(this)
-
-    }).on("mousedown mouseup", function(event) { event.stopPropagation() })
 
   } else {
 
@@ -75,6 +69,37 @@ function addLightsPanel() {
   }
 
   panel.append("<img title='Add New Light' class='nav' src='/app/imgs/panels/nav/+.png'>")
+
+  panel.find(".fold").click(function(event) {
+
+    event.stopPropagation()
+
+    foldPanel(this)
+
+  }).on("mousedown mouseup", function(event) { event.stopPropagation() })
+
+  panel.find(".lock").click(function(event) {
+
+    let template = $(this).closest("div.light")
+    let light = template.data("light")
+    let lock = light.toggleLock()
+
+    template.find("select").toggleClass("disabled", lock)
+    template.find("select").prop("disabled", lock)
+
+    template.find(".slider").toggleClass("disabled", lock)
+
+    template.find(".lock").attr("src", "/app/imgs/panels/lock/" + (lock ? "locked" : "unlocked") + ".png")
+    template.find(".trash").toggleClass("disabled", lock)
+
+    template.find("input").toggleClass("disabled", lock)
+    template.find("button").toggleClass("disabled", lock)
+
+    sliderStyle(template.find(".slider"))
+
+  }).on("mousedown mouseup", function(event) { event.stopPropagation() })
+
+  panel.data("lights", lights)
 
   return panel
 
