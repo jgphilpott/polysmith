@@ -23,7 +23,7 @@ function addCameraPanel() {
 
     foldPanel(this)
 
-  }).mousedown(function(event) { event.stopPropagation() }) .mouseup(function(event) { event.stopPropagation() })
+  }).on("mousedown mouseup", function(event) { event.stopPropagation() })
 
   if (settings.camera.open) {
 
@@ -42,7 +42,7 @@ function addCameraPanel() {
   let holdInterval = null
   let holdTimeout = null
 
-  let min = -scale * 5
+  let min = - scale * 5
   let max = scale * 5
 
   position.append("<span id='position-x'><label id='x'>X</label><input type=number step=1 min=" + min + " max=" + max + " value=" + camera.position.x.toFixed(2) + "><button id='plus'>+</button><button id='minus'>-</button></span>")

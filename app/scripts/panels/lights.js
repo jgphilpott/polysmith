@@ -78,6 +78,10 @@ function addLightsPanel() {
 
   }).on("mousedown mouseup", function(event) { event.stopPropagation() })
 
+  panel.find("select#types").on("mousedown mouseup", function(event) { event.stopPropagation() })
+
+  panel.find(".slider").on("mousedown mouseup", function(event) { event.stopPropagation() })
+
   panel.find(".lock").click(function(event) {
 
     let template = $(this).closest("div.light")
@@ -88,6 +92,7 @@ function addLightsPanel() {
     template.find("select").prop("disabled", lock)
 
     template.find(".slider").toggleClass("disabled", lock)
+    template.find(".slider").slider(lock ? "disable" : "enable")
 
     template.find(".lock").attr("src", "/app/imgs/panels/lock/" + (lock ? "locked" : "unlocked") + ".png")
     template.find(".trash").toggleClass("disabled", lock)
@@ -98,6 +103,8 @@ function addLightsPanel() {
     sliderStyle(template.find(".slider"))
 
   }).on("mousedown mouseup", function(event) { event.stopPropagation() })
+
+  panel.find(".trash").on("mousedown mouseup", function(event) { event.stopPropagation() })
 
   panel.data("lights", lights)
 
