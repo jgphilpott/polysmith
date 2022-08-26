@@ -106,7 +106,13 @@ updateSuccess = (update) ->
 
     switch category
 
+        when "general"
+
+            $(".settings-category #general-" + setting + "").val value
+
         when "ui"
+
+            $(".settings-category #ui-" + setting + "").prop "checked", value
 
             if setting == "navbar"
 
@@ -142,6 +148,8 @@ updateSuccess = (update) ->
             break
 
         when "axes"
+
+            $(".settings-category #axes-" + setting + "").prop "checked", value
 
             if setting == "axesCaps"
 
