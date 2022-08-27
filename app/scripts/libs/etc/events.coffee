@@ -3,7 +3,7 @@ addEvents = () ->
     events = new THREEx.DomEvents camera, canvas
 
     events.operation = mesh: null, key: null
-    events.zIndex = 0
+    events.zIndex = 1
 
     $(window).on "resize", () ->
 
@@ -127,6 +127,8 @@ addPanelEvents = (panel) ->
     if id != "mesh"
 
         if settings.panels[id] then panel.css "visibility", "visible" else panel.css "visibility", "hidden"
+
+    panel.css "z-index", events.zIndex
 
     makeDragable panel
 
@@ -253,9 +255,13 @@ makeDragable = (element, origEvent = null) ->
 
                         scene.remove distanceLine
 
-                    xDistanceLine = newLine [[0, coordinates.y, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed"
-                    yDistanceLine = newLine [[coordinates.x, 0, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed"
-                    zDistanceLine = newLine [[coordinates.x, coordinates.y, 0], [coordinates.x, coordinates.y, coordinates.z]], "dashed"
+                    xColor = if settings.tooltips.measurements then redThree else blackThree
+                    yColor = if settings.tooltips.measurements then greenThree else blackThree
+                    zColor = if settings.tooltips.measurements then blueThree else blackThree
+
+                    xDistanceLine = newLine [[0, coordinates.y, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed", xColor
+                    yDistanceLine = newLine [[coordinates.x, 0, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed", yColor
+                    zDistanceLine = newLine [[coordinates.x, coordinates.y, 0], [coordinates.x, coordinates.y, coordinates.z]], "dashed", zColor
 
                     tooltips.distanceLines.push xDistanceLine, yDistanceLine, zDistanceLine
                     scene.add xDistanceLine, yDistanceLine, zDistanceLine
@@ -272,9 +278,11 @@ makeDragable = (element, origEvent = null) ->
                         yScreenCoordinates = world2screenCoordinates yDistanceLineCenter.x, yDistanceLineCenter.y, yDistanceLineCenter.z
                         zScreenCoordinates = world2screenCoordinates zDistanceLineCenter.x, zDistanceLineCenter.y, zDistanceLineCenter.z
 
-                        $("body").append "<div id='x' class='measurement tooltip'><p>" + coordinates.x.toFixed(2) + "</p></div>"
-                        $("body").append "<div id='y' class='measurement tooltip'><p>" + coordinates.y.toFixed(2) + "</p></div>"
-                        $("body").append "<div id='z' class='measurement tooltip'><p>" + coordinates.z.toFixed(2) + "</p></div>"
+                        measurements = [{key: "x", value: coordinates.x}, {key: "y", value: coordinates.y}, {key: "z", value: coordinates.z}].sort (a, b) -> Math.abs(a.value) - Math.abs(b.value)
+
+                        for measurement in measurements
+
+                            $("body").append "<div id='" + measurement.key + "' class='measurement tooltip'><p>" + measurement.value.toFixed(2) + "</p></div>"
 
                         $("body").find("#x.measurement.tooltip").css("left", xScreenCoordinates.x).css("top", xScreenCoordinates.y)
                         $("body").find("#y.measurement.tooltip").css("left", yScreenCoordinates.x).css("top", yScreenCoordinates.y)
