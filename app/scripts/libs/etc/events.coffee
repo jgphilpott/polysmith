@@ -246,16 +246,18 @@ makeDragable = (element, origEvent = null) ->
                 coordinates.x = if coordinates.x < min then min else if coordinates.x > max then max else coordinates.x
                 coordinates.y = if coordinates.y < min then min else if coordinates.y > max then max else coordinates.y
 
-                xDistanceLine = newLine [[0, coordinates.y, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed"
-                yDistanceLine = newLine [[coordinates.x, 0, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed"
-                zDistanceLine = newLine [[coordinates.x, coordinates.y, 0], [coordinates.x, coordinates.y, coordinates.z]], "dashed"
+                if settings.tooltips.guidelines
 
-                for distanceLine in tooltips.distanceLines
+                    for distanceLine in tooltips.distanceLines
 
-                    scene.remove distanceLine
+                        scene.remove distanceLine
 
-                tooltips.distanceLines.push xDistanceLine, yDistanceLine, zDistanceLine
-                scene.add xDistanceLine, yDistanceLine, zDistanceLine
+                    xDistanceLine = newLine [[0, coordinates.y, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed"
+                    yDistanceLine = newLine [[coordinates.x, 0, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed"
+                    zDistanceLine = newLine [[coordinates.x, coordinates.y, 0], [coordinates.x, coordinates.y, coordinates.z]], "dashed"
+
+                    tooltips.distanceLines.push xDistanceLine, yDistanceLine, zDistanceLine
+                    scene.add xDistanceLine, yDistanceLine, zDistanceLine
 
                 panel.find("#position-x input").val coordinates.x.toFixed 2
                 panel.find("#position-y input").val coordinates.y.toFixed 2
@@ -289,9 +291,11 @@ makeDragable = (element, origEvent = null) ->
 
             if element.lock != "locked"
 
-                for distanceLine in tooltips.distanceLines
+                if settings.tooltips.guidelines
 
-                    scene.remove distanceLine
+                    for distanceLine in tooltips.distanceLines
+
+                        scene.remove distanceLine
 
                 $("#canvas").css "cursor", "grab"
 
