@@ -1,12 +1,28 @@
 function addSettingsPanel() {
 
-  $("body").append("<div id='settings' class='panel'><img title='Close' class='close' src='/app/imgs/panels/nav/close.png'></div>")
+  let settingsPanel =
+
+    `<div id='settings' class='panel'>
+
+      <img title='Close' class='close' src='/app/imgs/panels/nav/close.png'>
+
+      <h3>Advanced Settings</h3>
+
+      <div id='first' class='settings-column'></div>
+      <div id='second' class='settings-column'></div>
+      <div id='third' class='settings-column'></div>
+
+    </div>`
+
+  $("body").append(settingsPanel)
 
   let panel = $("#settings.panel")
 
-  panel.append("<h3>Advanced Settings</h3>")
+  let firstSettingsColumn = panel.find("#first.settings-column")
+  let secondSettingsColumn = panel.find("#second.settings-column")
+  let thirdSettingsColumn = panel.find("#third.settings-column")
 
-  let general =
+  let generalSettings =
 
     `<div id='general-settings' class='settings-category'>
 
@@ -22,7 +38,7 @@ function addSettingsPanel() {
 
     </div>`
 
-  let ui =
+  let uiSettings =
 
     `<div id='ui-settings' class='settings-category'>
 
@@ -43,7 +59,23 @@ function addSettingsPanel() {
 
     </div>`
 
-  let axes =
+    let tooltipsSettings =
+
+      `<div id='tooltips-settings' class='settings-category'>
+
+        <h4>Tooltips</h4>
+
+        <div>
+          <input id='tooltips-guidelines' class='checkbox' type='checkbox' ` + (settings.tooltips.guidelines ? "checked" : "") + `><label>Guidelines</label>
+        </div>
+
+        <div>
+          <input id='tooltips-measurements' class='checkbox' type='checkbox' ` + (settings.tooltips.measurements ? "checked" : "") + ` ` + (settings.tooltips.guidelines ? "" : "disabled") + `><label>Measurements</label>
+        </div>
+
+      </div>`
+
+  let axesSettings =
 
     `<div id='axes-settings' class='settings-category'>
 
@@ -75,9 +107,12 @@ function addSettingsPanel() {
 
     </div>`
 
-  panel.append(general)
-  panel.append(ui)
-  panel.append(axes)
+  firstSettingsColumn.append(generalSettings)
+
+  secondSettingsColumn.append(uiSettings)
+  secondSettingsColumn.append(tooltipsSettings)
+
+  thirdSettingsColumn.append(axesSettings)
 
   panel.find(".select").on("change", function(event) {
 

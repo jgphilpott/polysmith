@@ -28,6 +28,10 @@ class Client():
                                     "help": False,
                                     "shortcuts": ["box", "cylinder", "sphere"]
                                 },
+                                "tooltips": {
+                                    "guidelines": True,
+                                    "measurements": True
+                                },
                                 "panels": {
                                     "camera": True,
                                     "lights": False,

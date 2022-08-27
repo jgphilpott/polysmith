@@ -28,6 +28,11 @@ getSettings = () ->
                 help: true
                 shortcuts: ["box", "cylinder", "sphere"]
 
+            tooltips:
+
+                guidelines: true
+                measurements: true
+
             panels:
 
                 camera: true
@@ -123,6 +128,12 @@ updateSuccess = (update) ->
             else
 
                 $("#" + setting + "").css "display", if value then "" else "none"
+
+        when "tooltips"
+
+            if setting == "guidelines"
+
+                $(".settings-category #tooltips-measurements").prop("disabled", !value)
 
         when "panels"
 
