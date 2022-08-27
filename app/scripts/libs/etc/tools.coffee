@@ -113,6 +113,14 @@ getBoundingBox = (mesh) ->
 
         return mesh.geometry.boundingBox
 
+getCenterPoint = (start, stop) ->
+
+    return
+
+        x: (stop.x - start.x) / 2 + start.x
+        y: (stop.y - start.y) / 2 + start.y
+        z: (stop.z - start.z) / 2 + start.z
+
 clearMeshOperation = () ->
 
     operationIcons = $ "#mesh.panel img.operation"

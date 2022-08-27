@@ -245,6 +245,7 @@ makeDragable = (element, origEvent = null) ->
 
                 coordinates.x = if coordinates.x < min then min else if coordinates.x > max then max else coordinates.x
                 coordinates.y = if coordinates.y < min then min else if coordinates.y > max then max else coordinates.y
+                coordinates.z = if coordinates.z < min then min else if coordinates.z > max then max else coordinates.z
 
                 if settings.tooltips.guidelines
 
@@ -258,6 +259,26 @@ makeDragable = (element, origEvent = null) ->
 
                     tooltips.distanceLines.push xDistanceLine, yDistanceLine, zDistanceLine
                     scene.add xDistanceLine, yDistanceLine, zDistanceLine
+
+                    if settings.tooltips.measurements
+
+                        $(".measurement.tooltip").remove()
+
+                        xDistanceLineCenter = getCenterPoint xDistanceLine.geometry.vertices[0], xDistanceLine.geometry.vertices[1]
+                        yDistanceLineCenter = getCenterPoint yDistanceLine.geometry.vertices[0], yDistanceLine.geometry.vertices[1]
+                        zDistanceLineCenter = getCenterPoint zDistanceLine.geometry.vertices[0], zDistanceLine.geometry.vertices[1]
+
+                        xScreenCoordinates = world2screenCoordinates xDistanceLineCenter.x, xDistanceLineCenter.y, xDistanceLineCenter.z
+                        yScreenCoordinates = world2screenCoordinates yDistanceLineCenter.x, yDistanceLineCenter.y, yDistanceLineCenter.z
+                        zScreenCoordinates = world2screenCoordinates zDistanceLineCenter.x, zDistanceLineCenter.y, zDistanceLineCenter.z
+
+                        $("body").append "<div id='x' class='measurement tooltip'><p>" + coordinates.x.toFixed(2) + "</p></div>"
+                        $("body").append "<div id='y' class='measurement tooltip'><p>" + coordinates.y.toFixed(2) + "</p></div>"
+                        $("body").append "<div id='z' class='measurement tooltip'><p>" + coordinates.z.toFixed(2) + "</p></div>"
+
+                        $("body").find("#x.measurement.tooltip").css("left", xScreenCoordinates.x).css("top", xScreenCoordinates.y)
+                        $("body").find("#y.measurement.tooltip").css("left", yScreenCoordinates.x).css("top", yScreenCoordinates.y)
+                        $("body").find("#z.measurement.tooltip").css("left", zScreenCoordinates.x).css("top", zScreenCoordinates.y)
 
                 panel.find("#position-x input").val coordinates.x.toFixed 2
                 panel.find("#position-y input").val coordinates.y.toFixed 2
@@ -296,6 +317,10 @@ makeDragable = (element, origEvent = null) ->
                     for distanceLine in tooltips.distanceLines
 
                         scene.remove distanceLine
+
+                    if settings.tooltips.measurements
+
+                        $(".measurement.tooltip").remove()
 
                 $("#canvas").css "cursor", "grab"
 
