@@ -16,8 +16,11 @@ getSettings = () ->
 
             general:
 
-                scale: tpye: "metric", size: 100
-                snap: grid: false, size: 1
+                scale: "metric"
+                unit: "millimeters"
+                snap: false
+                size: 100
+                grid: 1
 
             ui:
 
@@ -31,7 +34,7 @@ getSettings = () ->
             tooltips:
 
                 guidelines: true
-                measurements: true
+                measurements: false
 
             panels:
 

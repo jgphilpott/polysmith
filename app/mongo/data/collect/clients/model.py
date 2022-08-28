@@ -17,8 +17,11 @@ class Client():
 
             self.settings = {
                                 "general": {
-                                    "scale": {"tpye": "metric", "size": 100},
-                                    "snap": {"grid": False, "size": 1}
+                                    "scale": "metric",
+                                    "unit": "millimeters",
+                                    "snap": False,
+                                    "size": 100,
+                                    "grid": 1
                                 },
                                 "ui": {
                                     "title": "POLYMORPH",
@@ -30,7 +33,7 @@ class Client():
                                 },
                                 "tooltips": {
                                     "guidelines": True,
-                                    "measurements": True
+                                    "measurements": False
                                 },
                                 "panels": {
                                     "camera": True,

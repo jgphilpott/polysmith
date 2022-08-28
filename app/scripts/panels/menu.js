@@ -109,6 +109,14 @@ function addMenuPanel() {
           </select>
         </div>
 
+        <div>
+          <label>Unit</label>
+          <select id='general-unit' class='select'>
+            <option value='centimeters' ` + (settings.general.unit == "centimeters" ? "selected" : "") + `>Centimeters</option>
+            <option value='millimeters' ` + (settings.general.unit == "millimeters" ? "selected" : "") + `>Millimeters</option>
+          </select>
+        </div>
+
       </div>`
 
     let ui =
