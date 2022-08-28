@@ -53,7 +53,7 @@ if not exists(libs_dir):
     urlretrieve("https://raw.githubusercontent.com/jgphilpott/threex.domevents/master/threex.domevents.js", js_libs_dir + "/threeX.js")
 
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/03df747c3047504480e6dbeeddd27d68/raw/610e6908804af69ba765dc086b7018acbcdc4aa9/csgWrapper.js", js_libs_dir + "/csgWrapper.js")
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/59ad8432ba8567e91176e669454b9afa/raw/f608f772665fc6e76b999b8e266a479ce1c7fe6f/morph.coffee", js_libs_dir + "/morph.coffee")
+    urlretrieve("https://gist.githubusercontent.com/jgphilpott/59ad8432ba8567e91176e669454b9afa/raw/2e51fdb9eb1ea7a050e61da070a33c3611afea4b/morph.js", js_libs_dir + "/morph.js")
 
     urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/utils/BufferGeometryUtils.js", js_libs_dir + "/BufferGeometryUtils.js")
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/77709de890b806426089de1ff4e78758/raw/ee6c712af2e73bd8db799506d7863c45c493e744/LineSegmentsGeometry.js", js_libs_dir + "/LineSegmentsGeometry.js")
@@ -88,11 +88,11 @@ if not exists(libs_dir):
         calc = get("https://gist.githubusercontent.com/jgphilpott/4276345a5b7c96fc010afa28cc5d38b6/raw/26c8d0b1217c0e6dbf771fc80fd22dd3a35cb963/calculus.js").content.decode("utf-8")
         regr = get("https://gist.githubusercontent.com/jgphilpott/d38279e8fac9af31054e10b7363bf17e/raw/3684fcc69634970a75b1fa454b1a0f7b3c2c1a03/regression.js").content.decode("utf-8")
         roots = get("https://gist.githubusercontent.com/jgphilpott/e483b5fbe52a7233c292f35737e5a682/raw/d85ccaecf7d6b606809764b39f841a063c9a1fdc/roots.js").content.decode("utf-8")
-        trig = get("https://gist.githubusercontent.com/jgphilpott/1378cc2cccde6d65c5fb2b6111b5a98f/raw/587408f905ba1da6fcc970cb095bdf129ffa308b/trigonometry.js").content.decode("utf-8")
-        angles = get("https://gist.githubusercontent.com/jgphilpott/092c0f3e1bcfa75f543e8485b9b23e7d/raw/813b2b7ac4c3cbcfc5caec5eec3600bba3bf5edc/angleConverter.js").content.decode("utf-8")
+        trig = get("https://gist.githubusercontent.com/jgphilpott/1378cc2cccde6d65c5fb2b6111b5a98f/raw/3d1c75d73ae2a3f429b8974e5e26b6a7079817b1/trigonometry.js").content.decode("utf-8")
+        angle = get("https://gist.githubusercontent.com/jgphilpott/092c0f3e1bcfa75f543e8485b9b23e7d/raw/77562f03ff881928c9cd60d11ee4d7d2647d0449/angle.js").content.decode("utf-8")
         scaling = get("https://gist.githubusercontent.com/jgphilpott/6332dc7f5636db9ba455e1575407c496/raw/b72589532af0b7c63e321b15254acbb848248209/scaling.js").content.decode("utf-8")
 
-        math = numeric + "\n" + calc + "\n" + regr + "\n" + roots + "\n" + trig + "\n" + angles + "\n" + scaling
+        math = numeric + "\n" + calc + "\n" + regr + "\n" + roots + "\n" + trig + "\n" + angle + "\n" + scaling
 
         file.write(math)
 
@@ -100,7 +100,7 @@ if not exists(libs_dir):
 
         casefy = get("https://gist.githubusercontent.com/jgphilpott/19e7a94cdf6d6d4cd868cc18e628026c/raw/6a34b4074cc8871eb882dd0bc32ca12eff1b4aa4/casefy.js").content.decode("utf-8")
         rotation = get("https://gist.githubusercontent.com/jgphilpott/1bc17b82063f14fabb8f3e38825f6f10/raw/b5ddf5f386213f47ac4fd4b9f41bc116b37f29a3/rotation.js").content.decode("utf-8")
-        distance = get("https://gist.githubusercontent.com/jgphilpott/da9da7d8bdfb32982f99d9910efb1410/raw/51b50b26fc144e3cd2e2849ad47b280d5d1152f5/distanceConversion.js").content.decode("utf-8")
+        distance = get("https://gist.githubusercontent.com/jgphilpott/da9da7d8bdfb32982f99d9910efb1410/raw/16831902aae473f8f597756aacf791b9ad154d7f/distance.js").content.decode("utf-8")
         cookieFuncs = get("https://gist.githubusercontent.com/jgphilpott/b9ce64b9ef8b04c5ac58902b133b1a28/raw/8931a5cd26c48945e932a7399f853b593687f557/cookieFunctions.js").content.decode("utf-8")
         localStorage = get("https://gist.githubusercontent.com/jgphilpott/e26b92eb41b64e9565032d5c4d3c2878/raw/ffa6a3798ac2adceb1ea3aa15c8a379f8349d83a/localStorage.js").content.decode("utf-8")
         validEmail = get("https://gist.githubusercontent.com/jgphilpott/a1ffedea1d1a70320b8075597df1943a/raw/29b8f25b2a439a117783523f209ba42ef5e9cf9d/validEmail.js").content.decode("utf-8")
