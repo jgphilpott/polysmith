@@ -12,7 +12,7 @@ function polygen(name=true, logo=true, spikes=5) {
   let blockInterior = newBox(width - (thickness * 2), depth - (thickness * 2), height - (thickness * 2))
 
   let angleCut = newBox(height, height, height * 5, [0, offset, 0])
-  angleCut.rotation.x = tools.degree2radian(angle)
+  angleCut.rotation.x = tools.d$rad(angle)
 
   blockExterior = cutMesh(blockExterior, angleCut)
   angleCut.position.set(0, offset - (trig.side4angle(angle, thickness, true, null) * 2), 0)
@@ -24,7 +24,7 @@ function polygen(name=true, logo=true, spikes=5) {
 
     let primarySpike = newCylinder(height, 4, 0, [0, -height, 0])
 
-    primarySpike.rotation.x = tools.degree2radian(90)
+    primarySpike.rotation.x = tools.d$rad(90)
 
     block = joinMesh(block, primarySpike)
 
@@ -39,10 +39,10 @@ function polygen(name=true, logo=true, spikes=5) {
     let secondarySpikeThree = newCylinder(height/2, 3, 0, [spikeOffset, -(height/2) - (height/4), -spikeOffset])
     let secondarySpikeFour = newCylinder(height/2, 3, 0, [-spikeOffset, -(height/2) - (height/4), -spikeOffset])
 
-    secondarySpikeOne.rotation.x = tools.degree2radian(90)
-    secondarySpikeTwo.rotation.x = tools.degree2radian(90)
-    secondarySpikeThree.rotation.x = tools.degree2radian(90)
-    secondarySpikeFour.rotation.x = tools.degree2radian(90)
+    secondarySpikeOne.rotation.x = tools.d$rad(90)
+    secondarySpikeTwo.rotation.x = tools.d$rad(90)
+    secondarySpikeThree.rotation.x = tools.d$rad(90)
+    secondarySpikeFour.rotation.x = tools.d$rad(90)
 
     block = joinMesh(block, secondarySpikeOne)
     block = joinMesh(block, secondarySpikeTwo)
@@ -51,7 +51,7 @@ function polygen(name=true, logo=true, spikes=5) {
 
   }
 
-  block.rotation.x = tools.degree2radian(-135)
+  block.rotation.x = tools.d$rad(-135)
 
   data.scene.add(block)
 
@@ -74,9 +74,9 @@ function polygen(name=true, logo=true, spikes=5) {
 
       let logo = importSVG(svg, extrusion * 10)
 
-      logo.rotateX(tools.degree2radian(-angle))
-      logo.rotateY(tools.degree2radian(0))
-      logo.rotateZ(tools.degree2radian(180))
+      logo.rotateX(tools.d$rad(-angle))
+      logo.rotateY(tools.d$rad(0))
+      logo.rotateZ(tools.d$rad(180))
 
       let x = horizontal
       let y = trig.side4angle(angle, depth / 2, true, null) + trig.side4angle(angle, vertical, true, null)

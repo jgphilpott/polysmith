@@ -5,7 +5,7 @@ function polygen(height=150, topRadius=40, bottomRadius=30, thickness=2, segment
 
   let glass = cutMesh(glassExterior, glassInterior)
 
-  glass.rotation.x = tools.degree2radian(90)
+  glass.rotation.x = tools.d$rad(90)
 
   data.scene.add(glass)
 

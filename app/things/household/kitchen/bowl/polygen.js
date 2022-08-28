@@ -15,9 +15,9 @@ function polygen(type="classic") {
   let boxCutout = newBox(radius * 2, radius * 2, radius, [0, 0, -(radius * 1.333)])
   let lip = newTorus(radius - (thickness / 2), thickness, bowlSegments / 2, bowlSegments)
 
-  lip.rotation.y = degree2radian(0)
-  bowl.rotation.x = degree2radian(90)
-  bowlCutout.rotation.x = degree2radian(90)
+  lip.rotation.y = d$rad(0)
+  bowl.rotation.x = d$rad(90)
+  bowlCutout.rotation.x = d$rad(90)
 
   bowl = cutMesh(bowl, boxCutout)
   boxCutout.position.z += thickness

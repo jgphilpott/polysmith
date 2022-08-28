@@ -2,10 +2,10 @@ function polygen() {
 
   let cup = null
 
-  let depth = tools.inch2mm(6)
-  let radius = tools.inch2mm(4.25) / 2
-  let thickness = tools.inch2mm(0.1)
-  let flagstick = tools.inch2mm(0.75) / 2
+  let depth = in$mm(6)
+  let radius = in$mm(4.25) / 2
+  let thickness = in$mm(0.1)
+  let flagstick = in$mm(0.75) / 2
 
   let cupExterior = newCylinder(depth, radius, radius, [0, 0, 0], black, 128)
   let cupInterior = newCylinder(depth, radius - thickness, radius - thickness, [0, 0, 0], black, 128)
@@ -22,19 +22,19 @@ function polygen() {
   let holeExteriorRadius = cutMesh(cupExterior, newCylinder(depth, flagstick + (holeRadius * 1.5), flagstick + (holeRadius * 1.5), [0, 0, 0], black, 64))
   let holeInteriorRadius = newCylinder(depth, flagstick + (holeRadius / 2), flagstick + (holeRadius / 2), [0, 0, 0], black, 64)
 
-  holeCutter.rotation.y = tools.degree2radian(-30)
+  holeCutter.rotation.y = tools.d$rad(-30)
   let holeOne = cutMesh(cupExterior, holeCutter)
-  holeCutter.rotation.y = tools.degree2radian(30)
+  holeCutter.rotation.y = tools.d$rad(30)
   holeOne = cutMesh(cutMesh(intersectMesh(holeOne, holeCutter), holeExteriorRadius), holeInteriorRadius)
 
-  holeCutter.rotation.y = tools.degree2radian(-150)
+  holeCutter.rotation.y = tools.d$rad(-150)
   let holeTwo = cutMesh(cupExterior, holeCutter)
-  holeCutter.rotation.y = tools.degree2radian(-90)
+  holeCutter.rotation.y = tools.d$rad(-90)
   holeTwo = cutMesh(cutMesh(intersectMesh(holeTwo, holeCutter), holeExteriorRadius), holeInteriorRadius)
 
-  holeCutter.rotation.y = tools.degree2radian(150)
+  holeCutter.rotation.y = tools.d$rad(150)
   let holeThree = intersectMesh(cupExterior, holeCutter)
-  holeCutter.rotation.y = tools.degree2radian(90)
+  holeCutter.rotation.y = tools.d$rad(90)
   holeThree = cutMesh(cutMesh(cutMesh(holeThree, holeCutter), holeExteriorRadius), holeInteriorRadius)
 
   let baseWall = cutMesh(cutMesh(newBox(radius - thickness, radius / 2, thickness, [(radius - thickness) / 2, - (depth / 2) + (depth / 3), 0], black), baseTop), flagstickInterior)
@@ -45,16 +45,16 @@ function polygen() {
   flagstick = cutMesh(cutMesh(flagstickExterior, flagstickInterior), baseTop)
 
   base = joinMesh(joinMesh(base, baseWall), baseSupport)
-  baseWall.rotation.y = tools.degree2radian(120)
-  baseSupport.rotation.y = tools.degree2radian(120)
+  baseWall.rotation.y = tools.d$rad(120)
+  baseSupport.rotation.y = tools.d$rad(120)
   base = joinMesh(joinMesh(base, baseWall), baseSupport)
-  baseWall.rotation.y = tools.degree2radian(-120)
-  baseSupport.rotation.y = tools.degree2radian(-120)
+  baseWall.rotation.y = tools.d$rad(-120)
+  baseSupport.rotation.y = tools.d$rad(-120)
   base = joinMesh(joinMesh(base, baseWall), baseSupport)
 
   cup = joinMesh(cup, joinMesh(base, flagstick))
 
-  cup.rotation.x = tools.degree2radian(-90)
+  cup.rotation.x = tools.d$rad(-90)
 
   data.scene.add(cup)
 
