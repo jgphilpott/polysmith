@@ -32,6 +32,15 @@ Popen(["tsc", "-w", scripts_dir + "/root.ts"])
 Popen(["boussole", "watch"], cwd="app/config")
 compile(dirname=(styles_dir, styles_dir), output_style="compressed")
 
+@app.route("/")
+def home():
+
+    data = {"title": title, "client": None}
+
+    if "id" in request.cookies: data["client"] = valid_client(request.cookies.get("id"))
+
+    return render_template("templates/root.html", data=data)
+
 if not exists(libs_dir):
 
     makedirs(libs_dir)
@@ -110,14 +119,5 @@ if not exists(libs_dir):
         tools = casefy + "\n" + rotation + "\n" + distance + "\n" + cookieFuncs + "\n" + localStorage + "\n" + validEmail + "\n" + format + "\n" + subset
 
         file.write(tools)
-
-@app.route("/")
-def home():
-
-    data = {"title": title, "client": None}
-
-    if "id" in request.cookies: data["client"] = valid_client(request.cookies.get("id"))
-
-    return render_template("templates/root.html", data=data)
 
 plugin(app).run(app, host="0.0.0.0", port=4000, debug=True)

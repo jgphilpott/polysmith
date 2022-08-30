@@ -1,4 +1,4 @@
-<p align="center"><img width="250" height="250" src="https://github.com/jgphilpott/shapeMaker/blob/master/app/imgs/theme/logo.png"></p>
+<p align="center"><img width="250" height="250" src="https://github.com/jgphilpott/polymorph/blob/master/app/imgs/theme/logo.png"></p>
 
 # Intro
 
