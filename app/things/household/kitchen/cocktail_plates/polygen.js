@@ -4,8 +4,8 @@ function polygen(sides=3, size=75) {
   let lipSize = 10
   let angle, holderDistance, slotDistance = null
 
-  let plate = newCylinder(thickness + lipSize, size + lipSize, size, [0, 0, 0], black, sides).rotateX(tools.d$rad(90))
-  let lip = newCylinder(thickness + lipSize, size + lipSize - thickness, size - thickness, [0, thickness, 0], black, sides).rotateX(tools.d$rad(90))
+  let plate = newCylinder(thickness + lipSize, size + lipSize, size, [0, 0, 0], black, sides).rotateX(tools.deg$rad(90))
+  let lip = newCylinder(thickness + lipSize, size + lipSize - thickness, size - thickness, [0, thickness, 0], black, sides).rotateX(tools.deg$rad(90))
 
   switch (sides) {
 
@@ -67,8 +67,8 @@ function polygen(sides=3, size=75) {
 
   }
 
-  let glass_holder = newCylinder(lipSize * 2, lipSize, lipSize, [trig.side4angle(angle, holderDistance, null, true), 0, -trig.side4angle(angle, holderDistance, true, null)], black, 42).rotateX(tools.d$rad(90))
-  let glass_slot = newBox(lipSize + 1, lipSize * 4, lipSize * 2, [0, slotDistance, 0], black).rotateZ(tools.d$rad(-angle))
+  let glass_holder = newCylinder(lipSize * 2, lipSize, lipSize, [trig.side$angle(angle, holderDistance, null, true), 0, -trig.side$angle(angle, holderDistance, true, null)], black, 42).rotateX(tools.deg$rad(90))
+  let glass_slot = newBox(lipSize + 1, lipSize * 4, lipSize * 2, [0, slotDistance, 0], black).rotateZ(tools.deg$rad(-angle))
 
   let cocktail_plate = cutMesh(cutMesh(cutMesh(plate, lip), glass_holder), glass_slot)
 

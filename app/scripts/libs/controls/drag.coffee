@@ -31,9 +31,9 @@ addDragControls = () ->
         deltaZ = Math.abs position.z - target.z
 
         radius3 = position.distanceTo target
-        radius2 = side4sides deltaZ, null, radius3
+        radius2 = side$sides deltaZ, null, radius3
 
-        horizontalAngle = angle4sides radius2, deltaX
+        horizontalAngle = angle$sides radius2, deltaX
 
         if position.x < target.x
 
@@ -43,7 +43,7 @@ addDragControls = () ->
 
             horizontalAngle = - horizontalAngle
 
-        verticalAngle = angle4sides radius3, deltaZ
+        verticalAngle = angle$sides radius3, deltaZ
 
         if position.z < target.z
 
@@ -62,7 +62,7 @@ addDragControls = () ->
         satoshi = 0.000001
         panel = $ "#camera.panel"
 
-        radius2 = side4sides Math.abs(position.z - target.z), null, radius3
+        radius2 = side$sides Math.abs(position.z - target.z), null, radius3
 
         newHorizontalAngle = horizontalAngle + ((startX - event.pageX) * dragSpeed)
 
@@ -80,9 +80,9 @@ addDragControls = () ->
 
             newVerticalAngle = - 180 - satoshi
 
-        newX = side4angle(newHorizontalAngle, radius2, true, null) + target.x
-        newY = side4angle(newHorizontalAngle, radius2, null, true) + target.y
-        newZ = side4angle(newVerticalAngle, radius3, true, null) + target.z
+        newX = side$angle(newHorizontalAngle, radius2, true, null) + target.x
+        newY = side$angle(newHorizontalAngle, radius2, null, true) + target.y
+        newZ = side$angle(newVerticalAngle, radius3, true, null) + target.z
 
         panel.find("#position-x input").val newX.toFixed 2
         panel.find("#position-y input").val newY.toFixed 2

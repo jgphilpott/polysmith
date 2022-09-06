@@ -15,9 +15,9 @@ addFlyControls = () ->
             deltaZ = Math.abs position.z - target.z
 
             radius3 = position.distanceTo target
-            radius2 = side4sides deltaZ, null, radius3
+            radius2 = side$sides deltaZ, null, radius3
 
-            horizontalAngle = angle4sides radius2, deltaX
+            horizontalAngle = angle$sides radius2, deltaX
 
             if position.x < target.x
 
@@ -27,7 +27,7 @@ addFlyControls = () ->
 
                 horizontalAngle = - horizontalAngle
 
-            verticalAngle = angle4sides radius3, deltaZ
+            verticalAngle = angle$sides radius3, deltaZ
 
             if position.z < target.z
 
@@ -43,11 +43,11 @@ addFlyControls = () ->
 
                         verticalAngle = 180 - verticalAngle; inverter = - inverter
 
-                    radius2 = side4angle verticalAngle, flySpeed, true, null
+                    radius2 = side$angle verticalAngle, flySpeed, true, null
 
-                    stepX = side4angle(horizontalAngle, radius2, true, null) * inverter
-                    stepY = side4angle(horizontalAngle, radius2, null, true) * inverter
-                    stepZ = side4angle(verticalAngle, flySpeed, null, true)
+                    stepX = side$angle(horizontalAngle, radius2, true, null) * inverter
+                    stepY = side$angle(horizontalAngle, radius2, null, true) * inverter
+                    stepZ = side$angle(verticalAngle, flySpeed, null, true)
 
                     if event.keyCode == 38 # Up
 
@@ -77,8 +77,8 @@ addFlyControls = () ->
 
                         newHorizontalAngle = newHorizontalAngle - 360
 
-                    stepX = side4angle newHorizontalAngle, flySpeed, true, null
-                    stepY = side4angle newHorizontalAngle, flySpeed, null, true
+                    stepX = side$angle newHorizontalAngle, flySpeed, true, null
+                    stepY = side$angle newHorizontalAngle, flySpeed, null, true
 
                     if event.keyCode == 37 # Left
 
@@ -118,12 +118,12 @@ addFlyControls = () ->
 
                         newVerticalAngle = - 180 - satoshi
 
-                    target.z = position.z - side4angle newVerticalAngle, radius3, true, null
+                    target.z = position.z - side$angle newVerticalAngle, radius3, true, null
 
-                    radius2 = side4sides Math.abs(position.z - target.z), null, radius3
+                    radius2 = side$sides Math.abs(position.z - target.z), null, radius3
 
-                    target.x = position.x - side4angle horizontalAngle, radius2, true, null
-                    target.y = position.y - side4angle horizontalAngle, radius2, null, true
+                    target.x = position.x - side$angle horizontalAngle, radius2, true, null
+                    target.y = position.y - side$angle horizontalAngle, radius2, null, true
 
                 else if event.keyCode == 83 # S
 
@@ -137,12 +137,12 @@ addFlyControls = () ->
 
                         newVerticalAngle = - 180 - satoshi
 
-                    target.z = position.z - side4angle newVerticalAngle, radius3, true, null
+                    target.z = position.z - side$angle newVerticalAngle, radius3, true, null
 
-                    radius2 = side4sides Math.abs(position.z - target.z), null, radius3
+                    radius2 = side$sides Math.abs(position.z - target.z), null, radius3
 
-                    target.x = position.x - side4angle horizontalAngle, radius2, true, null
-                    target.y = position.y - side4angle horizontalAngle, radius2, null, true
+                    target.x = position.x - side$angle horizontalAngle, radius2, true, null
+                    target.y = position.y - side$angle horizontalAngle, radius2, null, true
 
                 else if event.keyCode == 65 # A
 
@@ -152,8 +152,8 @@ addFlyControls = () ->
 
                         newHorizontalAngle = newHorizontalAngle - 360
 
-                    target.x = position.x - side4angle newHorizontalAngle, radius2, true, null
-                    target.y = position.y - side4angle newHorizontalAngle, radius2, null, true
+                    target.x = position.x - side$angle newHorizontalAngle, radius2, true, null
+                    target.y = position.y - side$angle newHorizontalAngle, radius2, null, true
 
                 else if event.keyCode == 68 # D
 
@@ -163,8 +163,8 @@ addFlyControls = () ->
 
                         newHorizontalAngle = newHorizontalAngle - 360
 
-                    target.x = position.x - side4angle newHorizontalAngle, radius2, true, null
-                    target.y = position.y - side4angle newHorizontalAngle, radius2, null, true
+                    target.x = position.x - side$angle newHorizontalAngle, radius2, true, null
+                    target.y = position.y - side$angle newHorizontalAngle, radius2, null, true
 
                 panel.find("#target-x input").val target.x.toFixed 2
                 panel.find("#target-y input").val target.y.toFixed 2

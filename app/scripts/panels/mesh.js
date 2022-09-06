@@ -209,9 +209,9 @@ function addMeshPanel(mesh, coordinates=null) {
     position.find("#position-y input").val(mesh.position.y.toFixed(2))
     position.find("#position-z input").val(mesh.position.z.toFixed(2))
 
-    rotation.find("#rotation-x input").val(rad$d(mesh.rotation.x).toFixed(2))
-    rotation.find("#rotation-y input").val(rad$d(mesh.rotation.y).toFixed(2))
-    rotation.find("#rotation-z input").val(rad$d(mesh.rotation.z).toFixed(2))
+    rotation.find("#rotation-x input").val(rad$deg(mesh.rotation.x).toFixed(2))
+    rotation.find("#rotation-y input").val(rad$deg(mesh.rotation.y).toFixed(2))
+    rotation.find("#rotation-z input").val(rad$deg(mesh.rotation.z).toFixed(2))
 
     scale.find("#scale-x input").val(mesh.scale.x.toFixed(2))
     scale.find("#scale-y input").val(mesh.scale.y.toFixed(2))
@@ -326,98 +326,98 @@ function addMesh(mesh=null, properties={}) {
       case "box":
 
         mesh = newBox()
-        mesh.rotation.x = d$rad(0)
+        mesh.rotation.x = deg$rad(0)
 
         break
 
       case "cylinder":
 
         mesh = newCylinder()
-        mesh.rotation.x = d$rad(90)
+        mesh.rotation.x = deg$rad(90)
 
         break
 
       case "sphere":
 
         mesh = newSphere()
-        mesh.rotation.x = d$rad(90)
+        mesh.rotation.x = deg$rad(90)
 
         break
 
       case "triangular-prism":
 
         mesh = newCylinder(10, 5, 5, 3)
-        mesh.rotation.x = d$rad(0)
+        mesh.rotation.x = deg$rad(0)
 
         break
 
       case "rectangular-prism":
 
         mesh = newCylinder(10, 5, 5, 4)
-        mesh.rotation.x = d$rad(0)
+        mesh.rotation.x = deg$rad(0)
 
         break
 
       case "pentagonal-prism":
 
         mesh = newCylinder(10, 5, 5, 5)
-        mesh.rotation.x = d$rad(0)
+        mesh.rotation.x = deg$rad(0)
 
         break
 
       case "hexagonal-prism":
 
         mesh = newCylinder(10, 5, 5, 6)
-        mesh.rotation.x = d$rad(0)
+        mesh.rotation.x = deg$rad(0)
 
         break
 
       case "heptagonal-prism":
 
         mesh = newCylinder(10, 5, 5, 7)
-        mesh.rotation.x = d$rad(0)
+        mesh.rotation.x = deg$rad(0)
 
         break
 
       case "octagonal-prism":
 
         mesh = newCylinder(10, 5, 5, 8)
-        mesh.rotation.x = d$rad(0)
+        mesh.rotation.x = deg$rad(0)
 
         break
 
       case "triangular-pyramid":
 
         mesh = newCylinder(10, 0, 5, 3)
-        mesh.rotation.x = d$rad(90)
+        mesh.rotation.x = deg$rad(90)
 
         break
 
       case "rectangular-pyramid":
 
         mesh = newCylinder(10, 0, 5, 4)
-        mesh.rotation.x = d$rad(90)
+        mesh.rotation.x = deg$rad(90)
 
         break
 
       case "pentagonal-pyramid":
 
         mesh = newCylinder(10, 0, 5, 5)
-        mesh.rotation.x = d$rad(90)
+        mesh.rotation.x = deg$rad(90)
 
         break
 
       case "cone":
 
         mesh = newCylinder(10, 0, 5, 42)
-        mesh.rotation.x = d$rad(90)
+        mesh.rotation.x = deg$rad(90)
 
         break
 
       case "torus":
 
         mesh = newTorus()
-        mesh.rotation.y = d$rad(90)
+        mesh.rotation.y = deg$rad(90)
 
         break
 
@@ -732,7 +732,7 @@ function updateMesh(mesh, type, key=null, value=null, save=false) {
 
       case "rotation":
 
-        mesh[type][key] = d$rad(value)
+        mesh[type][key] = deg$rad(value)
 
         mesh.updateMatrix()
 

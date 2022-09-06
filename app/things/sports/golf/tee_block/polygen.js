@@ -6,16 +6,16 @@ function polygen(name=true, logo=true, spikes=5) {
   let thickness = 2
 
   let angle = 45
-  let offset = trig.side4angle(angle, height, true, null) * 1.2
+  let offset = trig.side$angle(angle, height, true, null) * 1.2
 
   let blockExterior = newBox(width, depth, height, [0, 0, 0], red)
   let blockInterior = newBox(width - (thickness * 2), depth - (thickness * 2), height - (thickness * 2))
 
   let angleCut = newBox(height, height, height * 5, [0, offset, 0])
-  angleCut.rotation.x = tools.d$rad(angle)
+  angleCut.rotation.x = tools.deg$rad(angle)
 
   blockExterior = cutMesh(blockExterior, angleCut)
-  angleCut.position.set(0, offset - (trig.side4angle(angle, thickness, true, null) * 2), 0)
+  angleCut.position.set(0, offset - (trig.side$angle(angle, thickness, true, null) * 2), 0)
   blockInterior = cutMesh(blockInterior, angleCut)
 
   let block = cutMesh(blockExterior, blockInterior)
@@ -24,7 +24,7 @@ function polygen(name=true, logo=true, spikes=5) {
 
     let primarySpike = newCylinder(height, 4, 0, [0, -height, 0])
 
-    primarySpike.rotation.x = tools.d$rad(90)
+    primarySpike.rotation.x = tools.deg$rad(90)
 
     block = joinMesh(block, primarySpike)
 
@@ -39,10 +39,10 @@ function polygen(name=true, logo=true, spikes=5) {
     let secondarySpikeThree = newCylinder(height/2, 3, 0, [spikeOffset, -(height/2) - (height/4), -spikeOffset])
     let secondarySpikeFour = newCylinder(height/2, 3, 0, [-spikeOffset, -(height/2) - (height/4), -spikeOffset])
 
-    secondarySpikeOne.rotation.x = tools.d$rad(90)
-    secondarySpikeTwo.rotation.x = tools.d$rad(90)
-    secondarySpikeThree.rotation.x = tools.d$rad(90)
-    secondarySpikeFour.rotation.x = tools.d$rad(90)
+    secondarySpikeOne.rotation.x = tools.deg$rad(90)
+    secondarySpikeTwo.rotation.x = tools.deg$rad(90)
+    secondarySpikeThree.rotation.x = tools.deg$rad(90)
+    secondarySpikeFour.rotation.x = tools.deg$rad(90)
 
     block = joinMesh(block, secondarySpikeOne)
     block = joinMesh(block, secondarySpikeTwo)
@@ -51,7 +51,7 @@ function polygen(name=true, logo=true, spikes=5) {
 
   }
 
-  block.rotation.x = tools.d$rad(-135)
+  block.rotation.x = tools.deg$rad(-135)
 
   data.scene.add(block)
 
@@ -61,8 +61,8 @@ function polygen(name=true, logo=true, spikes=5) {
   function addName(name="Golf", font="ubuntu", size=16, extrusion=1, vertical=0, horizontal=0) {
 
     let x = horizontal
-    let y = trig.side4angle(angle, depth / 2, true, null) + trig.side4angle(angle, vertical, true, null)
-    let z = trig.side4angle(angle, depth / 2, null, true) - trig.side4angle(angle, vertical, null, true)
+    let y = trig.side$angle(angle, depth / 2, true, null) + trig.side$angle(angle, vertical, true, null)
+    let z = trig.side$angle(angle, depth / 2, null, true) - trig.side$angle(angle, vertical, null, true)
 
     addText(name, size, extrusion * 2, false, font, true, x, y, z, -angle)
 
@@ -74,13 +74,13 @@ function polygen(name=true, logo=true, spikes=5) {
 
       let logo = importSVG(svg, extrusion * 10)
 
-      logo.rotateX(tools.d$rad(-angle))
-      logo.rotateY(tools.d$rad(0))
-      logo.rotateZ(tools.d$rad(180))
+      logo.rotateX(tools.deg$rad(-angle))
+      logo.rotateY(tools.deg$rad(0))
+      logo.rotateZ(tools.deg$rad(180))
 
       let x = horizontal
-      let y = trig.side4angle(angle, depth / 2, true, null) + trig.side4angle(angle, vertical, true, null)
-      let z = trig.side4angle(angle, depth / 2, null, true) - trig.side4angle(angle, vertical, null, true)
+      let y = trig.side$angle(angle, depth / 2, true, null) + trig.side$angle(angle, vertical, true, null)
+      let z = trig.side$angle(angle, depth / 2, null, true) - trig.side$angle(angle, vertical, null, true)
 
       logo.position.set(x, y, z)
 

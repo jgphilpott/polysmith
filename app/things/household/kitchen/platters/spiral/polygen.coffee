@@ -1,6 +1,6 @@
 class ArchimedeanSpiral extends THREE.Curve
 
-    constructor : (size = 1, length = d$rad 360) ->
+    constructor : (size = 1, length = deg$rad 360) ->
 
         super()
 
@@ -22,8 +22,8 @@ polygen = () ->
 
     settings.ui.title = "Spiral Platter"
 
-    spiral = new ArchimedeanSpiral 10, d$rad 720
-    spiralTrim = new ArchimedeanSpiral 10, d$rad 900
+    spiral = new ArchimedeanSpiral 10, deg$rad 720
+    spiralTrim = new ArchimedeanSpiral 10, deg$rad 900
 
     spiralStart = spiral.getPoint 0
     spiralStop = spiral.getPoint 1
@@ -64,8 +64,8 @@ polygen = () ->
 
         radius = spiralRadius + spiralThickness / 3
 
-        x = radius * Math.cos d$rad degree
-        y = radius * Math.sin d$rad degree
+        x = radius * Math.cos deg$rad degree
+        y = radius * Math.sin deg$rad degree
 
         spiralPathEx.push new THREE.Vector2 x, y
 
@@ -73,8 +73,8 @@ polygen = () ->
 
         radius = spiralRadius - spiralThickness / 2
 
-        x = radius * Math.cos d$rad degree
-        y = radius * Math.sin d$rad degree
+        x = radius * Math.cos deg$rad degree
+        y = radius * Math.sin deg$rad degree
 
         spiralPathIn.push new THREE.Vector2 x, y
 
@@ -97,7 +97,7 @@ polygen = () ->
     spiralTrimGeometry = new THREE.ExtrudeGeometry spiralTrimPath, spiralTrimExtrudeSettings
     spiralTrimMaterial = new THREE.MeshLambertMaterial color: 0xff0000
     spiralTrimMesh = new THREE.Mesh spiralTrimGeometry, spiralTrimMaterial
-    spiralTrimMesh.rotateZ d$rad 180
+    spiralTrimMesh.rotateZ deg$rad 180
 
     spiralStartCapEx = newSphere spiralRadius * 2 + (spiralThickness / 3), spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStart.x, spiralStart.y, spiralStart.z + spiralStartCapOffset]
     spiralStartCapIn = newSphere spiralRadius * 2 - (spiralThickness / 2), spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStart.x, spiralStart.y, spiralStart.z + spiralStartCapOffset]
@@ -106,10 +106,10 @@ polygen = () ->
     spiralStopCapIn = newSphere spiralRadius - (spiralThickness / 2), spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStop.x - spiralStopCapOffset, spiralStop.y, spiralStop.z]
 
     spiralStartCapTrim = newTorus spiralRadius * 2, spiralThickness / golden, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStart.x, spiralStart.y, spiralStart.z + spiralStartCapOffset]
-    spiralStartCapTrim.rotateY d$rad 90
+    spiralStartCapTrim.rotateY deg$rad 90
 
     spiralStopCapTrim = newTorus spiralRadius, spiralThickness / golden, spiralRadiusSegments * 2, spiralRadiusSegments * 2, [spiralStop.x - (spiralStopCapOffset * 3), spiralStop.y, spiralStop.z]
-    spiralStopCapTrim.rotateY d$rad 90
+    spiralStopCapTrim.rotateY deg$rad 90
     spiralStopCapTrim.scale.y = golden
 
     spiralStartTopCutter = newBox spiralRadius * 5, spiralRadius * 5, spiralRadius * 5, [0, 0, spiralRadius * 2.5]
@@ -121,11 +121,11 @@ polygen = () ->
     spiralStartTrimCutter = newCylinder spiralRadius, spiralRadius * 2, spiralRadius * 2
     spiralStopTrimCutter = newCylinder spiralRadius, spiralStop.x - spiralRadius + (spiralThickness / 2), spiralStop.x - spiralRadius + (spiralThickness / 2)
 
-    spiralStartCapEx.rotateX d$rad 90
-    spiralStartCapIn.rotateX d$rad 90
+    spiralStartCapEx.rotateX deg$rad 90
+    spiralStartCapIn.rotateX deg$rad 90
 
-    spiralStopCapEx.rotateX d$rad 90
-    spiralStopCapIn.rotateX d$rad 90
+    spiralStopCapEx.rotateX deg$rad 90
+    spiralStopCapIn.rotateX deg$rad 90
 
     spiralStartCapEx.scale.y = golden
     spiralStartCapIn.scale.y = golden

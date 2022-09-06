@@ -150,39 +150,6 @@ updateMetrics = (mesh) ->
     controls.find("#surface span").text mesh.surface.toFixed 2
     controls.find("#volume span").text mesh.volume.toFixed 2
 
-# Credit: https://stackoverflow.com/a/13091694/1544937
-screen2worldCoordinates = (x, y, zTarget = 0) ->
-
-    vector = new THREE.Vector3()
-    coordinates = new THREE.Vector3()
-
-    vector.set (x / window.innerWidth) * 2 - 1, - (y / window.innerHeight) * 2 + 1, 0
-
-    vector.unproject camera
-
-    vector.sub(camera.position).normalize()
-
-    distance = (zTarget - camera.position.z) / vector.z
-
-    coordinates.copy(camera.position).add(vector.multiplyScalar distance)
-
-    return coordinates
-
-# Credit: https://stackoverflow.com/a/36706930/1544937
-world2screenCoordinates = (x, y, z) ->
-
-    halfWidth = window.innerWidth / 2
-    halfHeight = window.innerHeight / 2
-
-    coordinates = new THREE.Vector3 x, y, z
-
-    coordinates.project camera
-
-    coordinates.x = coordinates.x * halfWidth + halfWidth
-    coordinates.y = - coordinates.y * halfHeight + halfHeight
-
-    return new THREE.Vector2 coordinates.x, coordinates.y
-
 # Credit: https://stackoverflow.com/a/50937272/1544937
 getSurfaceArea = (mesh) ->
 

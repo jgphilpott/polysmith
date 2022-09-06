@@ -195,7 +195,7 @@ makeDragable = (element, origEvent = null) ->
 
             if element.lock != "locked"
 
-                coordinates = world2screenCoordinates element.position.x, element.position.y, element.position.z
+                coordinates = d3$d2 element.position.x, element.position.y, element.position.z
 
                 xOffset = origEvent.clientX - coordinates.x
                 yOffset = origEvent.clientY - coordinates.y
@@ -243,7 +243,7 @@ makeDragable = (element, origEvent = null) ->
                 $("#canvas").css "cursor", "grabbing"
 
                 panel = $ "#mesh." + element.uuid + ""
-                coordinates = screen2worldCoordinates eventX, eventY, element.position.z
+                coordinates = d2$d3 eventX, eventY, element.position.z
 
                 coordinates.x = if coordinates.x < min then min else if coordinates.x > max then max else coordinates.x
                 coordinates.y = if coordinates.y < min then min else if coordinates.y > max then max else coordinates.y
@@ -274,9 +274,9 @@ makeDragable = (element, origEvent = null) ->
                         yDistanceLineCenter = getCenterPoint yDistanceLine.geometry.vertices[0], yDistanceLine.geometry.vertices[1]
                         zDistanceLineCenter = getCenterPoint zDistanceLine.geometry.vertices[0], zDistanceLine.geometry.vertices[1]
 
-                        xScreenCoordinates = world2screenCoordinates xDistanceLineCenter.x, xDistanceLineCenter.y, xDistanceLineCenter.z
-                        yScreenCoordinates = world2screenCoordinates yDistanceLineCenter.x, yDistanceLineCenter.y, yDistanceLineCenter.z
-                        zScreenCoordinates = world2screenCoordinates zDistanceLineCenter.x, zDistanceLineCenter.y, zDistanceLineCenter.z
+                        xScreenCoordinates = d3$d2 xDistanceLineCenter.x, xDistanceLineCenter.y, xDistanceLineCenter.z
+                        yScreenCoordinates = d3$d2 yDistanceLineCenter.x, yDistanceLineCenter.y, yDistanceLineCenter.z
+                        zScreenCoordinates = d3$d2 zDistanceLineCenter.x, zDistanceLineCenter.y, zDistanceLineCenter.z
 
                         measurements = [{key: "x", value: coordinates.x}, {key: "y", value: coordinates.y}, {key: "z", value: coordinates.z}].sort (a, b) -> Math.abs(a.value) - Math.abs(b.value)
 
@@ -353,7 +353,7 @@ makeDragable = (element, origEvent = null) ->
 
                 if dragged
 
-                    coordinates = screen2worldCoordinates ghost.offset().left + (ghost.width() / 2), ghost.offset().top + (ghost.height() / 2), 0
+                    coordinates = d2$d3 ghost.offset().left + (ghost.width() / 2), ghost.offset().top + (ghost.height() / 2), 0
 
                     x = if coordinates.x < min then min else if coordinates.x > max then max else coordinates.x
                     y = if coordinates.y < min then min else if coordinates.y > max then max else coordinates.y

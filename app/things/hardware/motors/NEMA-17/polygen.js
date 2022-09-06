@@ -12,11 +12,11 @@ function polygen(collar=false) {
   let shaft = newCylinder(shaftLength, shaftRadius, shaftRadius)
   let cut = newBox(shaftLength, shaftLength, shaftLength, [0, shaftLength - cutLength, (shaftLength / 2 + shaftRadius) - cutDepth])
 
-  shaft = cutMesh(shaft, cut).rotateX(tools.d$rad(90))
+  shaft = cutMesh(shaft, cut).rotateX(tools.deg$rad(90))
 
   if (collar) {
 
-    collar = newCylinder(collarLength, collarRadius, collarRadius, [0, 0, collarLength / 2]).rotateX(tools.d$rad(90))
+    collar = newCylinder(collarLength, collarRadius, collarRadius, [0, 0, collarLength / 2]).rotateX(tools.deg$rad(90))
     shaft.position.set(0, 0, (shaftLength / 2) + collarLength)
 
     data.scene.add(collar)

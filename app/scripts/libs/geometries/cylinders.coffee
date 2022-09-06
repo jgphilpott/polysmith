@@ -6,7 +6,7 @@ newCylinder = (length = 10, positiveRadius = 5, negativeRadius = 5, radialSegmen
     cylinder = new THREE.Mesh geometry, meshMaterial material, color
 
     cylinder.position.set position[0], position[1], position[2]
-    cylinder.rotation.x = d$rad 90
+    cylinder.rotation.x = deg$rad 90
 
     cylinder.class = "cylinder"
     cylinder.name = "Cylinder"

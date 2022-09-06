@@ -22,9 +22,9 @@ newText = (text = "Text", size = 12, height = 3, bevel = false, font = "ubuntu",
 
     textMesh = new THREE.Mesh textGeometry, meshMaterial material, color
 
-    textMesh.rotateX d$rad rotateX
-    textMesh.rotateY d$rad rotateY
-    textMesh.rotateZ d$rad rotateZ
+    textMesh.rotateX deg$rad rotateX
+    textMesh.rotateY deg$rad rotateY
+    textMesh.rotateZ deg$rad rotateZ
 
     textMesh.position.set x, y, z
 

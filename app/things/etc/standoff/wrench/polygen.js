@@ -11,7 +11,7 @@ function polygen(size) {
 
   bolt.position.set(0, 0, size)
 
-  wrench = joinMesh(joinMesh(cutMesh(wrench, bolt), handel), handelCap).rotateX(tools.d$rad(90))
+  wrench = joinMesh(joinMesh(cutMesh(wrench, bolt), handel), handelCap).rotateX(tools.deg$rad(90))
 
   data.scene.add(wrench)
 
