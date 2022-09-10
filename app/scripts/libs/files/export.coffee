@@ -6,7 +6,7 @@ exportFile = (type) ->
     exporter = null
     extension = null
 
-    switch type
+    switch lower type
 
         when "collada"
 
