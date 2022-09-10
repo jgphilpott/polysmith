@@ -4,7 +4,7 @@ importFile = (type, path, properties = {}) ->
     loader = null
     material = meshMaterial()
 
-    switch type
+    switch lower(type)
 
         when "3mf"
 
