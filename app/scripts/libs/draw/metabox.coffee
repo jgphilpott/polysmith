@@ -25,13 +25,13 @@ drawMetabox = (type, object, event) ->
 
             objectBox.append "<p class='title'>Object</p>"
             objectBox.append "<p id='type' class='meta'><span class='label'>Type:</span> <span class='value'>" + object.class.replace("-", " ").replace(/\b\w/g, (char) -> return char.toUpperCase()) + "</span></p>"
-            objectBox.append "<p id='surface' class='meta'><span class='label'>Surface:</span> <span class='value'>" + object.surface.toFixed 2 + "</span></p>"
-            objectBox.append "<p id='volume' class='meta'><span class='label'>Volume:</span> <span class='value'>" + object.volume.toFixed 2 + "</span></p>"
+            objectBox.append "<p id='surface' class='meta'><span class='label'>Surface:</span> <span class='value'>" + format(object.surface, "area", settings.general.unit[settings.general.scale] + "Sq", 2, 0, settings.general.language) + "</span></p>"
+            objectBox.append "<p id='volume' class='meta'><span class='label'>Volume:</span> <span class='value'>" + format(object.volume, "volume", settings.general.unit[settings.general.scale] + "Cu", 2, 0, settings.general.language) + "</span></p>"
 
             eventBox.append "<p class='title'>Event</p>"
-            eventBox.append "<p id='x' class='intersection'><span class='label'>X</span> <span class='value'>" + intersects[0].point.x.toFixed 2 + "</span></p>"
-            eventBox.append "<p id='y' class='intersection'><span class='label'>Y</span> <span class='value'>" + intersects[0].point.y.toFixed 2 + "</span></p>"
-            eventBox.append "<p id='z' class='intersection'><span class='label'>Z</span> <span class='value'>" + intersects[0].point.z.toFixed 2 + "</span></p>"
+            eventBox.append "<p id='x' class='intersection'><span class='label'>X</span> <span class='value'>" + format(intersects[0].point.x, "length", settings.general.unit[settings.general.scale], 2, 0, settings.general.language) + "</span></p>"
+            eventBox.append "<p id='y' class='intersection'><span class='label'>Y</span> <span class='value'>" + format(intersects[0].point.y, "length", settings.general.unit[settings.general.scale], 2, 0, settings.general.language) + "</span></p>"
+            eventBox.append "<p id='z' class='intersection'><span class='label'>Z</span> <span class='value'>" + format(intersects[0].point.z, "length", settings.general.unit[settings.general.scale], 2, 0, settings.general.language) + "</span></p>"
 
         when "update"
 
@@ -39,9 +39,9 @@ drawMetabox = (type, object, event) ->
             yIntersection = metabox.find "#y.intersection span.value"
             zIntersection = metabox.find "#z.intersection span.value"
 
-            xIntersection.text intersects[0].point.x.toFixed 2
-            yIntersection.text intersects[0].point.y.toFixed 2
-            zIntersection.text intersects[0].point.z.toFixed 2
+            xIntersection.text format intersects[0].point.x, "length", settings.general.unit[settings.general.scale], 2, 0, settings.general.language
+            yIntersection.text format intersects[0].point.y, "length", settings.general.unit[settings.general.scale], 2, 0, settings.general.language
+            zIntersection.text format intersects[0].point.z, "length", settings.general.unit[settings.general.scale], 2, 0, settings.general.language
 
     return metabox
 
