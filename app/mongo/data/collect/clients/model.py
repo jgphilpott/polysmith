@@ -17,8 +17,9 @@ class Client():
 
             self.settings = {
                                 "general": {
+                                    "language": "en-US",
                                     "scale": "metric",
-                                    "unit": "millimeters",
+                                    "unit": {"imperial": "inch", "metric": "millimeter"},
                                     "snap": False,
                                     "size": 100,
                                     "grid": 1

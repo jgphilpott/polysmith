@@ -16,8 +16,13 @@ getSettings = () ->
 
             general:
 
+                language: "en-US"
                 scale: "metric"
-                unit: "millimeters"
+                unit:
+
+                    imperial: "inch"
+                    metric: "millimeter"
+
                 snap: false
                 size: 100
                 grid: 1
