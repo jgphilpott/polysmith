@@ -282,7 +282,7 @@ makeDragable = (element, origEvent = null) ->
 
                         for measurement in measurements
 
-                            $("body").append "<div id='" + measurement.key + "' class='measurement tooltip'><p>" + measurement.value.toFixed(2) + "</p></div>"
+                            $("body").append "<div id='" + measurement.key + "' class='measurement tooltip'><p>" + format(measurement.value, "length", settings.general.unit[settings.general.scale], 2, 2, settings.general.language) + "</p></div>"
 
                         $("body").find("#x.measurement.tooltip").css("left", xScreenCoordinates.x).css("top", xScreenCoordinates.y)
                         $("body").find("#y.measurement.tooltip").css("left", yScreenCoordinates.x).css("top", yScreenCoordinates.y)
