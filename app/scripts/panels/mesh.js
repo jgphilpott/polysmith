@@ -52,8 +52,8 @@ function addMeshPanel(mesh, coordinates=null) {
     tools += "<img title='Delete Mesh' id='trash' class='tool' src='/app/imgs/panels/tools/trash.png'>"
 
     meta += "<p id='type'><b>Type:</b> <span>" + mesh.class.replace("-", " ").replace(/\b\w/g, function(char) { return char.toUpperCase() }) + "</span></p>"
-    meta += "<p id='surface'><b>Surface:</b> <span>" + mesh.surface.toFixed(2) + "</span></p>"
-    meta += "<p id='volume'><b>Volume:</b> <span>" + mesh.volume.toFixed(2) + "</span></p>"
+    meta += "<p id='surface'><b>Surface:</b> <span>" + format(mesh.surface, "area", settings.general.unit[settings.general.scale] + "Sq", 2, 0, settings.general.language) + "</span></p>"
+    meta += "<p id='volume'><b>Volume:</b> <span>" + format(mesh.volume, "volume", settings.general.unit[settings.general.scale] + "Cu", 2, 0, settings.general.language) + "</span></p>"
 
     panel.append(operations + "</div>")
     panel.append(colors + "</div>")
@@ -97,9 +97,9 @@ function addMeshPanel(mesh, coordinates=null) {
 
       if (mesh.class == "box") {
 
-        properties.append("<span id='properties-length'><label>Length</label> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
-        properties.append("<span id='properties-width'><label>Width</label> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
-        properties.append("<span id='properties-height'><label>Height</label> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+        properties.append("<span id='properties-length'><label>Length</label> <div class='suffix " + settings.general.unit[settings.general.scale] + "'><input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "></div><button id='plus'>+</button><button id='minus'>-</button></span>")
+        properties.append("<span id='properties-width'><label>Width</label> <div class='suffix " + settings.general.unit[settings.general.scale] + "'><input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "></div><button id='plus'>+</button><button id='minus'>-</button></span>")
+        properties.append("<span id='properties-height'><label>Height</label> <div class='suffix " + settings.general.unit[settings.general.scale] + "'><input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "></div><button id='plus'>+</button><button id='minus'>-</button></span>")
 
         properties.find("#properties-length input").val(mesh.geometry.parameters.width.toFixed(2))
         properties.find("#properties-width input").val(mesh.geometry.parameters.height.toFixed(2))
@@ -107,7 +107,7 @@ function addMeshPanel(mesh, coordinates=null) {
 
       }  else if (mesh.class == "sphere") {
 
-        properties.append("<span id='properties-radius'><label><p>Radius</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.append("<span id='properties-radius'><label><p>Radius</p> <div class='suffix " + settings.general.unit[settings.general.scale] + "'><input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "></div><button id='plus'>+</button><button id='minus'>-</button></label></span>")
         properties.append("<span id='properties-width-segments'><label><p>Width Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
         properties.append("<span id='properties-height-segments'><label><p>Height Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
 
@@ -117,9 +117,9 @@ function addMeshPanel(mesh, coordinates=null) {
 
       } else if (mesh.class == "cylinder" || mesh.class.split("-")[1] == "prism") {
 
-        properties.append("<span id='properties-length'><label><p>Length</p> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-        properties.append("<span id='properties-radius-positive'><label><p>Positive Radius</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-        properties.append("<span id='properties-radius-negative'><label><p>Negative Radius</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.append("<span id='properties-length'><label><p>Length</p> <div class='suffix " + settings.general.unit[settings.general.scale] + "'><input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "></div><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.append("<span id='properties-radius-positive'><label><p>Positive Radius</p> <div class='suffix " + settings.general.unit[settings.general.scale] + "'><input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "></div><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.append("<span id='properties-radius-negative'><label><p>Negative Radius</p> <div class='suffix " + settings.general.unit[settings.general.scale] + "'><input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "></div><button id='plus'>+</button><button id='minus'>-</button></label></span>")
 
         properties.find("#properties-length input").val(mesh.geometry.parameters.height.toFixed(2))
         properties.find("#properties-radius-positive input").val(mesh.geometry.parameters.radiusTop.toFixed(2))
@@ -135,16 +135,16 @@ function addMeshPanel(mesh, coordinates=null) {
 
       } else if (mesh.class.split("-")[1] == "pyramid") {
 
-        properties.append("<span id='properties-height'><label>Height</label> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
-        properties.append("<span id='properties-radius'><label>Radius</label> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+        properties.append("<span id='properties-height'><label>Height</label> <div class='suffix " + settings.general.unit[settings.general.scale] + "'><input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "></div><button id='plus'>+</button><button id='minus'>-</button></span>")
+        properties.append("<span id='properties-radius'><label>Radius</label> <div class='suffix " + settings.general.unit[settings.general.scale] + "'><input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "></div><button id='plus'>+</button><button id='minus'>-</button></span>")
 
         properties.find("#properties-height input").val(mesh.geometry.parameters.height.toFixed(2))
         properties.find("#properties-radius input").val(mesh.geometry.parameters.radiusBottom.toFixed(2))
 
       } else if (mesh.class == "cone") {
 
-        properties.append("<span id='properties-height'><label><p>Height</p> <input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-        properties.append("<span id='properties-radius'><label><p>Radius</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.append("<span id='properties-height'><label><p>Height</p> <div class='suffix " + settings.general.unit[settings.general.scale] + "'><input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "></div><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.append("<span id='properties-radius'><label><p>Radius</p> <div class='suffix " + settings.general.unit[settings.general.scale] + "'><input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "></div><button id='plus'>+</button><button id='minus'>-</button></label></span>")
         properties.append("<span id='properties-radius-segments'><label><p>Radial Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
 
         properties.find("#properties-height input").val(mesh.geometry.parameters.height.toFixed(2))
@@ -153,8 +153,8 @@ function addMeshPanel(mesh, coordinates=null) {
 
       } else if (mesh.class == "torus") {
 
-        properties.append("<span id='properties-thickness'><label><p>Thickness</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
-        properties.append("<span id='properties-radius'><label><p>Radius</p> <input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.append("<span id='properties-thickness'><label><p>Thickness</p> <div class='suffix " + settings.general.unit[settings.general.scale] + "'><input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "></div><button id='plus'>+</button><button id='minus'>-</button></label></span>")
+        properties.append("<span id='properties-radius'><label><p>Radius</p> <div class='suffix " + settings.general.unit[settings.general.scale] + "'><input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "></div><button id='plus'>+</button><button id='minus'>-</button></label></span>")
         properties.append("<span id='properties-tube-segments'><label><p>Tubular Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
         properties.append("<span id='properties-radius-segments'><label><p>Radial Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>")
 
@@ -193,17 +193,17 @@ function addMeshPanel(mesh, coordinates=null) {
     let scaleMin = 0
     let scaleMax = 100
 
-    position.append("<span id='position-x'><label id='x'>X</label> <input type=number step=" + positionStep + " min=" + positionMin + " max=" + positionMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
-    position.append("<span id='position-y'><label id='y'>Y</label> <input type=number step=" + positionStep + " min=" + positionMin + " max=" + positionMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
-    position.append("<span id='position-z'><label id='z'>Z</label> <input type=number step=" + positionStep + " min=" + positionMin + " max=" + positionMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+    position.append("<span id='position-x'><label id='x'>X</label> <div class='suffix " + settings.general.unit[settings.general.scale] + "'><input type=number step=" + positionStep + " min=" + positionMin + " max=" + positionMax + "></div><button id='plus'>+</button><button id='minus'>-</button></span>")
+    position.append("<span id='position-y'><label id='y'>Y</label> <div class='suffix " + settings.general.unit[settings.general.scale] + "'><input type=number step=" + positionStep + " min=" + positionMin + " max=" + positionMax + "></div><button id='plus'>+</button><button id='minus'>-</button></span>")
+    position.append("<span id='position-z'><label id='z'>Z</label> <div class='suffix " + settings.general.unit[settings.general.scale] + "'><input type=number step=" + positionStep + " min=" + positionMin + " max=" + positionMax + "></div><button id='plus'>+</button><button id='minus'>-</button></span>")
 
-    rotation.append("<span id='rotation-x'><label id='x'>X</label> <input type=number step=" + rotationStep + " min=" + rotationMin + " max=" + rotationMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
-    rotation.append("<span id='rotation-y'><label id='y'>Y</label> <input type=number step=" + rotationStep + " min=" + rotationMin + " max=" + rotationMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
-    rotation.append("<span id='rotation-z'><label id='z'>Z</label> <input type=number step=" + rotationStep + " min=" + rotationMin + " max=" + rotationMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+    rotation.append("<span id='rotation-x'><label id='x'>X</label> <div class='suffix degree'><input type=number step=" + rotationStep + " min=" + rotationMin + " max=" + rotationMax + "></div><button id='plus'>+</button><button id='minus'>-</button></span>")
+    rotation.append("<span id='rotation-y'><label id='y'>Y</label> <div class='suffix degree'><input type=number step=" + rotationStep + " min=" + rotationMin + " max=" + rotationMax + "></div><button id='plus'>+</button><button id='minus'>-</button></span>")
+    rotation.append("<span id='rotation-z'><label id='z'>Z</label> <div class='suffix degree'><input type=number step=" + rotationStep + " min=" + rotationMin + " max=" + rotationMax + "></div><button id='plus'>+</button><button id='minus'>-</button></span>")
 
-    scale.append("<span id='scale-x'><label id='x'>X</label> <input type=number step=" + scaleStep + " min=" + scaleMin + " max=" + scaleMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
-    scale.append("<span id='scale-y'><label id='y'>Y</label> <input type=number step=" + scaleStep + " min=" + scaleMin + " max=" + scaleMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
-    scale.append("<span id='scale-z'><label id='z'>Z</label> <input type=number step=" + scaleStep + " min=" + scaleMin + " max=" + scaleMax + "><button id='plus'>+</button><button id='minus'>-</button></span>")
+    scale.append("<span id='scale-x'><label id='x'>X</label> <div class='suffix percent'><input type=number step=" + scaleStep + " min=" + scaleMin + " max=" + scaleMax + "></div><button id='plus'>+</button><button id='minus'>-</button></span>")
+    scale.append("<span id='scale-y'><label id='y'>Y</label> <div class='suffix percent'><input type=number step=" + scaleStep + " min=" + scaleMin + " max=" + scaleMax + "></div><button id='plus'>+</button><button id='minus'>-</button></span>")
+    scale.append("<span id='scale-z'><label id='z'>Z</label> <div class='suffix percent'><input type=number step=" + scaleStep + " min=" + scaleMin + " max=" + scaleMax + "></div><button id='plus'>+</button><button id='minus'>-</button></span>")
 
     position.find("#position-x input").val(mesh.position.x.toFixed(2))
     position.find("#position-y input").val(mesh.position.y.toFixed(2))
@@ -213,9 +213,9 @@ function addMeshPanel(mesh, coordinates=null) {
     rotation.find("#rotation-y input").val(rad$deg(mesh.rotation.y).toFixed(2))
     rotation.find("#rotation-z input").val(rad$deg(mesh.rotation.z).toFixed(2))
 
-    scale.find("#scale-x input").val(mesh.scale.x.toFixed(2))
-    scale.find("#scale-y input").val(mesh.scale.y.toFixed(2))
-    scale.find("#scale-z input").val(mesh.scale.z.toFixed(2))
+    scale.find("#scale-x input").val((mesh.scale.x * 100).toFixed(2))
+    scale.find("#scale-y input").val((mesh.scale.y * 100).toFixed(2))
+    scale.find("#scale-z input").val((mesh.scale.z * 100).toFixed(2))
 
     if (mesh.lock == "locked") {
 

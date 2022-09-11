@@ -107,7 +107,7 @@ if not exists(libs_dir):
     with open(js_libs_dir + "/tools.js", "w") as file:
 
         convert = get("https://raw.githubusercontent.com/jgphilpott/convert/24d31a1715c1c4f0468d35769f733cb4cf1ff3f7/convert.js").content.decode("utf-8")
-        abbreviations = get("https://gist.githubusercontent.com/jgphilpott/12783015d68e056e54252355d75b41a9/raw/55e7812308bc9cb10203ca21b1eaf6986cf16305/abbreviations.js").content.decode("utf-8")
+        abbreviations = get("https://gist.githubusercontent.com/jgphilpott/12783015d68e056e54252355d75b41a9/raw/8f2d8e431290a286f19aa5a03309c4c8b77596f6/abbreviations.js").content.decode("utf-8")
         format = get("https://gist.githubusercontent.com/jgphilpott/787659ac4ea57a9971da58a76191079b/raw/b4f9a7e4d9556545e56a6da3edf89a3a25a845f8/format.js").content.decode("utf-8")
         casefy = get("https://gist.githubusercontent.com/jgphilpott/19e7a94cdf6d6d4cd868cc18e628026c/raw/6a34b4074cc8871eb882dd0bc32ca12eff1b4aa4/casefy.js").content.decode("utf-8")
         rotation = get("https://gist.githubusercontent.com/jgphilpott/1bc17b82063f14fabb8f3e38825f6f10/raw/b5ddf5f386213f47ac4fd4b9f41bc116b37f29a3/rotation.js").content.decode("utf-8")
