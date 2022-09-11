@@ -40,9 +40,9 @@ function addLightsPanel() {
             </div>
             <div class='body'>
 
-              <span id='position-x'><label id='x'>X</label><input type=number step=1 min=` + min + ` max=` + max + ` value=` + light.getX().toFixed(2) + `><button id='plus'>+</button><button id='minus'>-</button></span>
-              <span id='position-y'><label id='y'>Y</label><input type=number step=1 min=` + min + ` max=` + max + ` value=` + light.getY().toFixed(2) + `><button id='plus'>+</button><button id='minus'>-</button></span>
-              <span id='position-z'><label id='z'>Z</label><input type=number step=1 min=` + min + ` max=` + max + ` value=` + light.getZ().toFixed(2) + `><button id='plus'>+</button><button id='minus'>-</button></span>
+              <span id='position-x'><label id='x'>X</label><div class='suffix ` + settings.general.unit[settings.general.scale] + `'><input type=number step=1 min=` + min + ` max=` + max + ` value=` + light.getX().toFixed(2) + `></div><button id='plus'>+</button><button id='minus'>-</button></span>
+              <span id='position-y'><label id='y'>Y</label><div class='suffix ` + settings.general.unit[settings.general.scale] + `'><input type=number step=1 min=` + min + ` max=` + max + ` value=` + light.getY().toFixed(2) + `></div><button id='plus'>+</button><button id='minus'>-</button></span>
+              <span id='position-z'><label id='z'>Z</label><div class='suffix ` + settings.general.unit[settings.general.scale] + `'><input type=number step=1 min=` + min + ` max=` + max + ` value=` + light.getZ().toFixed(2) + `></div><button id='plus'>+</button><button id='minus'>-</button></span>
 
             </div>
         </div>`
