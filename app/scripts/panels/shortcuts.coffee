@@ -49,7 +49,7 @@ addShortcutsPanel = () ->
 
     panel.find("#toggle").click((event) ->
 
-        shapesVisible = shapesPanel.css("visibility") == "visible" ? true : false
+        shapesVisible = if shapesPanel.css("visibility") == "visible" then true else false
 
         updateSettings "panels", "shapes", !shapesVisible
 
@@ -64,7 +64,7 @@ toggleShortcut = (id) ->
 
     if shortcut.css("display") == "block"
 
-        settings.ui.shortcuts.filterInPlace((item) -> item != id)
+        settings.ui.shortcuts.filterInPlace (item) -> item != id
 
         shortcut.css "display", "none"
         shape.css "opacity", 1
