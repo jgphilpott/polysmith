@@ -1,4 +1,4 @@
-addPanels = () ->
+addPanels = ->
 
     panels.push addPanelEvents addCameraPanel()
     panels.push addPanelEvents addLightsPanel()

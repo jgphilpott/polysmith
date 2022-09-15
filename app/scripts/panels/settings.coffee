@@ -1,4 +1,4 @@
-addSettingsPanel = () ->
+addSettingsPanel = ->
 
     settingsPanel =
 

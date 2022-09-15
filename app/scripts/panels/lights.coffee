@@ -1,4 +1,4 @@
-addLightsPanel = () ->
+addLightsPanel = ->
 
     $("body").append "<div id='lights' class='panel'><img title='Close' class='close' src='/app/imgs/panels/nav/close.png'></div>"
 
