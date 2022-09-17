@@ -39,7 +39,7 @@ def home():
 
     if "id" in request.cookies: data["client"] = valid_client(request.cookies.get("id"))
 
-    return render_template("templates/root.html", data=data)
+    return render_template("templates/root.jinja", data=data)
 
 if not exists(libs_dir):
 
