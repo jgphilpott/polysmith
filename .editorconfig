@@ -2,19 +2,16 @@ root = true
 
 [*] # All
 charset = utf-8
-indent_size = 2
+indent_size = 4
 indent_style = space
 insert_final_newline = false
 trim_trailing_whitespace = true
 
 [*.py] # Python
-indent_size = 4
 insert_final_newline = true
 
 [*.coffee] # CoffeeScript
-indent_size = 4
 insert_final_newline = true
 
 [*.sass] # Sass
-indent_size = 4
 insert_final_newline = true
