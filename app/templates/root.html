@@ -2,220 +2,221 @@
 
 <html lang="en" dir="ltr">
 
-  <head>
+    <head>
 
-    <meta charset="utf-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{ data.title }}</title>
+        <title>{{ data.title }}</title>
 
-    <link rel="shortcut icon" href="{{ url_for('static', filename='imgs/theme/logo.png') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='imgs/theme/logo.png') }}">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='libs/css/jQuery-UI.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/root.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='libs/css/jQuery-UI.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/root.css') }}">
 
-    <script src="{{ url_for('static', filename='libs/js/sha256.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/socket.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/sha256.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/socket.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='libs/js/jQuery.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/jQueryUI.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/jQuery.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/jQueryUI.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='libs/js/three.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/threeX.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/three.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/threeX.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='libs/js/csgWrapper.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/morph.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/csgWrapper.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/morph.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='libs/js/math.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/tools.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/math.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/tools.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='libs/js/EffectComposer.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/OutlinePass.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/RenderPass.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/ShaderPass.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/CopyShader.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/EffectComposer.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/OutlinePass.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/RenderPass.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/ShaderPass.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/CopyShader.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='libs/js/exporters/OBJExporter.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/exporters/PLYExporter.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/exporters/STLExporter.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/exporters/OBJExporter.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/exporters/PLYExporter.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/exporters/STLExporter.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='libs/js/importers/OBJLoader.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/importers/PLYLoader.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/importers/STLLoader.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/importers/SVGLoader.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/importers/OBJLoader.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/importers/PLYLoader.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/importers/STLLoader.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/importers/SVGLoader.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='libs/js/FileSaver.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/files/export.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/files/import.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/files/local.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/files/server.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/FileSaver.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/files/export.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/files/import.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/files/local.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/files/server.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='scripts/libs/colors/glass/grayscale.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/colors/glass/rainbow.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/colors/solid/grayscale.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/colors/solid/rainbow.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/colors/three/grayscale.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/colors/three/rainbow.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/colors/glass/grayscale.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/colors/glass/rainbow.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/colors/solid/grayscale.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/colors/solid/rainbow.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/colors/three/grayscale.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/colors/three/rainbow.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='scripts/libs/lights/ambient/light.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/lights/directional/light.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/lights/hemisphere/light.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/lights/point/light.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/lights/spot/light.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/lights/light.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/lights/ambient/light.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/lights/directional/light.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/lights/hemisphere/light.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/lights/point/light.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/lights/spot/light.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/lights/light.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='scripts/libs/cameras/array.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/cameras/cube.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/cameras/orthographic.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/cameras/perspective.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/cameras/stereo.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/cameras/array.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/cameras/cube.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/cameras/orthographic.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/cameras/perspective.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/cameras/stereo.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='scripts/libs/controls/drag.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/controls/fly.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/controls/focus.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/controls/zoom.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/controls/drag.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/controls/fly.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/controls/focus.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/controls/zoom.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='scripts/libs/materials/line.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/materials/mesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/materials/line.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/materials/mesh.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='libs/js/BufferGeometryUtils.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/LineSegmentsGeometry.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/LineSegments.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/LineGeometry.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/LineMaterial.js') }}"></script>
-    <script src="{{ url_for('static', filename='libs/js/LineMesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/BufferGeometryUtils.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/LineSegmentsGeometry.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/LineSegments.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/LineGeometry.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/LineMaterial.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/LineMesh.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='scripts/libs/geometries/boxes.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/geometries/circles.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/geometries/cones.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/geometries/cylinders.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/geometries/knots.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/geometries/lines.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/geometries/lines2.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/geometries/planes.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/geometries/quadrilaterals.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/geometries/rings.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/geometries/spheres.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/geometries/text.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/geometries/toruses.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/geometries/triangles.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/geometries/tubes.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/geometries/boxes.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/geometries/circles.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/geometries/cones.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/geometries/cylinders.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/geometries/knots.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/geometries/lines.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/geometries/lines2.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/geometries/planes.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/geometries/quadrilaterals.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/geometries/rings.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/geometries/spheres.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/geometries/text.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/geometries/toruses.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/geometries/triangles.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/geometries/tubes.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='scripts/libs/etc/events.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/etc/settings.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/etc/setup.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/etc/tools.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/etc/ui.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/etc/events.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/etc/settings.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/etc/setup.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/etc/tools.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/etc/ui.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='scripts/libs/draw/axes.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/libs/draw/metabox.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/draw/axes.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/draw/metabox.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='scripts/panels/all.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/panels/camera.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/panels/context.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/panels/lights.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/panels/menu.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/panels/mesh.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/panels/meshes.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/panels/settings.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/panels/shapes.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/panels/shortcuts.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/panels/all.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/panels/camera.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/panels/context.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/panels/lights.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/panels/menu.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/panels/mesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/panels/meshes.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/panels/settings.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/panels/shapes.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/panels/shortcuts.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='scripts/root.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/root.js') }}"></script>
 
-  </head>
+    </head>
 
-  <body oncontextmenu="return false">
+    <body oncontextmenu="return false">
 
-    <div id='navbar'>
+        <div id="navbar">
 
-      <img id="menu" src="{{ url_for('static', filename='imgs/theme/menu/white.png') }}">
+            <img id="menu" src="{{ url_for('static', filename='imgs/theme/menu/white.png') }}">
 
-      <h1 id='title'><span contenteditable='true'>{{ data.title|upper }}</span></h1>
+            <h1 id="title"><span contenteditable="true">{{ data.title|upper }}</span></h1>
 
-    </div>
+        </div>
 
-    <a href="https://github.com/jgphilpott/polymorph" target="_blank">
+        <a href="https://github.com/jgphilpott/polymorph" target="_blank">
 
-      <img id="forkme" src="{{ url_for('static', filename='imgs/theme/forkme/right/red.png') }}">
+            <img id="forkme" src="{{ url_for('static', filename='imgs/theme/forkme/right/red.png') }}">
 
-    </a>
+        </a>
 
-    <img title="Help" id="help" src="{{ url_for('static', filename='imgs/panels/nav/?.png') }}">
+        <div id="metabox"></div>
 
-    <div id=metabox></div>
+        <img title="Help" id="help" src="{{ url_for('static', filename='imgs/panels/nav/?.png') }}">
 
-    <script>
+        <script>
 
-      const data = {{ data | tojson | safe }}
-      const client = data.client
-      const socket = io()
+            const data = {{ data | tojson | safe }}
+            const client = data.client
+            const socket = io()
 
-      data.scale = scale = 100
+            data.scale = scale = 100
 
-      data.axes = axes = []
-      data.meshes = meshes = []
-      data.lights = lights = []
-      data.panels = panels = []
+            data.axes = axes = []
+            data.meshes = meshes = []
+            data.lights = lights = []
+            data.panels = panels = []
 
-      data.settings = settings = {}
-      data.controls = controls = {}
-      data.tooltips = tooltips = {}
+            data.settings = settings = {}
+            data.controls = controls = {}
+            data.tooltips = tooltips = {}
 
-      let box = addBox
-      let circle = addCircle
-      let cone = addCone
-      let cylinder = addCylinder
-      let knot = addKnot
-      let line = addLine
-      let line2 = addLine2
-      let plane = addPlane
-      let quadrilateral = addQuadrilateral
-      let ring = addRing
-      let sphere = addSphere
-      let text = addText
-      let torus = addTorus
-      let triangle = addTriangle
-      let tube = addTube
+            let box = addBox
+            let circle = addCircle
+            let cone = addCone
+            let cylinder = addCylinder
+            let knot = addKnot
+            let line = addLine
+            let line2 = addLine2
+            let plane = addPlane
+            let quadrilateral = addQuadrilateral
+            let ring = addRing
+            let sphere = addSphere
+            let text = addText
+            let torus = addTorus
+            let triangle = addTriangle
+            let tube = addTube
 
-      data.settings = settings = getSettings()
+            data.settings = settings = getSettings()
 
-      console.log("Welcome to " + data.title + "!")
+            console.log("Welcome to " + data.title + "!")
 
-      $("#navbar #title span").text(settings.ui.title)
+            $("#navbar #title span").text(settings.ui.title)
 
-      $("#navbar").css("top", settings.ui.navbar ? 0 : -50)
-      $("#forkme").css("display", settings.ui.forkme ? "" : "none")
-      $("#metabox").css("display", settings.ui.metabox ? "" : "none")
-      $("#help").css("display", settings.ui.help ? "" : "none")
+            $("#navbar").css("top", settings.ui.navbar ? 0 : - 50)
+            $("#forkme").css("display", settings.ui.forkme ? "" : "none")
+            $("#metabox").css("display", settings.ui.metabox ? "" : "none")
+            $("#help").css("display", settings.ui.help ? "" : "none")
 
-      var renderer, composer, canvas, scene, camera, events
+            var renderer, composer, canvas, scene, camera, events
 
-      data.renderer = renderer = new THREE.WebGLRenderer({alpha: true, antialias: true, logarithmicDepthBuffer: true})
-      renderer.setSize(window.innerWidth, window.innerHeight)
-      renderer.setPixelRatio(window.devicePixelRatio)
-      data.composer = composer = new THREE.EffectComposer(renderer)
+            data.renderer = renderer = new THREE.WebGLRenderer({alpha: true, antialias: true, logarithmicDepthBuffer: true})
+            renderer.setSize(window.innerWidth, window.innerHeight)
+            renderer.setPixelRatio(window.devicePixelRatio)
+            data.composer = composer = new THREE.EffectComposer(renderer)
 
-      data.canvas = canvas = document.body.appendChild(renderer.domElement)
-      canvas.setAttribute("id", "canvas")
+            data.canvas = canvas = document.body.appendChild(renderer.domElement)
+            canvas.setAttribute("id", "canvas")
 
-      data.scene = scene = new THREE.Scene()
+            data.scene = scene = new THREE.Scene()
 
-      new Light("ambient"); new Light("point")
+            new Light("ambient"); new Light("point")
 
-      data.camera = camera = addPerspectiveCamera()
+            data.camera = camera = addPerspectiveCamera()
 
-      data.controls = controls = addDragControls()
-      data.controls = controls = addFlyControls()
-      data.controls = controls = addZoomControls()
+            data.controls = controls = addDragControls()
+            data.controls = controls = addFlyControls()
+            data.controls = controls = addZoomControls()
 
-      data.events = events = addEvents()
-      data.panels = panels = addPanels()
-      data.axes = axes = addAxes()
+            data.events = events = addEvents()
+            data.panels = panels = addPanels()
+            data.axes = axes = addAxes()
 
-      setup()
+            setup()
 
-    </script>
+        </script>
 
-  </body>
+    </body>
 
 </html>
