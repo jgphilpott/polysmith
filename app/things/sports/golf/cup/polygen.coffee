@@ -4,7 +4,7 @@ polygen = () ->
 
     radius = 54
     depth = 152.4
-    thickness = 2.5
+    thickness = 3
     flagstick = 15
 
     cupExterior = newCylinder depth, radius, radius, 256
