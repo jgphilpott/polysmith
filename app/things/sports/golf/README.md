@@ -1,1 +1,0 @@
-[Thingiverse Golf Collection](https://www.thingiverse.com/jgphilpott/collections/golf)

@@ -1,1 +1,0 @@
-[Thingiverse Art Collection](https://www.thingiverse.com/jgphilpott/collections/art)

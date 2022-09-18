@@ -1,1 +1,0 @@
-[Thingiverse Weapons Collection](https://www.thingiverse.com/jgphilpott/collections/weapons)

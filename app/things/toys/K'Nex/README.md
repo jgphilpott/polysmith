@@ -1,1 +1,0 @@
-[Thingiverse K'Nex Collection](https://www.thingiverse.com/jgphilpott/collections/knex)
