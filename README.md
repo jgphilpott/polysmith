@@ -20,7 +20,7 @@ docker-compose up
 
 # Usage
 
-To create/view a 3D model you will need to add a polygen function to one of the root files in the [scripts directory](https://github.com/jgphilpott/polymorph/tree/master/app/scripts). You can either create a new function from scratch or copy and paste from one of the _**[things](https://github.com/jgphilpott/polymorph/tree/master/app/things)**_.
+To create/view a 3D model you will need to add a polygen function to one of the root files in the [scripts directory](https://github.com/jgphilpott/polymorph/tree/master/app/scripts). You can either create a new function from scratch or copy and paste from one of the _**[things](https://github.com/jgphilpott/things)**_.
 
 Once you see the desired model in the view you can use `Ctrl + Enter` to download it as an STL file or `Shift + Enter` to download it as an OBJ file. You can use any software you like to slice the STL/OBJ files but [Cura](https://github.com/Ultimaker/Cura) is recommended.
 

@@ -28,7 +28,10 @@ app/styles/*/*/*.css
 venv
 
 ### Models ###
+app/things
 *.gcode
 *.scad
-*.stp
 *.ipt
+*.obj
+*.stl
+*.stp
