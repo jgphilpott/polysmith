@@ -7,6 +7,7 @@ services:
     build: .
     volumes:
      - .:/root
+     - ../things:/things
     ports:
      - 4000:4000
     links:
