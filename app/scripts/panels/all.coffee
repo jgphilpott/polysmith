@@ -4,6 +4,7 @@ addPanels = ->
     panels.push addPanelEvents addLightsPanel()
     panels.push addPanelEvents addMenuPanel()
     panels.push addPanelEvents addMeshesPanel()
+    panels.push addPanelEvents addPolygenPanel()
     panels.push addPanelEvents addSettingsPanel()
     panels.push addPanelEvents addShapesPanel()
     panels.push addPanelEvents addShortcutsPanel()

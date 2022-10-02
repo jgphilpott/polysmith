@@ -18,7 +18,7 @@ setup = () ->
 
         composer.render()
 
-    if polygen?
+    if typeof polygen == "function"
 
         localDelete "meshes"
 
