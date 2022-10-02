@@ -4,7 +4,7 @@
 
 Polymorph is a [JavaScript](https://en.wikipedia.org/wiki/JavaScript) based 3D modeling software that uses [three.js](https://github.com/mrdoob/three.js) and [csg.js](https://github.com/evanw/csg.js) in the background. It can export [STL](https://en.wikipedia.org/wiki/STL_(file_format)) and [OBJ](https://en.wikipedia.org/wiki/Wavefront_.obj_file) files to be used for 3D printing. The project also works in combination with a personal [things](https://github.com/jgphilpott/things) repository to host your own models and designs without polluting the software.
 
-# Quick Start
+# Setup
 
 1) Clone this repository to you local device with the command `git clone https://github.com/jgphilpott/polymorph.git`.
 
