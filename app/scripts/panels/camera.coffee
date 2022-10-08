@@ -13,8 +13,6 @@ addCameraPanel = ->
 
     panel.find(".fold, h4").click((event) ->
 
-        event.stopPropagation()
-
         controls = $(this).closest ".controls"
         display = controls.find(".body").css "display"
         id = controls.attr "id"
@@ -65,8 +63,6 @@ addCameraPanel = ->
 
     panel.find(".reset").click((event) ->
 
-        event.stopPropagation()
-
         speed.find(".slider").slider "value", 50
 
         sliderStyle speed.find "#drag.slider"
@@ -92,7 +88,7 @@ addCameraPanel = ->
     panel.find("input").keyup (event) -> event.stopPropagation(); updateCamera(this, event)
     panel.find("input").change (event) -> event.stopPropagation(); updateCamera(this, event)
 
-    panel.find("input").dblclick (event) -> event.stopPropagation(); document.execCommand("selectAll")
+    panel.find("input").dblclick (event) -> document.execCommand "selectAll"
     panel.find("input").mousedown (event) -> event.stopPropagation()
     panel.find("input").mouseup (event) -> event.stopPropagation()
 
@@ -100,7 +96,7 @@ addCameraPanel = ->
 
         event.stopPropagation()
 
-        selection = $(this).parent().attr("id").split("-")[0]
+        selection = $(this).closest("span").attr("id").split("-")[0]
 
         updateSettings "camera", selection, camera[selection]
 

@@ -93,8 +93,6 @@ addLightsPanel = ->
 
     panel.find(".fold").click((event) ->
 
-        event.stopPropagation()
-
         foldPanel this
 
     ).on "mousedown mouseup", (event) -> event.stopPropagation()

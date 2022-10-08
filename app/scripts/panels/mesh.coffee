@@ -223,24 +223,24 @@ addMeshPanel = (mesh, coordinates = null) ->
         panel.find("#name span").keydown (event) -> event.stopPropagation()
         panel.find("#name span").keyup (event) -> event.stopPropagation(); if mesh.lock != "locked" then updateMesh(mesh, "name", "mesh", $(this)[0].innerText)
 
-        panel.find("#name span").dblclick (event) -> event.stopPropagation(); if mesh.lock != "locked" then document.execCommand("selectAll")
+        panel.find("#name span").dblclick (event) -> if mesh.lock != "locked" then document.execCommand("selectAll")
         panel.find("#name span").mousedown (event) -> event.stopPropagation(); if mesh.lock == "locked" then event.preventDefault()
         panel.find("#name span").mouseup (event) -> event.stopPropagation()
 
         panel.find("#name span").blur (event) -> event.stopPropagation(); if mesh.lock != "locked" then updateMesh(mesh, "name", null, $(this)[0].innerText, true)
 
-        panel.find(".operation").click (event) -> event.stopPropagation(); if mesh.lock != "locked" then updateMesh(mesh, "operation", this.id, "setup")
+        panel.find(".operation").click (event) -> if mesh.lock != "locked" then updateMesh(mesh, "operation", this.id, "setup")
         panel.find(".operation").on "mousedown mouseup", (event) -> event.stopPropagation()
 
-        panel.find(".color").click (event) -> event.stopPropagation(); if mesh.lock != "locked" then updateMesh(mesh, "color", null, this.id, true)
+        panel.find(".color").click (event) -> if mesh.lock != "locked" then updateMesh(mesh, "color", null, this.id, true)
         panel.find(".color").on "mousedown mouseup", (event) -> event.stopPropagation()
 
-        panel.find("#eye").click (event) -> event.stopPropagation(); if mesh.lock != "locked" then updateMesh(mesh, "visibility", "eye", this.src, true)
-        panel.find("#lock").click (event) -> event.stopPropagation(); updateMesh(mesh, "lock")
-        panel.find("#trash").click (event) -> event.stopPropagation(); if mesh.lock != "locked" then removeMesh(mesh)
+        panel.find("#eye").click (event) -> if mesh.lock != "locked" then updateMesh(mesh, "visibility", "eye", this.src, true)
+        panel.find("#lock").click (event) -> updateMesh(mesh, "lock")
+        panel.find("#trash").click (event) -> if mesh.lock != "locked" then removeMesh(mesh)
         panel.find(".tool").on "mousedown mouseup", (event) -> event.stopPropagation()
 
-        panel.find(".fold, h4").click (event) -> event.stopPropagation(); foldPanel(this)
+        panel.find(".fold, h4").click (event) -> foldPanel(this)
         panel.find(".fold, h4").on "mousedown mouseup", (event) -> event.stopPropagation()
 
         panel.find("input").keypress (event) -> event.stopPropagation(); if event.keyCode == 13 then this.blur()
@@ -248,7 +248,7 @@ addMeshPanel = (mesh, coordinates = null) ->
         panel.find("input").keyup (event) -> event.stopPropagation(); id = $(this).closest("span").attr("id"); updateMesh(mesh, id.split("-")[0], id.split("-").splice(1).join("-"), Number($(this).val()))
         panel.find("input").change (event) -> event.stopPropagation(); id = $(this).closest("span").attr("id"); updateMesh(mesh, id.split("-")[0], id.split("-").splice(1).join("-"), Number($(this).val()), "temp")
 
-        panel.find("input").dblclick (event) -> event.stopPropagation(); if mesh.lock != "locked" then document.execCommand("selectAll")
+        panel.find("input").dblclick (event) -> if mesh.lock != "locked" then document.execCommand("selectAll")
         panel.find("input").mousedown (event) -> event.stopPropagation(); if mesh.lock == "locked" then event.preventDefault()
         panel.find("input").mouseup (event) -> event.stopPropagation()
 

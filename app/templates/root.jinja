@@ -108,7 +108,9 @@
         <script src="{{ url_for('static', filename='scripts/libs/etc/ui.js') }}"></script>
 
         <script src="{{ url_for('static', filename='scripts/libs/draw/axes.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/draw/help.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/libs/draw/metabox.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/draw/tooltips.js') }}"></script>
 
         <script src="{{ url_for('static', filename='scripts/panels/all.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/panels/camera.js') }}"></script>
@@ -179,6 +181,7 @@
             let triangle = addTriangle
             let tube = addTube
 
+            data.help = help = new Help
             data.settings = settings = getSettings()
 
             console.log("Welcome to " + data.title + "!")

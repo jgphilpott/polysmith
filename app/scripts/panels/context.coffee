@@ -94,17 +94,14 @@ contextMenu = (type, element, event) ->
 
 positionContextMenu = (panel, event) ->
 
-    padding = 5
-
-    contextMenuWidth = panel.outerWidth()
-    contextMenuHeight = panel.outerHeight()
+    gapSize = 5
 
     if event.pageX >= window.innerWidth / 2
-        panel.css "left", event.pageX - contextMenuWidth + padding
+        panel.css "left", event.pageX - panel.outerWidth() + gapSize
     else if event.pageX < window.innerWidth / 2
-        panel.css "left", event.pageX - padding
+        panel.css "left", event.pageX - gapSize
 
     if event.pageY >= window.innerHeight / 2
-        panel.css "top", event.pageY - contextMenuHeight + padding
+        panel.css "top", event.pageY - panel.outerHeight() + gapSize
     else if event.pageY < window.innerHeight / 2
-        panel.css "top", event.pageY - padding
+        panel.css "top", event.pageY - gapSize

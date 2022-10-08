@@ -69,15 +69,13 @@ updateMeshesPanel = (type, mesh) ->
             tableRow.find(".name span").keydown (event) -> event.stopPropagation()
             tableRow.find(".name span").keyup (event) -> event.stopPropagation(); if mesh.lock != "locked" then updateMesh(mesh, "name", "meshes", $(this)[0].innerText)
 
-            tableRow.find(".name span").dblclick (event) -> event.stopPropagation(); if mesh.lock != "locked" then document.execCommand("selectAll")
+            tableRow.find(".name span").dblclick (event) -> if mesh.lock != "locked" then document.execCommand("selectAll")
             tableRow.find(".name span").mousedown (event) -> event.stopPropagation(); if mesh.lock == "locked" then event.preventDefault()
             tableRow.find(".name span").mouseup (event) -> event.stopPropagation()
 
             tableRow.find(".name span").blur (event) -> event.stopPropagation(); if mesh.lock != "locked" then updateMesh(mesh, "name", null, $(this)[0].innerText, true)
 
             tableRow.find(".settings").click ->
-
-                event.stopPropagation()
 
                 panel = $("#mesh." + mesh.uuid + "")
 
@@ -100,8 +98,8 @@ updateMeshesPanel = (type, mesh) ->
 
                     addMeshPanel mesh
 
-            tableRow.find(".lock").click -> event.stopPropagation(); updateMesh(mesh, "lock")
-            tableRow.find(".trash").click -> event.stopPropagation(); if mesh.lock != "locked" then removeMesh(mesh)
+            tableRow.find(".lock").click -> updateMesh(mesh, "lock")
+            tableRow.find(".trash").click -> if mesh.lock != "locked" then removeMesh(mesh)
             tableRow.find(".settings, .lock, .trash").on "mousedown mouseup", (event) -> event.stopPropagation()
 
             break

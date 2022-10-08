@@ -20,6 +20,10 @@ addEvents = () ->
         camera.aspect = innerWidth / innerHeight
         camera.updateProjectionMatrix()
 
+    $("body").click ->
+
+        help.setActive false
+
     $("body").keypress (event) ->
 
         # Ctrl + Enter
