@@ -1,5 +1,7 @@
 @import "tooltips/abbreviations.sass"
 @import "tooltips/measurements.sass"
+@import "tooltips/metabox.sass"
+@import "tooltips/help.sass"
 
 @import "colors/glass/grayscale.sass"
 @import "colors/glass/rainbow.sass"
@@ -25,7 +27,7 @@
 
 body
 
-    font-family: "polyfont"
+    font-family: "polyfont", "helvetica", "arial"
     cursor: default
 
 canvas
@@ -86,8 +88,6 @@ a:hover
         width: 50px
         height: 50px
 
-    #menu:hover
-
         cursor: context-menu
 
     #title
@@ -112,75 +112,14 @@ a:hover
 
 #forkme
 
-    position: fixed
-
     top: 0px
     right: 0px
 
     width: 150px
     height: 150px
 
-    z-index: 999999999
+    position: fixed
+
+    z-index: 99999999
 
     clip-path: polygon(15px 0px, 60px 0px, 150px 90px, 150px 135px)
-
-#metabox
-
-    position: fixed
-
-    left: 0%
-    top: 100%
-
-    z-index: 999999999
-
-    transform: translate(0%, -100%)
-
-    #name
-
-        margin: 5px 15px
-
-    .databox
-
-        margin: 5px 10px
-        display: inline-block
-
-        p
-
-            margin: 5px
-
-            span.label
-
-                font-weight: bold
-
-        p.title
-
-            margin: 0px 5px 10px
-
-            font-weight: bold
-
-        #x span.label
-
-            color: $red-solid
-
-        #y span.label
-
-            color: $green-solid
-
-        #z span.label
-
-            color: $blue-solid
-
-#help
-
-    cursor: pointer
-    position: fixed
-
-    width: 30px
-    height: 30px
-
-    z-index: 999999999
-
-    top: calc(100% - 30px)
-    left: calc(100% - 30px)
-
-    transform: translate(-50%, -50%)

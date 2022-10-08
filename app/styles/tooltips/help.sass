@@ -1,0 +1,50 @@
+@import "../colors/glass/grayscale.sass"
+@import "../colors/glass/rainbow.sass"
+
+@import "../colors/solid/grayscale.sass"
+@import "../colors/solid/rainbow.sass"
+
+.help
+
+    cursor: help !important
+
+#help
+
+    width: 30px
+    height: 30px
+
+    cursor: pointer
+    position: fixed
+
+    z-index: 99999999
+
+    top: calc(100% - 30px)
+    left: calc(100% - 30px)
+
+    transform: translate(-50%, -50%)
+
+    transition-duration: 0.5s
+    transition-timing-function: linear
+    transition-property: width, height, filter
+
+    filter: drop-shadow(0px 0px 0px $gray-solid)
+
+#help:hover
+
+    width: 35px
+    height: 35px
+
+    filter: drop-shadow(0px 0px 5px $gray-solid)
+
+#help-box
+
+    padding: 5px
+
+    position: fixed
+
+    z-index: 999999999
+
+    background-color: $light-gray-solid
+
+    border: 1px solid $black-solid
+    border-radius: 5px

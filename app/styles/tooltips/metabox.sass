@@ -1,0 +1,51 @@
+@import "../colors/glass/grayscale.sass"
+@import "../colors/glass/rainbow.sass"
+
+@import "../colors/solid/grayscale.sass"
+@import "../colors/solid/rainbow.sass"
+
+#metabox
+
+    left: 0%
+    top: 100%
+
+    position: fixed
+
+    z-index: 99999999
+
+    transform: translate(0%, -100%)
+
+    #name
+
+        margin: 5px 15px
+
+    .databox
+
+        margin: 5px 10px
+        display: inline-block
+
+        p
+
+            margin: 5px
+
+            span.label
+
+                font-weight: bold
+
+        p.title
+
+            margin: 0px 5px 10px
+
+            font-weight: bold
+
+        #x span.label
+
+            color: $red-solid
+
+        #y span.label
+
+            color: $green-solid
+
+        #z span.label
+
+            color: $blue-solid
