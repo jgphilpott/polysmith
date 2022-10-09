@@ -175,7 +175,9 @@ addMeshEvents = (mesh) ->
 
     events.addEventListener mesh, "click", (event) ->
 
-        updateMesh mesh, "operation", events.operation.key, null, true
+        if events.operation.key
+
+            updateMesh mesh, "operation", events.operation.key, null, true
 
     events.addEventListener mesh, "dblclick", (event) ->
 
@@ -205,8 +207,6 @@ makeDragable = (element, origEvent = null) ->
                 yOffset = origEvent.clientY - coordinates.y
 
                 $("#canvas").css "cursor", "grabbing"
-
-                tooltips.distanceLines = []
 
         else
 

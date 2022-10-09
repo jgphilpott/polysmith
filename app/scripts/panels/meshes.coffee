@@ -22,8 +22,6 @@ addMeshesPanel = ->
 
         panel.find("#meshes.table tbody").css "clip-path", "inset(" + $(this).scrollTop() + "px 0px 0px 0px)"
 
-    tooltips.meshCount = 0
-
     return panel
 
 updateMeshesPanel = (type, mesh) ->

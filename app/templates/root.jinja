@@ -163,7 +163,6 @@
 
             data.settings = settings = {}
             data.controls = controls = {}
-            data.tooltips = tooltips = {}
 
             let box = addBox
             let circle = addCircle
@@ -182,6 +181,7 @@
             let tube = addTube
 
             data.help = help = new Help
+            data.tooltips = tooltips = new Tooltips
             data.settings = settings = getSettings()
 
             console.log("Welcome to " + data.title + "!")
