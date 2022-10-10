@@ -1,4 +1,4 @@
-meshMaterial = (type = "normal", color = blackThree, side = THREE.DoubleSide) ->
+meshMaterial = (type = "normal", color = blackThree, texture = null, side = THREE.DoubleSide) ->
 
     material = null
 
@@ -6,7 +6,7 @@ meshMaterial = (type = "normal", color = blackThree, side = THREE.DoubleSide) ->
 
         when "basic"
 
-            material = new THREE.MeshBasicMaterial color: color, side: side; break
+            material = new THREE.MeshBasicMaterial color: color, map: texture, side: side; break
 
         when "depth"
 
@@ -18,11 +18,11 @@ meshMaterial = (type = "normal", color = blackThree, side = THREE.DoubleSide) ->
 
         when "lambert"
 
-            material = new THREE.MeshLambertMaterial color: color, side: side; break
+            material = new THREE.MeshLambertMaterial color: color, map: texture, side: side; break
 
         when "matcap"
 
-            material = new THREE.MeshMatcapMaterial color: color, side: side; break
+            material = new THREE.MeshMatcapMaterial color: color, map: texture, side: side; break
 
         when "normal"
 
@@ -30,19 +30,19 @@ meshMaterial = (type = "normal", color = blackThree, side = THREE.DoubleSide) ->
 
         when "phong"
 
-            material = new THREE.MeshPhongMaterial color: color, side: side; break
+            material = new THREE.MeshPhongMaterial color: color, map: texture, side: side; break
 
         when "physical"
 
-            material = new THREE.MeshPhysicalMaterial color: color, side: side; break
+            material = new THREE.MeshPhysicalMaterial color: color, map: texture, side: side; break
 
         when "standard"
 
-            material = new THREE.MeshStandardMaterial color: color, side: side; break
+            material = new THREE.MeshStandardMaterial color: color, map: texture, side: side; break
 
         when "toon"
 
-            material = new THREE.MeshToonMaterial color: color, side: side; break
+            material = new THREE.MeshToonMaterial color: color, map: texture, side: side; break
 
     if material
 
@@ -50,7 +50,7 @@ meshMaterial = (type = "normal", color = blackThree, side = THREE.DoubleSide) ->
 
         if color == blackThree
 
-            material.metalness = -25
+            material.metalness = - 25
             material.roughness = 0.75
 
         else

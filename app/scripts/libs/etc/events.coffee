@@ -51,7 +51,7 @@ addEvents = () ->
 
         $(this).text title
 
-    $("#canvas").mousedown((event) ->
+    $("#canvas").mousedown (event) ->
 
         window.getSelection().removeAllRanges()
 
@@ -59,9 +59,12 @@ addEvents = () ->
 
             if $(input).is ":focus" then $(input).blur()
 
-    ).click (event) ->
+    $("#canvas").click (event) ->
 
-        if events.operation.key and not camera.dragged then clearMeshOperation()
+        if not camera.dragged
+
+            if events.operation.key then clearMeshOperation()
+            if tooltips.getSelected() then tooltips.setSelected null
 
     $("#navbar, #forkme, #metabox, #help").mouseenter((event) ->
 
@@ -175,9 +178,17 @@ addMeshEvents = (mesh) ->
 
     events.addEventListener mesh, "click", (event) ->
 
-        if events.operation.key
+        event.origDomEvent.stopImmediatePropagation()
 
-            updateMesh mesh, "operation", events.operation.key, null, true
+        if not camera.dragged
+
+            if events.operation.key
+
+                updateMesh mesh, "operation", events.operation.key, null, true
+
+            else
+
+                tooltips.setSelected mesh
 
     events.addEventListener mesh, "dblclick", (event) ->
 
