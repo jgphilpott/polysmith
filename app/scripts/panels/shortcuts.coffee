@@ -24,6 +24,8 @@ addShortcutsPanel = ->
     panel.append "<img title='Cone' id='cone' class='shape' src='/app/imgs/icons/shapes/pyramids/pyramid-x.png'>"
 
     panel.append "<img title='Torus' id='torus' class='shape' src='/app/imgs/icons/shapes/special/torus.png'>"
+    panel.append "<img title='Text' id='text' class='shape' src='/app/imgs/icons/shapes/special/text.png'>"
+    panel.append "<img title='Image' id='image' class='shape' src='/app/imgs/icons/shapes/special/image.png'>"
 
     panel.append "<img title='Toggle Shapes Panel' id='toggle' class='nav' src='/app/imgs/panels/nav/" + (if shapesVisible then "x" else "+") + ".png'>"
 
