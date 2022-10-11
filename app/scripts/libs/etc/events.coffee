@@ -186,7 +186,7 @@ addMeshEvents = (mesh) ->
 
                 updateMesh mesh, "operation", events.operation.key, null, true
 
-            else
+            else if tooltips.getSelected() != mesh
 
                 tooltips.setSelected mesh
 

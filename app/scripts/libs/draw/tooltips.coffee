@@ -10,27 +10,17 @@ class Tooltips
 
     setSelected : (selected = null) ->
 
-        if this.selected
-
-            this.removeRotationTools()
-
         this.selected = selected
-
-        if selected
-
-            this.addRotationTools()
-
-        else
-
-            this.removeRotationTools()
+        this.removeRotationTools()
+        if this.selected then this.addRotationTools()
 
     getSelected : (self = this) ->
 
         return self.selected
 
-    addRotationTools : (mesh = this.selected) ->
+    addRotationTools : (mesh = this.selected, tools = this.rotationTools) ->
 
-        geometry = new THREE.PlaneGeometry 10, 5
+        geometry = new THREE.PlaneGeometry 6, 3
 
         xIcon = new THREE.TextureLoader().load "/app/imgs/icons/tooltips/rotate/red.png"
         yIcon = new THREE.TextureLoader().load "/app/imgs/icons/tooltips/rotate/green.png"
@@ -44,26 +34,57 @@ class Tooltips
         yTool = new THREE.Mesh geometry, yMaterial
         zTool = new THREE.Mesh geometry, zMaterial
 
-        xTool.position.set mesh.position.x + 10, mesh.position.y, mesh.position.z
-        yTool.position.set mesh.position.x, mesh.position.y + 10, mesh.position.z
-        zTool.position.set mesh.position.x, mesh.position.y, mesh.position.z + 10
-
-        this.rotationTools.push xTool, yTool, zTool
+        tools.push xTool, yTool, zTool
         scene.add xTool, yTool, zTool
 
-        return this.rotationTools
+        this.updateRotationTools()
 
-    updateRotationTools : () ->
+    updateRotationTools : (mesh = this.selected, tools = this.rotationTools) ->
 
-        return this.rotationTools
+        gapSize = 10
 
-    removeRotationTools : () ->
+        xTool = tools[0]
+        yTool = tools[1]
+        zTool = tools[2]
 
-        for rotationTool in this.rotationTools
+        boundingBox = getBoundingBox mesh
 
-            rotationTool.geometry.dispose()
-            rotationTool.material.dispose()
+        xPosition = if camera.position.x > mesh.position.x then mesh.position.x + boundingBox.max.x + gapSize else mesh.position.x + boundingBox.min.x - gapSize
+        yPosition = if camera.position.y > mesh.position.y then mesh.position.y + boundingBox.max.y + gapSize else mesh.position.y + boundingBox.min.y - gapSize
+        zPosition = if camera.position.z > mesh.position.z then mesh.position.z + boundingBox.max.z + gapSize else mesh.position.z + boundingBox.min.z - gapSize
 
-            scene.remove rotationTool
+        xRotation = if camera.position.x > mesh.position.x then deg$rad -90 else deg$rad 90
+        yRotation = if camera.position.y > mesh.position.y then deg$rad 0 else deg$rad 180
 
-        return this.rotationTools
+        if camera.position.z > mesh.position.z
+
+            zRotation = if camera.position.y > mesh.position.y then deg$rad 0 else deg$rad 180
+
+        else
+
+            zRotation = if camera.position.y > mesh.position.y then deg$rad 180 else deg$rad 0
+
+        cameraBox = newBox 1, 1, 1, [camera.position.x, camera.position.y, zPosition]
+
+        xTool.position.set xPosition, mesh.position.y, mesh.position.z
+        yTool.position.set mesh.position.x, yPosition, mesh.position.z
+        zTool.position.set mesh.position.x, mesh.position.y, zPosition
+
+        cameraBox.up.set 0, 0, 1
+        cameraBox.lookAt zTool.position
+        zTool.quaternion.copy cameraBox.quaternion
+
+        xTool.rotation.z = xRotation
+        yTool.rotation.z = yRotation
+        zTool.rotation.z = zRotation
+
+    removeRotationTools : (mesh = this.selected, tools = this.rotationTools) ->
+
+        for tool in tools
+
+            tool.geometry.dispose()
+            tool.material.dispose()
+
+            scene.remove tool
+
+        this.rotationTools = []

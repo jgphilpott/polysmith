@@ -91,6 +91,8 @@ addDragControls = () ->
         position.set newX, newY, newZ
         camera.lookAt target.x, target.y, target.z
 
+        if tooltips.getSelected() then tooltips.updateRotationTools()
+
     stop = (event) ->
 
         event.preventDefault()

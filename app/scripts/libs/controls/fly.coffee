@@ -172,6 +172,8 @@ addFlyControls = () ->
 
             camera.lookAt target.x, target.y, target.z
 
+            if tooltips.getSelected() then tooltips.updateRotationTools()
+
     ).keyup (event) ->
 
         if [37, 38, 39, 40, 65, 68, 83, 87].includes event.keyCode

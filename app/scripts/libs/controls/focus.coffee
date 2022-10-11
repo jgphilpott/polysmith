@@ -21,6 +21,8 @@ focus = (point, duration = 1000, steps = 100) ->
             panel.find("#target-y input").val target.y.toFixed 2
             panel.find("#target-z input").val target.z.toFixed 2
 
+            if tooltips.getSelected() then tooltips.updateRotationTools()
+
         for step in [0...steps]
 
             setTimeout updateCameraTarget, duration / steps * step

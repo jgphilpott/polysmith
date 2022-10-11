@@ -33,6 +33,8 @@ addZoomControls = () ->
             panel.find("#position-y input").val position.y.toFixed 2
             panel.find("#position-z input").val position.z.toFixed 2
 
+            if tooltips.getSelected() then tooltips.updateRotationTools()
+
         if zoomDelta > 0 and position.distanceTo(target) >= zoomMin # Zoom In
 
             zoom()
