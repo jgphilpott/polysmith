@@ -3,22 +3,32 @@ class Tooltips
     constructor : (self = this) ->
 
         @selected = null
+        @boundingBox = null
 
         @meshCount = 0
         @distanceLines = []
         @rotationTools = []
+        @rotationRing = null
 
     setSelected : (selected = null) ->
 
         this.selected = selected
+
         this.removeRotationTools()
-        if this.selected then this.addRotationTools()
+        this.boundingBox = null
+
+        if selected
+
+            this.addRotationTools()
+            this.boundingBox = getBoundingBox selected
 
     getSelected : (self = this) ->
 
         return self.selected
 
     addRotationTools : (mesh = this.selected, tools = this.rotationTools) ->
+
+        self = this
 
         geometry = new THREE.PlaneGeometry 6, 3
 
@@ -34,6 +44,30 @@ class Tooltips
         yTool = new THREE.Mesh geometry, yMaterial
         zTool = new THREE.Mesh geometry, zMaterial
 
+        events.addEventListener xTool, "mouseover", (event) ->
+            $("#canvas").css "cursor", "pointer"
+            self.addRotationRing("x")
+
+        events.addEventListener xTool, "mouseout", (event) ->
+            $("#canvas").css "cursor", ""
+            self.removeRotationRing()
+
+        events.addEventListener yTool, "mouseover", (event) ->
+            $("#canvas").css "cursor", "pointer"
+            self.addRotationRing("y")
+
+        events.addEventListener yTool, "mouseout", (event) ->
+            $("#canvas").css "cursor", ""
+            self.removeRotationRing()
+
+        events.addEventListener zTool, "mouseover", (event) ->
+            $("#canvas").css "cursor", "pointer"
+            self.addRotationRing("z")
+
+        events.addEventListener zTool, "mouseout", (event) ->
+            $("#canvas").css "cursor", ""
+            self.removeRotationRing()
+
         tools.push xTool, yTool, zTool
         scene.add xTool, yTool, zTool
 
@@ -47,11 +81,9 @@ class Tooltips
         yTool = tools[1]
         zTool = tools[2]
 
-        boundingBox = getBoundingBox mesh
-
-        xPosition = if camera.position.x > mesh.position.x then mesh.position.x + boundingBox.max.x + gapSize else mesh.position.x + boundingBox.min.x - gapSize
-        yPosition = if camera.position.y > mesh.position.y then mesh.position.y + boundingBox.max.y + gapSize else mesh.position.y + boundingBox.min.y - gapSize
-        zPosition = if camera.position.z > mesh.position.z then mesh.position.z + boundingBox.max.z + gapSize else mesh.position.z + boundingBox.min.z - gapSize
+        xPosition = if camera.position.x > mesh.position.x then mesh.position.x + this.boundingBox.max.x + gapSize else mesh.position.x + this.boundingBox.min.x - gapSize
+        yPosition = if camera.position.y > mesh.position.y then mesh.position.y + this.boundingBox.max.y + gapSize else mesh.position.y + this.boundingBox.min.y - gapSize
+        zPosition = if camera.position.z > mesh.position.z then mesh.position.z + this.boundingBox.max.z + gapSize else mesh.position.z + this.boundingBox.min.z - gapSize
 
         xRotation = if camera.position.x > mesh.position.x then deg$rad -90 else deg$rad 90
         yRotation = if camera.position.y > mesh.position.y then deg$rad 0 else deg$rad 180
@@ -82,9 +114,64 @@ class Tooltips
 
         for tool in tools
 
+            events.removeEventListener tool, "mouseover"
+            events.removeEventListener tool, "mouseout"
+
             tool.geometry.dispose()
             tool.material.dispose()
 
             scene.remove tool
 
         this.rotationTools = []
+
+    addRotationRing : (axis, mesh = this.selected) ->
+
+        gapSize = 10
+
+        if not this.rotationRing
+
+            geometry = new THREE.RingGeometry 5, 10, 10
+            material = meshMaterial "basic", blackThree
+
+            ring = new THREE.Mesh geometry, material
+
+            switch axis
+
+                when "x"
+
+                    ring.rotation.y = deg$rad 90
+
+                    ring.position.x = if camera.position.x > mesh.position.x then mesh.position.x + this.boundingBox.min.x - gapSize else mesh.position.x + this.boundingBox.max.x + gapSize
+                    ring.position.y = mesh.position.y
+                    ring.position.z = mesh.position.z
+
+                when "y"
+
+                    ring.rotation.x = deg$rad 90
+
+                    ring.position.x = mesh.position.x
+                    ring.position.y = if camera.position.y > mesh.position.y then mesh.position.y + this.boundingBox.min.y - gapSize else mesh.position.y + this.boundingBox.max.y + gapSize
+                    ring.position.z = mesh.position.z
+
+                when "z"
+
+                    ring.position.x = mesh.position.x
+                    ring.position.y = mesh.position.y
+                    ring.position.z = if camera.position.z > mesh.position.z then mesh.position.z + this.boundingBox.min.z - gapSize else mesh.position.z + this.boundingBox.max.z + gapSize
+
+            this.rotationRing = ring
+
+            scene.add ring
+
+    updateRotationRing : (ring = this.rotationRing) ->
+
+        return ring
+
+    removeRotationRing : (ring = this.rotationRing) ->
+
+        this.rotationRing = null
+
+        ring.geometry.dispose()
+        ring.material.dispose()
+
+        scene.remove ring

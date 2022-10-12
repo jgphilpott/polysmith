@@ -342,7 +342,7 @@ addAxisCapEvents = (cap) ->
 
         if not events.operation.key
 
-            $("#canvas").css("cursor", "pointer")
+            $("#canvas").css "cursor", "pointer"
 
     events.addEventListener cap, "mouseout", (event) ->
 
