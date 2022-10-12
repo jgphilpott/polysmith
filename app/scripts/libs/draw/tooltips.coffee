@@ -14,13 +14,13 @@ class Tooltips
 
         this.selected = selected
 
-        this.removeRotationTools()
         this.boundingBox = null
+        this.removeRotationTools()
 
         if selected
 
-            this.addRotationTools()
             this.boundingBox = getBoundingBox selected
+            this.addRotationTools()
 
     getSelected : (self = this) ->
 
