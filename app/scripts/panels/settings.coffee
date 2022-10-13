@@ -88,6 +88,10 @@ addSettingsPanel = ->
                 <input id='tooltips-measurements' class='checkbox' type='checkbox' """ + (if settings.tooltips.measurements then "checked" else "") + " " + (if settings.tooltips.guidelines then "" else "disabled") + """><label>Measurements</label>
             </div>
 
+            <div>
+                <input id='tooltips-rotation' class='checkbox' type='checkbox' """ + (if settings.tooltips.rotation then "checked" else "") + """><label>Rotation Tools</label>
+            </div>
+
         </div>
         """
 
