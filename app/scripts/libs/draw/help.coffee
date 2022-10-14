@@ -14,6 +14,15 @@ class Help
 
                 self.events = true
 
+                $("#navbar #menu").mousemove -> self.addHelpBox this, "This is the menu icon!"
+                $("#navbar #menu").mouseout -> self.removeHelpBox this
+
+                $("#navbar #title").mousemove -> self.addHelpBox this, "This is the title!"
+                $("#navbar #title").mouseout -> self.removeHelpBox this
+
+                $("#forkme").mousemove -> self.addHelpBox this, "This is the Fork Me icon!"
+                $("#forkme").mouseout -> self.removeHelpBox this
+
     setActive : (active = false) ->
 
         this.active = active
