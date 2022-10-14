@@ -92,6 +92,10 @@ addSettingsPanel = ->
                 <input id='tooltips-rotation' class='checkbox' type='checkbox' """ + (if settings.tooltips.rotation then "checked" else "") + """><label>Rotation Tools</label>
             </div>
 
+            <div>
+                <input id='tooltips-bounding' class='checkbox' type='checkbox' """ + (if settings.tooltips.bounding then "checked" else "") + """><label>Bounding Box</label>
+            </div>
+
         </div>
         """
 

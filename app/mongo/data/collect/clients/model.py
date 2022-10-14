@@ -33,7 +33,7 @@ class Client():
                                     "shortcuts": ["box", "cylinder", "sphere"]
                                 },
                                 "tooltips": {
-                                    "boundingBox": True,
+                                    "bounding": True,
                                     "guidelines": True,
                                     "measurements": False,
                                     "rotation": True

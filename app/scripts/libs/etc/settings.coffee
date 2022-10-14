@@ -38,10 +38,10 @@ getSettings = () ->
 
             tooltips:
 
-                boundingBox: true
                 guidelines: true
                 measurements: false
                 rotation: true
+                bounding: true
 
             panels:
 
