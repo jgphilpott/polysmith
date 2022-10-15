@@ -8,20 +8,30 @@ class Help
         $("#help").click (event) ->
 
             event.stopPropagation()
-            self.setActive true
+
+            if not self.getActive()
+
+                self.setActive true
+
+            else
+
+                self.setActive false
 
             if not self.events
 
                 self.events = true
 
-                $("#navbar #menu").mousemove -> self.addHelpBox this, "This is the menu icon!"
+                $("#navbar #menu").mousemove -> self.addHelpBox this, "This is the Menu icon!"
                 $("#navbar #menu").mouseout -> self.removeHelpBox this
 
-                $("#navbar #title").mousemove -> self.addHelpBox this, "This is the title!"
+                $("#navbar #title").mousemove -> self.addHelpBox this, "This is the Title!"
                 $("#navbar #title").mouseout -> self.removeHelpBox this
 
                 $("#forkme").mousemove -> self.addHelpBox this, "This is the Fork Me icon!"
                 $("#forkme").mouseout -> self.removeHelpBox this
+
+                $("#help").mousemove -> self.addHelpBox this, "This is the Help icon!"
+                $("#help").mouseout -> self.removeHelpBox this
 
     setActive : (active = false) ->
 
