@@ -33,6 +33,30 @@ class Help
                 $("#help").mousemove -> self.addHelpBox this, "This is the Help icon!"
                 $("#help").mouseout -> self.removeHelpBox this
 
+                $("#camera.panel").mousemove -> self.addHelpBox this, "This is the camera panel!"
+                $("#camera.panel").mouseout -> self.removeHelpBox this
+
+                $("#lights.panel").mousemove -> self.addHelpBox this, "This is the lights panel!"
+                $("#lights.panel").mouseout -> self.removeHelpBox this
+
+                $("#menu.panel").mousemove -> self.addHelpBox this, "This is the menu panel!"
+                $("#menu.panel").mouseout -> self.removeHelpBox this
+
+                $("#mesh.panel").mousemove -> self.addHelpBox this, "This is a mesh panel!"
+                $("#mesh.panel").mouseout -> self.removeHelpBox this
+
+                $("#meshes.panel").mousemove -> self.addHelpBox this, "This is the meshes panel!"
+                $("#meshes.panel").mouseout -> self.removeHelpBox this
+
+                $("#settings.panel").mousemove -> self.addHelpBox this, "This is the settings panel!"
+                $("#settings.panel").mouseout -> self.removeHelpBox this
+
+                $("#shapes.panel").mousemove -> self.addHelpBox this, "This is the shapes panel!"
+                $("#shapes.panel").mouseout -> self.removeHelpBox this
+
+                $("#shortcuts.panel").mousemove -> self.addHelpBox this, "This is the shortcuts panel!"
+                $("#shortcuts.panel").mouseout -> self.removeHelpBox this
+
     setActive : (active = false) ->
 
         this.active = active
