@@ -24,6 +24,10 @@ addEvents = () ->
 
         help.setActive false
 
+    $("body").contextmenu ->
+
+        help.setActive false
+
     $("body").keypress (event) ->
 
         # Ctrl + Enter
