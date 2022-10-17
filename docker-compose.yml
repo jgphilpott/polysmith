@@ -14,7 +14,7 @@ services:
      - database
 
   jupyter:
-    container_name: notebook
+    container_name: jupyter
     image: jupyter/minimal-notebook:latest
     restart: always
     ports:
