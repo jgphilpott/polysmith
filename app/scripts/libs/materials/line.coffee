@@ -14,7 +14,7 @@ lineMaterial = (type = "basic", color = blackThree, linewidth = 1, dashed = fals
 
         when "thick"
 
-            material = new LineMaterial color: color, linewidth: linewidth, dashed: dashed, vertexColors: vertexColors, alphaToCoverage: alphaToCoverage; break
+            material = new LineThickMaterial color: color, linewidth: linewidth, dashed: dashed, vertexColors: vertexColors, alphaToCoverage: alphaToCoverage; break
 
     if material
 

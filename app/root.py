@@ -67,9 +67,9 @@ if not exists(libs_dir):
     urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/utils/BufferGeometryUtils.js", js_libs_dir + "/BufferGeometryUtils.js")
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/77709de890b806426089de1ff4e78758/raw/ee6c712af2e73bd8db799506d7863c45c493e744/LineSegmentsGeometry.js", js_libs_dir + "/LineSegmentsGeometry.js")
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/ec71d7abcf504f85e01ffe9e297a682c/raw/28bde3afab2cb8df3a46d84e689774b243a6c8c2/LineGeometry.js", js_libs_dir + "/LineGeometry.js")
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/9e1cf7758b8d7cf02537bb15aacdba6a/raw/58b8b125dce8ff6bc1000b810ee46de13898fb71/LineMaterial.js", js_libs_dir + "/LineMaterial.js")
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/605923031deec863802ca6f61ca9e688/raw/8838a8254859dd90f4d40b4d2922895251a70c15/LineSegments.js", js_libs_dir + "/LineSegments.js")
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/ec6e0b40dbdd02c9d4cfae0dd2166c5e/raw/a40e8c52d8166a311d208a24105bd9c53b65bcd8/LineMesh.js", js_libs_dir + "/LineMesh.js")
+    urlretrieve("https://gist.githubusercontent.com/jgphilpott/9e1cf7758b8d7cf02537bb15aacdba6a/raw/d28c4c67d30e06cabdd0574eb6dcf0a0a717499b/LineMaterial.js", js_libs_dir + "/LineMaterial.js")
+    urlretrieve("https://gist.githubusercontent.com/jgphilpott/605923031deec863802ca6f61ca9e688/raw/691d91ef4c854d8d2d278c7f60ccf730e06b11ed/LineSegments.js", js_libs_dir + "/LineSegments.js")
+    urlretrieve("https://gist.githubusercontent.com/jgphilpott/ec6e0b40dbdd02c9d4cfae0dd2166c5e/raw/06e67919d42984ab995813a559ede0182fdd7cc1/LineMesh.js", js_libs_dir + "/LineMesh.js")
 
     urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/postprocessing/EffectComposer.js", js_libs_dir + "/EffectComposer.js")
     urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/postprocessing/OutlinePass.js", js_libs_dir + "/OutlinePass.js")
