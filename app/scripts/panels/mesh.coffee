@@ -510,7 +510,7 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
             color = blackThree
 
         mesh.material.dispose()
-        mesh.material = meshMaterial material, color
+        mesh.material = new MeshMaterial material, color
         mesh.material.wireframe = wireframe
         mesh.material.opacity = opacity
         mesh.material.style = value

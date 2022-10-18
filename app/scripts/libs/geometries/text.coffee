@@ -1,8 +1,8 @@
 # Link: https://threejs.org/docs/#examples/en/geometries/TextGeometry
 
-newText = (text = "Text", size = 12, height = 3, bevel = false, font = "ubuntu", material = "normal", color = blackThree, center = true, x = 0, y = 0, z = 0, rotateX = 0, rotateY = 0, rotateZ = 180) ->
+newText = (text = "Text", size = 12, height = 3, bevel = false, font = "ubuntu", type = "normal", color = blackThree, center = true, x = 0, y = 0, z = 0, rotateX = 0, rotateY = 0, rotateZ = 180) ->
 
-    textGeometry = new THREE.TextBufferGeometry text,
+    params =
 
         font: font
 
@@ -16,11 +16,14 @@ newText = (text = "Text", size = 12, height = 3, bevel = false, font = "ubuntu",
         bevelOffset: 0
         bevelSegments: 3
 
+    geometry = new THREE.TextBufferGeometry text, params
+    material = new MeshMaterial type, color
+
     if center
 
-        textGeometry.center()
+        geometry.center()
 
-    textMesh = new THREE.Mesh textGeometry, meshMaterial material, color
+    textMesh = new THREE.Mesh geometry, material
 
     textMesh.rotateX deg$rad rotateX
     textMesh.rotateY deg$rad rotateY
@@ -33,10 +36,10 @@ newText = (text = "Text", size = 12, height = 3, bevel = false, font = "ubuntu",
 
     return textMesh
 
-addText = (text = "Text", size = 12, height = 3, bevel = false, font = "ubuntu", material = "normal", color = blackThree, center = true, x = 0, y = 0, z = 0, rotateX = 0, rotateY = 0, rotateZ = 180) ->
+addText = (text = "Text", size = 12, height = 3, bevel = false, font = "ubuntu", type = "normal", color = blackThree, center = true, x = 0, y = 0, z = 0, rotateX = 0, rotateY = 0, rotateZ = 180) ->
 
     loader = new THREE.FontLoader()
 
     loader.load "./app/fonts/JSON/" + font + ".json", (font) ->
 
-        addMesh newText text, size, height, bevel, font, material, color, center, x, y, z, rotateX, rotateY, rotateZ
+        addMesh newText text, size, height, bevel, font, type, color, center, x, y, z, rotateX, rotateY, rotateZ

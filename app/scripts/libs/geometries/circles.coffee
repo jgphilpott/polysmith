@@ -1,9 +1,11 @@
 # Link: https://threejs.org/docs/#api/en/geometries/CircleGeometry
 
-newCircle = (radius = 10, radialSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
+newCircle = (radius = 10, radialSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
     geometry = new THREE.CircleGeometry radius, radialSegments
-    circle = new THREE.Mesh geometry, meshMaterial material, color
+    material = new MeshMaterial type, color
+
+    circle = new THREE.Mesh geometry, material
 
     circle.position.set position[0], position[1], position[2]
 
@@ -12,6 +14,6 @@ newCircle = (radius = 10, radialSegments = 42, position = [0, 0, 0], material = 
 
     return circle
 
-addCircle = (radius = 10, radialSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
+addCircle = (radius = 10, radialSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
-    return addMesh newCircle radius, radialSegments, position, material, color
+    return addMesh newCircle radius, radialSegments, position, type, color

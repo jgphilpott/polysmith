@@ -1,4 +1,4 @@
-newQuadrilateral = (v1 = [0, 5, 5], v2 = [0, 5, -5], v3 = [0, -5, -5], v4 = [0, -5, 5], material = "normal", color = blackThree) ->
+newQuadrilateral = (v1 = [0, 5, 5], v2 = [0, 5, -5], v3 = [0, -5, -5], v4 = [0, -5, 5], type = "normal", color = blackThree) ->
 
     geometry = new THREE.Geometry()
 
@@ -10,13 +10,16 @@ newQuadrilateral = (v1 = [0, 5, 5], v2 = [0, 5, -5], v3 = [0, -5, -5], v4 = [0, 
     geometry.faces.push new THREE.Face3 0, 1, 2
     geometry.faces.push new THREE.Face3 2, 3, 0
 
-    quadrilateral = new THREE.Mesh new THREE.BufferGeometry().fromGeometry(geometry), meshMaterial(material, color)
+    geometry = new THREE.BufferGeometry().fromGeometry geometry
+    material = new MeshMaterial type, color
+
+    quadrilateral = new THREE.Mesh geometry, material
 
     quadrilateral.class = "quadrilateral"
     quadrilateral.name = "Quadrilateral"
 
     return quadrilateral
 
-addQuadrilateral = (v1 = [0, 5, 5], v2 = [0, 5, -5], v3 = [0, -5, -5], v4 = [0, -5, 5], material = "normal", color = blackThree) ->
+addQuadrilateral = (v1 = [0, 5, 5], v2 = [0, 5, -5], v3 = [0, -5, -5], v4 = [0, -5, 5], type = "normal", color = blackThree) ->
 
-    return addMesh newQuadrilateral v1, v2, v3, v4, material, color
+    return addMesh newQuadrilateral v1, v2, v3, v4, type, color

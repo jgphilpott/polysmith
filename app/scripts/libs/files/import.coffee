@@ -2,7 +2,7 @@ importFile = (type, path, properties = {}) ->
 
     mesh = null
     loader = null
-    material = meshMaterial()
+    material = new MeshMaterial "normal"
 
     switch lower type
 

@@ -1,9 +1,11 @@
 # Link: https://threejs.org/docs/#api/en/geometries/SphereGeometry
 
-newSphere = (radius = 5, widthSegments = 42, heightSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
+newSphere = (radius = 5, widthSegments = 42, heightSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
     geometry = new THREE.SphereGeometry radius, widthSegments, heightSegments
-    sphere = new THREE.Mesh geometry, meshMaterial material, color
+    material = new MeshMaterial type, color
+
+    sphere = new THREE.Mesh geometry, material
 
     sphere.position.set position[0], position[1], position[2]
 
@@ -12,6 +14,6 @@ newSphere = (radius = 5, widthSegments = 42, heightSegments = 42, position = [0,
 
     return sphere
 
-addSphere = (radius = 5, widthSegments = 42, heightSegments = 42, position = [0, 0, 0], material = "normal", color = blackThree) ->
+addSphere = (radius = 5, widthSegments = 42, heightSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
-    return addMesh newSphere radius, widthSegments, heightSegments, position, material, color
+    return addMesh newSphere radius, widthSegments, heightSegments, position, type, color

@@ -1,4 +1,4 @@
-newTriangle = (v1 = [0, 0, 10 * Math.sqrt(3) / 4], v2 = [0, 5, -10 * Math.sqrt(3) / 4], v3 = [0, -5, -10 * Math.sqrt(3) / 4], material = "normal", color = blackThree) ->
+newTriangle = (v1 = [0, 0, 10 * Math.sqrt(3) / 4], v2 = [0, 5, -10 * Math.sqrt(3) / 4], v3 = [0, -5, -10 * Math.sqrt(3) / 4], type = "normal", color = blackThree) ->
 
     geometry = new THREE.Geometry()
 
@@ -8,13 +8,16 @@ newTriangle = (v1 = [0, 0, 10 * Math.sqrt(3) / 4], v2 = [0, 5, -10 * Math.sqrt(3
 
     geometry.faces.push new THREE.Face3 0, 1, 2
 
-    triangle = new THREE.Mesh new THREE.BufferGeometry().fromGeometry(geometry), meshMaterial(material, color)
+    geometry = new THREE.BufferGeometry().fromGeometry geometry
+    material = new MeshMaterial type, color
+
+    triangle = new THREE.Mesh geometry, material
 
     triangle.class = "triangle"
     triangle.name = "Triangle"
 
     return triangle
 
-addTriangle = (v1 = [0, 0, 10 * Math.sqrt(3) / 4], v2 = [0, 5, -10 * Math.sqrt(3) / 4], v3 = [0, -5, -10 * Math.sqrt(3) / 4], material = "normal", color = blackThree) ->
+addTriangle = (v1 = [0, 0, 10 * Math.sqrt(3) / 4], v2 = [0, 5, -10 * Math.sqrt(3) / 4], v3 = [0, -5, -10 * Math.sqrt(3) / 4], type = "normal", color = blackThree) ->
 
-    return addMesh newTriangle v1, v2, v3, material, color
+    return addMesh newTriangle v1, v2, v3, type, color
