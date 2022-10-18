@@ -8,15 +8,18 @@ line2Geometry = (vertices = [[10, 10, 10], [-10, -10, -10]]) ->
 
     return new LineGeometry().setPositions positions
 
-newLine2 = (vertices = [[10, 10, 10], [-10, -10, -10]], material = "thick", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2) ->
+newLine2 = (vertices = [[10, 10, 10], [-10, -10, -10]], type = "thick", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2) ->
 
-    line = new LineMesh(line2Geometry(vertices), lineMaterial(material, color, linewidth, dashed, dashSize, gapSize)).computeLineDistances()
+    geometry = line2Geometry vertices
+    material = new LineMaterial type, color, linewidth, dashed, dashSize, gapSize
+
+    line = new LineMesh(geometry, material).computeLineDistances()
 
     line.class = "line2"
     line.name = "Thick Line"
 
     return line
 
-addLine2 = (vertices = [[10, 10, 10], [-10, -10, -10]], material = "thick", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2) ->
+addLine2 = (vertices = [[10, 10, 10], [-10, -10, -10]], type = "thick", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2) ->
 
-    return addMesh newLine2 vertices, material, color, linewidth, dashed, dashSize, gapSize
+    return addMesh newLine2 vertices, type, color, linewidth, dashed, dashSize, gapSize

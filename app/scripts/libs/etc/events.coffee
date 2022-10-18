@@ -272,6 +272,9 @@ makeDragable = (element, origEvent = null) ->
 
                     for distanceLine in tooltips.distanceLines
 
+                        distanceLine.geometry.dispose()
+                        distanceLine.material.dispose()
+
                         scene.remove distanceLine
 
                     xColor = if settings.tooltips.measurements then redThree else blackThree
@@ -342,6 +345,9 @@ makeDragable = (element, origEvent = null) ->
                 if settings.tooltips.guidelines
 
                     for distanceLine in tooltips.distanceLines
+
+                        distanceLine.geometry.dispose()
+                        distanceLine.material.dispose()
 
                         scene.remove distanceLine
 

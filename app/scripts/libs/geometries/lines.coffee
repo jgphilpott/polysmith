@@ -10,15 +10,18 @@ lineGeometry = (vertices = [[10, 10, 10], [-10, -10, -10]]) ->
 
     return geometry
 
-newLine = (vertices = [[10, 10, 10], [-10, -10, -10]], material = "basic", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2) ->
+newLine = (vertices = [[10, 10, 10], [-10, -10, -10]], type = "basic", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2) ->
 
-    line = new THREE.Line(lineGeometry(vertices), lineMaterial(material, color, linewidth, dashed, dashSize, gapSize)).computeLineDistances()
+    geometry = lineGeometry vertices
+    material = new LineMaterial type, color, linewidth, dashed, dashSize, gapSize
+
+    line = new THREE.Line(geometry, material).computeLineDistances()
 
     line.class = "line"
     line.name = "Line"
 
     return line
 
-addLine = (vertices = [[10, 10, 10], [-10, -10, -10]], material = "basic", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2) ->
+addLine = (vertices = [[10, 10, 10], [-10, -10, -10]], type = "basic", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2) ->
 
-    return addMesh newLine vertices, material, color, linewidth, dashed, dashSize, gapSize
+    return addMesh newLine vertices, type, color, linewidth, dashed, dashSize, gapSize
