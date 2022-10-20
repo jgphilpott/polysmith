@@ -64,11 +64,12 @@
         <script src="{{ url_for('static', filename='scripts/libs/lights/spot/light.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/libs/lights/light.js') }}"></script>
 
-        <script src="{{ url_for('static', filename='scripts/libs/cameras/array.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/libs/cameras/cube.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/libs/cameras/orthographic.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/libs/cameras/perspective.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/libs/cameras/stereo.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/cameras/array/camera.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/cameras/cube/camera.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/cameras/orthographic/camera.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/cameras/perspective/camera.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/cameras/stereo/camera.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/libs/cameras/camera.js') }}"></script>
 
         <script src="{{ url_for('static', filename='scripts/libs/controls/drag.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/libs/controls/fly.js') }}"></script>
@@ -221,7 +222,7 @@
 
             new Light("ambient"); new Light("point")
 
-            data.camera = camera = addPerspectiveCamera()
+            data.camera = camera = new Camera("perspective").add()
 
             data.controls = controls = addDragControls()
             data.controls = controls = addFlyControls()
