@@ -400,6 +400,18 @@ addMesh = (mesh = null, properties = {}) ->
 
                 break
 
+            when "text"
+
+                mesh = addText()
+
+                return
+
+            when "image"
+
+                mesh = importFile "svg", "app/imgs/svg/image.svg"
+
+                return
+
     if mesh
 
         mesh.name = if "name" in properties then properties.name else if mesh.name then mesh.name else "Unnamed"

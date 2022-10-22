@@ -58,10 +58,10 @@ importFile = (type, path, properties = {}) ->
 
         if type == "svg"
 
-            $.get path, (svg) ->
+            loader.load path, (svg) ->
 
                 shapes = []
-                paths = loader.parse(svg).paths
+                paths = svg.paths
 
                 for path in paths
 
@@ -69,6 +69,8 @@ importFile = (type, path, properties = {}) ->
 
                 geometry = new THREE.ExtrudeBufferGeometry shapes, properties
                 mesh = new THREE.Mesh geometry, material
+
+                addMesh mesh
 
         else
 

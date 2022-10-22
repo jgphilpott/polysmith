@@ -8,15 +8,23 @@ localMeshes = (action, mesh) ->
 
             loader = new THREE.ObjectLoader()
 
+            localWrite "meshes", []
+
             for mesh in meshes
 
-                addMesh loader.parse(mesh),
+                if mesh.metadata.class == "text"
 
-                    name: mesh.metadata.name
-                    lock: mesh.metadata.lock
-                    class: mesh.metadata.class
-                    style: mesh.metadata.style
-                    wireframe: mesh.metadata.wireframe
+                    addText()
+
+                else
+
+                    addMesh loader.parse(mesh),
+
+                        name: mesh.metadata.name
+                        lock: mesh.metadata.lock
+                        class: mesh.metadata.class
+                        style: mesh.metadata.style
+                        wireframe: mesh.metadata.wireframe
 
     else
 
