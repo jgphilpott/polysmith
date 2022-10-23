@@ -67,6 +67,8 @@ exportFile = (type) ->
 
     addAxes()
 
+    return file
+
 exportFiles = (type) ->
 
     null
