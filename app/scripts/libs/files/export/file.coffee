@@ -1,74 +1,68 @@
-exportFile = (type) ->
+class Exporter
 
-    removeAxes()
+    constructor : () ->
 
-    file = null
-    exporter = null
-    extension = null
+        @exporter = null
+        @file = null
 
-    switch lower type
+        return
 
-        when "collada"
+    exportFile : (type = "") ->
 
-            exporter = new THREE.ColladaExporter()
-            extension = "dae"
+        switch lower type.trim()
 
-            break
+            when "collada"
 
-        when "draco"
+                this.exporter = new ColladaExporter(); break
 
-            exporter = new THREE.DRACOExporter()
-            extension = "drc"
+            when "draco"
 
-            break
+                this.exporter = new DRACOExporter(); break
 
-        when "gltf"
+            when "gltf"
 
-            exporter = new THREE.GLTFExporter()
-            extension = "gltf"
+                this.exporter = new GLTFExporter(); break
 
-            break
+            when "mmd"
 
-        when "mmd"
+                this.exporter = new MMDExporter(); break
 
-            exporter = new THREE.MMDExporter()
-            extension = "mmd"
+            when "obj"
 
-            break
+                this.exporter = new OBJExporter(); break
 
-        when "obj"
+            when "ply"
 
-            exporter = new THREE.OBJExporter()
-            extension = "obj"
+                this.exporter = new PLYExporter(); break
 
-            break
+            when "stl"
 
-        when "ply"
+                this.exporter = new STLExporter(); break
 
-            exporter = new THREE.PLYExporter()
-            extension = "ply"
+        if this.exporter
 
-            break
+            removeAxes()
 
-        when "stl"
+            this.file = new Blob [this.exporter.parse scene], type: "text/plain"
 
-            exporter = new THREE.STLExporter()
-            extension = "stl"
+            if this.file
 
-            break
+                saveAs this.file, lower settings.ui.title + "." + this.exporter.extension
 
-    if exporter
+            addAxes()
 
-        file = new Blob [exporter.parse scene], type: "text/plain"
+        this.exporter = null
+        this.file = null
 
-    if file and extension
+        return
 
-        saveAs file, settings.ui.title.toLowerCase() + "." + extension
+    exportFiles : (types = []) ->
 
-    addAxes()
+        for type in types
 
-    return file
+            this.exportFile type
 
-exportFiles = (type) ->
+        this.exporter = null
+        this.file = null
 
-    null
+        return
