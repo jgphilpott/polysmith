@@ -45,27 +45,15 @@
         <script src="{{ url_for('static', filename='libs/js/importers/STLLoader.js') }}"></script>
         <script src="{{ url_for('static', filename='libs/js/importers/SVGLoader.js') }}"></script>
 
-        <script src="{{ url_for('static', filename='scripts/libs/files/export/collada/file.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/libs/files/export/draco/file.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/libs/files/export/gltf/file.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/libs/files/export/mmd/file.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/libs/files/export/obj/file.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/libs/files/export/ply/file.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/libs/files/export/stl/file.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/libs/files/export/file.js') }}"></script>
 
-        <script src="{{ url_for('static', filename='scripts/libs/files/import/3mf/file.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/libs/files/import/amf/file.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/libs/files/import/collada/file.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/libs/files/import/draco/file.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/libs/files/import/fbx/file.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/libs/files/import/gltf/file.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/libs/files/import/mmd/file.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/libs/files/import/obj/file.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/libs/files/import/ply/file.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/libs/files/import/stl/file.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/libs/files/import/svg/file.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/libs/files/import/vrml/file.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/libs/files/import/file.js') }}"></script>
 
         <script src="{{ url_for('static', filename='scripts/libs/files/local/file.js') }}"></script>
@@ -217,8 +205,12 @@
             let tube = addTube
 
             data.help = help = new Help
+
             data.tooltips = tooltips = new Tooltips
             data.settings = settings = getSettings()
+
+            data.exporter = exporter = new Exporter()
+            data.importer = importer = new Importer()
 
             console.log("Welcome to " + data.title + "!")
 

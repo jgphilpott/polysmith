@@ -36,7 +36,7 @@ addEvents = () ->
             event.preventDefault()
             event.stopPropagation()
 
-            exportFile "stl"
+            exporter.exportFile "stl"
 
         # Shift + Enter
         else if event.shiftKey and event.keyCode == 13
@@ -44,7 +44,7 @@ addEvents = () ->
             event.preventDefault()
             event.stopPropagation()
 
-            exportFile "obj"
+            exporter.exportFile "obj"
 
     $("#navbar #title span").on("keypress keydown keyup", (event) -> event.stopPropagation()).blur (event) ->
 

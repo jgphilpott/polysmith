@@ -1,112 +1,93 @@
-importFile = (type, path, properties = {}) ->
+# Link: https://github.com/mrdoob/three.js/tree/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/loaders
 
-    mesh = null
-    loader = null
-    material = new MeshMaterial "normal"
+class Importer
 
-    switch lower type
+    constructor : () ->
 
-        when "3mf"
+        @importer = null
 
-            loader = new THREE.ThreeMFLoader(); break
+    importFile : (type = "", path = "") ->
 
-        when "amf"
+        type = lower type.trim()
 
-            loader = new THREE.AMFLoader(); break
+        switch type
 
-        when "collada"
+            when "3mf"
 
-            loader = new THREE.ColladaLoader(); break
+                this.importer = new THREEMFLoader(); break
 
-        when "draco"
+            when "amf"
 
-            loader = new THREE.DRACOLoader(); break
+                this.importer = new AMFLoader(); break
 
-        when "fbx"
+            when "collada"
 
-            loader = new THREE.FBXLoader(); break
+                this.importer = new ColladaLoader(); break
 
-        when "gltf"
+            when "draco"
 
-            loader = new THREE.GLTFLoader(); break
+                this.importer = new DRACOLoader(); break
 
-        when "mmd"
+            when "fbx"
 
-            loader = new THREE.MMDLoader(); break
+                this.importer = new FBXLoader(); break
 
-        when "obj"
+            when "gltf"
 
-            loader = new THREE.OBJLoader(); break
+                this.importer = new GLTFLoader(); break
 
-        when "ply"
+            when "mmd"
 
-            loader = new THREE.PLYLoader(); break
+                this.importer = new MMDLoader(); break
 
-        when "stl"
+            when "obj"
 
-            loader = new THREE.STLLoader(); break
+                this.importer = new OBJLoader(); break
 
-        when "svg"
+            when "ply"
 
-            loader = new THREE.SVGLoader(); break
+                this.importer = new PLYLoader(); break
 
-        when "vrml"
+            when "stl"
 
-            loader = new THREE.VRMLLoader(); break
+                this.importer = new STLLoader(); break
 
-    if loader
+            when "svg"
 
-        if type == "svg"
+                this.importer = new SVGLoader(); break
 
-            loader.load path, (svg) ->
+            when "vrml"
 
-                shapes = []
-                paths = svg.paths
+                this.importer = new VRMLLoader(); break
 
-                for path in paths
+        if this.importer
 
-                    Array.prototype.push.apply shapes, path.toShapes()
+            loader = this.importer
 
-                geometry = new THREE.ExtrudeBufferGeometry shapes, properties
-                mesh = new THREE.Mesh geometry, material
+            loader.load path, (file) ->
 
-                addMesh mesh
+                meshes = loader.import file
 
-        else
+                for mesh in meshes
 
-            loader.load path, (object) ->
+                    addMesh mesh
 
-                objects = []
+        this.importer = null
 
-                if type == "obj"
+    importFiles : (input) ->
 
-                    object.traverse (property) ->
+        if input.files
 
-                        if property instanceof THREE.Mesh
+            importer = this
 
-                            property.material = material
-                            objects.push property
+            for file in input.files
 
-                else
+                reader = new FileReader()
 
-                    objects.push new THREE.Mesh object, material
+                reader.readAsDataURL file
 
-                for object in objects
+                reader.extension = file.name.match(/\.[0-9a-z]+$/i)[0].substring 1
 
-                    addMesh object
+                reader.onload = (file) -> importer.importFile file.target.extension, file.target.result
 
-    return mesh
-
-importFiles = (input) ->
-
-    if input.files and input.files.length
-
-        for file in input.files
-
-            reader = new FileReader()
-
-            reader.readAsDataURL file
-
-            reader.extension = file.name.match(/\.[0-9a-z]+$/i)[0].substring(1)
-
-            reader.onload = (file) -> importFile file.target.extension, file.target.result
+        this.importer = null

@@ -408,7 +408,7 @@ addMesh = (mesh = null, properties = {}) ->
 
             when "image"
 
-                mesh = importFile "svg", "app/imgs/svg/image.svg"
+                mesh = importer.importFile "svg", "app/imgs/svg/image.svg"
 
                 return
 

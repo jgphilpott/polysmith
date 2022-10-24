@@ -49,10 +49,10 @@ addMenuPanel = ->
 
         subPanel = panel.find "#export-import-panel.sub-panel"
 
-        subPanel.find("#stl, #obj").click -> exportFile this.id
+        subPanel.find("#stl, #obj").click -> exporter.exportFile this.id
         subPanel.find("#stl, #obj").on "mousedown mouseup", (event) -> event.stopPropagation()
 
-        subPanel.find("#file").on "change", -> importFiles this
+        subPanel.find("#file").on "change", -> importer.importFiles this
         subPanel.find("#import").click -> subPanel.find("#file").trigger "click"
         subPanel.find("#import").on "mousedown mouseup", (event) -> event.stopPropagation()
 

@@ -1,3 +1,5 @@
+# Link: https://github.com/mrdoob/three.js/tree/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/exporters
+
 class Exporter
 
     constructor : () ->
@@ -5,11 +7,11 @@ class Exporter
         @exporter = null
         @file = null
 
-        return
-
     exportFile : (type = "") ->
 
-        switch lower type.trim()
+        type = lower type.trim()
+
+        switch type
 
             when "collada"
 
@@ -54,8 +56,6 @@ class Exporter
         this.exporter = null
         this.file = null
 
-        return
-
     exportFiles : (types = []) ->
 
         for type in types
@@ -64,5 +64,3 @@ class Exporter
 
         this.exporter = null
         this.file = null
-
-        return
