@@ -436,7 +436,7 @@ addMesh = (mesh = null, properties = {}) ->
         updateMetrics mesh
         addMeshEvents mesh
 
-        localMeshes "add", mesh
+        localStore.addMeshes mesh
         updateMeshesPanel "add", mesh
 
         scene.add mesh
@@ -453,7 +453,7 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
 
         mesh.name = value
 
-        if save then localMeshes "update", mesh
+        if save then localStore.updateMeshes mesh
 
         meshPanelName = $ "#mesh." + mesh.uuid + " #name span"
         meshesPanelName = $ "#meshes.table tr#" + mesh.uuid + " .name span"
@@ -495,7 +495,7 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
                     events.operation.mesh.geometry = morphed.geometry
 
                     updateMetrics events.operation.mesh
-                    localMeshes "update", events.operation.mesh
+                    localStore.updateMeshes events.operation.mesh
 
                     $("#mesh." + events.operation.mesh.uuid + " #properties.controls").remove()
 
@@ -527,7 +527,7 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
         mesh.material.opacity = opacity
         mesh.material.style = value
 
-        if save then localMeshes "update", mesh
+        if save then localStore.updateMeshes mesh
 
     else if type == "visibility" and mesh.lock != "locked"
 
@@ -554,7 +554,7 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
                 slider.slider "value", 100
                 sliderFill slider
 
-        if save then localMeshes "update", mesh
+        if save then localStore.updateMeshes mesh
 
     else if type == "lock"
 
@@ -619,7 +619,7 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
             meshesTableRow.find(".lock").attr "src", "/app/imgs/panels/lock/" + mesh.lock + ".png"
             meshesTableRow.find(".trash").addClass "disabled"
 
-        localMeshes "update", mesh
+        localStore.updateMeshes mesh
 
     else if (type == "properties" or type == "position" or type == "rotation" or type == "scale") and mesh.lock != "locked"
 
@@ -710,7 +710,7 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
 
                 break
 
-        if save == true then localMeshes "update", mesh
+        if save == true then localStore.updateMeshes mesh
 
 removeMesh = (mesh) ->
 
@@ -731,7 +731,7 @@ removeMesh = (mesh) ->
         if events.operation.mesh == mesh then clearMeshOperation()
 
         updateMeshesPanel "remove", mesh
-        localMeshes "remove", mesh
+        localStore.removeMeshes mesh
 
         mesh.geometry.dispose()
         mesh.material.dispose()

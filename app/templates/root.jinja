@@ -212,6 +212,9 @@
             data.exporter = exporter = new Exporter()
             data.importer = importer = new Importer()
 
+            data.localStore = localStore = new LocalStorage()
+            data.serverStore = serverStore = new ServerStorage()
+
             console.log("Welcome to " + data.title + "!")
 
             $("#navbar #title span").text(settings.ui.title)

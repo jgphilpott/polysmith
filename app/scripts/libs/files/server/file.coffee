@@ -1,0 +1,5 @@
+class ServerStorage
+
+    constructor : () ->
+
+        return

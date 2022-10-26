@@ -251,3 +251,30 @@ getVolume = (mesh) ->
     mesh.volume = volume
 
     return volume
+
+serializeMesh = (mesh) ->
+
+    mesh.updateMatrix()
+    meshJSON = mesh.toJSON()
+
+    meshJSON.metadata.name = mesh.name
+    meshJSON.metadata.lock = mesh.lock
+    meshJSON.metadata.class = mesh.class
+    meshJSON.metadata.style = mesh.material.style
+    meshJSON.metadata.wireframe = mesh.material.wireframe
+
+    return meshJSON
+
+deserializeMesh = (meshJSON) ->
+
+    loader = new THREE.ObjectLoader()
+
+    mesh = loader.parse meshJSON
+
+    mesh.name = meshJSON.metadata.name
+    mesh.lock = meshJSON.metadata.lock
+    mesh.class = meshJSON.metadata.class
+    mesh.material.style = meshJSON.metadata.style
+    mesh.material.wireframe = meshJSON.metadata.wireframe
+
+    return mesh

@@ -357,7 +357,7 @@ makeDragable = (element, origEvent = null) ->
 
                 $("#canvas").css "cursor", "grab"
 
-                localMeshes "update", element
+                localStore.updateMeshes element
 
                 tooltips.distanceLines = []
 
@@ -386,10 +386,12 @@ makeDragable = (element, origEvent = null) ->
 
                     mesh = addMesh null, {name: element.attr("title"), class: element.attr("id"), position: {x: x, y: y, z: z}}
 
-                    composer.outlinePass.visibleEdgeColor.set blackThree
-                    composer.outlinePass.selectedObjects = [mesh]
+                    if element.attr("id") != "text" and element.attr("id") != "image"
 
-                    $("#canvas").css "cursor", "grab"
+                        composer.outlinePass.visibleEdgeColor.set blackThree
+                        composer.outlinePass.selectedObjects = [mesh]
+
+                        $("#canvas").css "cursor", "grab"
 
                 ghost.remove()
 

@@ -1,64 +1,108 @@
-localMeshes = (action, mesh) ->
+class LocalStorage
 
-    meshes = localRead "meshes"
+    constructor : () ->
 
-    if action == "load"
+        return
 
-        if meshes instanceof Array and meshes.length
+    keys : () ->
 
-            loader = new THREE.ObjectLoader()
+        return localKeys()
 
-            localWrite "meshes", []
+    write : (key, value) ->
+
+        result = localWrite key, value
+
+        if not result
+
+            console.warn "You have reached the maximum local storage allowance, some of your changes may not be saved. To access more storage space please signup and/or login."
+
+            return false
+
+        else
+
+            return value
+
+    read : (key) ->
+
+        result = localRead key
+
+        if not result
+
+            console.warn "There was an error attempting to read item in local storage with key: " + key
+
+            return false
+
+        else
+
+            return result
+
+    delete : (key) ->
+
+        result = localDelete key
+
+        if not result
+
+            console.warn "There was an error attempting to delete item in local storage with key: " + key
+
+            return false
+
+        else
+
+            return key
+
+    dump : () ->
+
+        return localDump()
+
+    addMeshes : (mesh) ->
+
+        mesh = serializeMesh mesh
+        meshes = this.read "meshes"
+
+        if not meshes.find (localMesh) -> localMesh.object.uuid == mesh.object.uuid
+
+            meshes.push mesh
+
+            this.write "meshes", meshes
+
+    updateMeshes : (mesh) ->
+
+        mesh = serializeMesh mesh
+        meshes = this.read "meshes"
+
+        meshIndex = meshes.findIndex (localMesh) -> localMesh.object.uuid == mesh.object.uuid
+
+        if meshIndex >= 0
+
+            meshes[meshIndex] = mesh
+
+            this.write "meshes", meshes
+
+    loadMeshes : () ->
+
+        meshes = this.read "meshes"
+
+        if meshes.length
+
+            this.write "meshes", []
 
             for mesh in meshes
 
-                if mesh.metadata.class == "text"
+                mesh = deserializeMesh mesh
+
+                if mesh.class == "text"
 
                     addText()
 
                 else
 
-                    addMesh loader.parse(mesh),
+                    addMesh mesh
 
-                        name: mesh.metadata.name
-                        lock: mesh.metadata.lock
-                        class: mesh.metadata.class
-                        style: mesh.metadata.style
-                        wireframe: mesh.metadata.wireframe
+    removeMeshes : (mesh) ->
 
-    else
+        mesh = serializeMesh mesh
+        meshes = this.read "meshes"
 
-        mesh.updateMatrix()
+        meshes.filterInPlace (localMesh) -> localMesh.object.uuid != mesh.object.uuid
 
-        meshIndex = null
-        meshJSON = mesh.toJSON()
-
-        meshJSON.metadata.name = mesh.name
-        meshJSON.metadata.lock = mesh.lock
-        meshJSON.metadata.class = mesh.class
-        meshJSON.metadata.style = mesh.material.style
-        meshJSON.metadata.wireframe = mesh.material.wireframe
-
-        if action == "add"
-
-            if meshes instanceof Array and not meshes.find (localMesh) -> localMesh.object.uuid == mesh.uuid
-
-                meshes.push meshJSON
-
-            else
-
-                meshes = [meshJSON]
-
-        else if action == "update"
-
-            meshIndex = meshes.findIndex (localMesh) -> localMesh.object.uuid == mesh.uuid
-
-            meshes[meshIndex] = meshJSON
-
-        else if action == "remove"
-
-            meshes.filterInPlace (localMesh) -> localMesh.object.uuid != mesh.uuid
-
-        if not localWrite("meshes", meshes) or (action == "update" and meshIndex < 0)
-
-            console.warn "You have reached the maximum local storage allowance, some of your changes may not be saved. To access more storage space please signup and/or login."
+        this.write "meshes", meshes

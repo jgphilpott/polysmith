@@ -20,12 +20,24 @@ setup = () ->
 
     if typeof polygen == "function"
 
-        localDelete "meshes"
+        localStore.delete "meshes"
 
         polygen()
 
+    else if client
+
+        localStore.delete "meshes"
+
+        serverStore.loadMeshes()
+
     else
 
-        localMeshes "load"
+        if localRead "meshes"
+
+            localStore.loadMeshes()
+
+        else
+
+            localStore.write "meshes", meshes
 
     animate()
