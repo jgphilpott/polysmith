@@ -27,8 +27,8 @@ addShapesPanel = ->
 
     panel.append "<h4 id='special'>Special</h4>"
     panel.append "<img title='Torus' id='torus' class='shape' src='/app/imgs/icons/shapes/special/torus.png'>"
-    panel.append "<img title='Text' id='text' class='shape' src='/app/imgs/icons/shapes/special/text.png'>"
-    panel.append "<img title='Image' id='image' class='shape' src='/app/imgs/icons/shapes/special/image.png'>"
+    panel.append "<img title='Text' id='text' class='shape' src='/app/imgs/icons/shapes/special/text.svg'>"
+    panel.append "<img title='Image' id='image' class='shape' src='/app/imgs/icons/shapes/special/image.svg'>"
 
     panel.find("img.shape").toArray().forEach (shape) ->
 
