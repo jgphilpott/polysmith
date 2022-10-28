@@ -9,7 +9,7 @@ addFlyControls = () ->
 
             target = camera.target
             position = camera.position
-            flySpeed = settings.controls.flySpeed / 10
+            flySpeed = settings.getSetting("controls", "flySpeed") / 10
 
             deltaX = Math.abs position.x - target.x
             deltaZ = Math.abs position.z - target.z
@@ -180,6 +180,6 @@ addFlyControls = () ->
 
             if [37, 38, 39, 40].includes event.keyCode
 
-                updateSettings "camera", "position", camera.position
+                settings.setSetting "camera", "position", camera.position
 
-            updateSettings "camera", "target", camera.target
+            settings.setSetting "camera", "target", camera.target

@@ -49,9 +49,9 @@ addEvents = () ->
     $("#navbar #title span").on("keypress keydown keyup", (event) -> event.stopPropagation()).blur (event) ->
 
         text = $(this)[0].innerText.replace(/[^a-zA-Z0-9-_ ]/g, "").trim()
-        title = if text then text else data.title.toUpperCase()
+        title = if text then text else upper data.title
 
-        updateSettings "ui", "title", title
+        settings.setSetting "ui", "title", title
 
         $(this).text title
 
@@ -131,13 +131,13 @@ addPanelEvents = (panel) ->
 
         else
 
-            updateSettings "panels", id, false
+            settings.setSetting "panels", id, false
 
     ).on "mousedown mouseup", (event) -> event.stopPropagation()
 
     if id != "mesh"
 
-        if settings.panels[id] then panel.css "visibility", "visible" else panel.css "visibility", "hidden"
+        if settings.getSetting("panels", id) then panel.css("visibility", "visible") else panel.css("visibility", "hidden")
 
     panel.css "z-index", events.zIndex
 
@@ -149,7 +149,9 @@ addMeshEvents = (mesh) ->
 
     events.addEventListener mesh, "mouseover", (event) ->
 
-        if settings.ui.metabox then drawMetabox "draw", mesh, event.origDomEvent
+        if settings.getSetting "ui", "metabox"
+
+            drawMetabox "draw", mesh, event.origDomEvent
 
     events.addEventListener mesh, "mousemove", (event) ->
 
@@ -166,7 +168,9 @@ addMeshEvents = (mesh) ->
 
         composer.outlinePass.selectedObjects = [mesh]
 
-        if settings.ui.metabox then drawMetabox "update", mesh, event.origDomEvent
+        if settings.getSetting "ui", "metabox"
+
+            drawMetabox "update", mesh, event.origDomEvent
 
     events.addEventListener mesh, "mouseout", (event) ->
 
@@ -262,13 +266,17 @@ makeDragable = (element, origEvent = null) ->
                 $("#canvas").css "cursor", "grabbing"
 
                 panel = $ "#mesh." + element.uuid + ""
+
                 coordinates = d2$d3 eventX, eventY, element.position.z
+                guidelines = settings.getSetting "tooltips", "guidelines"
 
                 coordinates.x = if coordinates.x < min then min else if coordinates.x > max then max else coordinates.x
                 coordinates.y = if coordinates.y < min then min else if coordinates.y > max then max else coordinates.y
                 coordinates.z = if coordinates.z < min then min else if coordinates.z > max then max else coordinates.z
 
-                if settings.tooltips.guidelines
+                if guidelines
+
+                    measurements = settings.getSetting "tooltips", "measurements"
 
                     for distanceLine in tooltips.distanceLines
 
@@ -277,9 +285,9 @@ makeDragable = (element, origEvent = null) ->
 
                         scene.remove distanceLine
 
-                    xColor = if settings.tooltips.measurements then redThree else blackThree
-                    yColor = if settings.tooltips.measurements then greenThree else blackThree
-                    zColor = if settings.tooltips.measurements then blueThree else blackThree
+                    xColor = if measurements then redThree else blackThree
+                    yColor = if measurements then greenThree else blackThree
+                    zColor = if measurements then blueThree else blackThree
 
                     xDistanceLine = newLine [[0, coordinates.y, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed", xColor
                     yDistanceLine = newLine [[coordinates.x, 0, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed", yColor
@@ -288,9 +296,13 @@ makeDragable = (element, origEvent = null) ->
                     tooltips.distanceLines.push xDistanceLine, yDistanceLine, zDistanceLine
                     scene.add xDistanceLine, yDistanceLine, zDistanceLine
 
-                    if settings.tooltips.measurements
+                    if measurements
 
                         $(".measurement.tooltip").remove()
+
+                        unit = settings.getSetting "general", "unit"
+                        scale = settings.getSetting "general", "scale"
+                        language =settings.getSetting "general", "language"
 
                         xDistanceLineCenter = getCenterPoint xDistanceLine.geometry.vertices[0], xDistanceLine.geometry.vertices[1]
                         yDistanceLineCenter = getCenterPoint yDistanceLine.geometry.vertices[0], yDistanceLine.geometry.vertices[1]
@@ -304,7 +316,7 @@ makeDragable = (element, origEvent = null) ->
 
                         for measurement in measurements
 
-                            $("body").append "<div id='" + measurement.key + "' class='measurement tooltip'><p>" + format(measurement.value, "length", settings.general.unit[settings.general.scale], 2, 2, settings.general.language) + "</p></div>"
+                            $("body").append "<div id='" + measurement.key + "' class='measurement tooltip'><p>" + format(measurement.value, "length", unit[scale], 2, 2, language) + "</p></div>"
 
                         $("body").find("#x.measurement.tooltip").css("left", xScreenCoordinates.x).css("top", xScreenCoordinates.y)
                         $("body").find("#y.measurement.tooltip").css("left", yScreenCoordinates.x).css("top", yScreenCoordinates.y)
@@ -342,7 +354,7 @@ makeDragable = (element, origEvent = null) ->
 
             if element.lock != "locked"
 
-                if settings.tooltips.guidelines
+                if settings.getSetting "tooltips", "guidelines"
 
                     for distanceLine in tooltips.distanceLines
 
@@ -351,7 +363,7 @@ makeDragable = (element, origEvent = null) ->
 
                         scene.remove distanceLine
 
-                    if settings.tooltips.measurements
+                    if settings.getSetting "tooltips", "measurements"
 
                         $(".measurement.tooltip").remove()
 

@@ -76,9 +76,7 @@ sliderStop = (event, slider) ->
 
     if panel.attr("id") == "camera"
 
-        settings.controls[this.id + "Speed"] = value
-
-        updateSettings "controls", this.id + "Speed", value
+        settings.setSetting "controls", this.id + "Speed", value
 
     else if panel.attr("id") == "mesh"
 

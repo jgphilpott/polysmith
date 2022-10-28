@@ -49,7 +49,7 @@ class Exporter
 
             if this.file
 
-                saveAs this.file, lower settings.ui.title + "." + this.exporter.extension
+                saveAs this.file, lower settings.getSetting("ui", "title") + "." + this.exporter.extension
 
             addAxes()
 

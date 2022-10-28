@@ -9,6 +9,9 @@ addLightsPanel = ->
 
     if lights.length
 
+        unit = settings.getSetting "general", "unit"
+        scale = settings.getSetting "general", "scale"
+
         panel.append "<div id='list'></div>"
 
         list = panel.find "#list"
@@ -43,7 +46,7 @@ addLightsPanel = ->
 
                         <span id='position-x'>
                             <label id='x'>X</label>
-                            <div class='suffix """ + settings.general.unit[settings.general.scale] + """'>
+                            <div class='suffix """ + unit[scale] + """'>
                                 <input type=number step=1 min=""" + min + """ max=""" + max + """ value=""" + light.getX().toFixed(2) + """>
                             </div>
                             <button id='plus'>+</button>
@@ -52,7 +55,7 @@ addLightsPanel = ->
 
                         <span id='position-y'>
                             <label id='y'>Y</label>
-                            <div class='suffix """ + settings.general.unit[settings.general.scale] + """'>
+                            <div class='suffix """ + unit[scale] + """'>
                                 <input type=number step=1 min=""" + min + """ max=""" + max + """ value=""" + light.getY().toFixed(2) + """>
                             </div>
                             <button id='plus'>+</button>
@@ -61,7 +64,7 @@ addLightsPanel = ->
 
                         <span id='position-z'>
                             <label id='z'>Z</label>
-                            <div class='suffix """ + settings.general.unit[settings.general.scale] + """'>
+                            <div class='suffix """ + unit[scale] + """'>
                                 <input type=number step=1 min=""" + min + """ max=""" + max + """ value=""" + light.getZ().toFixed(2) + """>
                             </div>
                             <button id='plus'>+</button>

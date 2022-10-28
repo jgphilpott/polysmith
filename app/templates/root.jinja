@@ -159,7 +159,7 @@
 
             <img title="Menu" id="menu" src="{{ url_for('static', filename='imgs/theme/menu/white.png') }}">
 
-            <h1 id="title"><span contenteditable="true">{{ data.title|upper }}</span></h1>
+            <h1 id="title"><span contenteditable="true">{{ data.title | upper }}</span></h1>
 
         </div>
 
@@ -186,8 +186,18 @@
             data.lights = lights = []
             data.panels = panels = []
 
-            data.settings = settings = {}
             data.controls = controls = {}
+
+            data.serverStore = serverStore = new ServerStorage()
+            data.localStore = localStore = new LocalStorage()
+
+            data.importer = importer = new Importer()
+            data.exporter = exporter = new Exporter()
+
+            data.settings = settings = new Settings()
+            data.tooltips = tooltips = new Tooltips()
+
+            data.help = help = new Help()
 
             let box = addBox
             let circle = addCircle
@@ -205,25 +215,14 @@
             let triangle = addTriangle
             let tube = addTube
 
-            data.help = help = new Help
-
-            data.tooltips = tooltips = new Tooltips
-            data.settings = settings = getSettings()
-
-            data.exporter = exporter = new Exporter()
-            data.importer = importer = new Importer()
-
-            data.localStore = localStore = new LocalStorage()
-            data.serverStore = serverStore = new ServerStorage()
-
             console.log("Welcome to " + data.title + "!")
 
-            $("#navbar #title span").text(settings.ui.title)
+            $("#navbar #title span").text(settings.getSetting("ui", "title"))
 
-            $("#navbar").css("top", settings.ui.navbar ? 0 : - 50)
-            $("#forkme").css("display", settings.ui.forkme ? "" : "none")
-            $("#metabox").css("display", settings.ui.metabox ? "" : "none")
-            $("#help").css("display", settings.ui.help ? "" : "none")
+            $("#navbar").css("top", settings.getSetting("ui", "navbar") ? 0 : -50)
+            $("#forkme").css("display", settings.getSetting("ui", "forkme") ? "" : "none")
+            $("#metabox").css("display", settings.getSetting("ui", "metabox") ? "" : "none")
+            $("#help").css("display", settings.getSetting("ui", "help") ? "" : "none")
 
             var renderer, composer, canvas, scene, camera, events
 

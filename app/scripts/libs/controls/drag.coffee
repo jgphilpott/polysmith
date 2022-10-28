@@ -25,7 +25,7 @@ addDragControls = () ->
         target = camera.target
         position = camera.position
 
-        dragSpeed = settings.controls.dragSpeed / 500
+        dragSpeed = settings.getSetting("controls", "dragSpeed") / 500
 
         deltaX = Math.abs position.x - target.x
         deltaZ = Math.abs position.z - target.z
@@ -101,6 +101,6 @@ addDragControls = () ->
         document.onmouseup = null
         document.onmousemove = null
 
-        updateSettings "camera", "position", position
+        settings.setSetting "camera", "position", position
 
     $("#canvas").mousedown start

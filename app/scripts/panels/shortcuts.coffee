@@ -45,7 +45,7 @@ addShortcutsPanel = ->
 
         $(shape).contextmenu (event) -> contextMenu "shape", $(this), event
 
-        if settings.ui.shortcuts.includes shape.id
+        if settings.getSetting("ui", "shortcuts").includes shape.id
 
             $(shape).css "display", "block"
 
@@ -53,7 +53,7 @@ addShortcutsPanel = ->
 
         shapesVisible = if shapesPanel.css("visibility") == "visible" then true else false
 
-        updateSettings "panels", "shapes", !shapesVisible
+        settings.setSetting "panels", "shapes", !shapesVisible
 
     ).mousedown((event) -> event.stopPropagation()).mouseup((event) -> event.stopPropagation())
 
@@ -61,21 +61,22 @@ addShortcutsPanel = ->
 
 toggleShortcut = (id) ->
 
+    shortcuts = settings.getSetting "ui", "shortcuts"
     shortcut = $("#shortcuts.panel img#" + id + ".shape")
     shape = $("#shapes.panel img#" + id + ".shape")
 
     if shortcut.css("display") == "block"
 
-        settings.ui.shortcuts.filterInPlace (item) -> item != id
+        shortcuts.filterInPlace (item) -> item != id
 
         shortcut.css "display", "none"
         shape.css "opacity", 1
 
     else
 
-        settings.ui.shortcuts.push id
+        shortcuts.push id
 
         shortcut.css "display", "block"
         shape.css "opacity", 0.5
 
-    updateSettings "ui", "shortcuts", settings.ui.shortcuts
+    settings.setSetting "ui", "shortcuts", shortcuts

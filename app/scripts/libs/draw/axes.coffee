@@ -1,20 +1,20 @@
-addAxes = (min = - scale, max = scale) ->
+addAxes = (min = -scale, max = scale) ->
 
-    if settings.axes.xAxis
+    if settings.getSetting "axes", "xAxis"
         addAxisX min, max
-    if settings.axes.yAxis
+    if settings.getSetting "axes", "yAxis"
         addAxisY min, max
-    if settings.axes.zAxis
+    if settings.getSetting "axes", "zAxis"
         addAxisZ min, max
 
-    if settings.axes.xyPlane
+    if settings.getSetting "axes", "xyPlane"
         addPlaneXY min, max
-    if settings.axes.xzPlane
+    if settings.getSetting "axes", "xzPlane"
         addPlaneXZ min, max
-    if settings.axes.yzPlane
+    if settings.getSetting "axes", "yzPlane"
         addPlaneYZ min, max
 
-    if settings.axes.axesCaps
+    if settings.getSetting "axes", "axesCaps"
         addAxesCaps min, max
 
     return axes
@@ -23,16 +23,16 @@ removeAxes = () ->
 
     for axis, index in axes by -1
 
-        if axis.name.includes("cap")
+        if axis.name.includes "cap"
 
             removeAxisCapEvents axis
 
         axes.splice index, 1
         scene.remove axis
 
-addAxisX = (min = - scale, max = scale) ->
+addAxisX = (min = -scale, max = scale) ->
 
-    if settings.axes.xAxis
+    if settings.getSetting "axes", "xAxis"
 
         axisX = newLine2 [[min, 0, 0], [max, 0, 0]], "thick", redThree, 3
 
@@ -50,9 +50,9 @@ removeAxisX = () ->
             axes.splice index, 1
             scene.remove axis
 
-addAxisY = (min = - scale, max = scale) ->
+addAxisY = (min = -scale, max = scale) ->
 
-    if settings.axes.yAxis
+    if settings.getSetting "axes", "yAxis"
 
         axisY = newLine2 [[0, min, 0], [0, max, 0]], "thick", greenThree, 3
 
@@ -70,9 +70,9 @@ removeAxisY = () ->
             axes.splice index, 1
             scene.remove axis
 
-addAxisZ = (min = - scale, max = scale) ->
+addAxisZ = (min = -scale, max = scale) ->
 
-    if settings.axes.zAxis
+    if settings.getSetting "axes", "zAxis"
 
         axisZ = newLine2 [[0, 0, min], [0, 0, max]], "thick", blueThree, 3
 
@@ -90,11 +90,11 @@ removeAxisZ = () ->
             axes.splice index, 1
             scene.remove axis
 
-addPlaneXY = (min = - scale, max = scale) ->
+addPlaneXY = (min = -scale, max = scale) ->
 
-    if settings.axes.xyPlane
+    if settings.getSetting "axes", "xyPlane"
 
-        step = settings.axes.xyPlaneStep
+        step = settings.getSetting "axes", "xyPlaneStep"
 
         for tick in [step...max] by step
 
@@ -129,11 +129,11 @@ removePlaneXY = () ->
             axes.splice index, 1
             scene.remove axis
 
-addPlaneXZ = (min = - scale, max = scale) ->
+addPlaneXZ = (min = -scale, max = scale) ->
 
-    if settings.axes.xzPlane
+    if settings.getSetting "axes", "xzPlane"
 
-        step = settings.axes.xzPlaneStep
+        step = settings.getSetting "axes", "xzPlaneStep"
 
         for tick in [step...max] by step
 
@@ -168,11 +168,11 @@ removePlaneXZ = () ->
             axes.splice index, 1
             scene.remove axis
 
-addPlaneYZ = (min = - scale, max = scale) ->
+addPlaneYZ = (min = -scale, max = scale) ->
 
-    if settings.axes.yzPlane
+    if settings.getSetting "axes", "yzPlane"
 
-        step = settings.axes.yzPlaneStep
+        step = settings.getSetting "axes", "yzPlaneStep"
 
         for tick in [step...max] by step
 
@@ -207,15 +207,15 @@ removePlaneYZ = () ->
             axes.splice index, 1
             scene.remove axis
 
-addAxesCaps = (min = - scale, max = scale) ->
+addAxesCaps = (min = -scale, max = scale) ->
 
-    if settings.axes.axesCaps and (settings.axes.xAxis or settings.axes.yAxis or settings.axes.zAxis)
+    if settings.getSetting("axes", "axesCaps") and (settings.getSetting("axes", "xAxis") or settings.getSetting("axes", "yAxis") or settings.getSetting("axes", "zAxis"))
 
-        if settings.axes.xAxis
+        if settings.getSetting "axes", "xAxis"
             addAxisCapsX min, max
-        if settings.axes.yAxis
+        if settings.getSetting "axes", "yAxis"
             addAxisCapsY min, max
-        if settings.axes.zAxis
+        if settings.getSetting "axes", "zAxis"
             addAxisCapsZ min, max
 
         addCentroidCap()
@@ -224,7 +224,7 @@ removeAxesCaps = () ->
 
     for axis, index in axes by -1
 
-        if axis.name.includes("cap")
+        if axis.name.includes "cap"
 
             removeAxisCapEvents axis
 
@@ -233,7 +233,7 @@ removeAxesCaps = () ->
 
 addCentroidCap = () ->
 
-    if settings.axes.axesCaps and (settings.axes.xAxis or settings.axes.yAxis or settings.axes.zAxis)
+    if settings.getSetting("axes", "axesCaps") and (settings.getSetting("axes", "xAxis") or settings.getSetting("axes", "yAxis") or settings.getSetting("axes", "zAxis"))
 
         centroid = newSphere 1, 25, 25, [0, 0, 0], "basic", blackThree
 
@@ -255,9 +255,9 @@ removeCentroidCap = () ->
             axes.splice index, 1
             scene.remove axis
 
-addAxisCapsX = (min= - scale, max = scale) ->
+addAxisCapsX = (min= -scale, max = scale) ->
 
-    if settings.axes.axesCaps and settings.axes.xAxis
+    if settings.getSetting("axes", "axesCaps") and settings.getSetting("axes", "xAxis")
 
         minCapX = newSphere 1, 25, 25, [min, 0, 0], "basic", redThree
         maxCapX = newSphere 1, 25, 25, [max, 0, 0], "basic", greenThree
@@ -282,9 +282,9 @@ removeAxisCapsX = () ->
             axes.splice index, 1
             scene.remove axis
 
-addAxisCapsY = (min = - scale, max = scale) ->
+addAxisCapsY = (min = -scale, max = scale) ->
 
-    if settings.axes.axesCaps and settings.axes.yAxis
+    if settings.getSetting("axes", "axesCaps") and settings.getSetting("axes", "yAxis")
 
         minCapY = newSphere 1, 25, 25, [0, min, 0], "basic", redThree
         maxCapY = newSphere 1, 25, 25, [0, max, 0], "basic", greenThree
@@ -309,9 +309,9 @@ removeAxisCapsY = () ->
             axes.splice index, 1
             scene.remove axis
 
-addAxisCapsZ = (min = - scale, max = scale) ->
+addAxisCapsZ = (min = -scale, max = scale) ->
 
-    if settings.axes.axesCaps and settings.axes.zAxis
+    if settings.getSetting("axes", "axesCaps") and settings.getSetting("axes", "zAxis")
 
         minCapZ = newSphere 1, 25, 25, [0, 0, min], "basic", redThree
         maxCapZ = newSphere 1, 25, 25, [0, 0, max], "basic", greenThree

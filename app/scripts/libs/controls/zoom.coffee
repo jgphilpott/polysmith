@@ -18,9 +18,10 @@ addZoomControls = () ->
         stepY = position.y - target.y
         stepZ = position.z - target.z
 
-        zoomMax = settings.controls.zoomMax
-        zoomMin = settings.controls.zoomMin
-        zoomSpeed = settings.controls.zoomSpeed / 50000
+        zoomMax = settings.getSetting "controls", "zoomMax"
+        zoomMin = settings.getSetting "controls", "zoomMin"
+
+        zoomSpeed = settings.getSetting("controls", "zoomSpeed") / 50000
         zoomDelta = event.originalEvent.wheelDelta * zoomSpeed
 
         zoom = () ->
@@ -45,6 +46,6 @@ addZoomControls = () ->
 
         zoomTimeout = setTimeout(() ->
 
-            updateSettings "camera", "position", position
+            settings.setSetting "camera", "position", position
 
         , 100)

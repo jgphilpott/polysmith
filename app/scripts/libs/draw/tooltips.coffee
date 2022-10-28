@@ -10,6 +10,10 @@ class Tooltips
         @rotationTools = []
         @rotationRing = null
 
+    getSelected : (self = this) ->
+
+        return self.selected
+
     setSelected : (selected = null) ->
 
         this.selected = selected
@@ -19,12 +23,8 @@ class Tooltips
 
         if selected
 
-            this.boundingBox = getBoundingBox selected
-            this.addRotationTools()
-
-    getSelected : (self = this) ->
-
-        return self.selected
+            if settings.getSetting "tooltips", "rotation" then this.boundingBox = getBoundingBox selected
+            if settings.getSetting "tooltips", "bounding" then this.addRotationTools()
 
     addRotationTools : (mesh = this.selected, tools = this.rotationTools) ->
 

@@ -27,7 +27,7 @@ focus = (point, duration = 1000, steps = 100) ->
 
             setTimeout updateCameraTarget, duration / steps * step
 
-        updateSettings "camera", "target", x: point.x, y: point.y, z: point.z
+        settings.setSetting "camera", "target", x: point.x, y: point.y, z: point.z
 
         return true
 

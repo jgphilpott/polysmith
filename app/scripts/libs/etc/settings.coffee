@@ -1,18 +1,10 @@
-getSettings = () ->
+class Settings
 
-    localSettings = localRead "settings"
+    constructor : () ->
 
-    if client and client.settings
+        localSettings = localRead "settings"
 
-        data.settings = client.settings
-
-    else if localSettings
-
-        data.settings = localSettings
-
-    else
-
-        data.settings =
+        @defaultSettings =
 
             general:
 
@@ -80,215 +72,240 @@ getSettings = () ->
                 zoomMax: 500
                 zoomMin: 1
 
-    socket.on "update_settings_success", (update) -> updateSuccess update
-    socket.on "update_settings_failed", (update) -> updateFailed update
+        if client
 
-    localWrite "settings", data.settings
+            @settings = client.settings
 
-    return data.settings
+        else if localSettings
 
-updateSettings = (category, setting, value) ->
-
-    try
-
-        if data.settings[category][setting] != undefined
-
-            if client
-
-                socket.emit "update_settings", id: readCookie("id"), category: category, setting: setting, value: value
-
-            else
-
-                return updateSuccess category: category, setting: setting, value: value
+            @settings = localSettings
 
         else
 
-            return updateFailed category: category, setting: setting, value: value
+            @settings = this.defaultSettings
 
-    catch error
+        socket.on "update_settings_success", (update) -> this.updateSuccess update
+        socket.on "update_settings_failed", (update) -> this.updateFailed update
 
-        return updateFailed category: category, setting: setting, value: value
+        localStore.write "settings", this.settings
 
-    return
+    getSetting : (category, setting) ->
 
-updateSuccess = (update) ->
+        try
 
-    category = update.category
-    setting = update.setting
-    value = update.value
+            return this.settings[category][setting]
 
-    data.settings[category][setting] = value
+        catch error
 
-    switch category
+            return undefined
 
-        when "general"
+    setSetting : (category, setting, value) ->
 
-            $(".settings-category #general-" + setting + "").val value
+        try
 
-        when "ui"
+            if this.getSetting(category, setting) != undefined
 
-            $(".settings-category #ui-" + setting + "").prop "checked", value
+                if client
 
-            if setting == "navbar"
-
-                top = if value then 0 else -50
-
-                $("#navbar").animate {top: top}, {duration: 1000, queue: false}
-
-            else
-
-                $("#" + setting + "").css "display", if value then "" else "none"
-
-        when "tooltips"
-
-            if setting == "guidelines"
-
-                $(".settings-category #tooltips-measurements").prop("disabled", !value)
-
-        when "panels"
-
-            panel = $ "#" + setting + ".panel"
-            checkbox = $ "#panels-panel #" + setting + ""
-
-            if value
-
-                panel.css "z-index", events.zIndex += 1
-
-            checkbox.prop "checked", if value then true else false
-            panel.css "visibility", if value then "visible" else "hidden"
-
-            if setting == "settings"
-
-                $("#settings-panel.sub-panel img.gear").css "opacity", if value then 1 else 0.5
-
-            if setting == "shapes"
-
-                $("#shortcuts.panel #toggle").attr "src", "/app/imgs/panels/nav/" + (if value then "x" else "+") + ".png"
-
-
-            break
-
-        when "axes"
-
-            $(".settings-category #axes-" + setting + "").prop "checked", value
-
-            if setting == "axesCaps"
-
-                if value then addAxesCaps() else removeAxesCaps()
-
-            if setting == "xAxis" or setting == "yAxis" or setting == "zAxis"
-
-                if value
-
-                    if setting == "xAxis"
-
-                        addAxisX()
-
-                        if settings.axes.axesCaps
-
-                            addAxisCapsX()
-
-                        if not settings.axes.yAxis and not settings.axes.zAxis
-
-                            addCentroidCap()
-
-                    if setting == "yAxis"
-
-                        addAxisY()
-
-                        if settings.axes.axesCaps
-
-                            addAxisCapsY()
-
-                        if not settings.axes.xAxis and not settings.axes.zAxis
-
-                            addCentroidCap()
-
-                    if setting == "zAxis"
-
-                        addAxisZ()
-
-                        if settings.axes.axesCaps
-
-                            addAxisCapsZ()
-
-                        if not settings.axes.xAxis and not settings.axes.yAxis
-
-                            addCentroidCap()
+                    socket.emit "update_settings", id: readCookie("id"), category: category, setting: setting, value: value
 
                 else
 
-                    if setting == "xAxis"
+                    return this.updateSuccess category: category, setting: setting, value: value
 
-                        removeAxisX()
-                        removeAxisCapsX()
+            else
 
-                        if not settings.axes.yAxis and not settings.axes.zAxis
+                return this.updateFailed category: category, setting: setting, value: value
 
-                            removeCentroidCap()
+        catch error
 
-                    if setting == "yAxis"
+            return this.updateFailed category: category, setting: setting, value: value
 
-                        removeAxisY()
-                        removeAxisCapsY()
+    updateSuccess : (update) ->
 
-                        if not settings.axes.xAxis and not settings.axes.zAxis
+        category = update.category
+        setting = update.setting
+        value = update.value
 
-                            removeCentroidCap()
+        this.settings[category][setting] = value
 
-                    if setting == "zAxis"
+        switch category
 
-                        removeAxisZ()
-                        removeAxisCapsZ()
+            when "general"
 
-                        if not settings.axes.xAxis and not settings.axes.yAxis
+                $(".settings-category #general-" + setting + "").val value
 
-                            removeCentroidCap()
+                break
 
-            if setting == "xyPlane"
+            when "ui"
 
-                if value then addPlaneXY() else removePlaneXY()
+                $(".settings-category #ui-" + setting + "").prop "checked", value
 
-            if setting == "xzPlane"
+                if setting == "navbar"
 
-                if value then addPlaneXZ() else removePlaneXZ()
+                    top = if value then 0 else -50
 
-            if setting == "yzPlane"
+                    $("#navbar").animate {top: top}, {duration: 1000, queue: false}
 
-                if value then addPlaneYZ() else removePlaneYZ()
+                else
 
-        when "camera"
+                    $("#" + setting + "").css "display", if value then "" else "none"
 
-            cameraPanel = $ "#camera.panel"
+                break
 
-            if setting == "position"
+            when "tooltips"
 
-                position = cameraPanel.find "#position .body"
+                if setting == "guidelines"
 
-                position.find("#position-x input").val value.x.toFixed 2
-                position.find("#position-y input").val value.y.toFixed 2
-                position.find("#position-z input").val value.z.toFixed 2
+                    $(".settings-category #tooltips-measurements").prop "disabled", !value
 
-            else if setting == "target"
+                break
 
-                target = cameraPanel.find "#target .body"
+            when "panels"
 
-                target.find("#target-x input").val value.x.toFixed 2
-                target.find("#target-y input").val value.y.toFixed 2
-                target.find("#target-z input").val value.z.toFixed 2
+                panel = $ "#" + setting + ".panel"
+                checkbox = $ "#panels-panel #" + setting + ""
 
-            break
+                if value
 
-    localWrite "settings", data.settings
+                    panel.css "z-index", events.zIndex += 1
 
-    return true
+                checkbox.prop "checked", if value then true else false
+                panel.css "visibility", if value then "visible" else "hidden"
 
-updateFailed = (update) ->
+                if setting == "settings"
 
-    category = update.category
-    setting = update.setting
-    value = update.value
+                    $("#settings-panel.sub-panel img.gear").css "opacity", if value then 1 else 0.5
 
-    console.warn "Update of " + category + " setting " + setting + " failed!"
+                if setting == "shapes"
 
-    return false
+                    $("#shortcuts.panel #toggle").attr "src", "/app/imgs/panels/nav/" + (if value then "x" else "+") + ".png"
+
+                break
+
+            when "axes"
+
+                $(".settings-category #axes-" + setting + "").prop "checked", value
+
+                if setting == "axesCaps"
+
+                    if value then addAxesCaps() else removeAxesCaps()
+
+                if setting == "xAxis" or setting == "yAxis" or setting == "zAxis"
+
+                    if value
+
+                        if setting == "xAxis"
+
+                            addAxisX()
+
+                            if settings.getSetting "axes", "axesCaps"
+
+                                addAxisCapsX()
+
+                            if not settings.getSetting("axes", "yAxis") and not settings.getSetting("axes", "zAxis")
+
+                                addCentroidCap()
+
+                        if setting == "yAxis"
+
+                            addAxisY()
+
+                            if settings.getSetting "axes", "axesCaps"
+
+                                addAxisCapsY()
+
+                            if not settings.getSetting("axes", "xAxis") and not settings.getSetting("axes", "zAxis")
+
+                                addCentroidCap()
+
+                        if setting == "zAxis"
+
+                            addAxisZ()
+
+                            if settings.getSetting "axes", "axesCaps"
+
+                                addAxisCapsZ()
+
+                            if not settings.getSetting("axes", "xAxis") and not settings.getSetting("axes", "yAxis")
+
+                                addCentroidCap()
+
+                    else
+
+                        if setting == "xAxis"
+
+                            removeAxisX()
+                            removeAxisCapsX()
+
+                            if not settings.getSetting("axes", "yAxis") and not settings.getSetting("axes", "zAxis")
+
+                                removeCentroidCap()
+
+                        if setting == "yAxis"
+
+                            removeAxisY()
+                            removeAxisCapsY()
+
+                            if not settings.getSetting("axes", "xAxis") and not settings.getSetting("axes", "zAxis")
+
+                                removeCentroidCap()
+
+                        if setting == "zAxis"
+
+                            removeAxisZ()
+                            removeAxisCapsZ()
+
+                            if not settings.getSetting("axes", "xAxis") and not settings.getSetting("axes", "yAxis")
+
+                                removeCentroidCap()
+
+                if setting == "xyPlane"
+
+                    if value then addPlaneXY() else removePlaneXY()
+
+                if setting == "xzPlane"
+
+                    if value then addPlaneXZ() else removePlaneXZ()
+
+                if setting == "yzPlane"
+
+                    if value then addPlaneYZ() else removePlaneYZ()
+
+                break
+
+            when "camera"
+
+                cameraPanel = $ "#camera.panel"
+
+                if setting == "position"
+
+                    position = cameraPanel.find "#position .body"
+
+                    position.find("#position-x input").val value.x.toFixed 2
+                    position.find("#position-y input").val value.y.toFixed 2
+                    position.find("#position-z input").val value.z.toFixed 2
+
+                else if setting == "target"
+
+                    target = cameraPanel.find "#target .body"
+
+                    target.find("#target-x input").val value.x.toFixed 2
+                    target.find("#target-y input").val value.y.toFixed 2
+                    target.find("#target-z input").val value.z.toFixed 2
+
+                break
+
+        localStore.write "settings", this.settings
+
+        return true
+
+    updateFailed : (update) ->
+
+        category = update.category
+        setting = update.setting
+        value = update.value
+
+        console.warn "Update of " + category + " setting " + setting + " failed!"
+
+        return false

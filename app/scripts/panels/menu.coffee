@@ -60,12 +60,12 @@ addMenuPanel = ->
 
         panels = "<div id='panels-panel' class='sub-panel'><h3 id='title'>Panels</h3>"
 
-        panels += "<div><input id='camera' class='checkbox' type='checkbox' " + (if settings.panels.camera then "checked" else "") + "><label>Camera</label></div>"
-        panels += "<div><input id='lights' class='checkbox' type='checkbox' " + (if settings.panels.lights then "checked" else "") + "><label>Lights</label></div>"
-        panels += "<div><input id='meshes' class='checkbox' type='checkbox' " + (if settings.panels.meshes then"checked" else "") + "><label>Meshes</label></div>"
-        panels += "<div><input id='settings' class='checkbox' type='checkbox' " + (if settings.panels.settings then "checked" else "") + "><label>Settings</label></div>"
-        panels += "<div><input id='shapes' class='checkbox' type='checkbox' " + (if settings.panels.shapes then "checked" else "") + "><label>Shapes</label></div>"
-        panels += "<div><input id='shortcuts' class='checkbox' type='checkbox' " + (if settings.panels.shortcuts then "checked" else "") + "><label>Shortcuts</label></div>"
+        panels += "<div><input id='camera' class='checkbox' type='checkbox' " + (if settings.getSetting "panels", "camera" then "checked" else "") + "><label>Camera</label></div>"
+        panels += "<div><input id='lights' class='checkbox' type='checkbox' " + (if settings.getSetting "panels", "lights" then "checked" else "") + "><label>Lights</label></div>"
+        panels += "<div><input id='meshes' class='checkbox' type='checkbox' " + (if settings.getSetting "panels", "meshes" then"checked" else "") + "><label>Meshes</label></div>"
+        panels += "<div><input id='settings' class='checkbox' type='checkbox' " + (if settings.getSetting "panels", "settings" then "checked" else "") + "><label>Settings</label></div>"
+        panels += "<div><input id='shapes' class='checkbox' type='checkbox' " + (if settings.getSetting "panels", "shapes" then "checked" else "") + "><label>Shapes</label></div>"
+        panels += "<div><input id='shortcuts' class='checkbox' type='checkbox' " + (if settings.getSetting "panels", "shortcuts" then "checked" else "") + "><label>Shortcuts</label></div>"
 
         panel.append panels + "</div>"
 
@@ -75,7 +75,7 @@ addMenuPanel = ->
 
             $(this).blur()
 
-            updateSettings "panels", $(this).attr("id"), $(this).prop("checked")
+            settings.setSetting "panels", $(this).attr("id"), $(this).prop("checked")
 
         ).on "mousedown mouseup", (event) -> event.stopPropagation()
 
@@ -96,16 +96,16 @@ addMenuPanel = ->
                 <div>
                     <label>Scale</label>
                     <select id='general-scale' class='select'>
-                        <option value='imperial' """ + (if settings.general.scale == "imperial" then "selected" else "") + """>Imperial</option>
-                        <option value='metric' """ + (if settings.general.scale == "metric" then "selected" else "") + """>Metric</option>
+                        <option value='imperial' """ + (if settings.getSetting("general", "scale") == "imperial" then "selected" else "") + """>Imperial</option>
+                        <option value='metric' """ + (if settings.getSetting("general", "scale") == "metric" then "selected" else "") + """>Metric</option>
                     </select>
                 </div>
 
                 <div>
                     <label>Unit</label>
                     <select id='general-unit' class='select'>
-                        <option value='centimeter' """ + (if settings.general.unit.metric == "centimeter" then "selected" else "") + """>Centimeter</option>
-                        <option value='millimeter' """ + (if settings.general.unit.metric == "millimeter" then "selected" else "") + """>Millimeter</option>
+                        <option value='centimeter' """ + (if settings.getSetting("general", "unit").metric == "centimeter" then "selected" else "") + """>Centimeter</option>
+                        <option value='millimeter' """ + (if settings.getSetting("general", "unit").metric == "millimeter" then "selected" else "") + """>Millimeter</option>
                     </select>
                 </div>
 
@@ -118,16 +118,19 @@ addMenuPanel = ->
                 <h4>UI</h4>
 
                 <div>
-                    <input id='ui-navbar' class='checkbox' type='checkbox' """ + (if settings.ui.navbar then "checked" else "") + """><label>Navbar</label>
+                    <input id='ui-navbar' class='checkbox' type='checkbox' """ + (if settings.getSetting "ui", "navbar" then "checked" else "") + """><label>Navbar</label>
                 </div>
+
                 <div>
-                    <input id='ui-forkme' class='checkbox' type='checkbox' """ + (if settings.ui.forkme then "checked" else "") + """><label>Forkme</label>
+                    <input id='ui-forkme' class='checkbox' type='checkbox' """ + (if settings.getSetting "ui", "forkme" then "checked" else "") + """><label>Forkme</label>
                 </div>
+
                 <div>
-                    <input id='ui-metabox' class='checkbox' type='checkbox' """ + (if settings.ui.metabox then "checked" else "") + """><label>Metabox</label>
+                    <input id='ui-metabox' class='checkbox' type='checkbox' """ + (if settings.getSetting "ui", "metabox" then "checked" else "") + """><label>Metabox</label>
                 </div>
+
                 <div>
-                    <input id='ui-help' class='checkbox' type='checkbox' """ + (if settings.ui.help then "checked" else "") + """><label>Help</label>
+                    <input id='ui-help' class='checkbox' type='checkbox' """ + (if settings.getSetting "ui", "help" then "checked" else "") + """><label>Help</label>
                 </div>
 
             </div>"""
@@ -139,27 +142,31 @@ addMenuPanel = ->
                 <h4>Axes</h4>
 
                 <div>
-                    <input id='axes-axesCaps' class='checkbox' type='checkbox' """ + (if settings.axes.axesCaps then "checked" else "") + """><label>Axes Caps</label>
+                    <input id='axes-axesCaps' class='checkbox' type='checkbox' """ + (if settings.getSetting "axes", "axesCaps" then "checked" else "") + """><label>Axes Caps</label>
                 </div>
 
                 <div>
-                    <input id='axes-xAxis' class='checkbox' type='checkbox' """ + (if settings.axes.xAxis then "checked" else "") + """><label>X Axis</label>
-                </div>
-                <div>
-                    <input id='axes-yAxis' class='checkbox' type='checkbox' """ + (if settings.axes.yAxis then "checked" else "") + """><label>Y Axis</label>
-                </div>
-                <div>
-                    <input id='axes-zAxis' class='checkbox' type='checkbox' """ + (if settings.axes.zAxis then "checked" else "") + """><label>Z Axis</label>
+                    <input id='axes-xAxis' class='checkbox' type='checkbox' """ + (if settings.getSetting "axes", "xAxis" then "checked" else "") + """><label>X Axis</label>
                 </div>
 
                 <div>
-                    <input id='axes-xyPlane' class='checkbox' type='checkbox' """ + (if settings.axes.xyPlane then "checked" else "") + """><label>XY Plane</label>
+                    <input id='axes-yAxis' class='checkbox' type='checkbox' """ + (if settings.getSetting "axes", "yAxis" then "checked" else "") + """><label>Y Axis</label>
                 </div>
+
                 <div>
-                    <input id='axes-xzPlane' class='checkbox' type='checkbox' """ + (if settings.axes.xzPlane then "checked" else "") + """><label>XZ Plane</label>
+                    <input id='axes-zAxis' class='checkbox' type='checkbox' """ + (if settings.getSetting "axes", "zAxis" then "checked" else "") + """><label>Z Axis</label>
                 </div>
+
                 <div>
-                    <input id='axes-yzPlane' class='checkbox' type='checkbox' """ + (if settings.axes.yzPlane then "checked" else "") + """><label>YZ Plane</label>
+                    <input id='axes-xyPlane' class='checkbox' type='checkbox' """ + (if settings.getSetting "axes", "xyPlane" then "checked" else "") + """><label>XY Plane</label>
+                </div>
+
+                <div>
+                    <input id='axes-xzPlane' class='checkbox' type='checkbox' """ + (if settings.getSetting "axes", "xzPlane" then "checked" else "") + """><label>XZ Plane</label>
+                </div>
+
+                <div>
+                    <input id='axes-yzPlane' class='checkbox' type='checkbox' """ + (if settings.getSetting "axes", "yzPlane" then "checked" else "") + """><label>YZ Plane</label>
                 </div>
 
             </div>"""
@@ -170,9 +177,9 @@ addMenuPanel = ->
 
         subPanel.find("img.gear").click( ->
 
-            updateSettings "panels", "settings", !settings.panels.settings
+            settings.setSetting "panels", "settings", !settings.getSetting("panels", "settings")
 
-        ).css "opacity", if settings.panels.settings then 1 else 0.5
+        ).css "opacity", if settings.getSetting "panels", "settings" then 1 else 0.5
 
         subPanel.find(".select").on("change", ->
 
@@ -181,7 +188,7 @@ addMenuPanel = ->
             status = $(this).find(":selected").val()
             setting = $(this).attr("id").split "-"
 
-            updateSettings setting[0], setting[1], status
+            settings.setSetting setting[0], setting[1], status
 
         ).on "mousedown mouseup", (event) -> event.stopPropagation()
 
@@ -192,7 +199,7 @@ addMenuPanel = ->
             status = $(this).prop "checked"
             setting = $(this).attr("id").split "-"
 
-            updateSettings setting[0], setting[1], status
+            settings.setSetting setting[0], setting[1], status
 
         ).on "mousedown mouseup", (event) -> event.stopPropagation()
 
@@ -357,11 +364,11 @@ addMenuPanel = ->
         if panel.css("visibility") == "hidden"
 
             panel.css "visibility", "visible"
-            updateSettings "panels", "menu", true
+            settings.setSetting "panels", "menu", true
 
         else if panel.css("visibility") == "visible"
 
             panel.css "visibility", "hidden"
-            updateSettings "panels", "menu", false
+            settings.setSetting "panels", "menu", false
 
     return panel

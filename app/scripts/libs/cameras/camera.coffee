@@ -6,8 +6,8 @@ class Camera
 
         @type = type.toLowerCase().trim()
 
-        @position = settings.camera.position
-        @target = settings.camera.target
+        @position = settings.getSetting "camera", "position"
+        @target = settings.getSetting "camera", "target"
 
         switch this.type
 

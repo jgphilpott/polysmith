@@ -44,7 +44,7 @@ addShapesPanel = ->
 
         $(shape).contextmenu (event) -> contextMenu "shape", $(this), event
 
-        if settings.ui.shortcuts.includes shape.id
+        if settings.getSetting("ui", "shortcuts").includes shape.id
 
             $(shape).css "opacity", 0.5
 
