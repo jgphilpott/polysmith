@@ -14,7 +14,11 @@ contextMenu = (type, element, event) ->
 
             panel.append "<p id='look'>Look Here</p>"
 
-            panel.find("#look").click -> focus x: element.position.x, y: element.position.y, z: element.position.z
+            panel.find("#look").click ->
+
+                if camera.focus element.position
+
+                    $("#canvas").css "cursor", ""
 
             break
 
@@ -60,7 +64,7 @@ contextMenu = (type, element, event) ->
 
                     addMeshPanel element
 
-            panel.find("#look").click -> focus({x: element.position.x, y: element.position.y, z: element.position.z})
+            panel.find("#look").click -> if camera.focus element.position then $("#canvas").css "cursor", ""
             panel.find("#cut").click -> updateMesh(element, "operation", "cut", "setup")
             panel.find("#join").click -> updateMesh(element, "operation", "join", "setup")
             panel.find("#intersect").click -> updateMesh(element, "operation", "intersect", "setup")

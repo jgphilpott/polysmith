@@ -42,19 +42,22 @@ addCameraPanel = ->
     target = panel.find "#target .body"
     speed = panel.find "#speed .body"
 
+    cameraPosition = camera.getPosition()
+    cameraTarget = camera.getTarget()
+
     holdInterval = null
     holdTimeout = null
 
     min = - scale * 5
     max = scale * 5
 
-    position.append "<span id='position-x'><label id='x'>X</label><div class='suffix " + unit[scale] + "'><input type=number step=1 min=" + min + " max=" + max + " value=" + camera.position.x.toFixed(2) + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
-    position.append "<span id='position-y'><label id='y'>Y</label><div class='suffix " + unit[scale] + "'><input type=number step=1 min=" + min + " max=" + max + " value=" + camera.position.y.toFixed(2) + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
-    position.append "<span id='position-z'><label id='z'>Z</label><div class='suffix " + unit[scale] + "'><input type=number step=1 min=" + min + " max=" + max + " value=" + camera.position.z.toFixed(2) + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
+    position.append "<span id='position-x'><label id='x'>X</label><div class='suffix " + unit[scale] + "'><input type=number step=1 min=" + min + " max=" + max + " value=" + cameraPosition.x.toFixed(2) + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
+    position.append "<span id='position-y'><label id='y'>Y</label><div class='suffix " + unit[scale] + "'><input type=number step=1 min=" + min + " max=" + max + " value=" + cameraPosition.y.toFixed(2) + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
+    position.append "<span id='position-z'><label id='z'>Z</label><div class='suffix " + unit[scale] + "'><input type=number step=1 min=" + min + " max=" + max + " value=" + cameraPosition.z.toFixed(2) + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
 
-    target.append "<span id='target-x'><label id='x'>X</label><div class='suffix " + unit[scale] + "'><input type=number step=1 min=" + min + " max=" + max + " value=" + camera.target.x.toFixed(2) + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
-    target.append "<span id='target-y'><label id='y'>Y</label><div class='suffix " + unit[scale] + "'><input type=number step=1 min=" + min + " max=" + max + " value=" + camera.target.y.toFixed(2) + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
-    target.append "<span id='target-z'><label id='z'>Z</label><div class='suffix " + unit[scale] + "'><input type=number step=1 min=" + min + " max=" + max + " value=" + camera.target.z.toFixed(2) + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
+    target.append "<span id='target-x'><label id='x'>X</label><div class='suffix " + unit[scale] + "'><input type=number step=1 min=" + min + " max=" + max + " value=" + cameraTarget.x.toFixed(2) + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
+    target.append "<span id='target-y'><label id='y'>Y</label><div class='suffix " + unit[scale] + "'><input type=number step=1 min=" + min + " max=" + max + " value=" + cameraTarget.y.toFixed(2) + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
+    target.append "<span id='target-z'><label id='z'>Z</label><div class='suffix " + unit[scale] + "'><input type=number step=1 min=" + min + " max=" + max + " value=" + cameraTarget.z.toFixed(2) + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
 
     speed.append "<p>Drag Speed</p><div id='drag' class='slider'></div>"
     speed.append "<p>Fly Speed</p><div id='fly' class='slider'></div>"
@@ -74,9 +77,6 @@ addCameraPanel = ->
         target = settings.defaultSettings.camera.target
         position = settings.defaultSettings.camera.position
 
-        settings.setSetting "camera", "target", target
-        settings.setSetting "camera", "position", position
-
         settings.setSetting "controls", "dragSpeed", controls.dragSpeed
         settings.setSetting "controls", "flySpeed", controls.flySpeed
         settings.setSetting "controls", "zoomSpeed", controls.zoomSpeed
@@ -85,14 +85,12 @@ addCameraPanel = ->
         speed.find("#fly.slider").slider "value", controls.flySpeed
         speed.find("#zoom.slider").slider "value", controls.zoomSpeed
 
-        camera.position.set position.x, position.y, position.z
-        camera.lookAt target.x, target.y, target.z
-
         sliderStyle speed.find "#drag.slider"
         sliderStyle speed.find "#fly.slider"
         sliderStyle speed.find "#zoom.slider"
 
-        camera.target = target
+        camera.setPosition position
+        camera.setTarget target
 
     ).on "mousedown mouseup", (event) -> event.stopPropagation()
 
@@ -145,7 +143,7 @@ addCameraPanel = ->
     updateCamera = (controller, event) ->
 
         operation = $(controller).attr "id"
-        selection = $(controller).parent().attr("id").split "-"
+        selection = $(controller).closest("span").attr("id").split "-"
 
         input = $(controller).parent().find "input"
 
@@ -153,8 +151,8 @@ addCameraPanel = ->
         min = Number input.attr "min"
         max = Number input.attr "max"
 
-        position = camera.position
-        target = camera.target
+        position = camera.getPosition()
+        target = camera.getTarget()
 
         step = if operation == "plus" then step else if operation == "minus" then - step else 0
 
@@ -164,8 +162,7 @@ addCameraPanel = ->
 
         camera[selection[0]][selection[1]] = value
 
-        position.set position.x, position.y, position.z
-        camera.lookAt target.x, target.y, target.z
+        camera.setPosition position
 
         if event.type != "keyup" or value == min or value == max
 

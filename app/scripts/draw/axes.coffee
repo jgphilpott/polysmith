@@ -360,7 +360,7 @@ addAxisCapEvents = (cap) ->
 
     events.addEventListener cap, "dblclick", (event) ->
 
-        if focus event.target.position
+        if camera.focus event.target.position
 
             $("#canvas").css "cursor", ""
 

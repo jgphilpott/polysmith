@@ -17,8 +17,7 @@ addEvents = () ->
         renderer.setSize innerWidth, innerHeight
         composer.setSize innerWidth, innerHeight
 
-        camera.aspect = innerWidth / innerHeight
-        camera.updateProjectionMatrix()
+        camera.setAspect innerWidth, innerHeight
 
     $("body").click ->
 
@@ -200,7 +199,9 @@ addMeshEvents = (mesh) ->
 
     events.addEventListener mesh, "dblclick", (event) ->
 
-        focus x: mesh.position.x, y: mesh.position.y, z: mesh.position.z
+        if camera.focus mesh.position
+
+            $("#canvas").css "cursor", ""
 
     events.addEventListener mesh, "contextmenu", (event) ->
 

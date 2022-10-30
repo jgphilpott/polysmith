@@ -81,26 +81,29 @@ class Tooltips
         yTool = tools[1]
         zTool = tools[2]
 
-        xPosition = if camera.position.x > mesh.position.x then mesh.position.x + this.boundingBox.max.x + gapSize else mesh.position.x + this.boundingBox.min.x - gapSize
-        yPosition = if camera.position.y > mesh.position.y then mesh.position.y + this.boundingBox.max.y + gapSize else mesh.position.y + this.boundingBox.min.y - gapSize
-        zPosition = if camera.position.z > mesh.position.z then mesh.position.z + this.boundingBox.max.z + gapSize else mesh.position.z + this.boundingBox.min.z - gapSize
+        meshPosition = mesh.position
+        cameraPosition = camera.getPosition()
 
-        xRotation = if camera.position.x > mesh.position.x then deg$rad -90 else deg$rad 90
-        yRotation = if camera.position.y > mesh.position.y then deg$rad 0 else deg$rad 180
+        xPosition = if cameraPosition.x > meshPosition.x then meshPosition.x + this.boundingBox.max.x + gapSize else meshPosition.x + this.boundingBox.min.x - gapSize
+        yPosition = if cameraPosition.y > meshPosition.y then meshPosition.y + this.boundingBox.max.y + gapSize else meshPosition.y + this.boundingBox.min.y - gapSize
+        zPosition = if cameraPosition.z > meshPosition.z then meshPosition.z + this.boundingBox.max.z + gapSize else meshPosition.z + this.boundingBox.min.z - gapSize
 
-        if camera.position.z > mesh.position.z
+        xRotation = if cameraPosition.x > meshPosition.x then deg$rad -90 else deg$rad 90
+        yRotation = if cameraPosition.y > meshPosition.y then deg$rad 0 else deg$rad 180
 
-            zRotation = if camera.position.y > mesh.position.y then deg$rad 0 else deg$rad 180
+        if cameraPosition.z > meshPosition.z
+
+            zRotation = if cameraPosition.y > meshPosition.y then deg$rad 0 else deg$rad 180
 
         else
 
-            zRotation = if camera.position.y > mesh.position.y then deg$rad 180 else deg$rad 0
+            zRotation = if cameraPosition.y > meshPosition.y then deg$rad 180 else deg$rad 0
 
-        cameraBox = newBox 1, 1, 1, [camera.position.x, camera.position.y, zPosition]
+        cameraBox = newBox 1, 1, 1, [cameraPosition.x, cameraPosition.y, zPosition]
 
-        xTool.position.set xPosition, mesh.position.y, mesh.position.z
-        yTool.position.set mesh.position.x, yPosition, mesh.position.z
-        zTool.position.set mesh.position.x, mesh.position.y, zPosition
+        xTool.position.set xPosition, meshPosition.y, meshPosition.z
+        yTool.position.set meshPosition.x, yPosition, meshPosition.z
+        zTool.position.set meshPosition.x, meshPosition.y, zPosition
 
         cameraBox.up.set 0, 0, 1
         cameraBox.lookAt zTool.position
@@ -135,29 +138,32 @@ class Tooltips
 
             ring = new THREE.Mesh geometry, material
 
+            cameraPosition = camera.getPosition()
+            meshPosition = mesh.position
+
             switch axis
 
                 when "x"
 
                     ring.rotation.y = deg$rad 90
 
-                    ring.position.x = if camera.position.x > mesh.position.x then mesh.position.x + this.boundingBox.min.x - gapSize else mesh.position.x + this.boundingBox.max.x + gapSize
-                    ring.position.y = mesh.position.y
-                    ring.position.z = mesh.position.z
+                    ring.position.x = if cameraPosition.x > meshPosition.x then meshPosition.x + this.boundingBox.min.x - gapSize else meshPosition.x + this.boundingBox.max.x + gapSize
+                    ring.position.y = meshPosition.y
+                    ring.position.z = meshPosition.z
 
                 when "y"
 
                     ring.rotation.x = deg$rad 90
 
-                    ring.position.x = mesh.position.x
-                    ring.position.y = if camera.position.y > mesh.position.y then mesh.position.y + this.boundingBox.min.y - gapSize else mesh.position.y + this.boundingBox.max.y + gapSize
-                    ring.position.z = mesh.position.z
+                    ring.position.x = meshPosition.x
+                    ring.position.y = if cameraPosition.y > meshPosition.y then meshPosition.y + this.boundingBox.min.y - gapSize else meshPosition.y + this.boundingBox.max.y + gapSize
+                    ring.position.z = meshPosition.z
 
                 when "z"
 
-                    ring.position.x = mesh.position.x
-                    ring.position.y = mesh.position.y
-                    ring.position.z = if camera.position.z > mesh.position.z then mesh.position.z + this.boundingBox.min.z - gapSize else mesh.position.z + this.boundingBox.max.z + gapSize
+                    ring.position.x = meshPosition.x
+                    ring.position.y = meshPosition.y
+                    ring.position.z = if cameraPosition.z > meshPosition.z then meshPosition.z + this.boundingBox.min.z - gapSize else meshPosition.z + this.boundingBox.max.z + gapSize
 
             this.rotationRing = ring
 
