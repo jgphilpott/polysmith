@@ -1,3 +1,7 @@
+clone = (object) ->
+
+    return JSON.parse JSON.stringify object
+
 # Credit: https://stackoverflow.com/a/64777515/1544937
 chunkArray = (array, size) ->
 
