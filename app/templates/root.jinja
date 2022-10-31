@@ -80,10 +80,10 @@
         <script src="{{ url_for('static', filename='scripts/cameras/stereo/camera.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/cameras/camera.js') }}"></script>
 
-        <script src="{{ url_for('static', filename='scripts/controls/drag.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/controls/fly.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/controls/focus.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/controls/zoom.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/controls/drag/control.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/controls/fly/control.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/controls/zoom/control.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/controls/control.js') }}"></script>
 
         <script src="{{ url_for('static', filename='libs/js/BufferGeometryUtils.js') }}"></script>
         <script src="{{ url_for('static', filename='libs/js/LineSegmentsGeometry.js') }}"></script>
@@ -186,8 +186,6 @@
             data.lights = lights = []
             data.panels = panels = []
 
-            data.controls = controls = {}
-
             data.serverStore = serverStore = new ServerStorage()
             data.localStore = localStore = new LocalStorage()
 
@@ -238,11 +236,8 @@
 
             new Light("ambient"); new Light("point")
 
-            data.camera = camera = new Camera("perspective").add()
-
-            data.controls = controls = addDragControls()
-            data.controls = controls = addFlyControls()
-            data.controls = controls = addZoomControls()
+            data.camera = camera = new Camera().add()
+            data.controls = controls = new Controls().add()
 
             data.events = events = addEvents()
             data.panels = panels = addPanels()
