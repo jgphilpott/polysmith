@@ -4,7 +4,7 @@ class LineMaterial
 
     constructor : (type, color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2, vertexColors = false, alphaToCoverage = false) ->
 
-        @type = type.toLowerCase().trim()
+        @type = lower type.trim()
 
         switch this.type
 

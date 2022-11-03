@@ -109,22 +109,23 @@
         <script src="{{ url_for('static', filename='scripts/materials/mesh/toon/material.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/materials/mesh/material.js') }}"></script>
 
-        <script src="{{ url_for('static', filename='scripts/geometries/box.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/geometries/circle.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/geometries/cone.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/geometries/cylinder.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/geometries/image.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/geometries/knot.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/geometries/line.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/geometries/line2.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/geometries/plane.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/geometries/quadrilateral.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/geometries/ring.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/geometries/sphere.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/geometries/text.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/geometries/torus.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/geometries/triangle.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/geometries/tube.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/meshes/box/mesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/meshes/circle/mesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/meshes/cone/mesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/meshes/cylinder/mesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/meshes/image/mesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/meshes/knot/mesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/meshes/line/mesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/meshes/line2/mesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/meshes/plane/mesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/meshes/quadrilateral/mesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/meshes/ring/mesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/meshes/sphere/mesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/meshes/text/mesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/meshes/torus/mesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/meshes/triangle/mesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/meshes/tube/mesh.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/meshes/mesh.js') }}"></script>
 
         <script src="{{ url_for('static', filename='scripts/etc/events.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/etc/settings.js') }}"></script>
@@ -196,22 +197,6 @@
             data.tooltips = tooltips = new Tooltips()
 
             data.help = help = new Help()
-
-            let box = addBox
-            let circle = addCircle
-            let cone = addCone
-            let cylinder = addCylinder
-            let knot = addKnot
-            let line = addLine
-            let line2 = addLine2
-            let plane = addPlane
-            let quadrilateral = addQuadrilateral
-            let ring = addRing
-            let sphere = addSphere
-            let text = addText
-            let torus = addTorus
-            let triangle = addTriangle
-            let tube = addTube
 
             console.log("Welcome to " + data.title + "!")
 

@@ -4,7 +4,7 @@ class MeshMaterial
 
     constructor : (type, color = blackThree, texture = null, side = THREE.DoubleSide) ->
 
-        @type = type.toLowerCase().trim()
+        @type = lower type.trim()
 
         switch this.type
 

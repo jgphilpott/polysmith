@@ -144,69 +144,6 @@ addPanelEvents = (panel) ->
 
     return panel
 
-addMeshEvents = (mesh) ->
-
-    events.addEventListener mesh, "mouseover", (event) ->
-
-        if settings.getSetting "ui", "metabox"
-
-            drawMetabox "draw", mesh, event.origDomEvent
-
-    events.addEventListener mesh, "mousemove", (event) ->
-
-        if events.operation.key
-
-            if events.operation.mesh.uuid == mesh.uuid then composer.outlinePass.visibleEdgeColor.set redThree else composer.outlinePass.visibleEdgeColor.set greenThree
-            if events.operation.mesh.uuid == mesh.uuid then $("#canvas").css "cursor", "not-allowed" else $("#canvas").css "cursor", "copy"
-
-
-        else
-
-            if mesh.lock == "locked" then composer.outlinePass.visibleEdgeColor.set redThree else composer.outlinePass.visibleEdgeColor.set blackThree
-            if mesh.lock == "locked" then $("#canvas").css "cursor", "not-allowed" else $("#canvas").css "cursor", "grab"
-
-        composer.outlinePass.selectedObjects = [mesh]
-
-        if settings.getSetting "ui", "metabox"
-
-            drawMetabox "update", mesh, event.origDomEvent
-
-    events.addEventListener mesh, "mouseout", (event) ->
-
-        if events.operation.key then $("#canvas").css "cursor", "copy" else $("#canvas").css "cursor", ""
-
-        composer.outlinePass.selectedObjects = []
-
-        eraseMetabox()
-
-    events.addEventListener mesh, "mousedown", (event) ->
-
-        if mesh.lock != "locked" then makeDragable mesh, event.origDomEvent
-
-    events.addEventListener mesh, "click", (event) ->
-
-        event.origDomEvent.stopImmediatePropagation()
-
-        if not camera.dragged
-
-            if events.operation.key
-
-                updateMesh mesh, "operation", events.operation.key, null, true
-
-            else if tooltips.getSelected() != mesh
-
-                tooltips.setSelected mesh
-
-    events.addEventListener mesh, "dblclick", (event) ->
-
-        if camera.focus mesh.position
-
-            $("#canvas").css "cursor", ""
-
-    events.addEventListener mesh, "contextmenu", (event) ->
-
-        contextMenu "mesh", mesh, event.origDomEvent
-
 makeDragable = (element, origEvent = null) ->
 
     xOffset = 0
