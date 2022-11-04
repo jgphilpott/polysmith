@@ -2,11 +2,6 @@ clone = (object) ->
 
     return JSON.parse JSON.stringify object
 
-# Credit: https://stackoverflow.com/a/64777515/1544937
-chunkArray = (array, size) ->
-
-    return [...Array Math.ceil array.length / size].map (chunk, index) -> array.slice size * index, size + size * index
-
 calculatePercent = (min, max, value) ->
 
     return ((value - min) / (max - min)) * 100
@@ -158,7 +153,12 @@ updateMetrics = (mesh) ->
 getSurfaceArea = (mesh) ->
 
     surface = 0
+
     geometry = mesh.geometry
+
+    if geometry.isBufferGeometry
+
+        geometry = new THREE.Geometry().fromBufferGeometry geometry
 
     if geometry.faces and geometry.vertices
 
@@ -173,30 +173,8 @@ getSurfaceArea = (mesh) ->
             p3 = new THREE.Vector3(v3.x, v3.y, v3.z).applyMatrix4 mesh.matrix
 
             triangle = new THREE.Triangle p1, p2, p3
-            area = triangle.getArea()
 
-            surface += area
-
-    else if geometry.attributes.position.array
-
-        faces = chunkArray geometry.attributes.position.array, 9
-
-        for face in faces
-
-            vertices = chunkArray face, 3
-
-            v1 = vertices[0]
-            v2 = vertices[1]
-            v3 = vertices[2]
-
-            p1 = new THREE.Vector3(v1[0], v1[1], v1[2]).applyMatrix4 mesh.matrix
-            p2 = new THREE.Vector3(v2[0], v2[1], v2[2]).applyMatrix4 mesh.matrix
-            p3 = new THREE.Vector3(v3[0], v3[1], v3[2]).applyMatrix4 mesh.matrix
-
-            triangle = new THREE.Triangle p1, p2, p3
-            area = triangle.getArea()
-
-            surface += area
+            surface += triangle.getArea()
 
     mesh.surface = surface
 
@@ -206,24 +184,16 @@ getSurfaceArea = (mesh) ->
 getVolume = (mesh) ->
 
     volume = 0
-    position = null
-    geometry = mesh.geometry
 
-    p1 = new THREE.Vector3()
-    p2 = new THREE.Vector3()
-    p3 = new THREE.Vector3()
+    v1 = new THREE.Vector3()
+    v2 = new THREE.Vector3()
+    v3 = new THREE.Vector3()
+
+    geometry = mesh.geometry
 
     if not geometry.isBufferGeometry
 
-        try
-
-            geometry = new THREE.BufferGeometry().fromGeometry geometry
-
-        catch error
-
-            console.warn "The 'geometry' must be an indexed or non-indexed buffer geometry."
-
-            return volume
+        geometry = new THREE.BufferGeometry().fromGeometry geometry
 
     position = geometry.attributes.position
 
@@ -234,11 +204,11 @@ getVolume = (mesh) ->
 
         for face in [0...faces]
 
-            p1.fromBufferAttribute(position, index.array[face * 3 + 0]).applyMatrix4 mesh.matrix
-            p2.fromBufferAttribute(position, index.array[face * 3 + 1]).applyMatrix4 mesh.matrix
-            p3.fromBufferAttribute(position, index.array[face * 3 + 2]).applyMatrix4 mesh.matrix
+            v1.fromBufferAttribute(position, index.array[face * 3 + 0]).applyMatrix4 mesh.matrix
+            v2.fromBufferAttribute(position, index.array[face * 3 + 1]).applyMatrix4 mesh.matrix
+            v3.fromBufferAttribute(position, index.array[face * 3 + 2]).applyMatrix4 mesh.matrix
 
-            volume += signedVolumeOfTriangle p1, p2, p3
+            volume += signedVolumeOfTriangle v1, v2, v3
 
     else
 
@@ -246,11 +216,11 @@ getVolume = (mesh) ->
 
         for face in [0...faces]
 
-            p1.fromBufferAttribute(position, face * 3 + 0).applyMatrix4 mesh.matrix
-            p2.fromBufferAttribute(position, face * 3 + 1).applyMatrix4 mesh.matrix
-            p3.fromBufferAttribute(position, face * 3 + 2).applyMatrix4 mesh.matrix
+            v1.fromBufferAttribute(position, face * 3 + 0).applyMatrix4 mesh.matrix
+            v2.fromBufferAttribute(position, face * 3 + 1).applyMatrix4 mesh.matrix
+            v3.fromBufferAttribute(position, face * 3 + 2).applyMatrix4 mesh.matrix
 
-            volume += signedVolumeOfTriangle p1, p2, p3
+            volume += signedVolumeOfTriangle v1, v2, v3
 
     mesh.volume = volume
 

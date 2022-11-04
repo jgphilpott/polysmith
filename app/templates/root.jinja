@@ -5,9 +5,11 @@
     <head>
 
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>{{ data.title }}</title>
+        <script>const POLY = {}</script>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="shortcut icon" href="{{ url_for('static', filename='imgs/theme/logo.png') }}">
 
@@ -45,16 +47,16 @@
         <script src="{{ url_for('static', filename='libs/js/importers/STLLoader.js') }}"></script>
         <script src="{{ url_for('static', filename='libs/js/importers/SVGLoader.js') }}"></script>
 
+        <script src="{{ url_for('static', filename='scripts/files/export/file.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/files/export/obj/file.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/files/export/ply/file.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/files/export/stl/file.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/files/export/file.js') }}"></script>
 
+        <script src="{{ url_for('static', filename='scripts/files/import/file.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/files/import/obj/file.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/files/import/ply/file.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/files/import/stl/file.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/files/import/svg/file.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/files/import/file.js') }}"></script>
 
         <script src="{{ url_for('static', filename='scripts/files/local/file.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/files/server/file.js') }}"></script>
@@ -66,24 +68,24 @@
         <script src="{{ url_for('static', filename='scripts/colors/three/grayscale.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/colors/three/rainbow.js') }}"></script>
 
+        <script src="{{ url_for('static', filename='scripts/lights/light.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/lights/ambient/light.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/lights/directional/light.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/lights/hemisphere/light.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/lights/point/light.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/lights/spot/light.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/lights/light.js') }}"></script>
 
+        <script src="{{ url_for('static', filename='scripts/cameras/camera.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/cameras/array/camera.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/cameras/cube/camera.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/cameras/orthographic/camera.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/cameras/perspective/camera.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/cameras/stereo/camera.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/cameras/camera.js') }}"></script>
 
+        <script src="{{ url_for('static', filename='scripts/controls/control.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/controls/drag/control.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/controls/fly/control.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/controls/zoom/control.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/controls/control.js') }}"></script>
 
         <script src="{{ url_for('static', filename='libs/js/BufferGeometryUtils.js') }}"></script>
         <script src="{{ url_for('static', filename='libs/js/LineSegmentsGeometry.js') }}"></script>
@@ -92,11 +94,15 @@
         <script src="{{ url_for('static', filename='libs/js/LineMaterial.js') }}"></script>
         <script src="{{ url_for('static', filename='libs/js/LineMesh.js') }}"></script>
 
+        <script src="{{ url_for('static', filename='scripts/geometries/geometry.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/geometries/box/geometry.js') }}"></script>
+
+        <script src="{{ url_for('static', filename='scripts/materials/line/material.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/materials/line/basic/material.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/materials/line/dashed/material.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/materials/line/thick/material.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/materials/line/material.js') }}"></script>
 
+        <script src="{{ url_for('static', filename='scripts/materials/mesh/material.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/materials/mesh/basic/material.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/materials/mesh/depth/material.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/materials/mesh/distance/material.js') }}"></script>
@@ -107,8 +113,8 @@
         <script src="{{ url_for('static', filename='scripts/materials/mesh/physical/material.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/materials/mesh/standard/material.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/materials/mesh/toon/material.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/materials/mesh/material.js') }}"></script>
 
+        <script src="{{ url_for('static', filename='scripts/meshes/mesh.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/meshes/box/mesh.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/meshes/circle/mesh.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/meshes/cone/mesh.js') }}"></script>
@@ -125,7 +131,6 @@
         <script src="{{ url_for('static', filename='scripts/meshes/torus/mesh.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/meshes/triangle/mesh.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/meshes/tube/mesh.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/meshes/mesh.js') }}"></script>
 
         <script src="{{ url_for('static', filename='scripts/etc/events.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/etc/settings.js') }}"></script>
