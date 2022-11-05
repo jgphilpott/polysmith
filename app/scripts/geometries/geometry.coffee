@@ -23,8 +23,20 @@ class Geometry
         this.geometry.getSurface = this.getSurface
         this.geometry.setSurface = this.setSurface
 
+        this.geometry.getBoundingBox = this.getBoundingBox
+        this.geometry.setBoundingBox = this.setBoundingBox
+
+        this.geometry.getBoundingSphere = this.getBoundingSphere
+        this.geometry.setBoundingSphere = this.setBoundingSphere
+
         this.geometry.getVolume = this.getVolume
         this.geometry.setVolume = this.setVolume
+
+        this.translate = this.geometry.translate
+        this.center = this.geometry.center
+
+        this.geometry.setBoundingBox()
+        this.geometry.setBoundingSphere()
 
         this.geometry.setSurface()
         this.geometry.setVolume()
@@ -59,6 +71,22 @@ class Geometry
 
             return this
 
+    getBoundingBox : () ->
+
+        return this.boundingBox
+
+    setBoundingBox : () ->
+
+        this.computeBoundingBox()
+
+    getBoundingSphere : () ->
+
+        return this.boundingSphere
+
+    setBoundingSphere : () ->
+
+        this.computeBoundingSphere()
+
     getSurface : () ->
 
         return this.surface
@@ -82,8 +110,6 @@ class Geometry
                 surface += triangle.getArea()
 
         this.surface = surface
-
-        return surface
 
     getVolume : () ->
 
@@ -127,5 +153,3 @@ class Geometry
                 volume += signedVolumeOfTriangle v1, v2, v3
 
         this.volume = volume
-
-        return volume
