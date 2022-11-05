@@ -10,6 +10,10 @@ class Geometry
 
                 @geometry = new POLY.BoxBufferGeometry params; break
 
+            when "circle"
+
+                @geometry = new POLY.CircleBufferGeometry params; break
+
         this.geometry.getBuffer = this.getBuffer
         this.geometry.setBuffer = this.setBuffer
 

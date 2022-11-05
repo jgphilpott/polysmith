@@ -1,8 +1,6 @@
-# Link: https://threejs.org/docs/#api/en/geometries/CircleGeometry
-
 newCircle = (radius = 10, radialSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
-    geometry = new THREE.CircleGeometry radius, radialSegments
+    geometry = new CircleGeometry radius, radialSegments
     material = new MeshMaterial type, color
 
     circle = new THREE.Mesh geometry, material
