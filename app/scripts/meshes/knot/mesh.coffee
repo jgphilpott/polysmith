@@ -1,5 +1,3 @@
-# Link: https://threejs.org/docs/#api/en/geometries/TorusKnotGeometry
-
 newKnot = (size = 10, thickness = 3, radialSegments = 42, tubularSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
     geometry = new THREE.TorusKnotGeometry size, thickness, tubularSegments, radialSegments

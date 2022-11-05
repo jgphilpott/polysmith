@@ -1,8 +1,6 @@
-# Link: https://threejs.org/docs/#api/en/geometries/ConeGeometry
-
 newCone = (radius = 5, height = 10, radialSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
-    geometry = new THREE.ConeGeometry radius, height, radialSegments
+    geometry = new ConeGeometry radius, height, radialSegments
     material = new MeshMaterial type, color
 
     cone = new THREE.Mesh geometry, material

@@ -1,5 +1,3 @@
-# Link: https://threejs.org/docs/#api/en/geometries/SphereGeometry
-
 newSphere = (radius = 5, widthSegments = 42, heightSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
     geometry = new THREE.SphereGeometry radius, widthSegments, heightSegments

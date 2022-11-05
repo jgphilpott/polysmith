@@ -1,5 +1,3 @@
-# Link: https://threejs.org/docs/#api/en/geometries/PlaneGeometry
-
 newPlane = (width = 10, height = 10, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
     geometry = new THREE.PlaneGeometry width, height

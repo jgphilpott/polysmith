@@ -1,5 +1,3 @@
-# Link: https://threejs.org/docs/#examples/en/geometries/TextGeometry
-
 newText = (text = "Text", size = 12, height = 3, bevel = false, font = "ubuntu", type = "normal", color = blackThree, center = true, x = 0, y = 0, z = 0, rotateX = 0, rotateY = 0, rotateZ = 180) ->
 
     params =

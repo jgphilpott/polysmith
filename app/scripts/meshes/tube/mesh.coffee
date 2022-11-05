@@ -1,5 +1,3 @@
-# Link: https://threejs.org/docs/#api/en/geometries/TubeGeometry
-
 newPath = (vertices = [[]]) ->
 
     path = []

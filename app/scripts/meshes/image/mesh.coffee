@@ -1,5 +1,3 @@
-# Link: https://threejs.org/docs/#api/en/geometries/ExtrudeGeometry
-
 newImage = (image = "image", type = "normal", color = blackThree, center = true, x = 0, y = 0, z = 0, rotateX = 0, rotateY = 0, rotateZ = 0) ->
 
     shapes = []

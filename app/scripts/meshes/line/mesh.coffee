@@ -1,5 +1,3 @@
-# Link: https://threejs.org/docs/#api/en/objects/Line
-
 lineGeometry = (vertices = [[10, 10, 10], [-10, -10, -10]]) ->
 
     geometry = new THREE.Geometry()

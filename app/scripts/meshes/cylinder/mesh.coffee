@@ -1,5 +1,3 @@
-# Link: https://threejs.org/docs/#api/en/geometries/CylinderGeometry
-
 newCylinder = (length = 10, positiveRadius = 5, negativeRadius = 5, radialSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
     geometry = new THREE.CylinderGeometry positiveRadius, negativeRadius, length, radialSegments

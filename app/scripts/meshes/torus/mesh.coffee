@@ -1,5 +1,3 @@
-# Link: https://threejs.org/docs/#api/en/geometries/TorusGeometry
-
 newTorus = (radius = 5, thickness = 1, radialSegments = 42, tubularSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
     geometry = new THREE.TorusGeometry radius, thickness, radialSegments, tubularSegments

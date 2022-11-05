@@ -14,6 +14,10 @@ class Geometry
 
                 @geometry = new POLY.CircleBufferGeometry params; break
 
+            when "cone"
+
+                @geometry = new POLY.ConeBufferGeometry params; break
+
         this.geometry.getBuffer = this.getBuffer
         this.geometry.setBuffer = this.setBuffer
 

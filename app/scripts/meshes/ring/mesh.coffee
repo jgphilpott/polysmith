@@ -1,5 +1,3 @@
-# Link: https://threejs.org/docs/#api/en/geometries/RingGeometry
-
 newRing = (innerRadius = 5, outerRadius = 10, radialSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
     geometry = new THREE.RingGeometry innerRadius, outerRadius, radialSegments
