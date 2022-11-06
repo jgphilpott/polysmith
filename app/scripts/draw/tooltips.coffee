@@ -32,9 +32,9 @@ class Tooltips
 
         geometry = new THREE.PlaneGeometry 6, 3
 
-        xIcon = new THREE.TextureLoader().load "/app/imgs/icons/tooltips/rotate/red.png"
-        yIcon = new THREE.TextureLoader().load "/app/imgs/icons/tooltips/rotate/green.png"
-        zIcon = new THREE.TextureLoader().load "/app/imgs/icons/tooltips/rotate/blue.png"
+        xIcon = new THREE.TextureLoader().load "/app/imgs/icons/tools/rotate/red.png"
+        yIcon = new THREE.TextureLoader().load "/app/imgs/icons/tools/rotate/green.png"
+        zIcon = new THREE.TextureLoader().load "/app/imgs/icons/tools/rotate/blue.png"
 
         xMaterial = new MeshMaterial "basic", null, xIcon
         yMaterial = new MeshMaterial "basic", null, yIcon

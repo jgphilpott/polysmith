@@ -4,8 +4,8 @@ newImage = (image = "image", type = "normal", color = blackThree, center = true,
 
     params =
 
-        steps: 3
-        depth: 10
+        steps: 1
+        depth: 3
 
         bevelEnabled: false
         bevelThickness: 1
@@ -41,6 +41,6 @@ addImage = (image = "image", type = "normal", color = blackThree, center = true,
 
     loader = new THREE.SVGLoader()
 
-    loader.load "./app/imgs/icons/shapes/special/" + image + ".svg", (file) ->
+    loader.load "./app/imgs/icons/svg/" + image + ".svg", (file) ->
 
         addMesh newImage file, type, color, center, x, y, z, rotateX, rotateY, rotateZ
