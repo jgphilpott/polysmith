@@ -27,6 +27,10 @@ addShortcutsPanel = ->
     panel.append "<img title='Text' id='text' class='shape' src='/app/imgs/icons/shapes/special/text.svg'>"
     panel.append "<img title='Image' id='image' class='shape' src='/app/imgs/icons/shapes/special/image.svg'>"
 
+    panel.append "<img title='Octahedron' id='octahedron' class='shape' src='/app/imgs/icons/shapes/hedrons/octahedron.png'>"
+    panel.append "<img title='Dodecahedron' id='dodecahedron' class='shape' src='/app/imgs/icons/shapes/hedrons/dodecahedron.png'>"
+    panel.append "<img title='Icosahedron' id='icosahedron' class='shape' src='/app/imgs/icons/shapes/hedrons/icosahedron.png'>"
+
     panel.append "<img title='Toggle Shapes Panel' id='toggle' class='nav' src='/app/imgs/panels/nav/" + (if shapesVisible then "x" else "+") + ".png'>"
 
     panel.find("img.shape").toArray().forEach (shape) ->
