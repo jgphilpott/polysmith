@@ -1,3 +1,5 @@
+# Link: https://threejs.org/docs/#api/en/core/BufferGeometry
+
 class Geometry
 
     constructor : (type, params) ->
@@ -17,6 +19,10 @@ class Geometry
             when "cone"
 
                 @geometry = new POLY.ConeBufferGeometry params; break
+
+            when "cylinder"
+
+                @geometry = new POLY.CylinderBufferGeometry params; break
 
         this.geometry.getBuffer = this.getBuffer
         this.geometry.setBuffer = this.setBuffer

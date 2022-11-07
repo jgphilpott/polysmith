@@ -1,6 +1,6 @@
 newCylinder = (length = 10, positiveRadius = 5, negativeRadius = 5, radialSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
-    geometry = new THREE.CylinderGeometry positiveRadius, negativeRadius, length, radialSegments
+    geometry = new CylinderGeometry length, positiveRadius, negativeRadius, radialSegments
     material = new MeshMaterial type, color
 
     cylinder = new THREE.Mesh geometry, material
