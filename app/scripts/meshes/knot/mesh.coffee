@@ -1,6 +1,6 @@
-newKnot = (size = 10, thickness = 3, radialSegments = 42, tubularSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
+newKnot = (radius = 10, thickness = 3, radialSegments = 42, tubularSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
-    geometry = new THREE.TorusKnotGeometry size, thickness, tubularSegments, radialSegments
+    geometry = new TorusKnotGeometry radius, thickness, radialSegments, tubularSegments
     material = new MeshMaterial type, color
 
     knot = new THREE.Mesh geometry, material
@@ -12,6 +12,6 @@ newKnot = (size = 10, thickness = 3, radialSegments = 42, tubularSegments = 42, 
 
     return knot
 
-addKnot = (size = 10, thickness = 3, radialSegments = 42, tubularSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
+addKnot = (radius = 10, thickness = 3, radialSegments = 42, tubularSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
-    return addMesh newKnot size, thickness, radialSegments, tubularSegments, position, type, color
+    return addMesh newKnot radius, thickness, radialSegments, tubularSegments, position, type, color

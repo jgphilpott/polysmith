@@ -24,6 +24,18 @@ class Geometry
 
                 @geometry = new POLY.CylinderBufferGeometry params; break
 
+            when "knot"
+
+                @geometry = new POLY.TorusKnotBufferGeometry params; break
+
+            when "sphere"
+
+                @geometry = new POLY.SphereBufferGeometry params; break
+
+            when "torus"
+
+                @geometry = new POLY.TorusBufferGeometry params; break
+
         this.geometry.getBuffer = this.getBuffer
         this.geometry.setBuffer = this.setBuffer
 
@@ -85,7 +97,7 @@ class Geometry
 
         return this.boundingBox
 
-    setBoundingBox : () ->
+    setBoundingBox : (box) ->
 
         this.computeBoundingBox()
 
@@ -93,7 +105,7 @@ class Geometry
 
         return this.boundingSphere
 
-    setBoundingSphere : () ->
+    setBoundingSphere : (sphere) ->
 
         this.computeBoundingSphere()
 
@@ -101,7 +113,7 @@ class Geometry
 
         return this.surface
 
-    setSurface : () -> # Credit: https://stackoverflow.com/a/50937272/1544937
+    setSurface : (surface) -> # Credit: https://stackoverflow.com/a/50937272/1544937
 
         surface = 0
 
@@ -125,7 +137,7 @@ class Geometry
 
         return this.volume
 
-    setVolume : () -> # Credit: https://discourse.threejs.org/t/volume-of-three-buffergeometry/5109
+    setVolume : (volume) -> # Credit: https://discourse.threejs.org/t/volume-of-three-buffergeometry/5109
 
         volume = 0
 

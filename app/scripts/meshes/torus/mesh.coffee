@@ -1,6 +1,6 @@
 newTorus = (radius = 5, thickness = 1, radialSegments = 42, tubularSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
-    geometry = new THREE.TorusGeometry radius, thickness, radialSegments, tubularSegments
+    geometry = new TorusGeometry radius, thickness, radialSegments, tubularSegments
     material = new MeshMaterial type, color
 
     torus = new THREE.Mesh geometry, material
