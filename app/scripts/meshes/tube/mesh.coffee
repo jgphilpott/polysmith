@@ -1,16 +1,6 @@
-newPath = (vertices = [[]]) ->
+newTube = (vertices = [[10, 10, 10], [-10, -10, -10]], radius = 1, radialSegments = 42, tubularSegments = 42, closed = false, type = "normal", color = blackThree) ->
 
-    path = []
-
-    for vertex in vertices
-
-        path.push new THREE.Vector3 vertex[0], vertex[1], vertex[2]
-
-    return new THREE.CatmullRomCurve3 path
-
-newTube = (vertices = [[10, 10, 10], [-10, -10, -10]], radius = 1, radialSegments = 42, tubularSegments = 1, closed = false, type = "normal", color = blackThree) ->
-
-    geometry = new THREE.TubeGeometry newPath(vertices), tubularSegments, radius, radialSegments, closed
+    geometry = new TubeGeometry vertices, radius, radialSegments, tubularSegments, closed
     material = new MeshMaterial type, color
 
     tube = new THREE.Mesh geometry, material
@@ -20,6 +10,6 @@ newTube = (vertices = [[10, 10, 10], [-10, -10, -10]], radius = 1, radialSegment
 
     return tube
 
-addTube = (vertices = [[10, 10, 10], [-10, -10, -10]], radius = 1, radialSegments = 42, tubularSegments = 1, closed = false, type = "normal", color = blackThree) ->
+addTube = (vertices = [[10, 10, 10], [-10, -10, -10]], radius = 1, radialSegments = 42, tubularSegments = 42, closed = false, type = "normal", color = blackThree) ->
 
     return addMesh newTube vertices, radius, radialSegments, tubularSegments, closed, type, color

@@ -44,6 +44,10 @@ class Geometry
 
                 @geometry = new POLY.TriangleBufferGeometry params; break
 
+            when "tube"
+
+                @geometry = new POLY.TubeBufferGeometry params; break
+
         this.geometry.getBuffer = this.getBuffer
         this.geometry.setBuffer = this.setBuffer
 
