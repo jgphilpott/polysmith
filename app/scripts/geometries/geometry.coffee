@@ -28,6 +28,10 @@ class Geometry
 
                 @geometry = new POLY.TorusKnotBufferGeometry params; break
 
+            when "quadrilateral"
+
+                @geometry = new POLY.QuadrilateralBufferGeometry params; break
+
             when "sphere"
 
                 @geometry = new POLY.SphereBufferGeometry params; break
@@ -35,6 +39,10 @@ class Geometry
             when "torus"
 
                 @geometry = new POLY.TorusBufferGeometry params; break
+
+            when "triangle"
+
+                @geometry = new POLY.TriangleBufferGeometry params; break
 
         this.geometry.getBuffer = this.getBuffer
         this.geometry.setBuffer = this.setBuffer
