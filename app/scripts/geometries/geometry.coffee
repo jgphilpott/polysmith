@@ -32,6 +32,10 @@ class Geometry
 
                 @geometry = new POLY.QuadrilateralBufferGeometry params; break
 
+            when "ring"
+
+                @geometry = new POLY.RingBufferGeometry params; break
+
             when "sphere"
 
                 @geometry = new POLY.SphereBufferGeometry params; break
