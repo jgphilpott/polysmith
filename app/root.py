@@ -65,11 +65,11 @@ if not exists(libs_dir):
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/59ad8432ba8567e91176e669454b9afa/raw/2e51fdb9eb1ea7a050e61da070a33c3611afea4b/morph.js", js_libs_dir + "/morph.js")
 
     urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/utils/BufferGeometryUtils.js", js_libs_dir + "/BufferGeometryUtils.js")
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/77709de890b806426089de1ff4e78758/raw/ee6c712af2e73bd8db799506d7863c45c493e744/LineSegmentsGeometry.js", js_libs_dir + "/LineSegmentsGeometry.js")
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/ec71d7abcf504f85e01ffe9e297a682c/raw/28bde3afab2cb8df3a46d84e689774b243a6c8c2/LineGeometry.js", js_libs_dir + "/LineGeometry.js")
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/9e1cf7758b8d7cf02537bb15aacdba6a/raw/d28c4c67d30e06cabdd0574eb6dcf0a0a717499b/LineMaterial.js", js_libs_dir + "/LineMaterial.js")
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/605923031deec863802ca6f61ca9e688/raw/691d91ef4c854d8d2d278c7f60ccf730e06b11ed/LineSegments.js", js_libs_dir + "/LineSegments.js")
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/ec6e0b40dbdd02c9d4cfae0dd2166c5e/raw/06e67919d42984ab995813a559ede0182fdd7cc1/LineMesh.js", js_libs_dir + "/LineMesh.js")
+    urlretrieve("https://gist.githubusercontent.com/jgphilpott/77709de890b806426089de1ff4e78758/raw/073230320a9aba84ac8113767d678f789ee6f7c0/LineThickSegmentsGeometry.js", js_libs_dir + "/LineThickSegmentsGeometry.js")
+    urlretrieve("https://gist.githubusercontent.com/jgphilpott/ec71d7abcf504f85e01ffe9e297a682c/raw/061aa750b828eeb4deb32769ca05a59dec0f9267/LineThickGeometry.js", js_libs_dir + "/LineThickGeometry.js")
+    urlretrieve("https://gist.githubusercontent.com/jgphilpott/9e1cf7758b8d7cf02537bb15aacdba6a/raw/bfa4f28cfc89c555d1b063a6b836056a5d41df3b/LineThickMaterial.js", js_libs_dir + "/LineThickMaterial.js")
+    urlretrieve("https://gist.githubusercontent.com/jgphilpott/605923031deec863802ca6f61ca9e688/raw/9607fc300870925241831dcb22e926a83fee7d3a/LineThickSegments.js", js_libs_dir + "/LineThickSegments.js")
+    urlretrieve("https://gist.githubusercontent.com/jgphilpott/ec6e0b40dbdd02c9d4cfae0dd2166c5e/raw/0d2c20765653b311337d79f65c168b3573c76e19/LineThickMesh.js", js_libs_dir + "/LineThickMesh.js")
 
     urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/postprocessing/EffectComposer.js", js_libs_dir + "/EffectComposer.js")
     urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/postprocessing/OutlinePass.js", js_libs_dir + "/OutlinePass.js")

@@ -34,7 +34,7 @@ addAxisX = (min = -scale, max = scale) ->
 
     if settings.getSetting "axes", "xAxis"
 
-        axisX = newLine2 [[min, 0, 0], [max, 0, 0]], "thick", redThree, 3
+        axisX = newStroke [[min, 0, 0], [max, 0, 0]], "thick", redThree, 3
 
         axisX.name = "axis-x"
 
@@ -54,7 +54,7 @@ addAxisY = (min = -scale, max = scale) ->
 
     if settings.getSetting "axes", "yAxis"
 
-        axisY = newLine2 [[0, min, 0], [0, max, 0]], "thick", greenThree, 3
+        axisY = newStroke [[0, min, 0], [0, max, 0]], "thick", greenThree, 3
 
         axisY.name = "axis-y"
 
@@ -74,7 +74,7 @@ addAxisZ = (min = -scale, max = scale) ->
 
     if settings.getSetting "axes", "zAxis"
 
-        axisZ = newLine2 [[0, 0, min], [0, 0, max]], "thick", blueThree, 3
+        axisZ = newStroke [[0, 0, min], [0, 0, max]], "thick", blueThree, 3
 
         axisZ.name = "axis-z"
 

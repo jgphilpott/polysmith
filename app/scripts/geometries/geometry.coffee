@@ -28,6 +28,10 @@ class Geometry
 
                 @geometry = new POLY.TorusKnotBufferGeometry params; break
 
+            when "line"
+
+                @geometry = new POLY.LineBufferGeometry params; break
+
             when "plane"
 
                 @geometry = new POLY.PlaneBufferGeometry params; break
@@ -43,6 +47,10 @@ class Geometry
             when "sphere"
 
                 @geometry = new POLY.SphereBufferGeometry params; break
+
+            when "stroke"
+
+                @geometry = new POLY.StrokeBufferGeometry params; break
 
             when "torus"
 
@@ -80,8 +88,10 @@ class Geometry
         this.geometry.setBoundingBox()
         this.geometry.setBoundingSphere()
 
-        this.geometry.setSurface()
-        this.geometry.setVolume()
+        if this.type != "line" and this.type != "stroke"
+
+            this.geometry.setSurface()
+            this.geometry.setVolume()
 
         return this.geometry
 
