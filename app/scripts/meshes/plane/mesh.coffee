@@ -1,6 +1,6 @@
 newPlane = (width = 10, height = 10, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
-    geometry = new THREE.PlaneGeometry width, height
+    geometry = new PlaneGeometry width, height
     material = new MeshMaterial type, color
 
     plane = new THREE.Mesh geometry, material

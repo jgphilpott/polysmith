@@ -28,6 +28,10 @@ class Geometry
 
                 @geometry = new POLY.TorusKnotBufferGeometry params; break
 
+            when "plane"
+
+                @geometry = new POLY.PlaneBufferGeometry params; break
+
             when "quadrilateral"
 
                 @geometry = new POLY.QuadrilateralBufferGeometry params; break
