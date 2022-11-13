@@ -52,6 +52,10 @@ class Geometry
 
                 @geometry = new POLY.StrokeBufferGeometry params; break
 
+            when "text"
+
+                @geometry = new POLY.TextBufferGeometry params; break
+
             when "torus"
 
                 @geometry = new POLY.TorusBufferGeometry params; break

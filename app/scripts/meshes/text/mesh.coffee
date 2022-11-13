@@ -1,43 +1,21 @@
-newText = (text = "Text", size = 12, height = 3, bevel = false, font = "ubuntu", type = "normal", color = blackThree, center = true, x = 0, y = 0, z = 0, rotateX = 0, rotateY = 0, rotateZ = 180) ->
+newText = (text = "Text", font = "ubuntu", size = 12, height = 3, bevel = false, position = [0, 0, 0], type = "normal", color = blackThree, center = true) ->
 
-    params =
+    mesh = new THREE.Mesh()
 
-        font: font
-
-        size: size
-        height: height
-        curveSegments: 12
-
-        bevelEnabled: bevel
-        bevelThickness: 1
-        bevelSize: 1
-        bevelOffset: 0
-        bevelSegments: 3
-
-    geometry = new THREE.TextBufferGeometry text, params
+    geometry = new TextGeometry mesh, text, font, size, height, {bevel: bevel, center: center}
     material = new MeshMaterial type, color
 
-    if center
+    mesh.geometry = geometry
+    mesh.material = material
 
-        geometry.center()
+    mesh.position.set position[0], position[1], position[2]
+    mesh.rotation.z = deg$rad 180
 
-    textMesh = new THREE.Mesh geometry, material
+    mesh.class = "text"
+    mesh.name = "Text"
 
-    textMesh.rotateX deg$rad rotateX
-    textMesh.rotateY deg$rad rotateY
-    textMesh.rotateZ deg$rad rotateZ
+    return mesh
 
-    textMesh.position.set x, y, z
+addText = (text = "Text", font = "ubuntu", size = 12, height = 3, bevel = false, position = [0, 0, 0], type = "normal", color = blackThree, center = true) ->
 
-    textMesh.class = "text"
-    textMesh.name = "Text"
-
-    return textMesh
-
-addText = (text = "Text", size = 12, height = 3, bevel = false, font = "ubuntu", type = "normal", color = blackThree, center = true, x = 0, y = 0, z = 0, rotateX = 0, rotateY = 0, rotateZ = 180) ->
-
-    loader = new THREE.FontLoader()
-
-    loader.load "./app/fonts/JSON/" + font + ".json", (font) ->
-
-        addMesh newText text, size, height, bevel, font, type, color, center, x, y, z, rotateX, rotateY, rotateZ
+    return addMesh newText text, font, size, height, bevel, position, type, color, center
