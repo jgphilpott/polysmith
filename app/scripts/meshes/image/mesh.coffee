@@ -1,46 +1,20 @@
-newImage = (image = "image", type = "normal", color = blackThree, center = true, x = 0, y = 0, z = 0, rotateX = 0, rotateY = 0, rotateZ = 0) ->
+newImage = (file = "image", depth = 3, bevel = false, position = [0, 0, 0], type = "normal", color = blackThree, center = true) ->
 
-    shapes = []
+    mesh = new THREE.Mesh()
 
-    params =
-
-        steps: 1
-        depth: 3
-
-        bevelEnabled: false
-        bevelThickness: 1
-        bevelSize: 1
-        bevelOffset: 0
-        bevelSegments: 3
-
-    for path in image.paths
-
-        Array.prototype.push.apply shapes, path.toShapes()
-
-    geometry = new THREE.ExtrudeBufferGeometry shapes, params
+    geometry = new ImageGeometry mesh, file, depth, {bevelEnabled: bevel, center: center}
     material = new MeshMaterial type, color
 
-    if center
+    mesh.geometry = geometry
+    mesh.material = material
 
-        geometry.center()
+    mesh.position.set position[0], position[1], position[2]
 
-    imageMesh = new THREE.Mesh geometry, material
+    mesh.class = "image"
+    mesh.name = "Image"
 
-    imageMesh.rotateX deg$rad rotateX
-    imageMesh.rotateY deg$rad rotateY
-    imageMesh.rotateZ deg$rad rotateZ
+    return mesh
 
-    imageMesh.position.set x, y, z
+addImage = (file = "image", depth = 3, bevel = false, position = [0, 0, 0], type = "normal", color = blackThree, center = true) ->
 
-    imageMesh.class = "image"
-    imageMesh.name = "Image"
-
-    return imageMesh
-
-addImage = (image = "image", type = "normal", color = blackThree, center = true, x = 0, y = 0, z = 0, rotateX = 0, rotateY = 0, rotateZ = 0) ->
-
-    loader = new THREE.SVGLoader()
-
-    loader.load "./app/imgs/icons/svg/" + image + ".svg", (file) ->
-
-        addMesh newImage file, type, color, center, x, y, z, rotateX, rotateY, rotateZ
+    return addMesh newImage file, depth, bevel, position, type, color, center

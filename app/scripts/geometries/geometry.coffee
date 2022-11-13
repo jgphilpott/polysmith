@@ -24,6 +24,10 @@ class Geometry
 
                 @geometry = new POLY.CylinderBufferGeometry params; break
 
+            when "image"
+
+                @geometry = new POLY.ImageBufferGeometry params; break
+
             when "knot"
 
                 @geometry = new POLY.TorusKnotBufferGeometry params; break

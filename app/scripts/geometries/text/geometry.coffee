@@ -35,8 +35,8 @@ class POLY.TextBufferGeometry
             center: true
             curveSegments: 12
             bevelEnabled: false
-            bevelThickness: 10
-            bevelSize: 8
+            bevelThickness: 1
+            bevelSize: 1
             bevelOffset: 0
             bevelSegments: 3
 

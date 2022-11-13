@@ -2,7 +2,7 @@ newText = (text = "Text", font = "ubuntu", size = 12, height = 3, bevel = false,
 
     mesh = new THREE.Mesh()
 
-    geometry = new TextGeometry mesh, text, font, size, height, {bevel: bevel, center: center}
+    geometry = new TextGeometry mesh, text, font, size, height, {bevelEnabled: bevel, center: center}
     material = new MeshMaterial type, color
 
     mesh.geometry = geometry
