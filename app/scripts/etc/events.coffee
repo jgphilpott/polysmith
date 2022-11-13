@@ -12,7 +12,7 @@ addEvents = () ->
 
         for axis in axes
 
-            if axis.type == "Line2" then axis.material.resolution.set innerWidth, innerHeight
+            if axis.class == "stroke" then axis.material.resolution.set innerWidth, innerHeight
 
         renderer.setSize innerWidth, innerHeight
         composer.setSize innerWidth, innerHeight
