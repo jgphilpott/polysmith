@@ -9,6 +9,7 @@ __pycache__
 app/scripts/*/*.js
 app/scripts/*/*/*.js
 app/scripts/*/*/*/*.js
+app/scripts/*/*/*/*/*.js
 app/scripts/panels/*.js
 
 ### Styles ###
@@ -19,6 +20,7 @@ app/styles/*.css
 app/styles/*/*.css
 app/styles/*/*/*.css
 app/styles/*/*/*/*.css
+app/styles/*/*/*/*/*.css
 
 ### Config ###
 .bash_history
