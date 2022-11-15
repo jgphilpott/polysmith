@@ -25,6 +25,27 @@ addMesh = (mesh = null, properties = {}) ->
 
                 break
 
+            when "octahedron"
+
+                mesh = newOctahedron()
+                mesh.rotation.x = deg$rad 0
+
+                break
+
+            when "dodecahedron"
+
+                mesh = newDodecahedron()
+                mesh.rotation.x = deg$rad 0
+
+                break
+
+            when "icosahedron"
+
+                mesh = newIcosahedron()
+                mesh.rotation.x = deg$rad 0
+
+                break
+
             when "triangular-prism"
 
                 mesh = newCylinder 10, 5, 5, 3
@@ -105,12 +126,14 @@ addMesh = (mesh = null, properties = {}) ->
             when "text"
 
                 mesh = addText()
+                mesh.rotation.z = deg$rad 180
 
                 return
 
             when "image"
 
                 mesh = addImage()
+                mesh.rotation.x = deg$rad 0
 
                 return
 

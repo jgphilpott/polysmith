@@ -20,6 +20,18 @@ class Geometry
 
                 @geometry = new POLY.SphereBufferGeometry params; break
 
+            when "octahedron"
+
+                @geometry = new POLY.OctahedronBufferGeometry params; break
+
+            when "dodecahedron"
+
+                @geometry = new POLY.DodecahedronBufferGeometry params; break
+
+            when "icosahedron"
+
+                @geometry = new POLY.IcosahedronBufferGeometry params; break
+
             when "cone"
 
                 @geometry = new POLY.ConeBufferGeometry params; break
