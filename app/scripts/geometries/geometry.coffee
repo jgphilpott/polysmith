@@ -12,17 +12,21 @@ class Geometry
 
                 @geometry = new POLY.BoxBufferGeometry params; break
 
-            when "circle"
+            when "cylinder"
 
-                @geometry = new POLY.CircleBufferGeometry params; break
+                @geometry = new POLY.CylinderBufferGeometry params; break
+
+            when "sphere"
+
+                @geometry = new POLY.SphereBufferGeometry params; break
 
             when "cone"
 
                 @geometry = new POLY.ConeBufferGeometry params; break
 
-            when "cylinder"
+            when "capsule"
 
-                @geometry = new POLY.CylinderBufferGeometry params; break
+                @geometry = new POLY.CapsuleBufferGeometry params; break
 
             when "image"
 
@@ -32,13 +36,29 @@ class Geometry
 
                 @geometry = new POLY.TorusKnotBufferGeometry params; break
 
-            when "line"
+            when "text"
 
-                @geometry = new POLY.LineBufferGeometry params; break
+                @geometry = new POLY.TextBufferGeometry params; break
+
+            when "torus"
+
+                @geometry = new POLY.TorusBufferGeometry params; break
+
+            when "tube"
+
+                @geometry = new POLY.TubeBufferGeometry params; break
+
+            when "circle"
+
+                @geometry = new POLY.CircleBufferGeometry params; break
 
             when "plane"
 
                 @geometry = new POLY.PlaneBufferGeometry params; break
+
+            when "triangle"
+
+                @geometry = new POLY.TriangleBufferGeometry params; break
 
             when "quadrilateral"
 
@@ -48,29 +68,13 @@ class Geometry
 
                 @geometry = new POLY.RingBufferGeometry params; break
 
-            when "sphere"
+            when "line"
 
-                @geometry = new POLY.SphereBufferGeometry params; break
+                @geometry = new POLY.LineBufferGeometry params; break
 
             when "stroke"
 
                 @geometry = new POLY.StrokeBufferGeometry params; break
-
-            when "text"
-
-                @geometry = new POLY.TextBufferGeometry params; break
-
-            when "torus"
-
-                @geometry = new POLY.TorusBufferGeometry params; break
-
-            when "triangle"
-
-                @geometry = new POLY.TriangleBufferGeometry params; break
-
-            when "tube"
-
-                @geometry = new POLY.TubeBufferGeometry params; break
 
         this.geometry.getBuffer = this.getBuffer
         this.geometry.setBuffer = this.setBuffer
