@@ -29,8 +29,8 @@ drawMetabox = (type, object, event) ->
 
             objectBox.append "<p class='title'>Object</p>"
             objectBox.append "<p id='type' class='meta'><span class='label'>Type:</span> <span class='value'>" + object.class.replace("-", " ").replace(/\b\w/g, (char) -> return char.toUpperCase()) + "</span></p>"
-            objectBox.append "<p id='surface' class='meta'><span class='label'>Surface:</span> <span class='value'>" + format(object.surface, "area", unit[scale] + "Sq", 2, 0, language) + "</span></p>"
-            objectBox.append "<p id='volume' class='meta'><span class='label'>Volume:</span> <span class='value'>" + format(object.volume, "volume", unit[scale] + "Cu", 2, 0, language) + "</span></p>"
+            objectBox.append "<p id='surface' class='meta'><span class='label'>Surface:</span> <span class='value'>" + format(object.geometry.surface, "area", unit[scale] + "Sq", 2, 0, language) + "</span></p>"
+            objectBox.append "<p id='volume' class='meta'><span class='label'>Volume:</span> <span class='value'>" + format(object.geometry.volume, "volume", unit[scale] + "Cu", 2, 0, language) + "</span></p>"
 
             eventBox.append "<p class='title'>Event</p>"
             eventBox.append "<p id='x' class='intersection'><span class='label'>X</span> <span class='value'>" + format(intersects[0].point.x, "length", unit[scale], 2, 0, language) + "</span></p>"

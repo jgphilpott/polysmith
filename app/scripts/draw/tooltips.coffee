@@ -23,7 +23,7 @@ class Tooltips
 
         if selected
 
-            if settings.getSetting "tooltips", "rotation" then this.boundingBox = getBoundingBox selected
+            if settings.getSetting "tooltips", "rotation" then this.boundingBox = selected.geometry.boundingBox
             if settings.getSetting "tooltips", "bounding" then this.addRotationTools()
 
     addRotationTools : (mesh = this.selected, tools = this.rotationTools) ->

@@ -10,6 +10,24 @@ signedVolumeOfTriangle = (p1, p2, p3) ->
 
     return p1.dot(p2.cross(p3)) / 6.0
 
+getCenterPoint = (start, stop) ->
+
+    return
+
+        x: (stop.x - start.x) / 2 + start.x
+        y: (stop.y - start.y) / 2 + start.y
+        z: (stop.z - start.z) / 2 + start.z
+
+# Credit: https://stackoverflow.com/a/17411276/1544937
+circumpoint = (angle, radius) ->
+
+    radians = deg$rad angle
+
+    sin = Math.sin radians
+    cos = Math.cos radians
+
+    return [sin * radius, cos * radius]
+
 # Credit: https://stackoverflow.com/a/5624139/1544937
 component2hex = (component) ->
 
@@ -77,49 +95,6 @@ Array.prototype.filterInPlace = (condition, item) ->
 
     return this
 
-centerX = (boundingBox) ->
-
-    return - boundingBox.min.x - (Math.abs(boundingBox.max.x - boundingBox.min.x) / 2)
-
-centerY = (boundingBox) ->
-
-    return - boundingBox.min.y - (Math.abs(boundingBox.max.y - boundingBox.min.y) / 2)
-
-centerZ = (boundingBox) ->
-
-    return - boundingBox.min.z - (Math.abs(boundingBox.max.z - boundingBox.min.z) / 2)
-
-getBoundingBox = (mesh) ->
-
-    if not mesh.geometry.boundingBox
-
-        xVertices = []
-        yVertices = []
-        zVertices = []
-
-        for vertex in mesh.geometry.vertices
-
-            xVertices.push vertex.x
-            yVertices.push vertex.y
-            zVertices.push vertex.z
-
-        return
-
-            min: x: minValue(xVertices), y: minValue(yVertices), z: minValue(zVertices)
-            max: x: maxValue(xVertices), y: maxValue(yVertices), z: maxValue(zVertices)
-
-    else
-
-        return mesh.geometry.boundingBox
-
-getCenterPoint = (start, stop) ->
-
-    return
-
-        x: (stop.x - start.x) / 2 + start.x
-        y: (stop.y - start.y) / 2 + start.y
-        z: (stop.z - start.z) / 2 + start.z
-
 clearMeshOperation = () ->
 
     operationIcons = $ "#mesh.panel img.operation"
@@ -139,92 +114,15 @@ updateMetrics = (mesh) ->
 
     mesh.updateMatrix()
 
+    mesh.geometry.setVolume()
+    mesh.geometry.setSurface()
+
     panel = $ "#mesh." + mesh.uuid + ""
     controls = panel.find "#meta.controls"
 
-    mesh.volume = if mesh.class != "line" then getVolume(mesh) else 0
-    mesh.surface = if mesh.class != "line" then getSurfaceArea(mesh) else 0
-
     controls.find("#type span").text mesh.class.replace("-", " ").replace(/\b\w/g, (char) -> return char.toUpperCase())
-    controls.find("#surface span").text mesh.surface.toFixed 2
-    controls.find("#volume span").text mesh.volume.toFixed 2
-
-# Credit: https://stackoverflow.com/a/50937272/1544937
-getSurfaceArea = (mesh) ->
-
-    surface = 0
-
-    geometry = mesh.geometry
-
-    if geometry.isBufferGeometry
-
-        geometry = new THREE.Geometry().fromBufferGeometry geometry
-
-    if geometry.faces and geometry.vertices
-
-        for face in geometry.faces
-
-            v1 = geometry.vertices[face.a]
-            v2 = geometry.vertices[face.b]
-            v3 = geometry.vertices[face.c]
-
-            p1 = new THREE.Vector3(v1.x, v1.y, v1.z).applyMatrix4 mesh.matrix
-            p2 = new THREE.Vector3(v2.x, v2.y, v2.z).applyMatrix4 mesh.matrix
-            p3 = new THREE.Vector3(v3.x, v3.y, v3.z).applyMatrix4 mesh.matrix
-
-            triangle = new THREE.Triangle p1, p2, p3
-
-            surface += triangle.getArea()
-
-    mesh.surface = surface
-
-    return surface
-
-# Credit: https://discourse.threejs.org/t/volume-of-three-buffergeometry/5109
-getVolume = (mesh) ->
-
-    volume = 0
-
-    v1 = new THREE.Vector3()
-    v2 = new THREE.Vector3()
-    v3 = new THREE.Vector3()
-
-    geometry = mesh.geometry
-
-    if not geometry.isBufferGeometry
-
-        geometry = new THREE.BufferGeometry().fromGeometry geometry
-
-    position = geometry.attributes.position
-
-    if geometry.index
-
-        index = geometry.index
-        faces = index.count / 3
-
-        for face in [0...faces]
-
-            v1.fromBufferAttribute(position, index.array[face * 3 + 0]).applyMatrix4 mesh.matrix
-            v2.fromBufferAttribute(position, index.array[face * 3 + 1]).applyMatrix4 mesh.matrix
-            v3.fromBufferAttribute(position, index.array[face * 3 + 2]).applyMatrix4 mesh.matrix
-
-            volume += signedVolumeOfTriangle v1, v2, v3
-
-    else
-
-        faces = position.count / 3
-
-        for face in [0...faces]
-
-            v1.fromBufferAttribute(position, face * 3 + 0).applyMatrix4 mesh.matrix
-            v2.fromBufferAttribute(position, face * 3 + 1).applyMatrix4 mesh.matrix
-            v3.fromBufferAttribute(position, face * 3 + 2).applyMatrix4 mesh.matrix
-
-            volume += signedVolumeOfTriangle v1, v2, v3
-
-    mesh.volume = volume
-
-    return volume
+    controls.find("#surface span").text mesh.geometry.surface.toFixed 2
+    controls.find("#volume span").text mesh.geometry.volume.toFixed 2
 
 serializeMesh = (mesh) ->
 
@@ -250,5 +148,7 @@ deserializeMesh = (meshJSON) ->
     mesh.class = meshJSON.metadata.class
     mesh.material.style = meshJSON.metadata.style
     mesh.material.wireframe = meshJSON.metadata.wireframe
+
+    mesh.geometry = new Geometry "refresh", geometry: mesh.geometry
 
     return mesh

@@ -56,8 +56,8 @@ addMeshPanel = (mesh, coordinates = null) ->
         tools += "<img title='Delete Mesh' id='trash' class='tool' src='/app/imgs/panels/tools/trash.png'>"
 
         meta += "<p id='type'><b>Type:</b> <span>" + mesh.class.replace("-", " ").replace(/\b\w/g, (char) -> char.toUpperCase()) + "</span></p>"
-        meta += "<p id='surface'><b>Surface:</b> <span>" + format(mesh.surface, "area", unit[scale] + "Sq", 2, 0, language) + "</span></p>"
-        meta += "<p id='volume'><b>Volume:</b> <span>" + format(mesh.volume, "volume", unit[scale] + "Cu", 2, 0, language) + "</span></p>"
+        meta += "<p id='surface'><b>Surface:</b> <span>" + format(mesh.geometry.surface, "area", unit[scale] + "Sq", 2, 0, language) + "</span></p>"
+        meta += "<p id='volume'><b>Volume:</b> <span>" + format(mesh.geometry.volume, "volume", unit[scale] + "Cu", 2, 0, language) + "</span></p>"
 
         panel.append operations + "</div>"
         panel.append colors + "</div>"

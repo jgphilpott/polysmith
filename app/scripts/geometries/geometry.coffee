@@ -88,6 +88,10 @@ class Geometry
 
                 @geometry = new POLY.StrokeBufferGeometry params; break
 
+            else
+
+                @geometry = params.geometry
+
         this.geometry.getBuffer = this.getBuffer
         this.geometry.setBuffer = this.setBuffer
 
