@@ -54,12 +54,13 @@ if not exists(libs_dir):
     urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js", js_libs_dir + "/sha256.js")
     urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.4.0/socket.io.min.js", js_libs_dir + "/socket.js")
 
-    urlretrieve("https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css", css_libs_dir + "/jQuery-UI.css")
     urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js", js_libs_dir + "/jQuery.js")
     urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js", js_libs_dir + "/jQueryUI.js")
 
     urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js", js_libs_dir + "/three.js")
     urlretrieve("https://raw.githubusercontent.com/jgphilpott/threex.domevents/master/threex.domevents.js", js_libs_dir + "/threeX.js")
+
+    urlretrieve("https://raw.githubusercontent.com/eligrey/FileSaver.js/b5e61ec88969461ce0504658af07c2b56650ee8c/src/FileSaver.js", js_libs_dir + "/FileSaver.js")
 
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/03df747c3047504480e6dbeeddd27d68/raw/610e6908804af69ba765dc086b7018acbcdc4aa9/csgWrapper.js", js_libs_dir + "/csgWrapper.js")
     urlretrieve("https://gist.githubusercontent.com/jgphilpott/59ad8432ba8567e91176e669454b9afa/raw/2e51fdb9eb1ea7a050e61da070a33c3611afea4b/morph.js", js_libs_dir + "/morph.js")
@@ -77,7 +78,8 @@ if not exists(libs_dir):
     urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/postprocessing/ShaderPass.js", js_libs_dir + "/ShaderPass.js")
     urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/shaders/CopyShader.js", js_libs_dir + "/CopyShader.js")
 
-    urlretrieve("https://raw.githubusercontent.com/eligrey/FileSaver.js/b5e61ec88969461ce0504658af07c2b56650ee8c/src/FileSaver.js", js_libs_dir + "/FileSaver.js")
+    urlretrieve("https://gist.githubusercontent.com/jgphilpott/12783015d68e056e54252355d75b41a9/raw/068efd48041eb95ef53c0e8da9ae0dce7d7f1ef4/abbreviations.css", css_libs_dir + "/abbreviations.css")
+    urlretrieve("https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css", css_libs_dir + "/jQuery-UI.css")
 
     commit = "670b1e9e85356d98efa4c702e93c85dd52f01e1e"
     exporters = ["ColladaExporter.js", "DRACOExporter.js", "GLTFExporter.js", "MMDExporter.js", "OBJExporter.js", "PLYExporter.js", "STLExporter.js"]
@@ -94,9 +96,9 @@ if not exists(libs_dir):
     with open(js_libs_dir + "/math.js", "w") as file:
 
         numeric = get("https://raw.githubusercontent.com/sloisel/numeric/656fa1254be540f428710738ca9c1539625777f1/src/numeric.js").content.decode("utf-8")
-        calc = get("https://gist.githubusercontent.com/jgphilpott/4276345a5b7c96fc010afa28cc5d38b6/raw/26c8d0b1217c0e6dbf771fc80fd22dd3a35cb963/calculus.js").content.decode("utf-8")
-        regr = get("https://gist.githubusercontent.com/jgphilpott/d38279e8fac9af31054e10b7363bf17e/raw/3684fcc69634970a75b1fa454b1a0f7b3c2c1a03/regression.js").content.decode("utf-8")
-        roots = get("https://gist.githubusercontent.com/jgphilpott/e483b5fbe52a7233c292f35737e5a682/raw/d85ccaecf7d6b606809764b39f841a063c9a1fdc/roots.js").content.decode("utf-8")
+        calc = get("https://gist.githubusercontent.com/jgphilpott/4276345a5b7c96fc010afa28cc5d38b6/raw/1005b9c02b1697d974b33b4b64d956d8f29838b7/calculus.js").content.decode("utf-8")
+        regr = get("https://gist.githubusercontent.com/jgphilpott/d38279e8fac9af31054e10b7363bf17e/raw/3555aab46e57a9ccf367d00d336e526349aa0f42/regression.js").content.decode("utf-8")
+        roots = get("https://gist.githubusercontent.com/jgphilpott/e483b5fbe52a7233c292f35737e5a682/raw/4dee678d7c8f7577305aa30058a39ffd3502ae0c/roots.js").content.decode("utf-8")
         trig = get("https://gist.githubusercontent.com/jgphilpott/1378cc2cccde6d65c5fb2b6111b5a98f/raw/4ca9d6644932bef8a61b5ed9805fc124b020f2c5/trigonometry.js").content.decode("utf-8")
         limits = get("https://gist.githubusercontent.com/jgphilpott/6332dc7f5636db9ba455e1575407c496/raw/09cedcb3640f1428422ebe39959877e67830db03/limits.js").content.decode("utf-8")
 
@@ -114,7 +116,7 @@ if not exists(libs_dir):
         cookies = get("https://gist.githubusercontent.com/jgphilpott/b9ce64b9ef8b04c5ac58902b133b1a28/raw/5a8c863d59be464289bcee3e6363c0d025b050dd/cookies.js").content.decode("utf-8")
         localStorage = get("https://gist.githubusercontent.com/jgphilpott/e26b92eb41b64e9565032d5c4d3c2878/raw/7fe4d19aad1e765f134a45e128dbfe1cad1141aa/localStorage.js").content.decode("utf-8")
         email = get("https://gist.githubusercontent.com/jgphilpott/a1ffedea1d1a70320b8075597df1943a/raw/a91ee941914fedcafd12d892ed98f7ee43cb9bba/email.js").content.decode("utf-8")
-        subset = get("https://gist.githubusercontent.com/jgphilpott/a1367ca419ac2807ed4340d69356b7f1/raw/48ad3970a6a370853d18157142421ab02b1e2398/subset.js").content.decode("utf-8")
+        subset = get("https://gist.githubusercontent.com/jgphilpott/a1367ca419ac2807ed4340d69356b7f1/raw/83685f673d90f897e0c35b9136621ee7c1a4cc4d/subset.js").content.decode("utf-8")
 
         tools = convert + "\n" + abbreviations + "\n" + format + "\n" + casefy + "\n" + rotation + "\n" + cookies + "\n" + localStorage + "\n" + email + "\n" + subset
 
