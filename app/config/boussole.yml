@@ -1,6 +1,0 @@
-EXCLUDES: []
-LIBRARY_PATHS: []
-OUTPUT_STYLES: compressed
-SOURCES_PATH: ../styles
-SOURCE_COMMENTS: false
-TARGET_PATH: ../styles

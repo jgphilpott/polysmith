@@ -13,6 +13,7 @@ app/scripts/*/*/*/*/*.js
 app/scripts/panels/*.js
 
 ### Styles ###
+app/css
 *.css.map
 *.sass.map
 *.sass-cache
@@ -23,6 +24,7 @@ app/styles/*/*/*/*.css
 app/styles/*/*/*/*/*.css
 
 ### Config ###
+.python_history
 .bash_history
 .sonarlint
 .DS_Store

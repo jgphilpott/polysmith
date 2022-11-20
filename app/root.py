@@ -1,16 +1,17 @@
+import subprocess
 from os import urandom
 from os import makedirs
 from os.path import exists
-from subprocess import Popen
 
-from sass import compile
 from requests import get
 from urllib.request import urlretrieve
 
-from flask import Flask, request, render_template
-
+from sass import compile
+from multiprocessing import Process
 from mongo.socket.plug import plugin
 from mongo.data.collect.clients.mongo import valid_client
+
+from flask import Flask, request, render_template
 
 src_dir = "app"
 title = "Polymorph"
@@ -27,10 +28,10 @@ app = Flask(title, template_folder=src_dir, static_folder=src_dir)
 app.jinja_env.auto_reload = True
 app.config["SECRET_KEY"] = urandom(42).hex()
 
-Popen(["coffee", "-cbw", scripts_dir])
-Popen(["tsc", "-w", scripts_dir + "/root.ts"])
-Popen(["boussole", "watch"], cwd="app/config")
-compile(dirname=(styles_dir, styles_dir), output_style="compressed")
+subprocess.Popen(["coffee", "-cbw", scripts_dir])
+subprocess.Popen(["tsc", "-w", scripts_dir + "/root.ts"])
+compile(dirname=(styles_dir, css_libs_dir), output_style="compressed")
+subprocess.Popen(["node-sass", "-w", styles_dir, "-o", css_libs_dir, "--output-style", "compressed"])
 
 @app.route("/")
 def home():
@@ -40,6 +41,10 @@ def home():
     if "id" in request.cookies: data["client"] = valid_client(request.cookies.get("id"))
 
     return render_template("templates/root.jinja", data=data)
+
+def start():
+
+    plugin(app).run(app, host="0.0.0.0", port=4000, debug=True)
 
 if not exists(libs_dir):
 
@@ -51,47 +56,49 @@ if not exists(libs_dir):
     makedirs(js_libs_dir + "/exporters")
     makedirs(js_libs_dir + "/importers")
 
-    urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js", js_libs_dir + "/sha256.js")
-    urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.4.0/socket.io.min.js", js_libs_dir + "/socket.js")
+if not exists(js_libs_dir + "/sha256.js"): urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js", js_libs_dir + "/sha256.js")
+if not exists(js_libs_dir + "/socket.js"): urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.4.0/socket.io.min.js", js_libs_dir + "/socket.js")
 
-    urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js", js_libs_dir + "/jQuery.js")
-    urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js", js_libs_dir + "/jQueryUI.js")
+if not exists(js_libs_dir + "/jQuery.js"): urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js", js_libs_dir + "/jQuery.js")
+if not exists(js_libs_dir + "/jQueryUI.js"): urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js", js_libs_dir + "/jQueryUI.js")
 
-    urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js", js_libs_dir + "/three.js")
-    urlretrieve("https://raw.githubusercontent.com/jgphilpott/threex.domevents/master/threex.domevents.js", js_libs_dir + "/threeX.js")
+if not exists(js_libs_dir + "/three.js"): urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js", js_libs_dir + "/three.js")
+if not exists(js_libs_dir + "/threeX.js"): urlretrieve("https://raw.githubusercontent.com/jgphilpott/threex.domevents/master/threex.domevents.js", js_libs_dir + "/threeX.js")
 
-    urlretrieve("https://raw.githubusercontent.com/eligrey/FileSaver.js/b5e61ec88969461ce0504658af07c2b56650ee8c/src/FileSaver.js", js_libs_dir + "/FileSaver.js")
+if not exists(js_libs_dir + "/FileSaver.js"): urlretrieve("https://raw.githubusercontent.com/eligrey/FileSaver.js/b5e61ec88969461ce0504658af07c2b56650ee8c/src/FileSaver.js", js_libs_dir + "/FileSaver.js")
 
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/03df747c3047504480e6dbeeddd27d68/raw/610e6908804af69ba765dc086b7018acbcdc4aa9/csgWrapper.js", js_libs_dir + "/csgWrapper.js")
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/59ad8432ba8567e91176e669454b9afa/raw/2e51fdb9eb1ea7a050e61da070a33c3611afea4b/morph.js", js_libs_dir + "/morph.js")
+if not exists(js_libs_dir + "/csgWrapper.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/03df747c3047504480e6dbeeddd27d68/raw/610e6908804af69ba765dc086b7018acbcdc4aa9/csgWrapper.js", js_libs_dir + "/csgWrapper.js")
+if not exists(js_libs_dir + "/morph.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/59ad8432ba8567e91176e669454b9afa/raw/2e51fdb9eb1ea7a050e61da070a33c3611afea4b/morph.js", js_libs_dir + "/morph.js")
 
-    urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/utils/BufferGeometryUtils.js", js_libs_dir + "/BufferGeometryUtils.js")
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/77709de890b806426089de1ff4e78758/raw/073230320a9aba84ac8113767d678f789ee6f7c0/LineThickSegmentsGeometry.js", js_libs_dir + "/LineThickSegmentsGeometry.js")
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/ec71d7abcf504f85e01ffe9e297a682c/raw/061aa750b828eeb4deb32769ca05a59dec0f9267/LineThickGeometry.js", js_libs_dir + "/LineThickGeometry.js")
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/9e1cf7758b8d7cf02537bb15aacdba6a/raw/bfa4f28cfc89c555d1b063a6b836056a5d41df3b/LineThickMaterial.js", js_libs_dir + "/LineThickMaterial.js")
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/605923031deec863802ca6f61ca9e688/raw/9607fc300870925241831dcb22e926a83fee7d3a/LineThickSegments.js", js_libs_dir + "/LineThickSegments.js")
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/ec6e0b40dbdd02c9d4cfae0dd2166c5e/raw/0d2c20765653b311337d79f65c168b3573c76e19/LineThickMesh.js", js_libs_dir + "/LineThickMesh.js")
+if not exists(js_libs_dir + "/BufferGeometryUtils.js"): urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/utils/BufferGeometryUtils.js", js_libs_dir + "/BufferGeometryUtils.js")
+if not exists(js_libs_dir + "/LineThickSegmentsGeometry.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/77709de890b806426089de1ff4e78758/raw/073230320a9aba84ac8113767d678f789ee6f7c0/LineThickSegmentsGeometry.js", js_libs_dir + "/LineThickSegmentsGeometry.js")
+if not exists(js_libs_dir + "/LineThickGeometry.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/ec71d7abcf504f85e01ffe9e297a682c/raw/061aa750b828eeb4deb32769ca05a59dec0f9267/LineThickGeometry.js", js_libs_dir + "/LineThickGeometry.js")
+if not exists(js_libs_dir + "/LineThickMaterial.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/9e1cf7758b8d7cf02537bb15aacdba6a/raw/bfa4f28cfc89c555d1b063a6b836056a5d41df3b/LineThickMaterial.js", js_libs_dir + "/LineThickMaterial.js")
+if not exists(js_libs_dir + "/LineThickSegments.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/605923031deec863802ca6f61ca9e688/raw/9607fc300870925241831dcb22e926a83fee7d3a/LineThickSegments.js", js_libs_dir + "/LineThickSegments.js")
+if not exists(js_libs_dir + "/LineThickMesh.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/ec6e0b40dbdd02c9d4cfae0dd2166c5e/raw/0d2c20765653b311337d79f65c168b3573c76e19/LineThickMesh.js", js_libs_dir + "/LineThickMesh.js")
 
-    urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/postprocessing/EffectComposer.js", js_libs_dir + "/EffectComposer.js")
-    urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/postprocessing/OutlinePass.js", js_libs_dir + "/OutlinePass.js")
-    urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/postprocessing/RenderPass.js", js_libs_dir + "/RenderPass.js")
-    urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/postprocessing/ShaderPass.js", js_libs_dir + "/ShaderPass.js")
-    urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/shaders/CopyShader.js", js_libs_dir + "/CopyShader.js")
+if not exists(js_libs_dir + "/EffectComposer.js"): urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/postprocessing/EffectComposer.js", js_libs_dir + "/EffectComposer.js")
+if not exists(js_libs_dir + "/OutlinePass.js"): urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/postprocessing/OutlinePass.js", js_libs_dir + "/OutlinePass.js")
+if not exists(js_libs_dir + "/RenderPass.js"): urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/postprocessing/RenderPass.js", js_libs_dir + "/RenderPass.js")
+if not exists(js_libs_dir + "/ShaderPass.js"): urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/postprocessing/ShaderPass.js", js_libs_dir + "/ShaderPass.js")
+if not exists(js_libs_dir + "/CopyShader.js"): urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/shaders/CopyShader.js", js_libs_dir + "/CopyShader.js")
 
-    urlretrieve("https://gist.githubusercontent.com/jgphilpott/12783015d68e056e54252355d75b41a9/raw/068efd48041eb95ef53c0e8da9ae0dce7d7f1ef4/abbreviations.css", css_libs_dir + "/abbreviations.css")
-    urlretrieve("https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css", css_libs_dir + "/jQuery-UI.css")
+if not exists(css_libs_dir + "/abbreviations.css"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/12783015d68e056e54252355d75b41a9/raw/3c59342793c23b2b6c15e0ccdc702856371f757a/abbreviations.css", css_libs_dir + "/abbreviations.css")
+if not exists(css_libs_dir + "/jQuery-UI.css"): urlretrieve("https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.min.css", css_libs_dir + "/jQuery-UI.css")
 
-    commit = "670b1e9e85356d98efa4c702e93c85dd52f01e1e"
-    exporters = ["ColladaExporter.js", "DRACOExporter.js", "GLTFExporter.js", "MMDExporter.js", "OBJExporter.js", "PLYExporter.js", "STLExporter.js"]
-    importers = ["3MFLoader.js", "AMFLoader.js", "ColladaLoader.js", "DRACOLoader.js", "FBXLoader.js", "GLTFLoader.js", "MMDLoader.js", "OBJLoader.js", "PLYLoader.js", "STLLoader.js", "SVGLoader.js", "VRMLLoader.js"]
+commit = "670b1e9e85356d98efa4c702e93c85dd52f01e1e"
+exporters = ["ColladaExporter.js", "DRACOExporter.js", "GLTFExporter.js", "MMDExporter.js", "OBJExporter.js", "PLYExporter.js", "STLExporter.js"]
+importers = ["3MFLoader.js", "AMFLoader.js", "ColladaLoader.js", "DRACOLoader.js", "FBXLoader.js", "GLTFLoader.js", "MMDLoader.js", "OBJLoader.js", "PLYLoader.js", "STLLoader.js", "SVGLoader.js", "VRMLLoader.js"]
 
-    for exporter in exporters:
+for exporter in exporters:
 
-        urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/" + commit + "/examples/js/exporters/" + exporter, js_libs_dir + "/exporters/" + exporter)
+    if not exists(js_libs_dir + "/exporters/" + exporter): urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/" + commit + "/examples/js/exporters/" + exporter, js_libs_dir + "/exporters/" + exporter)
 
-    for importer in importers:
+for importer in importers:
 
-        urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/" + commit + "/examples/js/loaders/" + importer, js_libs_dir + "/importers/" + importer)
+    if not exists(js_libs_dir + "/importers/" + importer): urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/" + commit + "/examples/js/loaders/" + importer, js_libs_dir + "/importers/" + importer)
+
+if not exists(js_libs_dir + "/math.js"):
 
     with open(js_libs_dir + "/math.js", "w") as file:
 
@@ -105,6 +112,8 @@ if not exists(libs_dir):
         math = numeric + "\n" + calc + "\n" + regr + "\n" + roots + "\n" + trig + "\n" + limits
 
         file.write(math)
+
+if not exists(js_libs_dir + "/tools.js"):
 
     with open(js_libs_dir + "/tools.js", "w") as file:
 
@@ -122,4 +131,19 @@ if not exists(libs_dir):
 
         file.write(tools)
 
-plugin(app).run(app, host="0.0.0.0", port=4000, debug=True)
+def compress():
+
+    print("Starting Compression", flush=True)
+
+    for dirs, subdirs, files in os.walk("../app"):
+
+        for file in files:
+
+            path = os.path.join(dirs, file)
+            name, extension = os.path.splitext(path)
+
+    print("Finnished Compression", flush=True)
+
+Process(target=start).start()
+
+compress()
