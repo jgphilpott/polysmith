@@ -1,3 +1,4 @@
+import os
 import subprocess
 from os import urandom
 from os import makedirs
@@ -28,33 +29,18 @@ app = Flask(title, template_folder=src_dir, static_folder=src_dir)
 app.jinja_env.auto_reload = True
 app.config["SECRET_KEY"] = urandom(42).hex()
 
-subprocess.Popen(["coffee", "-cbw", scripts_dir])
 subprocess.Popen(["tsc", "-w", scripts_dir + "/root.ts"])
+subprocess.Popen(["coffee", "-cbw", "--no-header", scripts_dir])
 compile(dirname=(styles_dir, css_libs_dir), output_style="compressed")
 subprocess.Popen(["node-sass", "-w", styles_dir, "-o", css_libs_dir, "--output-style", "compressed"])
 
-@app.route("/")
-def home():
+if not exists(libs_dir): makedirs(libs_dir)
 
-    data = {"title": title, "client": None}
+if not exists(js_libs_dir): makedirs(js_libs_dir)
+if not exists(css_libs_dir): makedirs(css_libs_dir)
 
-    if "id" in request.cookies: data["client"] = valid_client(request.cookies.get("id"))
-
-    return render_template("templates/root.jinja", data=data)
-
-def start():
-
-    plugin(app).run(app, host="0.0.0.0", port=4000, debug=True)
-
-if not exists(libs_dir):
-
-    makedirs(libs_dir)
-
-    makedirs(js_libs_dir)
-    makedirs(css_libs_dir)
-
-    makedirs(js_libs_dir + "/exporters")
-    makedirs(js_libs_dir + "/importers")
+if not exists(js_libs_dir + "/exporters"): makedirs(js_libs_dir + "/exporters")
+if not exists(js_libs_dir + "/importers"): makedirs(js_libs_dir + "/importers")
 
 if not exists(js_libs_dir + "/sha256.js"): urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js", js_libs_dir + "/sha256.js")
 if not exists(js_libs_dir + "/socket.js"): urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.4.0/socket.io.min.js", js_libs_dir + "/socket.js")
@@ -125,24 +111,38 @@ if not exists(js_libs_dir + "/tools.js"):
         cookies = get("https://gist.githubusercontent.com/jgphilpott/b9ce64b9ef8b04c5ac58902b133b1a28/raw/5a8c863d59be464289bcee3e6363c0d025b050dd/cookies.js").content.decode("utf-8")
         localStorage = get("https://gist.githubusercontent.com/jgphilpott/e26b92eb41b64e9565032d5c4d3c2878/raw/7fe4d19aad1e765f134a45e128dbfe1cad1141aa/localStorage.js").content.decode("utf-8")
         email = get("https://gist.githubusercontent.com/jgphilpott/a1ffedea1d1a70320b8075597df1943a/raw/a91ee941914fedcafd12d892ed98f7ee43cb9bba/email.js").content.decode("utf-8")
-        subset = get("https://gist.githubusercontent.com/jgphilpott/a1367ca419ac2807ed4340d69356b7f1/raw/83685f673d90f897e0c35b9136621ee7c1a4cc4d/subset.js").content.decode("utf-8")
 
-        tools = convert + "\n" + abbreviations + "\n" + format + "\n" + casefy + "\n" + rotation + "\n" + cookies + "\n" + localStorage + "\n" + email + "\n" + subset
+        tools = convert + "\n" + abbreviations + "\n" + format + "\n" + casefy + "\n" + rotation + "\n" + cookies + "\n" + localStorage + "\n" + email
 
         file.write(tools)
 
+@app.route("/")
+def home():
+
+    data = {"title": title, "client": None}
+
+    if "id" in request.cookies:
+
+        data["client"] = valid_client(request.cookies.get("id"))
+
+    return render_template("templates/root.jinja", data=data)
+
+def start():
+
+    plugin(app).run(app, host="0.0.0.0", port=4000)
+
 def compress():
 
-    print("Starting Compression", flush=True)
-
-    for dirs, subdirs, files in os.walk("../app"):
+    for dirs, subdirs, files in os.walk("./app"):
 
         for file in files:
 
             path = os.path.join(dirs, file)
             name, extension = os.path.splitext(path)
 
-    print("Finnished Compression", flush=True)
+            if extension == ".js":
+
+                subprocess.run(["uglifyjs", path, "-co", path])
 
 Process(target=start).start()
 
