@@ -1,6 +1,6 @@
 newCapsule = (radius = 5, length = 5, radialSegments = 42, capSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
-    geometry = new CapsuleGeometry radius, length, radialSegments, capSegments
+    geometry = new CapsuleGeometry radius: radius, length: length, radialSegments: radialSegments, capSegments: capSegments
     material = new MeshMaterial type, color
 
     capsule = new THREE.Mesh geometry, material

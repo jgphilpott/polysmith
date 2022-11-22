@@ -2,27 +2,19 @@
 
 class TorusGeometry extends Geometry
 
-    constructor : (radius = 5, thickness = 1, radialSegments = 42, tubularSegments = 42, arc = Math.PI * 2) ->
+    constructor : (params = {}) ->
 
-        super "torus",
-
-            radius: radius
-            thickness: thickness
-
-            radialSegments: radialSegments
-            tubularSegments: tubularSegments
-
-            arc: arc
+        super "torus", params
 
 class POLY.TorusBufferGeometry extends THREE.TorusBufferGeometry
 
     constructor : (params) ->
 
-        radius = if "radius" of params then params.radius else 5
-        thickness = if "thickness" of params then params.thickness else 1
+        radius = params.radius ?= 5
+        thickness = params.thickness ?= 1
 
-        radialSegments = if "radialSegments" of params then params.radialSegments else 42
-        tubularSegments = if "tubularSegments" of params then params.tubularSegments else 42
+        radialSegments = params.radialSegments ?= 42
+        tubularSegments = params.tubularSegments ?= 42
 
         arc = if "arc" of params then params.arc else Math.PI * 2
 

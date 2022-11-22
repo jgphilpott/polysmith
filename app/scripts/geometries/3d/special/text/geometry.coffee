@@ -2,19 +2,9 @@
 
 class TextGeometry extends Geometry
 
-    constructor : (mesh, text = "Text", font = "ubuntu", size = 12, height = 3, options = {}) ->
+    constructor : (params = {}) ->
 
-        super "text",
-
-            mesh: mesh
-
-            text: text
-            font: font
-
-            size: size
-            height: height
-
-            options: options
+        super "text", params
 
 class POLY.TextBufferGeometry
 
@@ -24,13 +14,13 @@ class POLY.TextBufferGeometry
 
         loader = new THREE.FontLoader()
 
-        text = if "text" of params then params.text else "Text"
-        font = if "font" of params then params.font else "ubuntu"
+        text = params.text ?= "Text"
+        font = params.font ?= "ubuntu"
 
-        size = if "size" of params then params.size else 12
-        height = if "height" of params then params.height else 3
+        size = params.size ?= 12
+        height = params.height ?= 3
 
-        options = if "options" of params then params.options else
+        options = params.options ?=
 
             center: true
             curveSegments: 12

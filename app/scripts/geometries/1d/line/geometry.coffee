@@ -2,17 +2,15 @@
 
 class LineGeometry extends Geometry
 
-    constructor : (vertices = [[10, 10, 10], [-10, -10, -10]]) ->
+    constructor : (params = {}) ->
 
-        super "line",
-
-            vertices: vertices
+        super "line", params
 
 class POLY.LineBufferGeometry
 
     constructor : (params) ->
 
-        vertices = if "vertices" of params then params.vertices else [[10, 10, 10], [-10, -10, -10]]
+        vertices = params.vertices ?= [[10, 10, 10], [-10, -10, -10]]
 
         points = []
 

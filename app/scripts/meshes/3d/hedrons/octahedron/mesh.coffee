@@ -1,6 +1,6 @@
 newOctahedron = (radius = 5, detail = 0, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
-    geometry = new OctahedronGeometry radius, detail
+    geometry = new OctahedronGeometry radius: radius, detail: detail
     material = new MeshMaterial type, color
 
     octahedron = new THREE.Mesh geometry, material

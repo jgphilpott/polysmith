@@ -1,6 +1,6 @@
 newDodecahedron = (radius = 5, detail = 0, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
-    geometry = new DodecahedronGeometry radius, detail
+    geometry = new DodecahedronGeometry radius: radius, detail: detail
     material = new MeshMaterial type, color
 
     dodecahedron = new THREE.Mesh geometry, material

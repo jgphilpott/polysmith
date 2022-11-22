@@ -2,15 +2,9 @@
 
 class ImageGeometry extends Geometry
 
-    constructor : (mesh, file = "image", depth = 3, options = {}) ->
+    constructor : (params = {}) ->
 
-        super "image",
-
-            mesh: mesh
-            file: file
-
-            depth: depth
-            options: options
+        super "image", params
 
 class POLY.ImageBufferGeometry
 
@@ -20,10 +14,10 @@ class POLY.ImageBufferGeometry
 
         loader = new THREE.SVGLoader()
 
-        file = if "file" of params then params.file else "image"
-        depth = if "depth" of params then params.depth else 3
+        file = params.file ?= "image"
+        depth = params.depth ?= 3
 
-        options = if "options" of params then params.options else
+        options = params.options ?=
 
             steps: 1
             center: true

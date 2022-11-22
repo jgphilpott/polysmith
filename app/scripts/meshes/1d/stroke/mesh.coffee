@@ -1,6 +1,6 @@
 newStroke = (vertices = [[10, 10, 10], [-10, -10, -10]], type = "thick", color = blackThree, thickness = 1, dashed = false, dashSize = 3, gapSize = 2) ->
 
-    geometry = new StrokeGeometry vertices
+    geometry = new StrokeGeometry vertices: vertices
     material = new LineMaterial type, color, thickness, dashed, dashSize, gapSize
 
     stroke = new LineThickMesh(geometry, material).computeLineDistances()

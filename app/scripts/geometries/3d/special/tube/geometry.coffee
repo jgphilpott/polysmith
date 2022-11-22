@@ -2,18 +2,9 @@
 
 class TubeGeometry extends Geometry
 
-    constructor : (vertices = [[10, 10, 10], [-10, -10, -10]], radius = 1, radialSegments = 42, tubularSegments = 42, closed = false) ->
+    constructor : (params = {}) ->
 
-        super "tube",
-
-            vertices: vertices
-
-            radius: radius
-
-            radialSegments: radialSegments
-            tubularSegments: tubularSegments
-
-            closed: closed
+        super "tube", params
 
 class POLY.TubeBufferGeometry extends THREE.TubeBufferGeometry
 
@@ -21,14 +12,14 @@ class POLY.TubeBufferGeometry extends THREE.TubeBufferGeometry
 
         path = []
 
-        vertices = if "vertices" of params then params.vertices else [[10, 10, 10], [-10, -10, -10]]
+        vertices = params.vertices ?= [[10, 10, 10], [-10, -10, -10]]
 
-        radius = if "radius" of params then params.radius else 1
+        radius = params.radius ?= 1
 
-        radialSegments = if "radialSegments" of params then params.radialSegments else 42
-        tubularSegments = if "tubularSegments" of params then params.tubularSegments else 42
+        radialSegments = params.radialSegments ?= 42
+        tubularSegments = params.tubularSegments ?= 42
 
-        closed = if "closed" of params then params.closed else false
+        closed = params.closed ?= false
 
         for vertex in vertices
 

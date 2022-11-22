@@ -1,6 +1,6 @@
 newRing = (innerRadius = 5, outerRadius = 10, radialSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
-    geometry = new RingGeometry innerRadius, outerRadius, radialSegments
+    geometry = new RingGeometry innerRadius: innerRadius, outerRadius: outerRadius, radialSegments: radialSegments
     material = new MeshMaterial type, color
 
     ring = new THREE.Mesh geometry, material

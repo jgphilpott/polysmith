@@ -1,14 +1,8 @@
 class TriangleGeometry extends Geometry
 
-    constructor : (vertices = [
-        [0, 0, 10 * Math.sqrt(3) / 4],
-        [0, -5, -10 * Math.sqrt(3) / 4],
-        [0, 5, -10 * Math.sqrt(3) / 4]
-    ]) ->
+    constructor : (params = {}) ->
 
-        super "triangle",
-
-            vertices: vertices
+        super "triangle", params
 
 class POLY.TriangleBufferGeometry
 
@@ -16,17 +10,11 @@ class POLY.TriangleBufferGeometry
 
         geometry = new THREE.Geometry()
 
-        if "vertices" of params
-
-            vertices = params.vertices
-
-        else
-
-            vertices = [
-                [0, 0, 10 * Math.sqrt(3) / 4],
-                [0, -5, -10 * Math.sqrt(3) / 4],
-                [0, 5, -10 * Math.sqrt(3) / 4]
-            ]
+        vertices = params.vertices ?= [
+            [0, 0, 10 * Math.sqrt(3) / 4],
+            [0, -5, -10 * Math.sqrt(3) / 4],
+            [0, 5, -10 * Math.sqrt(3) / 4]
+        ]
 
         for vertex in vertices
 

@@ -1,15 +1,8 @@
 class QuadrilateralGeometry extends Geometry
 
-    constructor : (vertices = [
-        [0, 5, 5],
-        [0, -5, 5],
-        [0, -5, -5],
-        [0, 5, -5]
-    ]) ->
+    constructor : (params = {}) ->
 
-        super "quadrilateral",
-
-            vertices: vertices
+        super "quadrilateral", params
 
 class POLY.QuadrilateralBufferGeometry
 
@@ -17,18 +10,12 @@ class POLY.QuadrilateralBufferGeometry
 
         geometry = new THREE.Geometry()
 
-        if "vertices" of params
-
-            vertices = params.vertices
-
-        else
-
-            vertices = [
-                [0, 5, 5],
-                [0, -5, 5],
-                [0, -5, -5],
-                [0, 5, -5]
-            ]
+        vertices = params.vertices ?= [
+            [0, 5, 5],
+            [0, -5, 5],
+            [0, -5, -5],
+            [0, 5, -5]
+        ]
 
         for vertex in vertices
 

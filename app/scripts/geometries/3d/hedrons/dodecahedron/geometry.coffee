@@ -2,18 +2,15 @@
 
 class DodecahedronGeometry extends Geometry
 
-    constructor : (radius = 5, detail = 0) ->
+    constructor : (params = {}) ->
 
-        super "dodecahedron",
-
-            radius: radius
-            detail: detail
+        super "dodecahedron", params
 
 class POLY.DodecahedronBufferGeometry extends THREE.DodecahedronBufferGeometry
 
     constructor : (params) ->
 
-        radius = if "radius" of params then params.radius else 5
-        detail = if "detail" of params then params.detail else 0
+        radius = params.radius ?= 5
+        detail = params.detail ?= 0
 
         super radius, detail
