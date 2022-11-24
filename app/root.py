@@ -4,11 +4,12 @@ from os import urandom
 from os import makedirs
 from os.path import exists
 
+from sass import compile
+from threading import Thread
+
 from requests import get
 from urllib.request import urlretrieve
 
-from sass import compile
-from multiprocessing import Process
 from mongo.socket.plug import plugin
 from mongo.data.collect.clients.mongo import valid_client
 
@@ -26,7 +27,19 @@ scripts_dir = src_dir + "/scripts"
 
 app = Flask(title, template_folder=src_dir, static_folder=src_dir)
 
+@app.route("/")
+def home():
+
+    data = {"title": title, "client": None}
+
+    if "id" in request.cookies:
+
+        data["client"] = valid_client(request.cookies.get("id"))
+
+    return render_template("templates/root.jinja", data=data)
+
 app.jinja_env.auto_reload = True
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config["SECRET_KEY"] = urandom(42).hex()
 
 subprocess.Popen(["tsc", "-w", scripts_dir + "/root.ts"])
@@ -116,21 +129,6 @@ if not exists(js_libs_dir + "/tools.js"):
 
         file.write(tools)
 
-@app.route("/")
-def home():
-
-    data = {"title": title, "client": None}
-
-    if "id" in request.cookies:
-
-        data["client"] = valid_client(request.cookies.get("id"))
-
-    return render_template("templates/root.jinja", data=data)
-
-def start():
-
-    plugin(app).run(app, host="0.0.0.0", port=4000)
-
 def compress():
 
     for dirs, subdirs, files in os.walk("./app"):
@@ -144,6 +142,10 @@ def compress():
 
                 subprocess.run(["uglifyjs", path, "-co", path])
 
-Process(target=start).start()
+def start():
 
-compress()
+    plugin(app).run(app, host="0.0.0.0", port=4000)
+
+Thread(target=compress).start()
+
+start()
