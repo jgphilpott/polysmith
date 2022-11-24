@@ -8,10 +8,14 @@ class PhysicalMeshMaterial extends MeshMaterial
 
 class POLY.PhysicalMeshMaterial extends THREE.MeshPhysicalMaterial
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         map = params.map ?= null
         color = params.color ?= blackThree
         side = params.side ?= THREE.DoubleSide
 
-        super params
+        super
+
+            map: map
+            color: color
+            side: side

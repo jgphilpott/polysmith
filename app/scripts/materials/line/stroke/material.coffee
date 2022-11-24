@@ -1,25 +1,29 @@
 # Link: N/A
 
-class ThickLineMaterial extends LineMaterial
+class StrokeLineMaterial extends LineMaterial
 
     constructor : (params = {}) ->
 
-        super "thick", params
+        super "stroke", params
 
-class POLY.ThickLineMaterial extends LineThickMaterial
+class POLY.StrokeLineMaterial extends LineThickMaterial
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         color = params.color ?= blackThree
-        linewidth = params.linewidth ?= 1
+
         dashed = params.dashed ?= false
+        linewidth = params.linewidth ?= 1
+
         vertexColors = params.vertexColors ?= false
         alphaToCoverage = params.alphaToCoverage ?= false
 
         super
 
             color: color
-            linewidth: linewidth
+
             dashed: dashed
+            linewidth: linewidth
+
             vertexColors: vertexColors
             alphaToCoverage: alphaToCoverage

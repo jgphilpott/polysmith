@@ -8,17 +8,17 @@ class LineMaterial
 
         switch this.type
 
-            when "basic"
-
-                @material = new POLY.BasicLineMaterial params; break
-
             when "dashed"
 
                 @material = new POLY.DashedLineMaterial params; break
 
-            when "thick"
+            when "solid"
 
-                @material = new POLY.ThickLineMaterial params; break
+                @material = new POLY.SolidLineMaterial params; break
+
+            when "stroke"
+
+                @material = new POLY.StrokeLineMaterial params; break
 
             else
 
@@ -28,7 +28,7 @@ class LineMaterial
 
             this.material.transparent = true
 
-            if this.type == "thick"
+            if this.type == "stroke"
 
                 this.material.resolution.set window.innerWidth, window.innerHeight
 

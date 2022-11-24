@@ -8,10 +8,14 @@ class LambertMeshMaterial extends MeshMaterial
 
 class POLY.LambertMeshMaterial extends THREE.MeshLambertMaterial
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         map = params.map ?= null
         color = params.color ?= blackThree
         side = params.side ?= THREE.DoubleSide
 
-        super params
+        super
+
+            map: map
+            color: color
+            side: side

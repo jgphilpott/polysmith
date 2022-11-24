@@ -8,9 +8,10 @@ class DashedLineMaterial extends LineMaterial
 
 class POLY.DashedLineMaterial extends THREE.LineDashedMaterial
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         color = params.color ?= blackThree
+
         linewidth = params.linewidth ?= 1
         dashSize = params.dashSize ?= 3
         gapSize = params.gapSize ?= 2
@@ -18,6 +19,7 @@ class POLY.DashedLineMaterial extends THREE.LineDashedMaterial
         super
 
             color: color
+
             linewidth: linewidth
             dashSize: dashSize
             gapSize: gapSize

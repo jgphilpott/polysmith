@@ -36,9 +36,9 @@ class Tooltips
         yIcon = new THREE.TextureLoader().load "/app/imgs/icons/tools/rotate/green.png"
         zIcon = new THREE.TextureLoader().load "/app/imgs/icons/tools/rotate/blue.png"
 
-        xMaterial = new MeshMaterial "basic", map: xIcon
-        yMaterial = new MeshMaterial "basic", map: yIcon
-        zMaterial = new MeshMaterial "basic", map: zIcon
+        xMaterial = new MeshMaterial "basic", color: false, map: xIcon
+        yMaterial = new MeshMaterial "basic", color: false, map: yIcon
+        zMaterial = new MeshMaterial "basic", color: false, map: zIcon
 
         xTool = new THREE.Mesh geometry, xMaterial
         yTool = new THREE.Mesh geometry, yMaterial

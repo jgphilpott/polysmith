@@ -8,8 +8,10 @@ class DistanceMeshMaterial extends MeshMaterial
 
 class POLY.DistanceMeshMaterial extends THREE.MeshDistanceMaterial
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         side = params.side ?= THREE.DoubleSide
 
-        super params
+        super
+
+            side: side
