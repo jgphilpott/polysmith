@@ -1,7 +1,17 @@
 # Link: https://threejs.org/docs/#api/en/materials/MeshPhysicalMaterial
 
-class PhysicalMeshMaterial extends THREE.MeshPhysicalMaterial
+class PhysicalMeshMaterial extends MeshMaterial
 
-    constructor : (color = blackThree, texture = null, side = THREE.DoubleSide) ->
+    constructor : (params = {}) ->
 
-        super color: color, map: texture, side: side
+        super "physical", params
+
+class POLY.PhysicalMeshMaterial extends THREE.MeshPhysicalMaterial
+
+    constructor : (params) ->
+
+        map = params.map ?= null
+        color = params.color ?= blackThree
+        side = params.side ?= THREE.DoubleSide
+
+        super params

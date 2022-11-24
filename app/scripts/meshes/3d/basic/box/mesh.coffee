@@ -1,7 +1,7 @@
 newBox = (length = 10, width = 10, height = 10, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
     geometry = new BoxGeometry length: length, width: width, height: height
-    material = new MeshMaterial type, color
+    material = new MeshMaterial type, color: color
 
     box = new THREE.Mesh geometry, material
 

@@ -1,7 +1,7 @@
 newCircle = (radius = 10, radialSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
     geometry = new CircleGeometry radius: radius, radialSegments: radialSegments
-    material = new MeshMaterial type, color
+    material = new MeshMaterial type, color: color
 
     circle = new THREE.Mesh geometry, material
 

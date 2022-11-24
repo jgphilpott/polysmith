@@ -36,9 +36,9 @@ class Tooltips
         yIcon = new THREE.TextureLoader().load "/app/imgs/icons/tools/rotate/green.png"
         zIcon = new THREE.TextureLoader().load "/app/imgs/icons/tools/rotate/blue.png"
 
-        xMaterial = new MeshMaterial "basic", null, xIcon
-        yMaterial = new MeshMaterial "basic", null, yIcon
-        zMaterial = new MeshMaterial "basic", null, zIcon
+        xMaterial = new MeshMaterial "basic", map: xIcon
+        yMaterial = new MeshMaterial "basic", map: yIcon
+        zMaterial = new MeshMaterial "basic", map: zIcon
 
         xTool = new THREE.Mesh geometry, xMaterial
         yTool = new THREE.Mesh geometry, yMaterial
@@ -134,7 +134,7 @@ class Tooltips
         if not this.rotationRing
 
             geometry = new THREE.RingGeometry 5, 10, 10
-            material = new MeshMaterial "basic", blackThree
+            material = new MeshMaterial "basic", color: blackThree
 
             ring = new THREE.Mesh geometry, material
 

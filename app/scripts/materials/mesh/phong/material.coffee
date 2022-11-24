@@ -1,7 +1,17 @@
 # Link: https://threejs.org/docs/#api/en/materials/MeshPhongMaterial
 
-class PhongMeshMaterial extends THREE.MeshPhongMaterial
+class PhongMeshMaterial extends MeshMaterial
 
-    constructor : (color = blackThree, texture = null, side = THREE.DoubleSide) ->
+    constructor : (params = {}) ->
 
-        super color: color, map: texture, side: side
+        super "phong", params
+
+class POLY.PhongMeshMaterial extends THREE.MeshPhongMaterial
+
+    constructor : (params) ->
+
+        map = params.map ?= null
+        color = params.color ?= blackThree
+        side = params.side ?= THREE.DoubleSide
+
+        super params

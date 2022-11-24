@@ -2,7 +2,7 @@
 
 class Geometry
 
-    constructor : (type, params) ->
+    constructor : (type, params = {}) ->
 
         @type = lower type.trim()
 

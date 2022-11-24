@@ -1,7 +1,15 @@
 # Link: https://threejs.org/docs/#api/en/materials/MeshNormalMaterial
 
-class NormalMeshMaterial extends THREE.MeshNormalMaterial
+class NormalMeshMaterial extends MeshMaterial
 
-    constructor : (side = THREE.DoubleSide) ->
+    constructor : (params = {}) ->
 
-        super side: side
+        super "normal", params
+
+class POLY.NormalMeshMaterial extends THREE.MeshNormalMaterial
+
+    constructor : (params) ->
+
+        side = params.side ?= THREE.DoubleSide
+
+        super params

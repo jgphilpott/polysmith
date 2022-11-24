@@ -310,7 +310,7 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
             color = blackThree
 
         mesh.material.dispose()
-        mesh.material = new MeshMaterial material, color
+        mesh.material = new MeshMaterial material, color: color
         mesh.material.wireframe = wireframe
         mesh.material.opacity = opacity
         mesh.material.style = value
@@ -430,45 +430,45 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
 
                 if mesh.class == "box"
 
-                    length = if key == "length" then value else parameters.width
-                    width = if key == "width" then value else parameters.height
-                    height = if key == "height" then value else parameters.depth
+                    if key == "length" then parameters.width = value
+                    if key == "width" then parameters.height = value
+                    if key == "height" then parameters.depth = value
 
-                    mesh.geometry = new THREE.BoxGeometry length, width, height
+                    mesh.geometry = new BoxGeometry parameters
 
                 else if mesh.class == "sphere"
 
-                    radius = if key == "radius" then value else parameters.radius
-                    widthSegments = if key == "width-segments" then value else parameters.widthSegments
-                    heightSegments = if key == "height-segments" then value else parameters.heightSegments
+                    if key == "radius" then parameters.radius = value
+                    if key == "width-segments" then parameters.widthSegments = value
+                    if key == "height-segments" then parameters.heightSegments = value
 
-                    mesh.geometry = new THREE.SphereGeometry radius, widthSegments, heightSegments
+                    mesh.geometry = new SphereGeometry radius, widthSegments, heightSegments
 
                 else if mesh.class == "cylinder" or mesh.class.split("-")[1] == "prism"
 
-                    length = if key == "length" then value : parameters.height
-                    positiveRadius = if key == "radius-positive" then value else parameters.radiusTop
-                    negativeRadius = if key == "radius-negative" then value else parameters.radiusBottom
-                    radialSegments = if key == "radius-segments" then value else parameters.radialSegments
+                    if key == "length" then parameters.length = value
+                    if key == "radius-positive" then parameters.radiusTop = value
+                    if key == "radius-negative" then parameters.radiusBottom = value
+                    if key == "radius-segments" then parameters.radialSegments = value
 
-                    mesh.geometry = new THREE.CylinderGeometry positiveRadius, negativeRadius, length, radialSegments
+                    mesh.geometry = new CylinderGeometry positiveRadius, negativeRadius, length, radialSegments
 
                 else if mesh.class == "cone" or mesh.class.split("-")[1] == "pyramid"
 
-                    height = if key == "height" then value else parameters.height
-                    radius = if key == "radius" then value else parameters.radiusBottom
-                    radialSegments = if key == "radius-segments" then value else parameters.radialSegments
+                    if key == "height" then parameters.height = value
+                    if key == "radius" then parameters.radius = value
+                    if key == "radius-segments" then parameters.radialSegments = value
 
-                    mesh.geometry = new THREE.CylinderGeometry 0, radius, height, radialSegments
+                    mesh.geometry = new CylinderGeometry 0, radius, height, radialSegments
 
                 else if mesh.class == "torus"
 
-                    radius = if key == "radius" then value else parameters.radius
-                    thickness = if key == "thickness" then value else parameters.tube
-                    radialSegments = if key == "radius-segments" then value else parameters.radialSegments
-                    tubularSegments = if key == "tube-segments" then value else parameters.tubularSegments
+                    if key == "radius" then parameters.radius = value
+                    if key == "thickness" then parameters.thickness = value
+                    if key == "radius-segments" then parameters.radialSegments = value
+                    if key == "tube-segments" then parameters.tubularSegments = value
 
-                    mesh.geometry = new THREE.TorusGeometry radius, thickness, radialSegments, tubularSegments
+                    mesh.geometry = new TorusGeometry radius, thickness, radialSegments, tubularSegments
 
                 updateMetrics mesh
 

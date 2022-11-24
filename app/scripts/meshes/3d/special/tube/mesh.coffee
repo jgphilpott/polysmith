@@ -1,7 +1,7 @@
 newTube = (vertices = [[10, 10, 10], [-10, -10, -10]], radius = 1, radialSegments = 42, tubularSegments = 42, closed = false, type = "normal", color = blackThree) ->
 
     geometry = new TubeGeometry vertices: vertices, radius: radius, radialSegments: radialSegments, tubularSegments: tubularSegments, closed: closed
-    material = new MeshMaterial type, color
+    material = new MeshMaterial type, color: color
 
     tube = new THREE.Mesh geometry, material
 

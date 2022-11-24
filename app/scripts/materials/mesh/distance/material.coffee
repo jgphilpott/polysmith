@@ -1,7 +1,15 @@
 # Link: https://threejs.org/docs/#api/en/materials/MeshDistanceMaterial
 
-class DistanceMeshMaterial extends THREE.MeshDistanceMaterial
+class DistanceMeshMaterial extends MeshMaterial
 
-    constructor : (side = THREE.DoubleSide) ->
+    constructor : (params = {}) ->
 
-        super side: side
+        super "distance", params
+
+class POLY.DistanceMeshMaterial extends THREE.MeshDistanceMaterial
+
+    constructor : (params) ->
+
+        side = params.side ?= THREE.DoubleSide
+
+        super params

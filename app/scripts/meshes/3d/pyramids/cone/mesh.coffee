@@ -1,7 +1,7 @@
 newCone = (radius = 5, height = 10, radialSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
     geometry = new ConeGeometry radius: radius, height: height, radialSegments: radialSegments
-    material = new MeshMaterial type, color
+    material = new MeshMaterial type, color: color
 
     cone = new THREE.Mesh geometry, material
 

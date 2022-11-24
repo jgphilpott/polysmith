@@ -3,7 +3,7 @@ newImage = (file = "image", depth = 3, bevel = false, position = [0, 0, 0], type
     mesh = new THREE.Mesh()
 
     geometry = new ImageGeometry mesh: mesh, file: file, depth: depth, options: {bevelEnabled: bevel, center: center}
-    material = new MeshMaterial type, color
+    material = new MeshMaterial type, color: color
 
     mesh.geometry = geometry
     mesh.material = material

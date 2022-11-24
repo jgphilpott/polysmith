@@ -1,7 +1,7 @@
 newIcosahedron = (radius = 5, detail = 0, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
     geometry = new IcosahedronGeometry radius: radius, detail: detail
-    material = new MeshMaterial type, color
+    material = new MeshMaterial type, color: color
 
     icosahedron = new THREE.Mesh geometry, material
 

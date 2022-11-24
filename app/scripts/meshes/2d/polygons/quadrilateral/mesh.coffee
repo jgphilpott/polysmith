@@ -1,7 +1,7 @@
 newQuadrilateral = (vertices = [[0, 5, 5], [0, -5, 5], [0, -5, -5], [0, 5, -5]], position = [0, 0, 0], type = "normal", color = blackThree) ->
 
     geometry = new QuadrilateralGeometry vertices: vertices
-    material = new MeshMaterial type, color
+    material = new MeshMaterial type, color: color
 
     quadrilateral = new THREE.Mesh geometry, material
 

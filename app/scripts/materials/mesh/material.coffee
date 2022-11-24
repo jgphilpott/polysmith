@@ -2,7 +2,7 @@
 
 class MeshMaterial
 
-    constructor : (type, color = blackThree, texture = null, side = THREE.DoubleSide) ->
+    constructor : (type, params = {}) ->
 
         @type = lower type.trim()
 
@@ -10,49 +10,53 @@ class MeshMaterial
 
             when "basic"
 
-                @material = new BasicMeshMaterial color, texture, side; break
+                @material = new POLY.BasicMeshMaterial params; break
 
             when "depth"
 
-                @material = new DepthMeshMaterial side; break
+                @material = new POLY.DepthMeshMaterial params; break
 
             when "distance"
 
-                @material = new DistanceMeshMaterial side; break
+                @material = new POLY.DistanceMeshMaterial params; break
 
             when "lambert"
 
-                @material = new LambertMeshMaterial color, texture, side; break
+                @material = new POLY.LambertMeshMaterial params; break
 
             when "matcap"
 
-                @material = new MatcapMeshMaterial color, texture, side; break
+                @material = new POLY.MatcapMeshMaterial params; break
 
             when "normal"
 
-                @material = new NormalMeshMaterial side; break
+                @material = new POLY.NormalMeshMaterial params; break
 
             when "phong"
 
-                @material = new PhongMeshMaterial color, texture, side; break
+                @material = new POLY.PhongMeshMaterial params; break
 
             when "physical"
 
-                @material = new PhysicalMeshMaterial color, texture, side; break
+                @material = new POLY.PhysicalMeshMaterial params; break
 
             when "standard"
 
-                @material = new StandardMeshMaterial color, texture, side; break
+                @material = new POLY.StandardMeshMaterial params; break
 
             when "toon"
 
-                @material = new ToonMeshMaterial color, texture, side; break
+                @material = new POLY.ToonMeshMaterial params; break
+
+            else
+
+                @material = params.material
 
         if this.material
 
             this.material.transparent = true
 
-            if color == blackThree
+            if equal this.material.color, blackThree
 
                 this.material.metalness = -25
                 this.material.roughness = 0.75

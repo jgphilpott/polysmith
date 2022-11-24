@@ -1,7 +1,7 @@
 newSphere = (radius = 5, widthSegments = 42, heightSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
 
     geometry = new SphereGeometry radius: radius, widthSegments: widthSegments, heightSegments: heightSegments
-    material = new MeshMaterial type, color
+    material = new MeshMaterial type, color: color
 
     sphere = new THREE.Mesh geometry, material
 

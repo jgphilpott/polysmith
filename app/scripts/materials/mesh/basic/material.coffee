@@ -1,7 +1,17 @@
 # Link: https://threejs.org/docs/#api/en/materials/MeshBasicMaterial
 
-class BasicMeshMaterial extends THREE.MeshBasicMaterial
+class BasicMeshMaterial extends MeshMaterial
 
-    constructor : (color = blackThree, texture = null, side = THREE.DoubleSide) ->
+    constructor : (params = {}) ->
 
-        super color: color, map: texture, side: side
+        super "basic", params
+
+class POLY.BasicMeshMaterial extends THREE.MeshBasicMaterial
+
+    constructor : (params) ->
+
+        map = params.map ?= null
+        color = params.color ?= blackThree
+        side = params.side ?= THREE.DoubleSide
+
+        super params

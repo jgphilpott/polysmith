@@ -2,6 +2,10 @@ clone = (object) ->
 
     return JSON.parse JSON.stringify object
 
+equal = (object1, object2) ->
+
+    return JSON.stringify(object1) == JSON.stringify(object2)
+
 calculatePercent = (min, max, value) ->
 
     return ((value - min) / (max - min)) * 100

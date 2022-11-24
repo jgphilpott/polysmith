@@ -1,7 +1,15 @@
 # Link: https://threejs.org/docs/#api/en/materials/MeshDepthMaterial
 
-class DepthMeshMaterial extends THREE.MeshDepthMaterial
+class DepthMeshMaterial extends MeshMaterial
 
-    constructor : (side = THREE.DoubleSide) ->
+    constructor : (params = {}) ->
 
-        super side: side
+        super "depth", params
+
+class POLY.DepthMeshMaterial extends THREE.MeshDepthMaterial
+
+    constructor : (params) ->
+
+        side = params.side ?= THREE.DoubleSide
+
+        super params
