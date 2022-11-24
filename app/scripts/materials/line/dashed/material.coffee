@@ -1,7 +1,23 @@
 # Link: https://threejs.org/docs/#api/en/materials/LineDashedMaterial
 
-class DashedLineMaterial extends THREE.LineDashedMaterial
+class DashedLineMaterial extends LineMaterial
 
-    constructor : (color = blackThree, linewidth = 1, dashSize = 3, gapSize = 2) ->
+    constructor : (params = {}) ->
 
-        super color: color, linewidth: linewidth, dashSize: dashSize, gapSize: gapSize
+        super "dashed", params
+
+class POLY.DashedLineMaterial extends THREE.LineDashedMaterial
+
+    constructor : (params) ->
+
+        color = params.color ?= blackThree
+        linewidth = params.linewidth ?= 1
+        dashSize = params.dashSize ?= 3
+        gapSize = params.gapSize ?= 2
+
+        super
+
+            color: color
+            linewidth: linewidth
+            dashSize: dashSize
+            gapSize: gapSize

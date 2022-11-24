@@ -2,7 +2,7 @@
 
 class LineMaterial
 
-    constructor : (type, color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2, vertexColors = false, alphaToCoverage = false) ->
+    constructor : (type, params = {}) ->
 
         @type = lower type.trim()
 
@@ -10,15 +10,19 @@ class LineMaterial
 
             when "basic"
 
-                @material = new BasicLineMaterial color, linewidth; break
+                @material = new POLY.BasicLineMaterial params; break
 
             when "dashed"
 
-                @material = new DashedLineMaterial color, linewidth, dashSize, gapSize; break
+                @material = new POLY.DashedLineMaterial params; break
 
             when "thick"
 
-                @material = new ThickLineMaterial color, linewidth, dashed, vertexColors, alphaToCoverage; break
+                @material = new POLY.ThickLineMaterial params; break
+
+            else
+
+                @material = params.material
 
         if this.material
 

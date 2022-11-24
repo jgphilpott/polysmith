@@ -1,7 +1,19 @@
 # Link: https://threejs.org/docs/#api/en/materials/LineBasicMaterial
 
-class BasicLineMaterial extends THREE.LineBasicMaterial
+class BasicLineMaterial extends LineMaterial
 
-    constructor : (color = blackThree, linewidth = 1) ->
+    constructor : (params = {}) ->
 
-        super color: color, linewidth: linewidth
+        super "basic", params
+
+class POLY.BasicLineMaterial extends THREE.LineBasicMaterial
+
+    constructor : (params) ->
+
+        color = params.color ?= blackThree
+        linewidth = params.linewidth ?= 1
+
+        super
+
+            color: color
+            linewidth: linewidth

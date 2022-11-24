@@ -1,7 +1,25 @@
 # Link: N/A
 
-class ThickLineMaterial extends LineThickMaterial
+class ThickLineMaterial extends LineMaterial
 
-    constructor : (color = blackThree, linewidth = 1, dashed = false, vertexColors = false, alphaToCoverage = false) ->
+    constructor : (params = {}) ->
 
-        super color: color, linewidth: linewidth, dashed: dashed, vertexColors: vertexColors, alphaToCoverage: alphaToCoverage
+        super "thick", params
+
+class POLY.ThickLineMaterial extends LineThickMaterial
+
+    constructor : (params) ->
+
+        color = params.color ?= blackThree
+        linewidth = params.linewidth ?= 1
+        dashed = params.dashed ?= false
+        vertexColors = params.vertexColors ?= false
+        alphaToCoverage = params.alphaToCoverage ?= false
+
+        super
+
+            color: color
+            linewidth: linewidth
+            dashed: dashed
+            vertexColors: vertexColors
+            alphaToCoverage: alphaToCoverage
