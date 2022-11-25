@@ -8,7 +8,7 @@ class CircleGeometry extends Geometry
 
 class POLY.CircleBufferGeometry extends THREE.CircleBufferGeometry
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         radius = params.radius ?= 10
         segments = params.segments ?= 42

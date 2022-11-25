@@ -8,7 +8,7 @@ class SphereGeometry extends Geometry
 
 class POLY.SphereBufferGeometry extends THREE.SphereBufferGeometry
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         radius = params.radius ?= 5
 

@@ -8,7 +8,7 @@ class LineGeometry extends Geometry
 
 class POLY.LineBufferGeometry
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         vertices = params.vertices ?= [[10, 10, 10], [-10, -10, -10]]
 

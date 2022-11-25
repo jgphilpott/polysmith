@@ -8,7 +8,7 @@ class TubeGeometry extends Geometry
 
 class POLY.TubeBufferGeometry extends THREE.TubeBufferGeometry
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         path = []
 

@@ -8,7 +8,7 @@ class OctahedronGeometry extends Geometry
 
 class POLY.OctahedronBufferGeometry extends THREE.OctahedronBufferGeometry
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         radius = params.radius ?= 5
         detail = params.detail ?= 0

@@ -6,7 +6,7 @@ class QuadrilateralGeometry extends Geometry
 
 class POLY.QuadrilateralBufferGeometry
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         geometry = new THREE.Geometry()
 

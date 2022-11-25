@@ -8,7 +8,7 @@ class TorusKnotGeometry extends Geometry
 
 class POLY.TorusKnotBufferGeometry extends THREE.TorusKnotBufferGeometry
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         radius = params.radius ?= 10
         thickness = params.thickness ?= 3

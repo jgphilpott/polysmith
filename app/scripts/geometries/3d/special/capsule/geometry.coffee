@@ -8,7 +8,7 @@ class CapsuleGeometry extends Geometry
 
 class POLY.CapsuleBufferGeometry extends THREE.LatheBufferGeometry
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         path = new THREE.Path()
 

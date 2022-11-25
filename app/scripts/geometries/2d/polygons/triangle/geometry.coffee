@@ -6,7 +6,7 @@ class TriangleGeometry extends Geometry
 
 class POLY.TriangleBufferGeometry
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         geometry = new THREE.Geometry()
 

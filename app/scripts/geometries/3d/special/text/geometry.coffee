@@ -8,7 +8,7 @@ class TextGeometry extends Geometry
 
 class POLY.TextBufferGeometry
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         mesh = params.mesh
 

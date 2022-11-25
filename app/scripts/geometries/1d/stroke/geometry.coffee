@@ -6,7 +6,7 @@ class StrokeGeometry extends Geometry
 
 class POLY.StrokeBufferGeometry
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         vertices = params.vertices ?= [[10, 10, 10], [-10, -10, -10]]
 

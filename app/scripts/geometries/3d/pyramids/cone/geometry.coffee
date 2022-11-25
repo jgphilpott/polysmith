@@ -8,7 +8,7 @@ class ConeGeometry extends Geometry
 
 class POLY.ConeBufferGeometry extends THREE.ConeBufferGeometry
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         radius = params.radius ?= 5
         height = params.height ?= 10

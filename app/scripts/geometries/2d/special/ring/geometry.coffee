@@ -8,7 +8,7 @@ class RingGeometry extends Geometry
 
 class POLY.RingBufferGeometry extends THREE.RingBufferGeometry
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         innerRadius = params.innerRadius ?= 5
         outerRadius = params.outerRadius ?= 10

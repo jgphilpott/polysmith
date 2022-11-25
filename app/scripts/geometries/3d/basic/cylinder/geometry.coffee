@@ -8,7 +8,7 @@ class CylinderGeometry extends Geometry
 
 class POLY.CylinderBufferGeometry extends THREE.CylinderBufferGeometry
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         length = params.length ?= 10
 

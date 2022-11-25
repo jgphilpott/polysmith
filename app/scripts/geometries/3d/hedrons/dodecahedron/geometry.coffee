@@ -8,7 +8,7 @@ class DodecahedronGeometry extends Geometry
 
 class POLY.DodecahedronBufferGeometry extends THREE.DodecahedronBufferGeometry
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         radius = params.radius ?= 5
         detail = params.detail ?= 0

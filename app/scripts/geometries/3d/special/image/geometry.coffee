@@ -8,7 +8,7 @@ class ImageGeometry extends Geometry
 
 class POLY.ImageBufferGeometry
 
-    constructor : (params) ->
+    constructor : (params = {}) ->
 
         mesh = params.mesh
 
