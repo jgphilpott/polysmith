@@ -1,18 +1,21 @@
-newSphere = (radius = 5, widthSegments = 42, heightSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
+class Sphere extends Mesh
 
-    geometry = new SphereGeometry radius: radius, widthSegments: widthSegments, heightSegments: heightSegments
-    material = new MeshMaterial type, color: color
+    constructor : (params = {}) ->
 
-    sphere = new THREE.Mesh geometry, material
+        super "sphere", params
 
-    sphere.position.set position[0], position[1], position[2]
-    sphere.rotation.x = deg$rad 90
+class POLY.SphereMesh extends THREE.Mesh
 
-    sphere.class = "sphere"
-    sphere.name = "Sphere"
+    constructor : (params = {}) ->
 
-    return sphere
+        params.material ?= "normal"
 
-addSphere = (radius = 5, widthSegments = 42, heightSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
+        geometry = new SphereGeometry params
+        material = new MeshMaterial params.material, params
 
-    return addMesh newSphere radius, widthSegments, heightSegments, position, type, color
+        super geometry, material
+
+        this.class = "sphere"
+        this.name = "Sphere"
+
+        return this

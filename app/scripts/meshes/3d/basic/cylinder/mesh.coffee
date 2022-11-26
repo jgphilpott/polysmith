@@ -1,18 +1,21 @@
-newCylinder = (length = 10, positiveRadius = 5, negativeRadius = 5, radialSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
+class Cylinder extends Mesh
 
-    geometry = new CylinderGeometry length: length, positiveRadius: positiveRadius, negativeRadius: negativeRadius, radialSegments: radialSegments
-    material = new MeshMaterial type, color: color
+    constructor : (params = {}) ->
 
-    cylinder = new THREE.Mesh geometry, material
+        super "cylinder", params
 
-    cylinder.position.set position[0], position[1], position[2]
-    cylinder.rotation.x = deg$rad 90
+class POLY.CylinderMesh extends THREE.Mesh
 
-    cylinder.class = "cylinder"
-    cylinder.name = "Cylinder"
+    constructor : (params = {}) ->
 
-    return cylinder
+        params.material ?= "normal"
 
-addCylinder = (length = 10, positiveRadius = 5, negativeRadius = 5, radialSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
+        geometry = new CylinderGeometry params
+        material = new MeshMaterial params.material, params
 
-    return addMesh newCylinder length, positiveRadius, negativeRadius, radialSegments, position, type, color
+        super geometry, material
+
+        this.class = "cylinder"
+        this.name = "Cylinder"
+
+        return this

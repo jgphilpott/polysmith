@@ -235,7 +235,7 @@ addCentroidCap = () ->
 
     if settings.getSetting("axes", "axesCaps") and (settings.getSetting("axes", "xAxis") or settings.getSetting("axes", "yAxis") or settings.getSetting("axes", "zAxis"))
 
-        centroid = newSphere 1, 25, 25, [0, 0, 0], "basic", blackThree
+        centroid = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: 0, y: 0, z: 0}, material: "basic", color: blackThree
 
         centroid.name = "centroid-cap"
 
@@ -259,8 +259,8 @@ addAxisCapsX = (min= -scale, max = scale) ->
 
     if settings.getSetting("axes", "axesCaps") and settings.getSetting("axes", "xAxis")
 
-        minCapX = newSphere 1, 25, 25, [min, 0, 0], "basic", redThree
-        maxCapX = newSphere 1, 25, 25, [max, 0, 0], "basic", greenThree
+        minCapX = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: min, y: 0, z: 0}, material: "basic", color: redThree
+        maxCapX = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: max, y: 0, z: 0}, material: "basic", color: greenThree
 
         minCapX.name = "min-cap-x"
         maxCapX.name = "max-cap-x"
@@ -286,8 +286,8 @@ addAxisCapsY = (min = -scale, max = scale) ->
 
     if settings.getSetting("axes", "axesCaps") and settings.getSetting("axes", "yAxis")
 
-        minCapY = newSphere 1, 25, 25, [0, min, 0], "basic", redThree
-        maxCapY = newSphere 1, 25, 25, [0, max, 0], "basic", greenThree
+        minCapY = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: 0, y: min, z: 0}, material: "basic", color: redThree
+        maxCapY = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: 0, y: max, z: 0}, material: "basic", color: greenThree
 
         minCapY.name = "min-cap-y"
         maxCapY.name = "max-cap-y"
@@ -313,8 +313,8 @@ addAxisCapsZ = (min = -scale, max = scale) ->
 
     if settings.getSetting("axes", "axesCaps") and settings.getSetting("axes", "zAxis")
 
-        minCapZ = newSphere 1, 25, 25, [0, 0, min], "basic", redThree
-        maxCapZ = newSphere 1, 25, 25, [0, 0, max], "basic", greenThree
+        minCapZ = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: 0, y: 0, z: min}, material: "basic", color: redThree
+        maxCapZ = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: 0, y: 0, z: max}, material: "basic", color: greenThree
 
         minCapZ.name = "min-cap-z"
         maxCapZ.name = "max-cap-z"

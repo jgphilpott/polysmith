@@ -8,8 +8,10 @@ class POLY.BoxMesh extends THREE.Mesh
 
     constructor : (params = {}) ->
 
+        params.material ?= "normal"
+
         geometry = new BoxGeometry params
-        material = new MeshMaterial "normal", params
+        material = new MeshMaterial params.material, params
 
         super geometry, material
 

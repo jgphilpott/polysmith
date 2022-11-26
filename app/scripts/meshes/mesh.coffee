@@ -1,6 +1,6 @@
 class Mesh
 
-    constructor : (type, params) ->
+    constructor : (type, params = {}) ->
 
         @type = lower type.trim()
 
@@ -9,6 +9,18 @@ class Mesh
             when "box"
 
                 @mesh = new POLY.BoxMesh params; break
+
+            when "cylinder"
+
+                @mesh = new POLY.CylinderMesh params; break
+
+            when "sphere"
+
+                @mesh = new POLY.SphereMesh params; break
+
+            when "cone"
+
+                @mesh = new POLY.ConeMesh params; break
 
             else
 
@@ -78,14 +90,14 @@ addMesh = (mesh = null, properties = {}) ->
 
             when "cylinder"
 
-                mesh = newCylinder()
+                mesh = new Cylinder()
                 mesh.rotation.x = deg$rad 90
 
                 break
 
             when "sphere"
 
-                mesh = newSphere()
+                mesh = new Sphere()
                 mesh.rotation.x = deg$rad 90
 
                 break
@@ -113,70 +125,70 @@ addMesh = (mesh = null, properties = {}) ->
 
             when "triangular-prism"
 
-                mesh = newCylinder 10, 5, 5, 3
+                mesh = new Cylinder radialSegments: 3
                 mesh.rotation.x = deg$rad 0
 
                 break
 
             when "rectangular-prism"
 
-                mesh = newCylinder 10, 5, 5, 4
+                mesh = new Cylinder radialSegments: 4
                 mesh.rotation.x = deg$rad 0
 
                 break
 
             when "pentagonal-prism"
 
-                mesh = newCylinder 10, 5, 5, 5
+                mesh = new Cylinder radialSegments: 5
                 mesh.rotation.x = deg$rad 0
 
                 break
 
             when "hexagonal-prism"
 
-                mesh = newCylinder 10, 5, 5, 6
+                mesh = new Cylinder radialSegments: 6
                 mesh.rotation.x = deg$rad 0
 
                 break
 
             when "heptagonal-prism"
 
-                mesh = newCylinder 10, 5, 5, 7
+                mesh = new Cylinder radialSegments: 7
                 mesh.rotation.x = deg$rad 0
 
                 break
 
             when "octagonal-prism"
 
-                mesh = newCylinder 10, 5, 5, 8
+                mesh = new Cylinder radialSegments: 8
                 mesh.rotation.x = deg$rad 0
 
                 break
 
             when "triangular-pyramid"
 
-                mesh = newCylinder 10, 0, 5, 3
+                mesh = new Cone radialSegments: 3
                 mesh.rotation.x = deg$rad 90
 
                 break
 
             when "rectangular-pyramid"
 
-                mesh = newCylinder 10, 0, 5, 4
+                mesh = new Cone radialSegments: 4
                 mesh.rotation.x = deg$rad 90
 
                 break
 
             when "pentagonal-pyramid"
 
-                mesh = newCylinder 10, 0, 5, 5
+                mesh = new Cone radialSegments: 5
                 mesh.rotation.x = deg$rad 90
 
                 break
 
             when "cone"
 
-                mesh = newCylinder 10, 0, 5, 42
+                mesh = new Cone()
                 mesh.rotation.x = deg$rad 90
 
                 break

@@ -1,18 +1,21 @@
-newCone = (radius = 5, height = 10, radialSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
+class Cone extends Mesh
 
-    geometry = new ConeGeometry radius: radius, height: height, radialSegments: radialSegments
-    material = new MeshMaterial type, color: color
+    constructor : (params = {}) ->
 
-    cone = new THREE.Mesh geometry, material
+        super "cone", params
 
-    cone.position.set position[0], position[1], position[2]
-    cone.rotation.x = deg$rad 90
+class POLY.ConeMesh extends THREE.Mesh
 
-    cone.class = "cone"
-    cone.name = "Cone"
+    constructor : (params = {}) ->
 
-    return cone
+        params.material ?= "normal"
 
-addCone = (radius = 5, height = 10, radialSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
+        geometry = new ConeGeometry params
+        material = new MeshMaterial params.material, params
 
-    return addMesh newCone radius, height, radialSegments, position, type, color
+        super geometry, material
+
+        this.class = "cone"
+        this.name = "Cone"
+
+        return this
