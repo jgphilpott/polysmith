@@ -70,7 +70,9 @@ class Importer
 
                 for mesh in meshes
 
-                    addMesh mesh
+                    mesh = new Mesh "custom", mesh: mesh
+
+                    mesh.add()
 
         this.importer = null
 

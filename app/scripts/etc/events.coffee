@@ -271,7 +271,7 @@ makeDragable = (element, origEvent = null) ->
                     y = if coordinates.y < min then min else if coordinates.y > max then max else coordinates.y
                     z = if coordinates.z < min then min else if coordinates.z > max then max else coordinates.z
 
-                    mesh = addMesh null, {name: element.attr("title"), class: element.attr("id"), position: {x: x, y: y, z: z}}
+                    mesh = new Mesh element.attr("id"), position: {x: x, y: y, z: z}
 
                     if element.attr("id") != "text" and element.attr("id") != "image"
 
@@ -279,6 +279,8 @@ makeDragable = (element, origEvent = null) ->
                         composer.outlinePass.selectedObjects = [mesh]
 
                         $("#canvas").css "cursor", "grab"
+
+                    mesh.add()
 
                 ghost.remove()
 

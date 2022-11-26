@@ -45,7 +45,7 @@ addShapesPanel = ->
 
         , (event) ->
 
-            addMesh null, {name: shape.title, class: shape.id}
+            new Mesh(shape.id).add()
 
         $(shape).contextmenu (event) -> contextMenu "shape", $(this), event
 

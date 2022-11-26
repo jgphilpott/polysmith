@@ -30,6 +30,51 @@ class Mesh
 
                 @mesh = new POLY.IcosahedronMesh params; break
 
+            when "triangular-prism"
+
+                params.radialSegments = 3
+                @mesh = new POLY.CylinderMesh params; break
+
+            when "rectangular-prism"
+
+                params.radialSegments = 4
+                @mesh = new POLY.CylinderMesh params; break
+
+            when "pentagonal-prism"
+
+                params.radialSegments = 5
+                @mesh = new POLY.CylinderMesh params; break
+
+            when "hexagonal-prism"
+
+                params.radialSegments = 6
+                @mesh = new POLY.CylinderMesh params; break
+
+            when "heptagonal-prism"
+
+                params.radialSegments = 7
+                @mesh = new POLY.CylinderMesh params; break
+
+            when "octagonal-prism"
+
+                params.radialSegments = 8
+                @mesh = new POLY.CylinderMesh params; break
+
+            when "triangular-pyramid"
+
+                params.radialSegments = 3
+                @mesh = new POLY.ConeMesh params; break
+
+            when "rectangular-pyramid"
+
+                params.radialSegments = 4
+                @mesh = new POLY.ConeMesh params; break
+
+            when "pentagonal-pyramid"
+
+                params.radialSegments = 5
+                @mesh = new POLY.ConeMesh params; break
+
             when "cone"
 
                 @mesh = new POLY.ConeMesh params; break
@@ -50,9 +95,6 @@ class Mesh
 
                 @mesh = params.mesh
 
-        @position = params.position ?= x: 0, y: 0, z: 0
-        @rotation = params.rotation ?= x: 0, y: 0, z: 0
-
         this.mesh.getPosition = this.getPosition
         this.mesh.setPosition = this.setPosition
 
@@ -62,8 +104,15 @@ class Mesh
         this.mesh.add = this.add
         this.mesh.remove = this.remove
 
-        this.mesh.setPosition this.position
-        this.mesh.setRotation this.rotation
+        if params.position then this.mesh.setPosition params.position
+        if params.rotation then this.mesh.setRotation params.rotation
+
+        this.mesh.name = if "name" of params then params.name else if this.mesh.name then this.mesh.name else "Unnamed"
+        this.mesh.lock = if "lock" of params then params.lock else if this.mesh.lock then this.mesh.lock else "unlocked"
+        this.mesh.class = if "class" of params then params.class else if this.mesh.class then this.mesh.class else "custom"
+
+        this.mesh.material.style = if "style" of params then params.style else if this.mesh.material.style then this.mesh.material.style else "multi"
+        this.mesh.material.wireframe = if "wireframe" of params then params.wireframe else if this.mesh.material.wireframe then this.mesh.material.wireframe else false
 
         return this.mesh
 
@@ -89,6 +138,12 @@ class Mesh
 
     add : () ->
 
+        updateMetrics this
+        addMeshEvents this
+
+        localStore.addMeshes this
+        updateMeshesPanel "add", this
+
         scene.add this
 
     remove : () ->
@@ -98,176 +153,6 @@ class Mesh
 ###########
 ### OLD ###
 ###########
-
-addMesh = (mesh = null, properties = {}) ->
-
-    if !mesh and properties.class
-
-        switch properties.class
-
-            when "box"
-
-                mesh = new Box()
-                mesh.rotation.x = deg$rad 0
-
-                break
-
-            when "cylinder"
-
-                mesh = new Cylinder()
-                mesh.rotation.x = deg$rad 90
-
-                break
-
-            when "sphere"
-
-                mesh = new Sphere()
-                mesh.rotation.x = deg$rad 90
-
-                break
-
-            when "octahedron"
-
-                mesh = new Octahedron()
-                mesh.rotation.x = deg$rad 0
-
-                break
-
-            when "dodecahedron"
-
-                mesh = new Dodecahedron()
-                mesh.rotation.x = deg$rad 0
-
-                break
-
-            when "icosahedron"
-
-                mesh = new Icosahedron()
-                mesh.rotation.x = deg$rad 0
-
-                break
-
-            when "triangular-prism"
-
-                mesh = new Cylinder radialSegments: 3
-                mesh.rotation.x = deg$rad 0
-
-                break
-
-            when "rectangular-prism"
-
-                mesh = new Cylinder radialSegments: 4
-                mesh.rotation.x = deg$rad 0
-
-                break
-
-            when "pentagonal-prism"
-
-                mesh = new Cylinder radialSegments: 5
-                mesh.rotation.x = deg$rad 0
-
-                break
-
-            when "hexagonal-prism"
-
-                mesh = new Cylinder radialSegments: 6
-                mesh.rotation.x = deg$rad 0
-
-                break
-
-            when "heptagonal-prism"
-
-                mesh = new Cylinder radialSegments: 7
-                mesh.rotation.x = deg$rad 0
-
-                break
-
-            when "octagonal-prism"
-
-                mesh = new Cylinder radialSegments: 8
-                mesh.rotation.x = deg$rad 0
-
-                break
-
-            when "triangular-pyramid"
-
-                mesh = new Cone radialSegments: 3
-                mesh.rotation.x = deg$rad 90
-
-                break
-
-            when "rectangular-pyramid"
-
-                mesh = new Cone radialSegments: 4
-                mesh.rotation.x = deg$rad 90
-
-                break
-
-            when "pentagonal-pyramid"
-
-                mesh = new Cone radialSegments: 5
-                mesh.rotation.x = deg$rad 90
-
-                break
-
-            when "cone"
-
-                mesh = new Cone()
-                mesh.rotation.x = deg$rad 90
-
-                break
-
-            when "torus"
-
-                mesh = new Torus()
-                mesh.rotation.y = deg$rad 90
-
-                break
-
-            when "text"
-
-                mesh = new Text()
-                mesh.rotation.z = deg$rad 180
-
-                break
-
-            when "image"
-
-                mesh = new Image()
-                mesh.rotation.x = deg$rad 0
-
-                break
-
-    if mesh
-
-        mesh.name = if "name" in properties then properties.name else if mesh.name then mesh.name else "Unnamed"
-        mesh.lock = if "lock" in properties then properties.lock else if mesh.lock then mesh.lock else "unlocked"
-        mesh.class = if "class" in properties then properties.class else if mesh.class then mesh.class else "custom"
-
-        mesh.material.style = if "style" in properties then properties.style else if mesh.material.style then mesh.material.style else "multi"
-        mesh.material.wireframe = if "wireframe" in properties then properties.wireframe else if mesh.material.wireframe then mesh.material.wireframe else false
-
-        if properties.position
-
-            mesh.position.x = if properties.position.x then properties.position.x else if properties.position._x then properties.position._x else 0
-            mesh.position.y = if properties.position.y then properties.position.y else if properties.position._y then properties.position._y else 0
-            mesh.position.z = if properties.position.z then properties.position.z else if properties.position._z then properties.position._z else 0
-
-        if properties.rotation
-
-            mesh.rotation.x = if properties.rotation.x then properties.rotation.x else if properties.rotation._x then properties.rotation._x else 0
-            mesh.rotation.y = if properties.rotation.y then properties.rotation.y else if properties.rotation._y then properties.rotation._y else 0
-            mesh.rotation.z = if properties.rotation.z then properties.rotation.z else if properties.rotation._z then properties.rotation._z else 0
-
-        updateMetrics mesh
-        addMeshEvents mesh
-
-        localStore.addMeshes mesh
-        updateMeshesPanel "add", mesh
-
-        scene.add mesh
-
-    return mesh
 
 addMeshEvents = (mesh) ->
 

@@ -81,7 +81,7 @@ contextMenu = (type, element, event) ->
             panel.append "<p id='add'>Add Mesh</p>"
             if shortcut.css("display") == "none" then panel.append("<p id='show'>Show Shortcut</p>") else panel.append("<p id='hide'>Hide Shortcut</p>")
 
-            panel.find("#add").click -> addMesh(null, {name: element.attr("title"), class: element.attr("id")})
+            panel.find("#add").click -> new Mesh(element.attr "id").add()
             panel.find("#show, #hide").click -> toggleShortcut element.attr "id"
 
             break
