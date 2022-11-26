@@ -1,15 +1,21 @@
-newTube = (vertices = [[10, 10, 10], [-10, -10, -10]], radius = 1, radialSegments = 42, tubularSegments = 42, closed = false, type = "normal", color = blackThree) ->
+class Tube extends Mesh
 
-    geometry = new TubeGeometry vertices: vertices, radius: radius, radialSegments: radialSegments, tubularSegments: tubularSegments, closed: closed
-    material = new MeshMaterial type, color: color
+    constructor : (params = {}) ->
 
-    tube = new THREE.Mesh geometry, material
+        super "tube", params
 
-    tube.class = "tube"
-    tube.name = "Tube"
+class POLY.TubeMesh extends THREE.Mesh
 
-    return tube
+    constructor : (params = {}) ->
 
-addTube = (vertices = [[10, 10, 10], [-10, -10, -10]], radius = 1, radialSegments = 42, tubularSegments = 42, closed = false, type = "normal", color = blackThree) ->
+        params.material ?= "normal"
 
-    return addMesh newTube vertices, radius, radialSegments, tubularSegments, closed, type, color
+        geometry = new TubeGeometry params
+        material = new MeshMaterial params.material, params
+
+        super geometry, material
+
+        this.class = "tube"
+        this.name = "Tube"
+
+        return this

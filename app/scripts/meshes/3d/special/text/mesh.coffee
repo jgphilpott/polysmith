@@ -1,21 +1,20 @@
-newText = (text = "Text", font = "ubuntu", size = 12, height = 3, bevel = false, position = [0, 0, 0], type = "normal", color = blackThree, center = true) ->
+class Text extends Mesh
 
-    mesh = new THREE.Mesh()
+    constructor : (params = {}) ->
 
-    geometry = new TextGeometry mesh: mesh, text: text, font: font, size: size, height: height, options: {bevelEnabled: bevel, center: center}
-    material = new MeshMaterial type, color: color
+        super "text", params
 
-    mesh.geometry = geometry
-    mesh.material = material
+class POLY.TextMesh
 
-    mesh.position.set position[0], position[1], position[2]
-    mesh.rotation.z = deg$rad 180
+    constructor : (params = {}) ->
 
-    mesh.class = "text"
-    mesh.name = "Text"
+        params.material ?= "normal"
+        params.mesh ?= new THREE.Mesh()
 
-    return mesh
+        params.mesh.geometry = new TextGeometry params
+        params.mesh.material = new MeshMaterial params.material, params
 
-addText = (text = "Text", font = "ubuntu", size = 12, height = 3, bevel = false, position = [0, 0, 0], type = "normal", color = blackThree, center = true) ->
+        params.mesh.class = "text"
+        params.mesh.name = "Text"
 
-    return addMesh newText text, font, size, height, bevel, position, type, color, center
+        return params.mesh

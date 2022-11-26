@@ -1,17 +1,21 @@
-newCapsule = (radius = 5, length = 5, radialSegments = 42, capSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
+class Capsule extends Mesh
 
-    geometry = new CapsuleGeometry radius: radius, length: length, radialSegments: radialSegments, capSegments: capSegments
-    material = new MeshMaterial type, color: color
+    constructor : (params = {}) ->
 
-    capsule = new THREE.Mesh geometry, material
+        super "capsule", params
 
-    capsule.position.set position[0], position[1], position[2]
+class POLY.CapsuleMesh extends THREE.Mesh
 
-    capsule.class = "capsule"
-    capsule.name = "Capsule"
+    constructor : (params = {}) ->
 
-    return capsule
+        params.material ?= "normal"
 
-addCapsule = (radius = 5, length = 5, radialSegments = 42, capSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
+        geometry = new CapsuleGeometry params
+        material = new MeshMaterial params.material, params
 
-    return addMesh newCapsule radius, length, radialSegments, capSegments, position, type, color
+        super geometry, material
+
+        this.class = "capsule"
+        this.name = "Capsule"
+
+        return this

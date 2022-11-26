@@ -1,20 +1,20 @@
-newImage = (file = "image", depth = 3, bevel = false, position = [0, 0, 0], type = "normal", color = blackThree, center = true) ->
+class Image extends Mesh
 
-    mesh = new THREE.Mesh()
+    constructor : (params = {}) ->
 
-    geometry = new ImageGeometry mesh: mesh, file: file, depth: depth, options: {bevelEnabled: bevel, center: center}
-    material = new MeshMaterial type, color: color
+        super "image", params
 
-    mesh.geometry = geometry
-    mesh.material = material
+class POLY.ImageMesh
 
-    mesh.position.set position[0], position[1], position[2]
+    constructor : (params = {}) ->
 
-    mesh.class = "image"
-    mesh.name = "Image"
+        params.material ?= "normal"
+        params.mesh ?= new THREE.Mesh()
 
-    return mesh
+        params.mesh.geometry = new ImageGeometry params
+        params.mesh.material = new MeshMaterial params.material, params
 
-addImage = (file = "image", depth = 3, bevel = false, position = [0, 0, 0], type = "normal", color = blackThree, center = true) ->
+        params.mesh.class = "image"
+        params.mesh.name = "Image"
 
-    return addMesh newImage file, depth, bevel, position, type, color, center
+        return params.mesh

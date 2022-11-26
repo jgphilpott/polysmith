@@ -1,17 +1,21 @@
-newKnot = (radius = 10, thickness = 3, radialSegments = 42, tubularSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
+class Knot extends Mesh
 
-    geometry = new TorusKnotGeometry radius: radius, thickness: thickness, radialSegments: radialSegments, tubularSegments: tubularSegments
-    material = new MeshMaterial type, color: color
+    constructor : (params = {}) ->
 
-    knot = new THREE.Mesh geometry, material
+        super "knot", params
 
-    knot.position.set position[0], position[1], position[2]
+class POLY.KnotMesh extends THREE.Mesh
 
-    knot.class = "knot"
-    knot.name = "Knot"
+    constructor : (params = {}) ->
 
-    return knot
+        params.material ?= "normal"
 
-addKnot = (radius = 10, thickness = 3, radialSegments = 42, tubularSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
+        geometry = new KnotGeometry params
+        material = new MeshMaterial params.material, params
 
-    return addMesh newKnot radius, thickness, radialSegments, tubularSegments, position, type, color
+        super geometry, material
+
+        this.class = "knot"
+        this.name = "Knot"
+
+        return this

@@ -34,6 +34,18 @@ class Mesh
 
                 @mesh = new POLY.ConeMesh params; break
 
+            when "torus"
+
+                @mesh = new POLY.TorusMesh params; break
+
+            when "text"
+
+                @mesh = new POLY.TextMesh params; break
+
+            when "image"
+
+                @mesh = new POLY.ImageMesh params; break
+
             else
 
                 @mesh = params.mesh
@@ -207,24 +219,24 @@ addMesh = (mesh = null, properties = {}) ->
 
             when "torus"
 
-                mesh = newTorus()
+                mesh = new Torus()
                 mesh.rotation.y = deg$rad 90
 
                 break
 
             when "text"
 
-                mesh = addText()
+                mesh = new Text()
                 mesh.rotation.z = deg$rad 180
 
-                return
+                break
 
             when "image"
 
-                mesh = addImage()
+                mesh = new Image()
                 mesh.rotation.x = deg$rad 0
 
-                return
+                break
 
     if mesh
 

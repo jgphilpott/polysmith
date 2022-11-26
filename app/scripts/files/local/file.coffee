@@ -88,15 +88,13 @@ class LocalStorage
 
             for mesh in meshes
 
-                mesh = deserializeMesh mesh
+                if mesh.metadata.class == "text"
 
-                if mesh.class == "text"
-
-                    addText()
+                    new Text().add()
 
                 else
 
-                    addMesh mesh
+                    addMesh deserializeMesh mesh
 
     removeMeshes : (mesh) ->
 
