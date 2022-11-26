@@ -1,17 +1,21 @@
-newDodecahedron = (radius = 5, detail = 0, position = [0, 0, 0], type = "normal", color = blackThree) ->
+class Dodecahedron extends Mesh
 
-    geometry = new DodecahedronGeometry radius: radius, detail: detail
-    material = new MeshMaterial type, color: color
+    constructor : (params = {}) ->
 
-    dodecahedron = new THREE.Mesh geometry, material
+        super "dodecahedron", params
 
-    dodecahedron.position.set position[0], position[1], position[2]
+class POLY.DodecahedronMesh extends THREE.Mesh
 
-    dodecahedron.class = "dodecahedron"
-    dodecahedron.name = "Dodecahedron"
+    constructor : (params = {}) ->
 
-    return dodecahedron
+        params.material ?= "normal"
 
-addDodecahedron = (radius = 5, detail = 0, position = [0, 0, 0], type = "normal", color = blackThree) ->
+        geometry = new DodecahedronGeometry params
+        material = new MeshMaterial params.material, params
 
-    return addMesh newDodecahedron radius, detail, position, type, color
+        super geometry, material
+
+        this.class = "dodecahedron"
+        this.name = "Dodecahedron"
+
+        return this

@@ -1,17 +1,21 @@
-newOctahedron = (radius = 5, detail = 0, position = [0, 0, 0], type = "normal", color = blackThree) ->
+class Octahedron extends Mesh
 
-    geometry = new OctahedronGeometry radius: radius, detail: detail
-    material = new MeshMaterial type, color: color
+    constructor : (params = {}) ->
 
-    octahedron = new THREE.Mesh geometry, material
+        super "octahedron", params
 
-    octahedron.position.set position[0], position[1], position[2]
+class POLY.OctahedronMesh extends THREE.Mesh
 
-    octahedron.class = "octahedron"
-    octahedron.name = "Octahedron"
+    constructor : (params = {}) ->
 
-    return octahedron
+        params.material ?= "normal"
 
-addOctahedron = (radius = 5, detail = 0, position = [0, 0, 0], type = "normal", color = blackThree) ->
+        geometry = new OctahedronGeometry params
+        material = new MeshMaterial params.material, params
 
-    return addMesh newOctahedron radius, detail, position, type, color
+        super geometry, material
+
+        this.class = "octahedron"
+        this.name = "Octahedron"
+
+        return this

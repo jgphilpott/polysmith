@@ -1,17 +1,21 @@
-newIcosahedron = (radius = 5, detail = 0, position = [0, 0, 0], type = "normal", color = blackThree) ->
+class Icosahedron extends Mesh
 
-    geometry = new IcosahedronGeometry radius: radius, detail: detail
-    material = new MeshMaterial type, color: color
+    constructor : (params = {}) ->
 
-    icosahedron = new THREE.Mesh geometry, material
+        super "icosahedron", params
 
-    icosahedron.position.set position[0], position[1], position[2]
+class POLY.IcosahedronMesh extends THREE.Mesh
 
-    icosahedron.class = "icosahedron"
-    icosahedron.name = "Icosahedron"
+    constructor : (params = {}) ->
 
-    return icosahedron
+        params.material ?= "normal"
 
-addIcosahedron = (radius = 5, detail = 0, position = [0, 0, 0], type = "normal", color = blackThree) ->
+        geometry = new IcosahedronGeometry params
+        material = new MeshMaterial params.material, params
 
-    return addMesh newIcosahedron radius, detail, position, type, color
+        super geometry, material
+
+        this.class = "icosahedron"
+        this.name = "Icosahedron"
+
+        return this

@@ -18,6 +18,18 @@ class Mesh
 
                 @mesh = new POLY.SphereMesh params; break
 
+            when "octahedron"
+
+                @mesh = new POLY.OctahedronMesh params; break
+
+            when "dodecahedron"
+
+                @mesh = new POLY.DodecahedronMesh params; break
+
+            when "icosahedron"
+
+                @mesh = new POLY.IcosahedronMesh params; break
+
             when "cone"
 
                 @mesh = new POLY.ConeMesh params; break
@@ -104,21 +116,21 @@ addMesh = (mesh = null, properties = {}) ->
 
             when "octahedron"
 
-                mesh = newOctahedron()
+                mesh = new Octahedron()
                 mesh.rotation.x = deg$rad 0
 
                 break
 
             when "dodecahedron"
 
-                mesh = newDodecahedron()
+                mesh = new Dodecahedron()
                 mesh.rotation.x = deg$rad 0
 
                 break
 
             when "icosahedron"
 
-                mesh = newIcosahedron()
+                mesh = new Icosahedron()
                 mesh.rotation.x = deg$rad 0
 
                 break
