@@ -1,3 +1,68 @@
+class Mesh
+
+    constructor : (type, params) ->
+
+        @type = lower type.trim()
+
+        switch this.type
+
+            when "box"
+
+                @mesh = new POLY.BoxMesh params; break
+
+            else
+
+                @mesh = params.mesh
+
+        @position = params.position ?= x: 0, y: 0, z: 0
+        @rotation = params.rotation ?= x: 0, y: 0, z: 0
+
+        this.mesh.getPosition = this.getPosition
+        this.mesh.setPosition = this.setPosition
+
+        this.mesh.getRotation = this.getRotation
+        this.mesh.setRotation = this.setRotation
+
+        this.mesh.add = this.add
+        this.mesh.remove = this.remove
+
+        this.mesh.setPosition this.position
+        this.mesh.setRotation this.rotation
+
+        return this.mesh
+
+    getPosition : () ->
+
+        return this.position
+
+    setPosition : (position) ->
+
+        this.position.x = position.x
+        this.position.y = position.y
+        this.position.z = position.z
+
+    getRotation : () ->
+
+        return this.rotation
+
+    setRotation : (rotation) ->
+
+        this.rotation.x = rotation.x
+        this.rotation.y = rotation.y
+        this.rotation.z = rotation.z
+
+    add : () ->
+
+        scene.add this
+
+    remove : () ->
+
+        scene.remove this
+
+###########
+### OLD ###
+###########
+
 addMesh = (mesh = null, properties = {}) ->
 
     if !mesh and properties.class
@@ -6,7 +71,7 @@ addMesh = (mesh = null, properties = {}) ->
 
             when "box"
 
-                mesh = newBox()
+                mesh = new Box()
                 mesh.rotation.x = deg$rad 0
 
                 break

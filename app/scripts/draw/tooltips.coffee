@@ -99,7 +99,7 @@ class Tooltips
 
             zRotation = if cameraPosition.y > meshPosition.y then deg$rad 180 else deg$rad 0
 
-        cameraBox = newBox 1, 1, 1, [cameraPosition.x, cameraPosition.y, zPosition]
+        cameraBox = new Box length: 1, width: 1, height: 1, position: {x: cameraPosition.x, y: cameraPosition.y, z: zPosition}
 
         xTool.position.set xPosition, meshPosition.y, meshPosition.z
         yTool.position.set meshPosition.x, yPosition, meshPosition.z

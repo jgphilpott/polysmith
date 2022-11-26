@@ -1,17 +1,19 @@
-newBox = (length = 10, width = 10, height = 10, position = [0, 0, 0], type = "normal", color = blackThree) ->
+class Box extends Mesh
 
-    geometry = new BoxGeometry length: length, width: width, height: height
-    material = new MeshMaterial type, color: color
+    constructor : (params = {}) ->
 
-    box = new THREE.Mesh geometry, material
+        super "box", params
 
-    box.position.set position[0], position[1], position[2]
+class POLY.BoxMesh extends THREE.Mesh
 
-    box.class = "box"
-    box.name = "Box"
+    constructor : (params = {}) ->
 
-    return box
+        geometry = new BoxGeometry params
+        material = new MeshMaterial "normal", params
 
-addBox = (length = 10, width = 10, height = 10, position = [0, 0, 0], type = "normal", color = blackThree) ->
+        super geometry, material
 
-    return addMesh newBox length, width, height, position, type, color
+        this.class = "box"
+        this.name = "Box"
+
+        return this
