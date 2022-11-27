@@ -1,12 +1,12 @@
 # Link: https://threejs.org/docs/#api/en/geometries/CylinderGeometry
 
-class DecagonalPrismGeometry extends Geometry
+class CylindricalPrismGeometry extends Geometry
 
     constructor : (params = {}) ->
 
-        super "decagonal-prism", params
+        super "cylindrical-prism", params
 
-class POLY.DecagonalPrismBufferGeometry extends THREE.CylinderBufferGeometry
+class POLY.CylindricalPrismBufferGeometry extends THREE.CylinderBufferGeometry
 
     constructor : (params = {}) ->
 
@@ -15,7 +15,7 @@ class POLY.DecagonalPrismBufferGeometry extends THREE.CylinderBufferGeometry
         positiveRadius = params.positiveRadius ?= 5
         negativeRadius = params.negativeRadius ?= 5
 
-        radialSegments = params.radialSegments ?= 10
+        radialSegments = params.radialSegments ?= 42
         heightSegments = params.heightSegments ?= 1
 
         openEnded = params.openEnded ?= false
@@ -23,4 +23,4 @@ class POLY.DecagonalPrismBufferGeometry extends THREE.CylinderBufferGeometry
         thetaStart = params.thetaStart ?= 0
         thetaLength = params.thetaLength ?= Math.PI * 2
 
-        super positiveRadius, negativeRadius, length, 10, heightSegments, openEnded, thetaStart, thetaLength
+        super positiveRadius, negativeRadius, length, radialSegments, heightSegments, openEnded, thetaStart, thetaLength
