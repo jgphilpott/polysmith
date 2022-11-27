@@ -1,17 +1,21 @@
-newRing = (innerRadius = 5, outerRadius = 10, radialSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
+class Ring extends Mesh
 
-    geometry = new RingGeometry innerRadius: innerRadius, outerRadius: outerRadius, radialSegments: radialSegments
-    material = new MeshMaterial type, color: color
+    constructor : (params = {}) ->
 
-    ring = new THREE.Mesh geometry, material
+        super "ring", params
 
-    ring.position.set position[0], position[1], position[2]
+class POLY.RingMesh extends THREE.Mesh
 
-    ring.class = "ring"
-    ring.name = "Ring"
+    constructor : (params = {}) ->
 
-    return ring
+        params.material ?= "normal"
 
-addRing = (innerRadius = 5, outerRadius = 10, radialSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
+        geometry = new RingGeometry params
+        material = new MeshMaterial params.material, params
 
-    return addMesh newRing innerRadius, outerRadius, radialSegments, position, type, color
+        super geometry, material
+
+        this.class = "ring"
+        this.name = "Ring"
+
+        return this

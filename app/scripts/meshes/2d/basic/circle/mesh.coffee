@@ -1,17 +1,21 @@
-newCircle = (radius = 10, radialSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
+class Circle extends Mesh
 
-    geometry = new CircleGeometry radius: radius, radialSegments: radialSegments
-    material = new MeshMaterial type, color: color
+    constructor : (params = {}) ->
 
-    circle = new THREE.Mesh geometry, material
+        super "circle", params
 
-    circle.position.set position[0], position[1], position[2]
+class POLY.CircleMesh extends THREE.Mesh
 
-    circle.class = "circle"
-    circle.name = "Circle"
+    constructor : (params = {}) ->
 
-    return circle
+        params.material ?= "normal"
 
-addCircle = (radius = 10, radialSegments = 42, position = [0, 0, 0], type = "normal", color = blackThree) ->
+        geometry = new CircleGeometry params
+        material = new MeshMaterial params.material, params
 
-    return addMesh newCircle radius, radialSegments, position, type, color
+        super geometry, material
+
+        this.class = "circle"
+        this.name = "Circle"
+
+        return this

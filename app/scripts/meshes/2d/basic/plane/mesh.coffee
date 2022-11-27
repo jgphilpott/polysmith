@@ -1,17 +1,21 @@
-newPlane = (width = 10, height = 10, position = [0, 0, 0], type = "normal", color = blackThree) ->
+class Plane extends Mesh
 
-    geometry = new PlaneGeometry width: width, height: height
-    material = new MeshMaterial type, color: color
+    constructor : (params = {}) ->
 
-    plane = new THREE.Mesh geometry, material
+        super "plane", params
 
-    plane.position.set position[0], position[1], position[2]
+class POLY.PlaneMesh extends THREE.Mesh
 
-    plane.class = "plane"
-    plane.name = "Plane"
+    constructor : (params = {}) ->
 
-    return plane
+        params.material ?= "normal"
 
-addPlane = (width = 10, height = 10, position = [0, 0, 0], type = "normal", color = blackThree) ->
+        geometry = new PlaneGeometry params
+        material = new MeshMaterial params.material, params
 
-    return addMesh newPlane width, height, position, type, color
+        super geometry, material
+
+        this.class = "plane"
+        this.name = "Plane"
+
+        return this

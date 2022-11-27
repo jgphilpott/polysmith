@@ -1,17 +1,21 @@
-newQuadrilateral = (vertices = [[0, 5, 5], [0, -5, 5], [0, -5, -5], [0, 5, -5]], position = [0, 0, 0], type = "normal", color = blackThree) ->
+class Quadrilateral extends Mesh
 
-    geometry = new QuadrilateralGeometry vertices: vertices
-    material = new MeshMaterial type, color: color
+    constructor : (params = {}) ->
 
-    quadrilateral = new THREE.Mesh geometry, material
+        super "quadrilateral", params
 
-    quadrilateral.position.set position[0], position[1], position[2]
+class POLY.QuadrilateralMesh extends THREE.Mesh
 
-    quadrilateral.class = "quadrilateral"
-    quadrilateral.name = "Quadrilateral"
+    constructor : (params = {}) ->
 
-    return quadrilateral
+        params.material ?= "normal"
 
-addQuadrilateral = (vertices = [[0, 5, 5], [0, -5, 5], [0, -5, -5], [0, 5, -5]], position = [0, 0, 0], type = "normal", color = blackThree) ->
+        geometry = new QuadrilateralGeometry params
+        material = new MeshMaterial params.material, params
 
-    return addMesh newQuadrilateral vertices, position, type, color
+        super geometry, material
+
+        this.class = "quadrilateral"
+        this.name = "Quadrilateral"
+
+        return this

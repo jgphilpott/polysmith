@@ -1,17 +1,21 @@
-newTriangle = (vertices = [[0, 0, 10 * Math.sqrt(3) / 4], [0, -5, -10 * Math.sqrt(3) / 4], [0, 5, -10 * Math.sqrt(3) / 4]], position = [0, 0, 0], type = "normal", color = blackThree) ->
+class Triangle extends Mesh
 
-    geometry = new TriangleGeometry vertices: vertices
-    material = new MeshMaterial type, color: color
+    constructor : (params = {}) ->
 
-    triangle = new THREE.Mesh geometry, material
+        super "triangle", params
 
-    triangle.position.set position[0], position[1], position[2]
+class POLY.TriangleMesh extends THREE.Mesh
 
-    triangle.class = "triangle"
-    triangle.name = "Triangle"
+    constructor : (params = {}) ->
 
-    return triangle
+        params.material ?= "normal"
 
-addTriangle = (vertices = [[0, 0, 10 * Math.sqrt(3) / 4], [0, -5, -10 * Math.sqrt(3) / 4], [0, 5, -10 * Math.sqrt(3) / 4]], position = [0, 0, 0], type = "normal", color = blackThree) ->
+        geometry = new TriangleGeometry params
+        material = new MeshMaterial params.material, params
 
-    return addMesh newTriangle vertices, position, type, color
+        super geometry, material
+
+        this.class = "triangle"
+        this.name = "Triangle"
+
+        return this
