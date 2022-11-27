@@ -164,9 +164,9 @@ makeDragable = (element, origEvent = null) ->
                     yColor = if measurements then greenThree else blackThree
                     zColor = if measurements then blueThree else blackThree
 
-                    xDistanceLine = newLine [[0, coordinates.y, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed", xColor
-                    yDistanceLine = newLine [[coordinates.x, 0, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], "dashed", yColor
-                    zDistanceLine = newLine [[coordinates.x, coordinates.y, 0], [coordinates.x, coordinates.y, coordinates.z]], "dashed", zColor
+                    xDistanceLine = new Line vertices: [[0, coordinates.y, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], material: "dashed", color: xColor
+                    yDistanceLine = new Line vertices: [[coordinates.x, 0, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], material: "dashed", color: yColor
+                    zDistanceLine = new Line vertices: [[coordinates.x, coordinates.y, 0], [coordinates.x, coordinates.y, coordinates.z]], material: "dashed", color: zColor
 
                     tooltips.distanceLines.push xDistanceLine, yDistanceLine, zDistanceLine
                     scene.add xDistanceLine, yDistanceLine, zDistanceLine

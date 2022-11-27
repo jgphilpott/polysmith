@@ -11,9 +11,11 @@ class POLY.StrokeLineMaterial extends LineThickMaterial
     constructor : (params = {}) ->
 
         color = params.color ?= blackThree
+        linewidth = params.linewidth ?= 1
 
         dashed = params.dashed ?= false
-        linewidth = params.linewidth ?= 1
+        dashSize = params.dashSize ?= 3
+        gapSize = params.gapSize ?= 2
 
         vertexColors = params.vertexColors ?= false
         alphaToCoverage = params.alphaToCoverage ?= false
@@ -21,9 +23,11 @@ class POLY.StrokeLineMaterial extends LineThickMaterial
         super
 
             color: color
+            linewidth: linewidth
 
             dashed: dashed
-            linewidth: linewidth
+            dashSize: dashSize
+            gapSize: gapSize
 
             vertexColors: vertexColors
             alphaToCoverage: alphaToCoverage

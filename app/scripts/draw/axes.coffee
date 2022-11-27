@@ -34,7 +34,7 @@ addAxisX = (min = -scale, max = scale) ->
 
     if settings.getSetting "axes", "xAxis"
 
-        axisX = newStroke [[min, 0, 0], [max, 0, 0]], "stroke", redThree, 3
+        axisX = new Stroke vertices: [[min, 0, 0], [max, 0, 0]], linewidth: 3, color: redThree
 
         axisX.name = "axis-x"
 
@@ -54,7 +54,7 @@ addAxisY = (min = -scale, max = scale) ->
 
     if settings.getSetting "axes", "yAxis"
 
-        axisY = newStroke [[0, min, 0], [0, max, 0]], "stroke", greenThree, 3
+        axisY = new Stroke vertices: [[0, min, 0], [0, max, 0]], linewidth: 3, color: greenThree
 
         axisY.name = "axis-y"
 
@@ -74,7 +74,7 @@ addAxisZ = (min = -scale, max = scale) ->
 
     if settings.getSetting "axes", "zAxis"
 
-        axisZ = newStroke [[0, 0, min], [0, 0, max]], "stroke", blueThree, 3
+        axisZ = new Stroke vertices: [[0, 0, min], [0, 0, max]], linewidth: 3, color: blueThree
 
         axisZ.name = "axis-z"
 
@@ -98,10 +98,10 @@ addPlaneXY = (min = -scale, max = scale) ->
 
         for tick in [step...max] by step
 
-            xTickPositive = newLine [[max, tick, 0], [min, tick, 0]], "solid", blackThree
-            xTickNegative = newLine [[max, -tick, 0], [min, -tick, 0]], "solid", blackThree
-            yTickPositive = newLine [[tick, max, 0], [tick, min, 0]], "solid", blackThree
-            yTickNegative = newLine [[-tick, max, 0], [-tick, min, 0]], "solid", blackThree
+            xTickPositive = new Line vertices: [[max, tick, 0], [min, tick, 0]]
+            xTickNegative = new Line vertices: [[max, -tick, 0], [min, -tick, 0]]
+            yTickPositive = new Line vertices: [[tick, max, 0], [tick, min, 0]]
+            yTickNegative = new Line vertices: [[-tick, max, 0], [-tick, min, 0]]
 
             xTickPositive.name = "tick-xy-x-+-" + tick + ""
             xTickNegative.name = "tick-xy-x---" + tick + ""
@@ -111,8 +111,8 @@ addPlaneXY = (min = -scale, max = scale) ->
             axes.push xTickPositive, xTickNegative, yTickPositive, yTickNegative
             scene.add xTickPositive, xTickNegative, yTickPositive, yTickNegative
 
-        xTick = newLine [[max, 0, 0], [min, 0, 0]], "solid", blackThree
-        yTick = newLine [[0, max, 0], [0, min, 0]], "solid", blackThree
+        xTick = new Line vertices: [[max, 0, 0], [min, 0, 0]]
+        yTick = new Line vertices: [[0, max, 0], [0, min, 0]]
 
         xTick.name = "tick-xy-x-0"
         yTick.name = "tick-xy-y-0"
@@ -137,10 +137,10 @@ addPlaneXZ = (min = -scale, max = scale) ->
 
         for tick in [step...max] by step
 
-            xTickPositive = newLine [[max, 0, tick], [min, 0, tick]], "solid", blackThree
-            xTickNegative = newLine [[max, 0, -tick], [min, 0, -tick]], "solid", blackThree
-            zTickPositive = newLine [[tick, 0, max], [tick, 0, min]], "solid", blackThree
-            zTickNegative = newLine [[-tick, 0, max], [-tick, 0, min]], "solid", blackThree
+            xTickPositive = new Line vertices: [[max, 0, tick], [min, 0, tick]]
+            xTickNegative = new Line vertices: [[max, 0, -tick], [min, 0, -tick]]
+            zTickPositive = new Line vertices: [[tick, 0, max], [tick, 0, min]]
+            zTickNegative = new Line vertices: [[-tick, 0, max], [-tick, 0, min]]
 
             xTickPositive.name = "tick-xz-x-+-" + tick + ""
             xTickNegative.name = "tick-xz-x---" + tick + ""
@@ -150,8 +150,8 @@ addPlaneXZ = (min = -scale, max = scale) ->
             axes.push xTickPositive, xTickNegative, zTickPositive, zTickNegative
             scene.add xTickPositive, xTickNegative, zTickPositive, zTickNegative
 
-        xTick = newLine [[max, 0, 0], [min, 0, 0]], "solid", blackThree
-        zTick = newLine [[0, 0, max], [0, 0, min]], "solid", blackThree
+        xTick = new Line vertices: [[max, 0, 0], [min, 0, 0]]
+        zTick = new Line vertices: [[0, 0, max], [0, 0, min]]
 
         xTick.name = "tick-xz-x-0"
         zTick.name = "tick-xz-z-0"
@@ -176,10 +176,10 @@ addPlaneYZ = (min = -scale, max = scale) ->
 
         for tick in [step...max] by step
 
-            yTickPositive = newLine [[0, max, tick], [0, min, tick]], "solid", blackThree
-            yTickNegative = newLine [[0, max, -tick], [0, min, -tick]], "solid", blackThree
-            zTickPositive = newLine [[0, tick, max], [0, tick, min]], "solid", blackThree
-            zTickNegative = newLine [[0, -tick, max], [0, -tick, min]], "solid", blackThree
+            yTickPositive = new Line vertices: [[0, max, tick], [0, min, tick]]
+            yTickNegative = new Line vertices: [[0, max, -tick], [0, min, -tick]]
+            zTickPositive = new Line vertices: [[0, tick, max], [0, tick, min]]
+            zTickNegative = new Line vertices: [[0, -tick, max], [0, -tick, min]]
 
             yTickPositive.name = "tick-yz-y-+-" + tick + ""
             yTickNegative.name = "tick-yz-y---" + tick + ""
@@ -189,8 +189,8 @@ addPlaneYZ = (min = -scale, max = scale) ->
             axes.push yTickPositive, yTickNegative, zTickPositive, zTickNegative
             scene.add yTickPositive, yTickNegative, zTickPositive, zTickNegative
 
-        yTick = newLine [[0, max, 0], [0, min, 0]], "solid", blackThree
-        zTick = newLine [[0, 0, max], [0, 0, min]], "solid", blackThree
+        yTick = new Line vertices: [[0, max, 0], [0, min, 0]]
+        zTick = new Line vertices: [[0, 0, max], [0, 0, min]]
 
         yTick.name = "tick-yz-y-0"
         zTick.name = "tick-yz-z-0"

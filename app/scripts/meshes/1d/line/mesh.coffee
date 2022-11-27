@@ -1,15 +1,23 @@
-newLine = (vertices = [[10, 10, 10], [-10, -10, -10]], type = "solid", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2) ->
+class Line extends Mesh
 
-    geometry = new LineGeometry vertices: vertices
-    material = new LineMaterial type, color: color, linewidth: linewidth, dashed: dashed, dashSize: dashSize, gapSize: gapSize
+    constructor : (params = {}) ->
 
-    line = new THREE.Line(geometry, material).computeLineDistances()
+        super "line", params
 
-    line.class = "line"
-    line.name = "Line"
+class POLY.LineMesh extends THREE.Line
 
-    return line
+    constructor : (params = {}) ->
 
-addLine = (vertices = [[10, 10, 10], [-10, -10, -10]], type = "solid", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2) ->
+        params.material ?= "solid"
 
-    return addMesh newLine vertices, type, color, linewidth, dashed, dashSize, gapSize
+        geometry = new LineGeometry params
+        material = new LineMaterial params.material, params
+
+        super geometry, material
+
+        this.computeLineDistances()
+
+        this.class = "line"
+        this.name = "Line"
+
+        return this

@@ -91,6 +91,14 @@ class Mesh
 
                 @mesh = new POLY.ImageMesh params; break
 
+            when "line"
+
+                @mesh = new POLY.LineMesh params; break
+
+            when "stroke"
+
+                @mesh = new POLY.StrokeMesh params; break
+
             else
 
                 @mesh = params.mesh

@@ -1,15 +1,23 @@
-newStroke = (vertices = [[10, 10, 10], [-10, -10, -10]], type = "stroke", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2) ->
+class Stroke extends Mesh
 
-    geometry = new StrokeGeometry vertices: vertices
-    material = new LineMaterial type, color: color, linewidth: linewidth, dashed: dashed, dashSize: dashSize, gapSize: gapSize
+    constructor : (params = {}) ->
 
-    stroke = new LineThickMesh(geometry, material).computeLineDistances()
+        super "stroke", params
 
-    stroke.class = "stroke"
-    stroke.name = "Stroke"
+class POLY.StrokeMesh extends LineThickMesh
 
-    return stroke
+    constructor : (params = {}) ->
 
-addStroke = (vertices = [[10, 10, 10], [-10, -10, -10]], type = "stroke", color = blackThree, linewidth = 1, dashed = false, dashSize = 3, gapSize = 2) ->
+        params.material ?= "stroke"
 
-    return addMesh newStroke vertices, type, color, linewidth, dashed, dashSize, gapSize
+        geometry = new StrokeGeometry params
+        material = new LineMaterial params.material, params
+
+        super geometry, material
+
+        this.computeLineDistances()
+
+        this.class = "stroke"
+        this.name = "Stroke"
+
+        return this
