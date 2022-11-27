@@ -109,6 +109,9 @@ class Mesh
         this.mesh.getRotation = this.getRotation
         this.mesh.setRotation = this.setRotation
 
+        this.mesh.addEvents = this.addEvents
+        this.mesh.removeEvents = this.removeEvents
+
         this.mesh.add = this.add
         this.mesh.remove = this.remove
 
@@ -144,10 +147,97 @@ class Mesh
         this.rotation.y = rotation.y
         this.rotation.z = rotation.z
 
+    addEvents : (self = this) ->
+
+        events.addEventListener self, "mouseover", (event) ->
+
+            if settings.getSetting "ui", "metabox"
+
+                drawMetabox "draw", self, event.origDomEvent
+
+        events.addEventListener self, "mousemove", (event) ->
+
+            if events.operation.key
+
+                if events.operation.mesh.uuid == self.uuid
+
+                    composer.outlinePass.visibleEdgeColor.set redThree
+                    $("#canvas").css "cursor", "not-allowed"
+
+                else
+
+                    composer.outlinePass.visibleEdgeColor.set greenThree
+                    $("#canvas").css "cursor", "copy"
+
+            else
+
+                if self.lock == "locked"
+
+                    composer.outlinePass.visibleEdgeColor.set redThree
+                    $("#canvas").css "cursor", "not-allowed"
+
+                else
+
+                    composer.outlinePass.visibleEdgeColor.set blackThree
+                    $("#canvas").css "cursor", "grab"
+
+            composer.outlinePass.selectedObjects = [self]
+
+            if settings.getSetting "ui", "metabox"
+
+                drawMetabox "update", self, event.origDomEvent
+
+        events.addEventListener self, "mouseout", (event) ->
+
+            if events.operation.key then $("#canvas").css "cursor", "copy" else $("#canvas").css "cursor", ""
+
+            composer.outlinePass.selectedObjects = []
+
+            eraseMetabox()
+
+        events.addEventListener self, "mousedown", (event) ->
+
+            if self.lock != "locked" then makeDragable self, event.origDomEvent
+
+        events.addEventListener self, "click", (event) ->
+
+            event.origDomEvent.stopImmediatePropagation()
+
+            if not camera.dragged
+
+                if events.operation.key
+
+                    updateMesh self, "operation", events.operation.key, null, true
+
+                else if tooltips.getSelected() != self
+
+                    tooltips.setSelected self
+
+        events.addEventListener self, "dblclick", (event) ->
+
+            if camera.focus self.position
+
+                $("#canvas").css "cursor", ""
+
+        events.addEventListener self, "contextmenu", (event) ->
+
+            contextMenu "mesh", self, event.origDomEvent
+
+    removeEvents : (self = this) ->
+
+        events.removeEventListener self, "mouseover"
+        events.removeEventListener self, "mousemove"
+        events.removeEventListener self, "mouseout"
+        events.removeEventListener self, "mousedown"
+
+        events.removeEventListener self, "click"
+        events.removeEventListener self, "dblclick"
+        events.removeEventListener self, "contextmenu"
+
     add : () ->
 
+        this.addEvents()
         updateMetrics this
-        addMeshEvents this
 
         localStore.addMeshes this
         updateMeshesPanel "add", this
@@ -156,74 +246,26 @@ class Mesh
 
     remove : () ->
 
-        scene.remove this
+        if this.lock != "locked"
+
+            this.removeEvents()
+
+            $("body").css "cursor", ""
+            $("#canvas").css "cursor", ""
+
+            if events.operation.mesh == this then clearMeshOperation()
+
+            updateMeshesPanel "remove", this
+            localStore.removeMeshes this
+
+            this.geometry.dispose()
+            this.material.dispose()
+
+            scene.remove this
 
 ###########
 ### OLD ###
 ###########
-
-addMeshEvents = (mesh) ->
-
-    events.addEventListener mesh, "mouseover", (event) ->
-
-        if settings.getSetting "ui", "metabox"
-
-            drawMetabox "draw", mesh, event.origDomEvent
-
-    events.addEventListener mesh, "mousemove", (event) ->
-
-        if events.operation.key
-
-            if events.operation.mesh.uuid == mesh.uuid then composer.outlinePass.visibleEdgeColor.set redThree else composer.outlinePass.visibleEdgeColor.set greenThree
-            if events.operation.mesh.uuid == mesh.uuid then $("#canvas").css "cursor", "not-allowed" else $("#canvas").css "cursor", "copy"
-
-
-        else
-
-            if mesh.lock == "locked" then composer.outlinePass.visibleEdgeColor.set redThree else composer.outlinePass.visibleEdgeColor.set blackThree
-            if mesh.lock == "locked" then $("#canvas").css "cursor", "not-allowed" else $("#canvas").css "cursor", "grab"
-
-        composer.outlinePass.selectedObjects = [mesh]
-
-        if settings.getSetting "ui", "metabox"
-
-            drawMetabox "update", mesh, event.origDomEvent
-
-    events.addEventListener mesh, "mouseout", (event) ->
-
-        if events.operation.key then $("#canvas").css "cursor", "copy" else $("#canvas").css "cursor", ""
-
-        composer.outlinePass.selectedObjects = []
-
-        eraseMetabox()
-
-    events.addEventListener mesh, "mousedown", (event) ->
-
-        if mesh.lock != "locked" then makeDragable mesh, event.origDomEvent
-
-    events.addEventListener mesh, "click", (event) ->
-
-        event.origDomEvent.stopImmediatePropagation()
-
-        if not camera.dragged
-
-            if events.operation.key
-
-                updateMesh mesh, "operation", events.operation.key, null, true
-
-            else if tooltips.getSelected() != mesh
-
-                tooltips.setSelected mesh
-
-    events.addEventListener mesh, "dblclick", (event) ->
-
-        if camera.focus mesh.position
-
-            $("#canvas").css "cursor", ""
-
-    events.addEventListener mesh, "contextmenu", (event) ->
-
-        contextMenu "mesh", mesh, event.origDomEvent
 
 updateMesh = (mesh, type, key = null, value = null, save = false) ->
 
@@ -272,6 +314,8 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
                 morphed = morph key, events.operation.mesh, mesh
 
                 if morphed
+
+                    morphed.geometry = new Geometry "custom", geometry: morphed.geometry
 
                     events.operation.mesh.class = "custom"
                     events.operation.mesh.geometry = morphed.geometry
@@ -493,29 +537,3 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
                 break
 
         if save == true then localStore.updateMeshes mesh
-
-removeMesh = (mesh) ->
-
-    if mesh.lock != "locked"
-
-        $("body").css "cursor", ""
-        $("#canvas").css "cursor", ""
-
-        events.removeEventListener mesh, "mouseover"
-        events.removeEventListener mesh, "mousemove"
-        events.removeEventListener mesh, "mouseout"
-        events.removeEventListener mesh, "mousedown"
-
-        events.removeEventListener mesh, "click"
-        events.removeEventListener mesh, "dblclick"
-        events.removeEventListener mesh, "contextmenu"
-
-        if events.operation.mesh == mesh then clearMeshOperation()
-
-        updateMeshesPanel "remove", mesh
-        localStore.removeMeshes mesh
-
-        mesh.geometry.dispose()
-        mesh.material.dispose()
-
-        scene.remove mesh

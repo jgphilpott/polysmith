@@ -241,7 +241,7 @@ addMeshPanel = (mesh, coordinates = null) ->
 
         panel.find("#eye").click (event) -> if mesh.lock != "locked" then updateMesh(mesh, "visibility", "eye", this.src, true)
         panel.find("#lock").click (event) -> updateMesh(mesh, "lock")
-        panel.find("#trash").click (event) -> if mesh.lock != "locked" then removeMesh(mesh)
+        panel.find("#trash").click (event) -> if mesh.lock != "locked" then mesh.remove()
         panel.find(".tool").on "mousedown mouseup", (event) -> event.stopPropagation()
 
         panel.find(".fold, h4").click (event) -> foldPanel(this)

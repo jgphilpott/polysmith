@@ -70,7 +70,7 @@ contextMenu = (type, element, event) ->
             panel.find("#intersect").click -> updateMesh(element, "operation", "intersect", "setup")
             panel.find("#lock").click -> updateMesh(element, "lock")
             panel.find("#wireframe").click -> element.material.wireframe = !element.material.wireframe
-            panel.find("#remove").click -> removeMesh element
+            panel.find("#remove").click -> element.remove()
 
             break
 

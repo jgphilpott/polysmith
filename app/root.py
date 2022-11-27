@@ -66,7 +66,7 @@ if not exists(js_libs_dir + "/threeX.js"): urlretrieve("https://raw.githubuserco
 
 if not exists(js_libs_dir + "/FileSaver.js"): urlretrieve("https://raw.githubusercontent.com/eligrey/FileSaver.js/b5e61ec88969461ce0504658af07c2b56650ee8c/src/FileSaver.js", js_libs_dir + "/FileSaver.js")
 
-if not exists(js_libs_dir + "/csgWrapper.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/03df747c3047504480e6dbeeddd27d68/raw/610e6908804af69ba765dc086b7018acbcdc4aa9/csgWrapper.js", js_libs_dir + "/csgWrapper.js")
+if not exists(js_libs_dir + "/csgWrapper.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/03df747c3047504480e6dbeeddd27d68/raw/43325a9262bac33d5285a8e1c5a14ec4beeae014/csgWrapper.js", js_libs_dir + "/csgWrapper.js")
 if not exists(js_libs_dir + "/morph.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/59ad8432ba8567e91176e669454b9afa/raw/2e51fdb9eb1ea7a050e61da070a33c3611afea4b/morph.js", js_libs_dir + "/morph.js")
 
 if not exists(js_libs_dir + "/BufferGeometryUtils.js"): urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/utils/BufferGeometryUtils.js", js_libs_dir + "/BufferGeometryUtils.js")

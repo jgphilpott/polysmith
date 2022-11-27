@@ -97,7 +97,7 @@ updateMeshesPanel = (type, mesh) ->
                     addMeshPanel mesh
 
             tableRow.find(".lock").click -> updateMesh(mesh, "lock")
-            tableRow.find(".trash").click -> if mesh.lock != "locked" then removeMesh(mesh)
+            tableRow.find(".trash").click -> if mesh.lock != "locked" then mesh.remove()
             tableRow.find(".settings, .lock, .trash").on "mousedown mouseup", (event) -> event.stopPropagation()
 
             break
