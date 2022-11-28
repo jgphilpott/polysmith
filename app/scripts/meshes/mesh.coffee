@@ -32,64 +32,143 @@ class Mesh
 
             when "triangular-prism"
 
-                params.radialSegments = 3
-                @mesh = new POLY.CylinderMesh params; break
+                @mesh = new POLY.TriangularPrismMesh params; break
 
             when "rectangular-prism"
 
-                params.radialSegments = 4
-                @mesh = new POLY.CylinderMesh params; break
+                @mesh = new POLY.RectangularPrismMesh params; break
 
             when "pentagonal-prism"
 
-                params.radialSegments = 5
-                @mesh = new POLY.CylinderMesh params; break
+                @mesh = new POLY.PentagonalPrismMesh params; break
 
             when "hexagonal-prism"
 
-                params.radialSegments = 6
-                @mesh = new POLY.CylinderMesh params; break
+                @mesh = new POLY.HexagonalPrismMesh params; break
 
             when "heptagonal-prism"
 
-                params.radialSegments = 7
-                @mesh = new POLY.CylinderMesh params; break
+                @mesh = new POLY.HeptagonalPrismMesh params; break
 
             when "octagonal-prism"
 
-                params.radialSegments = 8
-                @mesh = new POLY.CylinderMesh params; break
+                @mesh = new POLY.OctagonalPrismMesh params; break
+
+            when "nonagonal-prism"
+
+                @mesh = new POLY.NonagonalPrismMesh params; break
+
+            when "decagonal-prism"
+
+                @mesh = new POLY.DecagonalPrismMesh params; break
+
+            when "cylindrical-prism"
+
+                @mesh = new POLY.CylindricalPrismMesh params; break
 
             when "triangular-pyramid"
 
-                params.radialSegments = 3
-                @mesh = new POLY.ConeMesh params; break
+                @mesh = new POLY.TriangularPyramidMesh params; break
 
             when "rectangular-pyramid"
 
-                params.radialSegments = 4
-                @mesh = new POLY.ConeMesh params; break
+                @mesh = new POLY.RectangularPyramidMesh params; break
 
             when "pentagonal-pyramid"
 
-                params.radialSegments = 5
-                @mesh = new POLY.ConeMesh params; break
+                @mesh = new POLY.PentagonalPyramidMesh params; break
+
+            when "hexagonal-pyramid"
+
+                @mesh = new POLY.HexagonalPyramidMesh params; break
+
+            when "heptagonal-pyramid"
+
+                @mesh = new POLY.HeptagonalPyramidMesh params; break
+
+            when "octagonal-pyramid"
+
+                @mesh = new POLY.OctagonalPyramidMesh params; break
+
+            when "nonagonal-pyramid"
+
+                @mesh = new POLY.NonagonalPyramidMesh params; break
+
+            when "decagonal-pyramid"
+
+                @mesh = new POLY.DecagonalPyramidMesh params; break
 
             when "cone"
 
                 @mesh = new POLY.ConeMesh params; break
 
-            when "torus"
+            when "capsule"
 
-                @mesh = new POLY.TorusMesh params; break
+                @mesh = new POLY.CapsuleMesh params; break
+
+            when "image"
+
+                @mesh = new POLY.ImageMesh params; break
+
+            when "knot"
+
+                @mesh = new POLY.KnotMesh params; break
 
             when "text"
 
                 @mesh = new POLY.TextMesh params; break
 
-            when "image"
+            when "torus"
 
-                @mesh = new POLY.ImageMesh params; break
+                @mesh = new POLY.TorusMesh params; break
+
+            when "tube"
+
+                @mesh = new POLY.TubeMesh params; break
+
+            when "circle"
+
+                @mesh = new POLY.CircleMesh params; break
+
+            when "plane"
+
+                @mesh = new POLY.PlaneMesh params; break
+
+            when "triangle"
+
+                @mesh = new POLY.TriangleMesh params; break
+
+            when "quadrilateral"
+
+                @mesh = new POLY.QuadrilateralMesh params; break
+
+            when "pentagon"
+
+                @mesh = new POLY.PentagonMesh params; break
+
+            when "hexagon"
+
+                @mesh = new POLY.HexagonMesh params; break
+
+            when "heptagon"
+
+                @mesh = new POLY.HeptagonMesh params; break
+
+            when "octagon"
+
+                @mesh = new POLY.OctagonMesh params; break
+
+            when "nonagon"
+
+                @mesh = new POLY.NonagonMesh params; break
+
+            when "decagon"
+
+                @mesh = new POLY.DecagonMesh params; break
+
+            when "ring"
+
+                @mesh = new POLY.RingMesh params; break
 
             when "line"
 

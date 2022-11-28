@@ -32,6 +32,74 @@ class Geometry
 
                 @geometry = new POLY.IcosahedronBufferGeometry params; break
 
+            when "triangular-prism"
+
+                @geometry = new POLY.TriangularPrismBufferGeometry params; break
+
+            when "rectangular-prism"
+
+                @geometry = new POLY.RectangularPrismBufferGeometry params; break
+
+            when "pentagonal-prism"
+
+                @geometry = new POLY.PentagonalPrismBufferGeometry params; break
+
+            when "hexagonal-prism"
+
+                @geometry = new POLY.HexagonalPrismBufferGeometry params; break
+
+            when "heptagonal-prism"
+
+                @geometry = new POLY.HeptagonalPrismBufferGeometry params; break
+
+            when "octagonal-prism"
+
+                @geometry = new POLY.OctagonalPrismBufferGeometry params; break
+
+            when "nonagonal-prism"
+
+                @geometry = new POLY.NonagonalPrismBufferGeometry params; break
+
+            when "decagonal-prism"
+
+                @geometry = new POLY.DecagonalPrismBufferGeometry params; break
+
+            when "cylindrical-prism"
+
+                @geometry = new POLY.CylindricalPrismBufferGeometry params; break
+
+            when "triangular-pyramid"
+
+                @geometry = new POLY.TriangularPyramidBufferGeometry params; break
+
+            when "rectangular-pyramid"
+
+                @geometry = new POLY.RectangularPyramidBufferGeometry params; break
+
+            when "pentagonal-pyramid"
+
+                @geometry = new POLY.PentagonalPyramidBufferGeometry params; break
+
+            when "hexagonal-pyramid"
+
+                @geometry = new POLY.HexagonalPyramidBufferGeometry params; break
+
+            when "heptagonal-pyramid"
+
+                @geometry = new POLY.HeptagonalPyramidBufferGeometry params; break
+
+            when "octagonal-pyramid"
+
+                @geometry = new POLY.OctagonalPyramidBufferGeometry params; break
+
+            when "nonagonal-pyramid"
+
+                @geometry = new POLY.NonagonalPyramidBufferGeometry params; break
+
+            when "decagonal-pyramid"
+
+                @geometry = new POLY.DecagonalPyramidBufferGeometry params; break
+
             when "cone"
 
                 @geometry = new POLY.ConeBufferGeometry params; break
@@ -46,7 +114,7 @@ class Geometry
 
             when "knot"
 
-                @geometry = new POLY.TorusKnotBufferGeometry params; break
+                @geometry = new POLY.KnotBufferGeometry params; break
 
             when "text"
 
@@ -75,6 +143,30 @@ class Geometry
             when "quadrilateral"
 
                 @geometry = new POLY.QuadrilateralBufferGeometry params; break
+
+            when "pentagon"
+
+                @geometry = new POLY.PentagonBufferGeometry params; break
+
+            when "hexagon"
+
+                @geometry = new POLY.HexagonBufferGeometry params; break
+
+            when "heptagon"
+
+                @geometry = new POLY.HeptagonBufferGeometry params; break
+
+            when "octagon"
+
+                @geometry = new POLY.OctagonBufferGeometry params; break
+
+            when "nonagon"
+
+                @geometry = new POLY.NonagonBufferGeometry params; break
+
+            when "decagon"
+
+                @geometry = new POLY.DecagonBufferGeometry params; break
 
             when "ring"
 

@@ -1,12 +1,12 @@
 # Link: https://threejs.org/docs/#api/en/geometries/TorusKnotGeometry
 
-class TorusKnotGeometry extends Geometry
+class KnotGeometry extends Geometry
 
     constructor : (params = {}) ->
 
         super "knot", params
 
-class POLY.TorusKnotBufferGeometry extends THREE.TorusKnotBufferGeometry
+class POLY.KnotBufferGeometry extends THREE.TorusKnotBufferGeometry
 
     constructor : (params = {}) ->
 
