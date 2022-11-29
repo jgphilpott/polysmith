@@ -15,6 +15,8 @@ class POLY.TorusMesh extends THREE.Mesh
 
         super geometry, material
 
+        this.rotation.y = deg$rad 90
+
         this.class = "torus"
         this.name = "Torus"
 

@@ -15,6 +15,8 @@ class POLY.NonagonalPyramidMesh extends THREE.Mesh
 
         super geometry, material
 
+        this.rotation.x = deg$rad 90
+
         this.class = "nonagonal-pyramid"
         this.name = "Nonagonal Pyramid"
 

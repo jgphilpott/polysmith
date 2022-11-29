@@ -15,6 +15,8 @@ class POLY.HeptagonalPyramidMesh extends THREE.Mesh
 
         super geometry, material
 
+        this.rotation.x = deg$rad 90
+
         this.class = "heptagonal-pyramid"
         this.name = "Heptagonal Pyramid"
 

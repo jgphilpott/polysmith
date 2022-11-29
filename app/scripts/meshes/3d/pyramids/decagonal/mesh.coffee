@@ -15,6 +15,8 @@ class POLY.DecagonalPyramidMesh extends THREE.Mesh
 
         super geometry, material
 
+        this.rotation.x = deg$rad 90
+
         this.class = "decagonal-pyramid"
         this.name = "Decagonal Pyramid"
 

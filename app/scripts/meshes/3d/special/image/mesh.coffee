@@ -14,6 +14,8 @@ class POLY.ImageMesh
         params.mesh.geometry = new ImageGeometry params
         params.mesh.material = new MeshMaterial params.material, params
 
+        params.mesh.rotation.y = deg$rad 180
+
         params.mesh.class = "image"
         params.mesh.name = "Image"
 

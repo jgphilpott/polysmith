@@ -15,6 +15,8 @@ class POLY.TriangularPyramidMesh extends THREE.Mesh
 
         super geometry, material
 
+        this.rotation.x = deg$rad 90
+
         this.class = "triangular-pyramid"
         this.name = "Triangular Pyramid"
 

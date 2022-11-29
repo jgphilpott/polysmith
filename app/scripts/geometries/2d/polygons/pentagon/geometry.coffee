@@ -20,11 +20,11 @@ class POLY.PentagonBufferGeometry
         p4 = circumpoint angle * 4, radius
 
         vertices = params.vertices ?= [
-            [0, p0[0], p0[1]]
-            [0, p1[0], p1[1]]
-            [0, p2[0], p2[1]]
-            [0, p3[0], p3[1]]
-            [0, p4[0], p4[1]]
+            [p0[0], p0[1], 0]
+            [p1[0], p1[1], 0]
+            [p2[0], p2[1], 0]
+            [p3[0], p3[1], 0]
+            [p4[0], p4[1], 0]
         ]
 
         for vertex in vertices

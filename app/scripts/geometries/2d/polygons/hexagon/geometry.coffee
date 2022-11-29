@@ -21,12 +21,12 @@ class POLY.HexagonBufferGeometry
         p5 = circumpoint angle * 5, radius
 
         vertices = params.vertices ?= [
-            [0, p0[0], p0[1]]
-            [0, p1[0], p1[1]]
-            [0, p2[0], p2[1]]
-            [0, p3[0], p3[1]]
-            [0, p4[0], p4[1]]
-            [0, p5[0], p5[1]]
+            [p0[0], p0[1], 0]
+            [p1[0], p1[1], 0]
+            [p2[0], p2[1], 0]
+            [p3[0], p3[1], 0]
+            [p4[0], p4[1], 0]
+            [p5[0], p5[1], 0]
         ]
 
         for vertex in vertices

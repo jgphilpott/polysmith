@@ -10,7 +10,7 @@ class POLY.CircleBufferGeometry extends THREE.CircleBufferGeometry
 
     constructor : (params = {}) ->
 
-        radius = params.radius ?= 10
+        radius = params.radius ?= 5
         segments = params.segments ?= 42
 
         thetaStart = params.thetaStart ?= 0

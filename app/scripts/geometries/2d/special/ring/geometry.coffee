@@ -10,8 +10,8 @@ class POLY.RingBufferGeometry extends THREE.RingBufferGeometry
 
     constructor : (params = {}) ->
 
-        innerRadius = params.innerRadius ?= 5
-        outerRadius = params.outerRadius ?= 10
+        innerRadius = params.innerRadius ?= 2.5
+        outerRadius = params.outerRadius ?= 5
 
         thetaSegments = params.thetaSegments ?= 42
         phiSegments = params.phiSegments ?= 1

@@ -18,9 +18,9 @@ class POLY.TriangleBufferGeometry
         p2 = circumpoint angle * 2, radius
 
         vertices = params.vertices ?= [
-            [0, p0[0], p0[1]]
-            [0, p1[0], p1[1]]
-            [0, p2[0], p2[1]]
+            [p0[0], p0[1], 0]
+            [p1[0], p1[1], 0]
+            [p2[0], p2[1], 0]
         ]
 
         for vertex in vertices
