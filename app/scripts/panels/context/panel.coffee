@@ -31,7 +31,7 @@ contextMenu = (type, element, event) ->
             panel.append "<p id='panel'>" + (if meshPanel.length and meshPanel.css("visibility") == "visible" then "Close" else "Open") + " Panel</p>"
             panel.append "<p id='look'>Look Here</p>"
 
-            if element.lock != "locked"
+            if not element.getLock()
 
                 panel.append "<h4>Ops</h4>"
                 panel.append "<p id='join'>Join Mesh</p>"
@@ -39,9 +39,9 @@ contextMenu = (type, element, event) ->
                 panel.append "<p id='intersect'>Intersect Mesh</p>"
 
             panel.append "<h4>Mesh</h4>"
-            if element.lock != "locked" then panel.append("<p id='lock'>Lock Mesh</p>") else panel.append("<p id='lock'>Unlock Mesh</p>")
-            if element.lock != "locked" then panel.append("<p id='wireframe'>Wireframe " + (if element.material.wireframe then "Off" else "On") + "</p>") else null
-            if element.lock != "locked" then panel.append("<p id='remove'>Remove Mesh</p>") else null
+            if not element.getLock() then panel.append("<p id='lock'>Lock Mesh</p>") else panel.append("<p id='lock'>Unlock Mesh</p>")
+            if not element.getLock() then panel.append("<p id='wireframe'>Wireframe " + (if element.material.wireframe then "Off" else "On") + "</p>") else null
+            if not element.getLock() then panel.append("<p id='remove'>Remove Mesh</p>") else null
 
             panel.find("#panel").click ->
 
@@ -68,7 +68,7 @@ contextMenu = (type, element, event) ->
             panel.find("#cut").click -> updateMesh(element, "operation", "cut", "setup")
             panel.find("#join").click -> updateMesh(element, "operation", "join", "setup")
             panel.find("#intersect").click -> updateMesh(element, "operation", "intersect", "setup")
-            panel.find("#lock").click -> updateMesh(element, "lock")
+            panel.find("#lock").click -> element.toggleLock()
             panel.find("#wireframe").click -> element.material.wireframe = !element.material.wireframe
             panel.find("#remove").click -> element.remove()
 

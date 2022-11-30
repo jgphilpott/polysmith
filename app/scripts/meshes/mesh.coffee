@@ -187,6 +187,7 @@ class Mesh
 
         this.mesh.getLock = this.getLock
         this.mesh.setLock = this.setLock
+        this.mesh.toggleLock = this.toggleLock
 
         this.mesh.getPosition = this.getPosition
         this.mesh.setPosition = this.setPosition
@@ -203,8 +204,8 @@ class Mesh
         if params.position then this.mesh.setPosition params.position
         if params.rotation then this.mesh.setRotation params.rotation
 
+        this.mesh.lock = if "lock" of params then params.lock else if this.mesh.lock then this.mesh.lock else false
         this.mesh.name = if "name" of params then params.name else if this.mesh.name then this.mesh.name else "Unnamed"
-        this.mesh.lock = if "lock" of params then params.lock else if this.mesh.lock then this.mesh.lock else "unlocked"
         this.mesh.class = if "class" of params then params.class else if this.mesh.class then this.mesh.class else "custom"
 
         this.mesh.material.style = if "style" of params then params.style else if this.mesh.material.style then this.mesh.material.style else "multi"
@@ -218,7 +219,7 @@ class Mesh
 
     setName : (key = null, value = null, save = false) ->
 
-        if this.getLock() != "locked"
+        if not this.getLock()
 
             value = value.trim()
 
@@ -238,9 +239,72 @@ class Mesh
 
         return this.lock
 
-    setLock : (lock) ->
+    setLock : (lock, save = true) ->
 
-        this.lock = lock
+        this.lock = Boolean lock
+
+        meshPanel = $("#mesh." + this.uuid + "")
+        meshesTableRow = $("#meshes.table tr#" + this.uuid + "")
+
+        if this.getLock()
+
+            composer.outlinePass.visibleEdgeColor.set redThree
+
+            if this is events.operation.mesh then clearMeshOperation()
+
+            meshPanel.find("#join.operation").attr "src", "/app/imgs/panels/ops/disabled/join.png"
+            meshPanel.find("#cut.operation").attr "src", "/app/imgs/panels/ops/disabled/cut.png"
+            meshPanel.find("#intersect.operation").attr "src", "/app/imgs/panels/ops/disabled/intersect.png"
+
+            meshPanel.find("#name span").addClass "disabled"
+            meshPanel.find(".operation").addClass "disabled"
+            meshPanel.find(".color").addClass "disabled"
+
+            meshPanel.find("#eye").addClass "disabled"
+            meshPanel.find("#visibility").addClass("disabled").slider "disable"
+            meshPanel.find("#lock").attr "src", "/app/imgs/panels/lock/locked.png"
+            meshPanel.find("#trash").addClass "disabled"
+
+            sliderStyle meshPanel.find "#visibility"
+
+            meshPanel.find("input").addClass "disabled"
+            meshPanel.find("button").addClass "disabled"
+
+            meshesTableRow.find(".name span").addClass "disabled"
+            meshesTableRow.find(".lock").attr "src", "/app/imgs/panels/lock/locked.png"
+            meshesTableRow.find(".trash").addClass "disabled"
+
+        else
+
+            composer.outlinePass.visibleEdgeColor.set blackThree
+
+            meshPanel.find("#join.operation").attr "src", "/app/imgs/panels/ops/default/join.png"
+            meshPanel.find("#cut.operation").attr "src", "/app/imgs/panels/ops/default/cut.png"
+            meshPanel.find("#intersect.operation").attr "src", "/app/imgs/panels/ops/default/intersect.png"
+
+            meshPanel.find("#name span").removeClass "disabled"
+            meshPanel.find(".operation").removeClass "disabled"
+            meshPanel.find(".color").removeClass "disabled"
+
+            meshPanel.find("#eye").removeClass "disabled"
+            meshPanel.find("#visibility").removeClass("disabled").slider "enable"
+            meshPanel.find("#lock").attr "src", "/app/imgs/panels/lock/unlocked.png"
+            meshPanel.find("#trash").removeClass "disabled"
+
+            sliderStyle meshPanel.find "#visibility"
+
+            meshPanel.find("input").removeClass "disabled"
+            meshPanel.find("button").removeClass "disabled"
+
+            meshesTableRow.find(".name span").removeClass "disabled"
+            meshesTableRow.find(".lock").attr "src", "/app/imgs/panels/lock/unlocked.png"
+            meshesTableRow.find(".trash").removeClass "disabled"
+
+        if save then localStore.updateMeshes this
+
+    toggleLock : () ->
+
+        this.setLock not this.getLock()
 
     getPosition : () ->
 
@@ -286,7 +350,7 @@ class Mesh
 
             else
 
-                if self.lock == "locked"
+                if self.getLock()
 
                     composer.outlinePass.visibleEdgeColor.set redThree
                     $("#canvas").css "cursor", "not-allowed"
@@ -312,7 +376,7 @@ class Mesh
 
         events.addEventListener self, "mousedown", (event) ->
 
-            if self.lock != "locked" then makeDragable self, event.origDomEvent
+            if not self.getLock() then makeDragable self, event.origDomEvent
 
         events.addEventListener self, "click", (event) ->
 
@@ -361,7 +425,7 @@ class Mesh
 
     remove : () ->
 
-        if this.lock != "locked"
+        if not this.getLock()
 
             this.removeEvents()
 
@@ -397,7 +461,7 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
 
                 $(icon).attr "src", "/app/imgs/panels/ops/default/" + icon.id + ".png"
 
-        if value == "setup" and mesh.lock != "locked"
+        if value == "setup" and not mesh.getLock()
 
             operationIcon.attr "src", "/app/imgs/panels/ops/selected/" + key + ".png"
 
@@ -429,7 +493,7 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
             events.operation.mesh = null
             events.operation.key = null
 
-    else if type == "color" and mesh.lock != "locked"
+    else if type == "color" and not mesh.getLock()
 
         color = null
         opacity = mesh.material.opacity
@@ -454,7 +518,7 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
 
         if save then localStore.updateMeshes mesh
 
-    else if type == "visibility" and mesh.lock != "locked"
+    else if type == "visibility" and not mesh.getLock()
 
         if key == "eye"
 
@@ -481,72 +545,7 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
 
         if save then localStore.updateMeshes mesh
 
-    else if type == "lock"
-
-        meshPanel = $ "#mesh." + mesh.uuid + ""
-        meshesTableRow = $ "#meshes.table tr#" + mesh.uuid + ""
-
-        if mesh.lock == "locked"
-
-            mesh.lock = "unlocked"
-
-            composer.outlinePass.visibleEdgeColor.set blackThree
-
-            meshPanel.find("#join.operation").attr "src", "/app/imgs/panels/ops/default/join.png"
-            meshPanel.find("#cut.operation").attr "src", "/app/imgs/panels/ops/default/cut.png"
-            meshPanel.find("#intersect.operation").attr "src", "/app/imgs/panels/ops/default/intersect.png"
-
-            meshPanel.find("#name span").removeClass "disabled"
-            meshPanel.find(".operation").removeClass "disabled"
-            meshPanel.find(".color").removeClass "disabled"
-
-            meshPanel.find("#eye").removeClass "disabled"
-            meshPanel.find("#visibility").removeClass("disabled").slider "enable"
-            meshPanel.find("#lock").attr "src", "/app/imgs/panels/lock/" + mesh.lock + ".png"
-            meshPanel.find("#trash").removeClass "disabled"
-
-            sliderStyle meshPanel.find "#visibility"
-
-            meshPanel.find("input").removeClass "disabled"
-            meshPanel.find("button").removeClass "disabled"
-
-            meshesTableRow.find(".name span").removeClass "disabled"
-            meshesTableRow.find(".lock").attr "src", "/app/imgs/panels/lock/" + mesh.lock + ".png"
-            meshesTableRow.find(".trash").removeClass "disabled"
-
-        else if mesh.lock == "unlocked"
-
-            mesh.lock = "locked"
-
-            composer.outlinePass.visibleEdgeColor.set redThree
-
-            if events.operation.mesh == mesh then clearMeshOperation()
-
-            meshPanel.find("#join.operation").attr "src", "/app/imgs/panels/ops/disabled/join.png"
-            meshPanel.find("#cut.operation").attr "src", "/app/imgs/panels/ops/disabled/cut.png"
-            meshPanel.find("#intersect.operation").attr "src", "/app/imgs/panels/ops/disabled/intersect.png"
-
-            meshPanel.find("#name span").addClass "disabled"
-            meshPanel.find(".operation").addClass "disabled"
-            meshPanel.find(".color").addClass "disabled"
-
-            meshPanel.find("#eye").addClass "disabled"
-            meshPanel.find("#visibility").addClass("disabled").slider "disable"
-            meshPanel.find("#lock").attr "src", "/app/imgs/panels/lock/" + mesh.lock + ".png"
-            meshPanel.find("#trash").addClass "disabled"
-
-            sliderStyle meshPanel.find "#visibility"
-
-            meshPanel.find("input").addClass "disabled"
-            meshPanel.find("button").addClass "disabled"
-
-            meshesTableRow.find(".name span").addClass "disabled"
-            meshesTableRow.find(".lock").attr "src", "/app/imgs/panels/lock/" + mesh.lock + ".png"
-            meshesTableRow.find(".trash").addClass "disabled"
-
-        localStore.updateMeshes mesh
-
-    else if (type == "properties" or type == "position" or type == "rotation" or type == "scale") and mesh.lock != "locked"
+    else if (type == "properties" or type == "position" or type == "rotation" or type == "scale") and not mesh.getLock()
 
         input = panel.find "span#" + type + "-" + key + " input"
 

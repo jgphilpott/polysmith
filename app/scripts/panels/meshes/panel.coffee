@@ -43,10 +43,10 @@ updateMeshesPanel = (type, mesh) ->
             row = "<tr id=" + mesh.uuid + ">"
 
             row += "<td><p title='ID' class='id'>" + tooltips.meshCount + "</p></td>"
-            row += "<td><p title='Name' class='name'><span class='" + (if mesh.lock == "locked" then "disabled" else "") + "' contenteditable='true'>" + mesh.name + "</span></p></td>"
+            row += "<td><p title='Name' class='name'><span class='" + (if mesh.getLock() then "disabled" else "") + "' contenteditable='true'>" + mesh.name + "</span></p></td>"
             row += "<td><img title='Settings' class='settings' src='/app/imgs/panels/tools/toggle/off.png'></td></td>"
-            row += "<td><img title='Lock Mesh' class='lock' src='/app/imgs/panels/lock/" + mesh.lock + ".png'></td>"
-            row += "<td><img title='Delete Mesh' class='trash " + (if mesh.lock == "locked" then "disabled" else "") + "' src='/app/imgs/panels/tools/trash.png'></td>"
+            row += "<td><img title='Lock Mesh' class='lock' src='/app/imgs/panels/lock/" + (if mesh.getLock() then "locked" else "unlocked") + ".png'></td>"
+            row += "<td><img title='Delete Mesh' class='trash " + (if mesh.getLock() then "disabled" else "") + "' src='/app/imgs/panels/tools/trash.png'></td>"
 
             table.append row + "</tr>"
 
@@ -54,7 +54,7 @@ updateMeshesPanel = (type, mesh) ->
 
             tableRow.mouseenter((event) ->
 
-                visibleEdgeColor = if mesh.lock == "locked" then redThree else blackThree
+                visibleEdgeColor = if mesh.getLock() then redThree else blackThree
 
                 data.composer.outlinePass.visibleEdgeColor.set visibleEdgeColor
                 data.composer.outlinePass.selectedObjects = [mesh]
@@ -67,8 +67,8 @@ updateMeshesPanel = (type, mesh) ->
             tableRow.find(".name span").keydown (event) -> event.stopPropagation()
             tableRow.find(".name span").keyup (event) -> event.stopPropagation(); mesh.setName("meshes", $(this)[0].innerText)
 
-            tableRow.find(".name span").dblclick (event) -> if mesh.lock != "locked" then document.execCommand("selectAll")
-            tableRow.find(".name span").mousedown (event) -> event.stopPropagation(); if mesh.lock == "locked" then event.preventDefault()
+            tableRow.find(".name span").dblclick (event) -> if not mesh.getLock() then document.execCommand("selectAll")
+            tableRow.find(".name span").mousedown (event) -> event.stopPropagation(); if mesh.getLock() then event.preventDefault()
             tableRow.find(".name span").mouseup (event) -> event.stopPropagation()
 
             tableRow.find(".name span").blur (event) -> event.stopPropagation(); mesh.setName(null, $(this)[0].innerText, true)
@@ -96,8 +96,8 @@ updateMeshesPanel = (type, mesh) ->
 
                     addMeshPanel mesh
 
-            tableRow.find(".lock").click -> updateMesh(mesh, "lock")
-            tableRow.find(".trash").click -> if mesh.lock != "locked" then mesh.remove()
+            tableRow.find(".lock").click -> mesh.toggleLock()
+            tableRow.find(".trash").click -> if not mesh.getLock() then mesh.remove()
             tableRow.find(".settings, .lock, .trash").on "mousedown mouseup", (event) -> event.stopPropagation()
 
             break

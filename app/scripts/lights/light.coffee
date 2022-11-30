@@ -2,7 +2,7 @@ class Light
 
     constructor : (type, intensity = 1, colorOne = whiteThree, colorTwo = blackThree, lock = false) ->
 
-        @type = type.toLowerCase().trim()
+        @type = lower type.trim()
         @intensity = intensity
 
         @colorOne = colorOne
@@ -88,7 +88,7 @@ class Light
 
     setLock : (lock = false) ->
 
-        this.lock = lock
+        this.lock = Boolean lock
 
     getLock : (self = this) ->
 
@@ -96,7 +96,7 @@ class Light
 
     toggleLock : (self = this) ->
 
-        this.lock = not self.lock
+        self.setLock not self.getLock()
 
     add : (self = this) ->
 

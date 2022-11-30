@@ -38,7 +38,7 @@ addLightsPanel = ->
 
                         <div id='intensity' class='slider'></div>
 
-                        <img title='Lock Light' class='lock' src='/app/imgs/panels/lock/""" + (if light.lock then "locked" else "unlocked") + """.png'>
+                        <img title='Lock Light' class='lock' src='/app/imgs/panels/lock/""" + (if light.getLock() then "locked" else "unlocked") + """.png'>
                         <img title='Delete Light' class='trash' src='/app/imgs/panels/tools/trash.png'>
 
                     </div>

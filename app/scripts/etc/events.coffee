@@ -93,7 +93,7 @@ makeDragable = (element, origEvent = null) ->
 
         if element.type == "Mesh"
 
-            if element.lock != "locked"
+            if not element.getLock()
 
                 coordinates = d3$d2 element.position.x, element.position.y, element.position.z
 
@@ -136,7 +136,7 @@ makeDragable = (element, origEvent = null) ->
 
         if element.type == "Mesh"
 
-            if element.lock != "locked"
+            if not element.getLock()
 
                 $("#canvas").css "cursor", "grabbing"
 
@@ -227,7 +227,7 @@ makeDragable = (element, origEvent = null) ->
 
         if element.type == "Mesh"
 
-            if element.lock != "locked"
+            if not element.getLock()
 
                 if settings.getSetting "tooltips", "guidelines"
 

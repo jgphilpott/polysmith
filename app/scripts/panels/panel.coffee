@@ -31,7 +31,7 @@ addPanelEvents = (panel) ->
         if id == "mesh"
 
             mesh = panel.data "mesh"
-            visibleEdgeColor = if mesh.lock == "locked" then redThree else blackThree
+            visibleEdgeColor = if mesh.getLock() then redThree else blackThree
 
             composer.outlinePass.visibleEdgeColor.set visibleEdgeColor
             composer.outlinePass.selectedObjects = [mesh]
