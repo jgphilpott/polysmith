@@ -225,13 +225,13 @@ addMeshPanel = (mesh, coordinates = null) ->
 
         panel.find("#name span").keypress (event) -> event.stopPropagation()
         panel.find("#name span").keydown (event) -> event.stopPropagation()
-        panel.find("#name span").keyup (event) -> event.stopPropagation(); if mesh.lock != "locked" then updateMesh(mesh, "name", "mesh", $(this)[0].innerText)
+        panel.find("#name span").keyup (event) -> event.stopPropagation(); mesh.setName("mesh", $(this)[0].innerText)
 
         panel.find("#name span").dblclick (event) -> if mesh.lock != "locked" then document.execCommand("selectAll")
         panel.find("#name span").mousedown (event) -> event.stopPropagation(); if mesh.lock == "locked" then event.preventDefault()
         panel.find("#name span").mouseup (event) -> event.stopPropagation()
 
-        panel.find("#name span").blur (event) -> event.stopPropagation(); if mesh.lock != "locked" then updateMesh(mesh, "name", null, $(this)[0].innerText, true)
+        panel.find("#name span").blur (event) -> event.stopPropagation(); mesh.setName(null, $(this)[0].innerText, true)
 
         panel.find(".operation").click (event) -> if mesh.lock != "locked" then updateMesh(mesh, "operation", this.id, "setup")
         panel.find(".operation").on "mousedown mouseup", (event) -> event.stopPropagation()

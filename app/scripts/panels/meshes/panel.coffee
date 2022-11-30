@@ -65,13 +65,13 @@ updateMeshesPanel = (type, mesh) ->
 
             tableRow.find(".name span").keypress (event) -> event.stopPropagation()
             tableRow.find(".name span").keydown (event) -> event.stopPropagation()
-            tableRow.find(".name span").keyup (event) -> event.stopPropagation(); if mesh.lock != "locked" then updateMesh(mesh, "name", "meshes", $(this)[0].innerText)
+            tableRow.find(".name span").keyup (event) -> event.stopPropagation(); mesh.setName("meshes", $(this)[0].innerText)
 
             tableRow.find(".name span").dblclick (event) -> if mesh.lock != "locked" then document.execCommand("selectAll")
             tableRow.find(".name span").mousedown (event) -> event.stopPropagation(); if mesh.lock == "locked" then event.preventDefault()
             tableRow.find(".name span").mouseup (event) -> event.stopPropagation()
 
-            tableRow.find(".name span").blur (event) -> event.stopPropagation(); if mesh.lock != "locked" then updateMesh(mesh, "name", null, $(this)[0].innerText, true)
+            tableRow.find(".name span").blur (event) -> event.stopPropagation(); mesh.setName(null, $(this)[0].innerText, true)
 
             tableRow.find(".settings").click ->
 

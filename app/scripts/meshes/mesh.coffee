@@ -182,6 +182,12 @@ class Mesh
 
                 @mesh = params.mesh
 
+        this.mesh.getName = this.getName
+        this.mesh.setName = this.setName
+
+        this.mesh.getLock = this.getLock
+        this.mesh.setLock = this.setLock
+
         this.mesh.getPosition = this.getPosition
         this.mesh.setPosition = this.setPosition
 
@@ -205,6 +211,36 @@ class Mesh
         this.mesh.material.wireframe = if "wireframe" of params then params.wireframe else if this.mesh.material.wireframe then this.mesh.material.wireframe else false
 
         return this.mesh
+
+    getName : () ->
+
+        return this.name
+
+    setName : (key = null, value = null, save = false) ->
+
+        if this.getLock() != "locked"
+
+            value = value.trim()
+
+            this.name = value
+
+            if save then localStore.updateMeshes this
+
+            meshPanelName = $ "#mesh." + this.uuid + " #name span"
+            meshesPanelName = $ "#meshes.table tr#" + this.uuid + " .name span"
+
+            if meshPanelName[0] and key != "mesh" then meshPanelName[0].innerText = value
+            if meshesPanelName[0] and key != "meshes" then meshesPanelName[0].innerText = value
+
+            if value == "" and key != "mesh" then meshPanelName.css("display", "none") else meshPanelName.css("display", "block")
+
+    getLock : () ->
+
+        return this.lock
+
+    setLock : (lock) ->
+
+        this.lock = lock
 
     getPosition : () ->
 
@@ -350,23 +386,7 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
 
     panel = $("#mesh." + mesh.uuid + "")
 
-    if type == "name" and mesh.lock != "locked"
-
-        value = value.trim()
-
-        mesh.name = value
-
-        if save then localStore.updateMeshes mesh
-
-        meshPanelName = $ "#mesh." + mesh.uuid + " #name span"
-        meshesPanelName = $ "#meshes.table tr#" + mesh.uuid + " .name span"
-
-        if meshPanelName[0] and key != "mesh" then meshPanelName[0].innerText = value
-        if meshesPanelName[0] and key != "meshes" then meshesPanelName[0].innerText = value
-
-        if value == "" and key != "mesh" then meshPanelName.css("display", "none") else meshPanelName.css("display", "block")
-
-    else if type == "operation"
+    if type == "operation"
 
         operationIcon = panel.find "#" + key + ".operation"
         operationIcons = $ "#mesh.panel img.operation"
