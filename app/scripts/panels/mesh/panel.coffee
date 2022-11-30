@@ -236,7 +236,7 @@ addMeshPanel = (mesh, coordinates = null) ->
         panel.find(".operation").click (event) -> if not mesh.getLock() then updateMesh(mesh, "operation", this.id, "setup")
         panel.find(".operation").on "mousedown mouseup", (event) -> event.stopPropagation()
 
-        panel.find(".color").click (event) -> if not mesh.getLock() then updateMesh(mesh, "color", null, this.id, true)
+        panel.find(".color").click (event) -> mesh.setColor this.id
         panel.find(".color").on "mousedown mouseup", (event) -> event.stopPropagation()
 
         panel.find("#eye").click (event) -> if not mesh.getLock() then updateMesh(mesh, "visibility", "eye", this.src, true)

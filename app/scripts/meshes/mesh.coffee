@@ -182,12 +182,17 @@ class Mesh
 
                 @mesh = params.mesh
 
+        this.mesh.save = this.save
+
         this.mesh.getName = this.getName
         this.mesh.setName = this.setName
 
         this.mesh.getLock = this.getLock
         this.mesh.setLock = this.setLock
         this.mesh.toggleLock = this.toggleLock
+
+        this.mesh.getColor = this.getColor
+        this.mesh.setColor = this.setColor
 
         this.mesh.getPosition = this.getPosition
         this.mesh.setPosition = this.setPosition
@@ -213,6 +218,10 @@ class Mesh
 
         return this.mesh
 
+    save : () ->
+
+        localStore.updateMeshes this
+
     getName : () ->
 
         return this.name
@@ -225,7 +234,7 @@ class Mesh
 
             this.name = value
 
-            if save then localStore.updateMeshes this
+            if save then this.save()
 
             meshPanelName = $ "#mesh." + this.uuid + " #name span"
             meshesPanelName = $ "#meshes.table tr#" + this.uuid + " .name span"
@@ -300,11 +309,46 @@ class Mesh
             meshesTableRow.find(".lock").attr "src", "/app/imgs/panels/lock/unlocked.png"
             meshesTableRow.find(".trash").removeClass "disabled"
 
-        if save then localStore.updateMeshes this
+        if save then this.save()
 
     toggleLock : () ->
 
         this.setLock not this.getLock()
+
+    getColor : () ->
+
+        return this.material.color
+
+    setColor : (color, save = true) ->
+
+        if not this.getLock()
+
+            opacity = this.material.opacity
+            wireframe = this.material.wireframe
+            material = if color is "multi" then "normal" else "standard"
+
+            $("#mesh." + this.uuid + "").find(".color").removeClass "selected"
+            $("#mesh." + this.uuid + "").find("#" + color + ".color").addClass "selected"
+
+            if ["red", "orange", "yellow", "green", "blue", "purple", "pink"].includes color
+
+                colorThree = rainbowThree[color + "Three"]
+
+            else if ["white", "gray", "black"].includes color
+
+                colorThree = grayscaleThree[color + "Three"]
+
+            else
+
+                colorThree = blackThree
+
+            this.material.dispose()
+            this.material = new MeshMaterial material, color: colorThree
+            this.material.wireframe = wireframe
+            this.material.opacity = opacity
+            this.material.style = color
+
+            if save then this.save()
 
     getPosition : () ->
 
@@ -493,31 +537,6 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
             events.operation.mesh = null
             events.operation.key = null
 
-    else if type == "color" and not mesh.getLock()
-
-        color = null
-        opacity = mesh.material.opacity
-        wireframe = mesh.material.wireframe
-        material = if value == "multi" then "normal" else "standard"
-
-        panel.find(".color").removeClass "selected"
-        panel.find("#" + value + ".color").addClass "selected"
-
-        if ["red", "orange", "yellow", "green", "blue", "purple", "pink"].includes value
-            color = rainbowThree[value + "Three"]
-        else if ["white", "gray", "black"].includes value
-            color = grayscaleThree[value + "Three"]
-        else
-            color = blackThree
-
-        mesh.material.dispose()
-        mesh.material = new MeshMaterial material, color: color
-        mesh.material.wireframe = wireframe
-        mesh.material.opacity = opacity
-        mesh.material.style = value
-
-        if save then localStore.updateMeshes mesh
-
     else if type == "visibility" and not mesh.getLock()
 
         if key == "eye"
@@ -543,7 +562,7 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
                 slider.slider "value", 100
                 sliderFill slider
 
-        if save then localStore.updateMeshes mesh
+        if save then mesh.save()
 
     else if (type == "properties" or type == "position" or type == "rotation" or type == "scale") and not mesh.getLock()
 
@@ -634,4 +653,4 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
 
                 break
 
-        if save == true then localStore.updateMeshes mesh
+        if save == true then mesh.save()
