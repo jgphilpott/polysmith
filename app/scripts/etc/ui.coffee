@@ -48,15 +48,11 @@ sliderSlide = (event, slider) ->
 
     sliderFill $(this), "#3273f6", "#e6e6e6"
 
-    if $(this).attr("id") == "visibility"
+    if $(this).attr("id") is "visibility"
 
-        eye = $(this).closest(".controls").find "#eye"
-        mesh = $(this).closest(".panel").data "mesh"
-        opacity = $(this).slider("option", "value") / 100
+        value = $(this).slider "option", "value"
 
-        eye.attr "src", "/app/imgs/panels/visibility/" + (if opacity < 0.5 then "hidden" else "visible") + ".png"
-
-        mesh.material.opacity = opacity
+        $(this).closest(".panel").data("mesh").setOpacity value, false
 
 sliderStop = (event, slider) ->
 
@@ -80,7 +76,7 @@ sliderStop = (event, slider) ->
 
     else if panel.attr("id") == "mesh"
 
-        updateMesh panel.data("mesh"), "visibility", "slider", value, true
+        panel.data("mesh").setOpacity value
 
 foldPanel = (element, duration = 1000) ->
 

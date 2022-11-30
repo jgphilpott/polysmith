@@ -194,6 +194,9 @@ class Mesh
         this.mesh.getColor = this.getColor
         this.mesh.setColor = this.setColor
 
+        this.mesh.getOpacity = this.getOpacity
+        this.mesh.setOpacity = this.setOpacity
+
         this.mesh.getPosition = this.getPosition
         this.mesh.setPosition = this.setPosition
 
@@ -323,7 +326,7 @@ class Mesh
 
         if not this.getLock()
 
-            opacity = this.material.opacity
+            opacity = this.getOpacity()
             wireframe = this.material.wireframe
             material = if color is "multi" then "normal" else "standard"
 
@@ -344,9 +347,30 @@ class Mesh
 
             this.material.dispose()
             this.material = new MeshMaterial material, color: colorThree
+            this.material.opacity = opacity / 100
             this.material.wireframe = wireframe
-            this.material.opacity = opacity
             this.material.style = color
+
+            if save then this.save()
+
+    getOpacity : () ->
+
+        return this.material.opacity * 100
+
+    setOpacity : (opacity, save = true) ->
+
+        if not this.getLock()
+
+            this.material.opacity = opacity / 100
+
+            panel = $("#mesh." + this.uuid + "")
+            slider = panel.find "#visibility.slider"
+            visibility = if opacity < 50 then "hidden" else "visible"
+
+            panel.find("#eye").attr "src", "/app/imgs/panels/visibility/" + visibility + ".png"
+
+            slider.slider "value", opacity
+            sliderFill slider
 
             if save then this.save()
 
@@ -536,33 +560,6 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
 
             events.operation.mesh = null
             events.operation.key = null
-
-    else if type == "visibility" and not mesh.getLock()
-
-        if key == "eye"
-
-            visibility = /[^/]*$/.exec(value)[0].split(".")[0]
-            slider = panel.find "#visibility.slider"
-
-            if visibility == "visible"
-
-                panel.find("#eye").attr "src", "/app/imgs/panels/visibility/hidden.png"
-
-                mesh.material.opacity = 0
-
-                slider.slider "value", 0
-                sliderFill slider
-
-            else if visibility == "hidden"
-
-                panel.find("#eye").attr "src", "/app/imgs/panels/visibility/visible.png"
-
-                mesh.material.opacity = 1
-
-                slider.slider "value", 100
-                sliderFill slider
-
-        if save then mesh.save()
 
     else if (type == "properties" or type == "position" or type == "rotation" or type == "scale") and not mesh.getLock()
 

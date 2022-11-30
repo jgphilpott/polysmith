@@ -239,7 +239,7 @@ addMeshPanel = (mesh, coordinates = null) ->
         panel.find(".color").click (event) -> mesh.setColor this.id
         panel.find(".color").on "mousedown mouseup", (event) -> event.stopPropagation()
 
-        panel.find("#eye").click (event) -> if not mesh.getLock() then updateMesh(mesh, "visibility", "eye", this.src, true)
+        panel.find("#eye").click (event) -> mesh.setOpacity (if /[^/]*$/.exec(this.src)[0].split(".")[0] is "hidden" then 100 else 0)
         panel.find("#lock").click (event) -> mesh.toggleLock()
         panel.find("#trash").click (event) -> if not mesh.getLock() then mesh.remove()
         panel.find(".tool").on "mousedown mouseup", (event) -> event.stopPropagation()
