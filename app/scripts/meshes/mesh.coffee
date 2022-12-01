@@ -183,6 +183,7 @@ class Mesh
                 @mesh = params.mesh
 
         this.mesh.save = this.save
+        this.mesh.morph = this.morph
 
         this.mesh.getName = this.getName
         this.mesh.setName = this.setName
@@ -224,6 +225,51 @@ class Mesh
     save : () ->
 
         localStore.updateMeshes this
+
+    morph : (key = null, value = null, save = false) ->
+
+        panel = $("#mesh." + this.uuid + "")
+
+        operationIcon = panel.find "#" + key + ".operation"
+        operationIcons = $ "#mesh.panel img.operation"
+
+        operationIcons.toArray().forEach (icon) ->
+
+            if not $(icon).hasClass "disabled"
+
+                $(icon).attr "src", "/app/imgs/panels/ops/default/" + icon.id + ".png"
+
+        if value == "setup" and not this.getLock()
+
+            operationIcon.attr "src", "/app/imgs/panels/ops/selected/" + key + ".png"
+
+            $("#canvas").css "cursor", "copy"
+
+            events.operation.mesh = this
+            events.operation.key = key
+
+        else if events.operation.key and not camera.dragged
+
+            if events.operation.mesh.uuid isnt this.uuid
+
+                morphed = morph key, events.operation.mesh, this
+
+                if morphed
+
+                    morphed.geometry = new Geometry "custom", geometry: morphed.geometry
+
+                    events.operation.mesh.class = "custom"
+                    events.operation.mesh.geometry = morphed.geometry
+
+                    updateMetrics events.operation.mesh
+                    localStore.updateMeshes events.operation.mesh
+
+                    $("#mesh." + events.operation.mesh.uuid + " #properties.controls").remove()
+
+            $("#canvas").css "cursor", ""
+
+            events.operation.mesh = null
+            events.operation.key = null
 
     getName : () ->
 
@@ -454,7 +500,7 @@ class Mesh
 
                 if events.operation.key
 
-                    updateMesh self, "operation", events.operation.key, null, true
+                    self.morph events.operation.key, null, true
 
                 else if tooltips.getSelected() != self
 
@@ -518,50 +564,7 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
 
     panel = $("#mesh." + mesh.uuid + "")
 
-    if type == "operation"
-
-        operationIcon = panel.find "#" + key + ".operation"
-        operationIcons = $ "#mesh.panel img.operation"
-
-        operationIcons.toArray().forEach (icon) ->
-
-            if !$(icon).hasClass "disabled"
-
-                $(icon).attr "src", "/app/imgs/panels/ops/default/" + icon.id + ".png"
-
-        if value == "setup" and not mesh.getLock()
-
-            operationIcon.attr "src", "/app/imgs/panels/ops/selected/" + key + ".png"
-
-            $("#canvas").css "cursor", "copy"
-
-            events.operation.mesh = mesh
-            events.operation.key = key
-
-        else if events.operation.key and !camera.dragged
-
-            if events.operation.mesh.uuid != mesh.uuid
-
-                morphed = morph key, events.operation.mesh, mesh
-
-                if morphed
-
-                    morphed.geometry = new Geometry "custom", geometry: morphed.geometry
-
-                    events.operation.mesh.class = "custom"
-                    events.operation.mesh.geometry = morphed.geometry
-
-                    updateMetrics events.operation.mesh
-                    localStore.updateMeshes events.operation.mesh
-
-                    $("#mesh." + events.operation.mesh.uuid + " #properties.controls").remove()
-
-            $("#canvas").css "cursor", ""
-
-            events.operation.mesh = null
-            events.operation.key = null
-
-    else if (type == "properties" or type == "position" or type == "rotation" or type == "scale") and not mesh.getLock()
+    if (type is "properties" or type is "position" or type is "rotation" or type is "scale") and not mesh.getLock()
 
         input = panel.find "span#" + type + "-" + key + " input"
 
@@ -570,7 +573,7 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
 
         value = if value < min then min else if value > max then max else if key.includes("segments") then value.toFixed(0) else value
 
-        if save == "temp" or key.includes("segments") or value == min or value == max then input.val value
+        if save is "temp" or key.includes("segments") or value is min or value is max then input.val value
 
         switch type
 
@@ -582,43 +585,43 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
 
                 if mesh.class == "box"
 
-                    if key == "length" then parameters.width = value
-                    if key == "width" then parameters.height = value
-                    if key == "height" then parameters.depth = value
+                    if key is "length" then parameters.width = value
+                    if key is "width" then parameters.height = value
+                    if key is "height" then parameters.depth = value
 
                     mesh.geometry = new BoxGeometry parameters
 
                 else if mesh.class == "sphere"
 
-                    if key == "radius" then parameters.radius = value
-                    if key == "width-segments" then parameters.widthSegments = value
-                    if key == "height-segments" then parameters.heightSegments = value
+                    if key is "radius" then parameters.radius = value
+                    if key is "width-segments" then parameters.widthSegments = value
+                    if key is "height-segments" then parameters.heightSegments = value
 
                     mesh.geometry = new SphereGeometry radius, widthSegments, heightSegments
 
                 else if mesh.class == "cylinder" or mesh.class.split("-")[1] == "prism"
 
-                    if key == "length" then parameters.length = value
-                    if key == "radius-positive" then parameters.radiusTop = value
-                    if key == "radius-negative" then parameters.radiusBottom = value
-                    if key == "radius-segments" then parameters.radialSegments = value
+                    if key is "length" then parameters.length = value
+                    if key is "radius-positive" then parameters.radiusTop = value
+                    if key is "radius-negative" then parameters.radiusBottom = value
+                    if key is "radius-segments" then parameters.radialSegments = value
 
                     mesh.geometry = new CylinderGeometry positiveRadius, negativeRadius, length, radialSegments
 
                 else if mesh.class == "cone" or mesh.class.split("-")[1] == "pyramid"
 
-                    if key == "height" then parameters.height = value
-                    if key == "radius" then parameters.radius = value
-                    if key == "radius-segments" then parameters.radialSegments = value
+                    if key is "height" then parameters.height = value
+                    if key is "radius" then parameters.radius = value
+                    if key is "radius-segments" then parameters.radialSegments = value
 
                     mesh.geometry = new CylinderGeometry 0, radius, height, radialSegments
 
                 else if mesh.class == "torus"
 
-                    if key == "radius" then parameters.radius = value
-                    if key == "thickness" then parameters.thickness = value
-                    if key == "radius-segments" then parameters.radialSegments = value
-                    if key == "tube-segments" then parameters.tubularSegments = value
+                    if key is "radius" then parameters.radius = value
+                    if key is "thickness" then parameters.thickness = value
+                    if key is "radius-segments" then parameters.radialSegments = value
+                    if key is "tube-segments" then parameters.tubularSegments = value
 
                     mesh.geometry = new TorusGeometry radius, thickness, radialSegments, tubularSegments
 
@@ -650,4 +653,4 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
 
                 break
 
-        if save == true then mesh.save()
+        if save is true then mesh.save()

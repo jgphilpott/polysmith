@@ -233,7 +233,7 @@ addMeshPanel = (mesh, coordinates = null) ->
 
         panel.find("#name span").blur (event) -> event.stopPropagation(); mesh.setName(null, $(this)[0].innerText, true)
 
-        panel.find(".operation").click (event) -> if not mesh.getLock() then updateMesh(mesh, "operation", this.id, "setup")
+        panel.find(".operation").click (event) -> if not mesh.getLock() then mesh.morph this.id, "setup"
         panel.find(".operation").on "mousedown mouseup", (event) -> event.stopPropagation()
 
         panel.find(".color").click (event) -> mesh.setColor this.id

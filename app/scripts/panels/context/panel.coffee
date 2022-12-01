@@ -65,9 +65,9 @@ contextMenu = (type, element, event) ->
                     addMeshPanel element
 
             panel.find("#look").click -> if camera.focus element.position then $("#canvas").css "cursor", ""
-            panel.find("#cut").click -> updateMesh(element, "operation", "cut", "setup")
-            panel.find("#join").click -> updateMesh(element, "operation", "join", "setup")
-            panel.find("#intersect").click -> updateMesh(element, "operation", "intersect", "setup")
+            panel.find("#cut").click -> element.morph "cut", "setup"
+            panel.find("#join").click -> element.morph "join", "setup"
+            panel.find("#intersect").click -> element.morph "intersect", "setup"
             panel.find("#lock").click -> element.toggleLock()
             panel.find("#wireframe").click -> element.material.wireframe = !element.material.wireframe
             panel.find("#remove").click -> element.remove()
