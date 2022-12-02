@@ -4,7 +4,7 @@ clone = (object) ->
 
 equal = (object1, object2) ->
 
-    return JSON.stringify(object1) == JSON.stringify(object2)
+    return JSON.stringify(object1) is JSON.stringify(object2)
 
 calculatePercent = (min, max, value) ->
 
@@ -37,7 +37,7 @@ component2hex = (component) ->
 
     hex = component.toString 16
 
-    return if hex.length == 1 then "0" + hex else hex
+    return if hex.length is 1 then "0" + hex else hex
 
 # Credit: https://stackoverflow.com/a/5624139/1544937
 rgb2hex = (red, green, blue) ->
@@ -64,11 +64,11 @@ $.fn.clickSingleDouble = (single_click_callback, double_click_callback, delay = 
 
             clicks++
 
-            if clicks == 1
+            if clicks is 1
 
                 setTimeout(() ->
 
-                    if clicks == 1
+                    if clicks is 1
 
                         single_click_callback.call(self, event)
 
@@ -89,7 +89,7 @@ Array.prototype.filterInPlace = (condition, item) ->
 
         if condition.call item, element, index, this
 
-            if index != i
+            if index isnt i
 
                 this[i] = element
 
@@ -98,35 +98,6 @@ Array.prototype.filterInPlace = (condition, item) ->
     this.length = i
 
     return this
-
-clearMeshOperation = () ->
-
-    operationIcons = $ "#mesh.panel img.operation"
-
-    for icon in operationIcons.toArray()
-
-        if not $(icon).hasClass "disabled"
-
-            $(icon).attr "src", "/app/imgs/panels/ops/default/" + icon.id + ".png"
-
-    $("#canvas").css "cursor", ""
-
-    events.operation.mesh = null
-    events.operation.key = null
-
-updateMetrics = (mesh) ->
-
-    mesh.updateMatrix()
-
-    mesh.geometry.setVolume()
-    mesh.geometry.setSurface()
-
-    panel = $ "#mesh." + mesh.uuid + ""
-    controls = panel.find "#meta.controls"
-
-    controls.find("#type span").text mesh.class.replace("-", " ").replace(/\b\w/g, (char) -> return char.toUpperCase())
-    controls.find("#surface span").text mesh.geometry.surface.toFixed 2
-    controls.find("#volume span").text mesh.geometry.volume.toFixed 2
 
 serializeMesh = (mesh) ->
 

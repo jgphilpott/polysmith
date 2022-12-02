@@ -81,6 +81,21 @@ addEvents = () ->
 
     return events
 
+clearMeshOperation = () ->
+
+    operationIcons = $ "#mesh.panel img.operation"
+
+    for icon in operationIcons.toArray()
+
+        if not $(icon).hasClass "disabled"
+
+            $(icon).attr "src", "/app/imgs/panels/ops/default/" + icon.id + ".png"
+
+    $("#canvas").css "cursor", ""
+
+    events.operation.mesh = null
+    events.operation.key = null
+
 makeDragable = (element, origEvent = null) ->
 
     xOffset = 0

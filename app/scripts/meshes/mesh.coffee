@@ -204,6 +204,9 @@ class Mesh
         this.mesh.getRotation = this.getRotation
         this.mesh.setRotation = this.setRotation
 
+        this.updateMatrix = this.mesh.updateMatrix
+        this.mesh.updateMetrics = this.updateMetrics
+
         this.mesh.addEvents = this.addEvents
         this.mesh.removeEvents = this.removeEvents
 
@@ -261,7 +264,7 @@ class Mesh
                     events.operation.mesh.class = "custom"
                     events.operation.mesh.geometry = morphed.geometry
 
-                    updateMetrics events.operation.mesh
+                    events.operation.mesh.updateMetrics()
                     localStore.updateMeshes events.operation.mesh
 
                     $("#mesh." + events.operation.mesh.uuid + " #properties.controls").remove()
@@ -440,6 +443,20 @@ class Mesh
         this.rotation.y = rotation.y
         this.rotation.z = rotation.z
 
+    updateMetrics : () ->
+
+        this.updateMatrix()
+
+        this.geometry.setVolume()
+        this.geometry.setSurface()
+
+        panel = $ "#mesh." + this.uuid + ""
+        controls = panel.find "#meta.controls"
+
+        controls.find("#type span").text this.class.replace("-", " ").replace(/\b\w/g, (char) -> return char.toUpperCase())
+        controls.find("#surface span").text this.geometry.surface.toFixed 2
+        controls.find("#volume span").text this.geometry.volume.toFixed 2
+
     addEvents : (self = this) ->
 
         events.addEventListener self, "mouseover", (event) ->
@@ -530,7 +547,7 @@ class Mesh
     add : () ->
 
         this.addEvents()
-        updateMetrics this
+        this.updateMetrics()
 
         localStore.addMeshes this
         updateMeshesPanel "add", this
@@ -625,7 +642,7 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
 
                     mesh.geometry = new TorusGeometry radius, thickness, radialSegments, tubularSegments
 
-                updateMetrics mesh
+                mesh.updateMetrics()
 
                 break
 
@@ -649,7 +666,7 @@ updateMesh = (mesh, type, key = null, value = null, save = false) ->
 
                 mesh[type][key] = value
 
-                updateMetrics mesh
+                mesh.updateMetrics()
 
                 break
 
