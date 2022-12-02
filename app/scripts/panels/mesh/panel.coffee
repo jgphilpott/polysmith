@@ -249,14 +249,14 @@ addMeshPanel = (mesh, coordinates = null) ->
 
         panel.find("input").keypress (event) -> event.stopPropagation(); if event.keyCode == 13 then this.blur()
         panel.find("input").keydown (event) -> event.stopPropagation(); if mesh.getLock() then event.preventDefault()
-        panel.find("input").keyup (event) -> event.stopPropagation(); id = $(this).closest("span").attr("id"); updateMesh(mesh, id.split("-")[0], id.split("-").splice(1).join("-"), Number($(this).val()))
-        panel.find("input").change (event) -> event.stopPropagation(); id = $(this).closest("span").attr("id"); updateMesh(mesh, id.split("-")[0], id.split("-").splice(1).join("-"), Number($(this).val()), "temp")
+        panel.find("input").keyup (event) -> event.stopPropagation(); id = $(this).closest("span").attr("id"); mesh.updateParams id.split("-")[0], id.split("-").splice(1).join("-"), Number($(this).val())
+        panel.find("input").change (event) -> event.stopPropagation(); id = $(this).closest("span").attr("id"); mesh.updateParams id.split("-")[0], id.split("-").splice(1).join("-"), Number($(this).val()), "temp"
 
         panel.find("input").dblclick (event) -> if not mesh.getLock() then document.execCommand("selectAll")
         panel.find("input").mousedown (event) -> event.stopPropagation(); if mesh.getLock() then event.preventDefault()
         panel.find("input").mouseup (event) -> event.stopPropagation()
 
-        panel.find("input").blur (event) -> event.stopPropagation(); id = $(this).closest("span").attr("id"); updateMesh(mesh, id.split("-")[0], id.split("-").splice(1).join("-"), Number($(this).val()), true)
+        panel.find("input").blur (event) -> event.stopPropagation(); id = $(this).closest("span").attr("id"); mesh.updateParams id.split("-")[0], id.split("-").splice(1).join("-"), Number($(this).val()), true
 
         panel.find("button").mousedown((event) ->
 
@@ -275,7 +275,7 @@ addMeshPanel = (mesh, coordinates = null) ->
 
                     value = Number(input.val()) + step
 
-                    updateMesh mesh, selection.split("-")[0], selection.split("-").splice(1).join("-"), value, "temp"
+                    mesh.updateParams selection.split("-")[0], selection.split("-").splice(1).join("-"), value, "temp"
 
                 holdTimeout = setTimeout ->
 

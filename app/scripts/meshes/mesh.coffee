@@ -206,6 +206,7 @@ class Mesh
 
         this.updateMatrix = this.mesh.updateMatrix
         this.mesh.updateMetrics = this.updateMetrics
+        this.mesh.updateParams = this.updateParams
 
         this.mesh.addEvents = this.addEvents
         this.mesh.removeEvents = this.removeEvents
@@ -457,6 +458,101 @@ class Mesh
         controls.find("#surface span").text this.geometry.surface.toFixed 2
         controls.find("#volume span").text this.geometry.volume.toFixed 2
 
+    updateParams : (type = null, key = null, value = null, save = false) ->
+
+        if not this.getLock()
+
+            panel = $("#mesh." + this.uuid + "")
+
+            input = panel.find "span#" + type + "-" + key + " input"
+
+            min = Number input.attr "min"
+            max = Number input.attr "max"
+
+            value = if value < min then min else if value > max then max else if key.includes("segments") then value.toFixed(0) else value
+
+            if save is "temp" or key.includes("segments") or value is min or value is max then input.val value
+
+            switch type
+
+                when "properties"
+
+                    this.geometry.dispose()
+
+                    parameters = this.geometry.parameters
+
+                    if this.class == "box"
+
+                        if key is "length" then parameters.width = value
+                        if key is "width" then parameters.height = value
+                        if key is "height" then parameters.depth = value
+
+                        this.geometry = new BoxGeometry parameters
+
+                    else if this.class == "sphere"
+
+                        if key is "radius" then parameters.radius = value
+                        if key is "width-segments" then parameters.widthSegments = value
+                        if key is "height-segments" then parameters.heightSegments = value
+
+                        this.geometry = new SphereGeometry parameters
+
+                    else if this.class == "cylinder" or this.class.split("-")[1] == "prism"
+
+                        if key is "length" then parameters.length = value
+                        if key is "radius-positive" then parameters.radiusTop = value
+                        if key is "radius-negative" then parameters.radiusBottom = value
+                        if key is "radius-segments" then parameters.radialSegments = value
+
+                        this.geometry = new CylinderGeometry parameters
+
+                    else if this.class == "cone" or this.class.split("-")[1] == "pyramid"
+
+                        if key is "height" then parameters.height = value
+                        if key is "radius" then parameters.radius = value
+                        if key is "radius-segments" then parameters.radialSegments = value
+
+                        this.geometry = new CylinderGeometry parameters
+
+                    else if this.class == "torus"
+
+                        if key is "radius" then parameters.radius = value
+                        if key is "thickness" then parameters.thickness = value
+                        if key is "radius-segments" then parameters.radialSegments = value
+                        if key is "tube-segments" then parameters.tubularSegments = value
+
+                        this.geometry = new TorusGeometry parameters
+
+                    this.updateMetrics()
+
+                    break
+
+                when "position"
+
+                    this[type][key] = value
+
+                    this.updateMatrix()
+
+                    break
+
+                when "rotation"
+
+                    this[type][key] = deg$rad value
+
+                    this.updateMatrix()
+
+                    break
+
+                when "scale"
+
+                    this[type][key] = value
+
+                    this.updateMetrics()
+
+                    break
+
+            if save is true then this.save()
+
     addEvents : (self = this) ->
 
         events.addEventListener self, "mouseover", (event) ->
@@ -572,102 +668,3 @@ class Mesh
             this.material.dispose()
 
             scene.remove this
-
-###########
-### OLD ###
-###########
-
-updateMesh = (mesh, type, key = null, value = null, save = false) ->
-
-    panel = $("#mesh." + mesh.uuid + "")
-
-    if (type is "properties" or type is "position" or type is "rotation" or type is "scale") and not mesh.getLock()
-
-        input = panel.find "span#" + type + "-" + key + " input"
-
-        min = Number input.attr "min"
-        max = Number input.attr "max"
-
-        value = if value < min then min else if value > max then max else if key.includes("segments") then value.toFixed(0) else value
-
-        if save is "temp" or key.includes("segments") or value is min or value is max then input.val value
-
-        switch type
-
-            when "properties"
-
-                mesh.geometry.dispose()
-
-                parameters = mesh.geometry.parameters
-
-                if mesh.class == "box"
-
-                    if key is "length" then parameters.width = value
-                    if key is "width" then parameters.height = value
-                    if key is "height" then parameters.depth = value
-
-                    mesh.geometry = new BoxGeometry parameters
-
-                else if mesh.class == "sphere"
-
-                    if key is "radius" then parameters.radius = value
-                    if key is "width-segments" then parameters.widthSegments = value
-                    if key is "height-segments" then parameters.heightSegments = value
-
-                    mesh.geometry = new SphereGeometry radius, widthSegments, heightSegments
-
-                else if mesh.class == "cylinder" or mesh.class.split("-")[1] == "prism"
-
-                    if key is "length" then parameters.length = value
-                    if key is "radius-positive" then parameters.radiusTop = value
-                    if key is "radius-negative" then parameters.radiusBottom = value
-                    if key is "radius-segments" then parameters.radialSegments = value
-
-                    mesh.geometry = new CylinderGeometry positiveRadius, negativeRadius, length, radialSegments
-
-                else if mesh.class == "cone" or mesh.class.split("-")[1] == "pyramid"
-
-                    if key is "height" then parameters.height = value
-                    if key is "radius" then parameters.radius = value
-                    if key is "radius-segments" then parameters.radialSegments = value
-
-                    mesh.geometry = new CylinderGeometry 0, radius, height, radialSegments
-
-                else if mesh.class == "torus"
-
-                    if key is "radius" then parameters.radius = value
-                    if key is "thickness" then parameters.thickness = value
-                    if key is "radius-segments" then parameters.radialSegments = value
-                    if key is "tube-segments" then parameters.tubularSegments = value
-
-                    mesh.geometry = new TorusGeometry radius, thickness, radialSegments, tubularSegments
-
-                mesh.updateMetrics()
-
-                break
-
-            when "position"
-
-                mesh[type][key] = value
-
-                mesh.updateMatrix()
-
-                break
-
-            when "rotation"
-
-                mesh[type][key] = deg$rad value
-
-                mesh.updateMatrix()
-
-                break
-
-            when "scale"
-
-                mesh[type][key] = value
-
-                mesh.updateMetrics()
-
-                break
-
-        if save is true then mesh.save()
