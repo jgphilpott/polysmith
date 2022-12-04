@@ -31,8 +31,8 @@ addLightsPanel = ->
 
                         <select name='types' id='types'>
 
-                            <option value='ambient' """ + (if light.type == "ambient" then "selected" else "") + """>Ambient</option>
-                            <option value='point' """ + (if light.type == "point" then "selected" else "") + """>Point</option>
+                            <option value='ambient' """ + (if light.type is "ambient" then "selected" else "") + """>Ambient</option>
+                            <option value='point' """ + (if light.type is "point" then "selected" else "") + """>Point</option>
 
                         </select>
 

@@ -133,7 +133,7 @@ class Camera
 
     focus : (point, duration = 1000, steps = 100) ->
 
-        if this.target.x != point.x or this.target.y != point.y or this.target.z != point.z
+        if this.target.x isnt point.x or this.target.y isnt point.y or this.target.z isnt point.z
 
             point = clone point
             target = clone this.target

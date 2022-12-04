@@ -17,7 +17,7 @@ addCameraPanel = ->
         display = controls.find(".body").css "display"
         id = controls.attr "id"
 
-        if display == "none" then settings.setSetting("camera", "open", id) else settings.setSetting("camera", "open", false)
+        if display is "none" then settings.setSetting("camera", "open", id) else settings.setSetting("camera", "open", false)
 
         foldPanel this
 
@@ -94,7 +94,7 @@ addCameraPanel = ->
 
     ).on "mousedown mouseup", (event) -> event.stopPropagation()
 
-    panel.find("input").keypress (event) -> event.stopPropagation(); if event.keyCode == 13 then this.blur()
+    panel.find("input").keypress (event) -> event.stopPropagation(); if event.keyCode is 13 then this.blur()
     panel.find("input").keydown (event) -> event.stopPropagation()
     panel.find("input").keyup (event) -> event.stopPropagation(); updateCamera(this, event)
     panel.find("input").change (event) -> event.stopPropagation(); updateCamera(this, event)
@@ -154,7 +154,7 @@ addCameraPanel = ->
         position = camera.getPosition()
         target = camera.getTarget()
 
-        step = if operation == "plus" then step else if operation == "minus" then - step else 0
+        step = if operation is "plus" then step else if operation is "minus" then - step else 0
 
         value = Number(input.val()) + step
 
@@ -164,7 +164,7 @@ addCameraPanel = ->
 
         camera.setPosition position
 
-        if event.type != "keyup" or value == min or value == max
+        if event.type isnt "keyup" or value is min or value is max
 
             input.val value.toFixed 2
 

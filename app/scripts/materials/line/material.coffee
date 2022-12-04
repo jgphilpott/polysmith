@@ -28,7 +28,7 @@ class LineMaterial
 
             this.material.transparent = true
 
-            if this.type == "stroke"
+            if this.type is "stroke"
 
                 this.material.resolution.set window.innerWidth, window.innerHeight
 

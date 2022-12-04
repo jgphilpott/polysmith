@@ -96,16 +96,16 @@ addMenuPanel = ->
                 <div>
                     <label>Scale</label>
                     <select id='general-scale' class='select'>
-                        <option value='imperial' """ + (if settings.getSetting("general", "scale") == "imperial" then "selected" else "") + """>Imperial</option>
-                        <option value='metric' """ + (if settings.getSetting("general", "scale") == "metric" then "selected" else "") + """>Metric</option>
+                        <option value='imperial' """ + (if settings.getSetting("general", "scale") is "imperial" then "selected" else "") + """>Imperial</option>
+                        <option value='metric' """ + (if settings.getSetting("general", "scale") is "metric" then "selected" else "") + """>Metric</option>
                     </select>
                 </div>
 
                 <div>
                     <label>Unit</label>
                     <select id='general-unit' class='select'>
-                        <option value='centimeter' """ + (if settings.getSetting("general", "unit").metric == "centimeter" then "selected" else "") + """>Centimeter</option>
-                        <option value='millimeter' """ + (if settings.getSetting("general", "unit").metric == "millimeter" then "selected" else "") + """>Millimeter</option>
+                        <option value='centimeter' """ + (if settings.getSetting("general", "unit").metric is "centimeter" then "selected" else "") + """>Centimeter</option>
+                        <option value='millimeter' """ + (if settings.getSetting("general", "unit").metric is "millimeter" then "selected" else "") + """>Millimeter</option>
                     </select>
                 </div>
 
@@ -225,7 +225,7 @@ addMenuPanel = ->
 
             emailCheck = validEmail email.val()
             passwordCheck = password.val().length >= password.data "min"
-            retypePasswordCheck = retypePassword.val() == password.val()
+            retypePasswordCheck = retypePassword.val() is password.val()
 
             if emailCheck and passwordCheck and retypePasswordCheck
 
@@ -325,21 +325,21 @@ addMenuPanel = ->
         password = subPanel.find ".password"
         retypePassword = subPanel.find ".retype-password"
 
-        emailCheck = validEmail(email.val()) or email.val() == ""
-        passwordCheck = password.val().length >= password.data("min") or password.val() == ""
-        retypePasswordCheck = retypePassword.val() == password.val() or retypePassword.val() == ""
+        emailCheck = validEmail(email.val()) or email.val() is ""
+        passwordCheck = password.val().length >= password.data("min") or password.val() is ""
+        retypePasswordCheck = retypePassword.val() is password.val() or retypePassword.val() is ""
 
         if emailCheck then email.removeClass("invalid") else email.addClass("invalid")
         if passwordCheck then password.removeClass("invalid") else password.addClass("invalid")
         if retypePasswordCheck then retypePassword.removeClass("invalid") else retypePassword.addClass("invalid")
 
-    $(document).keypress (event) -> if event.keyCode == 13 then togglePanel()
+    $(document).keypress (event) -> if event.keyCode is 13 then togglePanel()
 
     $("#navbar #menu").click -> togglePanel()
 
     toggleSubPanel = (subPanel, duration = 1000) ->
 
-        if subPanel.css("display") == "none"
+        if subPanel.css("display") is "none"
 
             panel.find(".sub-panel").css "display", "none"
 
@@ -361,12 +361,12 @@ addMenuPanel = ->
 
     togglePanel = ->
 
-        if panel.css("visibility") == "hidden"
+        if panel.css("visibility") is "hidden"
 
             panel.css "visibility", "visible"
             settings.setSetting "panels", "menu", true
 
-        else if panel.css("visibility") == "visible"
+        else if panel.css("visibility") is "visible"
 
             panel.css "visibility", "hidden"
             settings.setSetting "panels", "menu", false

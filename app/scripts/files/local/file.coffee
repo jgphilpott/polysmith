@@ -59,7 +59,7 @@ class LocalStorage
         mesh = serializeMesh mesh
         meshes = this.read "meshes"
 
-        if not meshes.find (localMesh) -> localMesh.object.uuid == mesh.object.uuid
+        if not meshes.find (localMesh) -> localMesh.object.uuid is mesh.object.uuid
 
             meshes.push mesh
 
@@ -70,7 +70,7 @@ class LocalStorage
         mesh = serializeMesh mesh
         meshes = this.read "meshes"
 
-        meshIndex = meshes.findIndex (localMesh) -> localMesh.object.uuid == mesh.object.uuid
+        meshIndex = meshes.findIndex (localMesh) -> localMesh.object.uuid is mesh.object.uuid
 
         if meshIndex >= 0
 
@@ -88,7 +88,7 @@ class LocalStorage
 
             for mesh in meshes
 
-                if mesh.metadata.class == "text"
+                if mesh.metadata.class is "text"
 
                     mesh = new Text()
 
@@ -103,6 +103,6 @@ class LocalStorage
         mesh = serializeMesh mesh
         meshes = this.read "meshes"
 
-        meshes.filterInPlace (localMesh) -> localMesh.object.uuid != mesh.object.uuid
+        meshes.filterInPlace (localMesh) -> localMesh.object.uuid isnt mesh.object.uuid
 
         this.write "meshes", meshes

@@ -70,11 +70,11 @@ sliderStop = (event, slider) ->
     panel.css "cursor", ""
     panel.find("*").css "cursor", ""
 
-    if panel.attr("id") == "camera"
+    if panel.attr("id") is "camera"
 
         settings.setSetting "controls", this.id + "Speed", value
 
-    else if panel.attr("id") == "mesh"
+    else if panel.attr("id") is "mesh"
 
         panel.data("mesh").setOpacity value
 
@@ -88,7 +88,7 @@ foldPanel = (element, duration = 1000) ->
     head = panel.find "#" + id + " .head"
     body = panel.find "#" + id + " .body"
 
-    if body.css("display") == "none"
+    if body.css("display") is "none"
 
         body.css "display", "block"
         height = body.height()
@@ -110,7 +110,7 @@ foldPanel = (element, duration = 1000) ->
 
     for tool in panel.find(".body").parent().toArray()
 
-        if $(tool).attr("id") != id and $(tool).find(".body").css("display") != "none"
+        if $(tool).attr("id") isnt id and $(tool).find(".body").css("display") isnt "none"
 
             $(tool).animate {height: head.height()}, {duration: duration, queue: false}
 

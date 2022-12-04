@@ -12,7 +12,7 @@ addEvents = () ->
 
         for axis in axes
 
-            if axis.class == "stroke" then axis.material.resolution.set innerWidth, innerHeight
+            if axis.class is "stroke" then axis.material.resolution.set innerWidth, innerHeight
 
         renderer.setSize innerWidth, innerHeight
         composer.setSize innerWidth, innerHeight
@@ -30,7 +30,7 @@ addEvents = () ->
     $("body").keypress (event) ->
 
         # Ctrl + Enter
-        if event.ctrlKey and (event.keyCode == 13 or event.keyCode == 10)
+        if event.ctrlKey and (event.keyCode is 13 or event.keyCode is 10)
 
             event.preventDefault()
             event.stopPropagation()
@@ -38,7 +38,7 @@ addEvents = () ->
             exporter.exportFile "stl"
 
         # Shift + Enter
-        else if event.shiftKey and event.keyCode == 13
+        else if event.shiftKey and event.keyCode is 13
 
             event.preventDefault()
             event.stopPropagation()
@@ -106,7 +106,7 @@ makeDragable = (element, origEvent = null) ->
 
     start = (event) ->
 
-        if element.type == "Mesh"
+        if element.type is "Mesh"
 
             if not element.getLock()
 
@@ -149,7 +149,7 @@ makeDragable = (element, origEvent = null) ->
         eventX = event.clientX - xOffset
         eventY = event.clientY - yOffset
 
-        if element.type == "Mesh"
+        if element.type is "Mesh"
 
             if not element.getLock()
 
@@ -240,7 +240,7 @@ makeDragable = (element, origEvent = null) ->
 
     stop = (event) ->
 
-        if element.type == "Mesh"
+        if element.type is "Mesh"
 
             if not element.getLock()
 
@@ -288,7 +288,7 @@ makeDragable = (element, origEvent = null) ->
 
                     mesh = new Mesh element.attr("id"), position: {x: x, y: y, z: z}
 
-                    if element.attr("id") != "text" and element.attr("id") != "image"
+                    if element.attr("id") isnt "text" and element.attr("id") isnt "image"
 
                         composer.outlinePass.visibleEdgeColor.set blackThree
                         composer.outlinePass.selectedObjects = [mesh]
@@ -304,4 +304,4 @@ makeDragable = (element, origEvent = null) ->
 
         dragged = null
 
-    if element.type != "Mesh" then element.mousedown start else if not events.operation.key then start() else null
+    if element.type isnt "Mesh" then element.mousedown start else if not events.operation.key then start() else null

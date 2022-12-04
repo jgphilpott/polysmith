@@ -5,7 +5,7 @@ addShortcutsPanel = ->
     panel = $("#shortcuts.panel")
 
     shapesPanel = $("#shapes.panel")
-    shapesVisible = if shapesPanel.css("visibility") == "visible" then true else false
+    shapesVisible = if shapesPanel.css("visibility") is "visible" then true else false
 
     panel.append "<img title='Box' id='box' class='shape' src='/app/imgs/icons/shapes/basic/box.png'>"
     panel.append "<img title='Cylinder' id='cylinder' class='shape' src='/app/imgs/icons/shapes/basic/cylinder.png'>"
@@ -39,7 +39,7 @@ addShortcutsPanel = ->
 
         $(shape).clickSingleDouble (event) ->
 
-            if shapesPanel.css("visibility") == "visible"
+            if shapesPanel.css("visibility") is "visible"
 
                 toggleShortcut shape.id
 
@@ -55,7 +55,7 @@ addShortcutsPanel = ->
 
     panel.find("#toggle").click((event) ->
 
-        shapesVisible = if shapesPanel.css("visibility") == "visible" then true else false
+        shapesVisible = if shapesPanel.css("visibility") is "visible" then true else false
 
         settings.setSetting "panels", "shapes", !shapesVisible
 
@@ -69,9 +69,9 @@ toggleShortcut = (id) ->
     shortcut = $("#shortcuts.panel img#" + id + ".shape")
     shape = $("#shapes.panel img#" + id + ".shape")
 
-    if shortcut.css("display") == "block"
+    if shortcut.css("display") is "block"
 
-        shortcuts.filterInPlace (item) -> item != id
+        shortcuts.filterInPlace (item) -> item isnt id
 
         shortcut.css "display", "none"
         shape.css "opacity", 1

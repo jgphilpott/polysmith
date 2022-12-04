@@ -103,7 +103,7 @@ class Settings
 
         try
 
-            if this.getSetting(category, setting) != undefined
+            if this.getSetting(category, setting) isnt undefined
 
                 if client
 
@@ -141,7 +141,7 @@ class Settings
 
                 $(".settings-category #ui-" + setting + "").prop "checked", value
 
-                if setting == "navbar"
+                if setting is "navbar"
 
                     top = if value then 0 else -50
 
@@ -155,7 +155,7 @@ class Settings
 
             when "tooltips"
 
-                if setting == "guidelines"
+                if setting is "guidelines"
 
                     $(".settings-category #tooltips-measurements").prop "disabled", !value
 
@@ -173,11 +173,11 @@ class Settings
                 checkbox.prop "checked", if value then true else false
                 panel.css "visibility", if value then "visible" else "hidden"
 
-                if setting == "settings"
+                if setting is "settings"
 
                     $("#settings-panel.sub-panel img.gear").css "opacity", if value then 1 else 0.5
 
-                if setting == "shapes"
+                if setting is "shapes"
 
                     $("#shortcuts.panel #toggle").attr "src", "/app/imgs/panels/nav/" + (if value then "x" else "+") + ".png"
 
@@ -187,15 +187,15 @@ class Settings
 
                 $(".settings-category #axes-" + setting + "").prop "checked", value
 
-                if setting == "axesCaps"
+                if setting is "axesCaps"
 
                     if value then addAxesCaps() else removeAxesCaps()
 
-                if setting == "xAxis" or setting == "yAxis" or setting == "zAxis"
+                if setting is "xAxis" or setting is "yAxis" or setting is "zAxis"
 
                     if value
 
-                        if setting == "xAxis"
+                        if setting is "xAxis"
 
                             addAxisX()
 
@@ -207,7 +207,7 @@ class Settings
 
                                 addCentroidCap()
 
-                        if setting == "yAxis"
+                        if setting is "yAxis"
 
                             addAxisY()
 
@@ -219,7 +219,7 @@ class Settings
 
                                 addCentroidCap()
 
-                        if setting == "zAxis"
+                        if setting is "zAxis"
 
                             addAxisZ()
 
@@ -233,7 +233,7 @@ class Settings
 
                     else
 
-                        if setting == "xAxis"
+                        if setting is "xAxis"
 
                             removeAxisX()
                             removeAxisCapsX()
@@ -242,7 +242,7 @@ class Settings
 
                                 removeCentroidCap()
 
-                        if setting == "yAxis"
+                        if setting is "yAxis"
 
                             removeAxisY()
                             removeAxisCapsY()
@@ -251,7 +251,7 @@ class Settings
 
                                 removeCentroidCap()
 
-                        if setting == "zAxis"
+                        if setting is "zAxis"
 
                             removeAxisZ()
                             removeAxisCapsZ()
@@ -260,15 +260,15 @@ class Settings
 
                                 removeCentroidCap()
 
-                if setting == "xyPlane"
+                if setting is "xyPlane"
 
                     if value then addPlaneXY() else removePlaneXY()
 
-                if setting == "xzPlane"
+                if setting is "xzPlane"
 
                     if value then addPlaneXZ() else removePlaneXZ()
 
-                if setting == "yzPlane"
+                if setting is "yzPlane"
 
                     if value then addPlaneYZ() else removePlaneYZ()
 
@@ -278,7 +278,7 @@ class Settings
 
                 cameraPanel = $ "#camera.panel"
 
-                if setting == "position"
+                if setting is "position"
 
                     position = cameraPanel.find "#position .body"
 
@@ -286,7 +286,7 @@ class Settings
                     position.find("#position-y input").val value.y.toFixed 2
                     position.find("#position-z input").val value.z.toFixed 2
 
-                else if setting == "target"
+                else if setting is "target"
 
                     target = cameraPanel.find "#target .body"
 

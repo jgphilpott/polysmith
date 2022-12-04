@@ -243,7 +243,7 @@ class Mesh
 
                 $(icon).attr "src", "/app/imgs/panels/ops/default/" + icon.id + ".png"
 
-        if value == "setup" and not this.getLock()
+        if value is "setup" and not this.getLock()
 
             operationIcon.attr "src", "/app/imgs/panels/ops/selected/" + key + ".png"
 
@@ -292,10 +292,10 @@ class Mesh
             meshPanelName = $ "#mesh." + this.uuid + " #name span"
             meshesPanelName = $ "#meshes.table tr#" + this.uuid + " .name span"
 
-            if meshPanelName[0] and key != "mesh" then meshPanelName[0].innerText = value
-            if meshesPanelName[0] and key != "meshes" then meshesPanelName[0].innerText = value
+            if meshPanelName[0] and key isnt "mesh" then meshPanelName[0].innerText = value
+            if meshesPanelName[0] and key isnt "meshes" then meshesPanelName[0].innerText = value
 
-            if value == "" and key != "mesh" then meshPanelName.css("display", "none") else meshPanelName.css("display", "block")
+            if value is "" and key isnt "mesh" then meshPanelName.css("display", "none") else meshPanelName.css("display", "block")
 
     getLock : () ->
 
@@ -481,7 +481,7 @@ class Mesh
 
                     parameters = this.geometry.parameters
 
-                    if this.class == "box"
+                    if this.class is "box"
 
                         if key is "length" then parameters.width = value
                         if key is "width" then parameters.height = value
@@ -489,7 +489,7 @@ class Mesh
 
                         this.geometry = new BoxGeometry parameters
 
-                    else if this.class == "sphere"
+                    else if this.class is "sphere"
 
                         if key is "radius" then parameters.radius = value
                         if key is "width-segments" then parameters.widthSegments = value
@@ -497,7 +497,7 @@ class Mesh
 
                         this.geometry = new SphereGeometry parameters
 
-                    else if this.class == "cylinder" or this.class.split("-")[1] == "prism"
+                    else if this.class is "cylinder" or this.class.split("-")[1] is "prism"
 
                         if key is "length" then parameters.length = value
                         if key is "radius-positive" then parameters.radiusTop = value
@@ -506,7 +506,7 @@ class Mesh
 
                         this.geometry = new CylinderGeometry parameters
 
-                    else if this.class == "cone" or this.class.split("-")[1] == "pyramid"
+                    else if this.class is "cone" or this.class.split("-")[1] is "pyramid"
 
                         if key is "height" then parameters.height = value
                         if key is "radius" then parameters.radius = value
@@ -514,7 +514,7 @@ class Mesh
 
                         this.geometry = new CylinderGeometry parameters
 
-                    else if this.class == "torus"
+                    else if this.class is "torus"
 
                         if key is "radius" then parameters.radius = value
                         if key is "thickness" then parameters.thickness = value
@@ -565,7 +565,7 @@ class Mesh
 
             if events.operation.key
 
-                if events.operation.mesh.uuid == self.uuid
+                if events.operation.mesh.uuid is self.uuid
 
                     composer.outlinePass.visibleEdgeColor.set redThree
                     $("#canvas").css "cursor", "not-allowed"
@@ -615,7 +615,7 @@ class Mesh
 
                     self.morph events.operation.key, null, true
 
-                else if tooltips.getSelected() != self
+                else if tooltips.getSelected() isnt self
 
                     tooltips.setSelected self
 
@@ -659,7 +659,7 @@ class Mesh
             $("body").css "cursor", ""
             $("#canvas").css "cursor", ""
 
-            if events.operation.mesh == this then clearMeshOperation()
+            if events.operation.mesh is this then clearMeshOperation()
 
             updateMeshesPanel "remove", this
             localStore.removeMeshes this

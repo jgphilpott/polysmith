@@ -28,7 +28,7 @@ addPanelEvents = (panel) ->
 
         panel.css "z-index", events.zIndex += 1
 
-        if id == "mesh"
+        if id is "mesh"
 
             mesh = panel.data "mesh"
             visibleEdgeColor = if mesh.getLock() then redThree else blackThree
@@ -54,7 +54,7 @@ addPanelEvents = (panel) ->
 
     close.click((event) ->
 
-        if id == "mesh"
+        if id is "mesh"
 
             panel.css "visibility", "hidden"
 
@@ -66,7 +66,7 @@ addPanelEvents = (panel) ->
 
     ).on "mousedown mouseup", (event) -> event.stopPropagation()
 
-    if id != "mesh"
+    if id isnt "mesh"
 
         if settings.getSetting("panels", id) then panel.css("visibility", "visible") else panel.css("visibility", "hidden")
 

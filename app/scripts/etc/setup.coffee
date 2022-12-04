@@ -18,7 +18,7 @@ setup = () ->
 
         composer.render()
 
-    if typeof polygen == "function"
+    if typeof polygen is "function"
 
         localStore.delete "meshes"
 

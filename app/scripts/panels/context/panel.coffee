@@ -28,7 +28,7 @@ contextMenu = (type, element, event) ->
             meshTableRow = $ "#meshes.table tr#" + element.uuid + ""
 
             panel.append "<h4>Basic</h4>"
-            panel.append "<p id='panel'>" + (if meshPanel.length and meshPanel.css("visibility") == "visible" then "Close" else "Open") + " Panel</p>"
+            panel.append "<p id='panel'>" + (if meshPanel.length and meshPanel.css("visibility") is "visible" then "Close" else "Open") + " Panel</p>"
             panel.append "<p id='look'>Look Here</p>"
 
             if not element.getLock()
@@ -45,13 +45,13 @@ contextMenu = (type, element, event) ->
 
             panel.find("#panel").click ->
 
-                if meshPanel.length and meshPanel.css("visibility") == "visible"
+                if meshPanel.length and meshPanel.css("visibility") is "visible"
 
                     meshTableRow.find(".settings").attr "src", "/app/imgs/panels/tools/toggle/off.png"
 
                     meshPanel.css "visibility", "hidden"
 
-                else if meshPanel.length and meshPanel.css("visibility") == "hidden"
+                else if meshPanel.length and meshPanel.css("visibility") is "hidden"
 
                     meshTableRow.find(".settings").attr "src", "/app/imgs/panels/tools/toggle/on.png"
 
@@ -79,7 +79,7 @@ contextMenu = (type, element, event) ->
             shortcut = $ "#shortcuts.panel img#" + element.attr("id") + ".shape"
 
             panel.append "<p id='add'>Add Mesh</p>"
-            if shortcut.css("display") == "none" then panel.append("<p id='show'>Show Shortcut</p>") else panel.append("<p id='hide'>Hide Shortcut</p>")
+            if shortcut.css("display") is "none" then panel.append("<p id='show'>Show Shortcut</p>") else panel.append("<p id='hide'>Hide Shortcut</p>")
 
             panel.find("#add").click -> new Mesh(element.attr "id").add()
             panel.find("#show, #hide").click -> toggleShortcut element.attr "id"

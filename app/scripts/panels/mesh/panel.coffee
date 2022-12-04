@@ -2,7 +2,7 @@ addMeshPanel = (mesh, coordinates = null) ->
 
     panel = $("#mesh." + mesh.uuid + "")
 
-    if panel.length == 0
+    if panel.length is 0
 
         $("body").append "<div id='mesh' class='panel " + mesh.uuid + "'><img title='Close' class='close' src='/app/imgs/panels/nav/close.png'></div>"
 
@@ -15,7 +15,7 @@ addMeshPanel = (mesh, coordinates = null) ->
 
         panel.append "<h3 id='name'><span contenteditable='true'></span></h3>"
         name = panel.find("#name span"); name[0].innerText = mesh.name
-        if mesh.name == "" then name.css "display", "none"
+        if mesh.name is "" then name.css "display", "none"
 
         panel.css "z-index", events.zIndex += 1
 
@@ -97,7 +97,7 @@ addMeshPanel = (mesh, coordinates = null) ->
             segmentsMin = 3
             segmentsMax = 100
 
-            if mesh.class == "box"
+            if mesh.class is "box"
 
                 properties.append "<span id='properties-length'><label>Length</label> <div class='suffix " + unit[scale] + "'><input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
                 properties.append "<span id='properties-width'><label>Width</label> <div class='suffix " + unit[scale] + "'><input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
@@ -107,7 +107,7 @@ addMeshPanel = (mesh, coordinates = null) ->
                 properties.find("#properties-width input").val mesh.geometry.parameters.height.toFixed 2
                 properties.find("#properties-height input").val mesh.geometry.parameters.depth.toFixed 2
 
-            else if mesh.class == "sphere"
+            else if mesh.class is "sphere"
 
                 properties.append "<span id='properties-radius'><label><p>Radius</p> <div class='suffix " + unit[scale] + "'><input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "></div><button id='plus'>+</button><button id='minus'>-</button></label></span>"
                 properties.append "<span id='properties-width-segments'><label><p>Width Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>"
@@ -117,7 +117,7 @@ addMeshPanel = (mesh, coordinates = null) ->
                 properties.find("#properties-width-segments input").val mesh.geometry.parameters.widthSegments
                 properties.find("#properties-height-segments input").val mesh.geometry.parameters.heightSegments
 
-            else if mesh.class == "cylinder" or mesh.class.split("-")[1] == "prism"
+            else if mesh.class is "cylinder" or mesh.class.split("-")[1] is "prism"
 
                 properties.append "<span id='properties-length'><label><p>Length</p> <div class='suffix " + unit[scale] + "'><input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "></div><button id='plus'>+</button><button id='minus'>-</button></label></span>"
                 properties.append "<span id='properties-radius-positive'><label><p>Positive Radius</p> <div class='suffix " + unit[scale] + "'><input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "></div><button id='plus'>+</button><button id='minus'>-</button></label></span>"
@@ -127,13 +127,13 @@ addMeshPanel = (mesh, coordinates = null) ->
                 properties.find("#properties-radius-positive input").val mesh.geometry.parameters.radiusTop.toFixed 2
                 properties.find("#properties-radius-negative input").val mesh.geometry.parameters.radiusBottom.toFixed 2
 
-                if mesh.class == "cylinder"
+                if mesh.class is "cylinder"
 
                     properties.append "<span id='properties-radius-segments'><label><p>Radial Segments</p> <input type=number step=" + segmentsStep + " min=" + segmentsMin + " max=" + segmentsMax + "><button id='plus'>+</button><button id='minus'>-</button></label></span>"
 
                     properties.find("#properties-radius-segments input").val mesh.geometry.parameters.radialSegments
 
-            else if mesh.class.split("-")[1] == "pyramid"
+            else if mesh.class.split("-")[1] is "pyramid"
 
                 properties.append "<span id='properties-height'><label>Height</label> <div class='suffix " + unit[scale] + "'><input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
                 properties.append "<span id='properties-radius'><label>Radius</label> <div class='suffix " + unit[scale] + "'><input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
@@ -141,7 +141,7 @@ addMeshPanel = (mesh, coordinates = null) ->
                 properties.find("#properties-height input").val mesh.geometry.parameters.height.toFixed 2
                 properties.find("#properties-radius input").val mesh.geometry.parameters.radiusBottom.toFixed 2
 
-            else if mesh.class == "cone"
+            else if mesh.class is "cone"
 
                 properties.append "<span id='properties-height'><label><p>Height</p> <div class='suffix " + unit[scale] + "'><input type=number step=" + regularStep + " min=" + regularMin + " max=" + regularMax + "></div><button id='plus'>+</button><button id='minus'>-</button></label></span>"
                 properties.append "<span id='properties-radius'><label><p>Radius</p> <div class='suffix " + unit[scale] + "'><input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "></div><button id='plus'>+</button><button id='minus'>-</button></label></span>"
@@ -151,7 +151,7 @@ addMeshPanel = (mesh, coordinates = null) ->
                 properties.find("#properties-radius input").val mesh.geometry.parameters.radiusBottom.toFixed 2
                 properties.find("#properties-radius-segments input").val mesh.geometry.parameters.radialSegments
 
-            else if mesh.class == "torus"
+            else if mesh.class is "torus"
 
                 properties.append "<span id='properties-thickness'><label><p>Thickness</p> <div class='suffix " + unit[scale] + "'><input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "></div><button id='plus'>+</button><button id='minus'>-</button></label></span>"
                 properties.append "<span id='properties-radius'><label><p>Radius</p> <div class='suffix " + unit[scale] + "'><input type=number step=" + radialStep + " min=" + radialMin + " max=" + radialMax + "></div><button id='plus'>+</button><button id='minus'>-</button></label></span>"
@@ -163,12 +163,12 @@ addMeshPanel = (mesh, coordinates = null) ->
                 properties.find("#properties-tube-segments input").val mesh.geometry.parameters.tubularSegments
                 properties.find("#properties-radius-segments input").val mesh.geometry.parameters.radialSegments
 
-            if mesh.class == "box" or mesh.class.split("-")[1] == "pyramid"
+            if mesh.class is "box" or mesh.class.split("-")[1] is "pyramid"
 
                 properties.find("label").css "width", "45px"
                 properties.find("input").css "width", "90px"
 
-            else if mesh.class == "cylinder" or mesh.class == "sphere" or mesh.class == "cone" or mesh.class == "torus" or mesh.class.split("-")[1] == "prism"
+            else if mesh.class is "cylinder" or mesh.class is "sphere" or mesh.class is "cone" or mesh.class is "torus" or mesh.class.split("-")[1] is "prism"
 
                 properties.find("label").css "margin", "3px 5px"
                 properties.find("label p").css "margin", "0px 5px"
@@ -247,7 +247,7 @@ addMeshPanel = (mesh, coordinates = null) ->
         panel.find(".fold, h4").click (event) -> foldPanel(this)
         panel.find(".fold, h4").on "mousedown mouseup", (event) -> event.stopPropagation()
 
-        panel.find("input").keypress (event) -> event.stopPropagation(); if event.keyCode == 13 then this.blur()
+        panel.find("input").keypress (event) -> event.stopPropagation(); if event.keyCode is 13 then this.blur()
         panel.find("input").keydown (event) -> event.stopPropagation(); if mesh.getLock() then event.preventDefault()
         panel.find("input").keyup (event) -> event.stopPropagation(); id = $(this).closest("span").attr("id"); mesh.updateParams id.split("-")[0], id.split("-").splice(1).join("-"), Number($(this).val())
         panel.find("input").change (event) -> event.stopPropagation(); id = $(this).closest("span").attr("id"); mesh.updateParams id.split("-")[0], id.split("-").splice(1).join("-"), Number($(this).val()), "temp"
@@ -269,7 +269,7 @@ addMeshPanel = (mesh, coordinates = null) ->
                 input = $(this).closest("span").find "input"
                 step = Number input.attr "step"
 
-                step = if operation == "plus" then step else if operation == "minus" then - step else 0
+                step = if operation is "plus" then step else if operation is "minus" then - step else 0
 
                 updateButton = ->
 

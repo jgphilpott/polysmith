@@ -34,16 +34,16 @@ addSettingsPanel = ->
             <div>
                 <label>Scale</label>
                 <select id='general-scale' class='select'>
-                    <option value='imperial' """ + (if settings.getSetting("general", "scale") == "imperial" then "selected" else "") + """>Imperial</option>
-                    <option value='metric' """ + (if settings.getSetting("general", "scale") == "metric" then "selected" else "") + """>Metric</option>
+                    <option value='imperial' """ + (if settings.getSetting("general", "scale") is "imperial" then "selected" else "") + """>Imperial</option>
+                    <option value='metric' """ + (if settings.getSetting("general", "scale") is "metric" then "selected" else "") + """>Metric</option>
                 </select>
             </div>
 
             <div>
                 <label>Unit</label>
                 <select id='general-unit' class='select'>
-                    <option value='centimeters' """ + (if settings.getSetting("general", "unit") == "centimeters" then "selected" else "") + """>Centimeters</option>
-                    <option value='millimeters' """ + (if settings.getSetting("general", "unit") == "millimeters" then "selected" else "") + """>Millimeters</option>
+                    <option value='centimeters' """ + (if settings.getSetting("general", "unit") is "centimeters" then "selected" else "") + """>Centimeters</option>
+                    <option value='millimeters' """ + (if settings.getSetting("general", "unit") is "millimeters" then "selected" else "") + """>Millimeters</option>
                 </select>
             </div>
 

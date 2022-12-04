@@ -208,7 +208,7 @@ class Geometry
         this.geometry.setBoundingBox()
         this.geometry.setBoundingSphere()
 
-        if this.type != "line" and this.type != "stroke"
+        if this.type isnt "line" and this.type isnt "stroke"
 
             this.geometry.setSurface()
             this.geometry.setVolume()

@@ -77,7 +77,7 @@ updateMeshesPanel = (type, mesh) ->
 
                 panel = $("#mesh." + mesh.uuid + "")
 
-                if panel.length and panel.css("visibility") == "visible"
+                if panel.length and panel.css("visibility") is "visible"
 
                     $(this).attr "src", "/app/imgs/panels/tools/toggle/off.png"
 
@@ -111,9 +111,9 @@ updateMeshesPanel = (type, mesh) ->
             $("#mesh." + mesh.uuid + "").remove()
             table.find("tr#" + mesh.uuid + "").remove()
 
-            meshes.filterInPlace (item) -> item.uuid != mesh.uuid
+            meshes.filterInPlace (item) -> item.uuid isnt mesh.uuid
 
-            if meshes.length == 0
+            if meshes.length is 0
 
                 panel.find("#none").css "display", "block"
                 panel.find("div.table").css "display", "none"
