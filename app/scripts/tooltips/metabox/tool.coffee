@@ -1,58 +1,60 @@
-drawMetabox = (type, object, event) ->
+class Metabox
 
-    metabox = $ "#metabox"
+    constructor : () ->
 
-    mouse = new THREE.Vector2()
-    raycaster = new THREE.Raycaster()
+        @box = $("#metabox")
 
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1
-    mouse.y = - (event.clientY / window.innerHeight) * 2 + 1
+    draw : (type, object, event) ->
 
-    raycaster.setFromCamera mouse, camera
-    intersects = raycaster.intersectObjects scene.children
+        mouse = new THREE.Vector2()
+        raycaster = new THREE.Raycaster()
 
-    unit = settings.getSetting "general", "unit"
-    scale = settings.getSetting "general", "scale"
-    language = settings.getSetting "general", "language"
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1
+        mouse.y = - (event.clientY / window.innerHeight) * 2 + 1
 
-    switch type
+        raycaster.setFromCamera mouse, camera
+        intersects = raycaster.intersectObjects scene.children
 
-        when "draw"
+        unit = settings.getSetting "general", "unit"
+        scale = settings.getSetting "general", "scale"
+        language = settings.getSetting "general", "language"
 
-            metabox.append "<h4 id='name'>" + object.name + "</h4>"
+        switch type
 
-            metabox.append "<div id='object' class='databox'></div>"
-            metabox.append "<div id='event' class='databox'></div>"
+            when "draw"
 
-            objectBox = metabox.find "#object.databox"
-            eventBox = metabox.find "#event.databox"
+                this.box.append "<h4 id='name'>" + object.name + "</h4>"
 
-            objectBox.append "<p class='title'>Object</p>"
-            objectBox.append "<p id='type' class='meta'><span class='label'>Type:</span> <span class='value'>" + object.class.replace("-", " ").replace(/\b\w/g, (char) -> return char.toUpperCase()) + "</span></p>"
-            objectBox.append "<p id='surface' class='meta'><span class='label'>Surface:</span> <span class='value'>" + format(object.geometry.surface, "area", unit[scale] + "Sq", 2, 0, language) + "</span></p>"
-            objectBox.append "<p id='volume' class='meta'><span class='label'>Volume:</span> <span class='value'>" + format(object.geometry.volume, "volume", unit[scale] + "Cu", 2, 0, language) + "</span></p>"
+                this.box.append "<div id='object' class='databox'></div>"
+                this.box.append "<div id='event' class='databox'></div>"
 
-            eventBox.append "<p class='title'>Event</p>"
-            eventBox.append "<p id='x' class='intersection'><span class='label'>X</span> <span class='value'>" + format(intersects[0].point.x, "length", unit[scale], 2, 0, language) + "</span></p>"
-            eventBox.append "<p id='y' class='intersection'><span class='label'>Y</span> <span class='value'>" + format(intersects[0].point.y, "length", unit[scale], 2, 0, language) + "</span></p>"
-            eventBox.append "<p id='z' class='intersection'><span class='label'>Z</span> <span class='value'>" + format(intersects[0].point.z, "length", unit[scale], 2, 0, language) + "</span></p>"
+                objectBox = this.box.find "#object.databox"
+                eventBox = this.box.find "#event.databox"
 
-        when "update"
+                objectBox.append "<p class='title'>Object</p>"
+                objectBox.append "<p id='type' class='meta'><span class='label'>Type:</span> <span class='value'>" + object.class.replace("-", " ").replace(/\b\w/g, (char) -> return char.toUpperCase()) + "</span></p>"
+                objectBox.append "<p id='surface' class='meta'><span class='label'>Surface:</span> <span class='value'>" + format(object.geometry.surface, "area", unit[scale] + "Sq", 2, 0, language) + "</span></p>"
+                objectBox.append "<p id='volume' class='meta'><span class='label'>Volume:</span> <span class='value'>" + format(object.geometry.volume, "volume", unit[scale] + "Cu", 2, 0, language) + "</span></p>"
 
-            xIntersection = metabox.find "#x.intersection span.value"
-            yIntersection = metabox.find "#y.intersection span.value"
-            zIntersection = metabox.find "#z.intersection span.value"
+                eventBox.append "<p class='title'>Event</p>"
+                eventBox.append "<p id='x' class='intersection'><span class='label'>X</span> <span class='value'>" + format(intersects[0].point.x, "length", unit[scale], 2, 0, language) + "</span></p>"
+                eventBox.append "<p id='y' class='intersection'><span class='label'>Y</span> <span class='value'>" + format(intersects[0].point.y, "length", unit[scale], 2, 0, language) + "</span></p>"
+                eventBox.append "<p id='z' class='intersection'><span class='label'>Z</span> <span class='value'>" + format(intersects[0].point.z, "length", unit[scale], 2, 0, language) + "</span></p>"
 
-            xIntersection.text format intersects[0].point.x, "length", unit[scale], 2, 0, language
-            yIntersection.text format intersects[0].point.y, "length", unit[scale], 2, 0, language
-            zIntersection.text format intersects[0].point.z, "length", unit[scale], 2, 0, language
+            when "update"
 
-    return metabox
+                xIntersection = this.box.find "#x.intersection span.value"
+                yIntersection = this.box.find "#y.intersection span.value"
+                zIntersection = this.box.find "#z.intersection span.value"
 
-eraseMetabox = () ->
+                xIntersection.text format intersects[0].point.x, "length", unit[scale], 2, 0, language
+                yIntersection.text format intersects[0].point.y, "length", unit[scale], 2, 0, language
+                zIntersection.text format intersects[0].point.z, "length", unit[scale], 2, 0, language
 
-    metabox = $ "#metabox"
+        return this.box
 
-    metabox.find("*").remove()
+    erase : () ->
 
-    return metabox
+        this.box.find("*").remove()
+
+        return this.box

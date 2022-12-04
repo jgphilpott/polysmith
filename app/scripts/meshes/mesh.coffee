@@ -559,7 +559,7 @@ class Mesh
 
             if settings.getSetting "ui", "metabox"
 
-                drawMetabox "draw", self, event.origDomEvent
+                metabox.draw "draw", self, event.origDomEvent
 
         events.addEventListener self, "mousemove", (event) ->
 
@@ -591,7 +591,7 @@ class Mesh
 
             if settings.getSetting "ui", "metabox"
 
-                drawMetabox "update", self, event.origDomEvent
+                metabox.draw "update", self, event.origDomEvent
 
         events.addEventListener self, "mouseout", (event) ->
 
@@ -599,7 +599,7 @@ class Mesh
 
             composer.outlinePass.selectedObjects = []
 
-            eraseMetabox()
+            metabox.erase()
 
         events.addEventListener self, "mousedown", (event) ->
 
