@@ -116,7 +116,7 @@ if not exists(js_libs_dir + "/tools.js"):
 
     with open(js_libs_dir + "/tools.js", "w") as file:
 
-        convert = get("https://raw.githubusercontent.com/jgphilpott/convert/24d31a1715c1c4f0468d35769f733cb4cf1ff3f7/convert.js").content.decode("utf-8")
+        convert = get("https://raw.githubusercontent.com/jgphilpott/convert/111869a7c883cbf1ed3b1344a72391355d6e5567/convert.js").content.decode("utf-8")
         abbreviations = get("https://gist.githubusercontent.com/jgphilpott/12783015d68e056e54252355d75b41a9/raw/8f2d8e431290a286f19aa5a03309c4c8b77596f6/abbreviations.js").content.decode("utf-8")
         format = get("https://gist.githubusercontent.com/jgphilpott/787659ac4ea57a9971da58a76191079b/raw/b4f9a7e4d9556545e56a6da3edf89a3a25a845f8/format.js").content.decode("utf-8")
         casefy = get("https://gist.githubusercontent.com/jgphilpott/19e7a94cdf6d6d4cd868cc18e628026c/raw/7aad9d31135124f4d845a9e9d01b026a39e125a1/casefy.js").content.decode("utf-8")
