@@ -54,30 +54,6 @@ class LocalStorage
 
         return localDump()
 
-    addMeshes : (mesh) ->
-
-        mesh = serializeMesh mesh
-        meshes = this.read "meshes"
-
-        if not meshes.find (localMesh) -> localMesh.object.uuid is mesh.object.uuid
-
-            meshes.push mesh
-
-            this.write "meshes", meshes
-
-    updateMeshes : (mesh) ->
-
-        mesh = serializeMesh mesh
-        meshes = this.read "meshes"
-
-        meshIndex = meshes.findIndex (localMesh) -> localMesh.object.uuid is mesh.object.uuid
-
-        if meshIndex >= 0
-
-            meshes[meshIndex] = mesh
-
-            this.write "meshes", meshes
-
     loadMeshes : () ->
 
         meshes = this.read "meshes"
@@ -98,7 +74,31 @@ class LocalStorage
 
                 mesh.add()
 
-    removeMeshes : (mesh) ->
+    addMesh : (mesh) ->
+
+        mesh = serializeMesh mesh
+        meshes = this.read "meshes"
+
+        if not meshes.find (localMesh) -> localMesh.object.uuid is mesh.object.uuid
+
+            meshes.push mesh
+
+            this.write "meshes", meshes
+
+    updateMesh : (mesh) ->
+
+        mesh = serializeMesh mesh
+        meshes = this.read "meshes"
+
+        meshIndex = meshes.findIndex (localMesh) -> localMesh.object.uuid is mesh.object.uuid
+
+        if meshIndex >= 0
+
+            meshes[meshIndex] = mesh
+
+            this.write "meshes", meshes
+
+    removeMesh : (mesh) ->
 
         mesh = serializeMesh mesh
         meshes = this.read "meshes"

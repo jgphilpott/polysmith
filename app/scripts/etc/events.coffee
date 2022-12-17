@@ -259,7 +259,7 @@ makeDragable = (element, origEvent = null) ->
 
                 $("#canvas").css "cursor", "grab"
 
-                localStore.updateMeshes element
+                localStore.updateMesh element
 
                 tooltips.distanceLines = []
 

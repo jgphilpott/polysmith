@@ -226,9 +226,23 @@ class Mesh
 
         return this.mesh
 
-    save : () ->
+    save : (method) ->
 
-        localStore.updateMeshes this
+        store = if client then serverStore else localStore
+
+        switch method
+
+            when "add"
+
+                store.addMesh this
+
+            when "update"
+
+                store.updateMesh this
+
+            when "remove"
+
+                store.removeMesh this
 
     morph : (key = null, value = null, save = false) ->
 
@@ -266,7 +280,7 @@ class Mesh
                     events.operation.mesh.geometry = morphed.geometry
 
                     events.operation.mesh.updateMetrics()
-                    localStore.updateMeshes events.operation.mesh
+                    localStore.updateMesh events.operation.mesh
 
                     $("#mesh." + events.operation.mesh.uuid + " #properties.controls").remove()
 
@@ -287,7 +301,7 @@ class Mesh
 
             this.name = value
 
-            if save then this.save()
+            if save then this.save "update"
 
             meshPanelName = $ "#mesh." + this.uuid + " #name span"
             meshesPanelName = $ "#meshes.table tr#" + this.uuid + " .name span"
@@ -362,7 +376,7 @@ class Mesh
             meshesTableRow.find(".lock").attr "src", "/app/imgs/panels/lock/unlocked.png"
             meshesTableRow.find(".trash").removeClass "disabled"
 
-        if save then this.save()
+        if save then this.save "update"
 
     toggleLock : () ->
 
@@ -401,7 +415,7 @@ class Mesh
             this.material.wireframe = wireframe
             this.material.style = color
 
-            if save then this.save()
+            if save then this.save "update"
 
     getOpacity : () ->
 
@@ -422,7 +436,7 @@ class Mesh
             slider.slider "value", opacity
             sliderFill slider
 
-            if save then this.save()
+            if save then this.save "update"
 
     getPosition : () ->
 
@@ -551,7 +565,7 @@ class Mesh
 
                     break
 
-            if save is true then this.save()
+            if save is true then this.save "update"
 
     addEvents : (self = this) ->
 
@@ -645,9 +659,9 @@ class Mesh
         this.addEvents()
         this.updateMetrics()
 
-        localStore.addMeshes this
         updateMeshesPanel "add", this
 
+        this.save "add"
         scene.add this
 
     remove : () ->
@@ -662,9 +676,9 @@ class Mesh
             if events.operation.mesh is this then clearMeshOperation()
 
             updateMeshesPanel "remove", this
-            localStore.removeMeshes this
 
             this.geometry.dispose()
             this.material.dispose()
 
+            this.save "remove"
             scene.remove this
