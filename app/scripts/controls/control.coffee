@@ -2,42 +2,28 @@ class Controls
 
     constructor : () ->
 
-        @dragControls = new DragControls()
-        @flyControls = new FlyControls()
-        @zoomControls = new ZoomControls()
+        @active = null
+
+        @drag = new DragControls()
+        @fly = new FlyControls()
+        @zoom = new ZoomControls()
 
     add : () ->
 
-        this.addDragControls()
-        this.addFlyControls()
-        this.addZoomControls()
+        if not this.active
+
+            this.active = true
+
+            this.drag.add()
+            this.fly.add()
+            this.zoom.add()
 
     remove : () ->
 
-        this.removeDragControls()
-        this.removeFlyControls()
-        this.removeZoomControls()
+        if this.active
 
-    addDragControls : () ->
+            this.active = false
 
-        this.dragControls.add()
-
-    removeDragControls : () ->
-
-        this.dragControls.remove()
-
-    addFlyControls : () ->
-
-        this.flyControls.add()
-
-    removeFlyControls : () ->
-
-        this.flyControls.remove()
-
-    addZoomControls : () ->
-
-        this.zoomControls.add()
-
-    removeZoomControls : () ->
-
-        this.zoomControls.remove()
+            this.drag.remove()
+            this.fly.remove()
+            this.zoom.remove()
