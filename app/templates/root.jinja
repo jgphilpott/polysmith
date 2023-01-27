@@ -215,7 +215,10 @@
         <script src="{{ url_for('static', filename='scripts/etc/ui.js') }}"></script>
 
         <script src="{{ url_for('static', filename='scripts/tooltips/tool.js') }}"></script>
-        <script src="{{ url_for('static', filename='scripts/tooltips/axes/tool.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/tooltips/grid/tool.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/tooltips/grid/axes/tool.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/tooltips/grid/caps/tool.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/tooltips/grid/ticks/tool.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/tooltips/help/tool.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/tooltips/metabox/tool.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/tooltips/rotation/tool.js') }}"></script>
@@ -304,12 +307,12 @@
 
             new Light("ambient"); new Light("point")
 
-            data.camera = camera = new Camera().add()
-            data.controls = controls = new Controls().add()
+            data.grid = grid = new Grid(); grid.add()
+            data.camera = camera = new Camera(); camera.add()
+            data.controls = controls = new Controls(); controls.add()
 
             data.events = events = addEvents()
             data.panels = panels = addPanels()
-            data.axes = axes = addAxes()
 
             setup()
 

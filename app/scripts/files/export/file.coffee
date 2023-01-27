@@ -43,7 +43,7 @@ class Exporter
 
         if this.exporter
 
-            removeAxes()
+            grid.remove()
 
             this.file = new Blob [this.exporter.parse scene], type: "text/plain"
 
@@ -51,7 +51,7 @@ class Exporter
 
                 saveAs this.file, lower settings.getSetting("ui", "title") + "." + this.exporter.extension
 
-            addAxes()
+            grid.add()
 
         this.exporter = null
         this.file = null
