@@ -30,7 +30,7 @@ class Axes
 
     addX : (min = -scale, max = scale) ->
 
-        if settings.getSetting "axes", "xAxis" and not this.x
+        if not this.x and settings.getSetting "axes", "xAxis"
 
             this.x = new Stroke vertices: [[min, 0, 0], [max, 0, 0]], linewidth: 3, color: redThree
 
@@ -38,13 +38,16 @@ class Axes
 
     removeX : () ->
 
+        this.x.geometry.dispose()
+        this.x.material.dispose()
+
         scene.remove this.x
 
         this.x = null
 
     addY : (min = -scale, max = scale) ->
 
-        if settings.getSetting "axes", "yAxis" and not this.y
+        if not this.y and settings.getSetting "axes", "yAxis"
 
             this.y = new Stroke vertices: [[0, min, 0], [0, max, 0]], linewidth: 3, color: greenThree
 
@@ -52,19 +55,25 @@ class Axes
 
     removeY : () ->
 
+        this.y.geometry.dispose()
+        this.y.material.dispose()
+
         scene.remove this.y
 
         this.y = null
 
     addZ : (min = -scale, max = scale) ->
 
-        if settings.getSetting "axes", "zAxis" and not this.z
+        if not this.z and settings.getSetting "axes", "zAxis"
 
             this.z = new Stroke vertices: [[0, 0, min], [0, 0, max]], linewidth: 3, color: blueThree
 
             scene.add this.z
 
     removeZ : () ->
+
+        this.z.geometry.dispose()
+        this.z.material.dispose()
 
         scene.remove this.z
 
