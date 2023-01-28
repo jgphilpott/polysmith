@@ -53,16 +53,18 @@ class Caps
 
     removeCentroid : () ->
 
-        this.centroid.geometry.dispose()
-        this.centroid.material.dispose()
+        if this.centroid
 
-        this.removeEvents this.centroid
+            this.centroid.geometry.dispose()
+            this.centroid.material.dispose()
 
-        scene.remove this.centroid
+            this.removeEvents this.centroid
 
-        this.centroid = null
+            scene.remove this.centroid
 
-    addX : (min= -scale, max = scale) ->
+            this.centroid = null
+
+    addX : (min = -scale, max = scale) ->
 
         if settings.getSetting "axes", "xAxis"
 
@@ -77,14 +79,16 @@ class Caps
 
     removeX : () ->
 
-        this.xMin.geometry.dispose(); this.xMax.geometry.dispose()
-        this.xMin.material.dispose(); this.xMax.material.dispose()
+        if this.xMin and this.xMax
 
-        this.removeEvents this.xMin; this.removeEvents this.xMax
+            this.xMin.geometry.dispose(); this.xMax.geometry.dispose()
+            this.xMin.material.dispose(); this.xMax.material.dispose()
 
-        scene.remove this.xMin, this.xMax
+            this.removeEvents this.xMin; this.removeEvents this.xMax
 
-        this.xMin = null; this.xMax = null
+            scene.remove this.xMin, this.xMax
+
+            this.xMin = null; this.xMax = null
 
     addY : (min = -scale, max = scale) ->
 
@@ -101,14 +105,16 @@ class Caps
 
     removeY : () ->
 
-        this.yMin.geometry.dispose(); this.yMax.geometry.dispose()
-        this.yMin.material.dispose(); this.yMax.material.dispose()
+        if this.yMin and this.yMax
 
-        this.removeEvents this.yMin; this.removeEvents this.yMax
+            this.yMin.geometry.dispose(); this.yMax.geometry.dispose()
+            this.yMin.material.dispose(); this.yMax.material.dispose()
 
-        scene.remove this.yMin, this.yMax
+            this.removeEvents this.yMin; this.removeEvents this.yMax
 
-        this.yMin = null; this.yMax = null
+            scene.remove this.yMin, this.yMax
+
+            this.yMin = null; this.yMax = null
 
     addZ : (min = -scale, max = scale) ->
 
@@ -125,14 +131,16 @@ class Caps
 
     removeZ : () ->
 
-        this.zMin.geometry.dispose(); this.zMax.geometry.dispose()
-        this.zMin.material.dispose(); this.zMax.material.dispose()
+        if this.zMin and this.zMax
 
-        this.removeEvents this.zMin; this.removeEvents this.zMax
+            this.zMin.geometry.dispose(); this.zMax.geometry.dispose()
+            this.zMin.material.dispose(); this.zMax.material.dispose()
 
-        scene.remove this.zMin, this.zMax
+            this.removeEvents this.zMin; this.removeEvents this.zMax
 
-        this.zMin = null; this.zMax = null
+            scene.remove this.zMin, this.zMax
+
+            this.zMin = null; this.zMax = null
 
     addEvents : (cap) ->
 

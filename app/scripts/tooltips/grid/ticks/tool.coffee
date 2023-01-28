@@ -28,7 +28,7 @@ class Ticks
             this.removeXZ()
             this.removeYZ()
 
-    addXY = (min = -scale, max = scale) ->
+    addXY : (min = -scale, max = scale) ->
 
         if this.xy.length is 0 and settings.getSetting "axes", "xyPlane"
 
@@ -50,18 +50,20 @@ class Ticks
             this.xy.push xTick, yTick
             scene.add xTick, yTick
 
-    removeXY = () ->
+    removeXY : () ->
 
-        for tick in this.xy
+        if this.xy.length isnt 0
 
-            tick.geometry.dispose()
-            tick.material.dispose()
+            for tick in this.xy
 
-            scene.remove tick
+                tick.geometry.dispose()
+                tick.material.dispose()
 
-        this.xy = []
+                scene.remove tick
 
-    addXZ = (min = -scale, max = scale) ->
+            this.xy = []
+
+    addXZ : (min = -scale, max = scale) ->
 
         if this.xz.length is 0 and settings.getSetting "axes", "xzPlane"
 
@@ -83,18 +85,20 @@ class Ticks
             this.xz.push xTick, zTick
             scene.add xTick, zTick
 
-    removeXZ = () ->
+    removeXZ : () ->
 
-        for tick in this.xz
+        if this.xz.length isnt 0
 
-            tick.geometry.dispose()
-            tick.material.dispose()
+            for tick in this.xz
 
-            scene.remove tick
+                tick.geometry.dispose()
+                tick.material.dispose()
 
-        this.xz = []
+                scene.remove tick
 
-    addYZ = (min = -scale, max = scale) ->
+            this.xz = []
+
+    addYZ : (min = -scale, max = scale) ->
 
         if this.yz.length is 0 and settings.getSetting "axes", "yzPlane"
 
@@ -116,13 +120,15 @@ class Ticks
             this.yz.push yTick, zTick
             scene.add yTick, zTick
 
-    removeYZ = () ->
+    removeYZ : () ->
 
-        for tick in this.yz
+        if this.yz.length isnt 0
 
-            tick.geometry.dispose()
-            tick.material.dispose()
+            for tick in this.yz
 
-            scene.remove tick
+                tick.geometry.dispose()
+                tick.material.dispose()
 
-        this.yz = []
+                scene.remove tick
+
+            this.yz = []

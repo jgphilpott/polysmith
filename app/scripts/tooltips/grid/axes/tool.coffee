@@ -38,12 +38,14 @@ class Axes
 
     removeX : () ->
 
-        this.x.geometry.dispose()
-        this.x.material.dispose()
+        if this.x
 
-        scene.remove this.x
+            this.x.geometry.dispose()
+            this.x.material.dispose()
 
-        this.x = null
+            scene.remove this.x
+
+            this.x = null
 
     addY : (min = -scale, max = scale) ->
 
@@ -55,12 +57,14 @@ class Axes
 
     removeY : () ->
 
-        this.y.geometry.dispose()
-        this.y.material.dispose()
+        if this.y
 
-        scene.remove this.y
+            this.y.geometry.dispose()
+            this.y.material.dispose()
 
-        this.y = null
+            scene.remove this.y
+
+            this.y = null
 
     addZ : (min = -scale, max = scale) ->
 
@@ -72,9 +76,11 @@ class Axes
 
     removeZ : () ->
 
-        this.z.geometry.dispose()
-        this.z.material.dispose()
+        if this.z
 
-        scene.remove this.z
+            this.z.geometry.dispose()
+            this.z.material.dispose()
 
-        this.z = null
+            scene.remove this.z
+
+            this.z = null
