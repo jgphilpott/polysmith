@@ -187,90 +187,89 @@ class Settings
 
                 $(".settings-category #axes-" + setting + "").prop "checked", value
 
-                if setting is "axesCaps"
-
-                    if value then addAxesCaps() else removeAxesCaps()
-
                 if setting is "xAxis" or setting is "yAxis" or setting is "zAxis"
+
+                    if value then grid.caps.addCentroid()
+
+                    switch setting
+
+                        when "xAxis"
+
+                            if value
+
+                                grid.axes.addX()
+                                grid.caps.addX()
+
+                            else
+
+                                grid.axes.removeX()
+                                grid.caps.removeX()
+
+                                if not settings.getSetting("axes", "yAxis") and not settings.getSetting("axes", "zAxis")
+
+                                    grid.caps.removeCentroid()
+
+                        when "yAxis"
+
+                            if value
+
+                                grid.axes.addY()
+                                grid.caps.addY()
+
+                            else
+
+                                grid.axes.removeY()
+                                grid.caps.removeY()
+
+                                if not settings.getSetting("axes", "xAxis") and not settings.getSetting("axes", "zAxis")
+
+                                    grid.caps.removeCentroid()
+
+                        when "zAxis"
+
+                            if value
+
+                                grid.axes.addZ()
+                                grid.caps.addZ()
+
+                            else
+
+                                grid.axes.removeZ()
+                                grid.caps.removeZ()
+
+                                if not settings.getSetting("axes", "xAxis") and not settings.getSetting("axes", "yAxis")
+
+                                    grid.caps.removeCentroid()
+
+                else if setting is "axesCaps"
 
                     if value
 
-                        if setting is "xAxis"
+                        grid.caps.addCentroid()
 
-                            addAxisX()
-
-                            if settings.getSetting "axes", "axesCaps"
-
-                                addAxisCapsX()
-
-                            if not settings.getSetting("axes", "yAxis") and not settings.getSetting("axes", "zAxis")
-
-                                addCentroidCap()
-
-                        if setting is "yAxis"
-
-                            addAxisY()
-
-                            if settings.getSetting "axes", "axesCaps"
-
-                                addAxisCapsY()
-
-                            if not settings.getSetting("axes", "xAxis") and not settings.getSetting("axes", "zAxis")
-
-                                addCentroidCap()
-
-                        if setting is "zAxis"
-
-                            addAxisZ()
-
-                            if settings.getSetting "axes", "axesCaps"
-
-                                addAxisCapsZ()
-
-                            if not settings.getSetting("axes", "xAxis") and not settings.getSetting("axes", "yAxis")
-
-                                addCentroidCap()
+                        grid.caps.addX()
+                        grid.caps.addY()
+                        grid.caps.addZ()
 
                     else
 
-                        if setting is "xAxis"
+                        grid.caps.removeCentroid()
 
-                            removeAxisX()
-                            removeAxisCapsX()
+                        grid.caps.removeX()
+                        grid.caps.removeY()
+                        grid.caps.removeZ()
 
-                            if not settings.getSetting("axes", "yAxis") and not settings.getSetting("axes", "zAxis")
+                else if setting is "xyPlane"
 
-                                removeCentroidCap()
+                    if value then grid.ticks.addXY() else grid.ticks.removeXY()
 
-                        if setting is "yAxis"
+                else if setting is "xzPlane"
 
-                            removeAxisY()
-                            removeAxisCapsY()
+                    if value then grid.ticks.addXZ() else grid.ticks.removeXZ()
 
-                            if not settings.getSetting("axes", "xAxis") and not settings.getSetting("axes", "zAxis")
+                else if setting is "yzPlane"
 
-                                removeCentroidCap()
-
-                        if setting is "zAxis"
-
-                            removeAxisZ()
-                            removeAxisCapsZ()
-
-                            if not settings.getSetting("axes", "xAxis") and not settings.getSetting("axes", "yAxis")
-
-                                removeCentroidCap()
-
-                if setting is "xyPlane"
-
-                    if value then addPlaneXY() else removePlaneXY()
-
-                if setting is "xzPlane"
-
-                    if value then addPlaneXZ() else removePlaneXZ()
-
-                if setting is "yzPlane"
-
-                    if value then addPlaneYZ() else removePlaneYZ()
+                    if value then grid.ticks.addYZ() else grid.ticks.removeYZ()
 
                 break
 
