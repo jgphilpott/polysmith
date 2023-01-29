@@ -72,6 +72,6 @@ addPanelEvents = (panel) ->
 
     panel.css "z-index", events.zIndex
 
-    makeDragable panel
+    events.makeDragable panel
 
     return panel

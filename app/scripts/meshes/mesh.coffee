@@ -1,6 +1,6 @@
 class Mesh
 
-    constructor : (type, params = {}) ->
+    constructor: (type, params = {}) ->
 
         @type = lower type.trim()
 
@@ -226,7 +226,7 @@ class Mesh
 
         return this.mesh
 
-    save : (method) ->
+    save: (method) ->
 
         store = if client then serverStore else localStore
 
@@ -244,7 +244,7 @@ class Mesh
 
                 store.removeMesh this
 
-    morph : (key = null, value = null, save = false) ->
+    morph: (key = null, value = null, save = false) ->
 
         panel = $("#mesh." + this.uuid + "")
 
@@ -289,11 +289,11 @@ class Mesh
             events.operation.mesh = null
             events.operation.key = null
 
-    getName : () ->
+    getName: () ->
 
         return this.name
 
-    setName : (key = null, value = null, save = false) ->
+    setName: (key = null, value = null, save = false) ->
 
         if not this.getLock()
 
@@ -311,11 +311,11 @@ class Mesh
 
             if value is "" and key isnt "mesh" then meshPanelName.css("display", "none") else meshPanelName.css("display", "block")
 
-    getLock : () ->
+    getLock: () ->
 
         return this.lock
 
-    setLock : (lock, save = true) ->
+    setLock: (lock, save = true) ->
 
         this.lock = Boolean lock
 
@@ -326,7 +326,7 @@ class Mesh
 
             composer.outlinePass.visibleEdgeColor.set redThree
 
-            if this is events.operation.mesh then clearMeshOperation()
+            if this is events.operation.mesh then events.clearMeshOperation()
 
             meshPanel.find("#join.operation").attr "src", "/app/imgs/panels/ops/disabled/join.png"
             meshPanel.find("#cut.operation").attr "src", "/app/imgs/panels/ops/disabled/cut.png"
@@ -378,15 +378,15 @@ class Mesh
 
         if save then this.save "update"
 
-    toggleLock : () ->
+    toggleLock: () ->
 
         this.setLock not this.getLock()
 
-    getColor : () ->
+    getColor: () ->
 
         return this.material.color
 
-    setColor : (color, save = true) ->
+    setColor: (color, save = true) ->
 
         if not this.getLock()
 
@@ -417,11 +417,11 @@ class Mesh
 
             if save then this.save "update"
 
-    getOpacity : () ->
+    getOpacity: () ->
 
         return this.material.opacity * 100
 
-    setOpacity : (opacity, save = true) ->
+    setOpacity: (opacity, save = true) ->
 
         if not this.getLock()
 
@@ -438,27 +438,27 @@ class Mesh
 
             if save then this.save "update"
 
-    getPosition : () ->
+    getPosition: () ->
 
         return this.position
 
-    setPosition : (position) ->
+    setPosition: (position) ->
 
         this.position.x = position.x
         this.position.y = position.y
         this.position.z = position.z
 
-    getRotation : () ->
+    getRotation: () ->
 
         return this.rotation
 
-    setRotation : (rotation) ->
+    setRotation: (rotation) ->
 
         this.rotation.x = rotation.x
         this.rotation.y = rotation.y
         this.rotation.z = rotation.z
 
-    updateMetrics : () ->
+    updateMetrics: () ->
 
         this.updateMatrix()
 
@@ -472,7 +472,7 @@ class Mesh
         controls.find("#surface span").text this.geometry.surface.toFixed 2
         controls.find("#volume span").text this.geometry.volume.toFixed 2
 
-    updateParams : (type = null, key = null, value = null, save = false) ->
+    updateParams: (type = null, key = null, value = null, save = false) ->
 
         if not this.getLock()
 
@@ -567,7 +567,7 @@ class Mesh
 
             if save is true then this.save "update"
 
-    addEvents : (self = this) ->
+    addEvents: (self = this) ->
 
         events.addEventListener self, "mouseover", (event) ->
 
@@ -617,7 +617,7 @@ class Mesh
 
         events.addEventListener self, "mousedown", (event) ->
 
-            if not self.getLock() then makeDragable self, event.origDomEvent
+            if not self.getLock() then events.makeDragable self, event.origDomEvent
 
         events.addEventListener self, "click", (event) ->
 
@@ -643,7 +643,7 @@ class Mesh
 
             contextMenu "mesh", self, event.origDomEvent
 
-    removeEvents : (self = this) ->
+    removeEvents: (self = this) ->
 
         events.removeEventListener self, "mouseover"
         events.removeEventListener self, "mousemove"
@@ -654,7 +654,7 @@ class Mesh
         events.removeEventListener self, "dblclick"
         events.removeEventListener self, "contextmenu"
 
-    add : () ->
+    add: ->
 
         this.addEvents()
         this.updateMetrics()
@@ -664,7 +664,7 @@ class Mesh
         this.save "add"
         scene.add this
 
-    remove : () ->
+    remove: ->
 
         if not this.getLock()
 
@@ -673,7 +673,7 @@ class Mesh
             $("body").css "cursor", ""
             $("#canvas").css "cursor", ""
 
-            if events.operation.mesh is this then clearMeshOperation()
+            if events.operation.mesh is this then events.clearMeshOperation()
 
             updateMeshesPanel "remove", this
 

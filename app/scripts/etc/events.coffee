@@ -1,114 +1,109 @@
-addEvents = () ->
+class Events extends THREEx.DomEvents
 
-    events = new THREEx.DomEvents camera, canvas
+    constructor: ->
 
-    events.operation = mesh: null, key: null
-    events.zIndex = 1
+        super camera, canvas
 
-    $(window).on "resize", () ->
+        $(window).on "resize", =>
 
-        innerWidth = window.innerWidth
-        innerHeight = window.innerHeight
+            width = window.innerWidth
+            height = window.innerHeight
 
-        for axis in axes
+            camera.setAspect width, height
 
-            if axis.class is "stroke" then axis.material.resolution.set innerWidth, innerHeight
+            renderer.setSize width, height
+            composer.setSize width, height
 
-        renderer.setSize innerWidth, innerHeight
-        composer.setSize innerWidth, innerHeight
+            if grid.axes.x then grid.axes.x.material.resolution.set width, height
+            if grid.axes.y then grid.axes.y.material.resolution.set width, height
+            if grid.axes.z then grid.axes.z.material.resolution.set width, height
 
-        camera.setAspect innerWidth, innerHeight
+        $("body").on "click contextmenu", =>
 
-    $("body").click ->
+            help.setActive false
 
-        help.setActive false
+        $("body").keypress (event) =>
 
-    $("body").contextmenu ->
+            # Ctrl + Enter
+            if event.ctrlKey and event.key is "Enter"
 
-        help.setActive false
+                event.stopPropagation()
+                exporter.exportFile "stl"
 
-    $("body").keypress (event) ->
+            # Shift + Enter
+            else if event.shiftKey and event.key is "Enter"
 
-        # Ctrl + Enter
-        if event.ctrlKey and (event.keyCode is 13 or event.keyCode is 10)
+                event.stopPropagation()
+                exporter.exportFile "obj"
 
-            event.preventDefault()
-            event.stopPropagation()
+        $("#canvas").mousedown (event) =>
 
-            exporter.exportFile "stl"
+            window.getSelection().removeAllRanges()
 
-        # Shift + Enter
-        else if event.shiftKey and event.keyCode is 13
+            for input in $("input, [contenteditable]")
 
-            event.preventDefault()
-            event.stopPropagation()
+                if $(input).is ":focus"
 
-            exporter.exportFile "obj"
+                    $(input).blur()
 
-    $("#navbar #title span").on("keypress keydown keyup", (event) -> event.stopPropagation()).blur (event) ->
+        $("#canvas").click (event) =>
 
-        text = $(this)[0].innerText.replace(/[^a-zA-Z0-9-_ ]/g, "").trim()
-        title = if text then text else upper data.title
+            if not camera.getDragged()
 
-        settings.setSetting "ui", "title", title
+                if this.operation.key then this.clearMeshOperation()
+                if tooltips.getSelected() then tooltips.setSelected null
 
-        $(this).text title
+        $("#navbar #title span").on("keypress keydown keyup", (event) => event.stopPropagation()).blur (event) =>
 
-    $("#canvas").mousedown (event) ->
+            text = $(event.target)[0].innerText.replace(/[^a-zA-Z0-9-_ ]/g, "").trim()
+            title = if text then text else upper data.title
 
-        window.getSelection().removeAllRanges()
+            settings.setSetting "ui", "title", title
 
-        for input in $("input, [contenteditable]")
+            $(event.target).text title
 
-            if $(input).is ":focus" then $(input).blur()
+        $("#navbar, #forkme, #help").mouseenter (event) =>
 
-    $("#canvas").click (event) ->
+            composer.outlinePass.selectedObjects = []
 
-        if not camera.dragged
+            $("#metabox").css "display", "none"
 
-            if events.operation.key then clearMeshOperation()
-            if tooltips.getSelected() then tooltips.setSelected null
+        $("#navbar, #forkme, #help").mouseleave (event) =>
 
-    $("#navbar, #forkme, #metabox, #help").mouseenter((event) ->
+            $("#metabox").css "display", "block"
 
-        composer.outlinePass.selectedObjects = []
+        @operation = mesh: null, key: null
 
-        $("#metabox").css "display", "none"
+        @zIndex = 1
 
-    ).mouseleave (event) ->
+    clearMeshOperation: ->
 
-        $("#metabox").css "display", "block"
+        operationIcons = $("#mesh.panel img.operation")
 
-    return events
+        for icon in operationIcons
 
-clearMeshOperation = () ->
+            if not $(icon).hasClass "disabled"
 
-    operationIcons = $ "#mesh.panel img.operation"
+                $(icon).attr "src", "/app/imgs/panels/ops/default/" + icon.id + ".png"
 
-    for icon in operationIcons.toArray()
+        $("#canvas").css "cursor", ""
 
-        if not $(icon).hasClass "disabled"
+        this.operation.mesh = null
+        this.operation.key = null
 
-            $(icon).attr "src", "/app/imgs/panels/ops/default/" + icon.id + ".png"
+    makeDragable: (element, origEvent = null) ->
 
-    $("#canvas").css "cursor", ""
+        xOffset = 0
+        yOffset = 0
 
-    events.operation.mesh = null
-    events.operation.key = null
+        dragged = null
 
-makeDragable = (element, origEvent = null) ->
+        max = scale * 3
+        min = -scale * 3
 
-    xOffset = 0
-    yOffset = 0
-    dragged = null
-    max = scale * 3
-    min = - (scale * 3)
+        start = (event) =>
 
-    start = (event) ->
-
-        if element.type is "Mesh"
-
-            if not element.getLock()
+            if element.type is "Mesh" and not element.getLock()
 
                 coordinates = d3$d2 element.position.x, element.position.y, element.position.z
 
@@ -117,41 +112,39 @@ makeDragable = (element, origEvent = null) ->
 
                 $("#canvas").css "cursor", "grabbing"
 
-        else
+            else
 
-            event.stopPropagation()
+                event.stopPropagation()
 
-            $("body").css "cursor", "grabbing"
+                if element.hasClass "panel"
 
-            if element.hasClass "panel"
+                    transform = element.css("transform").replace(/[{()}]/g, "").replace(/[a-zA-Z]/g, "").split(",")
 
-                transform = element.css("transform").replace(/[{()}]/g, "").replace(/[a-zA-Z]/g, "").split(",")
+                    xOffset = event.clientX - element.position().left + Number transform[4]
+                    yOffset = event.clientY - element.position().top + Number transform[5]
 
-                xOffset = event.clientX - element.position().left + Number transform[4]
-                yOffset = event.clientY - element.position().top + Number transform[5]
+                else if element.hasClass "shape"
 
-            else if element.hasClass "shape"
+                    $("body").append "<img class='ghost-shape' src='" + element.attr("src") + "'>"
 
-                $("body").append "<img class='ghost-shape' src='" + element.attr("src") + "'>"
+                    $(".ghost-shape").css "z-index", this.zIndex + 1
 
-                $(".ghost-shape").css "z-index", events.zIndex + 1
+                    xOffset = event.clientX - element.offset().left
+                    yOffset = event.clientY - element.offset().top
 
-                xOffset = event.clientX - element.offset().left
-                yOffset = event.clientY - element.offset().top
+                $("body").css "cursor", "grabbing"
 
-        document.onmousemove = drag
-        document.onmouseup = stop
+            document.onmousemove = drag
+            document.onmouseup = stop
 
-    drag = (event) ->
+        drag = (event) =>
 
-        dragged = true
+            dragged = true
 
-        eventX = event.clientX - xOffset
-        eventY = event.clientY - yOffset
+            eventX = event.clientX - xOffset
+            eventY = event.clientY - yOffset
 
-        if element.type is "Mesh"
-
-            if not element.getLock()
+            if element.type is "Mesh" and not element.getLock()
 
                 $("#canvas").css "cursor", "grabbing"
 
@@ -221,28 +214,26 @@ makeDragable = (element, origEvent = null) ->
                 element.position.x = coordinates.x
                 element.position.y = coordinates.y
 
-        else
+            else
 
-            event.stopPropagation()
+                event.stopPropagation()
 
-            if element.hasClass "panel"
+                if element.hasClass "panel"
 
-                element.css "cursor", "grabbing"
-                element.find("*").css "cursor", "grabbing"
+                    element.css "cursor", "grabbing"
+                    element.find("*").css "cursor", "grabbing"
 
-                element.css top: eventY, left: eventX
+                    element.css top: eventY, left: eventX
 
-            else if element.hasClass "shape"
+                else if element.hasClass "shape"
 
-                $(".ghost-shape").css "cursor", "grabbing"
+                    $(".ghost-shape").css "cursor", "grabbing"
 
-                $(".ghost-shape").css top: eventY, left: eventX
+                    $(".ghost-shape").css top: eventY, left: eventX
 
-    stop = (event) ->
+        stop = (event) =>
 
-        if element.type is "Mesh"
-
-            if not element.getLock()
+            if element.type is "Mesh" and not element.getLock()
 
                 if settings.getSetting "tooltips", "guidelines"
 
@@ -263,45 +254,45 @@ makeDragable = (element, origEvent = null) ->
 
                 tooltips.distanceLines = []
 
-        else
+            else
 
-            event.stopPropagation()
+                event.stopPropagation()
 
-            $("body").css "cursor", ""
+                $("body").css "cursor", ""
 
-            if element.hasClass "panel"
+                if element.hasClass "panel"
 
-                element.css "cursor", ""
-                element.find("*").css "cursor", ""
+                    element.css "cursor", ""
+                    element.find("*").css "cursor", ""
 
-            else if element.hasClass "shape"
+                else if element.hasClass "shape"
 
-                ghost = $ ".ghost-shape"
+                    ghost = $ ".ghost-shape"
 
-                if dragged
+                    if dragged
 
-                    coordinates = d2$d3 ghost.offset().left + (ghost.width() / 2), ghost.offset().top + (ghost.height() / 2), 0
+                        coordinates = d2$d3 ghost.offset().left + (ghost.width() / 2), ghost.offset().top + (ghost.height() / 2), 0
 
-                    x = if coordinates.x < min then min else if coordinates.x > max then max else coordinates.x
-                    y = if coordinates.y < min then min else if coordinates.y > max then max else coordinates.y
-                    z = if coordinates.z < min then min else if coordinates.z > max then max else coordinates.z
+                        x = if coordinates.x < min then min else if coordinates.x > max then max else coordinates.x
+                        y = if coordinates.y < min then min else if coordinates.y > max then max else coordinates.y
+                        z = if coordinates.z < min then min else if coordinates.z > max then max else coordinates.z
 
-                    mesh = new Mesh element.attr("id"), position: {x: x, y: y, z: z}
+                        mesh = new Mesh element.attr("id"), position: {x: x, y: y, z: z}
 
-                    if element.attr("id") isnt "text" and element.attr("id") isnt "image"
+                        if element.attr("id") isnt "text" and element.attr("id") isnt "image"
 
-                        composer.outlinePass.visibleEdgeColor.set blackThree
-                        composer.outlinePass.selectedObjects = [mesh]
+                            composer.outlinePass.visibleEdgeColor.set blackThree
+                            composer.outlinePass.selectedObjects = [mesh]
 
-                        $("#canvas").css "cursor", "grab"
+                            $("#canvas").css "cursor", "grab"
 
-                    mesh.add()
+                        mesh.add()
 
-                ghost.remove()
+                    ghost.remove()
 
-        document.onmousemove = null
-        document.onmouseup = null
+            document.onmousemove = null
+            document.onmouseup = null
 
-        dragged = null
+            dragged = null
 
-    if element.type isnt "Mesh" then element.mousedown start else if not events.operation.key then start() else null
+        if element.type isnt "Mesh" then element.mousedown start else if not this.operation.key then start() else null

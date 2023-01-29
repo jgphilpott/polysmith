@@ -35,7 +35,7 @@ addShortcutsPanel = ->
 
     panel.find("img.shape").toArray().forEach (shape) ->
 
-        makeDragable $(shape)
+        events.makeDragable $(shape)
 
         $(shape).clickSingleDouble (event) ->
 
