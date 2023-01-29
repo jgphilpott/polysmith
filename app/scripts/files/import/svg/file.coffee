@@ -2,11 +2,11 @@
 
 class SVGLoader extends THREE.SVGLoader
 
-    constructor : () ->
+    constructor: ->
 
         super()
 
-    import : (file) ->
+    import: (file) ->
 
         shapes = []
 

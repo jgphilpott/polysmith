@@ -1,12 +1,12 @@
 class Cone extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "cone", params
 
 class POLY.ConeMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

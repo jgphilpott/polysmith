@@ -2,13 +2,13 @@
 
 class PentagonalPrismGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "pentagonal-prism", params
 
 class POLY.PentagonalPrismBufferGeometry extends THREE.CylinderBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         length = params.length ?= 10
 

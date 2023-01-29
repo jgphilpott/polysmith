@@ -2,13 +2,13 @@
 
 class IcosahedronGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "icosahedron", params
 
 class POLY.IcosahedronBufferGeometry extends THREE.IcosahedronBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         radius = params.radius ?= 5
         detail = params.detail ?= 0

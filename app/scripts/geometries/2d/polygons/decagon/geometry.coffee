@@ -1,12 +1,12 @@
 class DecagonGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "decagon", params
 
 class POLY.DecagonBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         angle = 360 / 10
         radius = params.radius ?= 5

@@ -1,12 +1,12 @@
 class Knot extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "knot", params
 
 class POLY.KnotMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

@@ -1,12 +1,12 @@
 class Text extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "text", params
 
 class POLY.TextMesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
         params.mesh ?= new THREE.Mesh()

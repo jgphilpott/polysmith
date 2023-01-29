@@ -2,13 +2,13 @@
 
 class HexagonalPyramidGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "hexagonal-pyramid", params
 
 class POLY.HexagonalPyramidBufferGeometry extends THREE.ConeBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         radius = params.radius ?= 5
         height = params.height ?= 10

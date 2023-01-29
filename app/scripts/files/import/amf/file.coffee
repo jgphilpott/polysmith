@@ -2,10 +2,10 @@
 
 class AMFLoader extends THREE.AMFLoader
 
-    constructor : () ->
+    constructor: ->
 
         super()
 
-    import : (file) ->
+    import: (file) ->
 
         return [file]

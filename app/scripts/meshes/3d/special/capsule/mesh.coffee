@@ -1,12 +1,12 @@
 class Capsule extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "capsule", params
 
 class POLY.CapsuleMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

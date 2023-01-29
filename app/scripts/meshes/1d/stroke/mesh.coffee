@@ -1,12 +1,12 @@
 class Stroke extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "stroke", params
 
 class POLY.StrokeMesh extends LineThickMesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "stroke"
 

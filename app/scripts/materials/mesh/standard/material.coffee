@@ -2,13 +2,13 @@
 
 class StandardMeshMaterial extends MeshMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "standard", params
 
 class POLY.StandardMeshMaterial extends THREE.MeshStandardMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         map = params.map ?= null
         color = params.color ?= blackThree

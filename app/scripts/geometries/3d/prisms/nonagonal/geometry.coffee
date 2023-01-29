@@ -2,13 +2,13 @@
 
 class NonagonalPrismGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "nonagonal-prism", params
 
 class POLY.NonagonalPrismBufferGeometry extends THREE.CylinderBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         length = params.length ?= 10
 

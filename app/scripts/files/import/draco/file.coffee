@@ -2,10 +2,10 @@
 
 class DRACOLoader extends THREE.DRACOLoader
 
-    constructor : () ->
+    constructor: ->
 
         super()
 
-    import : (file) ->
+    import: (file) ->
 
         return [file]

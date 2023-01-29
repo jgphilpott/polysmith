@@ -2,7 +2,7 @@
 
 class GLTFExporter extends THREE.GLTFExporter
 
-    constructor : () ->
+    constructor: ->
 
         super()
 

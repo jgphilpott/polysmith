@@ -1,12 +1,12 @@
 class Triangle extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "triangle", params
 
 class POLY.TriangleMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

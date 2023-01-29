@@ -1,6 +1,6 @@
 class Settings
 
-    constructor : () ->
+    constructor: ->
 
         localSettings = localRead "settings"
 
@@ -89,7 +89,7 @@ class Settings
 
         localStore.write "settings", this.settings
 
-    getSetting : (category, setting) ->
+    getSetting: (category, setting) ->
 
         try
 
@@ -99,7 +99,7 @@ class Settings
 
             return undefined
 
-    setSetting : (category, setting, value) ->
+    setSetting: (category, setting, value) ->
 
         try
 
@@ -121,7 +121,7 @@ class Settings
 
             return this.updateFailed category: category, setting: setting, value: value
 
-    updateSuccess : (update) ->
+    updateSuccess: (update) ->
 
         category = update.category
         setting = update.setting
@@ -299,7 +299,7 @@ class Settings
 
         return true
 
-    updateFailed : (update) ->
+    updateFailed: (update) ->
 
         category = update.category
         setting = update.setting

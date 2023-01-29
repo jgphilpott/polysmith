@@ -1,12 +1,12 @@
 class HexagonalPyramid extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "hexagonal-pyramid", params
 
 class POLY.HexagonalPyramidMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

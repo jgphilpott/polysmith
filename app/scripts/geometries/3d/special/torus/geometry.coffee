@@ -2,13 +2,13 @@
 
 class TorusGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "torus", params
 
 class POLY.TorusBufferGeometry extends THREE.TorusBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         radius = params.radius ?= 5
         thickness = params.thickness ?= 1

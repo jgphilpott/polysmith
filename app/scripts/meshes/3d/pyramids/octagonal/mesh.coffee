@@ -1,12 +1,12 @@
 class OctagonalPyramid extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "octagonal-pyramid", params
 
 class POLY.OctagonalPyramidMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

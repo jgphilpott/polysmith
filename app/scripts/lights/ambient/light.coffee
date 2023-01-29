@@ -2,6 +2,6 @@
 
 class AmbientLight extends THREE.AmbientLight
 
-    constructor : (intensity = 1, color = whiteThree) ->
+    constructor: (intensity = 1, color = whiteThree) ->
 
         super color, intensity

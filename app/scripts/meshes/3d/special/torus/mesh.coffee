@@ -1,12 +1,12 @@
 class Torus extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "torus", params
 
 class POLY.TorusMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

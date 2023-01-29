@@ -1,10 +1,10 @@
 class DragControls
 
-    constructor : () ->
+    constructor: ->
 
         @active = null
 
-    add : () ->
+    add: ->
 
         if not this.active
 
@@ -94,7 +94,7 @@ class DragControls
 
             $("#canvas").mousedown start
 
-    remove : () ->
+    remove: ->
 
         if this.active
 

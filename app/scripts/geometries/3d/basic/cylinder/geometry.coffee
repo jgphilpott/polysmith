@@ -2,13 +2,13 @@
 
 class CylinderGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "cylinder", params
 
 class POLY.CylinderBufferGeometry extends THREE.CylinderBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         length = params.length ?= 10
 

@@ -2,6 +2,6 @@
 
 class DirectionalLight extends THREE.DirectionalLight
 
-    constructor : (intensity = 1, color = whiteThree) ->
+    constructor: (intensity = 1, color = whiteThree) ->
 
         super color, intensity

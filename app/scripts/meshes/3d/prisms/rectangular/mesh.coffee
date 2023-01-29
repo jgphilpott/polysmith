@@ -1,12 +1,12 @@
 class RectangularPrism extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "rectangular-prism", params
 
 class POLY.RectangularPrismMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

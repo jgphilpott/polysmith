@@ -1,6 +1,6 @@
 class Controls
 
-    constructor : () ->
+    constructor: ->
 
         @active = null
 
@@ -8,7 +8,7 @@ class Controls
         @fly = new FlyControls()
         @zoom = new ZoomControls()
 
-    add : () ->
+    add: ->
 
         if not this.active
 
@@ -18,7 +18,7 @@ class Controls
             this.fly.add()
             this.zoom.add()
 
-    remove : () ->
+    remove: ->
 
         if this.active
 

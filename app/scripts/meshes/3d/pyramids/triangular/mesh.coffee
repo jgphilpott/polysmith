@@ -1,12 +1,12 @@
 class TriangularPyramid extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "triangular-pyramid", params
 
 class POLY.TriangularPyramidMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

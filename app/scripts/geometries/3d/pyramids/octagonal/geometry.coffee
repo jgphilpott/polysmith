@@ -2,13 +2,13 @@
 
 class OctagonalPyramidGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "octagonal-pyramid", params
 
 class POLY.OctagonalPyramidBufferGeometry extends THREE.ConeBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         radius = params.radius ?= 5
         height = params.height ?= 10

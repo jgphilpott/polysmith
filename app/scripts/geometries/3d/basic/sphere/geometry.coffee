@@ -2,13 +2,13 @@
 
 class SphereGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "sphere", params
 
 class POLY.SphereBufferGeometry extends THREE.SphereBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         radius = params.radius ?= 5
 

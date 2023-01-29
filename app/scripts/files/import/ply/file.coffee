@@ -2,10 +2,10 @@
 
 class PLYLoader extends THREE.PLYLoader
 
-    constructor : () ->
+    constructor: ->
 
         super()
 
-    import : (file) ->
+    import: (file) ->
 
         return [new THREE.Mesh file, new MeshMaterial "normal"]

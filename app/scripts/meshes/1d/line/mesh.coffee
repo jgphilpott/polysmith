@@ -1,12 +1,12 @@
 class Line extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "line", params
 
 class POLY.LineMesh extends THREE.Line
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "solid"
 

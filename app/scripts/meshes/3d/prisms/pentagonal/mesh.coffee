@@ -1,12 +1,12 @@
 class PentagonalPrism extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "pentagonal-prism", params
 
 class POLY.PentagonalPrismMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

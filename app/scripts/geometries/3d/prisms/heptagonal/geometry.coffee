@@ -2,13 +2,13 @@
 
 class HeptagonalPrismGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "heptagonal-prism", params
 
 class POLY.HeptagonalPrismBufferGeometry extends THREE.CylinderBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         length = params.length ?= 10
 

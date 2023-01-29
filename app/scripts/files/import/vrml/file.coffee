@@ -2,10 +2,10 @@
 
 class VRMLLoader extends THREE.VRMLLoader
 
-    constructor : () ->
+    constructor: ->
 
         super()
 
-    import : (file) ->
+    import: (file) ->
 
         return [file]

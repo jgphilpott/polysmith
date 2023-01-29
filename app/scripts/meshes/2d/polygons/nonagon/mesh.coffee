@@ -1,12 +1,12 @@
 class Nonagon extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "nonagon", params
 
 class POLY.NonagonMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

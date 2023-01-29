@@ -2,13 +2,13 @@
 
 class TriangularPrismGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "triangular-prism", params
 
 class POLY.TriangularPrismBufferGeometry extends THREE.CylinderBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         length = params.length ?= 10
 

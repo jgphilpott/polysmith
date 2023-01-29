@@ -2,13 +2,13 @@
 
 class DepthMeshMaterial extends MeshMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "depth", params
 
 class POLY.DepthMeshMaterial extends THREE.MeshDepthMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         side = params.side ?= THREE.DoubleSide
 

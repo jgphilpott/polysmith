@@ -1,12 +1,12 @@
 class PentagonGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "pentagon", params
 
 class POLY.PentagonBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         angle = 360 / 5
         radius = params.radius ?= 5

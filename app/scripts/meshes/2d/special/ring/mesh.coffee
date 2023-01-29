@@ -1,12 +1,12 @@
 class Ring extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "ring", params
 
 class POLY.RingMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

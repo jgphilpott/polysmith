@@ -2,13 +2,13 @@
 
 class PentagonalPyramidGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "pentagonal-pyramid", params
 
 class POLY.PentagonalPyramidBufferGeometry extends THREE.ConeBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         radius = params.radius ?= 5
         height = params.height ?= 10

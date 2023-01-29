@@ -1,12 +1,12 @@
 class HeptagonalPrism extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "heptagonal-prism", params
 
 class POLY.HeptagonalPrismMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

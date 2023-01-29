@@ -1,12 +1,12 @@
 class Sphere extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "sphere", params
 
 class POLY.SphereMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

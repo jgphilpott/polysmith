@@ -1,12 +1,12 @@
 class CylindricalPrism extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "cylindrical-prism", params
 
 class POLY.CylindricalPrismMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

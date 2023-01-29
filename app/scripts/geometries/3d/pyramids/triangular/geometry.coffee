@@ -2,13 +2,13 @@
 
 class TriangularPyramidGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "triangular-pyramid", params
 
 class POLY.TriangularPyramidBufferGeometry extends THREE.ConeBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         radius = params.radius ?= 5
         height = params.height ?= 10

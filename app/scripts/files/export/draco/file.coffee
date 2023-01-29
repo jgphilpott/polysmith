@@ -2,7 +2,7 @@
 
 class DRACOExporter extends THREE.DRACOExporter
 
-    constructor : () ->
+    constructor: ->
 
         super()
 

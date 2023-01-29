@@ -1,12 +1,12 @@
 class PentagonalPyramid extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "pentagonal-pyramid", params
 
 class POLY.PentagonalPyramidMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

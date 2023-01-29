@@ -2,12 +2,12 @@
 
 class Exporter
 
-    constructor : () ->
+    constructor: ->
 
         @exporter = null
         @file = null
 
-    exportFile : (type = "") ->
+    exportFile: (type = "") ->
 
         type = lower type.trim()
 
@@ -56,7 +56,7 @@ class Exporter
         this.exporter = null
         this.file = null
 
-    exportFiles : (types = []) ->
+    exportFiles: (types = []) ->
 
         for type in types
 

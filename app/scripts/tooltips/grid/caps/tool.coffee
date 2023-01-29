@@ -1,6 +1,6 @@
 class Caps
 
-    constructor : () ->
+    constructor: ->
 
         @active = null
 
@@ -15,7 +15,7 @@ class Caps
         @zMin = null
         @zMax = null
 
-    add : (min = -scale, max = scale) ->
+    add: (min = -scale, max = scale) ->
 
         if not this.active
 
@@ -27,7 +27,7 @@ class Caps
             this.addY min, max
             this.addZ min, max
 
-    remove : () ->
+    remove: ->
 
         if this.active
 
@@ -39,7 +39,7 @@ class Caps
             this.removeY()
             this.removeZ()
 
-    addCentroid : () ->
+    addCentroid: ->
 
         if settings.getSetting("axes", "xAxis") or settings.getSetting("axes", "yAxis") or settings.getSetting("axes", "zAxis")
 
@@ -51,7 +51,7 @@ class Caps
 
                 scene.add this.centroid
 
-    removeCentroid : () ->
+    removeCentroid: ->
 
         if this.centroid
 
@@ -64,7 +64,7 @@ class Caps
 
             this.centroid = null
 
-    addX : (min = -scale, max = scale) ->
+    addX: (min = -scale, max = scale) ->
 
         if settings.getSetting "axes", "xAxis"
 
@@ -77,7 +77,7 @@ class Caps
 
                 scene.add this.xMin, this.xMax
 
-    removeX : () ->
+    removeX: ->
 
         if this.xMin and this.xMax
 
@@ -90,7 +90,7 @@ class Caps
 
             this.xMin = null; this.xMax = null
 
-    addY : (min = -scale, max = scale) ->
+    addY: (min = -scale, max = scale) ->
 
         if settings.getSetting "axes", "yAxis"
 
@@ -103,7 +103,7 @@ class Caps
 
                 scene.add this.yMin, this.yMax
 
-    removeY : () ->
+    removeY: ->
 
         if this.yMin and this.yMax
 
@@ -116,7 +116,7 @@ class Caps
 
             this.yMin = null; this.yMax = null
 
-    addZ : (min = -scale, max = scale) ->
+    addZ: (min = -scale, max = scale) ->
 
         if settings.getSetting "axes", "zAxis"
 
@@ -129,7 +129,7 @@ class Caps
 
                 scene.add this.zMin, this.zMax
 
-    removeZ : () ->
+    removeZ: ->
 
         if this.zMin and this.zMax
 
@@ -142,7 +142,7 @@ class Caps
 
             this.zMin = null; this.zMax = null
 
-    addEvents : (cap) ->
+    addEvents: (cap) ->
 
         events.addEventListener cap, "mouseover", (event) ->
 
@@ -174,7 +174,7 @@ class Caps
 
             contextMenu "axisCap", cap, event.origDomEvent
 
-    removeEvents : (cap) ->
+    removeEvents: (cap) ->
 
         events.removeEventListener cap, "mouseover"
         events.removeEventListener cap, "mouseout"

@@ -2,13 +2,13 @@
 
 class DashedLineMaterial extends LineMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "dashed", params
 
 class POLY.DashedLineMaterial extends THREE.LineDashedMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         color = params.color ?= blackThree
         linewidth = params.linewidth ?= 1

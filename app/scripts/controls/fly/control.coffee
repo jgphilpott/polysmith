@@ -1,10 +1,10 @@
 class FlyControls
 
-    constructor : () ->
+    constructor: ->
 
         @active = null
 
-    add : () ->
+    add: ->
 
         if not this.active
 
@@ -170,7 +170,7 @@ class FlyControls
 
                     camera.setTarget camera.getTarget()
 
-    remove : () ->
+    remove: ->
 
         if this.active
 

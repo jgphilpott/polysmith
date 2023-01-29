@@ -1,12 +1,12 @@
 class TriangularPrism extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "triangular-prism", params
 
 class POLY.TriangularPrismMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

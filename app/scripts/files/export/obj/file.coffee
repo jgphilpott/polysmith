@@ -2,7 +2,7 @@
 
 class OBJExporter extends THREE.OBJExporter
 
-    constructor : () ->
+    constructor: ->
 
         super()
 

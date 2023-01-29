@@ -2,7 +2,7 @@
 
 class Geometry
 
-    constructor : (type, params = {}) ->
+    constructor: (type, params = {}) ->
 
         @type = lower type.trim()
 
@@ -215,15 +215,15 @@ class Geometry
 
         return this.geometry
 
-    getBuffer : () ->
+    getBuffer: ->
 
         return this.isBufferGeometry
 
-    setBuffer : (buffer) ->
+    setBuffer: (buffer) ->
 
         this.isBufferGeometry = buffer
 
-    fromBuffer : () ->
+    fromBuffer: ->
 
         if this.getBuffer()
 
@@ -233,7 +233,7 @@ class Geometry
 
             return this
 
-    toBuffer : () ->
+    toBuffer: ->
 
         if not this.getBuffer()
 
@@ -243,27 +243,27 @@ class Geometry
 
             return this
 
-    getBoundingBox : () ->
+    getBoundingBox: ->
 
         return this.boundingBox
 
-    setBoundingBox : (box) ->
+    setBoundingBox: (box) ->
 
         this.computeBoundingBox()
 
-    getBoundingSphere : () ->
+    getBoundingSphere: ->
 
         return this.boundingSphere
 
-    setBoundingSphere : (sphere) ->
+    setBoundingSphere: (sphere) ->
 
         this.computeBoundingSphere()
 
-    getSurface : () ->
+    getSurface: ->
 
         return this.surface
 
-    setSurface : (surface) -> # Credit: https://stackoverflow.com/a/50937272/1544937
+    setSurface: (surface) -> # Credit: https://stackoverflow.com/a/50937272/1544937
 
         surface = 0
 
@@ -283,11 +283,11 @@ class Geometry
 
         this.surface = surface
 
-    getVolume : () ->
+    getVolume: ->
 
         return this.volume
 
-    setVolume : (volume) -> # Credit: https://discourse.threejs.org/t/volume-of-three-buffergeometry/5109
+    setVolume: (volume) -> # Credit: https://discourse.threejs.org/t/volume-of-three-buffergeometry/5109
 
         volume = 0
 

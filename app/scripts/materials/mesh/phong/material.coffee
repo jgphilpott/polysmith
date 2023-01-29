@@ -2,13 +2,13 @@
 
 class PhongMeshMaterial extends MeshMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "phong", params
 
 class POLY.PhongMeshMaterial extends THREE.MeshPhongMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         map = params.map ?= null
         color = params.color ?= blackThree

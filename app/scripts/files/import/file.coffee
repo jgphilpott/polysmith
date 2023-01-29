@@ -2,11 +2,11 @@
 
 class Importer
 
-    constructor : () ->
+    constructor: ->
 
         @importer = null
 
-    importFile : (type = "", path = "") ->
+    importFile: (type = "", path = "") ->
 
         type = lower type.trim()
 
@@ -76,7 +76,7 @@ class Importer
 
         this.importer = null
 
-    importFiles : (input) ->
+    importFiles: (input) ->
 
         if input.files
 

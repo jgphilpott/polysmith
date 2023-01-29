@@ -2,10 +2,10 @@
 
 class GLTFLoader extends THREE.GLTFLoader
 
-    constructor : () ->
+    constructor: ->
 
         super()
 
-    import : (file) ->
+    import: (file) ->
 
         return [file]

@@ -2,13 +2,13 @@
 
 class BoxGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "box", params
 
 class POLY.BoxBufferGeometry extends THREE.BoxBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         length = params.length ?= 10
         width = params.width ?= 10

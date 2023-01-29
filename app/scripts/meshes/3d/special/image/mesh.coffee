@@ -1,12 +1,12 @@
 class Image extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "image", params
 
 class POLY.ImageMesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
         params.mesh ?= new THREE.Mesh()

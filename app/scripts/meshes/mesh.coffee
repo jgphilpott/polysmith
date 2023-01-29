@@ -289,7 +289,7 @@ class Mesh
             events.operation.mesh = null
             events.operation.key = null
 
-    getName: () ->
+    getName: ->
 
         return this.name
 
@@ -311,7 +311,7 @@ class Mesh
 
             if value is "" and key isnt "mesh" then meshPanelName.css("display", "none") else meshPanelName.css("display", "block")
 
-    getLock: () ->
+    getLock: ->
 
         return this.lock
 
@@ -378,11 +378,11 @@ class Mesh
 
         if save then this.save "update"
 
-    toggleLock: () ->
+    toggleLock: ->
 
         this.setLock not this.getLock()
 
-    getColor: () ->
+    getColor: ->
 
         return this.material.color
 
@@ -417,7 +417,7 @@ class Mesh
 
             if save then this.save "update"
 
-    getOpacity: () ->
+    getOpacity: ->
 
         return this.material.opacity * 100
 
@@ -438,7 +438,7 @@ class Mesh
 
             if save then this.save "update"
 
-    getPosition: () ->
+    getPosition: ->
 
         return this.position
 
@@ -448,7 +448,7 @@ class Mesh
         this.position.y = position.y
         this.position.z = position.z
 
-    getRotation: () ->
+    getRotation: ->
 
         return this.rotation
 
@@ -458,7 +458,7 @@ class Mesh
         this.rotation.y = rotation.y
         this.rotation.z = rotation.z
 
-    updateMetrics: () ->
+    updateMetrics: ->
 
         this.updateMatrix()
 

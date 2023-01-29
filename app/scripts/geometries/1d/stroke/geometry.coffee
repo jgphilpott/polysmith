@@ -1,12 +1,12 @@
 class StrokeGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "stroke", params
 
 class POLY.StrokeBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         vertices = params.vertices ?= [[10, 10, 10], [-10, -10, -10]]
 

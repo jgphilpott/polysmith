@@ -1,14 +1,14 @@
 class LocalStorage
 
-    constructor : () ->
+    constructor: ->
 
         return
 
-    keys : () ->
+    keys: ->
 
         return localKeys()
 
-    write : (key, value) ->
+    write: (key, value) ->
 
         result = localWrite key, value
 
@@ -22,7 +22,7 @@ class LocalStorage
 
             return value
 
-    read : (key) ->
+    read: (key) ->
 
         result = localRead key
 
@@ -36,7 +36,7 @@ class LocalStorage
 
             return result
 
-    delete : (key) ->
+    delete: (key) ->
 
         result = localDelete key
 
@@ -50,11 +50,11 @@ class LocalStorage
 
             return key
 
-    dump : () ->
+    dump: ->
 
         return localDump()
 
-    loadMeshes : () ->
+    loadMeshes: ->
 
         meshes = this.read "meshes"
 
@@ -74,7 +74,7 @@ class LocalStorage
 
                 mesh.add()
 
-    addMesh : (mesh) ->
+    addMesh: (mesh) ->
 
         mesh = serializeMesh mesh
         meshes = this.read "meshes"
@@ -85,7 +85,7 @@ class LocalStorage
 
             this.write "meshes", meshes
 
-    updateMesh : (mesh) ->
+    updateMesh: (mesh) ->
 
         mesh = serializeMesh mesh
         meshes = this.read "meshes"
@@ -98,7 +98,7 @@ class LocalStorage
 
             this.write "meshes", meshes
 
-    removeMesh : (mesh) ->
+    removeMesh: (mesh) ->
 
         mesh = serializeMesh mesh
         meshes = this.read "meshes"

@@ -2,13 +2,13 @@
 
 class NonagonalPyramidGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "nonagonal-pyramid", params
 
 class POLY.NonagonalPyramidBufferGeometry extends THREE.ConeBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         radius = params.radius ?= 5
         height = params.height ?= 10

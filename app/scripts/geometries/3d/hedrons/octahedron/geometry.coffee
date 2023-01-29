@@ -2,13 +2,13 @@
 
 class OctahedronGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "octahedron", params
 
 class POLY.OctahedronBufferGeometry extends THREE.OctahedronBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         radius = params.radius ?= 5
         detail = params.detail ?= 0

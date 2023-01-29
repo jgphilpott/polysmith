@@ -1,12 +1,12 @@
 class Box extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "box", params
 
 class POLY.BoxMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

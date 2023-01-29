@@ -2,13 +2,13 @@
 
 class TextGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "text", params
 
 class POLY.TextBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         mesh = params.mesh
 

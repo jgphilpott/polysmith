@@ -2,13 +2,13 @@
 
 class StrokeLineMaterial extends LineMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "stroke", params
 
 class POLY.StrokeLineMaterial extends LineThickMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         color = params.color ?= blackThree
         linewidth = params.linewidth ?= 1

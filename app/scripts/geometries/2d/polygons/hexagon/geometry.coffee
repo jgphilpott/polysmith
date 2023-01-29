@@ -1,12 +1,12 @@
 class HexagonGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "hexagon", params
 
 class POLY.HexagonBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         angle = 360 / 6
         radius = params.radius ?= 5

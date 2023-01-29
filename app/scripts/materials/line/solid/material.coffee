@@ -2,13 +2,13 @@
 
 class SolidLineMaterial extends LineMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "solid", params
 
 class POLY.SolidLineMaterial extends THREE.LineBasicMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         color = params.color ?= blackThree
         linewidth = params.linewidth ?= 1

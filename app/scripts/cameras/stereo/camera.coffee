@@ -2,6 +2,6 @@
 
 class StereoCamera extends THREE.StereoCamera
 
-    constructor : () ->
+    constructor: ->
 
         super()

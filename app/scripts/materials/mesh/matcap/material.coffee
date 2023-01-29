@@ -2,13 +2,13 @@
 
 class MatcapMeshMaterial extends MeshMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "matcap", params
 
 class POLY.MatcapMeshMaterial extends THREE.MeshMatcapMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         map = params.map ?= null
         color = params.color ?= blackThree

@@ -1,12 +1,12 @@
 class QuadrilateralGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "quadrilateral", params
 
 class POLY.QuadrilateralBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         angle = 360 / 4
         radius = params.radius ?= 5

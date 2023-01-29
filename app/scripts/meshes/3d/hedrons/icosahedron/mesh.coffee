@@ -1,12 +1,12 @@
 class Icosahedron extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "icosahedron", params
 
 class POLY.IcosahedronMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

@@ -1,12 +1,12 @@
 class Hexagon extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "hexagon", params
 
 class POLY.HexagonMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

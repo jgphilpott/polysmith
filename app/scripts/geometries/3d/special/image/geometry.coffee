@@ -2,13 +2,13 @@
 
 class ImageGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "image", params
 
 class POLY.ImageBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         mesh = params.mesh
 

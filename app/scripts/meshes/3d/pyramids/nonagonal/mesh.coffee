@@ -1,12 +1,12 @@
 class NonagonalPyramid extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "nonagonal-pyramid", params
 
 class POLY.NonagonalPyramidMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

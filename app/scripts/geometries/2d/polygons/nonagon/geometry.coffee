@@ -1,12 +1,12 @@
 class NonagonGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "nonagon", params
 
 class POLY.NonagonBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         angle = 360 / 9
         radius = params.radius ?= 5

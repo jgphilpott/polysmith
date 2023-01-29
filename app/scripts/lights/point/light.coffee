@@ -2,6 +2,6 @@
 
 class PointLight extends THREE.PointLight
 
-    constructor : (intensity = 1, color = whiteThree) ->
+    constructor: (intensity = 1, color = whiteThree) ->
 
         super color, intensity

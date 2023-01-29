@@ -1,6 +1,6 @@
 class Ticks
 
-    constructor : () ->
+    constructor: ->
 
         @active = null
 
@@ -8,7 +8,7 @@ class Ticks
         @xz = []
         @yz = []
 
-    add : (min = -scale, max = scale) ->
+    add: (min = -scale, max = scale) ->
 
         if not this.active
 
@@ -18,7 +18,7 @@ class Ticks
             this.addXZ min, max
             this.addYZ min, max
 
-    remove : () ->
+    remove: ->
 
         if this.active
 
@@ -28,7 +28,7 @@ class Ticks
             this.removeXZ()
             this.removeYZ()
 
-    addXY : (min = -scale, max = scale) ->
+    addXY: (min = -scale, max = scale) ->
 
         if this.xy.length is 0 and settings.getSetting "axes", "xyPlane"
 
@@ -50,7 +50,7 @@ class Ticks
             this.xy.push xTick, yTick
             scene.add xTick, yTick
 
-    removeXY : () ->
+    removeXY: ->
 
         if this.xy.length isnt 0
 
@@ -63,7 +63,7 @@ class Ticks
 
             this.xy = []
 
-    addXZ : (min = -scale, max = scale) ->
+    addXZ: (min = -scale, max = scale) ->
 
         if this.xz.length is 0 and settings.getSetting "axes", "xzPlane"
 
@@ -85,7 +85,7 @@ class Ticks
             this.xz.push xTick, zTick
             scene.add xTick, zTick
 
-    removeXZ : () ->
+    removeXZ: ->
 
         if this.xz.length isnt 0
 
@@ -98,7 +98,7 @@ class Ticks
 
             this.xz = []
 
-    addYZ : (min = -scale, max = scale) ->
+    addYZ: (min = -scale, max = scale) ->
 
         if this.yz.length is 0 and settings.getSetting "axes", "yzPlane"
 
@@ -120,7 +120,7 @@ class Ticks
             this.yz.push yTick, zTick
             scene.add yTick, zTick
 
-    removeYZ : () ->
+    removeYZ: ->
 
         if this.yz.length isnt 0
 

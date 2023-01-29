@@ -2,6 +2,6 @@
 
 class ArrayCamera extends THREE.ArrayCamera
 
-    constructor : (array = []) ->
+    constructor: (array = []) ->
 
         super array

@@ -1,12 +1,12 @@
 class Pentagon extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "pentagon", params
 
 class POLY.PentagonMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

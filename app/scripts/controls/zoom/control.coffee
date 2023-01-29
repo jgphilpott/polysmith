@@ -1,10 +1,10 @@
 class ZoomControls
 
-    constructor : () ->
+    constructor: ->
 
         @active = null
 
-    add : () ->
+    add: ->
 
         if not this.active
 
@@ -56,7 +56,7 @@ class ZoomControls
 
                     zoom()
 
-    remove : () ->
+    remove: ->
 
         if this.active
 

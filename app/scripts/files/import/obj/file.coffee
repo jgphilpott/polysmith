@@ -2,11 +2,11 @@
 
 class OBJLoader extends THREE.OBJLoader
 
-    constructor : () ->
+    constructor: ->
 
         super()
 
-    import : (file) ->
+    import: (file) ->
 
         objects = []
 

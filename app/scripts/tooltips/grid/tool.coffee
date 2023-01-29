@@ -1,6 +1,6 @@
 class Grid
 
-    constructor : () ->
+    constructor: ->
 
         @active = null
 
@@ -8,7 +8,7 @@ class Grid
         @caps = new Caps()
         @ticks = new Ticks()
 
-    add : () ->
+    add: ->
 
         if not this.active
 
@@ -18,7 +18,7 @@ class Grid
             this.caps.add()
             this.ticks.add()
 
-    remove : () ->
+    remove: ->
 
         if this.active
 

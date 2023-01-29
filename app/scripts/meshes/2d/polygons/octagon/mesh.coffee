@@ -1,12 +1,12 @@
 class Octagon extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "octagon", params
 
 class POLY.OctagonMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

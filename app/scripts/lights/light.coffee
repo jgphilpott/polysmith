@@ -1,6 +1,6 @@
 class Light
 
-    constructor : (type, intensity = 1, colorOne = whiteThree, colorTwo = blackThree, lock = false) ->
+    constructor: (type, intensity = 1, colorOne = whiteThree, colorTwo = blackThree, lock = false) ->
 
         @type = lower type.trim()
         @intensity = intensity
@@ -46,65 +46,65 @@ class Light
 
         this.add()
 
-    setX : (x = 0) ->
+    setX: (x = 0) ->
 
         this.light.position.x = x
 
-    getX : (self = this) ->
+    getX: (self = this) ->
 
         return self.light.position.x
 
-    setY : (y = 0) ->
+    setY: (y = 0) ->
 
         this.light.position.y = y
 
-    getY : (self = this) ->
+    getY: (self = this) ->
 
         return self.light.position.y
 
-    setZ : (z = 0) ->
+    setZ: (z = 0) ->
 
         this.light.position.z = z
 
-    getZ : (self = this) ->
+    getZ: (self = this) ->
 
         return self.light.position.z
 
-    setPosition : (x = 0, y = 0, z = 0) ->
+    setPosition: (x = 0, y = 0, z = 0) ->
 
         this.light.position.set x, y, z
 
-    getPosition : (self = this) ->
+    getPosition: (self = this) ->
 
         return self.light.position
 
-    setIntensity : (intensity = 1) ->
+    setIntensity: (intensity = 1) ->
 
         this.light.intensity = intensity
 
-    getIntensity : (self = this) ->
+    getIntensity: (self = this) ->
 
         return self.light.intensity
 
-    setLock : (lock = false) ->
+    setLock: (lock = false) ->
 
         this.lock = Boolean lock
 
-    getLock : (self = this) ->
+    getLock: (self = this) ->
 
         return self.lock
 
-    toggleLock : (self = this) ->
+    toggleLock: (self = this) ->
 
         self.setLock not self.getLock()
 
-    add : (self = this) ->
+    add: (self = this) ->
 
         scene.add self.light
 
         lights.push self
 
-    remove : (self = this) ->
+    remove: (self = this) ->
 
         scene.remove self.light
 

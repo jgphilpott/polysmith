@@ -2,10 +2,10 @@
 
 class ColladaLoader extends THREE.ColladaLoader
 
-    constructor : () ->
+    constructor: ->
 
         super()
 
-    import : (file) ->
+    import: (file) ->
 
         return [file]

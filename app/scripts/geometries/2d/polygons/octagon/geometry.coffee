@@ -1,12 +1,12 @@
 class OctagonGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "octagon", params
 
 class POLY.OctagonBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         angle = 360 / 8
         radius = params.radius ?= 5

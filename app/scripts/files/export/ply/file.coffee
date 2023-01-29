@@ -2,7 +2,7 @@
 
 class PLYExporter extends THREE.PLYExporter
 
-    constructor : () ->
+    constructor: ->
 
         super()
 

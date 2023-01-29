@@ -1,12 +1,12 @@
 class Plane extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "plane", params
 
 class POLY.PlaneMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

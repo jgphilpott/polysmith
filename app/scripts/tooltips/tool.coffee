@@ -1,6 +1,6 @@
 class Tooltips
 
-    constructor : (self = this) ->
+    constructor: (self = this) ->
 
         @selected = null
         @boundingBox = null
@@ -10,11 +10,11 @@ class Tooltips
         @rotationTools = []
         @rotationRing = null
 
-    getSelected : (self = this) ->
+    getSelected: (self = this) ->
 
         return self.selected
 
-    setSelected : (selected = null) ->
+    setSelected: (selected = null) ->
 
         this.selected = selected
 
@@ -26,7 +26,7 @@ class Tooltips
             if settings.getSetting "tooltips", "rotation" then this.boundingBox = selected.geometry.boundingBox
             if settings.getSetting "tooltips", "bounding" then this.addRotationTools()
 
-    addRotationTools : (mesh = this.selected, tools = this.rotationTools) ->
+    addRotationTools: (mesh = this.selected, tools = this.rotationTools) ->
 
         self = this
 
@@ -73,7 +73,7 @@ class Tooltips
 
         this.updateRotationTools()
 
-    updateRotationTools : (mesh = this.selected, tools = this.rotationTools) ->
+    updateRotationTools: (mesh = this.selected, tools = this.rotationTools) ->
 
         gapSize = 10
 
@@ -113,7 +113,7 @@ class Tooltips
         yTool.rotation.z = yRotation
         zTool.rotation.z = zRotation
 
-    removeRotationTools : (mesh = this.selected, tools = this.rotationTools) ->
+    removeRotationTools: (mesh = this.selected, tools = this.rotationTools) ->
 
         for tool in tools
 
@@ -127,7 +127,7 @@ class Tooltips
 
         this.rotationTools = []
 
-    addRotationRing : (axis, mesh = this.selected) ->
+    addRotationRing: (axis, mesh = this.selected) ->
 
         gapSize = 10
 
@@ -169,11 +169,11 @@ class Tooltips
 
             scene.add ring
 
-    updateRotationRing : (ring = this.rotationRing) ->
+    updateRotationRing: (ring = this.rotationRing) ->
 
         return ring
 
-    removeRotationRing : (ring = this.rotationRing) ->
+    removeRotationRing: (ring = this.rotationRing) ->
 
         this.rotationRing = null
 

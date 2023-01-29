@@ -1,6 +1,6 @@
 class Axes
 
-    constructor : () ->
+    constructor: ->
 
         @active = null
 
@@ -8,7 +8,7 @@ class Axes
         @y = null
         @z = null
 
-    add : (min = -scale, max = scale) ->
+    add: (min = -scale, max = scale) ->
 
         if not this.active
 
@@ -18,7 +18,7 @@ class Axes
             this.addY min, max
             this.addZ min, max
 
-    remove : () ->
+    remove: ->
 
         if this.active
 
@@ -28,7 +28,7 @@ class Axes
             this.removeY()
             this.removeZ()
 
-    addX : (min = -scale, max = scale) ->
+    addX: (min = -scale, max = scale) ->
 
         if not this.x and settings.getSetting "axes", "xAxis"
 
@@ -36,7 +36,7 @@ class Axes
 
             scene.add this.x
 
-    removeX : () ->
+    removeX: ->
 
         if this.x
 
@@ -47,7 +47,7 @@ class Axes
 
             this.x = null
 
-    addY : (min = -scale, max = scale) ->
+    addY: (min = -scale, max = scale) ->
 
         if not this.y and settings.getSetting "axes", "yAxis"
 
@@ -55,7 +55,7 @@ class Axes
 
             scene.add this.y
 
-    removeY : () ->
+    removeY: ->
 
         if this.y
 
@@ -66,7 +66,7 @@ class Axes
 
             this.y = null
 
-    addZ : (min = -scale, max = scale) ->
+    addZ: (min = -scale, max = scale) ->
 
         if not this.z and settings.getSetting "axes", "zAxis"
 
@@ -74,7 +74,7 @@ class Axes
 
             scene.add this.z
 
-    removeZ : () ->
+    removeZ: ->
 
         if this.z
 

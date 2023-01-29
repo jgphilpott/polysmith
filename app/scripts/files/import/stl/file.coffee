@@ -2,10 +2,10 @@
 
 class STLLoader extends THREE.STLLoader
 
-    constructor : () ->
+    constructor: ->
 
         super()
 
-    import : (file) ->
+    import: (file) ->
 
         return [new THREE.Mesh file, new MeshMaterial "normal"]

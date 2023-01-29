@@ -2,13 +2,13 @@
 
 class DistanceMeshMaterial extends MeshMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "distance", params
 
 class POLY.DistanceMeshMaterial extends THREE.MeshDistanceMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         side = params.side ?= THREE.DoubleSide
 

@@ -1,12 +1,12 @@
 class Quadrilateral extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "quadrilateral", params
 
 class POLY.QuadrilateralMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

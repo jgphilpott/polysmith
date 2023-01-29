@@ -1,12 +1,12 @@
 class TriangleGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "triangle", params
 
 class POLY.TriangleBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         angle = 360 / 3
         radius = params.radius ?= 5

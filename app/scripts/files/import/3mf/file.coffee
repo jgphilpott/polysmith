@@ -2,10 +2,10 @@
 
 class THREEMFLoader extends THREE.3MFLoader
 
-    constructor : () ->
+    constructor: ->
 
         super()
 
-    import : (file) ->
+    import: (file) ->
 
         return [file]

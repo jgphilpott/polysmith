@@ -2,7 +2,7 @@
 
 class Camera
 
-    constructor : (type = "perspective") ->
+    constructor: (type = "perspective") ->
 
         @type = lower type.trim()
 
@@ -57,41 +57,41 @@ class Camera
 
         return this.camera
 
-    add : () ->
+    add: ->
 
         scene.add this
 
         return this
 
-    remove : () ->
+    remove: ->
 
         scene.remove this
 
         return this
 
-    getDragged : () ->
+    getDragged: ->
 
         return this.dragged
 
-    setDragged : (dragged) ->
+    setDragged: (dragged) ->
 
         this.dragged = dragged
 
-    getAspect : () ->
+    getAspect: ->
 
         return this.aspect
 
-    setAspect : (width = window.innerWidth, height = window.innerHeight) ->
+    setAspect: (width = window.innerWidth, height = window.innerHeight) ->
 
         this.aspect = width / height
 
         this.updateProjectionMatrix()
 
-    getPosition : () ->
+    getPosition: ->
 
         return this.position
 
-    setPosition : (position, updateSettings = true) ->
+    setPosition: (position, updateSettings = true) ->
 
         panel = $("#camera.panel")
 
@@ -109,11 +109,11 @@ class Camera
         panel.find("#position-y input").val position.y.toFixed 2
         panel.find("#position-z input").val position.z.toFixed 2
 
-    getTarget : () ->
+    getTarget: ->
 
         return this.target
 
-    setTarget : (target, updateSettings = true) ->
+    setTarget: (target, updateSettings = true) ->
 
         panel = $("#camera.panel")
 
@@ -131,7 +131,7 @@ class Camera
         panel.find("#target-y input").val target.y.toFixed 2
         panel.find("#target-z input").val target.z.toFixed 2
 
-    focus : (point, duration = 1000, steps = 100) ->
+    focus: (point, duration = 1000, steps = 100) ->
 
         if this.target.x isnt point.x or this.target.y isnt point.y or this.target.z isnt point.z
 

@@ -2,13 +2,13 @@
 
 class KnotGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "knot", params
 
 class POLY.KnotBufferGeometry extends THREE.TorusKnotBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         radius = params.radius ?= 10
         thickness = params.thickness ?= 3

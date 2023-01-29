@@ -2,13 +2,13 @@
 
 class NormalMeshMaterial extends MeshMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "normal", params
 
 class POLY.NormalMeshMaterial extends THREE.MeshNormalMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         side = params.side ?= THREE.DoubleSide
 

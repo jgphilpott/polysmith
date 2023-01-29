@@ -2,13 +2,13 @@
 
 class RingGeometry extends Geometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "ring", params
 
 class POLY.RingBufferGeometry extends THREE.RingBufferGeometry
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         innerRadius = params.innerRadius ?= 2.5
         outerRadius = params.outerRadius ?= 5

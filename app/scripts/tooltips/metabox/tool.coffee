@@ -1,10 +1,10 @@
 class Metabox
 
-    constructor : () ->
+    constructor: ->
 
         @box = $("#metabox")
 
-    draw : (type, object, event) ->
+    draw: (type, object, event) ->
 
         mouse = new THREE.Vector2()
         raycaster = new THREE.Raycaster()
@@ -53,7 +53,7 @@ class Metabox
 
         return this.box
 
-    erase : () ->
+    erase: ->
 
         this.box.find("*").remove()
 

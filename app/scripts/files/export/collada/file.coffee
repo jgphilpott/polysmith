@@ -2,7 +2,7 @@
 
 class ColladaExporter extends THREE.ColladaExporter
 
-    constructor : () ->
+    constructor: ->
 
         super()
 

@@ -1,12 +1,12 @@
 class Circle extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "circle", params
 
 class POLY.CircleMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

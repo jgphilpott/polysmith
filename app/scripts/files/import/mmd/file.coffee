@@ -2,10 +2,10 @@
 
 class MMDLoader extends THREE.MMDLoader
 
-    constructor : () ->
+    constructor: ->
 
         super()
 
-    import : (file) ->
+    import: (file) ->
 
         return [file]

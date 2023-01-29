@@ -2,13 +2,13 @@
 
 class LambertMeshMaterial extends MeshMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "lambert", params
 
 class POLY.LambertMeshMaterial extends THREE.MeshLambertMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         map = params.map ?= null
         color = params.color ?= blackThree

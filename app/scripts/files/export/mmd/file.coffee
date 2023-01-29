@@ -2,7 +2,7 @@
 
 class MMDExporter extends THREE.MMDExporter
 
-    constructor : () ->
+    constructor: ->
 
         super()
 

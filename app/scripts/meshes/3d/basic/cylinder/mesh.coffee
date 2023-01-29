@@ -1,12 +1,12 @@
 class Cylinder extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "cylinder", params
 
 class POLY.CylinderMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

@@ -2,10 +2,10 @@
 
 class FBXLoader extends THREE.FBXLoader
 
-    constructor : () ->
+    constructor: ->
 
         super()
 
-    import : (file) ->
+    import: (file) ->
 
         return [file]

@@ -2,7 +2,7 @@
 
 class STLExporter extends THREE.STLExporter
 
-    constructor : () ->
+    constructor: ->
 
         super()
 

@@ -2,13 +2,13 @@
 
 class ToonMeshMaterial extends MeshMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "toon", params
 
 class POLY.ToonMeshMaterial extends THREE.MeshToonMaterial
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         map = params.map ?= null
         color = params.color ?= blackThree

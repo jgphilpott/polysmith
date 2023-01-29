@@ -1,6 +1,6 @@
 class Help
 
-    constructor : (self = this) ->
+    constructor: (self = this) ->
 
         @active = false
         @events = false
@@ -57,7 +57,7 @@ class Help
                 $("#shortcuts.panel").mousemove -> self.addHelpBox this, "This is the shortcuts panel!"
                 $("#shortcuts.panel").mouseout -> self.removeHelpBox this
 
-    setActive : (active = false) ->
+    setActive: (active = false) ->
 
         this.active = active
 
@@ -73,11 +73,11 @@ class Help
             $("*").removeClass "help"
             $("#help").css "width": "", "height": "", "filter": ""
 
-    getActive : (self = this) ->
+    getActive: (self = this) ->
 
         return self.active
 
-    addHelpBox : (element, text = "") ->
+    addHelpBox: (element, text = "") ->
 
         if this.active
 
@@ -100,7 +100,7 @@ class Help
             else if event.pageY < window.innerHeight / 2
                 helpBox.css "top", event.pageY + gapSize
 
-    removeHelpBox : (element) ->
+    removeHelpBox: (element) ->
 
         $("#help-box").remove()
 

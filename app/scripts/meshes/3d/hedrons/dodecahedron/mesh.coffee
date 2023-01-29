@@ -1,12 +1,12 @@
 class Dodecahedron extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "dodecahedron", params
 
 class POLY.DodecahedronMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 

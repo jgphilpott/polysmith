@@ -1,12 +1,12 @@
 class Tube extends Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         super "tube", params
 
 class POLY.TubeMesh extends THREE.Mesh
 
-    constructor : (params = {}) ->
+    constructor: (params = {}) ->
 
         params.material ?= "normal"
 
