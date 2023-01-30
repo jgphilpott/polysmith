@@ -144,7 +144,7 @@ class Camera
             stepY = (point.y - target.y) / steps
             stepZ = (point.z - target.z) / steps
 
-            updateCameraTarget = () ->
+            updateCameraTarget = ->
 
                 target.x += stepX
                 target.y += stepY

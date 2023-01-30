@@ -15,13 +15,13 @@ sliderFill = (slider, colorOne = "#3273f6", colorTwo = "#efefef") ->
 
 sliderStyle = (slider) ->
 
-    slider.find("span").mouseover () ->
+    slider.find("span").mouseover ->
 
         if !events.slider
 
             sliderFill $(this).parent(), "#3273f6", "#e6e6e6"
 
-    slider.find("span").mouseout () ->
+    slider.find("span").mouseout ->
 
         if !events.slider
 

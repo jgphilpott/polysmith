@@ -55,7 +55,7 @@ hex2rgb = (hex) ->
 # The click event will be fired with a small delay but will not fire upon a double click.
 $.fn.clickSingleDouble = (single_click_callback, double_click_callback, delay = 333) ->
 
-    return this.each () ->
+    return this.each ->
 
         self = this
         clicks = 0
@@ -66,7 +66,7 @@ $.fn.clickSingleDouble = (single_click_callback, double_click_callback, delay = 
 
             if clicks is 1
 
-                setTimeout(() ->
+                setTimeout( ->
 
                     if clicks is 1
 

@@ -1,4 +1,4 @@
-setup = () ->
+setup = ->
 
     composer.renderPass = new THREE.RenderPass scene, camera
     composer.shaderPass = new THREE.ShaderPass THREE.CopyShader
@@ -12,7 +12,7 @@ setup = () ->
     composer.addPass composer.shaderPass
     composer.addPass composer.outlinePass
 
-    animate = () ->
+    animate = ->
 
         requestAnimationFrame animate
 
