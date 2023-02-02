@@ -7,7 +7,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 
 RUN apt-get install -y curl \
-    && curl -sL https://deb.nodesource.com/setup_14.x | bash - \
+    && curl -sL https://deb.nodesource.com/setup_19.x | bash - \
     && apt-get install -y nodejs \
     && curl -L https://www.npmjs.com/install.sh | sh \
     && npm install --global coffeescript \
