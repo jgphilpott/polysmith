@@ -1,0 +1,50 @@
+### Libs ###
+app/libs
+
+### Config ###
+.python_history
+.bash_history
+.sonarlint
+.DS_Store
+.npm
+.env
+venv
+
+### Python ###
+*.ipynb_checkpoints
+__pycache__
+
+### Scripts ###
+app/scripts/*/*.js
+app/scripts/*/*/*.js
+app/scripts/*/*/*/*.js
+app/scripts/*/*/*/*/*.js
+
+### Styles ###
+app/css
+*.css.map
+*.sass.map
+*.sass-cache
+app/styles/*.css
+app/styles/*/*.css
+app/styles/*/*/*.css
+app/styles/*/*/*/*.css
+app/styles/*/*/*/*/*.css
+
+### Models ###
+app/things
+*.3mf
+*.amf
+*.dae
+*.drc
+*.fbx
+*.gcode
+*.gltf
+*.ipt
+*.mmd
+*.obj
+*.ply
+*.scad
+*.stl
+*.stp
+*.wrl
