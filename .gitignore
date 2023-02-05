@@ -2,12 +2,13 @@
 app/libs
 
 ### Config ###
-.python_history
-.bash_history
-.sonarlint
-.DS_Store
-.npm
-.env
+*.python_history
+*.bash_history
+*.sonarlint
+*.DS_Store
+*.vscode
+*.npm
+*.env
 venv
 
 ### Python ###
