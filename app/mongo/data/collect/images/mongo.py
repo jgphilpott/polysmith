@@ -2,11 +2,11 @@ from mongo.data.collect.ions import mongo_collection
 
 collection = mongo_collection("images")
 
-def new_image(image):
+def add_image(image):
 
     return str(collection.insert_one(image).inserted_id)
 
-def new_images(images):
+def add_images(images):
 
     return str(collection.insert_many(images).inserted_ids)
 

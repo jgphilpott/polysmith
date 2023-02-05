@@ -2,11 +2,11 @@ from mongo.data.collect.ions import mongo_collection
 
 collection = mongo_collection("clients")
 
-def new_client(client):
+def add_client(client):
 
     return str(collection.insert_one(client).inserted_id)
 
-def new_clients(clients):
+def add_clients(clients):
 
     return str(collection.insert_many(clients).inserted_ids)
 

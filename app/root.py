@@ -54,7 +54,7 @@ if not exists(js_libs_dir + "/exporters"): makedirs(js_libs_dir + "/exporters")
 if not exists(js_libs_dir + "/importers"): makedirs(js_libs_dir + "/importers")
 
 if not exists(js_libs_dir + "/sha256.js"): urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js", js_libs_dir + "/sha256.js")
-if not exists(js_libs_dir + "/socket.js"): urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.min.js", js_libs_dir + "/socket.js")
+if not exists(js_libs_dir + "/socket.js"): urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.4.0/socket.io.min.js", js_libs_dir + "/socket.js")
 
 if not exists(js_libs_dir + "/jQuery.js"): urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js", js_libs_dir + "/jQuery.js")
 if not exists(js_libs_dir + "/jQueryUI.js"): urlretrieve("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js", js_libs_dir + "/jQueryUI.js")

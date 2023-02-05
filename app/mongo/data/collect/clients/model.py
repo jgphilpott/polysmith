@@ -4,10 +4,10 @@ class Client():
 
     def __init__(self, client):
 
-        self.email = client["email"]
-        self.password = client["password"]
-
         self.id = client["id"] if "id" in client else urandom(42).hex()
+
+        self.email = client["email"] if "email" in client else None
+        self.password = client["password"] if "password" in client else None
 
         if "settings" in client:
 
