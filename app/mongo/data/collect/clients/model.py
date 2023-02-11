@@ -1,10 +1,11 @@
-from os import urandom
+import os
+import pydash
 
 class Client():
 
     def __init__(self, client):
 
-        self.id = client["id"] if "id" in client else urandom(42).hex()
+        self.id = client["id"] if "id" in client else os.urandom(42).hex()
 
         self.email = client["email"] if "email" in client else None
         self.password = client["password"] if "password" in client else None
@@ -298,14 +299,14 @@ class Client():
                                 }
                             }
 
-    def update_settings(self, category, setting, value):
+    def update_settings(self, path, value):
 
-        self.settings[category][setting] = value
+        pydash.set_(self.settings, path, value)
 
         return self
 
     def refresh_id(self):
 
-        self.id = urandom(42).hex()
+        self.id = os.urandom(42).hex()
 
         return self

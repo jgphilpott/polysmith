@@ -7,6 +7,7 @@ app/libs
 *.sonarlint
 *.DS_Store
 *.vscode
+*.cache
 *.npm
 *.env
 venv

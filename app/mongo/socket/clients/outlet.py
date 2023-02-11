@@ -69,10 +69,10 @@ def connect_clients(app):
 
         try:
 
-            update_client(vars(Client(find_client({"id": update["id"]})).update_settings(update["category"], update["setting"], update["value"])))
+            update_client(vars(Client(find_client({"id": update["id"]})).update_settings(update["path"], update["value"])))
 
-            emit("update_settings_success", {"category": update["category"], "setting": update["setting"], "value": update["value"]})
+            emit("update_settings_success", {"path": update["path"], "value": update["value"]})
 
         except:
 
-            emit("update_settings_failed", {"category": update["category"], "setting": update["setting"], "value": update["value"]})
+            emit("update_settings_failed", {"path": update["path"], "value": update["value"]})

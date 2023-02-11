@@ -15,4 +15,7 @@ RUN apt-get install -y curl \
     && npm install --global uglify-js \
     && npm install --global node-sass
 
+RUN python3 -m pip install --upgrade pip
+RUN python3 -m pip install pydash
+
 CMD python3 app/root.py
