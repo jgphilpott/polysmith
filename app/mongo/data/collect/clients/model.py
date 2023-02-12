@@ -61,7 +61,7 @@ class Client():
                                         "unit": "hertz"
                                     },
                                     "length": {
-                                        "detail": 1,
+                                        "detail": 2,
                                         "snap": True,
                                         "unit": {
                                             "imperial": "inch",
@@ -256,10 +256,11 @@ class Client():
                                 },
                                 "camera": {
                                     "type": "perspective",
-                                    "position": {"x": 135, "y": 135, "z": 55},
+                                    "position": {"x": 240, "y": 240, "z": 120},
                                     "target": {"x": 0, "y": 0, "z": 0},
                                     "near": 0.1,
-                                    "far": 1000
+                                    "far": 1000,
+                                    "fov": 75
                                 },
                                 "controls": {
                                     "speed": {
