@@ -15,31 +15,40 @@ class Caps
         @zMin = null
         @zMax = null
 
-    add: ->
+    add: (save = false) ->
 
         if not this.active
 
             this.active = true
 
-            this.addCentroid()
+            this.addCentroid save
 
-            this.addX()
-            this.addY()
-            this.addZ()
+            this.addX printer.getSizeX(), save
+            this.addY printer.getSizeY(), save
+            this.addZ printer.getSizeZ(), save
 
-    remove: ->
+        if save then settings.set "tooltips.grid.caps", true
+
+    remove: (save = false) ->
 
         if this.active
 
             this.active = false
 
-            this.removeCentroid()
+            this.removeCentroid save
 
-            this.removeX()
-            this.removeY()
-            this.removeZ()
+            this.removeX save
+            this.removeY save
+            this.removeZ save
 
-    addCentroid: ->
+        if save then settings.set "tooltips.grid.caps", false
+
+    reset: ->
+
+        this.remove()
+        this.add()
+
+    addCentroid: (save = true) ->
 
         if settings.get("tooltips.grid.axes.x") or settings.get("tooltips.grid.axes.y") or settings.get("tooltips.grid.axes.z")
 
@@ -51,7 +60,7 @@ class Caps
 
                 scene.add this.centroid
 
-    removeCentroid: ->
+    removeCentroid: (save = true) ->
 
         if this.centroid
 
@@ -64,9 +73,11 @@ class Caps
 
             this.centroid = null
 
-    addX: (size = settings.get "printer.size.x") ->
+    addX: (size = printer.getSizeX(), save = true) ->
 
         if settings.get "tooltips.grid.axes.x"
+
+            size = adaptor "invert", "length", size
 
             if not this.xMin and not this.xMax and settings.get "tooltips.grid.caps"
 
@@ -77,7 +88,7 @@ class Caps
 
                 scene.add this.xMin, this.xMax
 
-    removeX: ->
+    removeX: (save = true) ->
 
         if this.xMin and this.xMax
 
@@ -90,9 +101,11 @@ class Caps
 
             this.xMin = null; this.xMax = null
 
-    addY: (size = settings.get "printer.size.y") ->
+    addY: (size = printer.getSizeY(), save = true) ->
 
         if settings.get "tooltips.grid.axes.y"
+
+            size = adaptor "invert", "length", size
 
             if not this.yMin and not this.yMax and settings.get "tooltips.grid.caps"
 
@@ -103,7 +116,7 @@ class Caps
 
                 scene.add this.yMin, this.yMax
 
-    removeY: ->
+    removeY: (save = true) ->
 
         if this.yMin and this.yMax
 
@@ -116,9 +129,11 @@ class Caps
 
             this.yMin = null; this.yMax = null
 
-    addZ: (size = settings.get "printer.size.z") ->
+    addZ: (size = printer.getSizeZ(), save = true) ->
 
         if settings.get "tooltips.grid.axes.z"
+
+            size = adaptor "invert", "length", size
 
             if not this.zMin and not this.zMax and settings.get "tooltips.grid.caps"
 
@@ -129,7 +144,7 @@ class Caps
 
                 scene.add this.zMin, this.zMax
 
-    removeZ: ->
+    removeZ: (save = true) ->
 
         if this.zMin and this.zMax
 

@@ -8,31 +8,39 @@ class Ticks
         @xz = []
         @yz = []
 
-    add: ->
+    add: (save = false) ->
 
         if not this.active
 
             this.active = true
 
-            this.addXY()
-            this.addXZ()
-            this.addYZ()
+            this.addXY printer.getSizeX(), printer.getSizeY(), save
+            this.addXZ printer.getSizeX(), printer.getSizeZ(), save
+            this.addYZ printer.getSizeY(), printer.getSizeZ(), save
 
-    remove: ->
+    remove: (save = false) ->
 
         if this.active
 
             this.active = false
 
-            this.removeXY()
-            this.removeXZ()
-            this.removeYZ()
+            this.removeXY save
+            this.removeXZ save
+            this.removeYZ save
 
-    addXY: (xSize = settings.get "printer.size.x", ySize = settings.get "printer.size.y") ->
+    reset: ->
+
+        this.remove()
+        this.add()
+
+    addXY: (xSize = printer.getSizeX(), ySize = printer.getSizeY(), save = true) ->
 
         if this.xy.length is 0 and settings.get "tooltips.grid.ticks.xy"
 
             step = settings.get "tooltips.grid.ticks.step.xy"
+
+            xSize = adaptor "invert", "length", xSize
+            ySize = adaptor "invert", "length", ySize
 
             for tick in [step...ySize / 2] by step
 
@@ -56,7 +64,9 @@ class Ticks
             this.xy.push xTick, yTick
             scene.add xTick, yTick
 
-    removeXY: ->
+        if save then settings.set "tooltips.grid.ticks.xy", true
+
+    removeXY: (save = true) ->
 
         if this.xy.length isnt 0
 
@@ -69,11 +79,16 @@ class Ticks
 
             this.xy = []
 
-    addXZ: (xSize = settings.get "printer.size.x", zSize = settings.get "printer.size.z") ->
+        if save then settings.set "tooltips.grid.ticks.xy", false
+
+    addXZ: (xSize = printer.getSizeX(), zSize = printer.getSizeZ(), save = true) ->
 
         if this.xz.length is 0 and settings.get "tooltips.grid.ticks.xz"
 
             step = settings.get "tooltips.grid.ticks.step.xz"
+
+            xSize = adaptor "invert", "length", xSize
+            zSize = adaptor "invert", "length", zSize
 
             for tick in [step...zSize / 2] by step
 
@@ -97,7 +112,9 @@ class Ticks
             this.xz.push xTick, zTick
             scene.add xTick, zTick
 
-    removeXZ: ->
+        if save then settings.set "tooltips.grid.ticks.xz", true
+
+    removeXZ: (save = true) ->
 
         if this.xz.length isnt 0
 
@@ -110,11 +127,16 @@ class Ticks
 
             this.xz = []
 
-    addYZ: (ySize = settings.get "printer.size.y", zSize = settings.get "printer.size.z") ->
+        if save then settings.set "tooltips.grid.ticks.xz", false
+
+    addYZ: (ySize = printer.getSizeY(), zSize = printer.getSizeZ(), save = true) ->
 
         if this.yz.length is 0 and settings.get "tooltips.grid.ticks.yz"
 
             step = settings.get "tooltips.grid.ticks.step.yz"
+
+            ySize = adaptor "invert", "length", ySize
+            zSize = adaptor "invert", "length", zSize
 
             for tick in [step...zSize / 2] by step
 
@@ -138,7 +160,9 @@ class Ticks
             this.yz.push yTick, zTick
             scene.add yTick, zTick
 
-    removeYZ: ->
+        if save then settings.set "tooltips.grid.ticks.yz", true
+
+    removeYZ: (save = true) ->
 
         if this.yz.length isnt 0
 
@@ -150,3 +174,5 @@ class Ticks
                 scene.remove tick
 
             this.yz = []
+
+        if save then settings.set "tooltips.grid.ticks.yz", false

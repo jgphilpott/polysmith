@@ -8,22 +8,27 @@ class Grid
         @caps = new Caps()
         @ticks = new Ticks()
 
-    add: ->
+    add: (save = false) ->
 
         if not this.active
 
             this.active = true
 
-            this.axes.add()
-            this.caps.add()
-            this.ticks.add()
+            this.axes.add save
+            this.caps.add save
+            this.ticks.add save
 
-    remove: ->
+    remove: (save = false) ->
 
         if this.active
 
             this.active = false
 
-            this.axes.remove()
-            this.caps.remove()
-            this.ticks.remove()
+            this.axes.remove save
+            this.caps.remove save
+            this.ticks.remove save
+
+    reset: ->
+
+        this.remove()
+        this.add()
