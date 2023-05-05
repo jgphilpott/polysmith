@@ -20,4 +20,4 @@ Add a clear and concise description of any alternative solutions or features you
 
 ### Additional Information:
 
-Add any other information or screenshots about the feature request here.
+Add any extra information about your feature request here.

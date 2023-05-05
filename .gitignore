@@ -2,18 +2,19 @@
 app/libs
 
 ### Config ###
-*.python_history
 *.bash_history
 *.sonarlint
 *.DS_Store
 *.vscode
 *.cache
+*.local
 *.npm
 *.env
 venv
 
 ### Python ###
 *.ipynb_checkpoints
+*.python_history
 __pycache__
 
 ### Scripts ###
@@ -23,7 +24,6 @@ app/scripts/*/*/*/*.js
 app/scripts/*/*/*/*/*.js
 
 ### Styles ###
-app/css
 *.css.map
 *.sass.map
 *.sass-cache
