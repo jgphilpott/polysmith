@@ -273,30 +273,30 @@ class Client():
                                         "max": 500
                                     }
                                 },
-                                "grid": {
-                                    "volume": False,
-                                    "caps": True,
-                                    "axes": {
-                                        "x": True,
-                                        "y": True,
-                                        "z": True
-                                    },
-                                    "ticks": {
-                                        "xy": True,
-                                        "xz": False,
-                                        "yz": False,
-                                        "step": {
-                                            "xy": 10,
-                                            "xz": 10,
-                                            "yz": 10
-                                        }
-                                    }
-                                },
                                 "tooltips": {
                                     "bounding": True,
                                     "rotation": True,
                                     "guidelines": True,
-                                    "measurements": False
+                                    "measurements": False,
+                                    "grid": {
+                                        "volume": False,
+                                        "caps": True,
+                                        "axes": {
+                                            "x": True,
+                                            "y": True,
+                                            "z": True
+                                        },
+                                        "ticks": {
+                                            "xy": True,
+                                            "xz": False,
+                                            "yz": False,
+                                            "step": {
+                                                "xy": 10,
+                                                "xz": 10,
+                                                "yz": 10
+                                            }
+                                        }
+                                    }
                                 }
                             }
 
