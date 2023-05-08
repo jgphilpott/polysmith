@@ -1,4 +1,4 @@
-live_count = 0
+live = 0
 
 from hashlib import sha256
 from flask_socketio import emit
@@ -11,14 +11,14 @@ def connect_clients(app):
     @app.on("connect")
     def connect():
 
-        global live_count
-        live_count += 1
+        global live
+        live += 1
 
     @app.on("disconnect")
     def disconnect():
 
-        global live_count
-        live_count -= 1
+        global live
+        live -= 1
 
     @app.on("signup")
     def signup(client):
@@ -27,9 +27,9 @@ def connect_clients(app):
 
         try:
 
-            find_client({"email": client["email"]})
+            match = find_client({"email": client["email"]})
 
-            emit("signup_failed")
+            if match: emit("signup_failed")
 
         except:
 
