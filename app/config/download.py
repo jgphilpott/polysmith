@@ -87,7 +87,8 @@ def get_libs(libs_dir):
             cookies = get("https://gist.githubusercontent.com/jgphilpott/b9ce64b9ef8b04c5ac58902b133b1a28/raw/5a8c863d59be464289bcee3e6363c0d025b050dd/cookies.js").content.decode("utf-8")
             localStorage = get("https://gist.githubusercontent.com/jgphilpott/e26b92eb41b64e9565032d5c4d3c2878/raw/7fe4d19aad1e765f134a45e128dbfe1cad1141aa/localStorage.js").content.decode("utf-8")
             email = get("https://gist.githubusercontent.com/jgphilpott/a1ffedea1d1a70320b8075597df1943a/raw/a91ee941914fedcafd12d892ed98f7ee43cb9bba/email.js").content.decode("utf-8")
+            favicon = get("https://gist.githubusercontent.com/jgphilpott/efdec642fc8bbaaae8115bd4fc49bd05/raw/89f07b3019e286e5039accf01221c0c2f101d80f/faviconScheme.js").content.decode("utf-8")
 
-            tools = convert + "\n" + abbreviations + "\n" + formatting + "\n" + casefy + "\n" + rotation + "\n" + cookies + "\n" + localStorage + "\n" + email
+            tools = convert + "\n" + abbreviations + "\n" + formatting + "\n" + casefy + "\n" + rotation + "\n" + cookies + "\n" + localStorage + "\n" + email + "\n" + favicon
 
             file.write(tools)
