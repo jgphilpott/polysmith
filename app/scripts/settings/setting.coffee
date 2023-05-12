@@ -59,3 +59,15 @@ class Settings
         localStore.write "settings", this
 
         if client then socket.emit "update_settings", id: readCookie("id"), path: path, value: value
+
+varifySettings = (settings, defaults) ->
+
+    for setting in Object.keys defaults
+
+        if setting not in Object.keys settings
+
+            settings[setting] = defaults[setting]
+
+        if _.isObject defaults[setting]
+
+            varifySettings settings[setting], defaults[setting]
