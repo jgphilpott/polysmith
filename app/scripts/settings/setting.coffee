@@ -2,53 +2,53 @@ class Settings
 
     constructor: ->
 
-        @camera = new CameraSettings()
-        @controls = new ControlsSettings()
-        @filaments = new FilamentsSettings()
-        @general = new GeneralSettings()
-        @panels = new PanelsSettings()
-        @printer = new PrinterSettings()
-        @scales = new ScalesSettings()
-        @slicing = new SlicingSettings()
-        @tooltips = new TooltipsSettings()
-        @ui = new UISettings()
-
         localSettings = localRead "settings"
 
         if client
 
-            @settings = client.settings
+            settings = client.settings
 
         else if localSettings
 
-            @settings = localSettings
+            settings = localSettings
 
         else
 
-            @settings = this.defaults()
+            settings = this.defaults()
 
-        localStore.write "settings", this.settings
+        @camera = new CameraSettings(settings.camera)
+        @controls = new ControlsSettings(settings.controls)
+        @filaments = new FilamentsSettings(settings.filaments)
+        @general = new GeneralSettings(settings.general)
+        @panels = new PanelsSettings(settings.panels)
+        @printer = new PrinterSettings(settings.printer)
+        @scales = new ScalesSettings(settings.scales)
+        @slicing = new SlicingSettings(settings.slicing)
+        @tooltips = new TooltipsSettings(settings.tooltips)
+        @ui = new UISettings(settings.ui)
+
+        localStore.write "settings", this
 
     defaults: ->
 
-        camera: this.camera.defaults()
-        controls: this.controls.defaults()
-        filaments: this.filaments.defaults()
-        general: this.general.defaults()
-        panels: this.panels.defaults()
-        printer: this.printer.defaults()
-        scales: this.scales.defaults()
-        slicing: this.slicing.defaults()
-        tooltips: this.tooltips.defaults()
-        ui: this.ui.defaults()
+        camera: new CameraSettings().defaults()
+        controls: new ControlsSettings().defaults()
+        filaments: new FilamentsSettings().defaults()
+        general: new GeneralSettings().defaults()
+        panels: new PanelsSettings().defaults()
+        printer: new PrinterSettings().defaults()
+        scales: new ScalesSettings().defaults()
+        slicing: new SlicingSettings().defaults()
+        tooltips: new TooltipsSettings().defaults()
+        ui: new UISettings().defaults()
 
     get: (path) ->
 
-        _.get this.settings, path, undefined
+        _.get this, path, undefined
 
     set: (path, value) ->
 
-        _.set this.settings, path, value
+        _.set this, path, value
 
         if typeof path is "string"
 
@@ -56,6 +56,6 @@ class Settings
 
         this[path[0]].update path, value
 
-        localStore.write "settings", this.settings
+        localStore.write "settings", this
 
         if client then socket.emit "update_settings", id: readCookie("id"), path: path, value: value
