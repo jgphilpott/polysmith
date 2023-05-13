@@ -10,9 +10,13 @@ class Camera
         @far = settings.get "camera.far"
         @fov = settings.get "camera.fov"
 
-        @type = lower type.trim()
+        position = vectorAdaptor "convert", "length", this.position
+        target = vectorAdaptor "convert", "length", this.target
+        near = adaptor "convert", "length", this.near
+        far = adaptor "convert", "length", this.far
+        fov = interpreter "convert", "angle", this.fov
 
-        switch this.type
+        switch lower type.trim()
 
             when "array"
 
@@ -35,16 +39,12 @@ class Camera
                 @camera = new StereoCamera(); break
 
         this.camera.up.set 0, 0, 1
-        this.camera.dragged = null
 
         this.camera.add = this.add
         this.camera.remove = this.remove
 
         this.camera.getAspect = this.getAspect
         this.camera.setAspect = this.setAspect
-
-        this.camera.getDragged = this.getDragged
-        this.camera.setDragged = this.setDragged
 
         this.camera.getPosition = this.getPosition
         this.camera.setPosition = this.setPosition
@@ -64,8 +64,10 @@ class Camera
         this.camera.target = this.target
         this.camera.focus = this.focus
 
-        this.camera.setPosition this.position
-        this.camera.setTarget this.target
+        this.camera.reset = this.reset
+
+        this.camera.setPosition position
+        this.camera.setTarget target
 
         return this.camera
 
@@ -83,7 +85,7 @@ class Camera
 
     getAspect: ->
 
-        return this.aspect
+        return clone this.aspect
 
     setAspect: (width = window.innerWidth, height = window.innerHeight) ->
 
@@ -91,110 +93,104 @@ class Camera
 
         this.updateProjectionMatrix()
 
-    getDragged: ->
-
-        return this.dragged
-
-    setDragged: (dragged) ->
-
-        this.dragged = dragged
-
     getPosition: ->
 
-        return this.position
+        return vectorAdaptor "convert", "length", clone this.position
 
     setPosition: (position, save = true) ->
 
-        this.position.x = position.x
-        this.position.y = position.y
-        this.position.z = position.z
+        panels.camera.setPosition position
 
-        panel = $("#camera.panel")
-        detail = settings.get "scales.length.detail"
+        this.position.x = adaptor "invert", "length", position.x
+        this.position.y = adaptor "invert", "length", position.y
+        this.position.z = adaptor "invert", "length", position.z
 
         this.lookAt this.target.x, this.target.y, this.target.z
-
-        panel.find("#position-x input").val position.x.toFixed detail
-        panel.find("#position-y input").val position.y.toFixed detail
-        panel.find("#position-z input").val position.z.toFixed detail
 
         if save then settings.set "camera.position", this.position
 
     getTarget: ->
 
-        return this.target
+        return vectorAdaptor "convert", "length", clone this.target
 
     setTarget: (target, save = true) ->
 
-        this.target.x = target.x
-        this.target.y = target.y
-        this.target.z = target.z
+        panels.camera.setTarget target
 
-        panel = $("#camera.panel")
-        detail = settings.get "scales.length.detail"
+        this.target.x = adaptor "invert", "length", target.x
+        this.target.y = adaptor "invert", "length", target.y
+        this.target.z = adaptor "invert", "length", target.z
 
         this.lookAt this.target.x, this.target.y, this.target.z
-
-        panel.find("#target-x input").val target.x.toFixed detail
-        panel.find("#target-y input").val target.y.toFixed detail
-        panel.find("#target-z input").val target.z.toFixed detail
 
         if save then settings.set "camera.target", this.target
 
     getNear: ->
 
-        return this.near
+        return adaptor "convert", "length", clone this.near
 
-    setNear: (near) ->
+    setNear: (near, save = true) ->
 
-        this.near = near
+        this.near = adaptor "invert", "length", near
 
         this.updateProjectionMatrix()
+
+        if save then settings.set "camera.near", this.near
 
     getFar: ->
 
-        return this.far
+        return adaptor "convert", "length", clone this.far
 
-    setFar: (far) ->
+    setFar: (far, save = true) ->
 
-        this.far = far
+        this.far = adaptor "invert", "length", far
 
         this.updateProjectionMatrix()
+
+        if save then settings.set "camera.far", this.far
 
     getFOV: ->
 
-        return this.fov
+        return interpreter "convert", "angle", clone this.fov
 
-    setFOV: (fov) ->
+    setFOV: (fov, save = true) ->
 
-        this.fov = fov
+        this.fov = interpreter "invert", "angle", fov
 
         this.updateProjectionMatrix()
 
+        if save then settings.set "camera.fov", this.fov
+
     focus: (point, duration = 1000, steps = 100) ->
+
+        point = vectorAdaptor "invert", "length", point
 
         if this.target.x isnt point.x or this.target.y isnt point.y or this.target.z isnt point.z
 
-            target = clone this.target
+            frame = 0
+            this.focusing = true
 
-            panel = $("#camera.panel")
-            detail = settings.get "scales.length.detail"
+            target = clone this.target
 
             stepX = (point.x - target.x) / steps
             stepY = (point.y - target.y) / steps
             stepZ = (point.z - target.z) / steps
 
-            updateCameraTarget = ->
+            updateCameraTarget = =>
+
+                frame += 1
 
                 target.x += stepX
                 target.y += stepY
                 target.z += stepZ
 
+                if equal frame, steps
+
+                    this.focusing = false
+
                 camera.lookAt target.x, target.y, target.z
 
-                panel.find("#target-x input").val target.x.toFixed detail
-                panel.find("#target-y input").val target.y.toFixed detail
-                panel.find("#target-z input").val target.z.toFixed detail
+                panels.camera.setTarget vectorAdaptor "convert", "length", clone target
 
             for step in [0...steps]
 
@@ -202,10 +198,31 @@ class Camera
 
             settings.set "camera.target", point
 
-            this.target = point
+            this.target = clone point
 
             return true
 
         else
 
             return false
+
+    reset: ->
+
+        defaults = settings.camera.defaults()
+
+        this.setAspect window.innerWidth, window.innerHeight
+
+        position = vectorAdaptor "convert", "length", defaults.position
+        target = vectorAdaptor "convert", "length", defaults.target
+        near = adaptor "convert", "length", defaults.near
+        far = adaptor "convert", "length", defaults.far
+        fov = interpreter "convert", "angle", defaults.fov
+
+        panels.camera.setPosition position
+        panels.camera.setTarget target
+
+        this.setPosition position
+        this.setTarget target
+        this.setNear near
+        this.setFar far
+        this.setFOV fov
