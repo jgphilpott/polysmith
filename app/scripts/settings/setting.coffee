@@ -2,19 +2,24 @@ class Settings
 
     constructor: ->
 
+        defaultSettings = this.defaults()
         localSettings = localRead "settings"
 
-        if client
+        if client or localSettings
 
-            settings = client.settings
+            if client
 
-        else if localSettings
+                settings = client.settings
 
-            settings = localSettings
+            else if localSettings
+
+                settings = localSettings
+
+            this.varifySettings settings, defaultSettings
 
         else
 
-            settings = this.defaults()
+            settings = defaultSettings
 
         @camera = new CameraSettings(settings.camera)
         @controls = new ControlsSettings(settings.controls)
@@ -44,7 +49,7 @@ class Settings
 
     get: (path) ->
 
-        _.get this, path, undefined
+        _.get this, path
 
     set: (path, value) ->
 
@@ -54,20 +59,30 @@ class Settings
 
             path = path.split "."
 
+        if client
+
+            update =
+
+                path: path
+                value: value
+                id: readCookie "id"
+
+            socket.emit "update_settings", update
+
+        else
+
+            localStore.write "settings", this
+
         this[path[0]].update path, value
 
-        localStore.write "settings", this
+    varifySettings: (settings, defaults) ->
 
-        if client then socket.emit "update_settings", id: readCookie("id"), path: path, value: value
+        for setting in Object.keys defaults
 
-varifySettings = (settings, defaults) ->
+            if setting not in Object.keys settings
 
-    for setting in Object.keys defaults
+                settings[setting] = defaults[setting]
 
-        if setting not in Object.keys settings
+            if _.isObject defaults[setting]
 
-            settings[setting] = defaults[setting]
-
-        if _.isObject defaults[setting]
-
-            varifySettings settings[setting], defaults[setting]
+                this.varifySettings settings[setting], defaults[setting]
