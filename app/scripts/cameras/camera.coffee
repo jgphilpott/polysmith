@@ -49,8 +49,26 @@ class Camera
         this.camera.getPosition = this.getPosition
         this.camera.setPosition = this.setPosition
 
+        this.camera.getPositionX = this.getPositionX
+        this.camera.setPositionX = this.setPositionX
+
+        this.camera.getPositionY = this.getPositionY
+        this.camera.setPositionY = this.setPositionY
+
+        this.camera.getPositionZ = this.getPositionZ
+        this.camera.setPositionZ = this.setPositionZ
+
         this.camera.getTarget = this.getTarget
         this.camera.setTarget = this.setTarget
+
+        this.camera.getTargetX = this.getTargetX
+        this.camera.setTargetX = this.setTargetX
+
+        this.camera.getTargetY = this.getTargetY
+        this.camera.setTargetY = this.setTargetY
+
+        this.camera.getTargetZ = this.getTargetZ
+        this.camera.setTargetZ = this.setTargetZ
 
         this.camera.getNear = this.getNear
         this.camera.setNear = this.setNear
@@ -109,6 +127,48 @@ class Camera
 
         if save then settings.set "camera.position", this.position
 
+    getPositionX: ->
+
+        return adaptor "convert", "length", clone this.position.x
+
+    setPositionX: (position, save = true) ->
+
+        panels.camera.setPositionX position
+
+        this.position.x = adaptor "invert", "length", position
+
+        this.lookAt this.target.x, this.target.y, this.target.z
+
+        if save then settings.set "camera.position", this.position
+
+    getPositionY: ->
+
+        return adaptor "convert", "length", clone this.position.y
+
+    setPositionY: (position, save = true) ->
+
+        panels.camera.setPositionY position
+
+        this.position.y = adaptor "invert", "length", position
+
+        this.lookAt this.target.x, this.target.y, this.target.z
+
+        if save then settings.set "camera.position", this.position
+
+    getPositionZ: ->
+
+        return adaptor "convert", "length", clone this.position.z
+
+    setPositionZ: (position, save = true) ->
+
+        panels.camera.setPositionZ position
+
+        this.position.z = adaptor "invert", "length", position
+
+        this.lookAt this.target.x, this.target.y, this.target.z
+
+        if save then settings.set "camera.position", this.position
+
     getTarget: ->
 
         return vectorAdaptor "convert", "length", clone this.target
@@ -120,6 +180,48 @@ class Camera
         this.target.x = adaptor "invert", "length", target.x
         this.target.y = adaptor "invert", "length", target.y
         this.target.z = adaptor "invert", "length", target.z
+
+        this.lookAt this.target.x, this.target.y, this.target.z
+
+        if save then settings.set "camera.target", this.target
+
+    getTargetX: ->
+
+        return adaptor "convert", "length", clone this.target.x
+
+    setTargetX: (target, save = true) ->
+
+        panels.camera.setTargetX target
+
+        this.target.x = adaptor "invert", "length", target
+
+        this.lookAt this.target.x, this.target.y, this.target.z
+
+        if save then settings.set "camera.target", this.target
+
+    getTargetY: ->
+
+        return adaptor "convert", "length", clone this.target.y
+
+    setTargetY: (target, save = true) ->
+
+        panels.camera.setTargetY target
+
+        this.target.y = adaptor "invert", "length", target
+
+        this.lookAt this.target.x, this.target.y, this.target.z
+
+        if save then settings.set "camera.target", this.target
+
+    getTargetZ: ->
+
+        return adaptor "convert", "length", clone this.target.z
+
+    setTargetZ: (target, save = true) ->
+
+        panels.camera.setTargetZ target
+
+        this.target.z = adaptor "invert", "length", target
 
         this.lookAt this.target.x, this.target.y, this.target.z
 
