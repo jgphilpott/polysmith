@@ -45,7 +45,7 @@ def get_libs(libs_dir):
     if not exists(js_libs_dir + "/ShaderPass.js"): urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/postprocessing/ShaderPass.js", js_libs_dir + "/ShaderPass.js")
     if not exists(js_libs_dir + "/CopyShader.js"): urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/shaders/CopyShader.js", js_libs_dir + "/CopyShader.js")
 
-    if not exists(css_libs_dir + "/abbreviations.css"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/12783015d68e056e54252355d75b41a9/raw/3c59342793c23b2b6c15e0ccdc702856371f757a/abbreviations.css", css_libs_dir + "/abbreviations.css")
+    if not exists(css_libs_dir + "/abbreviations.css"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/12783015d68e056e54252355d75b41a9/raw/3c1e6931cdad0006570e7c68ed3de8ac5746213c/abbreviations.css", css_libs_dir + "/abbreviations.css")
     if not exists(css_libs_dir + "/jQuery-UI.css"): urlretrieve("https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.min.css", css_libs_dir + "/jQuery-UI.css")
 
     commit = "309b00afb6dcbc5e6c58e72f10eaa8d2e8888c83"
@@ -79,9 +79,9 @@ def get_libs(libs_dir):
 
         with open(js_libs_dir + "/tools.js", "w") as file:
 
-            convert = get("https://raw.githubusercontent.com/jgphilpott/convert/111869a7c883cbf1ed3b1344a72391355d6e5567/convert.js").content.decode("utf-8")
-            abbreviations = get("https://gist.githubusercontent.com/jgphilpott/12783015d68e056e54252355d75b41a9/raw/8f2d8e431290a286f19aa5a03309c4c8b77596f6/abbreviations.js").content.decode("utf-8")
-            formatting = get("https://gist.githubusercontent.com/jgphilpott/787659ac4ea57a9971da58a76191079b/raw/b4f9a7e4d9556545e56a6da3edf89a3a25a845f8/format.js").content.decode("utf-8")
+            convert = get("https://raw.githubusercontent.com/jgphilpott/convert/20ede7ba169f82f09f94741ca247c1118c4a430a/convert.js").content.decode("utf-8")
+            abbreviations = get("https://gist.githubusercontent.com/jgphilpott/12783015d68e056e54252355d75b41a9/raw/3c1e6931cdad0006570e7c68ed3de8ac5746213c/abbreviations.js").content.decode("utf-8")
+            formatting = get("https://gist.githubusercontent.com/jgphilpott/787659ac4ea57a9971da58a76191079b/raw/cbea41bf2d74b5ce4d1d0629d168fc799a6c48cc/format.js").content.decode("utf-8")
             casefy = get("https://gist.githubusercontent.com/jgphilpott/19e7a94cdf6d6d4cd868cc18e628026c/raw/7aad9d31135124f4d845a9e9d01b026a39e125a1/casefy.js").content.decode("utf-8")
             rotation = get("https://gist.githubusercontent.com/jgphilpott/1bc17b82063f14fabb8f3e38825f6f10/raw/651521fa07f41d2ac1ef058c23babb3a99f8374b/rotation.js").content.decode("utf-8")
             cookies = get("https://gist.githubusercontent.com/jgphilpott/b9ce64b9ef8b04c5ac58902b133b1a28/raw/5a8c863d59be464289bcee3e6363c0d025b050dd/cookies.js").content.decode("utf-8")
