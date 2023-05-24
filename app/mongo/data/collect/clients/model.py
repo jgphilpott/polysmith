@@ -32,7 +32,7 @@ class Client():
                                     },
                                     "filaments": {
                                         "abs": {
-                                            "type": "ABS",
+                                            "type": "abs",
                                             "name": "Generic ABS",
                                             "description": "",
                                             "brand": "Generic",
@@ -53,7 +53,7 @@ class Client():
                                             }
                                         },
                                         "nylon": {
-                                            "type": "Nylon",
+                                            "type": "nylon",
                                             "name": "Generic Nylon",
                                             "description": "",
                                             "brand": "Generic",
@@ -74,7 +74,7 @@ class Client():
                                             }
                                         },
                                         "petg": {
-                                            "type": "PETG",
+                                            "type": "petg",
                                             "name": "Generic PETG",
                                             "description": "",
                                             "brand": "Generic",
@@ -95,7 +95,7 @@ class Client():
                                             }
                                         },
                                         "pla": {
-                                            "type": "PLA",
+                                            "type": "pla",
                                             "name": "Generic PLA",
                                             "description": "",
                                             "brand": "Generic",
@@ -174,12 +174,12 @@ class Client():
                                     },
                                     "scales": {
                                         "angle": {
-                                            "detail": 1,
+                                            "detail": 2,
                                             "snap": True,
                                             "unit": "degree"
                                         },
                                         "area": {
-                                            "detail": 1,
+                                            "detail": 2,
                                             "snap": True,
                                             "unit": {
                                                 "imperial": "inchSq",
@@ -187,17 +187,25 @@ class Client():
                                             }
                                         },
                                         "data": {
-                                            "detail": 1,
+                                            "detail": 2,
                                             "snap": True,
                                             "unit": "byte"
                                         },
+                                        "density": {
+                                            "detail": 2,
+                                            "snap": True,
+                                            "unit": {
+                                                "imperial": "ounceInchCu",
+                                                "metric": "gramCentimeterCu"
+                                            }
+                                        },
                                         "energy": {
-                                            "detail": 1,
+                                            "detail": 2,
                                             "snap": True,
                                             "unit": "watt"
                                         },
                                         "frequency": {
-                                            "detail": 1,
+                                            "detail": 2,
                                             "snap": True,
                                             "unit": "hertz"
                                         },
@@ -210,7 +218,7 @@ class Client():
                                             }
                                         },
                                         "mass": {
-                                            "detail": 1,
+                                            "detail": 2,
                                             "snap": True,
                                             "unit": {
                                                 "imperial": "ounce",
@@ -218,30 +226,30 @@ class Client():
                                             }
                                         },
                                         "pressure": {
-                                            "detail": 1,
+                                            "detail": 2,
                                             "snap": True,
                                             "unit": "psi"
                                         },
                                         "speed": {
-                                            "detail": 1,
+                                            "detail": 2,
                                             "snap": True,
                                             "unit": {
-                                                "imperial": "inchsPerSecond",
-                                                "metric": "millimetersPerSecond"
+                                                "imperial": "inchSecond",
+                                                "metric": "millimeterSecond"
                                             }
                                         },
                                         "temperature": {
-                                            "detail": 1,
+                                            "detail": 2,
                                             "snap": True,
                                             "unit": "celsius"
                                         },
                                         "time": {
-                                            "detail": 1,
+                                            "detail": 2,
                                             "snap": True,
                                             "unit": "millisecond"
                                         },
                                         "volume": {
-                                            "detail": 1,
+                                            "detail": 2,
                                             "snap": True,
                                             "unit": {
                                                 "imperial": "inchCu",
