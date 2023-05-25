@@ -62,6 +62,8 @@ class Filament
         this.filament.getRetractionDistance = this.getRetractionDistance
         this.filament.setRetractionDistance = this.setRetractionDistance
 
+        this.filament.reset = this.reset
+
         return this.filament
 
     getName: ->
@@ -203,3 +205,22 @@ class Filament
         this.retraction.distance = adaptor "invert", "length", distance
 
         if save then settings.set "filaments." + this.type + ".retraction.distance", this.retraction.distance
+
+    reset: ->
+
+        defaults = settings.filaments.defaults()[this.type]
+
+        this.setName defaults.name
+        this.setDescription defaults.description
+        this.setBrand defaults.brand
+        this.setColor defaults.color
+        this.setDiameter adaptor "convert", "length", defaults.diameter
+        this.setDensity adaptor "convert", "density", defaults.density
+        this.setWeight adaptor "convert", "mass", defaults.weight
+        this.setCost defaults.cost
+        this.setFan defaults.fan
+        this.setTemperatureBed interpreter "convert", "temperature", defaults.temperature.bed
+        this.setTemperatureNozzle interpreter "convert", "temperature", defaults.temperature.nozzle
+        this.setTemperatureStandby interpreter "convert", "temperature", defaults.temperature.standby
+        this.setRetractionSpeed adaptor "convert", "speed", defaults.retraction.speed
+        this.setRetractionDistance adaptor "convert", "length", defaults.retraction.distance
