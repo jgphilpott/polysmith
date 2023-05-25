@@ -35,6 +35,33 @@ class Filament
         this.filament.getDiameter = this.getDiameter
         this.filament.setDiameter = this.setDiameter
 
+        this.filament.getDensity = this.getDensity
+        this.filament.setDensity = this.setDensity
+
+        this.filament.getWeight = this.getWeight
+        this.filament.setWeight = this.setWeight
+
+        this.filament.getCost = this.getCost
+        this.filament.setCost = this.setCost
+
+        this.filament.getFan = this.getFan
+        this.filament.setFan = this.setFan
+
+        this.filament.getTemperatureBed = this.getTemperatureBed
+        this.filament.setTemperatureBed = this.setTemperatureBed
+
+        this.filament.getTemperatureNozzle = this.getTemperatureNozzle
+        this.filament.setTemperatureNozzle = this.setTemperatureNozzle
+
+        this.filament.getTemperatureStandby = this.getTemperatureStandby
+        this.filament.setTemperatureStandby = this.setTemperatureStandby
+
+        this.filament.getRetractionSpeed = this.getRetractionSpeed
+        this.filament.setRetractionSpeed = this.setRetractionSpeed
+
+        this.filament.getRetractionDistance = this.getRetractionDistance
+        this.filament.setRetractionDistance = this.setRetractionDistance
+
         return this.filament
 
     getName: ->
@@ -86,3 +113,93 @@ class Filament
         this.diameter = adaptor "invert", "length", diameter
 
         if save then settings.set "filaments." + this.type + ".diameter", this.diameter
+
+    getDensity: ->
+
+        return adaptor "convert", "density", clone this.density
+
+    setDensity: (density, save = true) ->
+
+        this.density = adaptor "invert", "density", density
+
+        if save then settings.set "filaments." + this.type + ".density", this.density
+
+    getWeight: ->
+
+        return adaptor "convert", "mass", clone this.weight
+
+    setWeight: (weight, save = true) ->
+
+        this.weight = adaptor "invert", "mass", weight
+
+        if save then settings.set "filaments." + this.type + ".weight", this.weight
+
+    getCost: ->
+
+        return clone this.cost
+
+    setCost: (cost, save = true) ->
+
+        this.cost = cost
+
+        if save then settings.set "filaments." + this.type + ".cost", this.cost
+
+    getFan: ->
+
+        return clone this.fan
+
+    setFan: (fan, save = true) ->
+
+        this.fan = fan
+
+        if save then settings.set "filaments." + this.type + ".fan", this.fan
+
+    getTemperatureBed: ->
+
+        return interpreter "convert", "temperature", clone this.temperature.bed
+
+    setTemperatureBed: (temperature, save = true) ->
+
+        this.temperature.bed = interpreter "invert", "temperature", temperature
+
+        if save then settings.set "filaments." + this.type + ".temperature.bed", this.temperature.bed
+
+    getTemperatureNozzle: ->
+
+        return interpreter "convert", "temperature", clone this.temperature.nozzle
+
+    setTemperatureNozzle: (temperature, save = true) ->
+
+        this.temperature.nozzle = interpreter "invert", "temperature", temperature
+
+        if save then settings.set "filaments." + this.type + ".temperature.nozzle", this.temperature.nozzle
+
+    getTemperatureStandby: ->
+
+        return interpreter "convert", "temperature", clone this.temperature.standby
+
+    setTemperatureStandby: (temperature, save = true) ->
+
+        this.temperature.standby = interpreter "invert", "temperature", temperature
+
+        if save then settings.set "filaments." + this.type + ".temperature.standby", this.temperature.standby
+
+    getRetractionSpeed: ->
+
+        return adaptor "convert", "speed", clone this.retraction.speed
+
+    setRetractionSpeed: (speed, save = true) ->
+
+        this.retraction.speed = adaptor "invert", "speed", speed
+
+        if save then settings.set "filaments." + this.type + ".retraction.speed", this.retraction.speed
+
+    getRetractionDistance: ->
+
+        return adaptor "convert", "length", clone this.retraction.distance
+
+    setRetractionDistance: (distance, save = true) ->
+
+        this.retraction.distance = adaptor "invert", "length", distance
+
+        if save then settings.set "filaments." + this.type + ".retraction.distance", this.retraction.distance

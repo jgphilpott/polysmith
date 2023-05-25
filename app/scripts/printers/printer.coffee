@@ -68,15 +68,25 @@ class Printer
 
         if save then settings.set "printer.centred", this.centred
 
-    getHeated: (component = "bed") ->
+    getHeatedBed: ->
 
-        return clone this.heated[component]
+        return clone this.heated.bed
 
-    setHeated: (heated, component = "bed", save = true) ->
+    setHeatedBed: (heated, save = true) ->
 
-        this.heated[component] = heated
+        this.heated.bed = heated
 
-        if save then settings.set "printer.heated", this.heated
+        if save then settings.set "printer.heated.bed", this.heated.bed
+
+    getHeatedVolume: ->
+
+        return clone this.heated.volume
+
+    setHeatedVolume: (heated, save = true) ->
+
+        this.heated.volume = heated
+
+        if save then settings.set "printer.heated.volume", this.heated.volume
 
     getNozzles: ->
 
@@ -159,8 +169,8 @@ class Printer
         this.setSize vectorAdaptor "convert", "length", defaults.size
         this.setShape defaults.shape
         this.setCentred defaults.centred
-        this.setHeated defaults.heated.bed, "bed"
-        this.setHeated defaults.heated.volume, "volume"
+        this.setHeatedBed defaults.heated.bed
+        this.setHeatedVolume defaults.heated.volume
 
         for nozzle in defaults.nozzles
 
