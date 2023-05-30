@@ -4,6 +4,20 @@ class DragControls
 
         @active = null
 
+        @speed = settings.get "controls.speed.drag"
+
+    getSpeed: ->
+
+        return clone this.speed
+
+    setSpeed: (speed, save = true) ->
+
+        this.speed = speed
+
+        panels.camera.setDragSpeed this.speed
+
+        if save then settings.set "controls.speed.drag", this.speed
+
     add: ->
 
         if not this.active
@@ -25,18 +39,19 @@ class DragControls
             verticalAngle = null
             horizontalAngle = null
 
-            start = (event) ->
+            start = (event) =>
 
                 startX = event.pageX
                 startY = event.pageY
 
-                camera.setDragged null
+                camera.dragged = null
+                camera.dragging = null
 
                 event.preventDefault()
                 event.stopPropagation()
 
-                target = camera.getTarget()
-                position = camera.getPosition()
+                target = camera.target
+                position = camera.position
 
                 deltaX = Math.abs position.x - target.x
                 deltaZ = Math.abs position.z - target.z
@@ -51,17 +66,17 @@ class DragControls
                 if position.y < target.y then horizontalAngle = -horizontalAngle
                 if position.z < target.z then verticalAngle = 180 - verticalAngle
 
-                dragSpeed = settings.get "controls.speed.drag"
-                dragSpeed = dragSpeed / dragModifier
+                dragSpeed = this.getSpeed() / dragModifier
 
                 document.onmousemove = drag
                 document.onmouseup = stop
 
-            drag = (event) ->
+            drag = (event) =>
 
                 satoshi = 0.000001
 
-                camera.setDragged true
+                camera.dragged = true
+                camera.dragging = true
 
                 event.preventDefault()
                 event.stopPropagation()
@@ -80,12 +95,20 @@ class DragControls
                 newY = side$angle(newHorizontalAngle, radius2, null, true) + target.y
                 newZ = side$angle(newVerticalAngle, radius3, true, null) + target.z
 
-                camera.setPosition x: newX, y: newY, z: newZ, false
+                newPosition =
 
-            stop = (event) ->
+                    x: adaptor "convert", "length", newX
+                    y: adaptor "convert", "length", newY
+                    z: adaptor "convert", "length", newZ
+
+                camera.setPosition newPosition, false
+
+            stop = (event) =>
 
                 event.preventDefault()
                 event.stopPropagation()
+
+                camera.dragging = false
 
                 document.onmouseup = null
                 document.onmousemove = null
@@ -101,3 +124,9 @@ class DragControls
             this.active = false
 
             $("#canvas").off "mousedown"
+
+    reset: ->
+
+        defaults = settings.controls.defaults()
+
+        this.setSpeed defaults.speed.drag

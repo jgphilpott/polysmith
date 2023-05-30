@@ -4,26 +4,47 @@ class FlyControls
 
         @active = null
 
+        @speed = settings.get "controls.speed.fly"
+
+        @flyCodes = [37, 38, 39, 40, 65, 68, 83, 87]
+
+        @moveCodes = [37, 38, 39, 40]
+        @spinCodes = [65, 68, 83, 87]
+
+    getSpeed: ->
+
+        return clone this.speed
+
+    setSpeed: (speed, save = true) ->
+
+        this.speed = speed
+
+        panels.camera.setFlySpeed this.speed
+
+        if save then settings.set "controls.speed.fly", this.speed
+
     add: ->
 
         if not this.active
 
             this.active = true
 
-            $(document).keydown (event) ->
+            $(document).keydown (event) =>
 
-                if [37, 38, 39, 40, 65, 68, 83, 87].includes event.keyCode
+                if not camera.dragging and not camera.focusing and this.flyCodes.includes event.keyCode
 
                     flyModifier = 10
                     satoshi = 0.000001
 
-                    target = clone camera.getTarget()
-                    position = clone camera.getPosition()
+                    camera.flying = true
+
+                    target = camera.target
+                    position = camera.position
 
                     deltaX = Math.abs position.x - target.x
                     deltaZ = Math.abs position.z - target.z
 
-                    radius3 = camera.getPosition().distanceTo target
+                    radius3 = camera.position.distanceTo target
                     radius2 = side$sides deltaZ, null, radius3
 
                     verticalAngle = angle$sides radius3, deltaZ
@@ -33,10 +54,11 @@ class FlyControls
                     if position.y < target.y then horizontalAngle = -horizontalAngle
                     if position.z < target.z then verticalAngle = 180 - verticalAngle
 
-                    flySpeed = settings.get "controls.speed.fly"
-                    flySpeed = flySpeed / flyModifier
+                    flySpeed = this.getSpeed() / flyModifier
 
-                    if [37, 38, 39, 40].includes event.keyCode
+                    if this.moveCodes.includes event.keyCode
+
+                        camera.moving = true
 
                         if event.keyCode is 38 or event.keyCode is 40 # Up or Down
 
@@ -79,7 +101,9 @@ class FlyControls
                                 target.x += stepX
                                 target.y += stepY
 
-                    if [65, 68, 83, 87].includes event.keyCode
+                    if this.spinCodes.includes event.keyCode
+
+                        camera.spinning = true
 
                         if event.keyCode is 87 or event.keyCode is 83 # W or S
 
@@ -107,18 +131,26 @@ class FlyControls
                         target.x = position.x - side$angle horizontalAngle, radius2, true, null
                         target.y = position.y - side$angle horizontalAngle, radius2, null, true
 
+                    position = vectorAdaptor "convert", "length", position
+                    target = vectorAdaptor "convert", "length", target
+
                     camera.setPosition position, false
                     camera.setTarget target, false
 
-            $(document).keyup (event) ->
+            $(document).keyup (event) =>
 
-                if [37, 38, 39, 40, 65, 68, 83, 87].includes event.keyCode
+                if this.flyCodes.includes event.keyCode
 
-                    if [37, 38, 39, 40].includes event.keyCode
+                    if this.moveCodes.includes event.keyCode
 
                         camera.setPosition camera.getPosition()
 
                     camera.setTarget camera.getTarget()
+
+                    camera.spinning = false
+                    camera.moving = false
+
+                    camera.flying = false
 
     remove: ->
 
@@ -127,3 +159,9 @@ class FlyControls
             this.active = false
 
             $(document).off "keydown keyup"
+
+    reset: ->
+
+        defaults = settings.controls.defaults()
+
+        this.setSpeed defaults.speed.fly
