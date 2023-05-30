@@ -167,6 +167,7 @@ class Printer
         defaults = settings.printer.defaults()
 
         this.setSize vectorAdaptor "convert", "length", defaults.size
+
         this.setShape defaults.shape
         this.setCentred defaults.centred
         this.setHeatedBed defaults.heated.bed

@@ -73,8 +73,11 @@ class Slicer
         defaults = settings.slicing.defaults()
 
         this.setGcode defaults.gcode
+
         this.setAdhesion defaults.adhesion
         this.setSupport defaults.support
+
         this.setLayer adaptor "convert", "length", defaults.layer
+
         this.setInfillDensity defaults.infill.density
         this.setInfillPattern defaults.infill.pattern
