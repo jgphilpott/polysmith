@@ -31,7 +31,6 @@ class ScalesSettings
             snap: true
             unit: "byte"
 
-
         density:
 
             detail: 2
@@ -40,18 +39,6 @@ class ScalesSettings
 
                 imperial: "ounceInchCu"
                 metric: "gramCentimeterCu"
-
-        energy:
-
-            detail: 2
-            snap: true
-            unit: "watt"
-
-        frequency:
-
-            detail: 2
-            snap: true
-            unit: "hertz"
 
         length:
 
@@ -70,12 +57,6 @@ class ScalesSettings
 
                 imperial: "ounce"
                 metric: "gram"
-
-        pressure:
-
-            detail: 2
-            snap: true
-            unit: "psi"
 
         speed:
 

@@ -199,16 +199,6 @@ class Client():
                                                 "metric": "gramCentimeterCu"
                                             }
                                         },
-                                        "energy": {
-                                            "detail": 2,
-                                            "snap": True,
-                                            "unit": "watt"
-                                        },
-                                        "frequency": {
-                                            "detail": 2,
-                                            "snap": True,
-                                            "unit": "hertz"
-                                        },
                                         "length": {
                                             "detail": 2,
                                             "snap": True,
@@ -224,11 +214,6 @@ class Client():
                                                 "imperial": "ounce",
                                                 "metric": "gram"
                                             }
-                                        },
-                                        "pressure": {
-                                            "detail": 2,
-                                            "snap": True,
-                                            "unit": "psi"
                                         },
                                         "speed": {
                                             "detail": 2,
