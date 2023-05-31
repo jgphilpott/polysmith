@@ -30,6 +30,14 @@ class Axes
 
     reset: ->
 
+        defaults = settings.tooltips.defaults().grid.axes
+
+        settings.set "tooltips.grid.axes.x", defaults.x
+        settings.set "tooltips.grid.axes.y", defaults.y
+        settings.set "tooltips.grid.axes.z", defaults.z
+
+    refresh: ->
+
         this.remove()
         this.add()
 
@@ -39,7 +47,7 @@ class Axes
 
             size = adaptor "invert", "length", size
 
-            this.x = new Stroke vertices: [[-size / 2, 0, 0], [size / 2, 0, 0]], linewidth: 3, color: redThree
+            this.x = new Stroke vertices: [[size / 2, 0, 0], [-size / 2, 0, 0]], linewidth: 3, color: redThree
 
             grid.caps.addCentroid()
             grid.caps.addX()
@@ -73,7 +81,7 @@ class Axes
 
             size = adaptor "invert", "length", size
 
-            this.y = new Stroke vertices: [[0, -size / 2, 0], [0, size / 2, 0]], linewidth: 3, color: greenThree
+            this.y = new Stroke vertices: [[0, size / 2, 0], [0, -size / 2, 0]], linewidth: 3, color: greenThree
 
             grid.caps.addCentroid()
             grid.caps.addY()
@@ -107,7 +115,7 @@ class Axes
 
             size = adaptor "invert", "length", size
 
-            this.z = new Stroke vertices: [[0, 0, -size / 2], [0, 0, size / 2]], linewidth: 3, color: blueThree
+            this.z = new Stroke vertices: [[0, 0, size / 2], [0, 0, -size / 2]], linewidth: 3, color: blueThree
 
             grid.caps.addCentroid()
             grid.caps.addZ()

@@ -26,7 +26,7 @@ class Client():
                                             "zoom": 50
                                         },
                                         "zoom": {
-                                            "min": 1,
+                                            "min": 5,
                                             "max": 500
                                         }
                                     },

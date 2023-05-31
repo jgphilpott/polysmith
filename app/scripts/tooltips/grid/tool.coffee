@@ -30,5 +30,11 @@ class Grid
 
     reset: ->
 
+        this.axes.reset()
+        this.caps.reset()
+        this.ticks.reset()
+
+    refresh: ->
+
         this.remove()
         this.add()

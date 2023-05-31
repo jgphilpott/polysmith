@@ -18,7 +18,7 @@ class ControlsSettings
 
         zoom:
 
-            min: 1
+            min: 5
             max: 500
 
     update: (path, value) ->

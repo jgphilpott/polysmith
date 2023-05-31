@@ -45,6 +45,12 @@ class Caps
 
     reset: ->
 
+        defaults = settings.tooltips.defaults().grid.caps
+
+        settings.set "tooltips.grid.caps", defaults
+
+    refresh: ->
+
         this.remove()
         this.add()
 
@@ -54,7 +60,7 @@ class Caps
 
             if not this.centroid and settings.get "tooltips.grid.caps"
 
-                this.centroid = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: 0, y: 0, z: 0}, material: "basic", color: blackThree
+                this.centroid = new Sphere radius: 1, widthSegments: 24, heightSegments: 24, position: {x: 0, y: 0, z: 0}, material: "basic", color: blackThree
 
                 this.addEvents this.centroid
 
@@ -81,8 +87,8 @@ class Caps
 
             if not this.xMin and not this.xMax and settings.get "tooltips.grid.caps"
 
-                this.xMin = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: -size / 2, y: 0, z: 0}, material: "basic", color: redThree
-                this.xMax = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: size / 2, y: 0, z: 0}, material: "basic", color: greenThree
+                this.xMin = new Sphere radius: 1, widthSegments: 24, heightSegments: 24, position: {x: -size / 2, y: 0, z: 0}, material: "basic", color: redThree
+                this.xMax = new Sphere radius: 1, widthSegments: 24, heightSegments: 24, position: {x: size / 2, y: 0, z: 0}, material: "basic", color: greenThree
 
                 this.addEvents this.xMin; this.addEvents this.xMax
 
@@ -109,8 +115,8 @@ class Caps
 
             if not this.yMin and not this.yMax and settings.get "tooltips.grid.caps"
 
-                this.yMin = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: 0, y: -size / 2, z: 0}, material: "basic", color: redThree
-                this.yMax = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: 0, y: size / 2, z: 0}, material: "basic", color: greenThree
+                this.yMin = new Sphere radius: 1, widthSegments: 24, heightSegments: 24, position: {x: 0, y: -size / 2, z: 0}, material: "basic", color: redThree
+                this.yMax = new Sphere radius: 1, widthSegments: 24, heightSegments: 24, position: {x: 0, y: size / 2, z: 0}, material: "basic", color: greenThree
 
                 this.addEvents this.yMin; this.addEvents this.yMax
 
@@ -137,8 +143,8 @@ class Caps
 
             if not this.zMin and not this.zMax and settings.get "tooltips.grid.caps"
 
-                this.zMin = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: 0, y: 0, z: -size / 2}, material: "basic", color: redThree
-                this.zMax = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: 0, y: 0, z: size / 2}, material: "basic", color: greenThree
+                this.zMin = new Sphere radius: 1, widthSegments: 24, heightSegments: 24, position: {x: 0, y: 0, z: -size / 2}, material: "basic", color: redThree
+                this.zMax = new Sphere radius: 1, widthSegments: 24, heightSegments: 24, position: {x: 0, y: 0, z: size / 2}, material: "basic", color: greenThree
 
                 this.addEvents this.zMin; this.addEvents this.zMax
 
@@ -159,33 +165,33 @@ class Caps
 
     addEvents: (cap) ->
 
-        events.addEventListener cap, "mouseover", (event) ->
+        events.addEventListener cap, "mouseover", (event) =>
 
             if not events.operation.key
 
                 $("#canvas").css "cursor", "pointer"
 
-        events.addEventListener cap, "mouseout", (event) ->
+        events.addEventListener cap, "mouseout", (event) =>
 
             if not events.operation.key
 
                 $("#canvas").css "cursor", ""
 
-        events.addEventListener cap, "mousedown", (event) ->
+        events.addEventListener cap, "mousedown", (event) =>
 
             event.stopPropagation()
 
-        events.addEventListener cap, "mouseup", (event) ->
+        events.addEventListener cap, "mouseup", (event) =>
 
             event.stopPropagation()
 
-        events.addEventListener cap, "dblclick", (event) ->
+        events.addEventListener cap, "dblclick", (event) =>
 
-            if camera.focus event.target.position
+            if camera.focus vectorAdaptor "convert", "length", event.target.position
 
                 $("#canvas").css "cursor", ""
 
-        events.addEventListener cap, "contextmenu", (event) ->
+        events.addEventListener cap, "contextmenu", (event) =>
 
             contextMenu "gridCap", cap, event.origDomEvent
 

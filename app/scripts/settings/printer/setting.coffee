@@ -30,4 +30,4 @@ class PrinterSettings
 
         if path[1] is "size"
 
-            grid.reset()
+            grid.refresh()

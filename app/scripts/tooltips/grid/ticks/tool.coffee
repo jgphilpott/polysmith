@@ -4,6 +4,10 @@ class Ticks
 
         @active = null
 
+        @xyStep = settings.get "tooltips.grid.ticks.step.xy"
+        @xzStep = settings.get "tooltips.grid.ticks.step.xz"
+        @yzStep = settings.get "tooltips.grid.ticks.step.yz"
+
         @xy = []
         @xz = []
         @yz = []
@@ -30,14 +34,68 @@ class Ticks
 
     reset: ->
 
+        defaults = settings.tooltips.defaults().grid.ticks
+
+        settings.set "tooltips.grid.ticks.xy", defaults.xy
+        settings.set "tooltips.grid.ticks.xz", defaults.xz
+        settings.set "tooltips.grid.ticks.yz", defaults.yz
+
+        settings.set "tooltips.grid.ticks.step.xy", defaults.step.xy
+        settings.set "tooltips.grid.ticks.step.xz", defaults.step.xz
+        settings.set "tooltips.grid.ticks.step.yz", defaults.step.yz
+
+    refresh: ->
+
         this.remove()
         this.add()
+
+    getStepXY: ->
+
+        return adaptor "convert", "length", clone this.xyStep
+
+    setStepXY: (step, save = true) ->
+
+        this.removeXY false
+
+        this.xyStep = adaptor "invert", "length", step
+
+        this.addXY printer.getSizeX(), printer.getSizeY(), false
+
+        if save then settings.set "tooltips.grid.ticks.step.xy", this.xyStep
+
+    getStepXZ: ->
+
+        return adaptor "convert", "length", clone this.xzStep
+
+    setStepXZ: (step, save = true) ->
+
+        this.removeXZ false
+
+        this.xzStep = adaptor "invert", "length", step
+
+        this.addXZ printer.getSizeX(), printer.getSizeZ(), false
+
+        if save then settings.set "tooltips.grid.ticks.step.xz", this.xzStep
+
+    getStepYZ: ->
+
+        return adaptor "convert", "length", clone this.yzStep
+
+    setStepYZ: (step, save = true) ->
+
+        this.removeYZ false
+
+        this.yzStep = adaptor "invert", "length", step
+
+        this.addYZ printer.getSizeY(), printer.getSizeZ(), false
+
+        if save then settings.set "tooltips.grid.ticks.step.yz", this.yzStep
 
     addXY: (xSize = printer.getSizeX(), ySize = printer.getSizeY(), save = true) ->
 
         if this.xy.length is 0 and settings.get "tooltips.grid.ticks.xy"
 
-            step = settings.get "tooltips.grid.ticks.step.xy"
+            step = adaptor "invert", "length", this.getStepXY()
 
             xSize = adaptor "invert", "length", xSize
             ySize = adaptor "invert", "length", ySize
@@ -85,7 +143,7 @@ class Ticks
 
         if this.xz.length is 0 and settings.get "tooltips.grid.ticks.xz"
 
-            step = settings.get "tooltips.grid.ticks.step.xz"
+            step = adaptor "invert", "length", this.getStepXZ()
 
             xSize = adaptor "invert", "length", xSize
             zSize = adaptor "invert", "length", zSize
@@ -133,7 +191,7 @@ class Ticks
 
         if this.yz.length is 0 and settings.get "tooltips.grid.ticks.yz"
 
-            step = settings.get "tooltips.grid.ticks.step.yz"
+            step = adaptor "invert", "length", this.getStepYZ()
 
             ySize = adaptor "invert", "length", ySize
             zSize = adaptor "invert", "length", zSize
