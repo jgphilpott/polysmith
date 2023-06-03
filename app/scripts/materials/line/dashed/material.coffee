@@ -17,3 +17,5 @@ class POLY.DashedLineMaterial extends THREE.LineDashedMaterial
         params.gapSize ?= 2
 
         super params
+
+        @dashed = true

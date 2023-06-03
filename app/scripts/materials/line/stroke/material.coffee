@@ -18,3 +18,13 @@ class POLY.StrokeLineMaterial extends LineThickMaterial
         params.gapSize ?= 2
 
         super params
+
+        this.setResolution()
+
+    getResolution: ->
+
+        return clone this.resolution
+
+    setResolution: (width = window.innerWidth, height = window.innerHeight) ->
+
+        this.resolution.set width, height

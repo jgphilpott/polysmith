@@ -14,3 +14,5 @@ class POLY.SolidLineMaterial extends THREE.LineBasicMaterial
         params.linewidth ?= 1
 
         super params
+
+        @dashed = false
