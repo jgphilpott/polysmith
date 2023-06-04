@@ -2,9 +2,12 @@ polygen = ->
 
     log "### Setup ###"
 
-    dashed = new Line material: "dashed", linewidth: 5, color: blueThree, vertices: [[10, 20, 10], [-10, 0, -10]]
-    solid = new Line material: "solid", linewidth: 5, color: blueThree, vertices: [[10, 0, 10], [-10, -20, -10]]
-    stroke = new Stroke material: "stroke", linewidth: 5, color: blueThree, vertices: [[10, 10, 10], [-10, -10, -10]]
+    camera.setTarget x: 0, y: 0, z: 0
+    camera.setPosition x: -42, y: 42, z: 42
+
+    dashed = new Line material: "dashed", color: blueThree, opacity: 50, linewidth: 5, vertices: [[10, 20, 10], [-10, 0, -10]]
+    solid = new Line material: "solid", color: blueThree, opacity: 50, linewidth: 5, vertices: [[10, 0, 10], [-10, -20, -10]]
+    stroke = new Stroke material: "stroke", color: blueThree, opacity: 50, linewidth: 5, vertices: [[10, 10, 10], [-10, -10, -10]]
 
     log dashed.material
     log solid.material
@@ -38,9 +41,9 @@ polygen = ->
     log solid.material.getOpacity()
     log stroke.material.getOpacity()
 
-    dashed.material.setOpacity 50
-    solid.material.setOpacity 50
-    stroke.material.setOpacity 50
+    dashed.material.setOpacity 100
+    solid.material.setOpacity 100
+    stroke.material.setOpacity 100
 
     log "### Transparent Tests ###"
 

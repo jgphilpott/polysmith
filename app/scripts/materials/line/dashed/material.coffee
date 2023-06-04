@@ -10,6 +10,7 @@ class POLY.DashedLineMaterial extends THREE.LineDashedMaterial
 
     constructor: (params = {}) ->
 
+        params.opacity = if params.opacity then params.opacity / 100 else 1
         params.color ?= blackThree
         params.linewidth ?= 1
 
