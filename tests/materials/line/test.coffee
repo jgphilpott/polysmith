@@ -5,9 +5,9 @@ polygen = ->
     camera.setTarget x: 0, y: 0, z: 0
     camera.setPosition x: -42, y: 42, z: 42
 
-    dashed = new Line material: "dashed", color: blueThree, opacity: 50, linewidth: 5, vertices: [[10, 20, 10], [-10, 0, -10]]
-    solid = new Line material: "solid", color: blueThree, opacity: 50, linewidth: 5, vertices: [[10, 0, 10], [-10, -20, -10]]
-    stroke = new Stroke material: "stroke", color: blueThree, opacity: 50, linewidth: 5, vertices: [[10, 10, 10], [-10, -10, -10]]
+    dashed = new Line name: "Dashed", material: "dashed", color: blueThree, opacity: 50, linewidth: 5, vertices: [[10, 20, 10], [-10, 0, -10]]
+    solid = new Line name: "Solid", material: "solid", color: blueThree, opacity: 50, linewidth: 5, vertices: [[10, 0, 10], [-10, -20, -10]]
+    stroke = new Stroke name: "Stroke", material: "stroke", color: blueThree, opacity: 50, linewidth: 5, vertices: [[10, 10, 10], [-10, -10, -10]]
 
     log dashed.material
     log solid.material
@@ -19,93 +19,110 @@ polygen = ->
 
     log "### Color Tests ###"
 
+    materialsLineColorTest1 = redThree
+    materialsLineColorTest2 = "#FFBF00"
+    materialsLineColorTest3 = "green"
+
+    materialsLineColorTest = materialsLineColorTest1
+
     log dashed.material.getColor()
     log solid.material.getColor()
     log stroke.material.getColor()
 
-    dashed.material.setColor "#FFBF00"
-    solid.material.setColor "#FFBF00"
-    stroke.material.setColor "#FFBF00"
-
-    dashed.material.setColor "green"
-    solid.material.setColor "green"
-    stroke.material.setColor "green"
-
-    dashed.material.setColor redThree
-    solid.material.setColor redThree
-    stroke.material.setColor redThree
+    dashed.material.setColor materialsLineColorTest
+    solid.material.setColor materialsLineColorTest
+    stroke.material.setColor materialsLineColorTest
 
     log "### Opacity Tests ###"
+
+    materialsLineOpacityTest1 = 100
+    materialsLineOpacityTest2 = 50
+    materialsLineOpacityTest3 = 0
+
+    materialsLineOpacityTest = materialsLineOpacityTest1
 
     log dashed.material.getOpacity()
     log solid.material.getOpacity()
     log stroke.material.getOpacity()
 
-    dashed.material.setOpacity 100
-    solid.material.setOpacity 100
-    stroke.material.setOpacity 100
+    dashed.material.setOpacity materialsLineOpacityTest
+    solid.material.setOpacity materialsLineOpacityTest
+    stroke.material.setOpacity materialsLineOpacityTest
 
     log "### Transparent Tests ###"
+
+    materialsLineTransparentTest1 = true
+    materialsLineTransparentTest2 = false
+
+    materialsLineTransparentTest = materialsLineTransparentTest1
 
     log dashed.material.getTransparent()
     log solid.material.getTransparent()
     log stroke.material.getTransparent()
 
-    dashed.material.setTransparent false
-    solid.material.setTransparent false
-    stroke.material.setTransparent false
-
-    dashed.material.setTransparent true
-    solid.material.setTransparent true
-    stroke.material.setTransparent true
+    dashed.material.setTransparent materialsLineTransparentTest
+    solid.material.setTransparent materialsLineTransparentTest
+    stroke.material.setTransparent materialsLineTransparentTest
 
     log "### Linewidth Tests ###"
+
+    materialsLineLinewidthTest1 = 10
+    materialsLineLinewidthTest2 = "1"
+
+    materialsLineLinewidthTest = materialsLineLinewidthTest1
 
     log dashed.material.getLinewidth()
     log solid.material.getLinewidth()
     log stroke.material.getLinewidth()
 
-    dashed.material.setLinewidth "1"
-    solid.material.setLinewidth "1"
-    stroke.material.setLinewidth "1"
-
-    dashed.material.setLinewidth 10
-    solid.material.setLinewidth 10
-    stroke.material.setLinewidth 10
+    dashed.material.setLinewidth materialsLineLinewidthTest
+    solid.material.setLinewidth materialsLineLinewidthTest
+    stroke.material.setLinewidth materialsLineLinewidthTest
 
     log "### Dashed Tests ###"
+
+    materialsLineDashedTest1 = true
+    materialsLineDashedTest2 = false
+
+    materialsLineDashedTest = materialsLineDashedTest1
 
     log dashed.material.getDashed()
     log solid.material.getDashed()
     log stroke.material.getDashed()
 
-    dashed.material.setDashed false
-    solid.material.setDashed false
-    stroke.material.setDashed false
-
-    dashed.material.setDashed true
-    solid.material.setDashed true
-    stroke.material.setDashed true
+    dashed.material.setDashed materialsLineDashedTest
+    solid.material.setDashed materialsLineDashedTest
+    stroke.material.setDashed materialsLineDashedTest
 
     log "### Dash Size Tests ###"
+
+    materialsLineDashSizeTest1 = 1
+    materialsLineDashSizeTest2 = "2"
+
+    materialsLineDashSizeTest = materialsLineDashSizeTest1
 
     log dashed.material.getDashSize()
     log solid.material.getDashSize()
     log stroke.material.getDashSize()
 
-    dashed.material.setDashSize 1
-    solid.material.setDashSize 1
-    stroke.material.setDashSize 1
+    dashed.material.setDashSize materialsLineDashSizeTest
+    solid.material.setDashSize materialsLineDashSizeTest
+    stroke.material.setDashSize materialsLineDashSizeTest
 
     log "### Gap Size Tests ###"
+
+    materialsLineGapSizeTest1 = 1
+    materialsLineGapSizeTest2 = "2"
+
+    materialsLineGapSizeTest = materialsLineGapSizeTest1
 
     log dashed.material.getGapSize()
     log solid.material.getGapSize()
     log stroke.material.getGapSize()
 
-    dashed.material.setGapSize 1
-    solid.material.setGapSize 1
-    stroke.material.setGapSize 1
+    dashed.material.setGapSize materialsLineGapSizeTest
+    solid.material.setGapSize materialsLineGapSizeTest
+    stroke.material.setGapSize materialsLineGapSizeTest
 
     log "### Resolution Tests ###"
 

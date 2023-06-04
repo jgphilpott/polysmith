@@ -50,4 +50,45 @@ class MeshMaterial
 
                 @material = params.material
 
+        this.material.getColor = this.getColor
+        this.material.setColor = this.setColor
+
+        this.material.getOpacity = this.getOpacity
+        this.material.setOpacity = this.setOpacity
+
+        this.material.getTransparent = this.getTransparent
+        this.material.setTransparent = this.setTransparent
+
+        this.material.setTransparent true
+
         return this.material
+
+    getColor: ->
+
+        return clone this.color
+
+    setColor: (color) ->
+
+        if color instanceof THREE.Color
+
+            this.color = color
+
+        else
+
+            this.color = new THREE.Color color
+
+    getOpacity: ->
+
+        return clone this.opacity * 100
+
+    setOpacity: (opacity) ->
+
+        this.opacity = Number opacity / 100
+
+    getTransparent: ->
+
+        return clone this.transparent
+
+    setTransparent: (transparent) ->
+
+        this.transparent = Boolean transparent
