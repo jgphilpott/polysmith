@@ -59,6 +59,12 @@ class MeshMaterial
         this.material.getTransparent = this.getTransparent
         this.material.setTransparent = this.setTransparent
 
+        this.material.getWireframe = this.getWireframe
+        this.material.setWireframe = this.setWireframe
+
+        this.material.getSide = this.getSide
+        this.material.setSide = this.setSide
+
         this.material.setTransparent true
 
         return this.material
@@ -92,3 +98,25 @@ class MeshMaterial
     setTransparent: (transparent) ->
 
         this.transparent = Boolean transparent
+
+    getWireframe: ->
+
+        return clone this.wireframe
+
+    setWireframe: (wireframe) ->
+
+        this.wireframe = Boolean wireframe
+
+    getSide: ->
+
+        return clone this.side
+
+    setSide: (side) ->
+
+        if side is THREE.DoubleSide or side is THREE.FrontSide or side is THREE.BackSide
+
+            this.side = side
+
+        else
+
+            this.side = THREE.DoubleSide

@@ -11,9 +11,9 @@ polygen = ->
     lambert = new Sphere name: "Lambert", material: "lambert", color: blueThree, opacity: 50, position: {x: 80, y: 0, z: 0}
     matcap = new Sphere name: "Matcap", material: "matcap", color: blueThree, opacity: 50, position: {x: 40, y: 0, z: 0}
     normal = new Sphere name: "Normal", material: "normal", color: blueThree, opacity: 50, position: {x: 20, y: 0, z: 0}
-    phong = new Sphere name: "Phong", material: "phong", color: blueThree, opacity: 50, position: {x: 50, y: 0, z: 0}
+    phong = new Sphere name: "Phong", material: "phong", color: blueThree, opacity: 50, position: {x: 70, y: 0, z: 0}
     physical = new Sphere name: "Physical", material: "physical", color: blueThree, opacity: 50, position: {x: 60, y: 0, z: 0}
-    standard = new Sphere name: "Standard", material: "standard", color: blueThree, opacity: 50, position: {x: 70, y: 0, z: 0}
+    standard = new Sphere name: "Standard", material: "standard", color: blueThree, opacity: 50, position: {x: 50, y: 0, z: 0}
     toon = new Sphere name: "Toon", material: "toon", color: blueThree, opacity: 50, position: {x: 90, y: 0, z: 0}
 
     log basic.material
@@ -126,3 +126,62 @@ polygen = ->
     physical.material.setTransparent materialsMeshTransparentTest
     standard.material.setTransparent materialsMeshTransparentTest
     toon.material.setTransparent materialsMeshTransparentTest
+
+    log "### Wireframe Tests ###"
+
+    materialsMeshWireframeTest1 = false
+    materialsMeshWireframeTest2 = true
+
+    materialsMeshWireframeTest = materialsMeshWireframeTest1
+
+    log basic.material.getWireframe()
+    log depth.material.getWireframe()
+    log distance.material.getWireframe()
+    log lambert.material.getWireframe()
+    log matcap.material.getWireframe()
+    log normal.material.getWireframe()
+    log phong.material.getWireframe()
+    log physical.material.getWireframe()
+    log standard.material.getWireframe()
+    log toon.material.getWireframe()
+
+    basic.material.setWireframe materialsMeshWireframeTest
+    depth.material.setWireframe materialsMeshWireframeTest
+    distance.material.setWireframe materialsMeshWireframeTest
+    lambert.material.setWireframe materialsMeshWireframeTest
+    matcap.material.setWireframe materialsMeshWireframeTest
+    normal.material.setWireframe materialsMeshWireframeTest
+    phong.material.setWireframe materialsMeshWireframeTest
+    physical.material.setWireframe materialsMeshWireframeTest
+    standard.material.setWireframe materialsMeshWireframeTest
+    toon.material.setWireframe materialsMeshWireframeTest
+
+    log "### Side Tests ###"
+
+    materialsMeshSideTest1 = THREE.DoubleSide
+    materialsMeshSideTest2 = THREE.FrontSide
+    materialsMeshSideTest3 = THREE.BackSide
+
+    materialsMeshSideTest = materialsMeshSideTest1
+
+    log basic.material.getSide()
+    log depth.material.getSide()
+    log distance.material.getSide()
+    log lambert.material.getSide()
+    log matcap.material.getSide()
+    log normal.material.getSide()
+    log phong.material.getSide()
+    log physical.material.getSide()
+    log standard.material.getSide()
+    log toon.material.getSide()
+
+    basic.material.setSide materialsMeshSideTest
+    depth.material.setSide materialsMeshSideTest
+    distance.material.setSide materialsMeshSideTest
+    lambert.material.setSide materialsMeshSideTest
+    matcap.material.setSide materialsMeshSideTest
+    normal.material.setSide materialsMeshSideTest
+    phong.material.setSide materialsMeshSideTest
+    physical.material.setSide materialsMeshSideTest
+    standard.material.setSide materialsMeshSideTest
+    toon.material.setSide materialsMeshSideTest
