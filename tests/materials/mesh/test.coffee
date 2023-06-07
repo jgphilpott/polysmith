@@ -98,6 +98,126 @@ polygen = ->
     standard.material.setOpacity materialsMeshOpacityTest
     toon.material.setOpacity materialsMeshOpacityTest
 
+    log "### Metalness Tests ###"
+
+    materialsMeshMetalnessTest1 = 100
+    materialsMeshMetalnessTest2 = 50
+    materialsMeshMetalnessTest3 = 0
+
+    materialsMeshMetalnessTest = materialsMeshMetalnessTest2
+
+    log basic.material.getMetalness()
+    log depth.material.getMetalness()
+    log distance.material.getMetalness()
+    log lambert.material.getMetalness()
+    log matcap.material.getMetalness()
+    log normal.material.getMetalness()
+    log phong.material.getMetalness()
+    log physical.material.getMetalness()
+    log standard.material.getMetalness()
+    log toon.material.getMetalness()
+
+    basic.material.setMetalness materialsMeshMetalnessTest
+    depth.material.setMetalness materialsMeshMetalnessTest
+    distance.material.setMetalness materialsMeshMetalnessTest
+    lambert.material.setMetalness materialsMeshMetalnessTest
+    matcap.material.setMetalness materialsMeshMetalnessTest
+    normal.material.setMetalness materialsMeshMetalnessTest
+    phong.material.setMetalness materialsMeshMetalnessTest
+    physical.material.setMetalness materialsMeshMetalnessTest
+    standard.material.setMetalness materialsMeshMetalnessTest
+    toon.material.setMetalness materialsMeshMetalnessTest
+
+    log "### Roughness Tests ###"
+
+    materialsMeshRoughnessTest1 = 100
+    materialsMeshRoughnessTest2 = 50
+    materialsMeshRoughnessTest3 = 0
+
+    materialsMeshRoughnessTest = materialsMeshRoughnessTest2
+
+    log basic.material.getRoughness()
+    log depth.material.getRoughness()
+    log distance.material.getRoughness()
+    log lambert.material.getRoughness()
+    log matcap.material.getRoughness()
+    log normal.material.getRoughness()
+    log phong.material.getRoughness()
+    log physical.material.getRoughness()
+    log standard.material.getRoughness()
+    log toon.material.getRoughness()
+
+    basic.material.setRoughness materialsMeshRoughnessTest
+    depth.material.setRoughness materialsMeshRoughnessTest
+    distance.material.setRoughness materialsMeshRoughnessTest
+    lambert.material.setRoughness materialsMeshRoughnessTest
+    matcap.material.setRoughness materialsMeshRoughnessTest
+    normal.material.setRoughness materialsMeshRoughnessTest
+    phong.material.setRoughness materialsMeshRoughnessTest
+    physical.material.setRoughness materialsMeshRoughnessTest
+    standard.material.setRoughness materialsMeshRoughnessTest
+    toon.material.setRoughness materialsMeshRoughnessTest
+
+    log "### Reflectivity Tests ###"
+
+    materialsMeshReflectivityTest1 = 100
+    materialsMeshReflectivityTest2 = 50
+    materialsMeshReflectivityTest3 = 0
+
+    materialsMeshReflectivityTest = materialsMeshReflectivityTest2
+
+    log basic.material.getReflectivity()
+    log depth.material.getReflectivity()
+    log distance.material.getReflectivity()
+    log lambert.material.getReflectivity()
+    log matcap.material.getReflectivity()
+    log normal.material.getReflectivity()
+    log phong.material.getReflectivity()
+    log physical.material.getReflectivity()
+    log standard.material.getReflectivity()
+    log toon.material.getReflectivity()
+
+    basic.material.setReflectivity materialsMeshReflectivityTest
+    depth.material.setReflectivity materialsMeshReflectivityTest
+    distance.material.setReflectivity materialsMeshReflectivityTest
+    lambert.material.setReflectivity materialsMeshReflectivityTest
+    matcap.material.setReflectivity materialsMeshReflectivityTest
+    normal.material.setReflectivity materialsMeshReflectivityTest
+    phong.material.setReflectivity materialsMeshReflectivityTest
+    physical.material.setReflectivity materialsMeshReflectivityTest
+    standard.material.setReflectivity materialsMeshReflectivityTest
+    toon.material.setReflectivity materialsMeshReflectivityTest
+
+    log "### Transmission Tests ###"
+
+    materialsMeshTransmissionTest1 = 100
+    materialsMeshTransmissionTest2 = 50
+    materialsMeshTransmissionTest3 = 0
+
+    materialsMeshTransmissionTest = materialsMeshTransmissionTest3
+
+    log basic.material.getTransmission()
+    log depth.material.getTransmission()
+    log distance.material.getTransmission()
+    log lambert.material.getTransmission()
+    log matcap.material.getTransmission()
+    log normal.material.getTransmission()
+    log phong.material.getTransmission()
+    log physical.material.getTransmission()
+    log standard.material.getTransmission()
+    log toon.material.getTransmission()
+
+    basic.material.setTransmission materialsMeshTransmissionTest
+    depth.material.setTransmission materialsMeshTransmissionTest
+    distance.material.setTransmission materialsMeshTransmissionTest
+    lambert.material.setTransmission materialsMeshTransmissionTest
+    matcap.material.setTransmission materialsMeshTransmissionTest
+    normal.material.setTransmission materialsMeshTransmissionTest
+    phong.material.setTransmission materialsMeshTransmissionTest
+    physical.material.setTransmission materialsMeshTransmissionTest
+    standard.material.setTransmission materialsMeshTransmissionTest
+    toon.material.setTransmission materialsMeshTransmissionTest
+
     log "### Transparent Tests ###"
 
     materialsMeshTransparentTest1 = true
