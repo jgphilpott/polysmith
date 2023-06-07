@@ -56,6 +56,18 @@ class MeshMaterial
         this.material.getOpacity = this.getOpacity
         this.material.setOpacity = this.setOpacity
 
+        this.material.getMetalness = this.getMetalness
+        this.material.setMetalness = this.setMetalness
+
+        this.material.getRoughness = this.getRoughness
+        this.material.setRoughness = this.setRoughness
+
+        this.material.getReflectivity = this.getReflectivity
+        this.material.setReflectivity = this.setReflectivity
+
+        this.material.getTransmission = this.getTransmission
+        this.material.setTransmission = this.setTransmission
+
         this.material.getTransparent = this.getTransparent
         this.material.setTransparent = this.setTransparent
 
@@ -90,6 +102,38 @@ class MeshMaterial
     setOpacity: (opacity) ->
 
         this.opacity = Number opacity / 100
+
+    getMetalness: ->
+
+        return clone this.metalness * 100
+
+    setMetalness: (metalness) ->
+
+        this.metalness = Number metalness / 100
+
+    getRoughness: ->
+
+        return clone this.roughness * 100
+
+    setRoughness: (roughness) ->
+
+        this.roughness = Number roughness / 100
+
+    getReflectivity: ->
+
+        return clone this.reflectivity * 100
+
+    setReflectivity: (reflectivity) ->
+
+        this.reflectivity = Number reflectivity / 100
+
+    getTransmission: ->
+
+        return clone this.transmission * 100
+
+    setTransmission: (transmission) ->
+
+        this.transmission = Number transmission / 100
 
     getTransparent: ->
 
