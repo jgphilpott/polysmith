@@ -2,12 +2,18 @@
 
 class SpotLight extends Light
 
-    constructor: (intensity = 1, color = whiteThree) ->
+    constructor: (params = {}) ->
 
-        super "spot", intensity, color
+        super "spot", params
 
 class POLY.SpotLight extends THREE.SpotLight
 
-    constructor: (intensity = 1, color = whiteThree) ->
+    constructor: (params = {}) ->
+
+        intensity = params.intensity ?= 1
+        color = params.color ?= whiteThree
+        position = params.position ?= printer.getSize()
 
         super color, intensity
+
+        this.position.set position.x, position.y, position.z

@@ -2,12 +2,18 @@
 
 class PointLight extends Light
 
-    constructor: (intensity = 1, color = whiteThree) ->
+    constructor: (params = {}) ->
 
-        super "point", intensity, color
+        super "point", params
 
 class POLY.PointLight extends THREE.PointLight
 
-    constructor: (intensity = 1, color = whiteThree) ->
+    constructor: (params = {}) ->
+
+        intensity = params.intensity ?= 1
+        color = params.color ?= whiteThree
+        position = params.position ?= printer.getSize()
 
         super color, intensity
+
+        this.position.set position.x, position.y, position.z

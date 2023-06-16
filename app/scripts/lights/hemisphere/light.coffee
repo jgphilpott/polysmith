@@ -2,12 +2,19 @@
 
 class HemisphereLight extends Light
 
-    constructor: (intensity = 1, skyColor = whiteThree, groundColor = blackThree) ->
+    constructor: (params = {}) ->
 
-        super "hemisphere", intensity, skyColor, groundColor
+        super "hemisphere", params
 
 class POLY.HemisphereLight extends THREE.HemisphereLight
 
-    constructor: (intensity = 1, skyColor = whiteThree, groundColor = blackThree) ->
+    constructor: (params = {}) ->
+
+        intensity = params.intensity ?= 1
+        skyColor = params.skyColor ?= whiteThree
+        groundColor = params.groundColor ?= blackThree
+        position = params.position ?= x: 0, y: 0, z: 0
 
         super skyColor, groundColor, intensity
+
+        this.position.set position.x, position.y, position.z
