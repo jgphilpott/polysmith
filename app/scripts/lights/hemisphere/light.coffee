@@ -10,11 +10,14 @@ class POLY.HemisphereLight extends THREE.HemisphereLight
 
     constructor: (params = {}) ->
 
+        lock = params.lock ?= false
         intensity = params.intensity ?= 1
         skyColor = params.skyColor ?= whiteThree
         groundColor = params.groundColor ?= blackThree
         position = params.position ?= x: 0, y: 0, z: 0
 
         super skyColor, groundColor, intensity
+
+        this.lock = Boolean lock
 
         this.position.set position.x, position.y, position.z
