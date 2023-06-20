@@ -19,4 +19,6 @@ class POLY.AmbientLight extends THREE.AmbientLight
 
         this.lock = Boolean lock
 
+        position = vectorAdaptor "invert", "length", position
+
         this.position.set position.x, position.y, position.z
