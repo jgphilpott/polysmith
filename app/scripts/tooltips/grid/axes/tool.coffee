@@ -45,8 +45,6 @@ class Axes
 
         if not this.x and settings.get "tooltips.grid.axes.x"
 
-            size = adaptor "invert", "length", size
-
             this.x = new Stroke vertices: [[size / 2, 0, 0], [-size / 2, 0, 0]], linewidth: 3, color: redThree
 
             grid.caps.addCentroid()
@@ -79,8 +77,6 @@ class Axes
 
         if not this.y and settings.get "tooltips.grid.axes.y"
 
-            size = adaptor "invert", "length", size
-
             this.y = new Stroke vertices: [[0, size / 2, 0], [0, -size / 2, 0]], linewidth: 3, color: greenThree
 
             grid.caps.addCentroid()
@@ -112,8 +108,6 @@ class Axes
     addZ: (size = printer.getSizeZ(), save = true) ->
 
         if not this.z and settings.get "tooltips.grid.axes.z"
-
-            size = adaptor "invert", "length", size
 
             this.z = new Stroke vertices: [[0, 0, size / 2], [0, 0, -size / 2]], linewidth: 3, color: blueThree
 

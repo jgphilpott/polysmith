@@ -14,8 +14,11 @@ class POLY.DashedLineMaterial extends THREE.LineDashedMaterial
         params.color ?= blackThree
         params.linewidth ?= 1
 
-        params.dashSize ?= 3
-        params.gapSize ?= 2
+        params.dashSize ?= adaptor "convert", "length", 3
+        params.gapSize ?= adaptor "convert", "length", 2
+
+        params.dashSize = adaptor "invert", "length", params.dashSize
+        params.gapSize = adaptor "invert", "length", params.gapSize
 
         super params
 

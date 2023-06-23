@@ -95,16 +95,16 @@ class LineMaterial
 
     getDashSize: ->
 
-        return clone this.dashSize
+        return adaptor "convert", "length", clone this.dashSize
 
     setDashSize: (dashSize) ->
 
-        this.dashSize = Number dashSize
+        this.dashSize = adaptor "invert", "length", dashSize
 
     getGapSize: ->
 
-        return clone this.gapSize
+        return adaptor "convert", "length", clone this.gapSize
 
     setGapSize: (gapSize) ->
 
-        this.gapSize = Number gapSize
+        this.gapSize = adaptor "invert", "length", gapSize

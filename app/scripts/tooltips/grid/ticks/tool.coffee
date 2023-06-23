@@ -95,10 +95,7 @@ class Ticks
 
         if this.xy.length is 0 and settings.get "tooltips.grid.ticks.xy"
 
-            step = adaptor "invert", "length", this.getStepXY()
-
-            xSize = adaptor "invert", "length", xSize
-            ySize = adaptor "invert", "length", ySize
+            step =  this.getStepXY()
 
             for tick in [step...ySize / 2] by step
 
@@ -143,10 +140,7 @@ class Ticks
 
         if this.xz.length is 0 and settings.get "tooltips.grid.ticks.xz"
 
-            step = adaptor "invert", "length", this.getStepXZ()
-
-            xSize = adaptor "invert", "length", xSize
-            zSize = adaptor "invert", "length", zSize
+            step = this.getStepXZ()
 
             for tick in [step...zSize / 2] by step
 
@@ -191,10 +185,7 @@ class Ticks
 
         if this.yz.length is 0 and settings.get "tooltips.grid.ticks.yz"
 
-            step = adaptor "invert", "length", this.getStepYZ()
-
-            ySize = adaptor "invert", "length", ySize
-            zSize = adaptor "invert", "length", zSize
+            step = this.getStepYZ()
 
             for tick in [step...zSize / 2] by step
 
