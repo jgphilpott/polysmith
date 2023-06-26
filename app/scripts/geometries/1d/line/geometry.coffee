@@ -24,10 +24,14 @@ class POLY.LineBufferGeometry
 
         for vertex in vertices
 
-            x = adaptor "invert", "length", vertex[0]
-            y = adaptor "invert", "length", vertex[1]
-            z = adaptor "invert", "length", vertex[2]
+            vertex[0] = adaptor "invert", "length", vertex[0]
+            vertex[1] = adaptor "invert", "length", vertex[1]
+            vertex[2] = adaptor "invert", "length", vertex[2]
 
-            points.push new THREE.Vector3 x, y, z
+            points.push new THREE.Vector3 vertex[0], vertex[1], vertex[2]
 
-        return new THREE.BufferGeometry().setFromPoints points
+        line = new THREE.BufferGeometry().setFromPoints points
+
+        line.vertices = vertices
+
+        return line

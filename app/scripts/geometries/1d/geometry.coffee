@@ -16,4 +16,18 @@ class Geometry1D
 
                 @geometry = params.geometry
 
+        this.geometry.getDistance = this.getDistance
+
         return this.geometry
+
+    getDistance: ->
+
+        if this.type is "LineThickGeometry"
+
+            distance = this.attributes.instanceDistanceEnd.data.array
+
+        else
+
+            distance = this.attributes.lineDistance.array
+
+        return adaptor "convert", "length", clone distance[distance.length - 1]

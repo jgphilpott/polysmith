@@ -16,3 +16,9 @@ polygen = ->
     dashed.add()
     solid.add()
     stroke.add()
+
+    log "### Distance Tests ###"
+
+    log dashed.geometry.getDistance()
+    log solid.geometry.getDistance()
+    log stroke.geometry.getDistance()
