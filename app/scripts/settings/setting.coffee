@@ -85,4 +85,8 @@ class Settings
 
             if _.isObject defaults[setting]
 
+                if not _.isObject settings[setting]
+
+                    settings[setting] = {}
+
                 this.varifySettings settings[setting], defaults[setting]

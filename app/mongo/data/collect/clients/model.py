@@ -307,6 +307,10 @@ class Client():
 
             if isinstance(defaults[setting], dict):
 
+                if not isinstance(settings[setting], dict):
+
+                    settings[setting] = {}
+
                 self.varify_settings(settings[setting], defaults[setting])
 
     def update_settings(self, path, value):
