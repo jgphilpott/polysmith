@@ -1,0 +1,36 @@
+class HexagonGeometry extends Geometry
+
+    constructor: (params = {}) ->
+
+        super "hexagon", params
+
+class POLY.HexagonBufferGeometry
+
+    constructor: (params = {}) ->
+
+        size = 6
+        vertices = []
+        angle = 360 / size
+        radius = params.radius ?= adaptor "convert", "length", 5
+
+        for index in [0...size]
+
+            point = circumpoint angle * index, radius
+
+            vertices.push [point[0], point[1], 0]
+
+        vertices = params.vertices ?= vertices
+
+        geometry = new THREE.Geometry()
+
+        for vertex in vertices
+
+            geometry.vertices.push new THREE.Vector3 vertex[0], vertex[1], vertex[2]
+
+        for index in [1...size - 1]
+
+            geometry.faces.push new THREE.Face3 0, index, index + 1
+
+        geometry.computeFaceNormals()
+
+        return new THREE.BufferGeometry().fromGeometry geometry
