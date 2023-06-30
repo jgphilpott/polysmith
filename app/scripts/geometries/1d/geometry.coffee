@@ -2,32 +2,35 @@ class Geometry1D
 
     constructor: (type, params = {}) ->
 
-        switch lower type.trim()
+        type = lower type.trim()
+
+        if type in d1Line then category = "line"
+        if type in d1Stroke then category = "stroke"
+
+        switch category
 
             when "line"
 
-                @geometry = new POLY.LineBufferGeometry params; break
+                geometry = new POLY.LineBufferGeometry params; break
 
             when "stroke"
 
-                @geometry = new POLY.StrokeBufferGeometry params; break
+                geometry = new POLY.StrokeBufferGeometry params; break
 
             else
 
-                @geometry = params.geometry
+                geometry = params.geometry
 
-        this.geometry.getDistance = this.getDistance
+        geometry.getDistance = ->
 
-        return this.geometry
+            if this.type is "LineThickGeometry"
 
-    getDistance: ->
+                distance = this.attributes.instanceDistanceEnd.data.array
 
-        if this.type is "LineThickGeometry"
+            else
 
-            distance = this.attributes.instanceDistanceEnd.data.array
+                distance = this.attributes.lineDistance.array
 
-        else
+            return adaptor "convert", "length", clone distance[distance.length - 1]
 
-            distance = this.attributes.lineDistance.array
-
-        return adaptor "convert", "length", clone distance[distance.length - 1]
+        return geometry
