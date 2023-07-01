@@ -14,6 +14,16 @@ polygen = ->
     circle.add()
     plane.add()
 
+    log "### Bounding Sphere Tests ###"
+
+    log circle.geometry.getBoundingSphere()
+    log plane.geometry.getBoundingSphere()
+
+    log "### Bounding Box Tests ###"
+
+    log circle.geometry.getBoundingBox()
+    log plane.geometry.getBoundingBox()
+
     log "### Buffer Tests ###"
 
     log circle.geometry.getBuffer()

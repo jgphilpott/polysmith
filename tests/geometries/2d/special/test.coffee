@@ -11,6 +11,14 @@ polygen = ->
 
     ring.add()
 
+    log "### Bounding Sphere Tests ###"
+
+    log ring.geometry.getBoundingSphere()
+
+    log "### Bounding Box Tests ###"
+
+    log ring.geometry.getBoundingBox()
+
     log "### Buffer Tests ###"
 
     log ring.geometry.getBuffer()

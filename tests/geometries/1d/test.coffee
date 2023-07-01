@@ -22,3 +22,15 @@ polygen = ->
     log dashed.geometry.getDistance()
     log solid.geometry.getDistance()
     log stroke.geometry.getDistance()
+
+    log "### Bounding Sphere Tests ###"
+
+    log dashed.geometry.getBoundingSphere()
+    log solid.geometry.getBoundingSphere()
+    log stroke.geometry.getBoundingSphere()
+
+    log "### Bounding Box Tests ###"
+
+    log dashed.geometry.getBoundingBox()
+    log solid.geometry.getBoundingBox()
+    log stroke.geometry.getBoundingBox()

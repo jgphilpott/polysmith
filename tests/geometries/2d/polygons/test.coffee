@@ -32,6 +32,28 @@ polygen = ->
     nonagon.add()
     decagon.add()
 
+    log "### Bounding Sphere Tests ###"
+
+    log triangle.geometry.getBoundingSphere()
+    log quadrilateral.geometry.getBoundingSphere()
+    log pentagon.geometry.getBoundingSphere()
+    log hexagon.geometry.getBoundingSphere()
+    log heptagon.geometry.getBoundingSphere()
+    log octagon.geometry.getBoundingSphere()
+    log nonagon.geometry.getBoundingSphere()
+    log decagon.geometry.getBoundingSphere()
+
+    log "### Bounding Box Tests ###"
+
+    log triangle.geometry.getBoundingBox()
+    log quadrilateral.geometry.getBoundingBox()
+    log pentagon.geometry.getBoundingBox()
+    log hexagon.geometry.getBoundingBox()
+    log heptagon.geometry.getBoundingBox()
+    log octagon.geometry.getBoundingBox()
+    log nonagon.geometry.getBoundingBox()
+    log decagon.geometry.getBoundingBox()
+
     log "### Buffer Tests ###"
 
     log triangle.geometry.getBuffer()
