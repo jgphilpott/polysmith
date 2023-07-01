@@ -11,26 +11,57 @@ class Geometry1D
 
             when "line"
 
-                geometry = new POLY.LineBufferGeometry params; break
+                geometry = new POLY.LineBufferGeometry params
+                geometry.getDistance = this.getDistance; break
 
             when "stroke"
 
-                geometry = new POLY.StrokeBufferGeometry params; break
+                geometry = new POLY.StrokeBufferGeometry params
+                geometry.getDistance = this.getDistance; break
 
             else
 
                 geometry = params.geometry
 
-        geometry.getDistance = ->
+        geometry.getBoundingSphere = ->
 
-            if this.type is "LineThickGeometry"
+            boundingSphere = clone this.boundingSphere
 
-                distance = this.attributes.instanceDistanceEnd.data.array
+            boundingSphere.radius = adaptor "convert", "length", boundingSphere.radius
+            boundingSphere.center = vectorAdaptor "convert", "length", boundingSphere.center
 
-            else
+            return boundingSphere
 
-                distance = this.attributes.lineDistance.array
+        geometry.setBoundingSphere = (sphere) ->
 
-            return adaptor "convert", "length", clone distance[distance.length - 1]
+            this.computeBoundingSphere()
+
+        geometry.getBoundingBox = ->
+
+            boundingBox = clone this.boundingBox
+
+            boundingBox.min = vectorAdaptor "convert", "length", boundingBox.min
+            boundingBox.max = vectorAdaptor "convert", "length", boundingBox.max
+
+            return boundingBox
+
+        geometry.setBoundingBox = (box) ->
+
+            this.computeBoundingBox()
+
+        geometry.setBoundingSphere()
+        geometry.setBoundingBox()
 
         return geometry
+
+    getDistance: ->
+
+        if this.type is "LineThickGeometry"
+
+            distance = this.attributes.instanceDistanceEnd.data.array
+
+        else
+
+            distance = this.attributes.lineDistance.array
+
+        return adaptor "convert", "length", clone distance[distance.length - 1]
