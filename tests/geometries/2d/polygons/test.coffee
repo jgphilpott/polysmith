@@ -93,12 +93,3 @@ polygen = ->
     log octagon.geometry.getSurface()
     log nonagon.geometry.getSurface()
     log decagon.geometry.getSurface()
-
-    log triangle.geometry.setSurface()
-    log quadrilateral.geometry.setSurface()
-    log pentagon.geometry.setSurface()
-    log hexagon.geometry.setSurface()
-    log heptagon.geometry.setSurface()
-    log octagon.geometry.setSurface()
-    log nonagon.geometry.setSurface()
-    log decagon.geometry.setSurface()

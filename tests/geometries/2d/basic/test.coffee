@@ -39,6 +39,3 @@ polygen = ->
 
     log circle.geometry.getSurface()
     log plane.geometry.getSurface()
-
-    log circle.geometry.setSurface()
-    log plane.geometry.setSurface()

@@ -30,5 +30,3 @@ polygen = ->
     log "### Surface Tests ###"
 
     log ring.geometry.getSurface()
-
-    log ring.geometry.setSurface()
