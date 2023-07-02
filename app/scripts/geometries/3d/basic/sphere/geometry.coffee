@@ -29,7 +29,10 @@ class POLY.SphereBufferGeometry extends THREE.SphereBufferGeometry
 
         radius = adaptor "invert", "length", radius
 
+        phiStart = convert.angle[angleUnit]["radian"] phiStart
         phiLength = convert.angle[angleUnit]["radian"] phiLength
+
+        thetaStart = convert.angle[angleUnit]["radian"] thetaStart
         thetaLength = convert.angle[angleUnit]["radian"] thetaLength
 
         super radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength

@@ -36,6 +36,7 @@ class POLY.CylinderBufferGeometry extends THREE.CylinderBufferGeometry
         positiveRadius = adaptor "invert", "length", positiveRadius
         negativeRadius = adaptor "invert", "length", negativeRadius
 
+        thetaStart = convert.angle[angleUnit]["radian"] thetaStart
         thetaLength = convert.angle[angleUnit]["radian"] thetaLength
 
         super positiveRadius, negativeRadius, length, radialSegments, heightSegments, openEnded, thetaStart, thetaLength

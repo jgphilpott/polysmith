@@ -22,6 +22,8 @@ class POLY.CircleBufferGeometry extends THREE.CircleBufferGeometry
         thetaLength = params.thetaLength ?= thetaLength
 
         radius = adaptor "invert", "length", radius
+
+        thetaStart = convert.angle[angleUnit]["radian"] thetaStart
         thetaLength = convert.angle[angleUnit]["radian"] thetaLength
 
         super radius, segments, thetaStart, thetaLength

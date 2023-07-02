@@ -25,6 +25,10 @@ class POLY.HexagonBufferGeometry
 
         for vertex in vertices
 
+            vertex[0] = adaptor "invert", "length", vertex[0]
+            vertex[1] = adaptor "invert", "length", vertex[1]
+            vertex[2] = adaptor "invert", "length", vertex[2]
+
             geometry.vertices.push new THREE.Vector3 vertex[0], vertex[1], vertex[2]
 
         for index in [1...size - 1]

@@ -27,6 +27,8 @@ class POLY.RingBufferGeometry extends THREE.RingBufferGeometry
 
         innerRadius = adaptor "invert", "length", innerRadius
         outerRadius = adaptor "invert", "length", outerRadius
+
+        thetaStart = convert.angle[angleUnit]["radian"] thetaStart
         thetaLength = convert.angle[angleUnit]["radian"] thetaLength
 
         super innerRadius, outerRadius, thetaSegments, phiSegments, thetaStart, thetaLength
