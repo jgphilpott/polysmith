@@ -14,7 +14,7 @@ class POLY.SphereBufferGeometry extends THREE.SphereBufferGeometry
 
         angleUnit = settings.get "scales.angle.unit"
         phiLength = convert.angle["radian"][angleUnit] Math.PI * 2
-        thetaLength = convert.angle["radian"][angleUnit] Math.PI * 2
+        thetaLength = convert.angle["radian"][angleUnit] Math.PI
 
         radius = params.radius ?= radius
 
