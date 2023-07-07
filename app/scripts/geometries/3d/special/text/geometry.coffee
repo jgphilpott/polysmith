@@ -58,6 +58,7 @@ class POLY.TextBufferGeometry
                 curveSegments: curveSegments
 
             geometry = new THREE.TextBufferGeometry text, options
+            geometry = new Geometry3D "async", geometry: geometry
 
             if center then geometry.center()
 

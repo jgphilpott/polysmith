@@ -40,7 +40,7 @@ class POLY.ImageBufferGeometry
         bevelOffset = adaptor "invert", "length", bevelOffset
         bevelThickness = adaptor "invert", "length", bevelThickness
 
-        loader.load "./app/imgs/svg/" + image + ".svg", (image) ->
+        loader.load "./app/imgs/svg/" + image + ".svg", (image) =>
 
             options = params.options ?=
 
@@ -60,6 +60,7 @@ class POLY.ImageBufferGeometry
                 Array.prototype.push.apply shapes, path.toShapes()
 
             geometry = new THREE.ExtrudeBufferGeometry shapes, options
+            geometry = new Geometry3D "async", geometry: geometry
 
             if center then geometry.center()
 
