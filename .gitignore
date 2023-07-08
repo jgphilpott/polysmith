@@ -5,7 +5,6 @@ app/libs
 *.bash_history
 *.sonarlint
 *.DS_Store
-*.vscode
 *.cache
 *.local
 *.npm
