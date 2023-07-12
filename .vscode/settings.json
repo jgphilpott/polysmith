@@ -1,5 +1,6 @@
 {
     "workbench.colorTheme": "Default High Contrast Light",
+    "editor.scrollBeyondFirstLine": false,
     "editor.scrollBeyondLastLine": false,
     "editor.renderWhitespace": "all",
     "git.decorations.enabled": true,
