@@ -29,8 +29,8 @@ def get_libs(libs_dir):
 
     if not exists(js_libs_dir + "/FileSaver.js"): urlretrieve("https://raw.githubusercontent.com/eligrey/FileSaver.js/cea522bc41bfadc364837293d0c4dc585a65ac46/src/FileSaver.js", js_libs_dir + "/FileSaver.js")
 
-    if not exists(js_libs_dir + "/csgWrapper.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/03df747c3047504480e6dbeeddd27d68/raw/43325a9262bac33d5285a8e1c5a14ec4beeae014/csgWrapper.js", js_libs_dir + "/csgWrapper.js")
-    if not exists(js_libs_dir + "/morph.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/59ad8432ba8567e91176e669454b9afa/raw/5eb7306b165594b257bd3cb0aade98c380082015/morph.js", js_libs_dir + "/morph.js")
+    if not exists(js_libs_dir + "/OctreeCSG.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/990507c121fe94ddec4d875874528632/raw/711c21ba9d0610688ffa3c2d9d72c796eb228f8d/OctreeCSG.js", js_libs_dir + "/OctreeCSG.js")
+    if not exists(js_libs_dir + "/morph.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/59ad8432ba8567e91176e669454b9afa/raw/fbf3123f53f3cb70a190188fae81776cc8904180/morph.js", js_libs_dir + "/morph.js")
 
     if not exists(js_libs_dir + "/BufferGeometryUtils.js"): urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/utils/BufferGeometryUtils.js", js_libs_dir + "/BufferGeometryUtils.js")
     if not exists(js_libs_dir + "/LineThickSegmentsGeometry.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/77709de890b806426089de1ff4e78758/raw/207b228608657317820cdb855b4b034a34630fe0/LineThickSegmentsGeometry.js", js_libs_dir + "/LineThickSegmentsGeometry.js")
