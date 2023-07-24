@@ -51,7 +51,7 @@ class LineMaterial
 
         return clone this.color
 
-    setColor: (color) ->
+    setColor: (color = blackThree) ->
 
         if color instanceof THREE.Color
 
@@ -65,7 +65,7 @@ class LineMaterial
 
         return clone this.opacity * 100
 
-    setOpacity: (opacity) ->
+    setOpacity: (opacity = 100) ->
 
         this.opacity = Number opacity / 100
 
@@ -73,7 +73,7 @@ class LineMaterial
 
         return clone this.transparent
 
-    setTransparent: (transparent) ->
+    setTransparent: (transparent = true) ->
 
         this.transparent = Boolean transparent
 
@@ -81,7 +81,7 @@ class LineMaterial
 
         return clone this.linewidth
 
-    setLinewidth: (linewidth) ->
+    setLinewidth: (linewidth = 1) ->
 
         this.linewidth = Number linewidth
 
@@ -89,7 +89,7 @@ class LineMaterial
 
         return clone this.dashed
 
-    setDashed: (dashed) ->
+    setDashed: (dashed = false) ->
 
         this.dashed = Boolean dashed
 
@@ -97,7 +97,7 @@ class LineMaterial
 
         return adaptor "convert", "length", clone this.dashSize
 
-    setDashSize: (dashSize) ->
+    setDashSize: (dashSize = adaptor "convert", "length", 3) ->
 
         this.dashSize = adaptor "invert", "length", dashSize
 
@@ -105,6 +105,6 @@ class LineMaterial
 
         return adaptor "convert", "length", clone this.gapSize
 
-    setGapSize: (gapSize) ->
+    setGapSize: (gapSize = adaptor "convert", "length", 2) ->
 
         this.gapSize = adaptor "invert", "length", gapSize

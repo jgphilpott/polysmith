@@ -10,16 +10,20 @@ class POLY.DashedLineMaterial extends THREE.LineDashedMaterial
 
     constructor: (params = {}) ->
 
-        params.opacity = if params.opacity then params.opacity / 100 else 1
         params.color ?= blackThree
+        params.opacity ?= 100
         params.linewidth ?= 1
+        params.dashed = true
 
         params.dashSize ?= adaptor "convert", "length", 3
         params.gapSize ?= adaptor "convert", "length", 2
 
-        params.dashSize = adaptor "invert", "length", params.dashSize
-        params.gapSize = adaptor "invert", "length", params.gapSize
+        $params = clone params
+        $params.opacity /= 100
 
-        super params
+        $params.dashSize = adaptor "invert", "length", $params.dashSize
+        $params.gapSize = adaptor "invert", "length", $params.gapSize
 
-        @dashed = true
+        super $params
+
+        @dashed = $params.dashed
