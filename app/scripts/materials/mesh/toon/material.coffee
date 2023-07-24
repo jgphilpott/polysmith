@@ -12,6 +12,7 @@ class POLY.ToonMeshMaterial extends THREE.MeshToonMaterial
 
         params.side ?= THREE.DoubleSide
         params.color ?= blackThree
+        params.transparent ?= true
         params.reflectivity ?= 50
         params.transmission ?= 0
         params.metalness ?= 50

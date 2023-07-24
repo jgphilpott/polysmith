@@ -12,6 +12,7 @@ class POLY.LambertMeshMaterial extends THREE.MeshLambertMaterial
 
         params.side ?= THREE.DoubleSide
         params.color ?= blackThree
+        params.transparent ?= true
         params.reflectivity ?= 50
         params.transmission ?= 0
         params.metalness ?= 50

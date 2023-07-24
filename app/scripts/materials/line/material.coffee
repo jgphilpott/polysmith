@@ -25,11 +25,11 @@ class LineMaterial
         this.material.getColor = this.getColor
         this.material.setColor = this.setColor
 
-        this.material.getOpacity = this.getOpacity
-        this.material.setOpacity = this.setOpacity
-
         this.material.getTransparent = this.getTransparent
         this.material.setTransparent = this.setTransparent
+
+        this.material.getOpacity = this.getOpacity
+        this.material.setOpacity = this.setOpacity
 
         this.material.getLinewidth = this.getLinewidth
         this.material.setLinewidth = this.setLinewidth
@@ -42,8 +42,6 @@ class LineMaterial
 
         this.material.getGapSize = this.getGapSize
         this.material.setGapSize = this.setGapSize
-
-        this.material.setTransparent true
 
         return this.material
 
@@ -61,14 +59,6 @@ class LineMaterial
 
             this.color = new THREE.Color color
 
-    getOpacity: ->
-
-        return clone this.opacity * 100
-
-    setOpacity: (opacity = 100) ->
-
-        this.opacity = Number opacity / 100
-
     getTransparent: ->
 
         return clone this.transparent
@@ -76,6 +66,14 @@ class LineMaterial
     setTransparent: (transparent = true) ->
 
         this.transparent = Boolean transparent
+
+    getOpacity: ->
+
+        return clone this.opacity * 100
+
+    setOpacity: (opacity = 100) ->
+
+        this.opacity = Number opacity / 100
 
     getLinewidth: ->
 

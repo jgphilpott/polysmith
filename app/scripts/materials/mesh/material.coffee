@@ -53,6 +53,9 @@ class MeshMaterial
         this.material.getColor = this.getColor
         this.material.setColor = this.setColor
 
+        this.material.getTransparent = this.getTransparent
+        this.material.setTransparent = this.setTransparent
+
         this.material.getOpacity = this.getOpacity
         this.material.setOpacity = this.setOpacity
 
@@ -68,16 +71,11 @@ class MeshMaterial
         this.material.getTransmission = this.getTransmission
         this.material.setTransmission = this.setTransmission
 
-        this.material.getTransparent = this.getTransparent
-        this.material.setTransparent = this.setTransparent
-
         this.material.getWireframe = this.getWireframe
         this.material.setWireframe = this.setWireframe
 
         this.material.getSide = this.getSide
         this.material.setSide = this.setSide
-
-        this.material.setTransparent true
 
         return this.material
 
@@ -94,6 +92,14 @@ class MeshMaterial
         else
 
             this.color = new THREE.Color color
+
+    getTransparent: ->
+
+        return clone this.transparent
+
+    setTransparent: (transparent = true) ->
+
+        this.transparent = Boolean transparent
 
     getOpacity: ->
 
@@ -134,14 +140,6 @@ class MeshMaterial
     setTransmission: (transmission = 0) ->
 
         this.transmission = Number transmission / 100
-
-    getTransparent: ->
-
-        return clone this.transparent
-
-    setTransparent: (transparent = true) ->
-
-        this.transparent = Boolean transparent
 
     getWireframe: ->
 
