@@ -48,6 +48,9 @@ class Mesh1D
         mesh.getVertices = this.getVertices
         mesh.setVertices = this.setVertices
 
+        mesh.getLinewidth = this.getLinewidth
+        mesh.setLinewidth = this.setLinewidth
+
         mesh.getDashed = this.getDashed
         mesh.setDashed = this.setDashed
 
@@ -82,6 +85,19 @@ class Mesh1D
             this.params.vertices = vertices
 
             this.computeLineDistances()
+
+            if save then this.save "update"
+
+    getLinewidth: ->
+
+        return clone this.material.getLinewidth()
+
+    setLinewidth: (linewidth = 1, save = true) ->
+
+        if not this.getLock()
+
+            this.params.linewidth = Number linewidth
+            this.material.setLinewidth this.params.linewidth
 
             if save then this.save "update"
 
