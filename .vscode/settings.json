@@ -6,6 +6,14 @@
     "git.decorations.enabled": true,
     "explorer.sortOrder": "default",
     "folder-path-color.folders": [],
+    "cSpell.language": "en-US",
+    "cSpell.words": [
+        "Cura",
+        "Magine",
+        "Pinshape",
+        "Polygen",
+        "Thingiverse"
+    ],
     "files.exclude": {
         "app/libs": true,
         "**/*.bash_history": true,
