@@ -12,22 +12,12 @@ class Mesh1D
             when "line"
 
                 mesh = new POLY.LineMesh params
-
-                mesh.getDistance = this.getDistance
-                mesh.getVertices = this.getVertices
-                mesh.setVertices = this.setVertices
-
-                break
+                this.addMethods mesh; break
 
             when "stroke"
 
                 mesh = new POLY.StrokeMesh params
-
-                mesh.getDistance = this.getDistance
-                mesh.getVertices = this.getVertices
-                mesh.setVertices = this.setVertices
-
-                break
+                this.addMethods mesh; break
 
             else
 
@@ -51,32 +41,103 @@ class Mesh1D
 
         return mesh
 
+    addMethods: (mesh) ->
+
+        mesh.getDistance = this.getDistance
+
+        mesh.getVertices = this.getVertices
+        mesh.setVertices = this.setVertices
+
+        mesh.getDashed = this.getDashed
+        mesh.setDashed = this.setDashed
+
+        mesh.getDashSize = this.getDashSize
+        mesh.setDashSize = this.setDashSize
+
+        mesh.getGapSize = this.getGapSize
+        mesh.setGapSize = this.setGapSize
+
     getDistance: ->
 
         return clone this.geometry.getDistance()
 
     getVertices: ->
 
-        vertices = clone this.geometry.vertices
+        return clone this.params.vertices
 
-        for vertex in vertices
+    setVertices: (vertices = [], save = true) ->
 
-            vertex[0] = adaptor "convert", "length", vertex[0]
-            vertex[1] = adaptor "convert", "length", vertex[1]
-            vertex[2] = adaptor "convert", "length", vertex[2]
+        if not this.getLock()
 
-        return vertices
+            this.geometry.dispose()
 
-    setVertices: (vertices) ->
+            if this.class is "line"
 
-        this.geometry.dispose()
+                this.geometry = new LineGeometry vertices: vertices
 
-        if this.class is "line"
+            else if this.class is "stroke"
 
-            this.geometry = new LineGeometry vertices: vertices
+                this.geometry = new StrokeGeometry vertices: vertices
 
-        else if this.class is "stroke"
+            this.params.vertices = vertices
 
-            this.geometry = new StrokeGeometry vertices: vertices
+            this.computeLineDistances()
 
-        this.computeLineDistances()
+            if save then this.save "update"
+
+    getDashed: ->
+
+        return clone this.material.getDashed()
+
+    setDashed: (dashed = false, save = true) ->
+
+        if not this.getLock()
+
+            this.params.dashed = Boolean dashed
+
+            if this.type is "Line"
+
+                this.params.material = if this.params.dashed then "dashed" else "solid"
+
+                basic$dashed = this.material.type is "LineBasicMaterial" and this.params.dashed
+                dashed$basic = this.material.type is "LineDashedMaterial" and not this.params.dashed
+
+                if basic$dashed or dashed$basic
+
+                    this.material.dispose()
+
+                    this.material = new LineMaterial this.params.material, this.params
+
+            else
+
+                this.material.setDashed this.params.dashed
+
+            this.computeLineDistances()
+
+            if save then this.save "update"
+
+    getDashSize: ->
+
+        return clone this.material.getDashSize()
+
+    setDashSize: (dashSize = adaptor("convert", "length", 3), save = true) ->
+
+        if not this.getLock()
+
+            this.params.dashSize = Number dashSize
+            this.material.setDashSize this.params.dashSize
+
+            if save then this.save "update"
+
+    getGapSize: ->
+
+        return clone this.material.getGapSize()
+
+    setGapSize: (gapSize = adaptor("convert", "length", 2), save = true) ->
+
+        if not this.getLock()
+
+            this.params.gapSize = Number gapSize
+            this.material.setGapSize this.params.gapSize
+
+            if save then this.save "update"

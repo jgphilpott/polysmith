@@ -32,6 +32,4 @@ class POLY.StrokeBufferGeometry
 
         stroke = new LineThickGeometry().setPositions positions
 
-        stroke.vertices = vertices
-
         return stroke

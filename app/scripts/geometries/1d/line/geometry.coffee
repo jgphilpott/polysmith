@@ -32,6 +32,4 @@ class POLY.LineBufferGeometry
 
         line = new THREE.BufferGeometry().setFromPoints points
 
-        line.vertices = vertices
-
         return line

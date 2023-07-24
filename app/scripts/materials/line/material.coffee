@@ -99,7 +99,7 @@ class LineMaterial
 
     setDashSize: (dashSize = adaptor "convert", "length", 3) ->
 
-        this.dashSize = adaptor "invert", "length", dashSize
+        this.dashSize = adaptor "invert", "length", Number dashSize
 
     getGapSize: ->
 
@@ -107,4 +107,4 @@ class LineMaterial
 
     setGapSize: (gapSize = adaptor "convert", "length", 2) ->
 
-        this.gapSize = adaptor "invert", "length", gapSize
+        this.gapSize = adaptor "invert", "length", Number gapSize
