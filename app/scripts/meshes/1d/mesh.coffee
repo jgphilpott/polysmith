@@ -60,6 +60,9 @@ class Mesh1D
         mesh.getGapSize = this.getGapSize
         mesh.setGapSize = this.setGapSize
 
+        mesh.getType = this.getType
+        mesh.setType = this.setType
+
     getDistance: ->
 
         return clone this.geometry.getDistance()
@@ -111,9 +114,7 @@ class Mesh1D
 
             this.params.dashed = Boolean dashed
 
-            if this.type is "Line"
-
-                this.params.material = if this.params.dashed then "dashed" else "solid"
+            if this.class is "line"
 
                 basic$dashed = this.material.type is "LineBasicMaterial" and this.params.dashed
                 dashed$basic = this.material.type is "LineDashedMaterial" and not this.params.dashed
@@ -122,6 +123,7 @@ class Mesh1D
 
                     this.material.dispose()
 
+                    this.params.material = if this.params.dashed then "dashed" else "solid"
                     this.material = new LineMaterial this.params.material, this.params
 
             else
@@ -155,5 +157,43 @@ class Mesh1D
 
             this.params.gapSize = Number gapSize
             this.material.setGapSize this.params.gapSize
+
+            if save then this.save "update"
+
+    getType: ->
+
+        return clone this.class
+
+    setType: (type = "", save = true) ->
+
+        if not this.getLock()
+
+            if this.class is "line" and type is "stroke"
+
+                this.geometry.dispose()
+                this.material.dispose()
+
+                this.params.class = "stroke"
+                this.params.material = "stroke"
+
+                this.__proto__ = LineThickMesh.prototype
+
+                this.geometry = new StrokeGeometry this.params
+                this.material = new LineMaterial this.params.material, this.params
+
+            else if this.class is "stroke" and type is "line"
+
+                this.geometry.dispose()
+                this.material.dispose()
+
+                this.params.class = "line"
+                this.params.material = if this.getDashed() then "dashed" else "solid"
+
+                this.__proto__ = THREE.Line.prototype
+
+                this.geometry = new LineGeometry this.params
+                this.material = new LineMaterial this.params.material, this.params
+
+            this.computeLineDistances()
 
             if save then this.save "update"

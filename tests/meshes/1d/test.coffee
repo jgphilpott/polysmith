@@ -151,3 +151,18 @@ polygen = ->
     dashed.setGapSize lineGapSizeTest
     solid.setGapSize lineGapSizeTest
     stroke.setGapSize lineGapSizeTest
+
+    log "### Type Tests ###"
+
+    lineTypeTest1 = "line"
+    lineTypeTest2 = "stroke"
+
+    lineTypeTest = lineTypeTest1
+
+    log dashed.getType()
+    log solid.getType()
+    log stroke.getType()
+
+    dashed.setType lineTypeTest
+    solid.setType lineTypeTest
+    stroke.setType lineTypeTest
