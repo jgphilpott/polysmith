@@ -36,4 +36,6 @@ class Mesh3D extends Mesh2D
 
                 mesh = params.mesh
 
+        mesh = super type, mesh: mesh
+
         return mesh

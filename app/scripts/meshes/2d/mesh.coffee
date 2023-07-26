@@ -26,4 +26,30 @@ class Mesh2D extends Mesh1D
 
                 mesh = params.mesh
 
+        mesh.getBuffer = ->
+
+            return clone this.geometry.getBuffer()
+
+        mesh.setBuffer = (buffer = true) ->
+
+            this.geometry.setBuffer Boolean buffer
+
+        mesh.fromBuffer = ->
+
+            return this.geometry.fromBuffer()
+
+        mesh.toBuffer = ->
+
+            return this.geometry.toBuffer()
+
+        mesh.getSurface = ->
+
+            return clone this.geometry.getSurface()
+
+        mesh.setSurface = (surface = 0) ->
+
+            this.geometry.setSurface Number surface
+
+        mesh = super type, mesh: mesh
+
         return mesh

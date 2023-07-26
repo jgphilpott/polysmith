@@ -30,7 +30,7 @@ class Geometry2D extends Geometry1D
 
             return clone this.isBufferGeometry
 
-        geometry.setBuffer = (buffer) ->
+        geometry.setBuffer = (buffer = true) ->
 
             this.isBufferGeometry = Boolean buffer
 
@@ -58,9 +58,7 @@ class Geometry2D extends Geometry1D
 
             return adaptor "convert", "area", clone this.surface
 
-        geometry.setSurface = (surface) -> # Credit: https://stackoverflow.com/a/50937272/1544937
-
-            surface = 0
+        geometry.setSurface = (surface = 0) -> # Credit: https://stackoverflow.com/a/50937272/1544937
 
             shape = this.fromBuffer()
 

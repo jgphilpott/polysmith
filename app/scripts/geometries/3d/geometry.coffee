@@ -40,9 +40,7 @@ class Geometry3D extends Geometry2D
 
             return adaptor "convert", "volume", clone this.volume
 
-        geometry.setVolume = (volume) -> # Credit: https://discourse.threejs.org/t/volume-of-three-buffergeometry/5109
-
-            volume = 0
+        geometry.setVolume = (volume = 0) -> # Credit: https://discourse.threejs.org/t/volume-of-three-buffergeometry/5109
 
             shape = this.toBuffer()
 
