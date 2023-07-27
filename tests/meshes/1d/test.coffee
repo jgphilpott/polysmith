@@ -17,34 +17,6 @@ polygen = ->
     solid.add()
     stroke.add()
 
-    log "### Distance Tests ###"
-
-    log dashed.getDistance()
-    log solid.getDistance()
-    log stroke.getDistance()
-
-    log "### Bounding Sphere Tests ###"
-
-    log dashed.getBoundingSphere()
-    log solid.getBoundingSphere()
-    log stroke.getBoundingSphere()
-
-    log "### Bounding Box Tests ###"
-
-    log dashed.getBoundingBox()
-    log solid.getBoundingBox()
-    log stroke.getBoundingBox()
-
-    log "### Vertices Tests ###"
-
-    log dashed.getVertices()
-    log solid.getVertices()
-    log stroke.getVertices()
-
-    dashed.setVertices [[20, 30, 20], [-20, -10, -20]]
-    solid.setVertices [[20, 10, 20], [-20, -30, -20]]
-    stroke.setVertices [[20, 20, 20], [-20, -20, -20]]
-
     log "### Color Tests ###"
 
     lineColorTest1 = redThree
@@ -151,6 +123,34 @@ polygen = ->
     dashed.setGapSize lineGapSizeTest
     solid.setGapSize lineGapSizeTest
     stroke.setGapSize lineGapSizeTest
+
+    log "### Distance Tests ###"
+
+    log dashed.getDistance()
+    log solid.getDistance()
+    log stroke.getDistance()
+
+    log "### Bounding Sphere Tests ###"
+
+    log dashed.getBoundingSphere()
+    log solid.getBoundingSphere()
+    log stroke.getBoundingSphere()
+
+    log "### Bounding Box Tests ###"
+
+    log dashed.getBoundingBox()
+    log solid.getBoundingBox()
+    log stroke.getBoundingBox()
+
+    log "### Vertices Tests ###"
+
+    log dashed.getVertices()
+    log solid.getVertices()
+    log stroke.getVertices()
+
+    dashed.setVertices [[20, 30, 20], [-20, -10, -20]]
+    solid.setVertices [[20, 10, 20], [-20, -30, -20]]
+    stroke.setVertices [[20, 20, 20], [-20, -20, -20]]
 
     log "### Type Tests ###"
 
