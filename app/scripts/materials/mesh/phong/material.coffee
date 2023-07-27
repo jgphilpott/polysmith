@@ -13,6 +13,7 @@ class POLY.PhongMeshMaterial extends THREE.MeshPhongMaterial
         params.side ?= THREE.DoubleSide
         params.color ?= blackThree
         params.transparent ?= true
+        params.wireframe ?= false
         params.reflectivity ?= 50
         params.transmission ?= 0
         params.metalness ?= 50
