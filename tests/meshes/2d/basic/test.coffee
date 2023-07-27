@@ -70,6 +70,89 @@ polygen = ->
     circle.setOpacity meshOpacityTest
     plane.setOpacity meshOpacityTest
 
+    log "### Metalness Tests ###"
+
+    meshMetalnessTest1 = 100
+    meshMetalnessTest2 = 50
+    meshMetalnessTest3 = 0
+
+    meshMetalnessTest = meshMetalnessTest2
+
+    log circle.getMetalness()
+    log plane.getMetalness()
+
+    circle.setMetalness meshMetalnessTest
+    plane.setMetalness meshMetalnessTest
+
+    log "### Roughness Tests ###"
+
+    meshRoughnessTest1 = 100
+    meshRoughnessTest2 = 50
+    meshRoughnessTest3 = 0
+
+    meshRoughnessTest = meshRoughnessTest2
+
+    log circle.getRoughness()
+    log plane.getRoughness()
+
+    circle.setRoughness meshRoughnessTest
+    plane.setRoughness meshRoughnessTest
+
+    log "### Reflectivity Tests ###"
+
+    meshReflectivityTest1 = 100
+    meshReflectivityTest2 = 50
+    meshReflectivityTest3 = 0
+
+    meshReflectivityTest = meshReflectivityTest2
+
+    log circle.getReflectivity()
+    log plane.getReflectivity()
+
+    circle.setReflectivity meshReflectivityTest
+    plane.setReflectivity meshReflectivityTest
+
+    log "### Transmission Tests ###"
+
+    meshTransmissionTest1 = 100
+    meshTransmissionTest2 = 50
+    meshTransmissionTest3 = 0
+
+    meshTransmissionTest = meshTransmissionTest3
+
+    log circle.getTransmission()
+    log plane.getTransmission()
+
+    circle.setTransmission meshTransmissionTest
+    plane.setTransmission meshTransmissionTest
+
+    log "### Wireframe Tests ###"
+
+    meshWireframeTest1 = true
+    meshWireframeTest2 = false
+
+    meshWireframeTest = meshWireframeTest2
+
+    log circle.getWireframe()
+    log plane.getWireframe()
+
+    circle.setWireframe meshWireframeTest
+    plane.setWireframe meshWireframeTest
+
+    log "### Side Tests ###"
+
+    meshSideTest1 = THREE.DoubleSide
+    meshSideTest2 = THREE.FrontSide
+    meshSideTest3 = THREE.BackSide
+
+    meshSideTest = meshSideTest1
+
+    log circle.getSide()
+    log plane.getSide()
+
+    circle.setSide meshSideTest
+    plane.setSide meshSideTest
+
     log "### Bounding Sphere Tests ###"
 
     log circle.getBoundingSphere()

@@ -2,8 +2,8 @@ polygen = ->
 
     log "### Setup ###"
 
-    camera.setTarget x: 0, y: 0, z: 0
-    camera.setPosition x: 60, y: 60, z: 100
+    camera.setTarget x: 0, y: 0, z: 35
+    camera.setPosition x: 42, y: 42, z: 84
 
     triangle = new Triangle name: "Triangle", position: x: 0, y: 0, z: 0
     quadrilateral = new Quadrilateral name: "Quadrilateral", position: x: 0, y: 0, z: 10
