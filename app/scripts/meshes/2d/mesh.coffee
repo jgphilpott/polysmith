@@ -59,7 +59,7 @@ class Mesh2D extends Mesh1D
             if not this.getLock()
 
                 this.material.dispose()
-                this.params.material = String material
+                this.params.material = lower String material
                 this.material = new MeshMaterial this.params.material, this.params
 
                 if save then this.save "update"

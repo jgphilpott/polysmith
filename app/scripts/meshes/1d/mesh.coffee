@@ -162,7 +162,7 @@ class Mesh1D
 
     getType: ->
 
-        return clone this.class
+        return clone this.params.class
 
     setType: (type = "", save = true) ->
 

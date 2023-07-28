@@ -9,6 +9,7 @@ console.warn = -> null
 console.error = -> null
 
 clone = (object) -> _.clone object
+omit = (object, keys) -> _.omit object, keys
 equal = (object1, object2) -> _.isEqual object1, object2
 
 sleep = (time) ->
@@ -141,3 +142,32 @@ Array.prototype.filterInPlace = (condition, item) ->
     this.length = count
 
     return this
+
+serializeMesh = (mesh) ->
+
+    mesh.updateMatrix()
+    meshJSON = mesh.toJSON()
+
+    meshJSON.metadata.name = mesh.name
+    meshJSON.metadata.lock = mesh.lock
+    meshJSON.metadata.class = mesh.class
+    meshJSON.metadata.style = mesh.material.style
+    meshJSON.metadata.wireframe = mesh.material.wireframe
+
+    return meshJSON
+
+deserializeMesh = (meshJSON) ->
+
+    loader = new THREE.ObjectLoader()
+
+    mesh = loader.parse meshJSON
+
+    mesh.name = meshJSON.metadata.name
+    mesh.lock = meshJSON.metadata.lock
+    mesh.class = meshJSON.metadata.class
+    mesh.material.style = meshJSON.metadata.style
+    mesh.material.wireframe = meshJSON.metadata.wireframe
+
+    mesh.geometry = new Geometry "refresh", geometry: mesh.geometry
+
+    return mesh
