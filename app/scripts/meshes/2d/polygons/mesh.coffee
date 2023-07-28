@@ -40,4 +40,32 @@ class Mesh2DPolygon
 
                 @mesh = params.mesh
 
+        this.mesh.getRadius = ->
+
+            return clone this.params.radius
+
+        this.mesh.setRadius = (radius = adaptor("convert", "length", 5), save = true) ->
+
+            if not this.getLock()
+
+                this.geometry.dispose()
+                this.params.radius = Number radius
+                this.geometry = new window[capitalize(this.class) + "Geometry"] radius: this.params.radius
+
+                if save then this.save "update"
+
+        this.mesh.getVertices = ->
+
+            return clone this.params.vertices
+
+        this.mesh.setVertices = (vertices = [], save = true) ->
+
+            if not this.getLock()
+
+                this.geometry.dispose()
+                this.params.vertices = Array.from vertices
+                this.geometry = new window[capitalize(this.class) + "Geometry"] vertices: this.params.vertices
+
+                if save then this.save "update"
+
         return this.mesh
