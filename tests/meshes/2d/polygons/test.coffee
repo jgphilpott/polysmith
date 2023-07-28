@@ -352,3 +352,69 @@ polygen = ->
     log octagon.getSurface()
     log nonagon.getSurface()
     log decagon.getSurface()
+
+    log "### Radius Tests ###"
+
+    polygonRadiusTest = 10
+
+    log triangle.getRadius()
+    log quadrilateral.getRadius()
+    log pentagon.getRadius()
+    log hexagon.getRadius()
+    log heptagon.getRadius()
+    log octagon.getRadius()
+    log nonagon.getRadius()
+    log decagon.getRadius()
+
+    triangle.setRadius polygonRadiusTest
+    quadrilateral.setRadius polygonRadiusTest
+    pentagon.setRadius polygonRadiusTest
+    hexagon.setRadius polygonRadiusTest
+    heptagon.setRadius polygonRadiusTest
+    octagon.setRadius polygonRadiusTest
+    nonagon.setRadius polygonRadiusTest
+    decagon.setRadius polygonRadiusTest
+
+    log "### Vertices Tests ###"
+
+    polygonVerticesTest = decagon.getVertices()
+
+    log triangle.getVertices()
+    log quadrilateral.getVertices()
+    log pentagon.getVertices()
+    log hexagon.getVertices()
+    log heptagon.getVertices()
+    log octagon.getVertices()
+    log nonagon.getVertices()
+    log decagon.getVertices()
+
+    triangle.setVertices polygonVerticesTest
+    quadrilateral.setVertices polygonVerticesTest
+    pentagon.setVertices polygonVerticesTest
+    hexagon.setVertices polygonVerticesTest
+    heptagon.setVertices polygonVerticesTest
+    octagon.setVertices polygonVerticesTest
+    nonagon.setVertices polygonVerticesTest
+    decagon.setVertices polygonVerticesTest
+
+    log "### Type Tests ###"
+
+    polygonTypeTest = "decagon"
+
+    log triangle.getType()
+    log quadrilateral.getType()
+    log pentagon.getType()
+    log hexagon.getType()
+    log heptagon.getType()
+    log octagon.getType()
+    log nonagon.getType()
+    log decagon.getType()
+
+    triangle.setType polygonTypeTest
+    quadrilateral.setType polygonTypeTest
+    pentagon.setType polygonTypeTest
+    hexagon.setType polygonTypeTest
+    heptagon.setType polygonTypeTest
+    octagon.setType polygonTypeTest
+    nonagon.setType polygonTypeTest
+    decagon.setType polygonTypeTest
