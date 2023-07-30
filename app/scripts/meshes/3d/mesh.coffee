@@ -36,6 +36,14 @@ class Mesh3D extends Mesh2D
 
                 mesh = params.mesh
 
+        mesh.getVolume = ->
+
+            return clone this.geometry.getVolume()
+
+        mesh.setVolume = (volume = 0) ->
+
+            this.geometry.setVolume Number volume
+
         mesh = super type, mesh: mesh
 
         return mesh
