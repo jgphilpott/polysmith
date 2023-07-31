@@ -71,7 +71,7 @@ class Mesh1D
 
         return clone this.params.vertices
 
-    setVertices: (vertices = [], save = true) ->
+    setVertices: (vertices, save = true) ->
 
         if not this.getLock()
 
@@ -95,7 +95,7 @@ class Mesh1D
 
         return clone this.material.getLinewidth()
 
-    setLinewidth: (linewidth = 1, save = true) ->
+    setLinewidth: (linewidth, save = true) ->
 
         if not this.getLock()
 
@@ -108,7 +108,7 @@ class Mesh1D
 
         return clone this.material.getDashed()
 
-    setDashed: (dashed = false, save = true) ->
+    setDashed: (dashed, save = true) ->
 
         if not this.getLock()
 
@@ -138,7 +138,7 @@ class Mesh1D
 
         return clone this.material.getDashSize()
 
-    setDashSize: (dashSize = adaptor("convert", "length", 3), save = true) ->
+    setDashSize: (dashSize, save = true) ->
 
         if not this.getLock()
 
@@ -151,7 +151,7 @@ class Mesh1D
 
         return clone this.material.getGapSize()
 
-    setGapSize: (gapSize = adaptor("convert", "length", 2), save = true) ->
+    setGapSize: (gapSize, save = true) ->
 
         if not this.getLock()
 
@@ -164,7 +164,7 @@ class Mesh1D
 
         return clone this.params.class
 
-    setType: (type = "", save = true) ->
+    setType: (type, save = true) ->
 
         if not this.getLock()
 

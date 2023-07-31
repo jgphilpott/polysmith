@@ -44,7 +44,7 @@ class Mesh2DPolygon
 
             return clone this.params.radius
 
-        this.mesh.setRadius = (radius = adaptor("convert", "length", 5), save = true) ->
+        this.mesh.setRadius = (radius, save = true) ->
 
             if not this.getLock()
 
@@ -59,7 +59,7 @@ class Mesh2DPolygon
 
             return clone this.params.vertices
 
-        this.mesh.setVertices = (vertices = [], save = true) ->
+        this.mesh.setVertices = (vertices, save = true) ->
 
             if not this.getLock()
 
@@ -74,13 +74,13 @@ class Mesh2DPolygon
 
             return clone this.params.class
 
-        this.mesh.setType = (type = "", save = true) ->
+        this.mesh.setType = (type, save = true) ->
 
             if not this.getLock()
 
                 this.geometry.dispose()
                 this.params.class = lower String type
-                this.geometry = new window[capitalize(this.params.class) + "Geometry"]
+                this.geometry = new window[capitalize(this.params.class) + "Geometry"] this.params
 
                 if save then this.save "update"
 
