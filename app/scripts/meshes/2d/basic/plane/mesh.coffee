@@ -34,16 +34,16 @@ class POLY.PlaneMesh extends THREE.Mesh
 
             if save then this.save "update"
 
-    getHeight: ->
+    getLength: ->
 
-        return clone this.params.height
+        return clone this.params.length
 
-    setHeight: (height, save = true) ->
+    setLength: (length, save = true) ->
 
         if not this.getLock()
 
             this.geometry.dispose()
-            this.params.height = Number height
+            this.params.length = Number length
             this.geometry = new PlaneGeometry this.params
 
             if save then this.save "update"
@@ -62,16 +62,16 @@ class POLY.PlaneMesh extends THREE.Mesh
 
             if save then this.save "update"
 
-    getHeightSegments: ->
+    getLengthSegments: ->
 
-        return clone this.params.heightSegments
+        return clone this.params.lengthSegments
 
-    setHeightSegments: (heightSegments, save = true) ->
+    setLengthSegments: (lengthSegments, save = true) ->
 
         if not this.getLock()
 
             this.geometry.dispose()
-            this.params.heightSegments = Number heightSegments
+            this.params.lengthSegments = Number lengthSegments
             this.geometry = new PlaneGeometry this.params
 
             if save then this.save "update"

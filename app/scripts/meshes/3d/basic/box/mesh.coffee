@@ -20,20 +20,6 @@ class POLY.BoxMesh extends THREE.Mesh
 
         return this
 
-    getLength: ->
-
-        return clone this.params.length
-
-    setLength: (length, save = true) ->
-
-        if not this.getLock()
-
-            this.geometry.dispose()
-            this.params.length = Number length
-            this.geometry = new BoxGeometry this.params
-
-            if save then this.save "update"
-
     getWidth: ->
 
         return clone this.params.width
@@ -44,6 +30,20 @@ class POLY.BoxMesh extends THREE.Mesh
 
             this.geometry.dispose()
             this.params.width = Number width
+            this.geometry = new BoxGeometry this.params
+
+            if save then this.save "update"
+
+    getLength: ->
+
+        return clone this.params.length
+
+    setLength: (length, save = true) ->
+
+        if not this.getLock()
+
+            this.geometry.dispose()
+            this.params.length = Number length
             this.geometry = new BoxGeometry this.params
 
             if save then this.save "update"
@@ -62,20 +62,6 @@ class POLY.BoxMesh extends THREE.Mesh
 
             if save then this.save "update"
 
-    getLengthSegments: ->
-
-        return clone this.params.lengthSegments
-
-    setLengthSegments: (lengthSegments, save = true) ->
-
-        if not this.getLock()
-
-            this.geometry.dispose()
-            this.params.lengthSegments = Number lengthSegments
-            this.geometry = new BoxGeometry this.params
-
-            if save then this.save "update"
-
     getWidthSegments: ->
 
         return clone this.params.widthSegments
@@ -86,6 +72,20 @@ class POLY.BoxMesh extends THREE.Mesh
 
             this.geometry.dispose()
             this.params.widthSegments = Number widthSegments
+            this.geometry = new BoxGeometry this.params
+
+            if save then this.save "update"
+
+    getLengthSegments: ->
+
+        return clone this.params.lengthSegments
+
+    setLengthSegments: (lengthSegments, save = true) ->
+
+        if not this.getLock()
+
+            this.geometry.dispose()
+            this.params.lengthSegments = Number lengthSegments
             this.geometry = new BoxGeometry this.params
 
             if save then this.save "update"
