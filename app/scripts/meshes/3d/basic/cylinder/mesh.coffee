@@ -19,6 +19,7 @@ class POLY.CylinderMesh extends THREE.Mesh
         this.name = params.name ?= "Cylinder"
 
         this.rotation.x = deg$rad 90
+        this.rotation.y = deg$rad 90
 
         return this
 
@@ -78,16 +79,16 @@ class POLY.CylinderMesh extends THREE.Mesh
 
             if save then this.save "update"
 
-    getHeightSegments: ->
+    getLengthSegments: ->
 
-        return clone this.params.heightSegments
+        return clone this.params.lengthSegments
 
-    setHeightSegments: (heightSegments, save = true) ->
+    setLengthSegments: (lengthSegments, save = true) ->
 
         if not this.getLock()
 
             this.geometry.dispose()
-            this.params.heightSegments = Number heightSegments
+            this.params.lengthSegments = Number lengthSegments
             this.geometry = new CylinderGeometry this.params
 
             if save then this.save "update"

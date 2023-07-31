@@ -19,6 +19,7 @@ class POLY.SphereMesh extends THREE.Mesh
         this.name = params.name ?= "Sphere"
 
         this.rotation.x = deg$rad 90
+        this.rotation.y = deg$rad 180
 
         return this
 
@@ -36,58 +37,30 @@ class POLY.SphereMesh extends THREE.Mesh
 
             if save then this.save "update"
 
-    getWidthSegments: ->
+    getThetaSegments: ->
 
-        return clone this.params.widthSegments
+        return clone this.params.thetaSegments
 
-    setWidthSegments: (widthSegments, save = true) ->
+    setThetaSegments: (thetaSegments, save = true) ->
 
         if not this.getLock()
 
             this.geometry.dispose()
-            this.params.widthSegments = Number widthSegments
+            this.params.thetaSegments = Number thetaSegments
             this.geometry = new SphereGeometry this.params
 
             if save then this.save "update"
 
-    getHeightSegments: ->
+    getPhiSegments: ->
 
-        return clone this.params.heightSegments
+        return clone this.params.phiSegments
 
-    setHeightSegments: (heightSegments, save = true) ->
-
-        if not this.getLock()
-
-            this.geometry.dispose()
-            this.params.heightSegments = Number heightSegments
-            this.geometry = new SphereGeometry this.params
-
-            if save then this.save "update"
-
-    getPhiStart: ->
-
-        return clone this.params.phiStart
-
-    setPhiStart: (phiStart, save = true) ->
+    setPhiSegments: (phiSegments, save = true) ->
 
         if not this.getLock()
 
             this.geometry.dispose()
-            this.params.phiStart = Number phiStart
-            this.geometry = new SphereGeometry this.params
-
-            if save then this.save "update"
-
-    getPhiLength: ->
-
-        return clone this.params.phiLength
-
-    setPhiLength: (phiLength, save = true) ->
-
-        if not this.getLock()
-
-            this.geometry.dispose()
-            this.params.phiLength = Number phiLength
+            this.params.phiSegments = Number phiSegments
             this.geometry = new SphereGeometry this.params
 
             if save then this.save "update"
@@ -116,6 +89,34 @@ class POLY.SphereMesh extends THREE.Mesh
 
             this.geometry.dispose()
             this.params.thetaLength = Number thetaLength
+            this.geometry = new SphereGeometry this.params
+
+            if save then this.save "update"
+
+    getPhiStart: ->
+
+        return clone this.params.phiStart
+
+    setPhiStart: (phiStart, save = true) ->
+
+        if not this.getLock()
+
+            this.geometry.dispose()
+            this.params.phiStart = Number phiStart
+            this.geometry = new SphereGeometry this.params
+
+            if save then this.save "update"
+
+    getPhiLength: ->
+
+        return clone this.params.phiLength
+
+    setPhiLength: (phiLength, save = true) ->
+
+        if not this.getLock()
+
+            this.geometry.dispose()
+            this.params.phiLength = Number phiLength
             this.geometry = new SphereGeometry this.params
 
             if save then this.save "update"
