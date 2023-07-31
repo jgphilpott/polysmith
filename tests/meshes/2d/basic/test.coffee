@@ -198,11 +198,11 @@ polygen = ->
     plane.setWidth 42
     log plane.getWidth()
 
-    plane.setHeight 42
-    log plane.getHeight()
+    plane.setLength 42
+    log plane.getLength()
 
     plane.setWidthSegments 3
     log plane.getWidthSegments()
 
-    plane.setHeightSegments 3
-    log plane.getHeightSegments()
+    plane.setLengthSegments 3
+    log plane.getLengthSegments()
