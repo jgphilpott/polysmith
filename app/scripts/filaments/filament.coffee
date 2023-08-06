@@ -2,7 +2,7 @@ class Filament
 
     constructor: (type = "pla") ->
 
-        switch lower type.trim()
+        switch lower type
 
             when "abs"
 

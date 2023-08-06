@@ -8,7 +8,7 @@ class Importer
 
     importFile: (type = "", path = "") ->
 
-        switch lower type.trim()
+        switch lower type
 
             when "3mf"
 

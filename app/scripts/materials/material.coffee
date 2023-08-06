@@ -4,7 +4,7 @@ class Material
 
     constructor: (category, type, params = {}) ->
 
-        switch lower category.trim()
+        switch lower category
 
             when "line"
 

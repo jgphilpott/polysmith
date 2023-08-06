@@ -9,7 +9,7 @@ class Exporter
 
     exportFile: (type = "") ->
 
-        switch lower type.trim()
+        switch lower type
 
             when "collada"
 

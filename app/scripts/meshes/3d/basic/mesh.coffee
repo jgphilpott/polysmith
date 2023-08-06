@@ -2,7 +2,7 @@ class Mesh3DBasic
 
     constructor: (type, params = {}) ->
 
-        switch lower type.trim()
+        switch lower type
 
             when "box"
 

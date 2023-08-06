@@ -2,7 +2,7 @@ class Mesh3DHedrons
 
     constructor: (type, params = {}) ->
 
-        switch lower type.trim()
+        switch lower type
 
             when "octahedron"
 

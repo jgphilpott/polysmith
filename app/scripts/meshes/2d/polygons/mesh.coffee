@@ -2,7 +2,7 @@ class Mesh2DPolygon
 
     constructor: (type, params = {}) ->
 
-        switch lower type.trim()
+        switch lower type
 
             when "triangle"
 

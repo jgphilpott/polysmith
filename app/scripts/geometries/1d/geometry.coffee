@@ -2,7 +2,7 @@ class Geometry1D
 
     constructor: (type, params = {}) ->
 
-        type = lower type.trim()
+        type = lower type
 
         if type in d1Line then category = "line"
         if type in d1Stroke then category = "stroke"

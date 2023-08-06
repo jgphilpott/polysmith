@@ -2,7 +2,7 @@ class Mesh3D extends Mesh2D
 
     constructor: (type, params = {}) ->
 
-        type = lower type.trim()
+        type = lower type
 
         if type in d3Basic then category = "basic"
         if type in d3Hedrons then category = "hedrons"

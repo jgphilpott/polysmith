@@ -4,7 +4,7 @@ class MeshMaterial
 
     constructor: (type, params = {}) ->
 
-        switch lower type.trim()
+        switch lower type
 
             when "basic"
 
