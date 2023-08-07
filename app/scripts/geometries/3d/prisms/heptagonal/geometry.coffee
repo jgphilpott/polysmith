@@ -24,7 +24,7 @@ class POLY.HeptagonalPrismBufferGeometry extends THREE.CylinderBufferGeometry
         negativeRadius = params.negativeRadius ?= negativeRadius
 
         radialSegments = params.radialSegments ?= 7
-        heightSegments = params.heightSegments ?= 1
+        lengthSegments = params.lengthSegments ?= 1
 
         openEnded = params.openEnded ?= false
 
@@ -39,4 +39,4 @@ class POLY.HeptagonalPrismBufferGeometry extends THREE.CylinderBufferGeometry
         thetaStart = convert.angle[angleUnit]["radian"] thetaStart
         thetaLength = convert.angle[angleUnit]["radian"] thetaLength
 
-        super positiveRadius, negativeRadius, length, 7, heightSegments, openEnded, thetaStart, thetaLength
+        super positiveRadius, negativeRadius, length, 7, lengthSegments, openEnded, thetaStart, thetaLength
