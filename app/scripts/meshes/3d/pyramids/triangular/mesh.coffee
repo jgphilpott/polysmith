@@ -19,5 +19,6 @@ class POLY.TriangularPyramidMesh extends THREE.Mesh
         this.name = params.name ?= "Triangular Pyramid"
 
         this.rotation.x = deg$rad 90
+        this.rotation.y = deg$rad 90
 
         return this

@@ -19,5 +19,6 @@ class POLY.ConeMesh extends THREE.Mesh
         this.name = params.name ?= "Cone"
 
         this.rotation.x = deg$rad 90
+        this.rotation.y = deg$rad 90
 
         return this

@@ -2,7 +2,7 @@ class Mesh3DPyramids
 
     constructor: (type, params = {}) ->
 
-        switch lower type.trim()
+        switch lower type
 
             when "triangular-pyramid"
 
@@ -43,5 +43,117 @@ class Mesh3DPyramids
             else
 
                 @mesh = params.mesh
+
+        this.mesh.getRadius = ->
+
+            return clone this.params.radius
+
+        this.mesh.setRadius = (radius, save = true) ->
+
+            if not this.getLock()
+
+                this.geometry.dispose()
+                this.params.radius = Number radius
+                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+
+                if save then this.save "update"
+
+        this.mesh.getHeight = ->
+
+            return clone this.params.height
+
+        this.mesh.setHeight = (height, save = true) ->
+
+            if not this.getLock()
+
+                this.geometry.dispose()
+                this.params.height = Number height
+                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+
+                if save then this.save "update"
+
+        this.mesh.getRadialSegments = ->
+
+            return clone this.params.radialSegments
+
+        this.mesh.setRadialSegments = (radialSegments, save = true) ->
+
+            if not this.getLock()
+
+                this.geometry.dispose()
+                this.params.radialSegments = Number radialSegments
+                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+
+                if save then this.save "update"
+
+        this.mesh.getHeightSegments = ->
+
+            return clone this.params.heightSegments
+
+        this.mesh.setHeightSegments = (heightSegments, save = true) ->
+
+            if not this.getLock()
+
+                this.geometry.dispose()
+                this.params.heightSegments = Number heightSegments
+                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+
+                if save then this.save "update"
+
+        this.mesh.getOpenEnded = ->
+
+            return clone this.params.openEnded
+
+        this.mesh.setOpenEnded = (openEnded, save = true) ->
+
+            if not this.getLock()
+
+                this.geometry.dispose()
+                this.params.openEnded = Boolean openEnded
+                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+
+                if save then this.save "update"
+
+        this.mesh.getThetaStart = ->
+
+            return clone this.params.thetaStart
+
+        this.mesh.setThetaStart = (thetaStart, save = true) ->
+
+            if not this.getLock()
+
+                this.geometry.dispose()
+                this.params.thetaStart = Number thetaStart
+                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+
+                if save then this.save "update"
+
+        this.mesh.getThetaLength = ->
+
+            return clone this.params.thetaLength
+
+        this.mesh.setThetaLength = (thetaLength, save = true) ->
+
+            if not this.getLock()
+
+                this.geometry.dispose()
+                this.params.thetaLength = Number thetaLength
+                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+
+                if save then this.save "update"
+
+        this.mesh.getType = ->
+
+            return clone this.params.class
+
+        this.mesh.setType = (type, save = true) ->
+
+            if not this.getLock()
+
+                this.geometry.dispose()
+                this.params.class = lower String type
+                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+
+                if save then this.save "update"
 
         return this.mesh
