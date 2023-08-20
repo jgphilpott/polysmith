@@ -75,7 +75,7 @@ class Light
 
             lights.exclude (light) =>
 
-                light.uuid isnt this.uuid
+                light.uuid is this.uuid
 
         return this
 

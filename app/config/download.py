@@ -87,7 +87,7 @@ def get_libs(libs_dir):
             localStorage = get("https://gist.githubusercontent.com/jgphilpott/e26b92eb41b64e9565032d5c4d3c2878/raw/7fe4d19aad1e765f134a45e128dbfe1cad1141aa/localStorage.js").content.decode("utf-8")
             email = get("https://gist.githubusercontent.com/jgphilpott/a1ffedea1d1a70320b8075597df1943a/raw/a91ee941914fedcafd12d892ed98f7ee43cb9bba/email.js").content.decode("utf-8")
             favicon = get("https://gist.githubusercontent.com/jgphilpott/efdec642fc8bbaaae8115bd4fc49bd05/raw/89f07b3019e286e5039accf01221c0c2f101d80f/faviconScheme.js").content.decode("utf-8")
-            array = get("https://gist.githubusercontent.com/jgphilpott/a1367ca419ac2807ed4340d69356b7f1/raw/a8959f246ee0069559bd93745cafb37f0f016bc8/array.js").content.decode("utf-8")
+            array = get("https://gist.githubusercontent.com/jgphilpott/a1367ca419ac2807ed4340d69356b7f1/raw/23c7f01037b35e6d65eb6f051ac084e3f511a3fc/array.js").content.decode("utf-8")
             jquery = get("https://gist.githubusercontent.com/jgphilpott/83e40b7418954766e5b994d0f85e98d6/raw/15333fb6b48ce08b292f30c4c66d33b19515a41f/jQueryPlus.js").content.decode("utf-8")
 
             tools = convert + "\n" + abbreviations + "\n" + formatting + "\n" + casefy + "\n" + cookies + "\n" + localStorage + "\n" + email + "\n" + favicon + "\n" + array + "\n" + jquery
