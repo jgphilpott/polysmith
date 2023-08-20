@@ -73,7 +73,7 @@ class Light
 
             scene.remove this
 
-            lights.filterInPlace (light) =>
+            lights.exclude (light) =>
 
                 light.uuid isnt this.uuid
 

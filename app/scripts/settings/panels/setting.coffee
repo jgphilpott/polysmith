@@ -55,15 +55,17 @@ class PanelsSettings
         panel = $ "#" + path[1] + ".panel"
         checkbox = $ "#panels-panel #" + path[1] + ""
 
-        if value then panel.css "z-index", events.zIndex += 1
+        if path.last() is "open"
 
-        checkbox.prop "checked", if value then true else false
-        panel.css "visibility", if value then "visible" else "hidden"
+            if value then panel.css "z-index", events.zIndex += 1
 
-        if path[1] is "settings"
+            checkbox.prop "checked", if value then true else false
+            panel.css "visibility", if value then "visible" else "hidden"
 
-            $("#settings-panel.sub-panel img.gear").css "opacity", if value then 1 else 0.5
+            if path[1] is "settings"
 
-        else if path[1] is "shapes"
+                $("#settings-panel.sub-panel img.gear").css "opacity", if value then 1 else 0.5
 
-            $("#shortcuts.panel #toggle").attr "src", "/app/imgs/panels/nav/" + (if value then "x" else "+") + ".png"
+            else if path[1] is "shapes"
+
+                $("#shortcuts.panel #toggle").attr "src", "/app/imgs/panels/nav/" + (if value then "x" else "+") + ".png"

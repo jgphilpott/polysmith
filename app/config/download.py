@@ -83,12 +83,13 @@ def get_libs(libs_dir):
             abbreviations = get("https://gist.githubusercontent.com/jgphilpott/12783015d68e056e54252355d75b41a9/raw/3c1e6931cdad0006570e7c68ed3de8ac5746213c/abbreviations.js").content.decode("utf-8")
             formatting = get("https://gist.githubusercontent.com/jgphilpott/787659ac4ea57a9971da58a76191079b/raw/cbea41bf2d74b5ce4d1d0629d168fc799a6c48cc/format.js").content.decode("utf-8")
             casefy = get("https://gist.githubusercontent.com/jgphilpott/19e7a94cdf6d6d4cd868cc18e628026c/raw/2ed6c9636bcb6d71416ea0124adb98949322a87b/casefy.js").content.decode("utf-8")
-            rotation = get("https://gist.githubusercontent.com/jgphilpott/1bc17b82063f14fabb8f3e38825f6f10/raw/651521fa07f41d2ac1ef058c23babb3a99f8374b/rotation.js").content.decode("utf-8")
             cookies = get("https://gist.githubusercontent.com/jgphilpott/b9ce64b9ef8b04c5ac58902b133b1a28/raw/5a8c863d59be464289bcee3e6363c0d025b050dd/cookies.js").content.decode("utf-8")
             localStorage = get("https://gist.githubusercontent.com/jgphilpott/e26b92eb41b64e9565032d5c4d3c2878/raw/7fe4d19aad1e765f134a45e128dbfe1cad1141aa/localStorage.js").content.decode("utf-8")
             email = get("https://gist.githubusercontent.com/jgphilpott/a1ffedea1d1a70320b8075597df1943a/raw/a91ee941914fedcafd12d892ed98f7ee43cb9bba/email.js").content.decode("utf-8")
             favicon = get("https://gist.githubusercontent.com/jgphilpott/efdec642fc8bbaaae8115bd4fc49bd05/raw/89f07b3019e286e5039accf01221c0c2f101d80f/faviconScheme.js").content.decode("utf-8")
+            array = get("https://gist.githubusercontent.com/jgphilpott/a1367ca419ac2807ed4340d69356b7f1/raw/a8959f246ee0069559bd93745cafb37f0f016bc8/array.js").content.decode("utf-8")
+            jquery = get("https://gist.githubusercontent.com/jgphilpott/83e40b7418954766e5b994d0f85e98d6/raw/15333fb6b48ce08b292f30c4c66d33b19515a41f/jQueryPlus.js").content.decode("utf-8")
 
-            tools = convert + "\n" + abbreviations + "\n" + formatting + "\n" + casefy + "\n" + rotation + "\n" + cookies + "\n" + localStorage + "\n" + email + "\n" + favicon
+            tools = convert + "\n" + abbreviations + "\n" + formatting + "\n" + casefy + "\n" + cookies + "\n" + localStorage + "\n" + email + "\n" + favicon + "\n" + array + "\n" + jquery
 
             file.write(tools)
