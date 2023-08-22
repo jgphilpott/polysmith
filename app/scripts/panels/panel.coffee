@@ -12,16 +12,16 @@ class Panels
         @shapes = new ShapesPanel()
         @shortcuts = new ShortcutsPanel()
 
-        this.addEvents this.camera.panel
-        this.addEvents this.lights.panel
-        this.addEvents this.menu.panel
-        this.addEvents this.meshes.panel
-        this.addEvents this.polygen.panel
-        this.addEvents this.settings.panel
-        this.addEvents this.shapes.panel
-        this.addEvents this.shortcuts.panel
+        this.events this.camera.panel
+        this.events this.lights.panel
+        this.events this.menu.panel
+        this.events this.meshes.panel
+        this.events this.polygen.panel
+        this.events this.settings.panel
+        this.events this.shapes.panel
+        this.events this.shortcuts.panel
 
-    addEvents: (panel) ->
+    events: (panel) ->
 
         xOffset = 0
         yOffset = 0
@@ -84,38 +84,40 @@ class Panels
 
         panel.css "z-index", if events? then events.zIndex else 0
 
-        start = (event) =>
+        dragable = =>
 
-            event.stopPropagation()
+            start = (event) =>
 
-            transform = panel.css("transform").replace(/[{()}]/g, "").replace(/[a-zA-Z]/g, "").split(",")
+                event.stopPropagation()
 
-            xOffset = event.clientX - panel.position().left + Number transform[4]
-            yOffset = event.clientY - panel.position().top + Number transform[5]
+                transform = panel.css("transform").replace(/[{()}]/g, "").replace(/[a-zA-Z]/g, "").split(",")
 
-            panel.css "cursor", "grabbing"
+                xOffset = event.clientX - panel.position().left + Number transform[4]
+                yOffset = event.clientY - panel.position().top + Number transform[5]
 
-            document.onmousemove = drag
-            document.onmouseup = stop
+                panel.css "cursor", "grabbing"
 
-        drag = (event) =>
+                document.onmousemove = drag
+                document.onmouseup = stop
 
-            event.stopPropagation()
+            drag = (event) =>
 
-            eventX = event.clientX - xOffset
-            eventY = event.clientY - yOffset
+                event.stopPropagation()
 
-            panel.css top: eventY, left: eventX
+                eventX = event.clientX - xOffset
+                eventY = event.clientY - yOffset
 
-        stop = (event) =>
+                panel.css top: eventY, left: eventX
 
-            event.stopPropagation()
+            stop = (event) =>
 
-            panel.css "cursor", ""
+                event.stopPropagation()
 
-            document.onmousemove = null
-            document.onmouseup = null
+                panel.css "cursor", ""
 
-        panel.mousedown start
+                document.onmousemove = null
+                document.onmouseup = null
 
-        return panel
+            panel.mousedown start
+
+        dragable()
