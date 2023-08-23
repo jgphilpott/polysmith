@@ -181,7 +181,7 @@ class ShapesPanel
 
             shape = $(shape)
 
-            this.dragable shape
+            panels.shortcuts.dragable shape
 
             shape.contextmenu (event) =>
 
@@ -219,71 +219,3 @@ class ShapesPanel
                 category.animate {height: head.height()}, {duration: duration}
                 body.css "display", "none"
                 fold.rotate 0, duration
-
-    dragable: (shape) ->
-
-        xOffset = 0
-        yOffset = 0
-
-        dragged = null
-
-        start = (event) =>
-
-            event.stopPropagation()
-
-            $("body").append "<img class='ghost-shape' src='" + shape.attr("src") + "'>"
-            $(".ghost-shape").css "z-index", events.zIndex + 100
-
-            xOffset = event.clientX - shape.offset().left
-            yOffset = event.clientY - shape.offset().top
-
-            document.onmousemove = drag
-            document.onmouseup = stop
-
-        drag = (event) =>
-
-            dragged = true
-
-            event.stopPropagation()
-
-            eventX = event.clientX - xOffset
-            eventY = event.clientY - yOffset
-
-            $(".ghost-shape").css "cursor", "grabbing"
-
-            $(".ghost-shape").css top: eventY, left: eventX
-
-        stop = (event) =>
-
-            event.stopPropagation()
-
-            ghost = $(".ghost-shape")
-
-            if dragged
-
-                size = vectorAdaptor "invert", "length", printer.getSize()
-                coordinates = d2$d3 ghost.offset().left + (ghost.width() / 2), ghost.offset().top + (ghost.height() / 2)
-
-                x = if coordinates.x < -size.x then -size.x else if coordinates.x > size.x then size.x else coordinates.x
-                y = if coordinates.y < -size.y then -size.y else if coordinates.y > size.y then size.y else coordinates.y
-                z = if coordinates.z < -size.z then -size.z else if coordinates.z > size.z then size.z else coordinates.z
-
-                mesh = new Mesh shape.attr("id"), position: {x: x, y: y, z: z}
-
-                if shape.attr("id") isnt "text" and shape.attr("id") isnt "image"
-
-                    composer.outlinePass.visibleEdgeColor.set blackThree
-                    composer.outlinePass.selectedObjects = [mesh]
-
-                    $("#canvas").css "cursor", "grab"
-
-                mesh.add()
-
-            document.onmousemove = null
-            document.onmouseup = null
-
-            dragged = null
-
-            ghost.remove()
-
-        shape.mousedown start
