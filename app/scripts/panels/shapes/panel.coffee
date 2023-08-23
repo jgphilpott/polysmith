@@ -225,6 +225,8 @@ class ShapesPanel
 
     reset: ->
 
+        this.panel.find("img.reset").rotate 360
+
         panelDefaults = settings.panels.defaults()
 
         shapeDefaults = panelDefaults.shapes.selected
@@ -240,6 +242,6 @@ class ShapesPanel
 
             this.fold category.id
 
-        for shape in panels.shortcuts.find ".shape"
+        for shape in panels.shortcuts.panel.find ".shape"
 
             panels.shortcuts.animate shape.id
