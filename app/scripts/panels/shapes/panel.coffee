@@ -2,7 +2,7 @@ class ShapesPanel
 
     constructor: ->
 
-        this.add()
+        return this
 
     add: ->
 
@@ -152,6 +152,8 @@ class ShapesPanel
         this.panel.css "visibility", "hidden"
 
     events: ->
+
+        panels.events this.panel
 
         this.panel.find(".fold, h4").click (event) =>
 

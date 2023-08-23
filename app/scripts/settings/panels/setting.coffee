@@ -48,7 +48,7 @@ class PanelsSettings
         shortcuts:
 
             open: true
-            selected: ["box", "cylinder", "sphere"]
+            selected: ["box", "cylinder", "sphere", "text", "image"]
 
     update: (path, value) ->
 

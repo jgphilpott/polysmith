@@ -153,7 +153,7 @@ class Client():
                                         },
                                         "shortcuts": {
                                             "open": True,
-                                            "selected": ["box", "cylinder", "sphere"]
+                                            "selected": ["box", "cylinder", "sphere", "text", "image"]
                                         }
                                     },
                                     "printer": {

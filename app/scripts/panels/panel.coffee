@@ -12,23 +12,20 @@ class Panels
         @shapes = new ShapesPanel()
         @shortcuts = new ShortcutsPanel()
 
-        this.events this.camera.panel
-        this.events this.lights.panel
-        this.events this.menu.panel
-        this.events this.meshes.panel
-        this.events this.polygen.panel
-        this.events this.settings.panel
-        this.events this.shapes.panel
-        this.events this.shortcuts.panel
+    add: ->
+
+        this.camera.add()
+        this.lights.add()
+        this.menu.add()
+        this.meshes.add()
+        this.polygen.add()
+        this.settings.add()
+        this.shapes.add()
+        this.shortcuts.add()
 
     events: (panel) ->
 
-        xOffset = 0
-        yOffset = 0
-
-        queue = false
         duration = 1000
-
         id = panel.attr "id"
         close = panel.find ".close"
 
@@ -66,8 +63,8 @@ class Panels
 
                 composer.outlinePass.selectedObjects = []
 
-            close.animate {opacity: 1}, {duration: duration, queue: queue}
-            panel.animate {backgroundColor: grayGlass}, {duration: duration * 3, queue: queue}
+            close.animate {opacity: 1}, {duration: duration}
+            panel.animate {backgroundColor: grayGlass}, {duration: duration * 3}
 
         panel.mouseleave (event) =>
 
@@ -75,8 +72,8 @@ class Panels
 
             composer.outlinePass.selectedObjects = []
 
-            close.animate {opacity: 0}, {duration: duration, queue: queue}
-            panel.animate {backgroundColor: lightGrayGlass}, {duration: duration * 3, queue: queue}
+            close.animate {opacity: 0}, {duration: duration}
+            panel.animate {backgroundColor: lightGrayGlass}, {duration: duration * 3}
 
         if id isnt "mesh"
 
@@ -84,40 +81,43 @@ class Panels
 
         panel.css "z-index", if events? then events.zIndex else 0
 
-        dragable = =>
+        this.dragable panel
 
-            start = (event) =>
+    dragable: (panel) ->
 
-                event.stopPropagation()
+        xOffset = 0
+        yOffset = 0
 
-                transform = panel.css("transform").replace(/[{()}]/g, "").replace(/[a-zA-Z]/g, "").split(",")
+        start = (event) =>
 
-                xOffset = event.clientX - panel.position().left + Number transform[4]
-                yOffset = event.clientY - panel.position().top + Number transform[5]
+            event.stopPropagation()
 
-                panel.css "cursor", "grabbing"
+            transform = panel.css("transform").replace(/[{()}]/g, "").replace(/[a-zA-Z]/g, "").split(",")
 
-                document.onmousemove = drag
-                document.onmouseup = stop
+            xOffset = event.clientX - panel.position().left + Number transform[4]
+            yOffset = event.clientY - panel.position().top + Number transform[5]
 
-            drag = (event) =>
+            panel.css "cursor", "grabbing"
 
-                event.stopPropagation()
+            document.onmousemove = drag
+            document.onmouseup = stop
 
-                eventX = event.clientX - xOffset
-                eventY = event.clientY - yOffset
+        drag = (event) =>
 
-                panel.css top: eventY, left: eventX
+            event.stopPropagation()
 
-            stop = (event) =>
+            eventX = event.clientX - xOffset
+            eventY = event.clientY - yOffset
 
-                event.stopPropagation()
+            panel.css top: eventY, left: eventX
 
-                panel.css "cursor", ""
+        stop = (event) =>
 
-                document.onmousemove = null
-                document.onmouseup = null
+            event.stopPropagation()
 
-            panel.mousedown start
+            panel.css "cursor", ""
 
-        dragable()
+            document.onmousemove = null
+            document.onmouseup = null
+
+        panel.mousedown start
