@@ -1,0 +1,50 @@
+@import "../../colors/glass/grayscale.sass"
+@import "../../colors/glass/rainbow.sass"
+
+@import "../../colors/solid/grayscale.sass"
+@import "../../colors/solid/rainbow.sass"
+
+#shortcuts.panel
+
+    visibility: visible
+
+    top: calc(100% - 10px)
+    left: 50%
+
+    height: 82px
+
+    transform: translate(-50%, -100%)
+
+    display: flex
+    align-items: center
+
+    img.shape
+
+        width: 0px
+        height: 0px
+
+        margin: 0px
+
+    img.shape:hover
+
+        cursor: grab
+
+    img.nav
+
+        width: 22.5px
+        height: 22.5px
+
+        margin: 10px
+
+    img.nav:hover
+
+        cursor: pointer
+
+img.ghost-shape
+
+    width: 50px
+    height: 50px
+
+    opacity: 0.5
+
+    position: fixed
