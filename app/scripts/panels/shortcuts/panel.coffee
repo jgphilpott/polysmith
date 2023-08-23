@@ -116,26 +116,34 @@ class ShortcutsPanel
 
             event.stopPropagation()
 
-    toggle: (target, duration = 1000) ->
+    toggle: (target) ->
+
+        if this.shortcuts.includes target
+
+            this.shortcuts.exclude (shortcut) => shortcut is target
+
+        else
+
+            this.shortcuts.push target
+
+        settings.set "panels.shortcuts.selected", this.shortcuts
+
+        this.animate target
+
+    animate: (target, duration = 1000) ->
 
         shortcut = this.panel.find "img#" + target + ".shape"
         shape = panels.shapes.panel.find "img#" + target + ".shape"
 
         if this.shortcuts.includes target
 
-            this.shortcuts.exclude (shortcut) => shortcut is target
-
-            shortcut.animate {width: 0, height: 0, margin: 0}, {duration: duration}
-            shape.animate {opacity: 1}, {duration: duration}
-
-        else
-
-            this.shortcuts.push target
-
             shortcut.animate {width: 50, height: 50, margin: 10}, {duration: duration}
             shape.animate {opacity: 0.5}, {duration: duration}
 
-        settings.set "panels.shortcuts.selected", this.shortcuts
+        else
+
+            shortcut.animate {width: 0, height: 0, margin: 0}, {duration: duration}
+            shape.animate {opacity: 1}, {duration: duration}
 
     dragable: (shape) ->
 

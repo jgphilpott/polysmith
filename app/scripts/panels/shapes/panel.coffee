@@ -12,6 +12,7 @@ class ShapesPanel
             <div id='shapes' class='panel'>
 
                 <img title='Close' class='close' src='/app/imgs/panels/nav/close.png'>
+                <img title='Reset Shapes' class='reset' src='/app/imgs/panels/tools/reset.png'>
 
                 <h3>Shapes</h3>
 
@@ -155,6 +156,8 @@ class ShapesPanel
 
         panels.events this.panel
 
+        this.panel.find("img.reset").click (event) => this.reset()
+
         this.panel.find(".fold, h4").click (event) =>
 
             selection = $(event.target).closest(".category").attr("id")
@@ -219,3 +222,24 @@ class ShapesPanel
                 category.animate {height: head.height()}, {duration: duration}
                 body.css "display", "none"
                 fold.rotate 0, duration
+
+    reset: ->
+
+        panelDefaults = settings.panels.defaults()
+
+        shapeDefaults = panelDefaults.shapes.selected
+        shortcutDefaults = panelDefaults.shortcuts.selected
+
+        this.categories = shapeDefaults
+        panels.shortcuts.shortcuts = shortcutDefaults
+
+        settings.set "panels.shapes.selected", shapeDefaults
+        settings.set "panels.shortcuts.selected", shortcutDefaults
+
+        for category in this.panel.find ".category"
+
+            this.fold category.id
+
+        for shape in panels.shortcuts.find ".shape"
+
+            panels.shortcuts.animate shape.id
