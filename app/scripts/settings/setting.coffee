@@ -83,7 +83,7 @@ class Settings
 
                 settings[setting] = defaults[setting]
 
-            if _.isObject defaults[setting] and not _.isArray defaults[setting]
+            if _.isObject defaults[setting]
 
                 if not _.isObject settings[setting]
 

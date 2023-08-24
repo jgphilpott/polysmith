@@ -89,7 +89,8 @@ def get_libs(libs_dir):
             favicon = get("https://gist.githubusercontent.com/jgphilpott/efdec642fc8bbaaae8115bd4fc49bd05/raw/89f07b3019e286e5039accf01221c0c2f101d80f/faviconScheme.js").content.decode("utf-8")
             array = get("https://gist.githubusercontent.com/jgphilpott/a1367ca419ac2807ed4340d69356b7f1/raw/23c7f01037b35e6d65eb6f051ac084e3f511a3fc/array.js").content.decode("utf-8")
             jquery = get("https://gist.githubusercontent.com/jgphilpott/83e40b7418954766e5b994d0f85e98d6/raw/b75b8879c5165ef3d3a57cc5b159f865cdc6f0bb/jQueryPlus.js").content.decode("utf-8")
+            lodash = get("https://gist.githubusercontent.com/jgphilpott/e6716046f4225629f7f82fe878909f35/raw/5d1dbd8aa3412588ba51c888e07f041f28e890c7/LodashPlus.js").content.decode("utf-8")
 
-            tools = convert + "\n" + abbreviations + "\n" + formatting + "\n" + casefy + "\n" + cookies + "\n" + localStorage + "\n" + email + "\n" + favicon + "\n" + array + "\n" + jquery
+            tools = convert + "\n" + abbreviations + "\n" + formatting + "\n" + casefy + "\n" + cookies + "\n" + localStorage + "\n" + email + "\n" + favicon + "\n" + array + "\n" + jquery + "\n" + lodash
 
             file.write(tools)

@@ -2,11 +2,13 @@ log = console.log
 info = console.info
 warn = console.warn
 error = console.error
+assert = console.assert
 
 console.log = -> null
 console.info = -> null
 console.warn = -> null
 console.error = -> null
+console.assert = -> null
 
 clone = (object) -> _.clone object
 omit = (object, keys) -> _.omit object, keys
