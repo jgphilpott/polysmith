@@ -307,6 +307,19 @@ polygen = ->
     log tube.getVolume()
 
     log "### Capsule Tests ###"
+
+    capsule.setLength 10
+    log capsule.getLength()
+
+    capsule.setRadius 10
+    log capsule.getRadius()
+
+    capsule.setCapSegments 3
+    log capsule.getCapSegments()
+
+    capsule.setRadialSegments 6
+    log capsule.getRadialSegments()
+
     log "### Image Tests ###"
     log "### Knot Tests ###"
     log "### Text Tests ###"
