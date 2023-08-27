@@ -322,6 +322,25 @@ polygen = ->
 
     log "### Image Tests ###"
     log "### Knot Tests ###"
+
+    knot.setP 4
+    log knot.getP()
+
+    knot.setQ 6
+    log knot.getQ()
+
+    knot.setRadius 10
+    log knot.getRadius()
+
+    knot.setThickness 3
+    log knot.getThickness()
+
+    knot.setRadialSegments 3
+    log knot.getRadialSegments()
+
+    knot.setTubularSegments 12
+    log knot.getTubularSegments()
+
     log "### Text Tests ###"
     log "### Torus Tests ###"
     log "### Tube Tests ###"
