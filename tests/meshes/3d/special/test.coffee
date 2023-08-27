@@ -343,4 +343,20 @@ polygen = ->
 
     log "### Text Tests ###"
     log "### Torus Tests ###"
+
+    torus.setArc 180
+    log torus.getArc()
+
+    torus.setRadius 10
+    log torus.getRadius()
+
+    torus.setThickness 3
+    log torus.getThickness()
+
+    torus.setRadialSegments 6
+    log torus.getRadialSegments()
+
+    torus.setTubularSegments 3
+    log torus.getTubularSegments()
+
     log "### Tube Tests ###"
