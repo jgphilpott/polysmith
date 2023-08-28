@@ -77,15 +77,15 @@ class Mesh1D
 
             this.geometry.dispose()
 
+            this.params.vertices = Array.from vertices
+
             if this.class is "line"
 
-                this.geometry = new LineGeometry vertices: vertices
+                this.geometry = new LineGeometry this.params
 
             else if this.class is "stroke"
 
-                this.geometry = new StrokeGeometry vertices: vertices
-
-            this.params.vertices = vertices
+                this.geometry = new StrokeGeometry this.params
 
             this.computeLineDistances()
 

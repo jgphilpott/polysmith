@@ -360,3 +360,18 @@ polygen = ->
     log torus.getTubularSegments()
 
     log "### Tube Tests ###"
+
+    tube.setClosed false
+    log tube.getClosed()
+
+    tube.setRadius 3
+    log tube.getRadius()
+
+    tube.setVertices [[10, -10, 10], [-10, 10, -10]]
+    log tube.getVertices()
+
+    tube.setRadialSegments 6
+    log tube.getRadialSegments()
+
+    tube.setTubularSegments 1
+    log tube.getTubularSegments()
