@@ -18,8 +18,6 @@ class POLY.TubeMesh extends THREE.Mesh
         this.class = params.class ?= "tube"
         this.name = params.name ?= "Tube"
 
-        return this
-
     getClosed: ->
 
         return clone this.params.closed

@@ -10,7 +10,7 @@ class POLY.TubeBufferGeometry extends THREE.TubeBufferGeometry
 
     constructor: (params = {}) ->
 
-        path = []
+        tube = []
 
         radius = adaptor "convert", "length", 1
         vertices = [[10, 10, 10], [-10, -10, -10]]
@@ -37,8 +37,8 @@ class POLY.TubeBufferGeometry extends THREE.TubeBufferGeometry
             vertex[1] = adaptor "invert", "length", vertex[1]
             vertex[2] = adaptor "invert", "length", vertex[2]
 
-            path.push new THREE.Vector3 vertex[0], vertex[1], vertex[2]
+            tube.push new THREE.Vector3 vertex[0], vertex[1], vertex[2]
 
-        path = new THREE.CatmullRomCurve3 path
+        tube = new THREE.CatmullRomCurve3 tube
 
-        super path, tubularSegments, radius, radialSegments, closed
+        super tube, tubularSegments, radius, radialSegments, closed
