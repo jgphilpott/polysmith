@@ -375,6 +375,43 @@ polygen = ->
     log tube.getTubularSegments()
 
     log "### Image Tests ###"
+
+    image.setImage "./app/imgs/icons/tools/rotate.svg"
+    log image.getImage()
+    await sleep 100
+
+    image.setSteps 3
+    log image.getSteps()
+    await sleep 100
+
+    image.setDepth 5
+    log image.getDepth()
+    await sleep 100
+
+    image.setBevelEnabled true
+    log image.getBevelEnabled()
+    await sleep 100
+
+    image.setBevelSize 0.5
+    log image.getBevelSize()
+    await sleep 100
+
+    image.setBevelOffset 0
+    log image.getBevelOffset()
+    await sleep 100
+
+    image.setBevelThickness 0.5
+    log image.getBevelThickness()
+    await sleep 100
+
+    image.setBevelSegments 5
+    log image.getBevelSegments()
+    await sleep 100
+
+    image.setCurveSegments 6
+    log image.getCurveSegments()
+    await sleep 100
+
     log "### Text Tests ###"
 
     text.setText "Testing 123!"

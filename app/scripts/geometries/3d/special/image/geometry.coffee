@@ -20,7 +20,7 @@ class POLY.ImageBufferGeometry
         bevelOffset = adaptor "convert", "length", 0
         bevelThickness = adaptor "convert", "length", 0.1
 
-        image = params.image ?= "image"
+        image = params.image ?= "./app/imgs/icons/shapes/special/image.svg"
 
         steps = params.steps ?= 1
         depth = params.depth ?= depth
@@ -40,9 +40,9 @@ class POLY.ImageBufferGeometry
         bevelOffset = adaptor "invert", "length", bevelOffset
         bevelThickness = adaptor "invert", "length", bevelThickness
 
-        loader.load "./app/imgs/icons/shapes/special/" + image + ".svg", (image) =>
+        loader.load image, (image) =>
 
-            options = params.options ?=
+            options =
 
                 steps: steps
                 depth: depth
