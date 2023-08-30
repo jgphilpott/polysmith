@@ -12,7 +12,7 @@ polygen = ->
     torus = new Torus name: "Torus", position: x: 0, y: 0, z: 60
     tube = new Tube name: "Tube", position: x: 0, y: 0, z: 75
 
-    await sleep 1000
+    await sleep 100
 
     log capsule.geometry
     log image.geometry

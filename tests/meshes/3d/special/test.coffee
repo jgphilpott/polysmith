@@ -12,7 +12,7 @@ polygen = ->
     torus = new Torus name: "Torus", color: blueThree, position: x: 0, y: 0, z: 60
     tube = new Tube name: "Tube", color: blueThree, position: x: 0, y: 0, z: 75
 
-    await sleep 1000
+    await sleep 100
 
     log capsule
     log image
@@ -320,7 +320,6 @@ polygen = ->
     capsule.setRadialSegments 6
     log capsule.getRadialSegments()
 
-    log "### Image Tests ###"
     log "### Knot Tests ###"
 
     knot.setP 4
@@ -341,7 +340,6 @@ polygen = ->
     knot.setTubularSegments 12
     log knot.getTubularSegments()
 
-    log "### Text Tests ###"
     log "### Torus Tests ###"
 
     torus.setArc 180
@@ -375,3 +373,46 @@ polygen = ->
 
     tube.setTubularSegments 1
     log tube.getTubularSegments()
+
+    log "### Image Tests ###"
+    log "### Text Tests ###"
+
+    text.setText "Testing 123!"
+    log text.getText()
+    await sleep 100
+
+    text.setFont "times-new-roman"
+    log text.getFont()
+    await sleep 100
+
+    text.setSize 18
+    log text.getSize()
+    await sleep 100
+
+    text.setHeight 5
+    log text.getHeight()
+    await sleep 100
+
+    text.setBevelEnabled true
+    log text.getBevelEnabled()
+    await sleep 100
+
+    text.setBevelSize 0.5
+    log text.getBevelSize()
+    await sleep 100
+
+    text.setBevelOffset 0
+    log text.getBevelOffset()
+    await sleep 100
+
+    text.setBevelThickness 0.5
+    log text.getBevelThickness()
+    await sleep 100
+
+    text.setBevelSegments 5
+    log text.getBevelSegments()
+    await sleep 100
+
+    text.setCurveSegments 6
+    log text.getCurveSegments()
+    await sleep 100

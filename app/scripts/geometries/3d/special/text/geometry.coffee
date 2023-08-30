@@ -43,9 +43,9 @@ class POLY.TextBufferGeometry
         bevelOffset = adaptor "invert", "length", bevelOffset
         bevelThickness = adaptor "invert", "length", bevelThickness
 
-        loader.load "./app/fonts/JSON/" + font + ".json", (font) ->
+        loader.load "./app/fonts/JSON/" + font + ".json", (font) =>
 
-            options = params.options ?=
+            options =
 
                 font: font
                 size: size
