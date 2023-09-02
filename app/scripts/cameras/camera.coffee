@@ -131,11 +131,11 @@ class Camera
 
         return adaptor "convert", "length", clone this.position.x
 
-    setPositionX: (position, save = true) ->
+    setPositionX: (x, save = true) ->
 
-        panels.camera.setPositionX position
+        panels.camera.setPositionX Number x
 
-        this.position.x = adaptor "invert", "length", position
+        this.position.x = adaptor "invert", "length", Number x
 
         this.lookAt this.target.x, this.target.y, this.target.z
 
@@ -145,11 +145,11 @@ class Camera
 
         return adaptor "convert", "length", clone this.position.y
 
-    setPositionY: (position, save = true) ->
+    setPositionY: (y, save = true) ->
 
-        panels.camera.setPositionY position
+        panels.camera.setPositionY Number y
 
-        this.position.y = adaptor "invert", "length", position
+        this.position.y = adaptor "invert", "length", Number y
 
         this.lookAt this.target.x, this.target.y, this.target.z
 
@@ -159,11 +159,11 @@ class Camera
 
         return adaptor "convert", "length", clone this.position.z
 
-    setPositionZ: (position, save = true) ->
+    setPositionZ: (z, save = true) ->
 
-        panels.camera.setPositionZ position
+        panels.camera.setPositionZ Number z
 
-        this.position.z = adaptor "invert", "length", position
+        this.position.z = adaptor "invert", "length", Number z
 
         this.lookAt this.target.x, this.target.y, this.target.z
 
@@ -189,11 +189,11 @@ class Camera
 
         return adaptor "convert", "length", clone this.target.x
 
-    setTargetX: (target, save = true) ->
+    setTargetX: (x, save = true) ->
 
-        panels.camera.setTargetX target
+        panels.camera.setTargetX Number x
 
-        this.target.x = adaptor "invert", "length", target
+        this.target.x = adaptor "invert", "length", Number x
 
         this.lookAt this.target.x, this.target.y, this.target.z
 
@@ -203,11 +203,11 @@ class Camera
 
         return adaptor "convert", "length", clone this.target.y
 
-    setTargetY: (target, save = true) ->
+    setTargetY: (y, save = true) ->
 
-        panels.camera.setTargetY target
+        panels.camera.setTargetY Number y
 
-        this.target.y = adaptor "invert", "length", target
+        this.target.y = adaptor "invert", "length", Number y
 
         this.lookAt this.target.x, this.target.y, this.target.z
 
@@ -217,11 +217,11 @@ class Camera
 
         return adaptor "convert", "length", clone this.target.z
 
-    setTargetZ: (target, save = true) ->
+    setTargetZ: (z, save = true) ->
 
-        panels.camera.setTargetZ target
+        panels.camera.setTargetZ Number z
 
-        this.target.z = adaptor "invert", "length", target
+        this.target.z = adaptor "invert", "length", Number z
 
         this.lookAt this.target.x, this.target.y, this.target.z
 

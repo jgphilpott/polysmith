@@ -15,7 +15,7 @@ class ZoomControls
 
     setMin: (min, save = true) ->
 
-        this.min = adaptor "invert", "length", min
+        this.min = adaptor "invert", "length", Number min
 
         if save then settings.set "controls.zoom.min", this.min
 
@@ -25,7 +25,7 @@ class ZoomControls
 
     setMax: (max, save = true) ->
 
-        this.max = adaptor "invert", "length", max
+        this.max = adaptor "invert", "length", Number max
 
         if save then settings.set "controls.zoom.max", this.max
 
@@ -35,7 +35,7 @@ class ZoomControls
 
     setSpeed: (speed, save = true) ->
 
-        this.speed = speed
+        this.speed = Number speed
 
         panels.camera.setZoomSpeed this.speed
 

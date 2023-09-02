@@ -12,7 +12,7 @@ class DragControls
 
     setSpeed: (speed, save = true) ->
 
-        this.speed = speed
+        this.speed = Number speed
 
         panels.camera.setDragSpeed this.speed
 

@@ -17,7 +17,7 @@ class FlyControls
 
     setSpeed: (speed, save = true) ->
 
-        this.speed = speed
+        this.speed = Number speed
 
         panels.camera.setFlySpeed this.speed
 
