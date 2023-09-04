@@ -69,9 +69,9 @@ def get_libs(libs_dir):
             regr = get("https://gist.githubusercontent.com/jgphilpott/d38279e8fac9af31054e10b7363bf17e/raw/3555aab46e57a9ccf367d00d336e526349aa0f42/regression.js").content.decode("utf-8")
             roots = get("https://gist.githubusercontent.com/jgphilpott/e483b5fbe52a7233c292f35737e5a682/raw/4dee678d7c8f7577305aa30058a39ffd3502ae0c/roots.js").content.decode("utf-8")
             trig = get("https://gist.githubusercontent.com/jgphilpott/1378cc2cccde6d65c5fb2b6111b5a98f/raw/4ca9d6644932bef8a61b5ed9805fc124b020f2c5/trigonometry.js").content.decode("utf-8")
-            limits = get("https://gist.githubusercontent.com/jgphilpott/6332dc7f5636db9ba455e1575407c496/raw/09cedcb3640f1428422ebe39959877e67830db03/limits.js").content.decode("utf-8")
+            numerary = get("https://gist.githubusercontent.com/jgphilpott/6332dc7f5636db9ba455e1575407c496/raw/5b3b5420054275cdecb1403028ec3162851721af/numerary.js").content.decode("utf-8")
 
-            math = numeric + "\n" + calc + "\n" + regr + "\n" + roots + "\n" + trig + "\n" + limits
+            math = numeric + "\n" + calc + "\n" + regr + "\n" + roots + "\n" + trig + "\n" + numerary
 
             file.write(math)
 

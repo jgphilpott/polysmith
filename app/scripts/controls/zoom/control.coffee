@@ -48,7 +48,7 @@ class ZoomControls
             this.active = true
 
             zoomTimeout = null
-            zoomModifier = 100000
+            zoomModifier = 500000
 
             $("#canvas").on "wheel", (event) =>
 

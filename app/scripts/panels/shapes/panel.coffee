@@ -172,8 +172,6 @@ class ShapesPanel
 
             settings.set "panels.shapes.selected", this.categories
 
-            event.stopPropagation()
-
             this.fold selection
 
         this.panel.find(".fold, h4").on "mousedown mouseup", (event) =>
@@ -203,9 +201,10 @@ class ShapesPanel
     fold: (target, duration = 1000) ->
 
             category = this.panel.find "#" + target + ""
+
             head = category.find ".head"
             body = category.find ".body"
-            fold = head.find ".fold"
+            fold = category.find ".fold"
 
             if this.categories.includes target
 

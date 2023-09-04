@@ -33,7 +33,7 @@ class FlyControls
 
                 if not camera.dragging and not camera.focusing and this.flyCodes.includes event.keyCode
 
-                    flyModifier = 10
+                    flyModifier = 5
                     satoshi = 0.000001
 
                     camera.flying = true

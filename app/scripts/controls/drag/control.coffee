@@ -34,7 +34,7 @@ class DragControls
             position = null
 
             dragSpeed = null
-            dragModifier = 1000
+            dragModifier = 500
 
             verticalAngle = null
             horizontalAngle = null
