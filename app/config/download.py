@@ -69,9 +69,8 @@ def get_libs(libs_dir):
             regr = get("https://gist.githubusercontent.com/jgphilpott/d38279e8fac9af31054e10b7363bf17e/raw/3555aab46e57a9ccf367d00d336e526349aa0f42/regression.js").content.decode("utf-8")
             roots = get("https://gist.githubusercontent.com/jgphilpott/e483b5fbe52a7233c292f35737e5a682/raw/4dee678d7c8f7577305aa30058a39ffd3502ae0c/roots.js").content.decode("utf-8")
             trig = get("https://gist.githubusercontent.com/jgphilpott/1378cc2cccde6d65c5fb2b6111b5a98f/raw/4ca9d6644932bef8a61b5ed9805fc124b020f2c5/trigonometry.js").content.decode("utf-8")
-            numerary = get("https://gist.githubusercontent.com/jgphilpott/6332dc7f5636db9ba455e1575407c496/raw/5b3b5420054275cdecb1403028ec3162851721af/numerary.js").content.decode("utf-8")
 
-            math = numeric + "\n" + calc + "\n" + regr + "\n" + roots + "\n" + trig + "\n" + numerary
+            math = numeric + "\n" + calc + "\n" + regr + "\n" + roots + "\n" + trig
 
             file.write(math)
 
@@ -87,10 +86,24 @@ def get_libs(libs_dir):
             localStorage = get("https://gist.githubusercontent.com/jgphilpott/e26b92eb41b64e9565032d5c4d3c2878/raw/7fe4d19aad1e765f134a45e128dbfe1cad1141aa/localStorage.js").content.decode("utf-8")
             email = get("https://gist.githubusercontent.com/jgphilpott/a1ffedea1d1a70320b8075597df1943a/raw/a91ee941914fedcafd12d892ed98f7ee43cb9bba/email.js").content.decode("utf-8")
             favicon = get("https://gist.githubusercontent.com/jgphilpott/efdec642fc8bbaaae8115bd4fc49bd05/raw/89f07b3019e286e5039accf01221c0c2f101d80f/faviconScheme.js").content.decode("utf-8")
-            array = get("https://gist.githubusercontent.com/jgphilpott/a1367ca419ac2807ed4340d69356b7f1/raw/23c7f01037b35e6d65eb6f051ac084e3f511a3fc/array.js").content.decode("utf-8")
+            fullscreen = get("https://gist.githubusercontent.com/jgphilpott/d339fa0571cbe0e55a411caca87d2ece/raw/fc9dd92d373a167202ab658868dfb08c94804211/fullscreen.js").content.decode("utf-8")
             jquery = get("https://gist.githubusercontent.com/jgphilpott/83e40b7418954766e5b994d0f85e98d6/raw/b75b8879c5165ef3d3a57cc5b159f865cdc6f0bb/jQueryPlus.js").content.decode("utf-8")
             lodash = get("https://gist.githubusercontent.com/jgphilpott/e6716046f4225629f7f82fe878909f35/raw/5d1dbd8aa3412588ba51c888e07f041f28e890c7/LodashPlus.js").content.decode("utf-8")
 
-            tools = convert + "\n" + abbreviations + "\n" + formatting + "\n" + casefy + "\n" + cookies + "\n" + localStorage + "\n" + email + "\n" + favicon + "\n" + array + "\n" + jquery + "\n" + lodash
+            tools = convert + "\n" + abbreviations + "\n" + formatting + "\n" + casefy + "\n" + cookies + "\n" + localStorage + "\n" + email + "\n" + favicon + "\n" + fullscreen + "\n" + jquery + "\n" + lodash
 
             file.write(tools)
+
+    if not exists(js_libs_dir + "/prototype.js"):
+
+        with open(js_libs_dir + "/prototype.js", "w") as file:
+
+            boolean = get("https://gist.githubusercontent.com/jgphilpott/a876171a09ce00e450d7f4325542d819/raw/93df7a36469cab5b419f1751146f6e79ef8838d5/boolean.js").content.decode("utf-8")
+            number = get("https://gist.githubusercontent.com/jgphilpott/6332dc7f5636db9ba455e1575407c496/raw/34b4aa00facde53b8500622edac69d3326ca87f7/number.js").content.decode("utf-8")
+            string = get("https://gist.githubusercontent.com/jgphilpott/c4e0c275c808ae1a01386942dfc2a225/raw/2cf9c0add8dc98cfb654170e9608c0f06d6100fc/string.js").content.decode("utf-8")
+            array = get("https://gist.githubusercontent.com/jgphilpott/a1367ca419ac2807ed4340d69356b7f1/raw/e781ef9425fd62fa3a83a9893b98e95d516c28cc/array.js").content.decode("utf-8")
+            object = get("https://gist.githubusercontent.com/jgphilpott/8971e9e9760895d1a87ae58e5a740f11/raw/c3f460eb4a06bbee149dd8cd8fc0419d194fb73e/object.js").content.decode("utf-8")
+
+            prototype = boolean + "\n" + number + "\n" + string + "\n" + array + "\n" + object
+
+            file.write(prototype)
