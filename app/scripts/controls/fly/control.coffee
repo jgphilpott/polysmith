@@ -15,11 +15,11 @@ class FlyControls
 
         return clone this.speed
 
-    setSpeed: (speed, save = true) ->
+    setSpeed: (speed, animate = true, save = true) ->
 
         this.speed = Number speed
 
-        panels.camera.setFlySpeed this.speed
+        panels.camera.setFlySpeed this.speed, animate
 
         if save then settings.set "controls.speed.fly", this.speed
 

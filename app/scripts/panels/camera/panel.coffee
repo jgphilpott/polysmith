@@ -345,8 +345,8 @@ class CameraPanel
 
             selection = $(event.target).closest("span")
 
-            detail = settings.get "scales.length.detail"
             value = Number selection.find("input").val()
+            detail = settings.get "scales.length.detail"
 
             control = selection.attr("id").split("-")[0]
             axis = selection.attr("id").split("-")[1]
@@ -368,7 +368,7 @@ class CameraPanel
                 if axis is "y" then camera.setPositionY value, false
                 if axis is "z" then camera.setPositionZ value, false
 
-                this.position.find("#position-" + axis + " input").val round value, detail
+                this.position.find("#position-" + axis + " input").val value.round detail
 
             else if control is "target"
 
@@ -376,7 +376,7 @@ class CameraPanel
                 if axis is "y" then camera.setTargetY value, false
                 if axis is "z" then camera.setTargetZ value, false
 
-                this.target.find("#target-" + axis + " input").val round value, detail
+                this.target.find("#target-" + axis + " input").val value.round detail
 
         if event.type is "mousedown"
 
@@ -384,7 +384,11 @@ class CameraPanel
 
             this.buttonTimeout = setTimeout =>
 
-                this.buttonInterval = setInterval (=> updateCamera event), 100
+                this.buttonInterval = setInterval =>
+
+                    updateCamera event
+
+                , 100
 
             , 1000
 
@@ -498,25 +502,43 @@ class CameraPanel
 
         return clone this.drag.getValue()
 
-    setDragSpeed: (speed) ->
+    setDragSpeed: (speed, animate = true, duration = 1000) ->
 
-        this.drag.setValue Number speed
+        if animate
+
+            this.drag.animate speed, duration
+
+        else
+
+            this.drag.setValue speed
 
     getFlySpeed: ->
 
         return clone this.fly.getValue()
 
-    setFlySpeed: (speed) ->
+    setFlySpeed: (speed, animate = true, duration = 1000) ->
 
-        this.fly.setValue Number speed
+        if animate
+
+            this.fly.animate speed, duration
+
+        else
+
+            this.fly.setValue speed
 
     getZoomSpeed: ->
 
         return clone this.zoom.getValue()
 
-    setZoomSpeed: (speed) ->
+    setZoomSpeed: (speed, animate = true, duration = 1000) ->
 
-        this.zoom.setValue Number speed
+        if animate
+
+            this.zoom.animate speed, duration
+
+        else
+
+            this.zoom.setValue speed
 
     sliderStart: (event, slider) =>
 
@@ -530,6 +552,8 @@ class CameraPanel
         this.panel.find("*").css "cursor", "ew-resize"
 
     sliderSlide: (event, slider) =>
+
+        event.stopPropagation()
 
         this[event.target.id].setValue()
 
@@ -548,12 +572,13 @@ class CameraPanel
 
         this[event.target.id].fill $(event.target)
 
-        controls[event.target.id].setSpeed this[event.target.id].getValue()
+        controls[event.target.id].setSpeed this[event.target.id].getValue(), false
 
-    reset: ->
+    reset: (duration = 1000, steps = 100) ->
 
         this.panel.find("img.reset").rotate 360
 
+        panelDefaults = settings.panels.defaults()
         cameraDefaults = settings.camera.defaults()
         controlsDefaults = settings.controls.defaults()
 
@@ -561,5 +586,30 @@ class CameraPanel
         controls.fly.setSpeed controlsDefaults.speed.fly
         controls.zoom.setSpeed controlsDefaults.speed.zoom
 
-        camera.setPosition cameraDefaults.position
-        camera.setTarget cameraDefaults.target
+        positionStepX = (camera.getPositionX() - cameraDefaults.position.x) / steps
+        positionStepY = (camera.getPositionY() - cameraDefaults.position.y) / steps
+        positionStepZ = (camera.getPositionZ() - cameraDefaults.position.z) / steps
+
+        targetStepX = (camera.getTargetX() - cameraDefaults.target.x) / steps
+        targetStepY = (camera.getTargetY() - cameraDefaults.target.y) / steps
+        targetStepZ = (camera.getTargetZ() - cameraDefaults.target.z) / steps
+
+        updateCamera = =>
+
+            camera.setPositionX camera.getPositionX() - positionStepX
+            camera.setPositionY camera.getPositionY() - positionStepY
+            camera.setPositionZ camera.getPositionZ() - positionStepZ
+
+            camera.setTargetX camera.getTargetX() - targetStepX
+            camera.setTargetY camera.getTargetY() - targetStepY
+            camera.setTargetZ camera.getTargetZ() - targetStepZ
+
+        for step in [0...steps]
+
+            setTimeout updateCamera, duration / steps * step
+
+        if this.selected isnt panelDefaults.camera.selected
+
+            this.selected = panelDefaults.camera.selected
+
+            this.fold this.selected

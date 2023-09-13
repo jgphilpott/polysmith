@@ -10,11 +10,11 @@ class DragControls
 
         return clone this.speed
 
-    setSpeed: (speed, save = true) ->
+    setSpeed: (speed, animate = true, save = true) ->
 
         this.speed = Number speed
 
-        panels.camera.setDragSpeed this.speed
+        panels.camera.setDragSpeed this.speed, animate
 
         if save then settings.set "controls.speed.drag", this.speed
 
