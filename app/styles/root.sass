@@ -1,6 +1,8 @@
+@import "tooltips/forkme.sass"
+@import "tooltips/help.sass"
 @import "tooltips/measurements.sass"
 @import "tooltips/metabox.sass"
-@import "tooltips/help.sass"
+@import "tooltips/navbar.sass"
 
 @import "colors/glass/grayscale.sass"
 @import "colors/glass/rainbow.sass"
@@ -71,54 +73,3 @@ p, label
 a:hover
 
     cursor: pointer
-
-#navbar
-
-    width: 100%
-
-    display: flex
-    position: fixed
-    align-items: center
-
-    background-color: $black-solid
-
-    #menu
-
-        width: 50px
-        height: 50px
-
-        cursor: context-menu
-
-    #title
-
-        left: 50%
-        max-width: 50%
-        transform: translate(-50%, 0%)
-
-        position: absolute
-
-        color: $white-solid
-
-        span
-
-            cursor: text
-            outline: none
-
-            display: block
-            overflow: hidden
-
-            white-space: pre
-
-#forkme
-
-    top: 0px
-    right: 0px
-
-    width: 150px
-    height: 150px
-
-    position: fixed
-
-    z-index: calc(9e999)
-
-    clip-path: polygon(15px 0px, 60px 0px, 150px 90px, 150px 135px)

@@ -10,6 +10,7 @@ class UISettings
 
     defaults: ->
 
+        fullscreen: false
         title: "POLYMORPH"
         theme: "light"
         navbar: true
@@ -19,4 +20,28 @@ class UISettings
 
     update: (path, value) ->
 
-        null
+        setting = path[1]
+
+        if setting isnt "title" and setting isnt "theme"
+
+            $(".settings-category #ui-" + setting + "").prop "checked", value
+
+        if setting is "fullscreen"
+
+            if value then openFullScreen() else closeFullScreen()
+
+        else if setting is "navbar"
+
+            if value then navbar.show() else navbar.hide()
+
+        else if setting is "forkme"
+
+            if value then forkme.show() else forkme.hide()
+
+        else if setting is "metabox"
+
+            if value then metabox.show() else metabox.hide()
+
+        else if setting is "help"
+
+            if value then help.show() else help.hide()

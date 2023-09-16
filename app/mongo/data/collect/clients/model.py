@@ -278,6 +278,7 @@ class Client():
                                         }
                                     },
                                     "ui": {
+                                        "fullscreen": False,
                                         "title": "POLYMORPH",
                                         "theme": "light",
                                         "navbar": True,
