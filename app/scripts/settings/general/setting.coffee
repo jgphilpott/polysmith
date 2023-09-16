@@ -17,4 +17,8 @@ class GeneralSettings
 
     update: (path, value) ->
 
-        null
+        setting = path[1]
+
+        if setting is "scale" or setting is "unit"
+
+            $(".settings-category #general-" + setting + "").val value
