@@ -186,7 +186,7 @@ class ShapesPanel
 
             shape.contextmenu (event) =>
 
-                contextMenu "shape", $(event.target), event
+                panels.context.add "shape", $(event.target), event
 
             shape.clickSingleDouble (event) =>
 

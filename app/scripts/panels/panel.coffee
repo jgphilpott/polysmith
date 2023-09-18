@@ -47,7 +47,6 @@ class Panels
 
         panel.mouseenter (event) =>
 
-            $("#context-menu.panel").remove()
             $("#metabox").css "display", "none"
 
             panel.css "z-index", events.zIndex += 1

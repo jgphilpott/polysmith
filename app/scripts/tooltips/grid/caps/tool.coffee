@@ -193,7 +193,7 @@ class Caps
 
         events.addEventListener cap, "contextmenu", (event) =>
 
-            contextMenu "gridCap", cap, event.origDomEvent
+            panels.context.add "cap", cap, event.origDomEvent
 
     removeEvents: (cap) ->
 

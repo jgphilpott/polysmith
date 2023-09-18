@@ -1,0 +1,35 @@
+@import "../../colors/glass/grayscale.sass"
+@import "../../colors/glass/rainbow.sass"
+
+@import "../../colors/solid/grayscale.sass"
+@import "../../colors/solid/rainbow.sass"
+
+#context.panel
+
+    z-index: calc(9e999)
+
+    background-color: $light-gray-solid
+
+    h4
+
+        margin: 5px
+
+        text-align: center
+
+    p
+
+        margin: 3px
+
+    p:hover
+
+        font-weight: bold
+
+        cursor: pointer
+
+    p#remove:hover
+
+        color: $red-solid
+
+#context.panel:hover
+
+    cursor: default
