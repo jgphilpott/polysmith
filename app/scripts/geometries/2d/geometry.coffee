@@ -2,7 +2,7 @@ class Geometry2D extends Geometry1D
 
     constructor: (type, params = {}) ->
 
-        type = lower type
+        type = type.lower()
 
         if type in d2Basic then category = "basic"
         if type in d2Polygons then category = "polygon"

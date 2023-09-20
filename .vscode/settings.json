@@ -8,16 +8,20 @@
     "folder-path-color.folders": [],
     "cSpell.language": "en-US",
     "cSpell.words": [
+        "collada",
         "cura",
         "fullscreen",
+        "GLTF",
         "kebabify",
         "magine",
+        "octree",
         "pascalize",
         "pinshape",
         "polygen",
         "snakify",
         "thingiverse",
-        "titlize"
+        "titlize",
+        "VRML"
     ],
     "files.exclude": {
         "app/libs": true,

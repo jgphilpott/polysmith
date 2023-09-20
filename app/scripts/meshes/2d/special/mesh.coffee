@@ -2,7 +2,7 @@ class Mesh2DSpecial
 
     constructor: (type, params = {}) ->
 
-        switch lower type
+        switch type.lower()
 
             when "ring"
 

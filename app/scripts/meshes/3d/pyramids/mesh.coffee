@@ -2,7 +2,7 @@ class Mesh3DPyramids
 
     constructor: (type, params = {}) ->
 
-        switch lower type
+        switch type.lower()
 
             when "triangular-pyramid"
 
@@ -54,7 +54,7 @@ class Mesh3DPyramids
 
                 this.geometry.dispose()
                 this.params.radius = Number radius
-                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+                this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 
@@ -68,7 +68,7 @@ class Mesh3DPyramids
 
                 this.geometry.dispose()
                 this.params.height = Number height
-                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+                this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 
@@ -82,7 +82,7 @@ class Mesh3DPyramids
 
                 this.geometry.dispose()
                 this.params.radialSegments = Number radialSegments
-                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+                this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 
@@ -96,7 +96,7 @@ class Mesh3DPyramids
 
                 this.geometry.dispose()
                 this.params.heightSegments = Number heightSegments
-                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+                this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 
@@ -110,7 +110,7 @@ class Mesh3DPyramids
 
                 this.geometry.dispose()
                 this.params.openEnded = Boolean openEnded
-                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+                this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 
@@ -124,7 +124,7 @@ class Mesh3DPyramids
 
                 this.geometry.dispose()
                 this.params.thetaStart = Number thetaStart
-                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+                this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 
@@ -138,7 +138,7 @@ class Mesh3DPyramids
 
                 this.geometry.dispose()
                 this.params.thetaLength = Number thetaLength
-                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+                this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 
@@ -151,8 +151,8 @@ class Mesh3DPyramids
             if not this.getLock()
 
                 this.geometry.dispose()
-                this.params.class = lower String type
-                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+                this.params.class = String(type).lower()
+                this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 

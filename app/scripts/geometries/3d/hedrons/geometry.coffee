@@ -2,7 +2,7 @@ class Geometry3DHedrons
 
     constructor: (type, params = {}) ->
 
-        switch lower type
+        switch type.lower()
 
             when "octahedron"
 

@@ -2,7 +2,7 @@ class Mesh2DPolygon
 
     constructor: (type, params = {}) ->
 
-        switch lower type
+        switch type.lower()
 
             when "triangle"
 
@@ -51,7 +51,7 @@ class Mesh2DPolygon
                 this.geometry.dispose()
                 delete this.params.vertices
                 this.params.radius = Number radius
-                this.geometry = new window[capitalize(this.params.class) + "Geometry"] this.params
+                this.geometry = new window[this.params.class.capitalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 
@@ -66,7 +66,7 @@ class Mesh2DPolygon
                 this.geometry.dispose()
                 this.params.radius = null
                 this.params.vertices = Array.from vertices
-                this.geometry = new window[capitalize(this.params.class) + "Geometry"] this.params
+                this.geometry = new window[this.params.class.capitalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 
@@ -79,8 +79,8 @@ class Mesh2DPolygon
             if not this.getLock()
 
                 this.geometry.dispose()
-                this.params.class = lower String type
-                this.geometry = new window[capitalize(this.params.class) + "Geometry"] this.params
+                this.params.class = String(type).lower()
+                this.geometry = new window[this.params.class.capitalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 

@@ -4,7 +4,7 @@ class Geometry
 
     constructor: (type, params = {}) ->
 
-        type = lower type
+        type = type.lower()
 
         if type in d1 then dimension = "1D"
         if type in d2 then dimension = "2D"

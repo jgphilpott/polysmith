@@ -2,7 +2,7 @@ class Geometry3DPyramids
 
     constructor: (type, params = {}) ->
 
-        switch lower type
+        switch type.lower()
 
             when "triangular-pyramid"
 

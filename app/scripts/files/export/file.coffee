@@ -9,7 +9,7 @@ class Exporter
 
     exportFile: (type = "") ->
 
-        switch lower type
+        switch type.lower()
 
             when "collada"
 
@@ -47,7 +47,7 @@ class Exporter
 
             if this.file
 
-                saveAs this.file, lower settings.get("ui.title") + "." + this.exporter.extension
+                saveAs this.file, (settings.get("ui.title") + "." + this.exporter.extension).lower()
 
             grid.add()
 

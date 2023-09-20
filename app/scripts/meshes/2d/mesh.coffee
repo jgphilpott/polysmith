@@ -2,7 +2,7 @@ class Mesh2D extends Mesh1D
 
     constructor: (type, params = {}) ->
 
-        type = lower type
+        type = type.lower()
 
         if type in d2Basic then category = "basic"
         if type in d2Polygons then category = "polygon"
@@ -35,7 +35,7 @@ class Mesh2D extends Mesh1D
             if not this.getLock()
 
                 this.material.dispose()
-                this.params.material = lower String material
+                this.params.material = String(material).lower()
                 this.material = new MeshMaterial this.params.material, this.params
 
                 if save then this.save "update"

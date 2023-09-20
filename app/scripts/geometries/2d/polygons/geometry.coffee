@@ -2,7 +2,7 @@ class Geometry2DPolygon
 
     constructor: (type, params = {}) ->
 
-        switch lower type
+        switch type.lower()
 
             when "triangle"
 

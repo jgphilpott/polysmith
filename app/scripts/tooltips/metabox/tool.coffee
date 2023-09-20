@@ -121,7 +121,7 @@ class MetaBox
         yIntersection = format intersection.y, "length", lengthScale.unit[scale], lengthScale.detail, 0, language
         zIntersection = format intersection.z, "length", lengthScale.unit[scale], lengthScale.detail, 0, language
 
-        this.objectType.text titlize mesh.class.replace("-", " ")
+        this.objectType.text mesh.class.replace("-", " ").titlize()
         this.objectSurface.text if surface then surface else "Unknown"
         this.objectVolume.text if volume then volume else "Unknown"
 

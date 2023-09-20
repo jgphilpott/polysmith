@@ -2,7 +2,7 @@ class Geometry3DPrisms
 
     constructor: (type, params = {}) ->
 
-        switch lower type
+        switch type.lower()
 
             when "triangular-prism"
 

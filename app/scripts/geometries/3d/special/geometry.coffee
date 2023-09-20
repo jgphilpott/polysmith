@@ -2,7 +2,7 @@ class Geometry3DSpecial
 
     constructor: (type, params = {}) ->
 
-        switch lower type
+        switch type.lower()
 
             when "capsule"
 

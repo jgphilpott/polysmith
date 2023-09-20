@@ -2,7 +2,7 @@ class Geometry3D extends Geometry2D
 
     constructor: (type, params = {}) ->
 
-        type = lower type
+        type = type.lower()
 
         if type in d3Basic then category = "basic"
         if type in d3Hedrons then category = "hedrons"

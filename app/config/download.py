@@ -81,7 +81,6 @@ def get_libs(libs_dir):
             convert = get("https://raw.githubusercontent.com/jgphilpott/convert/20ede7ba169f82f09f94741ca247c1118c4a430a/convert.js").content.decode("utf-8")
             abbreviations = get("https://gist.githubusercontent.com/jgphilpott/12783015d68e056e54252355d75b41a9/raw/3c1e6931cdad0006570e7c68ed3de8ac5746213c/abbreviations.js").content.decode("utf-8")
             formatting = get("https://gist.githubusercontent.com/jgphilpott/787659ac4ea57a9971da58a76191079b/raw/cbea41bf2d74b5ce4d1d0629d168fc799a6c48cc/format.js").content.decode("utf-8")
-            casefy = get("https://gist.githubusercontent.com/jgphilpott/19e7a94cdf6d6d4cd868cc18e628026c/raw/2ed6c9636bcb6d71416ea0124adb98949322a87b/casefy.js").content.decode("utf-8")
             cookies = get("https://gist.githubusercontent.com/jgphilpott/b9ce64b9ef8b04c5ac58902b133b1a28/raw/5a8c863d59be464289bcee3e6363c0d025b050dd/cookies.js").content.decode("utf-8")
             localStorage = get("https://gist.githubusercontent.com/jgphilpott/e26b92eb41b64e9565032d5c4d3c2878/raw/7fe4d19aad1e765f134a45e128dbfe1cad1141aa/localStorage.js").content.decode("utf-8")
             email = get("https://gist.githubusercontent.com/jgphilpott/a1ffedea1d1a70320b8075597df1943a/raw/a91ee941914fedcafd12d892ed98f7ee43cb9bba/email.js").content.decode("utf-8")
@@ -90,7 +89,7 @@ def get_libs(libs_dir):
             jquery = get("https://gist.githubusercontent.com/jgphilpott/83e40b7418954766e5b994d0f85e98d6/raw/b75b8879c5165ef3d3a57cc5b159f865cdc6f0bb/jQueryPlus.js").content.decode("utf-8")
             lodash = get("https://gist.githubusercontent.com/jgphilpott/e6716046f4225629f7f82fe878909f35/raw/5d1dbd8aa3412588ba51c888e07f041f28e890c7/LodashPlus.js").content.decode("utf-8")
 
-            tools = convert + "\n" + abbreviations + "\n" + formatting + "\n" + casefy + "\n" + cookies + "\n" + localStorage + "\n" + email + "\n" + favicon + "\n" + fullscreen + "\n" + jquery + "\n" + lodash
+            tools = convert + "\n" + abbreviations + "\n" + formatting + "\n" + cookies + "\n" + localStorage + "\n" + email + "\n" + favicon + "\n" + fullscreen + "\n" + jquery + "\n" + lodash
 
             file.write(tools)
 
@@ -98,10 +97,10 @@ def get_libs(libs_dir):
 
         with open(js_libs_dir + "/prototype.js", "w") as file:
 
-            boolean = get("https://gist.githubusercontent.com/jgphilpott/a876171a09ce00e450d7f4325542d819/raw/93df7a36469cab5b419f1751146f6e79ef8838d5/boolean.js").content.decode("utf-8")
-            number = get("https://gist.githubusercontent.com/jgphilpott/6332dc7f5636db9ba455e1575407c496/raw/34b4aa00facde53b8500622edac69d3326ca87f7/number.js").content.decode("utf-8")
-            string = get("https://gist.githubusercontent.com/jgphilpott/c4e0c275c808ae1a01386942dfc2a225/raw/2cf9c0add8dc98cfb654170e9608c0f06d6100fc/string.js").content.decode("utf-8")
-            array = get("https://gist.githubusercontent.com/jgphilpott/a1367ca419ac2807ed4340d69356b7f1/raw/e781ef9425fd62fa3a83a9893b98e95d516c28cc/array.js").content.decode("utf-8")
+            boolean = get("https://gist.githubusercontent.com/jgphilpott/a876171a09ce00e450d7f4325542d819/raw/341d17a032715dfbbd3fb7d00a0ba3f426b4333b/boolean.js").content.decode("utf-8")
+            number = get("https://gist.githubusercontent.com/jgphilpott/6332dc7f5636db9ba455e1575407c496/raw/39366e458fe38ee301e78ecbd660227a85c45f71/number.js").content.decode("utf-8")
+            string = get("https://gist.githubusercontent.com/jgphilpott/c4e0c275c808ae1a01386942dfc2a225/raw/11057a3a277b9a38d2c48c2c9496dc5f91dadc4b/string.js").content.decode("utf-8")
+            array = get("https://gist.githubusercontent.com/jgphilpott/a1367ca419ac2807ed4340d69356b7f1/raw/86260257a88408a2e1bfa23ffe44a28bf13546eb/array.js").content.decode("utf-8")
             object = get("https://gist.githubusercontent.com/jgphilpott/8971e9e9760895d1a87ae58e5a740f11/raw/c3f460eb4a06bbee149dd8cd8fc0419d194fb73e/object.js").content.decode("utf-8")
 
             prototype = boolean + "\n" + number + "\n" + string + "\n" + array + "\n" + object

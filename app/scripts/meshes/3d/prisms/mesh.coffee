@@ -2,7 +2,7 @@ class Mesh3DPrisms
 
     constructor: (type, params = {}) ->
 
-        switch lower type
+        switch type.lower()
 
             when "triangular-prism"
 
@@ -54,7 +54,7 @@ class Mesh3DPrisms
 
                 this.geometry.dispose()
                 this.params.length = Number length
-                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+                this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 
@@ -68,7 +68,7 @@ class Mesh3DPrisms
 
                 this.geometry.dispose()
                 this.params.positiveRadius = Number positiveRadius
-                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+                this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 
@@ -82,7 +82,7 @@ class Mesh3DPrisms
 
                 this.geometry.dispose()
                 this.params.negativeRadius = Number negativeRadius
-                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+                this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 
@@ -96,7 +96,7 @@ class Mesh3DPrisms
 
                 this.geometry.dispose()
                 this.params.radialSegments = Number radialSegments
-                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+                this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 
@@ -110,7 +110,7 @@ class Mesh3DPrisms
 
                 this.geometry.dispose()
                 this.params.lengthSegments = Number lengthSegments
-                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+                this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 
@@ -124,7 +124,7 @@ class Mesh3DPrisms
 
                 this.geometry.dispose()
                 this.params.openEnded = Boolean openEnded
-                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+                this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 
@@ -138,7 +138,7 @@ class Mesh3DPrisms
 
                 this.geometry.dispose()
                 this.params.thetaStart = Number thetaStart
-                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+                this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 
@@ -152,7 +152,7 @@ class Mesh3DPrisms
 
                 this.geometry.dispose()
                 this.params.thetaLength = Number thetaLength
-                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+                this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 
@@ -165,8 +165,8 @@ class Mesh3DPrisms
             if not this.getLock()
 
                 this.geometry.dispose()
-                this.params.class = lower String type
-                this.geometry = new window[pascalize(this.params.class) + "Geometry"] this.params
+                this.params.class = String(type).lower()
+                this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
 

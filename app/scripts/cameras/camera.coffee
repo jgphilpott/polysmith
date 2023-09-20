@@ -16,7 +16,7 @@ class Camera
         far = adaptor "convert", "length", this.far
         fov = interpreter "convert", "angle", this.fov
 
-        switch lower type
+        switch type.lower()
 
             when "array"
 
