@@ -47,7 +47,7 @@ class Panels
 
         panel.mouseenter (event) =>
 
-            $("#metabox").css "display", "none"
+            metabox.hide()
 
             panel.css "z-index", events.zIndex += 1
 
@@ -66,8 +66,6 @@ class Panels
             panel.animate {backgroundColor: grayGlass}, {duration: duration * 3}
 
         panel.mouseleave (event) =>
-
-            $("#metabox").css "display", "block"
 
             composer.outlinePass.selectedObjects = []
 

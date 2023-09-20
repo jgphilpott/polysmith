@@ -38,10 +38,6 @@ class UISettings
 
                 if value then forkme.show() else forkme.hide()
 
-            else if setting is "metabox"
-
-                if value then metabox.show() else metabox.hide()
-
             else if setting is "help"
 
                 if value then help.show() else help.hide()
