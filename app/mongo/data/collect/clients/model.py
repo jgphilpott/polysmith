@@ -118,9 +118,7 @@ class Client():
                                     },
                                     "general": {
                                         "language": "en-US",
-                                        "currency": "USD",
-                                        "scale": "metric",
-                                        "snap": True
+                                        "currency": "USD"
                                     },
                                     "panels": {
                                         "camera": {
@@ -173,14 +171,15 @@ class Client():
                                         ]
                                     },
                                     "scales": {
+                                        "scale": "metric",
                                         "angle": {
                                             "detail": 2,
-                                            "snap": True,
+                                            "snap": False,
                                             "unit": "degree"
                                         },
                                         "area": {
                                             "detail": 2,
-                                            "snap": True,
+                                            "snap": False,
                                             "unit": {
                                                 "imperial": "inchSq",
                                                 "metric": "millimeterSq"
@@ -188,12 +187,12 @@ class Client():
                                         },
                                         "data": {
                                             "detail": 2,
-                                            "snap": True,
+                                            "snap": False,
                                             "unit": "byte"
                                         },
                                         "density": {
                                             "detail": 2,
-                                            "snap": True,
+                                            "snap": False,
                                             "unit": {
                                                 "imperial": "ounceInchCu",
                                                 "metric": "gramCentimeterCu"
@@ -201,7 +200,7 @@ class Client():
                                         },
                                         "length": {
                                             "detail": 2,
-                                            "snap": True,
+                                            "snap": False,
                                             "unit": {
                                                 "imperial": "inch",
                                                 "metric": "millimeter"
@@ -209,7 +208,7 @@ class Client():
                                         },
                                         "mass": {
                                             "detail": 2,
-                                            "snap": True,
+                                            "snap": False,
                                             "unit": {
                                                 "imperial": "ounce",
                                                 "metric": "gram"
@@ -217,7 +216,7 @@ class Client():
                                         },
                                         "speed": {
                                             "detail": 2,
-                                            "snap": True,
+                                            "snap": False,
                                             "unit": {
                                                 "imperial": "inchSecond",
                                                 "metric": "millimeterSecond"
@@ -225,20 +224,20 @@ class Client():
                                         },
                                         "temperature": {
                                             "detail": 2,
-                                            "snap": True,
+                                            "snap": False,
                                             "unit": "celsius"
                                         },
                                         "time": {
                                             "detail": 2,
-                                            "snap": True,
+                                            "snap": False,
                                             "unit": "millisecond"
                                         },
                                         "volume": {
                                             "detail": 2,
-                                            "snap": True,
+                                            "snap": False,
                                             "unit": {
                                                 "imperial": "inchCu",
-                                                "metric": "millimeterCu"
+                                                "metric": "centimeterCu"
                                             }
                                         }
                                     },
@@ -292,13 +291,13 @@ class Client():
 
             self.settings = client["settings"]
 
-            self.varify_settings(self.settings, self.default_settings)
+            self.verify_settings(self.settings, self.default_settings)
 
         else:
 
             self.settings = self.default_settings
 
-    def varify_settings(self, settings, defaults):
+    def verify_settings(self, settings, defaults):
 
         for setting in defaults.keys():
 
@@ -312,7 +311,7 @@ class Client():
 
                     settings[setting] = {}
 
-                self.varify_settings(settings[setting], defaults[setting])
+                self.verify_settings(settings[setting], defaults[setting])
 
     def update_settings(self, path, value):
 

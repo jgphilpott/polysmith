@@ -15,7 +15,7 @@ class Settings
 
                 settings = localSettings
 
-            this.varifySettings settings, defaultSettings
+            this.verifySettings settings, defaultSettings
 
         else
 
@@ -75,7 +75,7 @@ class Settings
 
         this[path[0]].update path, value
 
-    varifySettings: (settings, defaults) ->
+    verifySettings: (settings, defaults) ->
 
         for setting in Object.keys defaults
 
@@ -89,4 +89,4 @@ class Settings
 
                     settings[setting] = {}
 
-                this.varifySettings settings[setting], defaults[setting]
+                this.verifySettings settings[setting], defaults[setting]

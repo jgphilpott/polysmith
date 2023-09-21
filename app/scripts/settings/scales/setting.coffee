@@ -10,16 +10,17 @@ class ScalesSettings
 
     defaults: ->
 
+        scale: "metric"
         angle:
 
             detail: 2
-            snap: true
+            snap: false
             unit: "degree"
 
         area:
 
             detail: 2
-            snap: true
+            snap: false
             unit:
 
                 imperial: "inchSq"
@@ -28,13 +29,13 @@ class ScalesSettings
         data:
 
             detail: 2
-            snap: true
+            snap: false
             unit: "byte"
 
         density:
 
             detail: 2
-            snap: true
+            snap: false
             unit:
 
                 imperial: "ounceInchCu"
@@ -43,7 +44,7 @@ class ScalesSettings
         length:
 
             detail: 2
-            snap: true
+            snap: false
             unit:
 
                 imperial: "inch"
@@ -52,7 +53,7 @@ class ScalesSettings
         mass:
 
             detail: 2
-            snap: true
+            snap: false
             unit:
 
                 imperial: "ounce"
@@ -61,7 +62,7 @@ class ScalesSettings
         speed:
 
             detail: 2
-            snap: true
+            snap: false
             unit:
 
                 imperial: "inchSecond"
@@ -70,24 +71,28 @@ class ScalesSettings
         temperature:
 
             detail: 2
-            snap: true
+            snap: false
             unit: "celsius"
 
         time:
 
             detail: 2
-            snap: true
+            snap: false
             unit: "millisecond"
 
         volume:
 
             detail: 2
-            snap: true
+            snap: false
             unit:
 
                 imperial: "inchCu"
-                metric: "millimeterCu"
+                metric: "centimeterCu"
 
     update: (path, value) ->
 
-        null
+        setting = path[1]
+
+        if setting in this.paths()
+
+            $(".settings-category #scales-" + setting + "").val value

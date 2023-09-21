@@ -64,7 +64,7 @@ class CameraPanel
 
         @panel = $("#camera.panel")
 
-        scale = settings.get "general.scale"
+        scale = settings.get "scales.scale"
         unit = settings.get "scales.length.unit"
         detail = settings.get "scales.length.detail"
 

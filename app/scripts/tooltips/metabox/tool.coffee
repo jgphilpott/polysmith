@@ -102,7 +102,7 @@ class MetaBox
         mouse = new THREE.Vector2()
         raycaster = new THREE.Raycaster()
 
-        scale = settings.get "general.scale"
+        scale = settings.get "scales.scale"
         areaScale = settings.get "scales.area"
         volumeScale = settings.get "scales.volume"
         lengthScale = settings.get "scales.length"
