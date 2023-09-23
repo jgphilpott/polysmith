@@ -87,12 +87,19 @@ class ScalesSettings
             unit:
 
                 imperial: "inchCu"
-                metric: "centimeterCu"
+                metric: "millimeterCu"
 
     update: (path, value) ->
 
         setting = path[1]
 
-        if setting in this.paths()
+        if setting is "scale"
 
             $(".settings-category #scales-" + setting + "").val value
+
+            $("select.metric").css "display", if value is "metric" then "block" else "none"
+            $("select.imperial").css "display", if value is "imperial" then "block" else "none"
+
+        else
+
+            $(".settings-category #scales-" + setting + "." + path.last() + "").val value

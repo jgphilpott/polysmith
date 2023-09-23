@@ -237,7 +237,7 @@ class Client():
                                             "snap": False,
                                             "unit": {
                                                 "imperial": "inchCu",
-                                                "metric": "centimeterCu"
+                                                "metric": "millimeterCu"
                                             }
                                         }
                                     },

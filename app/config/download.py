@@ -101,8 +101,7 @@ def get_libs(libs_dir):
             number = get("https://gist.githubusercontent.com/jgphilpott/6332dc7f5636db9ba455e1575407c496/raw/39366e458fe38ee301e78ecbd660227a85c45f71/number.js").content.decode("utf-8")
             string = get("https://gist.githubusercontent.com/jgphilpott/c4e0c275c808ae1a01386942dfc2a225/raw/11057a3a277b9a38d2c48c2c9496dc5f91dadc4b/string.js").content.decode("utf-8")
             array = get("https://gist.githubusercontent.com/jgphilpott/a1367ca419ac2807ed4340d69356b7f1/raw/86260257a88408a2e1bfa23ffe44a28bf13546eb/array.js").content.decode("utf-8")
-            object = get("https://gist.githubusercontent.com/jgphilpott/8971e9e9760895d1a87ae58e5a740f11/raw/c3f460eb4a06bbee149dd8cd8fc0419d194fb73e/object.js").content.decode("utf-8")
 
-            prototype = boolean + "\n" + number + "\n" + string + "\n" + array + "\n" + object
+            prototype = boolean + "\n" + number + "\n" + string + "\n" + array
 
             file.write(prototype)
