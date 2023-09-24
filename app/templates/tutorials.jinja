@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+    <head>
+
+        <meta charset="utf-8">
+
+        <title>{{ data.title }}</title>
+        <script>const POLY = {}</script>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="shortcut icon" id="light-scheme-icon" href="{{ url_for('static', filename='imgs/theme/favicons/silhouette/black.png') }}">
+        <link rel="shortcut icon" id="dark-scheme-icon" href="{{ url_for('static', filename='imgs/theme/favicons/silhouette/white.png') }}">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='libs/css/abbreviations.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='libs/css/jQuery-UI.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='libs/css/pages/tutorials.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='libs/css/root.css') }}">
+
+        <script src="{{ url_for('static', filename='libs/js/sha256.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/socket.js') }}"></script>
+
+        <script src="{{ url_for('static', filename='libs/js/lodash.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/jQuery.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/jQueryUI.js') }}"></script>
+
+        <script src="{{ url_for('static', filename='libs/js/three.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/threeX.js') }}"></script>
+
+        <script src="{{ url_for('static', filename='libs/js/math.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/tools.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/js/prototype.js') }}"></script>
+
+        <script src="{{ url_for('static', filename='libs/js/FileSaver.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/files/local/file.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/files/server/file.js') }}"></script>
+
+        <script src="{{ url_for('static', filename='scripts/colors/glass/grayscale.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/colors/glass/rainbow.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/colors/solid/grayscale.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/colors/solid/rainbow.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/colors/three/grayscale.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/colors/three/rainbow.js') }}"></script>
+
+        <script src="{{ url_for('static', filename='scripts/settings/setting.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/settings/camera/setting.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/settings/controls/setting.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/settings/filaments/setting.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/settings/general/setting.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/settings/panels/setting.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/settings/printer/setting.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/settings/scales/setting.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/settings/slicing/setting.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/settings/tooltips/setting.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/settings/ui/setting.js') }}"></script>
+
+        <script src="{{ url_for('static', filename='scripts/tooltips/tool.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/tooltips/forkme/tool.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/tooltips/help/tool.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/tooltips/navbar/tool.js') }}"></script>
+
+        <script src="{{ url_for('static', filename='scripts/etc/tools.js') }}"></script>
+
+    </head>
+
+    <body oncontextmenu="return false">
+
+        <script>
+
+            const data = {{ data | tojson | safe }}
+
+        </script>
+
+        <script src="{{ url_for('static', filename='scripts/tutorials/tutorial.js') }}"></script>
+
+        <div class="wallpaper"></div>
+
+    </body>
+
+</html>
