@@ -64,4 +64,4 @@ class Geometry1D
 
             distance = this.attributes.lineDistance.array
 
-        return adaptor "convert", "length", clone distance[distance.length - 1]
+        return adaptor "convert", "length", clone distance.last()

@@ -84,12 +84,13 @@ def get_libs(libs_dir):
             cookies = get("https://gist.githubusercontent.com/jgphilpott/b9ce64b9ef8b04c5ac58902b133b1a28/raw/5a8c863d59be464289bcee3e6363c0d025b050dd/cookies.js").content.decode("utf-8")
             localStorage = get("https://gist.githubusercontent.com/jgphilpott/e26b92eb41b64e9565032d5c4d3c2878/raw/7fe4d19aad1e765f134a45e128dbfe1cad1141aa/localStorage.js").content.decode("utf-8")
             email = get("https://gist.githubusercontent.com/jgphilpott/a1ffedea1d1a70320b8075597df1943a/raw/a91ee941914fedcafd12d892ed98f7ee43cb9bba/email.js").content.decode("utf-8")
-            favicon = get("https://gist.githubusercontent.com/jgphilpott/efdec642fc8bbaaae8115bd4fc49bd05/raw/89f07b3019e286e5039accf01221c0c2f101d80f/faviconScheme.js").content.decode("utf-8")
+            favicon = get("https://gist.githubusercontent.com/jgphilpott/efdec642fc8bbaaae8115bd4fc49bd05/raw/4fc20edc7d3927e55159cf97980d37d9b9adfb70/faviconScheme.js").content.decode("utf-8")
             fullscreen = get("https://gist.githubusercontent.com/jgphilpott/d339fa0571cbe0e55a411caca87d2ece/raw/fc9dd92d373a167202ab658868dfb08c94804211/fullscreen.js").content.decode("utf-8")
+            page = get("https://gist.githubusercontent.com/jgphilpott/68e9e22ea6ac5bf44ff7a86ef75b5e5d/raw/f414e0b9fbc64f8d71440979358239ee6c40d117/page.js").content.decode("utf-8")
             jquery = get("https://gist.githubusercontent.com/jgphilpott/83e40b7418954766e5b994d0f85e98d6/raw/b75b8879c5165ef3d3a57cc5b159f865cdc6f0bb/jQueryPlus.js").content.decode("utf-8")
             lodash = get("https://gist.githubusercontent.com/jgphilpott/e6716046f4225629f7f82fe878909f35/raw/5d1dbd8aa3412588ba51c888e07f041f28e890c7/LodashPlus.js").content.decode("utf-8")
 
-            tools = convert + "\n" + abbreviations + "\n" + formatting + "\n" + cookies + "\n" + localStorage + "\n" + email + "\n" + favicon + "\n" + fullscreen + "\n" + jquery + "\n" + lodash
+            tools = convert + "\n" + abbreviations + "\n" + formatting + "\n" + cookies + "\n" + localStorage + "\n" + email + "\n" + favicon + "\n" + fullscreen + "\n" + page + "\n" + jquery + "\n" + lodash
 
             file.write(tools)
 
