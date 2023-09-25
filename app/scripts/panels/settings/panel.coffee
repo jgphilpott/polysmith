@@ -22,7 +22,7 @@ class SettingsPanel
             """
             <div id='settings' class='panel'>
 
-                <img title='Close' class='close' src='/app/imgs/panels/nav/close.png'>
+                <img title='Close' class='close' src='/app/imgs/panels/nav/close/black.png'>
                 <img title='Reset Settings' class='reset' src='/app/imgs/panels/tools/reset.png'>
 
                 <h3>Advanced Settings</h3>

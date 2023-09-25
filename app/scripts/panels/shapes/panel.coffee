@@ -11,7 +11,7 @@ class ShapesPanel
             """
             <div id='shapes' class='panel'>
 
-                <img title='Close' class='close' src='/app/imgs/panels/nav/close.png'>
+                <img title='Close' class='close' src='/app/imgs/panels/nav/close/black.png'>
                 <img title='Reset Shapes' class='reset' src='/app/imgs/panels/tools/reset.png'>
 
                 <h3>Shapes</h3>
@@ -20,7 +20,7 @@ class ShapesPanel
 
                     <div class='head'>
 
-                        <img title='Fold Basic' class='fold' src='/app/imgs/panels/nav/fold.png'>
+                        <img title='Fold Basic' class='fold' src='/app/imgs/panels/nav/fold/black.png'>
 
                         <h4>Basic</h4>
 
@@ -40,7 +40,7 @@ class ShapesPanel
 
                     <div class='head'>
 
-                        <img title='Fold Prisms' class='fold' src='/app/imgs/panels/nav/fold.png'>
+                        <img title='Fold Prisms' class='fold' src='/app/imgs/panels/nav/fold/black.png'>
 
                         <h4>Prisms</h4>
 
@@ -63,7 +63,7 @@ class ShapesPanel
 
                     <div class='head'>
 
-                        <img title='Fold Pyramids' class='fold' src='/app/imgs/panels/nav/fold.png'>
+                        <img title='Fold Pyramids' class='fold' src='/app/imgs/panels/nav/fold/black.png'>
 
                         <h4>Pyramids</h4>
 
@@ -84,7 +84,7 @@ class ShapesPanel
 
                     <div class='head'>
 
-                        <img title='Fold Hedrons' class='fold' src='/app/imgs/panels/nav/fold.png'>
+                        <img title='Fold Hedrons' class='fold' src='/app/imgs/panels/nav/fold/black.png'>
 
                         <h4>Hedrons</h4>
 
@@ -104,7 +104,7 @@ class ShapesPanel
 
                     <div class='head'>
 
-                        <img title='Fold Special' class='fold' src='/app/imgs/panels/nav/fold.png'>
+                        <img title='Fold Special' class='fold' src='/app/imgs/panels/nav/fold/black.png'>
 
                         <h4>Special</h4>
 

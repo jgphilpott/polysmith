@@ -11,7 +11,7 @@ class PolygenPanel
             """
             <div id='polygen' class='panel'>
 
-                <img title='Close' class='close' src='/app/imgs/panels/nav/close.png'>
+                <img title='Close' class='close' src='/app/imgs/panels/nav/close/black.png'>
 
                 <h3>Polygen</h3>
 

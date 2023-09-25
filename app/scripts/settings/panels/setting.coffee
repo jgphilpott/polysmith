@@ -72,4 +72,4 @@ class PanelsSettings
 
             else if path[1] is "shapes"
 
-                $("#shortcuts.panel img#toggle").attr "src", "/app/imgs/panels/nav/" + (if value then "x" else "+") + ".png"
+                $("#shortcuts.panel img#toggle").attr "src", "/app/imgs/panels/nav/" + (if value then "stop" else "plus") + "/regular.png"

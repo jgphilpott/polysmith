@@ -11,7 +11,7 @@ class ShortcutsPanel
             """
             <div id='shortcuts' class='panel'>
 
-                <img title='Close' class='close' src='/app/imgs/panels/nav/close.png'>
+                <img title='Close' class='close' src='/app/imgs/panels/nav/close/black.png'>
 
                 <img title='Box' id='box' class='shape' src='/app/imgs/icons/shapes/basic/box.png'>
                 <img title='Cylinder' id='cylinder' class='shape' src='/app/imgs/icons/shapes/basic/cylinder.png'>
@@ -37,7 +37,7 @@ class ShortcutsPanel
                 <img title='Text' id='text' class='shape' src='/app/imgs/icons/shapes/special/text.png'>
                 <img title='Image' id='image' class='shape' src='/app/imgs/icons/shapes/special/image.png'>
 
-                <img title='Toggle Shapes Panel' id='toggle' class='nav' src='/app/imgs/panels/nav/""" + (if settings.get("panels.shapes.open") then "x" else "+") + """.png'>
+                <img title='Toggle Shapes Panel' id='toggle' class='nav' src='/app/imgs/panels/nav/""" + (if settings.get("panels.shapes.open") then "stop" else "plus") + """/regular.png'>
 
             </div>
             """

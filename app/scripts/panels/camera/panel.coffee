@@ -11,7 +11,7 @@ class CameraPanel
             """
             <div id='camera' class='panel'>
 
-                <img title='Close' class='close' src='/app/imgs/panels/nav/close.png'>
+                <img title='Close' class='close' src='/app/imgs/panels/nav/close/black.png'>
                 <img title='Camera' class='camera' src='/app/imgs/panels/main/camera.png'>
                 <img title='Reset Camera' class='reset' src='/app/imgs/panels/tools/reset.png'>
 
@@ -19,7 +19,7 @@ class CameraPanel
 
                     <div class='head'>
 
-                        <img title='Fold Position' class='fold' src='/app/imgs/panels/nav/fold.png'>
+                        <img title='Fold Position' class='fold' src='/app/imgs/panels/nav/fold/black.png'>
 
                         <h4>Position</h4>
 
@@ -33,7 +33,7 @@ class CameraPanel
 
                     <div class='head'>
 
-                        <img title='Fold Target' class='fold' src='/app/imgs/panels/nav/fold.png'>
+                        <img title='Fold Target' class='fold' src='/app/imgs/panels/nav/fold/black.png'>
 
                         <h4>Target</h4>
 
@@ -47,7 +47,7 @@ class CameraPanel
 
                     <div class='head'>
 
-                        <img title='Fold Speed' class='fold' src='/app/imgs/panels/nav/fold.png'>
+                        <img title='Fold Speed' class='fold' src='/app/imgs/panels/nav/fold/black.png'>
 
                         <h4>Speed</h4>
 
