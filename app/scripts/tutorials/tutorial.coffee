@@ -1,11 +1,13 @@
 socket = io()
 client = data.client
 
-page = new Page()
-settings = new Settings()
-
 localStore = new LocalStorage()
 serverStore = new ServerStorage()
+
+settings = new Settings()
+
+events = new Events()
+page = new Page()
 
 navbar = new NavBar()
 forkme = new ForkMe()
