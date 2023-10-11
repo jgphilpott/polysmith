@@ -56,13 +56,13 @@ class ContextPanel
 
                 uuid = element.uuid
 
-                meshPanel = $("#mesh." + uuid + "")
+                meshPanel = element.panel
                 meshTableRow = $("#meshes.table tr#" + uuid + "")
-                meshPanelOpen = meshPanel.length and meshPanel.css("visibility") is "visible"
+                meshPanelOpen = meshPanel.panel.css("visibility") is "visible"
 
                 this.panel.append "<h4>Basic</h4>"
 
-                this.panel.append "<p id='panel'>" + (if meshPanelOpen then "Close" else "Open") + " Panel</p>"
+                this.panel.append "<p id='panel'>" + (if meshPanelOpen then "Hide" else "Show") + " Panel</p>"
                 this.panel.append "<p id='look'>Look Here</p>"
 
                 if not element.getLock()
@@ -81,24 +81,17 @@ class ContextPanel
 
                 this.panel.find("#panel").click =>
 
-                    if meshPanel.length and meshPanel.css("visibility") is "visible"
+                    if meshPanelOpen
 
                         meshTableRow.find(".settings").attr "src", "/app/imgs/panels/tools/toggle/off.png"
 
-                        meshPanel.css "visibility", "hidden"
-
-                    else if meshPanel.length and meshPanel.css("visibility") is "hidden"
-
-                        meshTableRow.find(".settings").attr "src", "/app/imgs/panels/tools/toggle/on.png"
-
-                        meshPanel.css "z-index", events.zIndex += 1
-                        meshPanel.css "visibility", "visible"
+                        element.panel.hide()
 
                     else
 
                         meshTableRow.find(".settings").attr "src", "/app/imgs/panels/tools/toggle/on.png"
 
-                        addMeshPanel element
+                        element.panel.show()
 
                 this.panel.find("#look").click =>
 
