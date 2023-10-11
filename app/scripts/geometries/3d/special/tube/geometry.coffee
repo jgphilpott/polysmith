@@ -33,11 +33,11 @@ class POLY.TubeBufferGeometry extends THREE.TubeBufferGeometry
 
         for vertex in vertices
 
-            vertex[0] = adaptor "invert", "length", vertex[0]
-            vertex[1] = adaptor "invert", "length", vertex[1]
-            vertex[2] = adaptor "invert", "length", vertex[2]
+            x = adaptor "invert", "length", vertex[0]
+            y = adaptor "invert", "length", vertex[1]
+            z = adaptor "invert", "length", vertex[2]
 
-            tube.push new THREE.Vector3 vertex[0], vertex[1], vertex[2]
+            tube.push new THREE.Vector3 x, y, z
 
         tube = new THREE.CatmullRomCurve3 tube
 

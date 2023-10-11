@@ -24,11 +24,11 @@ class POLY.StrokeBufferGeometry
 
         for vertex in vertices
 
-            vertex[0] = adaptor "invert", "length", vertex[0]
-            vertex[1] = adaptor "invert", "length", vertex[1]
-            vertex[2] = adaptor "invert", "length", vertex[2]
+            x = adaptor "invert", "length", clone vertex[0]
+            y = adaptor "invert", "length", clone vertex[1]
+            z = adaptor "invert", "length", clone vertex[2]
 
-            positions.push vertex[0], vertex[1], vertex[2]
+            positions.push x, y, z
 
         stroke = new LineThickGeometry().setPositions positions
 
