@@ -99,22 +99,22 @@ class Ticks
 
             for tick in [step...ySize / 2] by step
 
-                xTickPositive = new Line vertices: [[-xSize / 2, tick, 0], [xSize / 2, tick, 0]]
-                xTickNegative = new Line vertices: [[-xSize / 2, -tick, 0], [xSize / 2, -tick, 0]]
+                xTickPositive = new Line vertices: [[-xSize / 2, tick, 0], [xSize / 2, tick, 0]], panel: false
+                xTickNegative = new Line vertices: [[-xSize / 2, -tick, 0], [xSize / 2, -tick, 0]], panel: false
 
                 this.xy.push xTickPositive, xTickNegative
                 scene.add xTickPositive, xTickNegative
 
             for tick in [step...xSize / 2] by step
 
-                yTickPositive = new Line vertices: [[tick, -ySize / 2, 0], [tick, ySize / 2, 0]]
-                yTickNegative = new Line vertices: [[-tick, -ySize / 2, 0], [-tick, ySize / 2, 0]]
+                yTickPositive = new Line vertices: [[tick, -ySize / 2, 0], [tick, ySize / 2, 0]], panel: false
+                yTickNegative = new Line vertices: [[-tick, -ySize / 2, 0], [-tick, ySize / 2, 0]], panel: false
 
                 this.xy.push yTickPositive, yTickNegative
                 scene.add yTickPositive, yTickNegative
 
-            xTick = new Line vertices: [[-xSize / 2, 0, 0], [xSize / 2, 0, 0]]
-            yTick = new Line vertices: [[0, -ySize / 2, 0], [0, ySize / 2, 0]]
+            xTick = new Line vertices: [[-xSize / 2, 0, 0], [xSize / 2, 0, 0]], panel: false
+            yTick = new Line vertices: [[0, -ySize / 2, 0], [0, ySize / 2, 0]], panel: false
 
             this.xy.push xTick, yTick
             scene.add xTick, yTick
@@ -144,22 +144,22 @@ class Ticks
 
             for tick in [step...zSize / 2] by step
 
-                xTickPositive = new Line vertices: [[-xSize / 2, 0, tick], [xSize / 2, 0, tick]]
-                xTickNegative = new Line vertices: [[-xSize / 2, 0, -tick], [xSize / 2, 0, -tick]]
+                xTickPositive = new Line vertices: [[-xSize / 2, 0, tick], [xSize / 2, 0, tick]], panel: false
+                xTickNegative = new Line vertices: [[-xSize / 2, 0, -tick], [xSize / 2, 0, -tick]], panel: false
 
                 this.xz.push xTickPositive, xTickNegative
                 scene.add xTickPositive, xTickNegative
 
             for tick in [step...xSize / 2] by step
 
-                zTickPositive = new Line vertices: [[tick, 0, -zSize / 2], [tick, 0, zSize / 2]]
-                zTickNegative = new Line vertices: [[-tick, 0, -zSize / 2], [-tick, 0, zSize / 2]]
+                zTickPositive = new Line vertices: [[tick, 0, -zSize / 2], [tick, 0, zSize / 2]], panel: false
+                zTickNegative = new Line vertices: [[-tick, 0, -zSize / 2], [-tick, 0, zSize / 2]], panel: false
 
                 this.xz.push zTickPositive, zTickNegative
                 scene.add zTickPositive, zTickNegative
 
-            xTick = new Line vertices: [[-xSize / 2, 0, 0], [xSize / 2, 0, 0]]
-            zTick = new Line vertices: [[0, 0, -zSize / 2], [0, 0, zSize / 2]]
+            xTick = new Line vertices: [[-xSize / 2, 0, 0], [xSize / 2, 0, 0]], panel: false
+            zTick = new Line vertices: [[0, 0, -zSize / 2], [0, 0, zSize / 2]], panel: false
 
             this.xz.push xTick, zTick
             scene.add xTick, zTick
@@ -189,22 +189,22 @@ class Ticks
 
             for tick in [step...zSize / 2] by step
 
-                yTickPositive = new Line vertices: [[0, -ySize / 2, tick], [0, ySize / 2, tick]]
-                yTickNegative = new Line vertices: [[0, -ySize / 2, -tick], [0, ySize / 2, -tick]]
+                yTickPositive = new Line vertices: [[0, -ySize / 2, tick], [0, ySize / 2, tick]], panel: false
+                yTickNegative = new Line vertices: [[0, -ySize / 2, -tick], [0, ySize / 2, -tick]], panel: false
 
                 this.yz.push yTickPositive, yTickNegative
                 scene.add yTickPositive, yTickNegative
 
             for tick in [step...ySize / 2] by step
 
-                zTickPositive = new Line vertices: [[0, tick, -zSize / 2], [0, tick, zSize / 2]]
-                zTickNegative = new Line vertices: [[0, -tick, -zSize / 2], [0, -tick, zSize / 2]]
+                zTickPositive = new Line vertices: [[0, tick, -zSize / 2], [0, tick, zSize / 2]], panel: false
+                zTickNegative = new Line vertices: [[0, -tick, -zSize / 2], [0, -tick, zSize / 2]], panel: false
 
                 this.yz.push zTickPositive, zTickNegative
                 scene.add zTickPositive, zTickNegative
 
-            yTick = new Line vertices: [[0, -ySize / 2, 0], [0, ySize / 2, 0]]
-            zTick = new Line vertices: [[0, 0, -zSize / 2], [0, 0, zSize / 2]]
+            yTick = new Line vertices: [[0, -ySize / 2, 0], [0, ySize / 2, 0]], panel: false
+            zTick = new Line vertices: [[0, 0, -zSize / 2], [0, 0, zSize / 2]], panel: false
 
             this.yz.push yTick, zTick
             scene.add yTick, zTick

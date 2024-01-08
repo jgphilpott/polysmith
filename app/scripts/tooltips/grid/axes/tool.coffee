@@ -45,7 +45,7 @@ class Axes
 
         if not this.x and settings.get "tooltips.grid.axes.x"
 
-            this.x = new Stroke vertices: [[size / 2, 0, 0], [-size / 2, 0, 0]], linewidth: 3, color: redThree
+            this.x = new Stroke vertices: [[size / 2, 0, 0], [-size / 2, 0, 0]], linewidth: 3, color: redThree, panel: false
 
             grid.caps.addCentroid()
             grid.caps.addX()
@@ -77,7 +77,7 @@ class Axes
 
         if not this.y and settings.get "tooltips.grid.axes.y"
 
-            this.y = new Stroke vertices: [[0, size / 2, 0], [0, -size / 2, 0]], linewidth: 3, color: greenThree
+            this.y = new Stroke vertices: [[0, size / 2, 0], [0, -size / 2, 0]], linewidth: 3, color: greenThree, panel: false
 
             grid.caps.addCentroid()
             grid.caps.addY()
@@ -109,7 +109,7 @@ class Axes
 
         if not this.z and settings.get "tooltips.grid.axes.z"
 
-            this.z = new Stroke vertices: [[0, 0, size / 2], [0, 0, -size / 2]], linewidth: 3, color: blueThree
+            this.z = new Stroke vertices: [[0, 0, size / 2], [0, 0, -size / 2]], linewidth: 3, color: blueThree, panel: false
 
             grid.caps.addCentroid()
             grid.caps.addZ()

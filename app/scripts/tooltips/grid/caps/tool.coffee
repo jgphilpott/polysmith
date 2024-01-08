@@ -60,7 +60,7 @@ class Caps
 
             if not this.centroid and settings.get "tooltips.grid.caps"
 
-                this.centroid = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: 0, y: 0, z: 0}, material: "basic", color: blackThree
+                this.centroid = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: 0, y: 0, z: 0}, material: "basic", color: blackThree, panel: false
 
                 this.addEvents this.centroid
 
@@ -87,8 +87,8 @@ class Caps
 
             if not this.xMin and not this.xMax and settings.get "tooltips.grid.caps"
 
-                this.xMin = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: -size / 2, y: 0, z: 0}, material: "basic", color: redThree
-                this.xMax = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: size / 2, y: 0, z: 0}, material: "basic", color: greenThree
+                this.xMin = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: -size / 2, y: 0, z: 0}, material: "basic", color: redThree, panel: false
+                this.xMax = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: size / 2, y: 0, z: 0}, material: "basic", color: greenThree, panel: false
 
                 this.addEvents this.xMin; this.addEvents this.xMax
 
@@ -115,8 +115,8 @@ class Caps
 
             if not this.yMin and not this.yMax and settings.get "tooltips.grid.caps"
 
-                this.yMin = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: 0, y: -size / 2, z: 0}, material: "basic", color: redThree
-                this.yMax = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: 0, y: size / 2, z: 0}, material: "basic", color: greenThree
+                this.yMin = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: 0, y: -size / 2, z: 0}, material: "basic", color: redThree, panel: false
+                this.yMax = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: 0, y: size / 2, z: 0}, material: "basic", color: greenThree, panel: false
 
                 this.addEvents this.yMin; this.addEvents this.yMax
 
@@ -143,8 +143,8 @@ class Caps
 
             if not this.zMin and not this.zMax and settings.get "tooltips.grid.caps"
 
-                this.zMin = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: 0, y: 0, z: -size / 2}, material: "basic", color: redThree
-                this.zMax = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: 0, y: 0, z: size / 2}, material: "basic", color: greenThree
+                this.zMin = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: 0, y: 0, z: -size / 2}, material: "basic", color: redThree, panel: false
+                this.zMax = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: 0, y: 0, z: size / 2}, material: "basic", color: greenThree, panel: false
 
                 this.addEvents this.zMin; this.addEvents this.zMax
 
