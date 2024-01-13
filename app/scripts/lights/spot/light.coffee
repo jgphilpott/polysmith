@@ -48,6 +48,8 @@ class POLY.SpotLight extends THREE.SpotLight
 
             this.decay = Number decay
 
+        return this
+
     getAngle: ->
 
         angleUnit = settings.get "scales.angle.unit"
@@ -62,6 +64,8 @@ class POLY.SpotLight extends THREE.SpotLight
 
             this.angle = convert.angle[angleUnit]["radian"] angle
 
+        return this
+
     getPenumbra: ->
 
         return clone this.penumbra
@@ -72,6 +76,8 @@ class POLY.SpotLight extends THREE.SpotLight
 
             this.penumbra = Number penumbra
 
+        return this
+
     getDistance: ->
 
         return adaptor "convert", "length", clone this.distance
@@ -81,6 +87,8 @@ class POLY.SpotLight extends THREE.SpotLight
         if not this.getLock()
 
             this.distance = adaptor "invert", "length", distance
+
+        return this
 
     getTarget: ->
 
@@ -94,6 +102,8 @@ class POLY.SpotLight extends THREE.SpotLight
 
             this.target.position.set target.x, target.y, target.z
 
+        return this
+
     getTargetX: ->
 
         return adaptor "convert", "length", clone this.target.position.x
@@ -103,6 +113,8 @@ class POLY.SpotLight extends THREE.SpotLight
         if not this.getLock()
 
             this.target.position.x = adaptor "invert", "length", x
+
+        return this
 
     getTargetY: ->
 
@@ -114,6 +126,8 @@ class POLY.SpotLight extends THREE.SpotLight
 
             this.target.position.y = adaptor "invert", "length", y
 
+        return this
+
     getTargetZ: ->
 
         return adaptor "convert", "length", clone this.target.position.z
@@ -123,3 +137,5 @@ class POLY.SpotLight extends THREE.SpotLight
         if not this.getLock()
 
             this.target.position.z = adaptor "invert", "length", z
+
+        return this

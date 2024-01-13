@@ -93,6 +93,8 @@ class MeshMaterial
 
             this.color = new THREE.Color color
 
+        return this
+
     getTransparent: ->
 
         return clone this.transparent
@@ -100,6 +102,8 @@ class MeshMaterial
     setTransparent: (transparent = true) ->
 
         this.transparent = Boolean transparent
+
+        return this
 
     getOpacity: ->
 
@@ -109,6 +113,8 @@ class MeshMaterial
 
         this.opacity = Number opacity / 100
 
+        return this
+
     getMetalness: ->
 
         return clone this.metalness * 100
@@ -116,6 +122,8 @@ class MeshMaterial
     setMetalness: (metalness = 50) ->
 
         this.metalness = Number metalness / 100
+
+        return this
 
     getRoughness: ->
 
@@ -125,6 +133,8 @@ class MeshMaterial
 
         this.roughness = Number roughness / 100
 
+        return this
+
     getReflectivity: ->
 
         return clone this.reflectivity * 100
@@ -132,6 +142,8 @@ class MeshMaterial
     setReflectivity: (reflectivity = 50) ->
 
         this.reflectivity = Number reflectivity / 100
+
+        return this
 
     getTransmission: ->
 
@@ -141,6 +153,8 @@ class MeshMaterial
 
         this.transmission = Number transmission / 100
 
+        return this
+
     getWireframe: ->
 
         return clone this.wireframe
@@ -148,6 +162,8 @@ class MeshMaterial
     setWireframe: (wireframe = false) ->
 
         this.wireframe = Boolean wireframe
+
+        return this
 
     getSide: ->
 
@@ -162,3 +178,5 @@ class MeshMaterial
         else
 
             this.side = THREE.DoubleSide
+
+        return this

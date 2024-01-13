@@ -65,6 +65,8 @@ class POLY.TextMesh
 
             if save then this.save "update"
 
+        return this
+
     getFont: ->
 
         return clone this.params.font
@@ -78,6 +80,8 @@ class POLY.TextMesh
             this.geometry = new TextGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getSize: ->
 
@@ -93,6 +97,8 @@ class POLY.TextMesh
 
             if save then this.save "update"
 
+        return this
+
     getHeight: ->
 
         return clone this.params.height
@@ -106,6 +112,8 @@ class POLY.TextMesh
             this.geometry = new TextGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getBevelEnabled: ->
 
@@ -121,6 +129,8 @@ class POLY.TextMesh
 
             if save then this.save "update"
 
+        return this
+
     getBevelSize: ->
 
         return clone this.params.bevelSize
@@ -134,6 +144,8 @@ class POLY.TextMesh
             this.geometry = new TextGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getBevelOffset: ->
 
@@ -149,6 +161,8 @@ class POLY.TextMesh
 
             if save then this.save "update"
 
+        return this
+
     getBevelThickness: ->
 
         return clone this.params.bevelThickness
@@ -162,6 +176,8 @@ class POLY.TextMesh
             this.geometry = new TextGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getBevelSegments: ->
 
@@ -177,6 +193,8 @@ class POLY.TextMesh
 
             if save then this.save "update"
 
+        return this
+
     getCurveSegments: ->
 
         return clone this.params.curveSegments
@@ -190,3 +208,5 @@ class POLY.TextMesh
             this.geometry = new TextGeometry this.params
 
             if save then this.save "update"
+
+        return this

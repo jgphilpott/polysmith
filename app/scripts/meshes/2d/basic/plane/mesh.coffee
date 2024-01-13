@@ -34,6 +34,8 @@ class POLY.PlaneMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getLength: ->
 
         return clone this.params.length
@@ -47,6 +49,8 @@ class POLY.PlaneMesh extends THREE.Mesh
             this.geometry = new PlaneGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getWidthSegments: ->
 
@@ -62,6 +66,8 @@ class POLY.PlaneMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getLengthSegments: ->
 
         return clone this.params.lengthSegments
@@ -75,3 +81,5 @@ class POLY.PlaneMesh extends THREE.Mesh
             this.geometry = new PlaneGeometry this.params
 
             if save then this.save "update"
+
+        return this

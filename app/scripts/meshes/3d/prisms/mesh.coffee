@@ -58,6 +58,8 @@ class Mesh3DPrisms
 
                 if save then this.save "update"
 
+            return this
+
         this.mesh.getPositiveRadius = ->
 
             return clone this.params.positiveRadius
@@ -71,6 +73,8 @@ class Mesh3DPrisms
                 this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
+
+            return this
 
         this.mesh.getNegativeRadius = ->
 
@@ -86,6 +90,8 @@ class Mesh3DPrisms
 
                 if save then this.save "update"
 
+            return this
+
         this.mesh.getRadialSegments = ->
 
             return clone this.params.radialSegments
@@ -99,6 +105,8 @@ class Mesh3DPrisms
                 this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
+
+            return this
 
         this.mesh.getLengthSegments = ->
 
@@ -114,6 +122,8 @@ class Mesh3DPrisms
 
                 if save then this.save "update"
 
+            return this
+
         this.mesh.getOpenEnded = ->
 
             return clone this.params.openEnded
@@ -127,6 +137,8 @@ class Mesh3DPrisms
                 this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
+
+            return this
 
         this.mesh.getThetaStart = ->
 
@@ -142,6 +154,8 @@ class Mesh3DPrisms
 
                 if save then this.save "update"
 
+            return this
+
         this.mesh.getThetaLength = ->
 
             return clone this.params.thetaLength
@@ -156,6 +170,8 @@ class Mesh3DPrisms
 
                 if save then this.save "update"
 
+            return this
+
         this.mesh.getType = ->
 
             return clone this.params.class
@@ -169,5 +185,7 @@ class Mesh3DPrisms
                 this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
+
+            return this
 
         return this.mesh

@@ -58,6 +58,8 @@ class Mesh3DPyramids
 
                 if save then this.save "update"
 
+            return this
+
         this.mesh.getHeight = ->
 
             return clone this.params.height
@@ -71,6 +73,8 @@ class Mesh3DPyramids
                 this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
+
+            return this
 
         this.mesh.getRadialSegments = ->
 
@@ -86,6 +90,8 @@ class Mesh3DPyramids
 
                 if save then this.save "update"
 
+            return this
+
         this.mesh.getHeightSegments = ->
 
             return clone this.params.heightSegments
@@ -99,6 +105,8 @@ class Mesh3DPyramids
                 this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
+
+            return this
 
         this.mesh.getOpenEnded = ->
 
@@ -114,6 +122,8 @@ class Mesh3DPyramids
 
                 if save then this.save "update"
 
+            return this
+
         this.mesh.getThetaStart = ->
 
             return clone this.params.thetaStart
@@ -127,6 +137,8 @@ class Mesh3DPyramids
                 this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
+
+            return this
 
         this.mesh.getThetaLength = ->
 
@@ -142,6 +154,8 @@ class Mesh3DPyramids
 
                 if save then this.save "update"
 
+            return this
+
         this.mesh.getType = ->
 
             return clone this.params.class
@@ -155,5 +169,7 @@ class Mesh3DPyramids
                 this.geometry = new window[this.params.class.pascalize() + "Geometry"] this.params
 
                 if save then this.save "update"
+
+            return this
 
         return this.mesh

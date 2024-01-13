@@ -12,12 +12,20 @@ class Geometry1D
             when "line"
 
                 geometry = new POLY.LineBufferGeometry params
-                geometry.getDistance = this.getDistance; break
+
+                geometry.getDistance = this.getDistance
+                geometry.setDistance = this.setDistance
+
+                break
 
             when "stroke"
 
                 geometry = new POLY.StrokeBufferGeometry params
-                geometry.getDistance = this.getDistance; break
+
+                geometry.getDistance = this.getDistance
+                geometry.setDistance = this.setDistance
+
+                break
 
             else
 
@@ -36,6 +44,8 @@ class Geometry1D
 
             this.computeBoundingSphere()
 
+            return this
+
         geometry.getBoundingBox = ->
 
             boundingBox = clone this.boundingBox
@@ -48,6 +58,8 @@ class Geometry1D
         geometry.setBoundingBox = (box) ->
 
             this.computeBoundingBox()
+
+            return this
 
         geometry.setBoundingSphere()
         geometry.setBoundingBox()
@@ -65,3 +77,7 @@ class Geometry1D
             distance = this.attributes.lineDistance.array
 
         return adaptor "convert", "length", clone distance.last()
+
+    setDistance: ->
+
+        return this

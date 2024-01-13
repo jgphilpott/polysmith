@@ -40,6 +40,8 @@ class POLY.HemisphereLight extends THREE.HemisphereLight
 
                 this.color = new THREE.Color color
 
+        return this
+
     getGroundColor: ->
 
         return clone this.groundColor
@@ -55,3 +57,5 @@ class POLY.HemisphereLight extends THREE.HemisphereLight
             else
 
                 this.groundColor = new THREE.Color color
+
+        return this

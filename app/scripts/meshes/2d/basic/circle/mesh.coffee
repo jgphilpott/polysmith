@@ -34,6 +34,8 @@ class POLY.CircleMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getSegments: ->
 
         return clone this.params.segments
@@ -47,6 +49,8 @@ class POLY.CircleMesh extends THREE.Mesh
             this.geometry = new CircleGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getThetaStart: ->
 
@@ -62,6 +66,8 @@ class POLY.CircleMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getThetaLength: ->
 
         return clone this.params.thetaLength
@@ -75,3 +81,5 @@ class POLY.CircleMesh extends THREE.Mesh
             this.geometry = new CircleGeometry this.params
 
             if save then this.save "update"
+
+        return this

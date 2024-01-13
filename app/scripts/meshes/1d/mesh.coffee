@@ -31,6 +31,8 @@ class Mesh1D
 
             this.geometry.setBoundingSphere()
 
+            return this
+
         mesh.getBoundingBox = ->
 
             return clone this.geometry.getBoundingBox()
@@ -39,11 +41,14 @@ class Mesh1D
 
             this.geometry.setBoundingBox()
 
+            return this
+
         return mesh
 
     addMethods: (mesh) ->
 
         mesh.getDistance = this.getDistance
+        mesh.setDistance = this.setDistance
 
         mesh.getVertices = this.getVertices
         mesh.setVertices = this.setVertices
@@ -66,6 +71,10 @@ class Mesh1D
     getDistance: ->
 
         return clone this.geometry.getDistance()
+
+    setDistance: ->
+
+        return this
 
     getVertices: ->
 
@@ -91,6 +100,8 @@ class Mesh1D
 
             if save then this.save "update"
 
+        return this
+
     getLinewidth: ->
 
         return clone this.material.getLinewidth()
@@ -103,6 +114,8 @@ class Mesh1D
             this.material.setLinewidth this.params.linewidth
 
             if save then this.save "update"
+
+        return this
 
     getDashed: ->
 
@@ -134,6 +147,8 @@ class Mesh1D
 
             if save then this.save "update"
 
+        return this
+
     getDashSize: ->
 
         return clone this.material.getDashSize()
@@ -147,6 +162,8 @@ class Mesh1D
 
             if save then this.save "update"
 
+        return this
+
     getGapSize: ->
 
         return clone this.material.getGapSize()
@@ -159,6 +176,8 @@ class Mesh1D
             this.material.setGapSize this.params.gapSize
 
             if save then this.save "update"
+
+        return this
 
     getType: ->
 
@@ -197,3 +216,5 @@ class Mesh1D
             this.computeLineDistances()
 
             if save then this.save "update"
+
+        return this

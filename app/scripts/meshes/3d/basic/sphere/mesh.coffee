@@ -37,6 +37,8 @@ class POLY.SphereMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getThetaSegments: ->
 
         return clone this.params.thetaSegments
@@ -50,6 +52,8 @@ class POLY.SphereMesh extends THREE.Mesh
             this.geometry = new SphereGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getPhiSegments: ->
 
@@ -65,6 +69,8 @@ class POLY.SphereMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getThetaStart: ->
 
         return clone this.params.thetaStart
@@ -78,6 +84,8 @@ class POLY.SphereMesh extends THREE.Mesh
             this.geometry = new SphereGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getThetaLength: ->
 
@@ -93,6 +101,8 @@ class POLY.SphereMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getPhiStart: ->
 
         return clone this.params.phiStart
@@ -107,6 +117,8 @@ class POLY.SphereMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getPhiLength: ->
 
         return clone this.params.phiLength
@@ -120,3 +132,5 @@ class POLY.SphereMesh extends THREE.Mesh
             this.geometry = new SphereGeometry this.params
 
             if save then this.save "update"
+
+        return this

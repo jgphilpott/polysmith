@@ -55,6 +55,8 @@ class Mesh2DPolygon
 
                 if save then this.save "update"
 
+            return this
+
         this.mesh.getVertices = ->
 
             return clone this.params.vertices
@@ -70,6 +72,8 @@ class Mesh2DPolygon
 
                 if save then this.save "update"
 
+            return this
+
         this.mesh.getType = ->
 
             return clone this.params.class
@@ -83,5 +87,7 @@ class Mesh2DPolygon
                 this.geometry = new window[this.params.class.capitalize() + "Geometry"] this.params
 
                 if save then this.save "update"
+
+            return this
 
         return this.mesh

@@ -34,6 +34,8 @@ class Geometry2D extends Geometry1D
 
             this.isBufferGeometry = Boolean buffer
 
+            return this
+
         geometry.fromBuffer = ->
 
             if this.getBuffer()
@@ -75,6 +77,8 @@ class Geometry2D extends Geometry1D
                     surface += triangle.getArea()
 
             this.surface = surface
+
+            return this
 
         geometry = super type, geometry: geometry
 

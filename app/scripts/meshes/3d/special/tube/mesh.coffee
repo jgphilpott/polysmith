@@ -32,6 +32,8 @@ class POLY.TubeMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getRadius: ->
 
         return clone this.params.radius
@@ -45,6 +47,8 @@ class POLY.TubeMesh extends THREE.Mesh
             this.geometry = new TubeGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getVertices: ->
 
@@ -60,6 +64,8 @@ class POLY.TubeMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getRadialSegments: ->
 
         return clone this.params.radialSegments
@@ -74,6 +80,8 @@ class POLY.TubeMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getTubularSegments: ->
 
         return clone this.params.tubularSegments
@@ -87,3 +95,5 @@ class POLY.TubeMesh extends THREE.Mesh
             this.geometry = new TubeGeometry this.params
 
             if save then this.save "update"
+
+        return this

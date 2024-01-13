@@ -34,6 +34,8 @@ class POLY.BoxMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getLength: ->
 
         return clone this.params.length
@@ -47,6 +49,8 @@ class POLY.BoxMesh extends THREE.Mesh
             this.geometry = new BoxGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getHeight: ->
 
@@ -62,6 +66,8 @@ class POLY.BoxMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getWidthSegments: ->
 
         return clone this.params.widthSegments
@@ -75,6 +81,8 @@ class POLY.BoxMesh extends THREE.Mesh
             this.geometry = new BoxGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getLengthSegments: ->
 
@@ -90,6 +98,8 @@ class POLY.BoxMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getHeightSegments: ->
 
         return clone this.params.heightSegments
@@ -103,3 +113,5 @@ class POLY.BoxMesh extends THREE.Mesh
             this.geometry = new BoxGeometry this.params
 
             if save then this.save "update"
+
+        return this

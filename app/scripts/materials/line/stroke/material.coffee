@@ -36,3 +36,5 @@ class POLY.StrokeLineMaterial extends LineThickMaterial
     setResolution: (width = window.innerWidth, height = window.innerHeight) ->
 
         this.resolution.set width, height
+
+        return this

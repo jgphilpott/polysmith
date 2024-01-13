@@ -40,6 +40,8 @@ class POLY.DirectionalLight extends THREE.DirectionalLight
 
             this.target.position.set target.x, target.y, target.z
 
+        return this
+
     getTargetX: ->
 
         return adaptor "convert", "length", clone this.target.position.x
@@ -49,6 +51,8 @@ class POLY.DirectionalLight extends THREE.DirectionalLight
         if not this.getLock()
 
             this.target.position.x = adaptor "invert", "length", x
+
+        return this
 
     getTargetY: ->
 
@@ -60,6 +64,8 @@ class POLY.DirectionalLight extends THREE.DirectionalLight
 
             this.target.position.y = adaptor "invert", "length", y
 
+        return this
+
     getTargetZ: ->
 
         return adaptor "convert", "length", clone this.target.position.z
@@ -69,3 +75,5 @@ class POLY.DirectionalLight extends THREE.DirectionalLight
         if not this.getLock()
 
             this.target.position.z = adaptor "invert", "length", z
+
+        return this

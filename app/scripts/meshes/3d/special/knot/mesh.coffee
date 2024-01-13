@@ -34,6 +34,8 @@ class POLY.KnotMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getQ: ->
 
         return clone this.params.q
@@ -47,6 +49,8 @@ class POLY.KnotMesh extends THREE.Mesh
             this.geometry = new KnotGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getRadius: ->
 
@@ -62,6 +66,8 @@ class POLY.KnotMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getThickness: ->
 
         return clone this.params.thickness
@@ -75,6 +81,8 @@ class POLY.KnotMesh extends THREE.Mesh
             this.geometry = new KnotGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getRadialSegments: ->
 
@@ -90,6 +98,8 @@ class POLY.KnotMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getTubularSegments: ->
 
         return clone this.params.tubularSegments
@@ -103,3 +113,5 @@ class POLY.KnotMesh extends THREE.Mesh
             this.geometry = new KnotGeometry this.params
 
             if save then this.save "update"
+
+        return this

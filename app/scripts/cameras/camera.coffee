@@ -111,6 +111,8 @@ class Camera
 
         this.updateProjectionMatrix()
 
+        return this
+
     getPosition: ->
 
         return vectorAdaptor "convert", "length", clone this.position
@@ -127,6 +129,8 @@ class Camera
 
         if save then settings.set "camera.position", this.position
 
+        return this
+
     getPositionX: ->
 
         return adaptor "convert", "length", clone this.position.x
@@ -140,6 +144,8 @@ class Camera
         this.lookAt this.target.x, this.target.y, this.target.z
 
         if save then settings.set "camera.position", this.position
+
+        return this
 
     getPositionY: ->
 
@@ -155,6 +161,8 @@ class Camera
 
         if save then settings.set "camera.position", this.position
 
+        return this
+
     getPositionZ: ->
 
         return adaptor "convert", "length", clone this.position.z
@@ -168,6 +176,8 @@ class Camera
         this.lookAt this.target.x, this.target.y, this.target.z
 
         if save then settings.set "camera.position", this.position
+
+        return this
 
     getTarget: ->
 
@@ -185,6 +195,8 @@ class Camera
 
         if save then settings.set "camera.target", this.target
 
+        return this
+
     getTargetX: ->
 
         return adaptor "convert", "length", clone this.target.x
@@ -198,6 +210,8 @@ class Camera
         this.lookAt this.target.x, this.target.y, this.target.z
 
         if save then settings.set "camera.target", this.target
+
+        return this
 
     getTargetY: ->
 
@@ -213,6 +227,8 @@ class Camera
 
         if save then settings.set "camera.target", this.target
 
+        return this
+
     getTargetZ: ->
 
         return adaptor "convert", "length", clone this.target.z
@@ -227,6 +243,8 @@ class Camera
 
         if save then settings.set "camera.target", this.target
 
+        return this
+
     getNear: ->
 
         return adaptor "convert", "length", clone this.near
@@ -238,6 +256,8 @@ class Camera
         this.updateProjectionMatrix()
 
         if save then settings.set "camera.near", this.near
+
+        return this
 
     getFar: ->
 
@@ -251,6 +271,8 @@ class Camera
 
         if save then settings.set "camera.far", this.far
 
+        return this
+
     getFOV: ->
 
         return interpreter "convert", "angle", clone this.fov
@@ -262,6 +284,8 @@ class Camera
         this.updateProjectionMatrix()
 
         if save then settings.set "camera.fov", this.fov
+
+        return this
 
     focus: (point, duration = 1000, steps = 100) ->
 
@@ -328,3 +352,5 @@ class Camera
         this.setNear near
         this.setFar far
         this.setFOV fov
+
+        return this

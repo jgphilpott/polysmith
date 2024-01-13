@@ -44,6 +44,8 @@ class Mesh3D extends Mesh2D
 
             this.geometry.setVolume Number volume
 
+            return this
+
         mesh = super type, mesh: mesh
 
         return mesh

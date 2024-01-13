@@ -34,6 +34,8 @@ class POLY.TorusMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getRadius: ->
 
         return clone this.params.radius
@@ -47,6 +49,8 @@ class POLY.TorusMesh extends THREE.Mesh
             this.geometry = new TorusGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getThickness: ->
 
@@ -62,6 +66,8 @@ class POLY.TorusMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getRadialSegments: ->
 
         return clone this.params.radialSegments
@@ -76,6 +82,8 @@ class POLY.TorusMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getTubularSegments: ->
 
         return clone this.params.tubularSegments
@@ -89,3 +97,5 @@ class POLY.TorusMesh extends THREE.Mesh
             this.geometry = new TorusGeometry this.params
 
             if save then this.save "update"
+
+        return this

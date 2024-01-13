@@ -40,6 +40,8 @@ class Mesh2D extends Mesh1D
 
                 if save then this.save "update"
 
+            return this
+
         mesh.getMetalness = ->
 
             return clone this.params.metalness
@@ -52,6 +54,8 @@ class Mesh2D extends Mesh1D
                 this.material.setMetalness this.params.metalness
 
                 if save then this.save "update"
+
+            return this
 
         mesh.getRoughness = ->
 
@@ -66,6 +70,8 @@ class Mesh2D extends Mesh1D
 
                 if save then this.save "update"
 
+            return this
+
         mesh.getReflectivity = ->
 
             return clone this.params.reflectivity
@@ -78,6 +84,8 @@ class Mesh2D extends Mesh1D
                 this.material.setReflectivity this.params.reflectivity
 
                 if save then this.save "update"
+
+            return this
 
         mesh.getTransmission = ->
 
@@ -92,6 +100,8 @@ class Mesh2D extends Mesh1D
 
                 if save then this.save "update"
 
+            return this
+
         mesh.getWireframe = ->
 
             return clone this.params.wireframe
@@ -104,6 +114,8 @@ class Mesh2D extends Mesh1D
                 this.material.setWireframe this.params.wireframe
 
                 if save then this.save "update"
+
+            return this
 
         mesh.getSide = ->
 
@@ -118,6 +130,8 @@ class Mesh2D extends Mesh1D
 
                 if save then this.save "update"
 
+            return this
+
         mesh.getBuffer = ->
 
             return clone this.geometry.getBuffer()
@@ -125,6 +139,8 @@ class Mesh2D extends Mesh1D
         mesh.setBuffer = (buffer = true) ->
 
             this.geometry.setBuffer Boolean buffer
+
+            return this
 
         mesh.fromBuffer = ->
 
@@ -141,6 +157,8 @@ class Mesh2D extends Mesh1D
         mesh.setSurface = (surface = 0) ->
 
             this.geometry.setSurface Number surface
+
+            return this
 
         mesh = super type, mesh: mesh
 

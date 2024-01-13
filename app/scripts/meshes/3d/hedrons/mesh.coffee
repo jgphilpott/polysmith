@@ -34,6 +34,8 @@ class Mesh3DHedrons
 
                 if save then this.save "update"
 
+            return this
+
         this.mesh.getDetail = ->
 
             return clone this.params.detail
@@ -48,6 +50,8 @@ class Mesh3DHedrons
 
                 if save then this.save "update"
 
+            return this
+
         this.mesh.getType = ->
 
             return clone this.params.class
@@ -61,5 +65,7 @@ class Mesh3DHedrons
                 this.geometry = new window[this.params.class.capitalize() + "Geometry"] this.params
 
                 if save then this.save "update"
+
+            return this
 
         return this.mesh

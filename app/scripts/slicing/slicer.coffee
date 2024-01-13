@@ -18,6 +18,8 @@ class Slicer
 
         if save then settings.set "slicing.gcode", this.gcode
 
+        return this
+
     getAdhesion: ->
 
         return clone this.adhesion
@@ -27,6 +29,8 @@ class Slicer
         this.adhesion = adhesion
 
         if save then settings.set "slicing.adhesion", this.adhesion
+
+        return this
 
     getSupport: ->
 
@@ -38,6 +42,8 @@ class Slicer
 
         if save then settings.set "slicing.support", this.support
 
+        return this
+
     getLayer: ->
 
         return adaptor "convert", "length", clone this.layer
@@ -47,6 +53,8 @@ class Slicer
         this.layer = adaptor "invert", "length", layer
 
         if save then settings.set "slicing.layer", this.layer
+
+        return this
 
     getInfillDensity: ->
 
@@ -58,6 +66,8 @@ class Slicer
 
         if save then settings.set "slicing.infill.density", this.infill.density
 
+        return this
+
     getInfillPattern: ->
 
         return clone this.infill.pattern
@@ -67,6 +77,8 @@ class Slicer
         this.infill.pattern = pattern
 
         if save then settings.set "slicing.infill.pattern", this.infill.pattern
+
+        return this
 
     reset: ->
 
@@ -81,3 +93,5 @@ class Slicer
 
         this.setInfillDensity defaults.infill.density
         this.setInfillPattern defaults.infill.pattern
+
+        return this

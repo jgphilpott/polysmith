@@ -34,6 +34,8 @@ class POLY.RingMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getOuterRadius: ->
 
         return clone this.params.outerRadius
@@ -47,6 +49,8 @@ class POLY.RingMesh extends THREE.Mesh
             this.geometry = new RingGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getThetaSegments: ->
 
@@ -62,6 +66,8 @@ class POLY.RingMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getPhiSegments: ->
 
         return clone this.params.phiSegments
@@ -75,6 +81,8 @@ class POLY.RingMesh extends THREE.Mesh
             this.geometry = new RingGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getThetaStart: ->
 
@@ -90,6 +98,8 @@ class POLY.RingMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getThetaLength: ->
 
         return clone this.params.thetaLength
@@ -103,3 +113,5 @@ class POLY.RingMesh extends THREE.Mesh
             this.geometry = new RingGeometry this.params
 
             if save then this.save "update"
+
+        return this

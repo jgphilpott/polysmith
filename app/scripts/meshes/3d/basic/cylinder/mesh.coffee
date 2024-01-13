@@ -37,6 +37,8 @@ class POLY.CylinderMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getPositiveRadius: ->
 
         return clone this.params.positiveRadius
@@ -50,6 +52,8 @@ class POLY.CylinderMesh extends THREE.Mesh
             this.geometry = new CylinderGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getNegativeRadius: ->
 
@@ -65,6 +69,8 @@ class POLY.CylinderMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getRadialSegments: ->
 
         return clone this.params.radialSegments
@@ -78,6 +84,8 @@ class POLY.CylinderMesh extends THREE.Mesh
             this.geometry = new CylinderGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getLengthSegments: ->
 
@@ -93,6 +101,8 @@ class POLY.CylinderMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getOpenEnded: ->
 
         return clone this.params.openEnded
@@ -106,6 +116,8 @@ class POLY.CylinderMesh extends THREE.Mesh
             this.geometry = new CylinderGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getThetaStart: ->
 
@@ -121,6 +133,8 @@ class POLY.CylinderMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getThetaLength: ->
 
         return clone this.params.thetaLength
@@ -134,3 +148,5 @@ class POLY.CylinderMesh extends THREE.Mesh
             this.geometry = new CylinderGeometry this.params
 
             if save then this.save "update"
+
+        return this

@@ -34,6 +34,8 @@ class POLY.CapsuleMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getRadius: ->
 
         return clone this.params.radius
@@ -47,6 +49,8 @@ class POLY.CapsuleMesh extends THREE.Mesh
             this.geometry = new CapsuleGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getCapSegments: ->
 
@@ -62,6 +66,8 @@ class POLY.CapsuleMesh extends THREE.Mesh
 
             if save then this.save "update"
 
+        return this
+
     getRadialSegments: ->
 
         return clone this.params.radialSegments
@@ -75,3 +81,5 @@ class POLY.CapsuleMesh extends THREE.Mesh
             this.geometry = new CapsuleGeometry this.params
 
             if save then this.save "update"
+
+        return this

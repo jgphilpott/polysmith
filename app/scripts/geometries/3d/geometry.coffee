@@ -77,6 +77,8 @@ class Geometry3D extends Geometry2D
 
             this.volume = volume
 
+            return this
+
         geometry = super type, geometry: geometry
 
         geometry.setVolume()

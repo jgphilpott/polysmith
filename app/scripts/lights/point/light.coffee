@@ -1,4 +1,4 @@
-# Link: https://threejs.org/docs/#api/en/lights/PointLight
+        return this# Link: https://threejs.org/docs/#api/en/lights/PointLight
 
 class PointLight extends Light
 
@@ -37,6 +37,8 @@ class POLY.PointLight extends THREE.PointLight
 
             this.decay = Number decay
 
+        return this
+
     getDistance: ->
 
         return adaptor "convert", "length", clone this.distance
@@ -46,3 +48,5 @@ class POLY.PointLight extends THREE.PointLight
         if not this.getLock()
 
             this.distance = adaptor "invert", "length", distance
+
+        return this

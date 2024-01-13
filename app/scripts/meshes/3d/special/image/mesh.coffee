@@ -62,6 +62,8 @@ class POLY.ImageMesh
 
             if save then this.save "update"
 
+        return this
+
     getSteps: ->
 
         return clone this.params.steps
@@ -75,6 +77,8 @@ class POLY.ImageMesh
             this.geometry = new ImageGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getDepth: ->
 
@@ -90,6 +94,8 @@ class POLY.ImageMesh
 
             if save then this.save "update"
 
+        return this
+
     getBevelEnabled: ->
 
         return clone this.params.bevelEnabled
@@ -103,6 +109,8 @@ class POLY.ImageMesh
             this.geometry = new ImageGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getBevelSize: ->
 
@@ -118,6 +126,8 @@ class POLY.ImageMesh
 
             if save then this.save "update"
 
+        return this
+
     getBevelOffset: ->
 
         return clone this.params.bevelOffset
@@ -131,6 +141,8 @@ class POLY.ImageMesh
             this.geometry = new ImageGeometry this.params
 
             if save then this.save "update"
+
+        return this
 
     getBevelThickness: ->
 
@@ -146,6 +158,8 @@ class POLY.ImageMesh
 
             if save then this.save "update"
 
+        return this
+
     getBevelSegments: ->
 
         return clone this.params.bevelSegments
@@ -160,6 +174,8 @@ class POLY.ImageMesh
 
             if save then this.save "update"
 
+        return this
+
     getCurveSegments: ->
 
         return clone this.params.curveSegments
@@ -173,3 +189,5 @@ class POLY.ImageMesh
             this.geometry = new ImageGeometry this.params
 
             if save then this.save "update"
+
+        return this

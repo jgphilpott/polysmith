@@ -18,6 +18,8 @@ class Printer
 
         if save then settings.set "printer.size", this.size
 
+        return this
+
     getSizeX: ->
 
         return adaptor "convert", "length", clone this.size.x
@@ -27,6 +29,8 @@ class Printer
         this.size.x = adaptor "invert", "length", size
 
         if save then settings.set "printer.size", this.size
+
+        return this
 
     getSizeY: ->
 
@@ -38,6 +42,8 @@ class Printer
 
         if save then settings.set "printer.size", this.size
 
+        return this
+
     getSizeZ: ->
 
         return adaptor "convert", "length", clone this.size.z
@@ -47,6 +53,8 @@ class Printer
         this.size.z = adaptor "invert", "length", size
 
         if save then settings.set "printer.size", this.size
+
+        return this
 
     getShape: ->
 
@@ -58,6 +66,8 @@ class Printer
 
         if save then settings.set "printer.shape", this.shape
 
+        return this
+
     getCentred: ->
 
         return clone this.centred
@@ -67,6 +77,8 @@ class Printer
         this.centred = centred
 
         if save then settings.set "printer.centred", this.centred
+
+        return this
 
     getHeatedBed: ->
 
@@ -78,6 +90,8 @@ class Printer
 
         if save then settings.set "printer.heated.bed", this.heated.bed
 
+        return this
+
     getHeatedVolume: ->
 
         return clone this.heated.volume
@@ -87,6 +101,8 @@ class Printer
         this.heated.volume = heated
 
         if save then settings.set "printer.heated.volume", this.heated.volume
+
+        return this
 
     getNozzles: ->
 
@@ -112,6 +128,8 @@ class Printer
 
         if save then settings.set "printer.nozzles", this.nozzles
 
+        return this
+
     getNozzle: (index = 0) ->
 
         nozzle = clone this.nozzles[index]
@@ -132,6 +150,8 @@ class Printer
 
         if save then settings.set "printer.nozzles", this.nozzles
 
+        return this
+
     getNozzleFilament: (index = 0) ->
 
         return adaptor "convert", "length", clone this.nozzles[index].filament
@@ -141,6 +161,8 @@ class Printer
         this.nozzles[index].filament = adaptor "invert", "length", filament
 
         if save then settings.set "printer.nozzles", this.nozzles
+
+        return this
 
     getNozzleDiameter: (index = 0) ->
 
@@ -152,6 +174,8 @@ class Printer
 
         if save then settings.set "printer.nozzles", this.nozzles
 
+        return this
+
     getNozzleGantry: (index = 0) ->
 
         return adaptor "convert", "length", clone this.nozzles[index].gantry
@@ -161,6 +185,8 @@ class Printer
         this.nozzles[index].gantry = adaptor "invert", "length", gantry
 
         if save then settings.set "printer.nozzles", this.nozzles
+
+        return this
 
     reset: ->
 
@@ -180,3 +206,5 @@ class Printer
             nozzle.gantry = adaptor "convert", "length", nozzle.gantry
 
         this.setNozzles defaults.nozzles
+
+        return this

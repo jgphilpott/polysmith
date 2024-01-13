@@ -91,6 +91,8 @@ class Light
 
             this.position.set position.x, position.y, position.z
 
+        return this
+
     getPositionX: ->
 
         return adaptor "convert", "length", clone this.position.x
@@ -100,6 +102,8 @@ class Light
         if not this.getLock()
 
             this.position.x = adaptor "invert", "length", x
+
+        return this
 
     getPositionY: ->
 
@@ -111,6 +115,8 @@ class Light
 
             this.position.y = adaptor "invert", "length", y
 
+        return this
+
     getPositionZ: ->
 
         return adaptor "convert", "length", clone this.position.z
@@ -121,6 +127,8 @@ class Light
 
             this.position.z = adaptor "invert", "length", z
 
+        return this
+
     getIntensity: ->
 
         return clone this.intensity
@@ -130,6 +138,8 @@ class Light
         if not this.getLock()
 
             this.intensity = Number intensity
+
+        return this
 
     getColor: ->
 
@@ -147,9 +157,13 @@ class Light
 
                 this.color = new THREE.Color color
 
+        return this
+
     toggleLock: ->
 
         this.setLock not this.getLock()
+
+        return this
 
     getLock: ->
 
@@ -158,3 +172,5 @@ class Light
     setLock: (lock) ->
 
         this.lock = Boolean lock
+
+        return this

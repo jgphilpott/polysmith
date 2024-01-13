@@ -59,6 +59,8 @@ class LineMaterial
 
             this.color = new THREE.Color color
 
+        return this
+
     getTransparent: ->
 
         return clone this.transparent
@@ -66,6 +68,8 @@ class LineMaterial
     setTransparent: (transparent = true) ->
 
         this.transparent = Boolean transparent
+
+        return this
 
     getOpacity: ->
 
@@ -75,6 +79,8 @@ class LineMaterial
 
         this.opacity = Number opacity / 100
 
+        return this
+
     getLinewidth: ->
 
         return clone this.linewidth
@@ -82,6 +88,8 @@ class LineMaterial
     setLinewidth: (linewidth = 1) ->
 
         this.linewidth = Number linewidth
+
+        return this
 
     getDashed: ->
 
@@ -91,6 +99,8 @@ class LineMaterial
 
         this.dashed = Boolean dashed
 
+        return this
+
     getDashSize: ->
 
         return adaptor "convert", "length", clone this.dashSize
@@ -99,6 +109,8 @@ class LineMaterial
 
         this.dashSize = adaptor "invert", "length", Number dashSize
 
+        return this
+
     getGapSize: ->
 
         return adaptor "convert", "length", clone this.gapSize
@@ -106,3 +118,5 @@ class LineMaterial
     setGapSize: (gapSize = adaptor "convert", "length", 2) ->
 
         this.gapSize = adaptor "invert", "length", Number gapSize
+
+        return this

@@ -76,6 +76,8 @@ class Filament
 
         if save then settings.set "filaments." + this.type + ".name", this.name
 
+        return this
+
     getDescription: ->
 
         return clone this.description
@@ -85,6 +87,8 @@ class Filament
         this.description = description
 
         if save then settings.set "filaments." + this.type + ".description", this.description
+
+        return this
 
     getBrand: ->
 
@@ -96,6 +100,8 @@ class Filament
 
         if save then settings.set "filaments." + this.type + ".brand", this.brand
 
+        return this
+
     getColor: ->
 
         return clone this.color
@@ -105,6 +111,8 @@ class Filament
         this.color = color
 
         if save then settings.set "filaments." + this.type + ".color", this.color
+
+        return this
 
     getDiameter: ->
 
@@ -116,6 +124,8 @@ class Filament
 
         if save then settings.set "filaments." + this.type + ".diameter", this.diameter
 
+        return this
+
     getDensity: ->
 
         return adaptor "convert", "density", clone this.density
@@ -125,6 +135,8 @@ class Filament
         this.density = adaptor "invert", "density", density
 
         if save then settings.set "filaments." + this.type + ".density", this.density
+
+        return this
 
     getWeight: ->
 
@@ -136,6 +148,8 @@ class Filament
 
         if save then settings.set "filaments." + this.type + ".weight", this.weight
 
+        return this
+
     getCost: ->
 
         return clone this.cost
@@ -145,6 +159,8 @@ class Filament
         this.cost = cost
 
         if save then settings.set "filaments." + this.type + ".cost", this.cost
+
+        return this
 
     getFan: ->
 
@@ -156,6 +172,8 @@ class Filament
 
         if save then settings.set "filaments." + this.type + ".fan", this.fan
 
+        return this
+
     getTemperatureBed: ->
 
         return interpreter "convert", "temperature", clone this.temperature.bed
@@ -165,6 +183,8 @@ class Filament
         this.temperature.bed = interpreter "invert", "temperature", temperature
 
         if save then settings.set "filaments." + this.type + ".temperature.bed", this.temperature.bed
+
+        return this
 
     getTemperatureNozzle: ->
 
@@ -176,6 +196,8 @@ class Filament
 
         if save then settings.set "filaments." + this.type + ".temperature.nozzle", this.temperature.nozzle
 
+        return this
+
     getTemperatureStandby: ->
 
         return interpreter "convert", "temperature", clone this.temperature.standby
@@ -185,6 +207,8 @@ class Filament
         this.temperature.standby = interpreter "invert", "temperature", temperature
 
         if save then settings.set "filaments." + this.type + ".temperature.standby", this.temperature.standby
+
+        return this
 
     getRetractionSpeed: ->
 
@@ -196,6 +220,8 @@ class Filament
 
         if save then settings.set "filaments." + this.type + ".retraction.speed", this.retraction.speed
 
+        return this
+
     getRetractionDistance: ->
 
         return adaptor "convert", "length", clone this.retraction.distance
@@ -205,6 +231,8 @@ class Filament
         this.retraction.distance = adaptor "invert", "length", distance
 
         if save then settings.set "filaments." + this.type + ".retraction.distance", this.retraction.distance
+
+        return this
 
     reset: ->
 
@@ -228,3 +256,5 @@ class Filament
 
         this.setRetractionSpeed adaptor "convert", "speed", defaults.retraction.speed
         this.setRetractionDistance adaptor "convert", "length", defaults.retraction.distance
+
+        return this
