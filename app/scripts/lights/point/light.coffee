@@ -1,4 +1,4 @@
-        return this# Link: https://threejs.org/docs/#api/en/lights/PointLight
+# Link: https://threejs.org/docs/#api/en/lights/PointLight
 
 class PointLight extends Light
 
