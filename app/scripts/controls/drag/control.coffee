@@ -73,8 +73,6 @@ class DragControls
 
             drag = (event) =>
 
-                satoshi = 0.000001
-
                 camera.dragged = true
                 camera.dragging = true
 

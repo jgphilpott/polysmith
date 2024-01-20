@@ -1,10 +1,11 @@
+satoshi = 0.000001
+
 log = console.log
 info = console.info
 warn = console.warn
 error = console.error
 assert = console.assert
 
-console.log = -> null
 console.info = -> null
 console.warn = -> null
 console.error = -> null
@@ -52,10 +53,10 @@ vectorInterpreter = (type, category, vector) ->
 
 adaptor = (type, category, value) ->
 
-    scale = settings.get "general.scale"
+    scale = settings.get "scales.scale"
     unit = settings.get "scales." + category + ".unit"
 
-    defaultScale = settings.general.defaults().scale
+    defaultScale = settings.scales.defaults().scale
     defaultUnit = settings.scales.defaults()[category].unit
 
     if type is "convert" then return convert[category][defaultUnit[defaultScale]][unit[scale]] value
