@@ -39,7 +39,9 @@ def get_libs(libs_dir):
     if not exists(js_libs_dir + "/LineThickSegments.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/605923031deec863802ca6f61ca9e688/raw/5808ab9cecb36a246a593e88bcbf5839299e4157/LineThickSegments.js", js_libs_dir + "/LineThickSegments.js")
     if not exists(js_libs_dir + "/LineThickMesh.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/ec6e0b40dbdd02c9d4cfae0dd2166c5e/raw/4d2b02b32166361c3225ef109f15af65db0787cd/LineThickMesh.js", js_libs_dir + "/LineThickMesh.js")
 
+    if not exists(js_libs_dir + "/SimplifyModifier.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/67823330513c37814445342a7a689c9a/raw/9727edb4e99d2b634766339d6cac46b005024592/SimplifyModifier.js", js_libs_dir + "/SimplifyModifier.js")
     if not exists(js_libs_dir + "/LoopSubdivision.js"): urlretrieve("https://gist.githubusercontent.com/jgphilpott/2652b7c8a853dd89dd1830432fca8a79/raw/9196ee4714492014c4ae938b7f211dd68c2a22d9/LoopSubdivision.js", js_libs_dir + "/LoopSubdivision.js")
+
     if not exists(js_libs_dir + "/EffectComposer.js"): urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/postprocessing/EffectComposer.js", js_libs_dir + "/EffectComposer.js")
     if not exists(js_libs_dir + "/OutlinePass.js"): urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/postprocessing/OutlinePass.js", js_libs_dir + "/OutlinePass.js")
     if not exists(js_libs_dir + "/RenderPass.js"): urlretrieve("https://raw.githubusercontent.com/mrdoob/three.js/f9d1f8495f2ca581b2b695288b97c97e030c5407/examples/js/postprocessing/RenderPass.js", js_libs_dir + "/RenderPass.js")
