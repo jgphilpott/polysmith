@@ -1,4 +1,5 @@
 satoshi = 0.000001
+nakamoto = 0.0001
 
 log = console.log
 info = console.info

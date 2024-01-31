@@ -13,14 +13,14 @@
         "forkme",
         "fullscreen",
         "gcode",
-        "GLTF",
+        "gltf",
         "hedrons",
         "kebabify",
         "magine",
         "metabox",
         "octree",
         "pascalize",
-        "PETG",
+        "petg",
         "pinshape",
         "polygen",
         "pydash",
@@ -28,7 +28,7 @@
         "thingiverse",
         "titlize",
         "urandom",
-        "VRML"
+        "vrml"
     ],
     "files.exclude": {
         "app/libs": true,
