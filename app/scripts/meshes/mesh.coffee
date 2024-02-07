@@ -26,59 +26,92 @@ class Mesh
 
                 @mesh = params.mesh
 
+        params.panel ?= true
+
         this.mesh.add = this.add
         this.mesh.remove = this.remove
 
-        # this.mesh.addEvents = this.addEvents
-        # this.mesh.removeEvents = this.removeEvents
+        this.mesh.addEvents = this.addEvents
+        this.mesh.removeEvents = this.removeEvents
 
-        # this.mesh.getName = this.getName
-        # this.mesh.setName = this.setName
+        this.mesh.getName = this.getName
+        this.mesh.setName = this.setName
 
-        # this.mesh.getLock = this.getLock
-        # this.mesh.setLock = this.setLock
-        # this.mesh.toggleLock = this.toggleLock
+        this.mesh.getLock = this.getLock
+        this.mesh.setLock = this.setLock
+        this.mesh.toggleLock = this.toggleLock
 
-        # this.mesh.getColor = this.getColor
-        # this.mesh.setColor = this.setColor
+        this.mesh.getColor = this.getColor
+        this.mesh.setColor = this.setColor
 
-        # this.mesh.getTransparent = this.getTransparent
-        # this.mesh.setTransparent = this.setTransparent
+        this.mesh.getTransparent = this.getTransparent
+        this.mesh.setTransparent = this.setTransparent
 
-        # this.mesh.getOpacity = this.getOpacity
-        # this.mesh.setOpacity = this.setOpacity
+        this.mesh.getOpacity = this.getOpacity
+        this.mesh.setOpacity = this.setOpacity
 
-        # this.mesh.getPosition = this.getPosition
-        # this.mesh.setPosition = this.setPosition
+        this.mesh.getPosition = this.getPosition
+        this.mesh.setPosition = this.setPosition
 
-        # this.mesh.getRotation = this.getRotation
-        # this.mesh.setRotation = this.setRotation
+        this.mesh.getPositionX = this.getPositionX
+        this.mesh.setPositionX = this.setPositionX
 
-        # this.updateMatrix = this.mesh.updateMatrix
-        # this.mesh.updateMetrics = this.updateMetrics
-        # this.mesh.updateParams = this.updateParams
+        this.mesh.getPositionY = this.getPositionY
+        this.mesh.setPositionY = this.setPositionY
 
-        # if params.position then this.mesh.setPosition params.position, false
-        # if params.rotation then this.mesh.setRotation params.rotation, false
+        this.mesh.getPositionZ = this.getPositionZ
+        this.mesh.setPositionZ = this.setPositionZ
 
-        # this.mesh.lock = if "lock" of params then params.lock else if this.mesh.lock then this.mesh.lock else false
-        # this.mesh.name = if "name" of params then params.name else if this.mesh.name then this.mesh.name else "Unnamed"
-        # this.mesh.class = if "class" of params then params.class else if this.mesh.class then this.mesh.class else "custom"
+        this.mesh.getRotation = this.getRotation
+        this.mesh.setRotation = this.setRotation
 
-        # this.mesh.material.style = if "style" of params then params.style else if this.mesh.material.style then this.mesh.material.style else "multi"
-        # this.mesh.material.wireframe = if "wireframe" of params then params.wireframe else if this.mesh.material.wireframe then this.mesh.material.wireframe else false
+        this.mesh.getRotationX = this.getRotationX
+        this.mesh.setRotationX = this.setRotationX
 
-        # # this.translate = this.geometry.translate
-        # # this.center = this.geometry.center
+        this.mesh.getRotationY = this.getRotationY
+        this.mesh.setRotationY = this.setRotationY
 
-        # this.mesh.morph = this.morph
-        # this.mesh.save = this.save
+        this.mesh.getRotationZ = this.getRotationZ
+        this.mesh.setRotationZ = this.setRotationZ
 
-        # this.mesh.panel = new MeshPanel this.mesh
-        # this.mesh.dragable = this.dragable
-        # this.mesh.params = params
+        this.mesh.getScale = this.getScale
+        this.mesh.setScale = this.setScale
 
-        # return this.mesh
+        this.mesh.getScaleX = this.getScaleX
+        this.mesh.setScaleX = this.setScaleX
+
+        this.mesh.getScaleY = this.getScaleY
+        this.mesh.setScaleY = this.setScaleY
+
+        this.mesh.getScaleZ = this.getScaleZ
+        this.mesh.setScaleZ = this.setScaleZ
+
+        this.updateMatrix = this.mesh.updateMatrix
+        this.mesh.updateMetrics = this.updateMetrics
+        this.mesh.updateParams = this.updateParams
+
+        if params.panel then this.mesh.panel = new MeshPanel this.mesh
+
+        if params.position then this.mesh.setPosition params.position, false
+        if params.rotation then this.mesh.setRotation params.rotation, false
+
+        this.mesh.lock = if "lock" of params then params.lock else if this.mesh.lock then this.mesh.lock else false
+        this.mesh.name = if "name" of params then params.name else if this.mesh.name then this.mesh.name else "Unnamed"
+        this.mesh.class = if "class" of params then params.class else if this.mesh.class then this.mesh.class else "custom"
+
+        this.mesh.material.style = if "style" of params then params.style else if this.mesh.material.style then this.mesh.material.style else "multi"
+        this.mesh.material.wireframe = if "wireframe" of params then params.wireframe else if this.mesh.material.wireframe then this.mesh.material.wireframe else false
+
+        # this.translate = this.geometry.translate
+        # this.center = this.geometry.center
+
+        this.mesh.morph = this.morph
+        this.mesh.save = this.save
+
+        this.mesh.dragable = this.dragable
+        this.mesh.params = params
+
+        return this.mesh
 
     add: ->
 
@@ -87,8 +120,10 @@ class Mesh
 
         this.addEvents()
 
-        this.panel.add()
+        # this.panel.add()
         panels.meshes.addMesh this
+
+        return this
 
     remove: ->
 
@@ -109,524 +144,626 @@ class Mesh
 
                 events.clearCSG()
 
-    # addEvents: ->
+        return this
 
-    #     events.addEventListener this, "mouseover", (event) =>
+    addEvents: ->
 
-    #         null
+        events.addEventListener this, "mouseover", (event) =>
 
-    #     events.addEventListener this, "mousemove", (event) =>
+            null
 
-    #         if settings.get "ui.metabox"
+        events.addEventListener this, "mousemove", (event) =>
 
-    #             metabox.update this, event.origDomEvent
+            if settings.get "ui.metabox"
 
-    #         if events.operation.key
+                metabox.update this, event.origDomEvent
 
-    #             if events.operation.mesh.uuid is this.uuid
+            if events.operation.key
 
-    #                 composer.outlinePass.visibleEdgeColor.set redThree
-    #                 $("#canvas").css "cursor", "not-allowed"
+                if events.operation.mesh.uuid is this.uuid
 
-    #             else
+                    composer.outlinePass.visibleEdgeColor.set redThree
+                    $("#canvas").css "cursor", "not-allowed"
 
-    #                 composer.outlinePass.visibleEdgeColor.set greenThree
-    #                 $("#canvas").css "cursor", "copy"
+                else
 
-    #         else
+                    composer.outlinePass.visibleEdgeColor.set greenThree
+                    $("#canvas").css "cursor", "copy"
 
-    #             if this.getLock()
+            else
 
-    #                 composer.outlinePass.visibleEdgeColor.set redThree
-    #                 $("#canvas").css "cursor", "not-allowed"
+                if this.getLock()
 
-    #             else
+                    composer.outlinePass.visibleEdgeColor.set redThree
+                    $("#canvas").css "cursor", "not-allowed"
 
-    #                 composer.outlinePass.visibleEdgeColor.set blackThree
-    #                 $("#canvas").css "cursor", "grab"
+                else
 
-    #         composer.outlinePass.selectedObjects = [this]
+                    composer.outlinePass.visibleEdgeColor.set blackThree
+                    $("#canvas").css "cursor", "grab"
 
-    #     events.addEventListener this, "mouseout", (event) =>
+            composer.outlinePass.selectedObjects = [this]
 
-    #         composer.outlinePass.selectedObjects = []
+        events.addEventListener this, "mouseout", (event) =>
 
-    #         if events.operation.key
+            composer.outlinePass.selectedObjects = []
 
-    #             $("#canvas").css "cursor", "copy"
+            if events.operation.key
 
-    #         else
+                $("#canvas").css "cursor", "copy"
 
-    #             $("#canvas").css "cursor", ""
+            else
 
-    #         metabox.hide()
+                $("#canvas").css "cursor", ""
 
-    #     events.addEventListener this, "mousedown", (event) =>
+            metabox.hide()
 
-    #         if not this.getLock()
+        events.addEventListener this, "mousedown", (event) =>
 
-    #             this.dragable event.origDomEvent
+            this.dragable event.origDomEvent
 
-    #     events.addEventListener this, "click", (event) =>
+        events.addEventListener this, "click", (event) =>
 
-    #         event.origDomEvent.stopImmediatePropagation()
+            event.origDomEvent.stopImmediatePropagation()
 
-    #         if not camera.dragged
+            if not camera.dragged
 
-    #             if events.operation.key
+                if events.operation.key
 
-    #                 this.morph events.operation.key, null, true
+                    this.morph events.operation.key, null, true
 
-    #             else if tooltips.getSelected() isnt this
+                else if tooltips.getSelected() isnt this
 
-    #                 tooltips.setSelected this
+                    tooltips.setSelected this
 
-    #     events.addEventListener this, "dblclick", (event) =>
+        events.addEventListener this, "dblclick", (event) =>
 
-    #         if camera.focus vectorAdaptor "convert", "length", this.position
+            if camera.focus this.getPosition()
 
-    #             $("#canvas").css "cursor", ""
+                $("#canvas").css "cursor", ""
 
-    #     events.addEventListener this, "contextmenu", (event) =>
+        events.addEventListener this, "contextmenu", (event) =>
 
-    #         panels.context.add "mesh", this, event.origDomEvent
+            panels.context.add "mesh", this, event.origDomEvent
 
-    # removeEvents: ->
+        return this
 
-    #     events.removeEventListener this, "mouseover"
-    #     events.removeEventListener this, "mousemove"
-    #     events.removeEventListener this, "mouseout"
-    #     events.removeEventListener this, "mousedown"
+    removeEvents: ->
 
-    #     events.removeEventListener this, "click"
-    #     events.removeEventListener this, "dblclick"
-    #     events.removeEventListener this, "contextmenu"
+        events.removeEventListener this, "mouseover"
+        events.removeEventListener this, "mousemove"
+        events.removeEventListener this, "mouseout"
+        events.removeEventListener this, "mousedown"
 
-    # dragable: (origEvent) ->
+        events.removeEventListener this, "click"
+        events.removeEventListener this, "dblclick"
+        events.removeEventListener this, "contextmenu"
 
-    #     xOffset = 0
-    #     yOffset = 0
+        return this
 
-    #     dragged = null
-    #     element = this
+    dragable: (origDomEvent, save = true) ->
 
-    #     max = 100 * 3
-    #     min = -100 * 3
+        xOffset = 0
+        yOffset = 0
 
-    #     start = (event) =>
+        start = (event) =>
 
-    #         # event.stopPropagation()
+            coordinates = d3$d2 this.position.x, this.position.y, this.position.z
 
-    #         if element.type is "Mesh" and not element.getLock()
+            xOffset = origDomEvent.clientX - coordinates.x
+            yOffset = origDomEvent.clientY - coordinates.y
 
-    #             coordinates = d3$d2 element.position.x, element.position.y, element.position.z
+            $("#canvas").css "cursor", "grabbing"
 
-    #             xOffset = origEvent.clientX - coordinates.x
-    #             yOffset = origEvent.clientY - coordinates.y
+            document.onmousemove = drag
+            document.onmouseup = stop
 
-    #             $("#canvas").css "cursor", "grabbing"
+            this.dragged = null
 
-    #         document.onmousemove = drag
-    #         document.onmouseup = stop
+        drag = (event) =>
 
-    #     drag = (event) =>
+            this.dragged = true
 
-    #         dragged = true
+            eventX = event.clientX - xOffset
+            eventY = event.clientY - yOffset
 
-    #         # event.stopPropagation()
+            $("#canvas").css "cursor", "grabbing"
 
-    #         eventX = event.clientX - xOffset
-    #         eventY = event.clientY - yOffset
+            coordinates = d2$d3 eventX, eventY, this.position.z
+            size = vectorAdaptor "invert", "length", printer.getSize()
 
-    #         if element.type is "Mesh" and not element.getLock()
+            this.position.x = if coordinates.x < -size.x then -size.x else if coordinates.x > size.x then size.x else coordinates.x
+            this.position.y = if coordinates.y < -size.y then -size.y else if coordinates.y > size.y then size.y else coordinates.y
+            this.position.z = if coordinates.z < -size.z then -size.z else if coordinates.z > size.z then size.z else coordinates.z
 
-    #             $("#canvas").css "cursor", "grabbing"
+            composer.outlinePass.visibleEdgeColor.set blackThree
+            composer.outlinePass.selectedObjects = [this]
 
-    #             panel = $ "#mesh." + element.uuid + ""
+            tooltips.guidelines.add this.getPosition()
 
-    #             coordinates = d2$d3 eventX, eventY, element.position.z
-    #             guidelines = settings.get ["tooltips", "guidelines"]
+            this.setPosition this.getPosition()
 
-    #             coordinates.x = if coordinates.x < min then min else if coordinates.x > max then max else coordinates.x
-    #             coordinates.y = if coordinates.y < min then min else if coordinates.y > max then max else coordinates.y
-    #             coordinates.z = if coordinates.z < min then min else if coordinates.z > max then max else coordinates.z
+        stop = (event) =>
 
-    #             if guidelines
+            $("#canvas").css "cursor", "grab"
 
-    #                 measurements = settings.get ["tooltips", "measurements"]
+            if save then this.save "update"
 
-    #                 for distanceLine in tooltips.distanceLines
+            tooltips.guidelines.remove()
 
-    #                     distanceLine.geometry.dispose()
-    #                     distanceLine.material.dispose()
+            document.onmousemove = null
+            document.onmouseup = null
 
-    #                     scene.remove distanceLine
+        if not this.getLock() and not events.operation.key then start()
 
-    #                 xColor = if measurements then redThree else blackThree
-    #                 yColor = if measurements then greenThree else blackThree
-    #                 zColor = if measurements then blueThree else blackThree
+        return this
 
-    #                 xDistanceLine = new Line vertices: [[0, coordinates.y, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], material: "dashed", color: xColor
-    #                 yDistanceLine = new Line vertices: [[coordinates.x, 0, coordinates.z], [coordinates.x, coordinates.y, coordinates.z]], material: "dashed", color: yColor
-    #                 zDistanceLine = new Line vertices: [[coordinates.x, coordinates.y, 0], [coordinates.x, coordinates.y, coordinates.z]], material: "dashed", color: zColor
+    morph: (key = null, value = null, save = false) ->
 
-    #                 tooltips.distanceLines.push xDistanceLine, yDistanceLine, zDistanceLine
-    #                 scene.add xDistanceLine, yDistanceLine, zDistanceLine
+        panel = $("#mesh." + this.uuid + "")
 
-    #                 if measurements
+        operationIcon = panel.find "#" + key + ".operation"
+        operationIcons = $ "#mesh.panel img.operation"
 
-    #                     $(".measurement.tooltip").remove()
+        operationIcons.toArray().forEach (icon) ->
 
-    #                     length = settings.get "scales.length"
-    #                     language =settings.get "general.language"
+            if not $(icon).hasClass "disabled"
 
-    #                     xDistanceLineCenter = getCenterPoint xDistanceLine.geometry.vertices[0], xDistanceLine.geometry.vertices[1]
-    #                     yDistanceLineCenter = getCenterPoint yDistanceLine.geometry.vertices[0], yDistanceLine.geometry.vertices[1]
-    #                     zDistanceLineCenter = getCenterPoint zDistanceLine.geometry.vertices[0], zDistanceLine.geometry.vertices[1]
+                $(icon).attr "src", "/app/imgs/panels/ops/default/" + icon.id + ".png"
 
-    #                     xScreenCoordinates = d3$d2 xDistanceLineCenter.x, xDistanceLineCenter.y, xDistanceLineCenter.z
-    #                     yScreenCoordinates = d3$d2 yDistanceLineCenter.x, yDistanceLineCenter.y, yDistanceLineCenter.z
-    #                     zScreenCoordinates = d3$d2 zDistanceLineCenter.x, zDistanceLineCenter.y, zDistanceLineCenter.z
+        if value is "setup" and not this.getLock()
 
-    #                     measurements = [{key: "x", value: coordinates.x}, {key: "y", value: coordinates.y}, {key: "z", value: coordinates.z}].sort (a, b) -> Math.abs(a.value) - Math.abs(b.value)
+            operationIcon.attr "src", "/app/imgs/panels/ops/selected/" + key + ".png"
 
-    #                     for measurement in measurements
+            $("#canvas").css "cursor", "copy"
 
-    #                         $("body").append "<div id='" + measurement.key + "' class='measurement tooltip'><p>" + format(measurement.value, "length", length.unit[length.scale], 2, 2, language) + "</p></div>"
+            events.operation.mesh = this
+            events.operation.key = key
 
-    #                     $("body").find("#x.measurement.tooltip").css("left", xScreenCoordinates.x).css("top", xScreenCoordinates.y)
-    #                     $("body").find("#y.measurement.tooltip").css("left", yScreenCoordinates.x).css("top", yScreenCoordinates.y)
-    #                     $("body").find("#z.measurement.tooltip").css("left", zScreenCoordinates.x).css("top", zScreenCoordinates.y)
+        else if events.operation.key and not camera.dragged
 
-    #             panel.find("#position-x input").val coordinates.x.toFixed 2
-    #             panel.find("#position-y input").val coordinates.y.toFixed 2
+            if events.operation.mesh.uuid isnt this.uuid
 
-    #             composer.outlinePass.visibleEdgeColor.set blackThree
-    #             composer.outlinePass.selectedObjects = [element]
+                morphed = morph key, events.operation.mesh, this
 
-    #             element.position.x = coordinates.x
-    #             element.position.y = coordinates.y
+                if morphed
 
-    #     stop = (event) =>
+                    morphed.geometry = new Geometry "custom", geometry: morphed.geometry
+                    events.operation.mesh.class = "custom"
 
-    #         # event.stopPropagation()
+                    events.operation.mesh.geometry = morphed.geometry.clone()
+                    events.operation.mesh.matrix = morphed.matrix.clone()
 
-    #         if element.type is "Mesh" and not element.getLock()
+                    events.operation.mesh.position.x = morphed.position.x
+                    events.operation.mesh.position.y = morphed.position.y
+                    events.operation.mesh.position.z = morphed.position.z
 
-    #             if settings.get ["tooltips", "guidelines"]
+                    events.operation.mesh.rotation.x = morphed.rotation.x
+                    events.operation.mesh.rotation.y = morphed.rotation.y
+                    events.operation.mesh.rotation.z = morphed.rotation.z
 
-    #                 for distanceLine in tooltips.distanceLines
+                    events.operation.mesh.scale.x = morphed.scale.x
+                    events.operation.mesh.scale.y = morphed.scale.y
+                    events.operation.mesh.scale.z = morphed.scale.z
 
-    #                     distanceLine.geometry.dispose()
-    #                     distanceLine.material.dispose()
+                    events.operation.mesh.updateMetrics()
+                    localStore.updateMesh events.operation.mesh
 
-    #                     scene.remove distanceLine
+                    $("#mesh." + events.operation.mesh.uuid + " #properties.controls").remove()
 
-    #                 if settings.get ["tooltips", "measurements"]
+            $("#canvas").css "cursor", ""
 
-    #                     $(".measurement.tooltip").remove()
+            events.operation.mesh = null
+            events.operation.key = null
 
-    #             $("#canvas").css "cursor", "grab"
+        return this
 
-    #             localStore.updateMesh element
+    getName: ->
 
-    #             tooltips.distanceLines = []
+        return this.name
 
-    #         document.onmousemove = null
-    #         document.onmouseup = null
+    setName: (key = null, value = null, save = false) ->
 
-    #         dragged = null
+        if not this.getLock()
 
-    #     if element.type isnt "Mesh" then element.mousedown start else if not events.operation.key then start() else null
+            value = value.trim()
 
-    # morph: (key = null, value = null, save = false) ->
+            this.name = value
 
-    #     panel = $("#mesh." + this.uuid + "")
+            if save then this.save "update"
 
-    #     operationIcon = panel.find "#" + key + ".operation"
-    #     operationIcons = $ "#mesh.panel img.operation"
+            meshPanelName = $ "#mesh." + this.uuid + " #name span"
+            meshesPanelName = $ "#meshes.table tr#" + this.uuid + " .name span"
 
-    #     operationIcons.toArray().forEach (icon) ->
+            if meshPanelName[0] and key isnt "mesh" then meshPanelName[0].innerText = value
+            if meshesPanelName[0] and key isnt "meshes" then meshesPanelName[0].innerText = value
 
-    #         if not $(icon).hasClass "disabled"
+            if value is "" and key isnt "mesh" then meshPanelName.css("display", "none") else meshPanelName.css("display", "block")
 
-    #             $(icon).attr "src", "/app/imgs/panels/ops/default/" + icon.id + ".png"
+        return this
 
-    #     if value is "setup" and not this.getLock()
+    getLock: ->
 
-    #         operationIcon.attr "src", "/app/imgs/panels/ops/selected/" + key + ".png"
+        return this.lock
 
-    #         $("#canvas").css "cursor", "copy"
+    setLock: (lock, save = true) ->
 
-    #         events.operation.mesh = this
-    #         events.operation.key = key
+        this.lock = Boolean lock
 
-    #     else if events.operation.key and not camera.dragged
+        meshPanel = $("#mesh." + this.uuid + "")
+        meshesTableRow = $("#meshes.table tr#" + this.uuid + "")
 
-    #         if events.operation.mesh.uuid isnt this.uuid
+        if this.getLock()
 
-    #             morphed = morph key, events.operation.mesh, this
+            composer.outlinePass.visibleEdgeColor.set redThree
 
-    #             if morphed
+            if this is events.operation.mesh then events.clearCSG()
 
-    #                 morphed.geometry = new Geometry "custom", geometry: morphed.geometry
-    #                 events.operation.mesh.class = "custom"
+            meshPanel.find("#join.operation").attr "src", "/app/imgs/panels/ops/disabled/join.png"
+            meshPanel.find("#cut.operation").attr "src", "/app/imgs/panels/ops/disabled/cut.png"
+            meshPanel.find("#intersect.operation").attr "src", "/app/imgs/panels/ops/disabled/intersect.png"
 
-    #                 events.operation.mesh.geometry = morphed.geometry.clone()
-    #                 events.operation.mesh.matrix = morphed.matrix.clone()
+            meshPanel.find("#name span").addClass "disabled"
+            meshPanel.find(".operation").addClass "disabled"
+            meshPanel.find(".color").addClass "disabled"
 
-    #                 events.operation.mesh.position.x = morphed.position.x
-    #                 events.operation.mesh.position.y = morphed.position.y
-    #                 events.operation.mesh.position.z = morphed.position.z
-    #                 events.operation.mesh.rotation.x = morphed.rotation.x
-    #                 events.operation.mesh.rotation.y = morphed.rotation.y
-    #                 events.operation.mesh.rotation.z = morphed.rotation.z
-    #                 events.operation.mesh.scale.x = morphed.scale.x
-    #                 events.operation.mesh.scale.y = morphed.scale.y
-    #                 events.operation.mesh.scale.z = morphed.scale.z
+            meshPanel.find("#eye").addClass "disabled"
+            meshPanel.find("#visibility").addClass("disabled").slider "disable"
+            meshPanel.find("#lock").attr "src", "/app/imgs/panels/lock/locked.png"
+            meshPanel.find("#trash").addClass "disabled"
 
-    #                 events.operation.mesh.updateMetrics()
-    #                 localStore.updateMesh events.operation.mesh
+            sliderStyle meshPanel.find "#visibility"
 
-    #                 $("#mesh." + events.operation.mesh.uuid + " #properties.controls").remove()
+            meshPanel.find("input").addClass "disabled"
+            meshPanel.find("button").addClass "disabled"
 
-    #         $("#canvas").css "cursor", ""
+            meshesTableRow.find(".name span").addClass "disabled"
+            meshesTableRow.find(".lock").attr "src", "/app/imgs/panels/lock/locked.png"
+            meshesTableRow.find(".trash").addClass "disabled"
 
-    #         events.operation.mesh = null
-    #         events.operation.key = null
+        else
 
-    # getName: ->
+            composer.outlinePass.visibleEdgeColor.set blackThree
 
-    #     return this.name
+            meshPanel.find("#join.operation").attr "src", "/app/imgs/panels/ops/default/join.png"
+            meshPanel.find("#cut.operation").attr "src", "/app/imgs/panels/ops/default/cut.png"
+            meshPanel.find("#intersect.operation").attr "src", "/app/imgs/panels/ops/default/intersect.png"
 
-    # setName: (key = null, value = null, save = false) ->
+            meshPanel.find("#name span").removeClass "disabled"
+            meshPanel.find(".operation").removeClass "disabled"
+            meshPanel.find(".color").removeClass "disabled"
 
-    #     if not this.getLock()
+            meshPanel.find("#eye").removeClass "disabled"
+            meshPanel.find("#visibility").removeClass("disabled").slider "enable"
+            meshPanel.find("#lock").attr "src", "/app/imgs/panels/lock/unlocked.png"
+            meshPanel.find("#trash").removeClass "disabled"
 
-    #         value = value.trim()
+            sliderStyle meshPanel.find "#visibility"
 
-    #         this.name = value
+            meshPanel.find("input").removeClass "disabled"
+            meshPanel.find("button").removeClass "disabled"
 
-    #         if save then this.save "update"
+            meshesTableRow.find(".name span").removeClass "disabled"
+            meshesTableRow.find(".lock").attr "src", "/app/imgs/panels/lock/unlocked.png"
+            meshesTableRow.find(".trash").removeClass "disabled"
 
-    #         meshPanelName = $ "#mesh." + this.uuid + " #name span"
-    #         meshesPanelName = $ "#meshes.table tr#" + this.uuid + " .name span"
+        if save then this.save "update"
 
-    #         if meshPanelName[0] and key isnt "mesh" then meshPanelName[0].innerText = value
-    #         if meshesPanelName[0] and key isnt "meshes" then meshesPanelName[0].innerText = value
+        return this
 
-    #         if value is "" and key isnt "mesh" then meshPanelName.css("display", "none") else meshPanelName.css("display", "block")
+    toggleLock: ->
 
-    # getLock: ->
+        this.setLock not this.getLock()
 
-    #     return this.lock
+        return this
 
-    # setLock: (lock, save = true) ->
+    getColor: ->
 
-    #     this.lock = Boolean lock
+        return clone this.material.getColor()
 
-    #     meshPanel = $("#mesh." + this.uuid + "")
-    #     meshesTableRow = $("#meshes.table tr#" + this.uuid + "")
+    setColor: (color = blackThree, save = true) ->
 
-    #     if this.getLock()
+        if not this.getLock()
 
-    #         composer.outlinePass.visibleEdgeColor.set redThree
+            this.params.color = color
 
-    #         if this is events.operation.mesh then events.clearCSG()
+            depthMaterial = this.params.material is "depth"
+            normalMaterial = this.params.material is "normal"
+            distanceMaterial = this.params.material is "distance"
 
-    #         meshPanel.find("#join.operation").attr "src", "/app/imgs/panels/ops/disabled/join.png"
-    #         meshPanel.find("#cut.operation").attr "src", "/app/imgs/panels/ops/disabled/cut.png"
-    #         meshPanel.find("#intersect.operation").attr "src", "/app/imgs/panels/ops/disabled/intersect.png"
+            if depthMaterial or normalMaterial or distanceMaterial
 
-    #         meshPanel.find("#name span").addClass "disabled"
-    #         meshPanel.find(".operation").addClass "disabled"
-    #         meshPanel.find(".color").addClass "disabled"
+                this.setMaterial "standard", false
 
-    #         meshPanel.find("#eye").addClass "disabled"
-    #         meshPanel.find("#visibility").addClass("disabled").slider "disable"
-    #         meshPanel.find("#lock").attr "src", "/app/imgs/panels/lock/locked.png"
-    #         meshPanel.find("#trash").addClass "disabled"
+            if this.params.color is "multi"
 
-    #         sliderStyle meshPanel.find "#visibility"
+                this.setMaterial "normal", false
 
-    #         meshPanel.find("input").addClass "disabled"
-    #         meshPanel.find("button").addClass "disabled"
+            this.material.setColor this.params.color
 
-    #         meshesTableRow.find(".name span").addClass "disabled"
-    #         meshesTableRow.find(".lock").attr "src", "/app/imgs/panels/lock/locked.png"
-    #         meshesTableRow.find(".trash").addClass "disabled"
+            if save then this.save "update"
 
-    #     else
+        return this
 
-    #         composer.outlinePass.visibleEdgeColor.set blackThree
+    getTransparent: ->
 
-    #         meshPanel.find("#join.operation").attr "src", "/app/imgs/panels/ops/default/join.png"
-    #         meshPanel.find("#cut.operation").attr "src", "/app/imgs/panels/ops/default/cut.png"
-    #         meshPanel.find("#intersect.operation").attr "src", "/app/imgs/panels/ops/default/intersect.png"
+        return clone this.material.getTransparent()
 
-    #         meshPanel.find("#name span").removeClass "disabled"
-    #         meshPanel.find(".operation").removeClass "disabled"
-    #         meshPanel.find(".color").removeClass "disabled"
+    setTransparent: (transparent = true, save = true) ->
 
-    #         meshPanel.find("#eye").removeClass "disabled"
-    #         meshPanel.find("#visibility").removeClass("disabled").slider "enable"
-    #         meshPanel.find("#lock").attr "src", "/app/imgs/panels/lock/unlocked.png"
-    #         meshPanel.find("#trash").removeClass "disabled"
+        if not this.getLock()
 
-    #         sliderStyle meshPanel.find "#visibility"
+            this.params.transparent = Boolean transparent
+            this.material.setTransparent this.params.transparent
 
-    #         meshPanel.find("input").removeClass "disabled"
-    #         meshPanel.find("button").removeClass "disabled"
+            # panel stuff here
 
-    #         meshesTableRow.find(".name span").removeClass "disabled"
-    #         meshesTableRow.find(".lock").attr "src", "/app/imgs/panels/lock/unlocked.png"
-    #         meshesTableRow.find(".trash").removeClass "disabled"
+            if save then this.save "update"
 
-    #     if save then this.save "update"
+        return this
 
-    # toggleLock: ->
+    getOpacity: ->
 
-    #     this.setLock not this.getLock()
+        return clone this.material.getOpacity()
 
-    # getColor: ->
+    setOpacity: (opacity = 100, save = true) ->
 
-    #     return clone this.material.getColor()
+        if not this.getLock()
 
-    # setColor: (color = blackThree, save = true) ->
+            this.params.opacity = Number opacity
+            this.material.setOpacity this.params.opacity
 
-    #     if not this.getLock()
+            # panel = $("#mesh." + this.uuid + "")
+            # slider = panel.find "#visibility.slider"
+            # visibility = if opacity < 50 then "hidden" else "visible"
 
-    #         this.params.color = color
+            # panel.find("#eye").attr "src", "/app/imgs/panels/visibility/" + visibility + ".png"
 
-    #         depthMaterial = this.params.material is "depth"
-    #         normalMaterial = this.params.material is "normal"
-    #         distanceMaterial = this.params.material is "distance"
+            # slider.slider "value", opacity
+            # sliderFill slider
 
-    #         if depthMaterial or normalMaterial or distanceMaterial
+            if save then this.save "update"
 
-    #             this.setMaterial "standard", false
+        return this
 
-    #         if this.params.color is "multi"
+    getPosition: ->
 
-    #             this.setMaterial "normal", false
+        return vectorAdaptor "convert", "length", clone this.position
 
-    #         this.material.setColor this.params.color
+    setPosition: (position, save = true) ->
 
-    #         if save then this.save "update"
+        if not this.getLock()
 
-    # getTransparent: ->
+            if this.panel then this.panel.setPosition position
 
-    #     return clone this.material.getTransparent()
+            this.position.x = adaptor "invert", "length", position.x
+            this.position.y = adaptor "invert", "length", position.y
+            this.position.z = adaptor "invert", "length", position.z
 
-    # setTransparent: (transparent = true, save = true) ->
+            if save then this.save "update"
 
-    #     if not this.getLock()
+        return this
 
-    #         this.params.transparent = Boolean transparent
-    #         this.material.setTransparent this.params.transparent
+    getPositionX: ->
 
-    #         # panel stuff here
+        return adaptor "convert", "length", clone this.position.x
 
-    #         if save then this.save "update"
+    setPositionX: (x, save = true) ->
 
-    # getOpacity: ->
+        if not this.getLock()
 
-    #     return clone this.material.getOpacity()
+            # if this.panel then this.panel.setPositionX x
 
-    # setOpacity: (opacity = 100, save = true) ->
+            this.position.x = adaptor "invert", "length", x
 
-    #     if not this.getLock()
+            if save then this.save "update"
 
-    #         this.params.opacity = Number opacity
-    #         this.material.setOpacity this.params.opacity
+        return this
 
-    #         # panel = $("#mesh." + this.uuid + "")
-    #         # slider = panel.find "#visibility.slider"
-    #         # visibility = if opacity < 50 then "hidden" else "visible"
+    getPositionY: ->
 
-    #         # panel.find("#eye").attr "src", "/app/imgs/panels/visibility/" + visibility + ".png"
+        return adaptor "convert", "length", clone this.position.y
 
-    #         # slider.slider "value", opacity
-    #         # sliderFill slider
+    setPositionY: (y, save = true) ->
 
-    #         if save then this.save "update"
+        if not this.getLock()
 
-    # getPosition: ->
+            # if this.panel then this.panel.setPositionY y
 
-    #     return clone this.position
+            this.position.y = adaptor "invert", "length", y
 
-    # setPosition: (position, save = true) ->
+            if save then this.save "update"
 
-    #     if not this.getLock()
+        return this
 
-    #         this.position.x = position.x
-    #         this.position.y = position.y
-    #         this.position.z = position.z
+    getPositionZ: ->
 
-    #         this.updateMatrix()
+        return adaptor "convert", "length", clone this.position.z
 
-    #         if save then this.save "update"
+    setPositionZ: (z, save = true) ->
 
-    # getRotation: ->
+        if not this.getLock()
 
-    #     return clone this.rotation
+            # if this.panel then this.panel.setPositionZ z
 
-    # setRotation: (rotation, save = true) ->
+            this.position.z = adaptor "invert", "length", z
 
-    #     if not this.getLock()
+            if save then this.save "update"
 
-    #         this.rotation.x = rotation.x
-    #         this.rotation.y = rotation.y
-    #         this.rotation.z = rotation.z
+        return this
 
-    #         this.updateMatrix()
+    getRotation: ->
 
-    #         if save then this.save "update"
+        return clone this.rotation
 
-    # getScale: ->
+    setRotation: (rotation, save = true) ->
 
-    #     return clone this.scale
+        if not this.getLock()
 
-    # setScale: (scale, save = true) ->
+            this.rotation.x = rotation.x
+            this.rotation.y = rotation.y
+            this.rotation.z = rotation.z
 
-    #     if not this.getLock()
+            this.updateMatrix()
 
-    #         this.scale.x = scale.x
-    #         this.scale.y = scale.y
-    #         this.scale.z = scale.z
+            if save then this.save "update"
 
-    #         this.updateMetrics()
+        return this
 
-    #         if save then this.save "update"
+    getRotationX: ->
 
-    # updateMetrics: ->
+        return clone this.rotation.x
 
-    #     this.updateMatrix()
+    setRotationX: (x, save = true) ->
 
-    #     this.geometry.setVolume()
-    #     this.geometry.setSurface()
+        if not this.getLock()
 
-    #     panel = $ "#mesh." + this.uuid + ""
-    #     controls = panel.find "#meta.controls"
+            this.rotation.x = x
 
-    #     controls.find("#type span").text this.class.replace("-", " ").replace(/\b\w/g, (char) -> return char.toUpperCase())
-    #     controls.find("#surface span").text this.geometry.surface.toFixed 2
-    #     controls.find("#volume span").text this.geometry.volume.toFixed 2
+            this.updateMatrix()
 
-    # save: (method) ->
+            if save then this.save "update"
 
-    #     storage = if client then serverStore else localStore
+        return this
 
-    #     switch method
+    getRotationY: ->
 
-    #         when "add"
+        return clone this.rotation.x
 
-    #             storage.addMesh this
+    setRotationY: (y, save = true) ->
 
-    #         when "update"
+        if not this.getLock()
 
-    #             storage.updateMesh this
+            this.rotation.y = y
 
-    #         when "remove"
+            this.updateMatrix()
 
-    #             storage.removeMesh this
+            if save then this.save "update"
+
+        return this
+
+    getRotationZ: ->
+
+        return clone this.rotation.x
+
+    setRotationZ: (z, save = true) ->
+
+        if not this.getLock()
+
+            this.rotation.z = z
+
+            this.updateMatrix()
+
+            if save then this.save "update"
+
+        return this
+
+    getScale: ->
+
+        scale = clone this.scale
+
+        scale.x *= 100
+        scale.y *= 100
+        scale.z *= 100
+
+        return scale
+
+    setScale: (scale, save = true) ->
+
+        if not this.getLock()
+
+            this.scale.x = scale.x / 100
+            this.scale.y = scale.y / 100
+            this.scale.z = scale.z / 100
+
+            this.updateMetrics()
+
+            if save then this.save "update"
+
+        return this
+
+    getScaleX: ->
+
+        return clone this.scale.x * 100
+
+    setScaleX: (x, save = true) ->
+
+        if not this.getLock()
+
+            this.scale.x = x / 100
+
+            this.updateMetrics()
+
+            if save then this.save "update"
+
+        return this
+
+    getScaleY: ->
+
+        return clone this.scale.y * 100
+
+    setScaleY: (y, save = true) ->
+
+        if not this.getLock()
+
+            this.scale.y = y / 100
+
+            this.updateMetrics()
+
+            if save then this.save "update"
+
+        return this
+
+    getScaleZ: ->
+
+        return clone this.scale.z * 100
+
+    setScaleZ: (z, save = true) ->
+
+        if not this.getLock()
+
+            this.scale.z = z / 100
+
+            this.updateMetrics()
+
+            if save then this.save "update"
+
+        return this
+
+    updateMetrics: ->
+
+        this.updateMatrix()
+
+        this.geometry.setVolume()
+        this.geometry.setSurface()
+
+        panel = $ "#mesh." + this.uuid + ""
+        controls = panel.find "#meta.controls"
+
+        controls.find("#type span").text this.class.replace("-", " ").replace(/\b\w/g, (char) -> return char.toUpperCase())
+        controls.find("#surface span").text this.geometry.surface.toFixed 2
+        controls.find("#volume span").text this.geometry.volume.toFixed 2
+
+        return this
+
+    save: (method) ->
+
+        this.updateMatrix()
+
+        storage = if client then serverStore else localStore
+
+        switch method
+
+            when "add"
+
+                storage.addMesh this
+
+            when "update"
+
+                storage.updateMesh this
+
+            when "remove"
+
+                storage.removeMesh this
+
+        return this

@@ -1,0 +1,124 @@
+@import "../../colors/glass/grayscale.sass"
+@import "../../colors/glass/rainbow.sass"
+
+@import "../../colors/solid/grayscale.sass"
+@import "../../colors/solid/rainbow.sass"
+
+#meshes.panel
+
+    visibility: visible
+
+    top: 50%
+    left: calc(100% - 10px)
+
+    transform: translate(-100%, -50%)
+
+    h3, #none
+
+        margin: 10px
+
+        text-align: center
+
+    div.table
+
+        margin: 10px
+        display: none
+
+        overflow: scroll
+        max-height: 256px
+
+        table
+
+            border-collapse: collapse
+
+            thead
+
+                top: 0px
+
+                position: sticky
+
+            tbody
+
+                clip-path: inset(0px 0px 0px 0px)
+
+                tr:nth-child(odd)
+
+                    background: $gray-glass
+
+                tr:hover
+
+                    background: $dark-gray-glass
+
+            th, td
+
+                padding: 5px
+
+                border: 1px solid $black-solid
+
+                border-top: 0
+                border-bottom: 0
+
+            tr td:first-child,
+            tr th:first-child
+
+                border-left: 0
+
+            tr td:last-child,
+            tr th:last-child
+
+                border-right: 0
+
+            tr
+
+                text-align: center
+
+            p.name
+
+                max-width: 150px
+                text-align: left
+
+                span
+
+                    cursor: text
+                    outline: none
+
+                    display: block
+                    overflow: hidden
+
+                    white-space: pre
+
+                span.disabled
+
+                    cursor: not-allowed
+
+            img
+
+                margin: auto
+                display: block
+
+            img.settings
+
+                width: 50px
+                height: 20px
+
+            img.lock
+
+                width: 22.5px
+                height: 22.5px
+
+            img.trash
+
+                width: 16.5px
+                height: 22.5px
+
+            img.disabled
+
+                opacity: 0.5
+
+            img:hover
+
+                cursor: pointer
+
+            img.disabled:hover
+
+                cursor: not-allowed
