@@ -4,9 +4,7 @@ class LineMaterial
 
     constructor: (type, params = {}) ->
 
-        @type = lower type.trim()
-
-        switch this.type
+        switch type.lower()
 
             when "dashed"
 
@@ -24,12 +22,101 @@ class LineMaterial
 
                 @material = params.material
 
-        if this.material
+        this.material.getColor = this.getColor
+        this.material.setColor = this.setColor
 
-            this.material.transparent = true
+        this.material.getTransparent = this.getTransparent
+        this.material.setTransparent = this.setTransparent
 
-            if this.type is "stroke"
+        this.material.getOpacity = this.getOpacity
+        this.material.setOpacity = this.setOpacity
 
-                this.material.resolution.set window.innerWidth, window.innerHeight
+        this.material.getLinewidth = this.getLinewidth
+        this.material.setLinewidth = this.setLinewidth
+
+        this.material.getDashed = this.getDashed
+        this.material.setDashed = this.setDashed
+
+        this.material.getDashSize = this.getDashSize
+        this.material.setDashSize = this.setDashSize
+
+        this.material.getGapSize = this.getGapSize
+        this.material.setGapSize = this.setGapSize
 
         return this.material
+
+    getColor: ->
+
+        return clone this.color
+
+    setColor: (color = blackThree) ->
+
+        if color instanceof THREE.Color
+
+            this.color = color
+
+        else
+
+            this.color = new THREE.Color color
+
+        return this
+
+    getTransparent: ->
+
+        return clone this.transparent
+
+    setTransparent: (transparent = true) ->
+
+        this.transparent = Boolean transparent
+
+        return this
+
+    getOpacity: ->
+
+        return clone this.opacity * 100
+
+    setOpacity: (opacity = 100) ->
+
+        this.opacity = Number opacity / 100
+
+        return this
+
+    getLinewidth: ->
+
+        return clone this.linewidth
+
+    setLinewidth: (linewidth = 1) ->
+
+        this.linewidth = Number linewidth
+
+        return this
+
+    getDashed: ->
+
+        return clone this.dashed
+
+    setDashed: (dashed = false) ->
+
+        this.dashed = Boolean dashed
+
+        return this
+
+    getDashSize: ->
+
+        return adaptor "convert", "length", clone this.dashSize
+
+    setDashSize: (dashSize = adaptor "convert", "length", 3) ->
+
+        this.dashSize = adaptor "invert", "length", Number dashSize
+
+        return this
+
+    getGapSize: ->
+
+        return adaptor "convert", "length", clone this.gapSize
+
+    setGapSize: (gapSize = adaptor "convert", "length", 2) ->
+
+        this.gapSize = adaptor "invert", "length", Number gapSize
+
+        return this

@@ -15,9 +15,10 @@ class POLY.PentagonalPyramidMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.rotation.x = deg$rad 90
+        this.class = params.class ?= "pentagonal-pyramid"
+        this.name = params.name ?= "Pentagonal Pyramid"
 
-        this.class = "pentagonal-pyramid"
-        this.name = "Pentagonal Pyramid"
+        this.rotation.x = deg$rad 90
+        this.rotation.y = deg$rad 90
 
         return this

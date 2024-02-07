@@ -15,7 +15,7 @@ class POLY.PentagonalPrismMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.class = "pentagonal-prism"
-        this.name = "Pentagonal Prism"
+        this.class = params.class ?= "pentagonal-prism"
+        this.name = params.name ?= "Pentagonal Prism"
 
         return this

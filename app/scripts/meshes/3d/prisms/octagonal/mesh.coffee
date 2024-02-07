@@ -15,7 +15,7 @@ class POLY.OctagonalPrismMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.class = "octagonal-prism"
-        this.name = "Octagonal Prism"
+        this.class = params.class ?= "octagonal-prism"
+        this.name = params.name ?= "Octagonal Prism"
 
         return this

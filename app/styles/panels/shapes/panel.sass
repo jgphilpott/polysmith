@@ -1,0 +1,74 @@
+@import "../../colors/glass/grayscale.sass"
+@import "../../colors/glass/rainbow.sass"
+
+@import "../../colors/solid/grayscale.sass"
+@import "../../colors/solid/rainbow.sass"
+
+#shapes.panel
+
+    visibility: hidden
+
+    top: 47%
+    left: 50%
+
+    width: 455px
+
+    transform: translate(-50%, -50%)
+
+    h3
+
+        margin: 10px
+
+        text-align: center
+
+    img.reset
+
+        top: 0px
+        right: 0px
+
+        margin: 7px
+
+        width: 14px
+        height: 14px
+
+        cursor: pointer
+
+        position: fixed
+
+    .category
+
+        .head
+
+            display: flex
+            align-items: center
+
+            img.fold
+
+                width: 10px
+                height: 15px
+
+                padding: 3px
+
+            h4
+
+                margin: 5px
+
+            img.fold:hover,
+            h4:hover
+
+                cursor: pointer
+
+        .body
+
+            display: none
+
+            img.shape
+
+                width: 50px
+                height: 50px
+
+                margin: 10px
+
+            img.shape:hover
+
+                cursor: pointer

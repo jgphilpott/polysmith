@@ -15,7 +15,7 @@ class POLY.PentagonMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.class = "pentagon"
-        this.name = "Pentagon"
+        this.class = params.class ?= "pentagon"
+        this.name = params.name ?= "Pentagon"
 
         return this

@@ -15,7 +15,7 @@ class POLY.HexagonalPrismMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.class = "hexagonal-prism"
-        this.name = "Hexagonal Prism"
+        this.class = params.class ?= "hexagonal-prism"
+        this.name = params.name ?= "Hexagonal Prism"
 
         return this

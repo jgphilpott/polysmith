@@ -1,4 +1,4 @@
-# Link: https://github.com/mrdoob/three.js/tree/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/exporters
+# Link: https://github.com/mrdoob/three.js/tree/309b00afb6dcbc5e6c58e72f10eaa8d2e8888c83/examples/js/exporters
 
 class Exporter
 
@@ -9,9 +9,7 @@ class Exporter
 
     exportFile: (type = "") ->
 
-        type = lower type.trim()
-
-        switch type
+        switch type.lower()
 
             when "collada"
 
@@ -49,7 +47,7 @@ class Exporter
 
             if this.file
 
-                saveAs this.file, lower settings.getSetting("ui", "title") + "." + this.exporter.extension
+                saveAs this.file, (settings.get("ui.title") + "." + this.exporter.extension).lower()
 
             grid.add()
 

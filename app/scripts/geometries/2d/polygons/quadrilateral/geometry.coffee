@@ -8,29 +8,32 @@ class POLY.QuadrilateralBufferGeometry
 
     constructor: (params = {}) ->
 
-        angle = 360 / 4
-        radius = params.radius ?= 5
+        size = 4
+        vertices = []
+        angle = 360 / size
+        radius = params.radius ?= adaptor "convert", "length", 5
+
+        for index in [0...size]
+
+            point = circumpoint angle * index, radius
+
+            vertices.push [point[0], point[1], 0]
+
+        vertices = params.vertices ?= vertices
 
         geometry = new THREE.Geometry()
 
-        p0 = circumpoint angle * 0, radius
-        p1 = circumpoint angle * 1, radius
-        p2 = circumpoint angle * 2, radius
-        p3 = circumpoint angle * 3, radius
-
-        vertices = params.vertices ?= [
-            [p0[0], p0[1], 0]
-            [p1[0], p1[1], 0]
-            [p2[0], p2[1], 0]
-            [p3[0], p3[1], 0]
-        ]
-
         for vertex in vertices
+
+            vertex[0] = adaptor "invert", "length", vertex[0]
+            vertex[1] = adaptor "invert", "length", vertex[1]
+            vertex[2] = adaptor "invert", "length", vertex[2]
 
             geometry.vertices.push new THREE.Vector3 vertex[0], vertex[1], vertex[2]
 
-        geometry.faces.push new THREE.Face3 0, 1, 2
-        geometry.faces.push new THREE.Face3 0, 2, 3
+        for index in [1...size - 1]
+
+            geometry.faces.push new THREE.Face3 0, index, index + 1
 
         geometry.computeFaceNormals()
 

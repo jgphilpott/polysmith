@@ -6,14 +6,18 @@ labels: 'enhancement'
 assignees: jgphilpott
 ---
 
-**Is your feature request related to a problem? Please describe.**
+### Is your feature request related to a problem? Please describe:
+
 Add a clear and concise description of the problem.
 
-**Describe the solution you'd like to see.**
+### Describe the solution you'd like to see:
+
 Add a clear and concise description of what you want to happen.
 
-**Describe alternatives you've considered.**
+### Describe alternatives you've considered:
+
 Add a clear and concise description of any alternative solutions or features you've considered.
 
-**Additional Information.**
-Add any other information or screenshots about the feature request here.
+### Additional Information:
+
+Add any extra information about your feature request here.

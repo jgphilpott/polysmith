@@ -15,7 +15,7 @@ class POLY.OctahedronMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.class = "octahedron"
-        this.name = "Octahedron"
+        this.class = params.class ?= "octahedron"
+        this.name = params.name ?= "Octahedron"
 
         return this

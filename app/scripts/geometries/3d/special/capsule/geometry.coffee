@@ -12,11 +12,17 @@ class POLY.CapsuleBufferGeometry extends THREE.LatheBufferGeometry
 
         path = new THREE.Path()
 
-        radius = params.radius ?= 5
-        length = params.length ?= 5
+        length = adaptor "convert", "length", 5
+        radius = adaptor "convert", "length", 5
 
-        radialSegments = params.radialSegments ?= 42
+        length = params.length ?= length
+        radius = params.radius ?= radius
+
         capSegments = params.capSegments ?= 42
+        radialSegments = params.radialSegments ?= 42
+
+        length = adaptor "invert", "length", length
+        radius = adaptor "invert", "length", radius
 
         path.absarc 0, -length / 2, radius, Math.PI * 1.5, 0
         path.absarc 0, length / 2, radius, 0, Math.PI * 0.5
@@ -26,11 +32,3 @@ class POLY.CapsuleBufferGeometry extends THREE.LatheBufferGeometry
         super path, radialSegments
 
         this.type = "CapsuleBufferGeometry"
-
-        this.parameters =
-
-            radius: radius
-            length: length
-
-            radialSegments: radialSegments
-            capSegments: capSegments

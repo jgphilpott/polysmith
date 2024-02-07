@@ -15,7 +15,7 @@ class POLY.NonagonalPrismMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.class = "nonagonal-prism"
-        this.name = "Nonagonal Prism"
+        this.class = params.class ?= "nonagonal-prism"
+        this.name = params.name ?= "Nonagonal Prism"
 
         return this

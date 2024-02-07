@@ -15,7 +15,7 @@ class POLY.NonagonMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.class = "nonagon"
-        this.name = "Nonagon"
+        this.class = params.class ?= "nonagon"
+        this.name = params.name ?= "Nonagon"
 
         return this

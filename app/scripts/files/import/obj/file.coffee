@@ -1,4 +1,4 @@
-# Link: https://github.com/mrdoob/three.js/blob/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/loaders/OBJLoader.js
+# Link: https://github.com/mrdoob/three.js/blob/309b00afb6dcbc5e6c58e72f10eaa8d2e8888c83/examples/js/loaders/OBJLoader.js
 
 class OBJLoader extends THREE.OBJLoader
 
@@ -8,7 +8,7 @@ class OBJLoader extends THREE.OBJLoader
 
     import: (file) ->
 
-        objects = []
+        meshes = []
 
         file.traverse (property) ->
 
@@ -16,6 +16,6 @@ class OBJLoader extends THREE.OBJLoader
 
                 property.material = new MeshMaterial "normal"
 
-                objects.push property
+                meshes.push property
 
-        return objects
+        return meshes

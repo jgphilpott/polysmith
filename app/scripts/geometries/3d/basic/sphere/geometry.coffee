@@ -10,15 +10,29 @@ class POLY.SphereBufferGeometry extends THREE.SphereBufferGeometry
 
     constructor: (params = {}) ->
 
-        radius = params.radius ?= 5
+        radius = adaptor "convert", "length", 5
 
-        widthSegments = params.widthSegments ?= 42
-        heightSegments = params.heightSegments ?= 42
+        angleUnit = settings.get "scales.angle.unit"
+        thetaLength = convert.angle["radian"][angleUnit] Math.PI * 2
+        phiLength = convert.angle["radian"][angleUnit] Math.PI
 
-        phiStart = params.phiStart ?= 0
-        phiLength = params.phiLength ?= Math.PI * 2
+        radius = params.radius ?= radius
+
+        thetaSegments = params.thetaSegments ?= 42
+        phiSegments = params.phiSegments ?= 42
 
         thetaStart = params.thetaStart ?= 0
-        thetaLength = params.thetaLength ?= Math.PI
+        thetaLength = params.thetaLength ?= thetaLength
 
-        super radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength
+        phiStart = params.phiStart ?= 0
+        phiLength = params.phiLength ?= phiLength
+
+        radius = adaptor "invert", "length", radius
+
+        thetaStart = convert.angle[angleUnit]["radian"] thetaStart
+        thetaLength = convert.angle[angleUnit]["radian"] thetaLength
+
+        phiStart = convert.angle[angleUnit]["radian"] phiStart
+        phiLength = convert.angle[angleUnit]["radian"] phiLength
+
+        super radius, thetaSegments, phiSegments, thetaStart, thetaLength, phiStart, phiLength

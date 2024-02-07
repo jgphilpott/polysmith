@@ -10,17 +10,33 @@ class POLY.CylindricalPrismBufferGeometry extends THREE.CylinderBufferGeometry
 
     constructor: (params = {}) ->
 
-        length = params.length ?= 10
+        length = adaptor "convert", "length", 10
 
-        positiveRadius = params.positiveRadius ?= 5
-        negativeRadius = params.negativeRadius ?= 5
+        positiveRadius = adaptor "convert", "length", 5
+        negativeRadius = adaptor "convert", "length", 5
+
+        angleUnit = settings.get "scales.angle.unit"
+        thetaLength = convert.angle["radian"][angleUnit] Math.PI * 2
+
+        length = params.length ?= length
+
+        positiveRadius = params.positiveRadius ?= positiveRadius
+        negativeRadius = params.negativeRadius ?= negativeRadius
 
         radialSegments = params.radialSegments ?= 42
-        heightSegments = params.heightSegments ?= 1
+        lengthSegments = params.lengthSegments ?= 1
 
         openEnded = params.openEnded ?= false
 
         thetaStart = params.thetaStart ?= 0
-        thetaLength = params.thetaLength ?= Math.PI * 2
+        thetaLength = params.thetaLength ?= thetaLength
 
-        super positiveRadius, negativeRadius, length, radialSegments, heightSegments, openEnded, thetaStart, thetaLength
+        length = adaptor "invert", "length", length
+
+        positiveRadius = adaptor "invert", "length", positiveRadius
+        negativeRadius = adaptor "invert", "length", negativeRadius
+
+        thetaStart = convert.angle[angleUnit]["radian"] thetaStart
+        thetaLength = convert.angle[angleUnit]["radian"] thetaLength
+
+        super positiveRadius, negativeRadius, length, radialSegments, lengthSegments, openEnded, thetaStart, thetaLength

@@ -4,9 +4,7 @@ class MeshMaterial
 
     constructor: (type, params = {}) ->
 
-        @type = lower type.trim()
-
-        switch this.type
+        switch type.lower()
 
             when "basic"
 
@@ -52,18 +50,133 @@ class MeshMaterial
 
                 @material = params.material
 
-        if this.material
+        this.material.getColor = this.getColor
+        this.material.setColor = this.setColor
 
-            this.material.transparent = true
+        this.material.getTransparent = this.getTransparent
+        this.material.setTransparent = this.setTransparent
 
-            if equal this.material.color, blackThree
+        this.material.getOpacity = this.getOpacity
+        this.material.setOpacity = this.setOpacity
 
-                this.material.metalness = -25
-                this.material.roughness = 0.75
+        this.material.getMetalness = this.getMetalness
+        this.material.setMetalness = this.setMetalness
 
-            else
+        this.material.getRoughness = this.getRoughness
+        this.material.setRoughness = this.setRoughness
 
-                this.material.metalness = 0.5
-                this.material.roughness = 0.5
+        this.material.getReflectivity = this.getReflectivity
+        this.material.setReflectivity = this.setReflectivity
+
+        this.material.getTransmission = this.getTransmission
+        this.material.setTransmission = this.setTransmission
+
+        this.material.getWireframe = this.getWireframe
+        this.material.setWireframe = this.setWireframe
+
+        this.material.getSide = this.getSide
+        this.material.setSide = this.setSide
 
         return this.material
+
+    getColor: ->
+
+        return clone this.color
+
+    setColor: (color = blackThree) ->
+
+        if color instanceof THREE.Color
+
+            this.color = color
+
+        else
+
+            this.color = new THREE.Color color
+
+        return this
+
+    getTransparent: ->
+
+        return clone this.transparent
+
+    setTransparent: (transparent = true) ->
+
+        this.transparent = Boolean transparent
+
+        return this
+
+    getOpacity: ->
+
+        return clone this.opacity * 100
+
+    setOpacity: (opacity = 100) ->
+
+        this.opacity = Number opacity / 100
+
+        return this
+
+    getMetalness: ->
+
+        return clone this.metalness * 100
+
+    setMetalness: (metalness = 50) ->
+
+        this.metalness = Number metalness / 100
+
+        return this
+
+    getRoughness: ->
+
+        return clone this.roughness * 100
+
+    setRoughness: (roughness = 50) ->
+
+        this.roughness = Number roughness / 100
+
+        return this
+
+    getReflectivity: ->
+
+        return clone this.reflectivity * 100
+
+    setReflectivity: (reflectivity = 50) ->
+
+        this.reflectivity = Number reflectivity / 100
+
+        return this
+
+    getTransmission: ->
+
+        return clone this.transmission * 100
+
+    setTransmission: (transmission = 0) ->
+
+        this.transmission = Number transmission / 100
+
+        return this
+
+    getWireframe: ->
+
+        return clone this.wireframe
+
+    setWireframe: (wireframe = false) ->
+
+        this.wireframe = Boolean wireframe
+
+        return this
+
+    getSide: ->
+
+        return clone this.side
+
+    setSide: (side = THREE.DoubleSide) ->
+
+        if side is THREE.DoubleSide or side is THREE.FrontSide or side is THREE.BackSide
+
+            this.side = side
+
+        else
+
+            this.side = THREE.DoubleSide
+
+        return this

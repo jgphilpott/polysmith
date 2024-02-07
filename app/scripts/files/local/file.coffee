@@ -14,7 +14,7 @@ class LocalStorage
 
         if not result
 
-            console.warn "You have reached the maximum local storage allowance, some of your changes may not be saved. To access more storage space please signup and/or login."
+            warn "You have reached the maximum local storage allowance, some of your changes may not be saved. To access more storage space please signup and/or login."
 
             return false
 
@@ -28,7 +28,7 @@ class LocalStorage
 
         if not result
 
-            console.warn "There was an error attempting to read item in local storage with key: " + key
+            warn "There was an error attempting to read item in local storage with key: " + key
 
             return false
 
@@ -42,7 +42,7 @@ class LocalStorage
 
         if not result
 
-            console.warn "There was an error attempting to delete item in local storage with key: " + key
+            warn "There was an error attempting to delete item in local storage with key: " + key
 
             return false
 
@@ -79,7 +79,7 @@ class LocalStorage
         mesh = serializeMesh mesh
         meshes = this.read "meshes"
 
-        if not meshes.find (localMesh) -> localMesh.object.uuid is mesh.object.uuid
+        if not meshes.find (localMesh) => localMesh.object.uuid is mesh.object.uuid
 
             meshes.push mesh
 
@@ -90,7 +90,7 @@ class LocalStorage
         mesh = serializeMesh mesh
         meshes = this.read "meshes"
 
-        meshIndex = meshes.findIndex (localMesh) -> localMesh.object.uuid is mesh.object.uuid
+        meshIndex = meshes.findIndex (localMesh) => localMesh.object.uuid is mesh.object.uuid
 
         if meshIndex >= 0
 
@@ -103,6 +103,6 @@ class LocalStorage
         mesh = serializeMesh mesh
         meshes = this.read "meshes"
 
-        meshes.filterInPlace (localMesh) -> localMesh.object.uuid isnt mesh.object.uuid
+        meshes.exclude (localMesh) => localMesh.object.uuid is mesh.object.uuid
 
         this.write "meshes", meshes

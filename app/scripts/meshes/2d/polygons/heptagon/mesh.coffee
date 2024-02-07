@@ -15,7 +15,7 @@ class POLY.HeptagonMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.class = "heptagon"
-        this.name = "Heptagon"
+        this.class = params.class ?= "heptagon"
+        this.name = params.name ?= "Heptagon"
 
         return this

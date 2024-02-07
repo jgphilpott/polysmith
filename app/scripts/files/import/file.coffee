@@ -1,4 +1,4 @@
-# Link: https://github.com/mrdoob/three.js/tree/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/loaders
+# Link: https://github.com/mrdoob/three.js/tree/309b00afb6dcbc5e6c58e72f10eaa8d2e8888c83/examples/js/loaders
 
 class Importer
 
@@ -8,13 +8,11 @@ class Importer
 
     importFile: (type = "", path = "") ->
 
-        type = lower type.trim()
-
-        switch type
+        switch type.lower()
 
             when "3mf"
 
-                this.importer = new THREEMFLoader(); break
+                this.importer = new ThreeMFLoader(); break
 
             when "amf"
 
@@ -31,6 +29,10 @@ class Importer
             when "fbx"
 
                 this.importer = new FBXLoader(); break
+
+            when "gcode"
+
+                this.importer = new GCodeLoader(); break
 
             when "gltf"
 

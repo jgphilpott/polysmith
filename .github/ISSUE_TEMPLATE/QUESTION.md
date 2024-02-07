@@ -6,6 +6,6 @@ labels: 'question'
 assignees: jgphilpott
 ---
 
-### Description
+### Question:
 
-A brief description of your question...
+Type your question here.

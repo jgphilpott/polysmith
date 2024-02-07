@@ -10,7 +10,11 @@ class POLY.OctahedronBufferGeometry extends THREE.OctahedronBufferGeometry
 
     constructor: (params = {}) ->
 
-        radius = params.radius ?= 5
+        radius = adaptor "convert", "length", 5
+
         detail = params.detail ?= 0
+        radius = params.radius ?= radius
+
+        radius = adaptor "invert", "length", radius
 
         super radius, detail

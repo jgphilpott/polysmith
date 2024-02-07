@@ -4,39 +4,54 @@ class DragControls
 
         @active = null
 
+        @speed = settings.get "controls.speed.drag"
+
+    getSpeed: ->
+
+        return clone this.speed
+
+    setSpeed: (speed, animate = true, save = true) ->
+
+        this.speed = Number speed
+
+        panels.camera.setDragSpeed this.speed, animate
+
+        if save then settings.set "controls.speed.drag", this.speed
+
     add: ->
 
         if not this.active
 
             this.active = true
 
-            radius3 = null
-            radius2 = null
-
             startX = null
             startY = null
+
+            radius3 = null
+            radius2 = null
 
             target = null
             position = null
 
             dragSpeed = null
-            dragModifier = 1000
+            dragModifier = 500
 
             verticalAngle = null
             horizontalAngle = null
 
-            start = (event) ->
+            start = (event) =>
 
                 startX = event.pageX
                 startY = event.pageY
 
-                camera.setDragged null
+                camera.dragged = null
+                camera.dragging = null
 
                 event.preventDefault()
                 event.stopPropagation()
 
-                target = camera.getTarget()
-                position = camera.getPosition()
+                target = camera.target
+                position = camera.position
 
                 deltaX = Math.abs position.x - target.x
                 deltaZ = Math.abs position.z - target.z
@@ -48,20 +63,18 @@ class DragControls
                 horizontalAngle = angle$sides radius2, deltaX
 
                 if position.x < target.x then horizontalAngle = 180 - horizontalAngle
-                if position.y < target.y then horizontalAngle = - horizontalAngle
+                if position.y < target.y then horizontalAngle = -horizontalAngle
                 if position.z < target.z then verticalAngle = 180 - verticalAngle
 
-                dragSpeed = settings.getSetting "controls", "dragSpeed"
-                dragSpeed = dragSpeed / dragModifier
+                dragSpeed = this.getSpeed() / dragModifier
 
                 document.onmousemove = drag
                 document.onmouseup = stop
 
-            drag = (event) ->
+            drag = (event) =>
 
-                satoshi = 0.000001
-
-                camera.setDragged true
+                camera.dragged = true
+                camera.dragging = true
 
                 event.preventDefault()
                 event.stopPropagation()
@@ -73,19 +86,27 @@ class DragControls
                 newHorizontalAngle = horizontalAngle + ((startX - event.pageX) * dragSpeed)
 
                 if newVerticalAngle <= 0 then newVerticalAngle = satoshi
-                else if newVerticalAngle >= 180 then newVerticalAngle = - 180 - satoshi
+                else if newVerticalAngle >= 180 then newVerticalAngle = satoshi - 180
                 if newHorizontalAngle >= 180 then newHorizontalAngle = newHorizontalAngle - 360
 
                 newX = side$angle(newHorizontalAngle, radius2, true, null) + target.x
                 newY = side$angle(newHorizontalAngle, radius2, null, true) + target.y
                 newZ = side$angle(newVerticalAngle, radius3, true, null) + target.z
 
-                camera.setPosition x: newX, y: newY, z: newZ, false
+                newPosition =
 
-            stop = (event) ->
+                    x: adaptor "convert", "length", newX
+                    y: adaptor "convert", "length", newY
+                    z: adaptor "convert", "length", newZ
+
+                camera.setPosition newPosition, false
+
+            stop = (event) =>
 
                 event.preventDefault()
                 event.stopPropagation()
+
+                camera.dragging = false
 
                 document.onmouseup = null
                 document.onmousemove = null
@@ -101,3 +122,9 @@ class DragControls
             this.active = false
 
             $("#canvas").off "mousedown"
+
+    reset: ->
+
+        defaults = settings.controls.defaults()
+
+        this.setSpeed defaults.speed.drag

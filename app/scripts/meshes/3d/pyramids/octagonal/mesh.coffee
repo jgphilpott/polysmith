@@ -15,9 +15,10 @@ class POLY.OctagonalPyramidMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.rotation.x = deg$rad 90
+        this.class = params.class ?= "octagonal-pyramid"
+        this.name = params.name ?= "Octagonal Pyramid"
 
-        this.class = "octagonal-pyramid"
-        this.name = "Octagonal Pyramid"
+        this.rotation.x = deg$rad 90
+        this.rotation.y = deg$rad 90
 
         return this

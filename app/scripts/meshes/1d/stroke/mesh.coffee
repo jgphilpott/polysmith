@@ -8,16 +8,16 @@ class POLY.StrokeMesh extends LineThickMesh
 
     constructor: (params = {}) ->
 
-        params.material ?= "stroke"
+        material = params.material ?= "stroke"
 
         geometry = new StrokeGeometry params
-        material = new LineMaterial params.material, params
+        material = new LineMaterial material, params
 
         super geometry, material
 
-        this.computeLineDistances()
+        this.class = params.class ?= "stroke"
+        this.name = params.name ?= "Stroke"
 
-        this.class = "stroke"
-        this.name = "Stroke"
+        this.computeLineDistances()
 
         return this

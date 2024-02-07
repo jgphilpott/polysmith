@@ -8,79 +8,131 @@ class Axes
         @y = null
         @z = null
 
-    add: (min = -scale, max = scale) ->
+    add: (save = false) ->
 
         if not this.active
 
             this.active = true
 
-            this.addX min, max
-            this.addY min, max
-            this.addZ min, max
+            this.addX printer.getSizeX(), save
+            this.addY printer.getSizeY(), save
+            this.addZ printer.getSizeZ(), save
 
-    remove: ->
+    remove: (save = false) ->
 
         if this.active
 
             this.active = false
 
-            this.removeX()
-            this.removeY()
-            this.removeZ()
+            this.removeX save
+            this.removeY save
+            this.removeZ save
 
-    addX: (min = -scale, max = scale) ->
+    reset: ->
 
-        if not this.x and settings.getSetting "axes", "xAxis"
+        defaults = settings.tooltips.defaults().grid.axes
 
-            this.x = new Stroke vertices: [[min, 0, 0], [max, 0, 0]], linewidth: 3, color: redThree
+        settings.set "tooltips.grid.axes.x", defaults.x
+        settings.set "tooltips.grid.axes.y", defaults.y
+        settings.set "tooltips.grid.axes.z", defaults.z
+
+    refresh: ->
+
+        this.remove()
+        this.add()
+
+    addX: (size = printer.getSizeX(), save = true) ->
+
+        if not this.x and settings.get "tooltips.grid.axes.x"
+
+            this.x = new Stroke vertices: [[size / 2, 0, 0], [-size / 2, 0, 0]], linewidth: 3, color: redThree, panel: false
+
+            grid.caps.addCentroid()
+            grid.caps.addX()
 
             scene.add this.x
 
-    removeX: ->
+        if save then settings.set "tooltips.grid.axes.x", true
+
+    removeX: (save = true) ->
 
         if this.x
 
             this.x.geometry.dispose()
             this.x.material.dispose()
 
+            if not this.y and not this.z
+
+                grid.caps.removeCentroid()
+
+            grid.caps.removeX()
+
             scene.remove this.x
 
             this.x = null
 
-    addY: (min = -scale, max = scale) ->
+        if save then settings.set "tooltips.grid.axes.x", false
 
-        if not this.y and settings.getSetting "axes", "yAxis"
+    addY: (size = printer.getSizeY(), save = true) ->
 
-            this.y = new Stroke vertices: [[0, min, 0], [0, max, 0]], linewidth: 3, color: greenThree
+        if not this.y and settings.get "tooltips.grid.axes.y"
+
+            this.y = new Stroke vertices: [[0, size / 2, 0], [0, -size / 2, 0]], linewidth: 3, color: greenThree, panel: false
+
+            grid.caps.addCentroid()
+            grid.caps.addY()
 
             scene.add this.y
 
-    removeY: ->
+        if save then settings.set "tooltips.grid.axes.y", true
+
+    removeY: (save = true) ->
 
         if this.y
 
             this.y.geometry.dispose()
             this.y.material.dispose()
 
+            if not this.x and not this.z
+
+                grid.caps.removeCentroid()
+
+            grid.caps.removeY()
+
             scene.remove this.y
 
             this.y = null
 
-    addZ: (min = -scale, max = scale) ->
+        if save then settings.set "tooltips.grid.axes.y", false
 
-        if not this.z and settings.getSetting "axes", "zAxis"
+    addZ: (size = printer.getSizeZ(), save = true) ->
 
-            this.z = new Stroke vertices: [[0, 0, min], [0, 0, max]], linewidth: 3, color: blueThree
+        if not this.z and settings.get "tooltips.grid.axes.z"
+
+            this.z = new Stroke vertices: [[0, 0, size / 2], [0, 0, -size / 2]], linewidth: 3, color: blueThree, panel: false
+
+            grid.caps.addCentroid()
+            grid.caps.addZ()
 
             scene.add this.z
 
-    removeZ: ->
+        if save then settings.set "tooltips.grid.axes.z", true
+
+    removeZ: (save = true) ->
 
         if this.z
 
             this.z.geometry.dispose()
             this.z.material.dispose()
 
+            if not this.x and not this.y
+
+                grid.caps.removeCentroid()
+
+            grid.caps.removeZ()
+
             scene.remove this.z
 
             this.z = null
+
+        if save then settings.set "tooltips.grid.axes.z", false

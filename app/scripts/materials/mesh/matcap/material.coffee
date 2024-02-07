@@ -10,12 +10,22 @@ class POLY.MatcapMeshMaterial extends THREE.MeshMatcapMaterial
 
     constructor: (params = {}) ->
 
-        map = params.map ?= null
-        color = params.color ?= blackThree
-        side = params.side ?= THREE.DoubleSide
+        params.side ?= THREE.DoubleSide
+        params.color ?= blackThree
+        params.transparent ?= true
+        params.wireframe ?= false
+        params.reflectivity ?= 50
+        params.transmission ?= 0
+        params.metalness ?= 50
+        params.roughness ?= 50
+        params.opacity ?= 100
 
-        super
+        $params = clone params
 
-            map: map
-            color: color
-            side: side
+        $params.reflectivity /= 100
+        $params.transmission /= 100
+        $params.metalness /= 100
+        $params.roughness /= 100
+        $params.opacity /= 100
+
+        super $params

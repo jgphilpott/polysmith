@@ -4,76 +4,75 @@ class FlyControls
 
         @active = null
 
+        @speed = settings.get "controls.speed.fly"
+
+        @flyCodes = [37, 38, 39, 40, 65, 68, 83, 87]
+
+        @moveCodes = [37, 38, 39, 40]
+        @spinCodes = [65, 68, 83, 87]
+
+    getSpeed: ->
+
+        return clone this.speed
+
+    setSpeed: (speed, animate = true, save = true) ->
+
+        this.speed = Number speed
+
+        panels.camera.setFlySpeed this.speed, animate
+
+        if save then settings.set "controls.speed.fly", this.speed
+
     add: ->
 
         if not this.active
 
             this.active = true
 
-            $(document).keydown (event) ->
+            $(document).keydown (event) =>
 
-                if [37, 38, 39, 40, 65, 68, 83, 87].includes event.keyCode
+                if not camera.dragging and not camera.focusing and this.flyCodes.includes event.keyCode
 
-                    flyModifier = 10
-                    satoshi = 0.000001
+                    flyModifier = 5
 
-                    target = clone camera.getTarget()
-                    position = clone camera.getPosition()
+                    camera.flying = true
+
+                    target = camera.target
+                    position = camera.position
 
                     deltaX = Math.abs position.x - target.x
                     deltaZ = Math.abs position.z - target.z
 
-                    radius3 = camera.getPosition().distanceTo target
+                    radius3 = camera.position.distanceTo target
                     radius2 = side$sides deltaZ, null, radius3
 
                     verticalAngle = angle$sides radius3, deltaZ
                     horizontalAngle = angle$sides radius2, deltaX
 
                     if position.x < target.x then horizontalAngle = 180 - horizontalAngle
-                    if position.y < target.y then horizontalAngle = - horizontalAngle
+                    if position.y < target.y then horizontalAngle = -horizontalAngle
                     if position.z < target.z then verticalAngle = 180 - verticalAngle
 
-                    flySpeed = settings.getSetting "controls", "flySpeed"
-                    flySpeed = flySpeed / flyModifier
+                    flySpeed = this.getSpeed() / flyModifier
 
-                    if [37, 38, 39, 40].includes event.keyCode
+                    if this.moveCodes.includes event.keyCode
+
+                        camera.moving = true
 
                         if event.keyCode is 38 or event.keyCode is 40 # Up or Down
 
-                            if verticalAngle > 90
+                            if verticalAngle >= 90 then verticalAngle = 180 - verticalAngle
 
-                                verticalAngle = 180 - verticalAngle
-
-                                inverter = 1
-
-                            else
-
-                                inverter = -1
-
-                            radius2 = side$angle verticalAngle, flySpeed, true, null
-
-                            stepX = side$angle(horizontalAngle, radius2, true, null) * inverter
-                            stepY = side$angle(horizontalAngle, radius2, null, true) * inverter
-                            stepZ = side$angle(verticalAngle, flySpeed, null, true)
+                            stepZ = side$angle verticalAngle, flySpeed, null, true
 
                             if event.keyCode is 38 # Up
 
-                                position.x += stepX
-                                position.y += stepY
                                 position.z += stepZ
-
-                                target.x += stepX
-                                target.y += stepY
                                 target.z += stepZ
 
                             else if event.keyCode is 40 # Down
 
-                                position.x -= stepX
-                                position.y -= stepY
                                 position.z -= stepZ
-
-                                target.x -= stepX
-                                target.y -= stepY
                                 target.z -= stepZ
 
                         if event.keyCode is 37 or event.keyCode is 39 # Left or Right
@@ -101,29 +100,14 @@ class FlyControls
                                 target.x += stepX
                                 target.y += stepY
 
-                    if [65, 68, 83, 87].includes event.keyCode
+                    if this.spinCodes.includes event.keyCode
 
-                        if event.keyCode is 87 # W
+                        camera.spinning = true
 
-                            verticalAngle += flySpeed
+                        if event.keyCode is 87 or event.keyCode is 83 # W or S
 
-                            if verticalAngle <= 0
-
-                                verticalAngle = satoshi
-
-                            else if verticalAngle >= 180
-
-                                verticalAngle = - 180 - satoshi
-
-                            target.z = position.z - side$angle verticalAngle, radius3, true, null
-                            radius2 = side$sides Math.abs(position.z - target.z), null, radius3
-
-                            target.x = position.x - side$angle horizontalAngle, radius2, true, null
-                            target.y = position.y - side$angle horizontalAngle, radius2, null, true
-
-                        else if event.keyCode is 83 # S
-
-                            verticalAngle -= flySpeed
+                            if event.keyCode is 87 then verticalAngle += flySpeed
+                            if event.keyCode is 83 then verticalAngle -= flySpeed
 
                             if verticalAngle <= 0
 
@@ -131,44 +115,41 @@ class FlyControls
 
                             else if verticalAngle >= 180
 
-                                verticalAngle = - 180 - satoshi
+                                verticalAngle = satoshi - 180
 
                             target.z = position.z - side$angle verticalAngle, radius3, true, null
                             radius2 = side$sides Math.abs(position.z - target.z), null, radius3
 
-                            target.x = position.x - side$angle horizontalAngle, radius2, true, null
-                            target.y = position.y - side$angle horizontalAngle, radius2, null, true
+                        else if event.keyCode is 65 or event.keyCode is 68 # A or D
 
-                        else if event.keyCode is 65 # A
-
-                            horizontalAngle += flySpeed
+                            if event.keyCode is 65 then horizontalAngle += flySpeed
+                            if event.keyCode is 68 then horizontalAngle -= flySpeed
 
                             if horizontalAngle >= 180 then horizontalAngle -= 360
 
-                            target.x = position.x - side$angle horizontalAngle, radius2, true, null
-                            target.y = position.y - side$angle horizontalAngle, radius2, null, true
+                        target.x = position.x - side$angle horizontalAngle, radius2, true, null
+                        target.y = position.y - side$angle horizontalAngle, radius2, null, true
 
-                        else if event.keyCode is 68 # D
-
-                            horizontalAngle -= flySpeed
-
-                            if horizontalAngle >= 180 then horizontalAngle -= 360
-
-                            target.x = position.x - side$angle horizontalAngle, radius2, true, null
-                            target.y = position.y - side$angle horizontalAngle, radius2, null, true
+                    position = vectorAdaptor "convert", "length", position
+                    target = vectorAdaptor "convert", "length", target
 
                     camera.setPosition position, false
                     camera.setTarget target, false
 
-            $(document).keyup (event) ->
+            $(document).keyup (event) =>
 
-                if [37, 38, 39, 40, 65, 68, 83, 87].includes event.keyCode
+                if this.flyCodes.includes event.keyCode
 
-                    if [37, 38, 39, 40].includes event.keyCode
+                    if this.moveCodes.includes event.keyCode
 
                         camera.setPosition camera.getPosition()
 
                     camera.setTarget camera.getTarget()
+
+                    camera.spinning = false
+                    camera.moving = false
+
+                    camera.flying = false
 
     remove: ->
 
@@ -177,3 +158,9 @@ class FlyControls
             this.active = false
 
             $(document).off "keydown keyup"
+
+    reset: ->
+
+        defaults = settings.controls.defaults()
+
+        this.setSpeed defaults.speed.fly

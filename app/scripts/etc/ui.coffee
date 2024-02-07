@@ -1,3 +1,52 @@
+class Slider
+
+    constructor: (args) ->
+
+        @min = args.min ?= 1
+        @max = args.max ?= 100
+        @value = args.value ?= 50
+
+        @start = args.start ?= => null
+        @slide = args.slide ?= => null
+        @stop = args.stop ?= => null
+
+        @element = args.element.slider args
+
+        this.style = sliderStyle
+        this.fill = sliderFill
+
+        this.style this.element
+
+    getValue: ->
+
+        return clone this.value
+
+    setValue: (value = null) ->
+
+        if value
+
+            this.value = Number value
+
+        else
+
+            this.value = this.element.slider "option", "value"
+
+        this.element.slider "value", this.value
+
+        this.style this.element
+
+    animate: (value, duration = 1000, steps = 100) ->
+
+        stepValue = (this.getValue() - value) / steps
+
+        for step in [0...steps]
+
+            setTimeout =>
+
+                this.setValue this.getValue() - stepValue
+
+            , duration / steps * step
+
 sliderFill = (slider, colorOne = "#3273f6", colorTwo = "#efefef") ->
 
     if slider.hasClass "disabled"
@@ -41,8 +90,8 @@ sliderStart = (event, slider) ->
 
     panel = $(this).closest ".panel"
 
-    panel.css "cursor", "grabbing"
-    panel.find("*").css "cursor", "grabbing"
+    panel.css "cursor", "ew-resize"
+    panel.find("*").css "cursor", "ew-resize"
 
 sliderSlide = (event, slider) ->
 
@@ -72,7 +121,7 @@ sliderStop = (event, slider) ->
 
     if panel.attr("id") is "camera"
 
-        settings.setSetting "controls", this.id + "Speed", value
+        settings.set ["controls", this.id + "Speed"], value
 
     else if panel.attr("id") is "mesh"
 
@@ -98,7 +147,7 @@ foldPanel = (element, duration = 1000) ->
 
         body.css "display", "block"
 
-        rotate fold, 90, duration
+        fold.rotate 90, duration
 
     else
 
@@ -106,7 +155,7 @@ foldPanel = (element, duration = 1000) ->
 
         body.css "display", "none"
 
-        rotate fold, 0, duration
+        fold.rotate 0, duration
 
     for tool in panel.find(".body").parent().toArray()
 
@@ -116,4 +165,4 @@ foldPanel = (element, duration = 1000) ->
 
             $(tool).find(".body").css "display", "none"
 
-            rotate $(tool).find(".fold"), 0, duration
+            $(tool).find(".fold").rotate 0, duration

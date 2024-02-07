@@ -8,16 +8,16 @@ class POLY.LineMesh extends THREE.Line
 
     constructor: (params = {}) ->
 
-        params.material ?= "solid"
+        material = params.material ?= "solid"
 
         geometry = new LineGeometry params
-        material = new LineMaterial params.material, params
+        material = new LineMaterial material, params
 
         super geometry, material
 
-        this.computeLineDistances()
+        this.class = params.class ?= "line"
+        this.name = params.name ?= "Line"
 
-        this.class = "line"
-        this.name = "Line"
+        this.computeLineDistances()
 
         return this

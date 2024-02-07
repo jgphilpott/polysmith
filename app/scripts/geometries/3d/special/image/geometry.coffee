@@ -14,35 +14,55 @@ class POLY.ImageBufferGeometry
 
         loader = new THREE.SVGLoader()
 
-        file = params.file ?= "image"
-        depth = params.depth ?= 3
+        depth = adaptor "convert", "length", 3
 
-        options = params.options ?=
+        bevelSize = adaptor "convert", "length", 0.1
+        bevelOffset = adaptor "convert", "length", 0
+        bevelThickness = adaptor "convert", "length", 0.1
 
-            steps: 1
-            center: true
-            curveSegments: 12
-            bevelEnabled: false
-            bevelThickness: 1
-            bevelSize: 1
-            bevelOffset: 0
-            bevelSegments: 3
+        image = params.image ?= "./app/imgs/icons/shapes/special/image.svg"
 
-        loader.load "./app/imgs/svg/" + file + ".svg", (file) ->
+        steps = params.steps ?= 1
+        depth = params.depth ?= depth
+        center = params.center ?= true
+
+        bevelEnabled = params.bevelEnabled ?= false
+        bevelSize = params.bevelSize ?= bevelSize
+        bevelOffset = params.bevelOffset ?= bevelOffset
+        bevelThickness = params.bevelThickness ?= bevelThickness
+
+        bevelSegments = params.bevelSegments ?= 3
+        curveSegments = params.curveSegments ?= 12
+
+        depth = adaptor "invert", "length", depth
+
+        bevelSize = adaptor "invert", "length", bevelSize
+        bevelOffset = adaptor "invert", "length", bevelOffset
+        bevelThickness = adaptor "invert", "length", bevelThickness
+
+        loader.load image, (image) =>
+
+            options =
+
+                steps: steps
+                depth: depth
+                bevelEnabled: bevelEnabled
+                bevelSize: bevelSize
+                bevelOffset: bevelOffset
+                bevelThickness: bevelThickness
+                bevelSegments: bevelSegments
+                curveSegments: curveSegments
 
             shapes = []
 
-            options.depth = depth
-
-            for path in file.paths
+            for path in image.paths
 
                 Array.prototype.push.apply shapes, path.toShapes()
 
             geometry = new THREE.ExtrudeBufferGeometry shapes, options
+            geometry = new Geometry3D "async", geometry: geometry
 
-            if options.center
-
-                geometry.center()
+            if center then geometry.center()
 
             mesh.geometry.dispose()
             mesh.geometry = geometry

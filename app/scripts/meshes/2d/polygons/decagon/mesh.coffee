@@ -15,7 +15,7 @@ class POLY.DecagonMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.class = "decagon"
-        this.name = "Decagon"
+        this.class = params.class ?= "decagon"
+        this.name = params.name ?= "Decagon"
 
         return this

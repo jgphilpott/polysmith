@@ -10,8 +10,22 @@ class POLY.DepthMeshMaterial extends THREE.MeshDepthMaterial
 
     constructor: (params = {}) ->
 
-        side = params.side ?= THREE.DoubleSide
+        params.side ?= THREE.DoubleSide
+        params.color ?= blackThree
+        params.transparent ?= true
+        params.wireframe ?= false
+        params.reflectivity ?= 50
+        params.transmission ?= 0
+        params.metalness ?= 50
+        params.roughness ?= 50
+        params.opacity ?= 100
 
-        super
+        $params = clone params
 
-            side: side
+        $params.reflectivity /= 100
+        $params.transmission /= 100
+        $params.metalness /= 100
+        $params.roughness /= 100
+        $params.opacity /= 100
+
+        super $params

@@ -1,4 +1,4 @@
-# Link: https://github.com/mrdoob/three.js/blob/670b1e9e85356d98efa4c702e93c85dd52f01e1e/examples/js/loaders/SVGLoader.js
+# Link: https://github.com/mrdoob/three.js/blob/309b00afb6dcbc5e6c58e72f10eaa8d2e8888c83/examples/js/loaders/SVGLoader.js
 
 class SVGLoader extends THREE.SVGLoader
 
@@ -10,9 +10,7 @@ class SVGLoader extends THREE.SVGLoader
 
         shapes = []
 
-        paths = file.paths
-
-        for path in paths
+        for path in file.paths
 
             Array.prototype.push.apply shapes, path.toShapes()
 

@@ -15,43 +15,58 @@ class Caps
         @zMin = null
         @zMax = null
 
-    add: (min = -scale, max = scale) ->
+    add: (save = false) ->
 
         if not this.active
 
             this.active = true
 
-            this.addCentroid()
+            this.addCentroid save
 
-            this.addX min, max
-            this.addY min, max
-            this.addZ min, max
+            this.addX printer.getSizeX(), save
+            this.addY printer.getSizeY(), save
+            this.addZ printer.getSizeZ(), save
 
-    remove: ->
+        if save then settings.set "tooltips.grid.caps", true
+
+    remove: (save = false) ->
 
         if this.active
 
             this.active = false
 
-            this.removeCentroid()
+            this.removeCentroid save
 
-            this.removeX()
-            this.removeY()
-            this.removeZ()
+            this.removeX save
+            this.removeY save
+            this.removeZ save
 
-    addCentroid: ->
+        if save then settings.set "tooltips.grid.caps", false
 
-        if settings.getSetting("axes", "xAxis") or settings.getSetting("axes", "yAxis") or settings.getSetting("axes", "zAxis")
+    reset: ->
 
-            if not this.centroid and settings.getSetting "axes", "axesCaps"
+        defaults = settings.tooltips.defaults().grid.caps
 
-                this.centroid = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: 0, y: 0, z: 0}, material: "basic", color: blackThree
+        settings.set "tooltips.grid.caps", defaults
+
+    refresh: ->
+
+        this.remove()
+        this.add()
+
+    addCentroid: (save = true) ->
+
+        if settings.get("tooltips.grid.axes.x") or settings.get("tooltips.grid.axes.y") or settings.get("tooltips.grid.axes.z")
+
+            if not this.centroid and settings.get "tooltips.grid.caps"
+
+                this.centroid = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: 0, y: 0, z: 0}, material: "basic", color: blackThree, panel: false
 
                 this.addEvents this.centroid
 
                 scene.add this.centroid
 
-    removeCentroid: ->
+    removeCentroid: (save = true) ->
 
         if this.centroid
 
@@ -64,20 +79,22 @@ class Caps
 
             this.centroid = null
 
-    addX: (min = -scale, max = scale) ->
+    addX: (size = printer.getSizeX(), save = true) ->
 
-        if settings.getSetting "axes", "xAxis"
+        if settings.get "tooltips.grid.axes.x"
 
-            if not this.xMin and not this.xMax and settings.getSetting "axes", "axesCaps"
+            size = adaptor "invert", "length", size
 
-                this.xMin = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: min, y: 0, z: 0}, material: "basic", color: redThree
-                this.xMax = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: max, y: 0, z: 0}, material: "basic", color: greenThree
+            if not this.xMin and not this.xMax and settings.get "tooltips.grid.caps"
+
+                this.xMin = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: -size / 2, y: 0, z: 0}, material: "basic", color: redThree, panel: false
+                this.xMax = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: size / 2, y: 0, z: 0}, material: "basic", color: greenThree, panel: false
 
                 this.addEvents this.xMin; this.addEvents this.xMax
 
                 scene.add this.xMin, this.xMax
 
-    removeX: ->
+    removeX: (save = true) ->
 
         if this.xMin and this.xMax
 
@@ -90,20 +107,22 @@ class Caps
 
             this.xMin = null; this.xMax = null
 
-    addY: (min = -scale, max = scale) ->
+    addY: (size = printer.getSizeY(), save = true) ->
 
-        if settings.getSetting "axes", "yAxis"
+        if settings.get "tooltips.grid.axes.y"
 
-            if not this.yMin and not this.yMax and settings.getSetting "axes", "axesCaps"
+            size = adaptor "invert", "length", size
 
-                this.yMin = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: 0, y: min, z: 0}, material: "basic", color: redThree
-                this.yMax = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: 0, y: max, z: 0}, material: "basic", color: greenThree
+            if not this.yMin and not this.yMax and settings.get "tooltips.grid.caps"
+
+                this.yMin = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: 0, y: -size / 2, z: 0}, material: "basic", color: redThree, panel: false
+                this.yMax = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: 0, y: size / 2, z: 0}, material: "basic", color: greenThree, panel: false
 
                 this.addEvents this.yMin; this.addEvents this.yMax
 
                 scene.add this.yMin, this.yMax
 
-    removeY: ->
+    removeY: (save = true) ->
 
         if this.yMin and this.yMax
 
@@ -116,20 +135,22 @@ class Caps
 
             this.yMin = null; this.yMax = null
 
-    addZ: (min = -scale, max = scale) ->
+    addZ: (size = printer.getSizeZ(), save = true) ->
 
-        if settings.getSetting "axes", "zAxis"
+        if settings.get "tooltips.grid.axes.z"
 
-            if not this.zMin and not this.zMax and settings.getSetting "axes", "axesCaps"
+            size = adaptor "invert", "length", size
 
-                this.zMin = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: 0, y: 0, z: min}, material: "basic", color: redThree
-                this.zMax = new Sphere radius: 1, widthSegments: 25, heightSegments: 25, position: {x: 0, y: 0, z: max}, material: "basic", color: greenThree
+            if not this.zMin and not this.zMax and settings.get "tooltips.grid.caps"
+
+                this.zMin = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: 0, y: 0, z: -size / 2}, material: "basic", color: redThree, panel: false
+                this.zMax = new Sphere radius: 1, thetaSegments: 24, phiSegments: 24, position: {x: 0, y: 0, z: size / 2}, material: "basic", color: greenThree, panel: false
 
                 this.addEvents this.zMin; this.addEvents this.zMax
 
                 scene.add this.zMin, this.zMax
 
-    removeZ: ->
+    removeZ: (save = true) ->
 
         if this.zMin and this.zMax
 
@@ -144,35 +165,35 @@ class Caps
 
     addEvents: (cap) ->
 
-        events.addEventListener cap, "mouseover", (event) ->
+        events.addEventListener cap, "mouseover", (event) =>
 
             if not events.operation.key
 
                 $("#canvas").css "cursor", "pointer"
 
-        events.addEventListener cap, "mouseout", (event) ->
+        events.addEventListener cap, "mouseout", (event) =>
 
             if not events.operation.key
 
                 $("#canvas").css "cursor", ""
 
-        events.addEventListener cap, "mousedown", (event) ->
+        events.addEventListener cap, "mousedown", (event) =>
 
             event.stopPropagation()
 
-        events.addEventListener cap, "mouseup", (event) ->
+        events.addEventListener cap, "mouseup", (event) =>
 
             event.stopPropagation()
 
-        events.addEventListener cap, "dblclick", (event) ->
+        events.addEventListener cap, "dblclick", (event) =>
 
-            if camera.focus event.target.position
+            if camera.focus vectorAdaptor "convert", "length", event.target.position
 
                 $("#canvas").css "cursor", ""
 
-        events.addEventListener cap, "contextmenu", (event) ->
+        events.addEventListener cap, "contextmenu", (event) =>
 
-            contextMenu "axisCap", cap, event.origDomEvent
+            panels.context.add "cap", cap, event.origDomEvent
 
     removeEvents: (cap) ->
 

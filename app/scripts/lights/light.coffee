@@ -1,111 +1,176 @@
+# Link: https://threejs.org/docs/#api/en/lights/Light
+
 class Light
 
-    constructor: (type, intensity = 1, colorOne = whiteThree, colorTwo = blackThree, lock = false) ->
+    constructor: (type, params = {}) ->
 
-        @type = lower type.trim()
-        @intensity = intensity
-
-        @colorOne = colorOne
-        @colorTwo = colorTwo
-
-        @lock = lock
-
-        switch this.type
+        switch type.lower()
 
             when "ambient"
 
-                @light = new AmbientLight this.intensity, this.colorOne
-                this.setPosition 0, 0, 0
-                break
+                @light = new POLY.AmbientLight params; break
 
             when "directional"
 
-                @light = new DirectionalLight this.intensity, this.colorOne
-                this.setPosition scale, scale, scale
-                break
+                @light = new POLY.DirectionalLight params; break
 
             when "hemisphere"
 
-                @light = new HemisphereLight this.intensity, this.colorOne, this.colorTwo
-                this.setPosition 0, 0, 0
-                break
+                @light = new POLY.HemisphereLight params; break
 
             when "point"
 
-                @light = new PointLight this.intensity, this.colorOne
-                this.setPosition scale, scale, scale
-                break
+                @light = new POLY.PointLight params; break
 
             when "spot"
 
-                @light = new SpotLight this.intensity, this.colorOne
-                this.setPosition scale, scale, scale
-                break
+                @light = new POLY.SpotLight params; break
 
-        @uuid = this.light.uuid
+            else
 
-        this.add()
+                @light = params.light
 
-    setX: (x = 0) ->
+        this.light.add = this.add
+        this.light.remove = this.remove
 
-        this.light.position.x = x
+        this.light.getPosition = this.getPosition
+        this.light.setPosition = this.setPosition
 
-    getX: (self = this) ->
+        this.light.getPositionX = this.getPositionX
+        this.light.setPositionX = this.setPositionX
 
-        return self.light.position.x
+        this.light.getPositionY = this.getPositionY
+        this.light.setPositionY = this.setPositionY
 
-    setY: (y = 0) ->
+        this.light.getPositionZ = this.getPositionZ
+        this.light.setPositionZ = this.setPositionZ
 
-        this.light.position.y = y
+        this.light.getIntensity = this.getIntensity
+        this.light.setIntensity = this.setIntensity
 
-    getY: (self = this) ->
+        this.light.getColor = this.getColor
+        this.light.setColor = this.setColor
 
-        return self.light.position.y
+        this.light.toggleLock = this.toggleLock
+        this.light.getLock = this.getLock
+        this.light.setLock = this.setLock
 
-    setZ: (z = 0) ->
+        return this.light
 
-        this.light.position.z = z
+    add: ->
 
-    getZ: (self = this) ->
+        if not this.getLock()
 
-        return self.light.position.z
+            scene.add this
 
-    setPosition: (x = 0, y = 0, z = 0) ->
+            lights.push this
 
-        this.light.position.set x, y, z
+        return this
 
-    getPosition: (self = this) ->
+    remove: ->
 
-        return self.light.position
+        if not this.getLock()
 
-    setIntensity: (intensity = 1) ->
+            scene.remove this
 
-        this.light.intensity = intensity
+            lights.exclude (light) =>
 
-    getIntensity: (self = this) ->
+                light.uuid is this.uuid
 
-        return self.light.intensity
+        return this
 
-    setLock: (lock = false) ->
+    getPosition: ->
+
+        return vectorAdaptor "convert", "length", clone this.position
+
+    setPosition: (position) ->
+
+        if not this.getLock()
+
+            position = vectorAdaptor "invert", "length", position
+
+            this.position.set position.x, position.y, position.z
+
+        return this
+
+    getPositionX: ->
+
+        return adaptor "convert", "length", clone this.position.x
+
+    setPositionX: (x) ->
+
+        if not this.getLock()
+
+            this.position.x = adaptor "invert", "length", x
+
+        return this
+
+    getPositionY: ->
+
+        return adaptor "convert", "length", clone this.position.y
+
+    setPositionY: (y) ->
+
+        if not this.getLock()
+
+            this.position.y = adaptor "invert", "length", y
+
+        return this
+
+    getPositionZ: ->
+
+        return adaptor "convert", "length", clone this.position.z
+
+    setPositionZ: (z) ->
+
+        if not this.getLock()
+
+            this.position.z = adaptor "invert", "length", z
+
+        return this
+
+    getIntensity: ->
+
+        return clone this.intensity
+
+    setIntensity: (intensity) ->
+
+        if not this.getLock()
+
+            this.intensity = Number intensity
+
+        return this
+
+    getColor: ->
+
+        return clone this.color
+
+    setColor: (color) ->
+
+        if not this.getLock()
+
+            if color instanceof THREE.Color
+
+                this.color = color
+
+            else
+
+                this.color = new THREE.Color color
+
+        return this
+
+    toggleLock: ->
+
+        this.setLock not this.getLock()
+
+        return this
+
+    getLock: ->
+
+        return clone this.lock
+
+    setLock: (lock) ->
 
         this.lock = Boolean lock
 
-    getLock: (self = this) ->
-
-        return self.lock
-
-    toggleLock: (self = this) ->
-
-        self.setLock not self.getLock()
-
-    add: (self = this) ->
-
-        scene.add self.light
-
-        lights.push self
-
-    remove: (self = this) ->
-
-        scene.remove self.light
-
-        lights.filterInPlace (item) -> item.light.uuid isnt self.light.uuid
+        return this

@@ -15,9 +15,10 @@ class POLY.RectangularPyramidMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.rotation.x = deg$rad 90
+        this.class = params.class ?= "rectangular-pyramid"
+        this.name = params.name ?= "Rectangular Pyramid"
 
-        this.class = "rectangular-pyramid"
-        this.name = "Rectangular Pyramid"
+        this.rotation.x = deg$rad 90
+        this.rotation.y = deg$rad 90
 
         return this

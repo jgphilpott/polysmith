@@ -2,60 +2,106 @@ class Help
 
     constructor: (self = this) ->
 
+        this.add()
+
         @active = false
-        @events = false
+        @button = $("#help")
 
-        $("#help").click (event) ->
+        if settings.get "ui.help"
 
-            event.stopPropagation()
+            this.show 0
 
-            if not self.getActive()
+        else
 
-                self.setActive true
+            this.hide 0
 
-            else
+    add: ->
 
-                self.setActive false
+        $("body").append "<img title='Help' id='help' src='/app/imgs/panels/nav/help/" + (if page.path() is "/" then "regular" else "inverted") + ".png'>"
 
-            if not self.events
+    remove: ->
 
-                self.events = true
+        this.button.remove()
 
-                $("#navbar #menu").mousemove -> self.addHelpBox this, "This is the Menu icon!"
-                $("#navbar #menu").mouseout -> self.removeHelpBox this
+    show: (duration = 1000) ->
 
-                $("#navbar #title").mousemove -> self.addHelpBox this, "This is the Title!"
-                $("#navbar #title").mouseout -> self.removeHelpBox this
+            this.events true
 
-                $("#forkme").mousemove -> self.addHelpBox this, "This is the Fork Me icon!"
-                $("#forkme").mouseout -> self.removeHelpBox this
+            this.button.animate {width: "30px", height: "30px"}, {duration: duration}
 
-                $("#help").mousemove -> self.addHelpBox this, "This is the Help icon!"
-                $("#help").mouseout -> self.removeHelpBox this
+    hide: (duration = 1000) ->
 
-                $("#camera.panel").mousemove -> self.addHelpBox this, "This is the camera panel!"
-                $("#camera.panel").mouseout -> self.removeHelpBox this
+            this.events false
 
-                $("#lights.panel").mousemove -> self.addHelpBox this, "This is the lights panel!"
-                $("#lights.panel").mouseout -> self.removeHelpBox this
+            this.button.animate {width: "0px", height: "0px"}, {duration: duration}
 
-                $("#menu.panel").mousemove -> self.addHelpBox this, "This is the menu panel!"
-                $("#menu.panel").mouseout -> self.removeHelpBox this
+    events: (status = true) ->
 
-                $("#mesh.panel").mousemove -> self.addHelpBox this, "This is a mesh panel!"
-                $("#mesh.panel").mouseout -> self.removeHelpBox this
+        if status
 
-                $("#meshes.panel").mousemove -> self.addHelpBox this, "This is the meshes panel!"
-                $("#meshes.panel").mouseout -> self.removeHelpBox this
+            this.button.mouseover (event) =>
 
-                $("#settings.panel").mousemove -> self.addHelpBox this, "This is the settings panel!"
-                $("#settings.panel").mouseout -> self.removeHelpBox this
+                this.button.css "width", "35px"
+                this.button.css "height", "35px"
 
-                $("#shapes.panel").mousemove -> self.addHelpBox this, "This is the shapes panel!"
-                $("#shapes.panel").mouseout -> self.removeHelpBox this
+            this.button.mouseout (event) =>
 
-                $("#shortcuts.panel").mousemove -> self.addHelpBox this, "This is the shortcuts panel!"
-                $("#shortcuts.panel").mouseout -> self.removeHelpBox this
+                if not this.active
+
+                    this.button.css "width", "30px"
+                    this.button.css "height", "30px"
+
+            this.button.click (event) =>
+
+                event.stopPropagation()
+
+                if not this.getActive()
+
+                    this.setActive true
+
+                else
+
+                    this.setActive false
+
+                $("#navbar #menu").mousemove -> this.addHelpBox this, "This is the Menu icon!"
+                $("#navbar #menu").mouseout -> this.removeHelpBox this
+
+                $("#navbar #title").mousemove -> this.addHelpBox this, "This is the Title!"
+                $("#navbar #title").mouseout -> this.removeHelpBox this
+
+                $("#forkme").mousemove -> this.addHelpBox this, "This is the Fork Me icon!"
+                $("#forkme").mouseout -> this.removeHelpBox this
+
+                this.button.mousemove -> this.addHelpBox this, "This is the Help icon!"
+                this.button.mouseout -> this.removeHelpBox this
+
+                $("#camera.panel").mousemove -> this.addHelpBox this, "This is the camera panel!"
+                $("#camera.panel").mouseout -> this.removeHelpBox this
+
+                $("#lights.panel").mousemove -> this.addHelpBox this, "This is the lights panel!"
+                $("#lights.panel").mouseout -> this.removeHelpBox this
+
+                $("#menu.panel").mousemove -> this.addHelpBox this, "This is the menu panel!"
+                $("#menu.panel").mouseout -> this.removeHelpBox this
+
+                $("#mesh.panel").mousemove -> this.addHelpBox this, "This is a mesh panel!"
+                $("#mesh.panel").mouseout -> this.removeHelpBox this
+
+                $("#meshes.panel").mousemove -> this.addHelpBox this, "This is the meshes panel!"
+                $("#meshes.panel").mouseout -> this.removeHelpBox this
+
+                $("#settings.panel").mousemove -> this.addHelpBox this, "This is the settings panel!"
+                $("#settings.panel").mouseout -> this.removeHelpBox this
+
+                $("#shapes.panel").mousemove -> this.addHelpBox this, "This is the shapes panel!"
+                $("#shapes.panel").mouseout -> this.removeHelpBox this
+
+                $("#shortcuts.panel").mousemove -> this.addHelpBox this, "This is the shortcuts panel!"
+                $("#shortcuts.panel").mouseout -> this.removeHelpBox this
+
+        else
+
+            this.button.off("mouseover mouseout click")
 
     setActive: (active = false) ->
 
@@ -64,18 +110,24 @@ class Help
         if active
 
             $("*").addClass "help"
-            $("#help").css "width": "35px", "height": "35px", "filter": "drop-shadow(0px 0px 5px #ccc)"
+
+            if settings.get "ui.help"
+
+                this.button.css "width": "35px", "height": "35px", "filter": "drop-shadow(0px 0px 5px #ccc)"
 
         else
 
             $("#help-box").remove()
 
             $("*").removeClass "help"
-            $("#help").css "width": "", "height": "", "filter": ""
 
-    getActive: (self = this) ->
+            if settings.get "ui.help"
 
-        return self.active
+                this.button.css "width": "", "height": "", "filter": ""
+
+    getActive: ->
+
+        return this.active
 
     addHelpBox: (element, text = "") ->
 

@@ -2,188 +2,37 @@ class Mesh
 
     constructor: (type, params = {}) ->
 
-        @type = lower type.trim()
+        type = type.lower()
 
-        switch this.type
+        if type in d1 then dimension = "1D"
+        if type in d2 then dimension = "2D"
+        if type in d3 then dimension = "3D"
 
-            when "box"
+        switch dimension
 
-                @mesh = new POLY.BoxMesh params; break
+            when "1D"
 
-            when "cylinder"
+                @mesh = new Mesh1D type, params
 
-                @mesh = new POLY.CylinderMesh params; break
+            when "2D"
 
-            when "sphere"
+                @mesh = new Mesh2D type, params
 
-                @mesh = new POLY.SphereMesh params; break
+            when "3D"
 
-            when "octahedron"
-
-                @mesh = new POLY.OctahedronMesh params; break
-
-            when "dodecahedron"
-
-                @mesh = new POLY.DodecahedronMesh params; break
-
-            when "icosahedron"
-
-                @mesh = new POLY.IcosahedronMesh params; break
-
-            when "triangular-prism"
-
-                @mesh = new POLY.TriangularPrismMesh params; break
-
-            when "rectangular-prism"
-
-                @mesh = new POLY.RectangularPrismMesh params; break
-
-            when "pentagonal-prism"
-
-                @mesh = new POLY.PentagonalPrismMesh params; break
-
-            when "hexagonal-prism"
-
-                @mesh = new POLY.HexagonalPrismMesh params; break
-
-            when "heptagonal-prism"
-
-                @mesh = new POLY.HeptagonalPrismMesh params; break
-
-            when "octagonal-prism"
-
-                @mesh = new POLY.OctagonalPrismMesh params; break
-
-            when "nonagonal-prism"
-
-                @mesh = new POLY.NonagonalPrismMesh params; break
-
-            when "decagonal-prism"
-
-                @mesh = new POLY.DecagonalPrismMesh params; break
-
-            when "cylindrical-prism"
-
-                @mesh = new POLY.CylindricalPrismMesh params; break
-
-            when "triangular-pyramid"
-
-                @mesh = new POLY.TriangularPyramidMesh params; break
-
-            when "rectangular-pyramid"
-
-                @mesh = new POLY.RectangularPyramidMesh params; break
-
-            when "pentagonal-pyramid"
-
-                @mesh = new POLY.PentagonalPyramidMesh params; break
-
-            when "hexagonal-pyramid"
-
-                @mesh = new POLY.HexagonalPyramidMesh params; break
-
-            when "heptagonal-pyramid"
-
-                @mesh = new POLY.HeptagonalPyramidMesh params; break
-
-            when "octagonal-pyramid"
-
-                @mesh = new POLY.OctagonalPyramidMesh params; break
-
-            when "nonagonal-pyramid"
-
-                @mesh = new POLY.NonagonalPyramidMesh params; break
-
-            when "decagonal-pyramid"
-
-                @mesh = new POLY.DecagonalPyramidMesh params; break
-
-            when "cone"
-
-                @mesh = new POLY.ConeMesh params; break
-
-            when "capsule"
-
-                @mesh = new POLY.CapsuleMesh params; break
-
-            when "image"
-
-                @mesh = new POLY.ImageMesh params; break
-
-            when "knot"
-
-                @mesh = new POLY.KnotMesh params; break
-
-            when "text"
-
-                @mesh = new POLY.TextMesh params; break
-
-            when "torus"
-
-                @mesh = new POLY.TorusMesh params; break
-
-            when "tube"
-
-                @mesh = new POLY.TubeMesh params; break
-
-            when "circle"
-
-                @mesh = new POLY.CircleMesh params; break
-
-            when "plane"
-
-                @mesh = new POLY.PlaneMesh params; break
-
-            when "triangle"
-
-                @mesh = new POLY.TriangleMesh params; break
-
-            when "quadrilateral"
-
-                @mesh = new POLY.QuadrilateralMesh params; break
-
-            when "pentagon"
-
-                @mesh = new POLY.PentagonMesh params; break
-
-            when "hexagon"
-
-                @mesh = new POLY.HexagonMesh params; break
-
-            when "heptagon"
-
-                @mesh = new POLY.HeptagonMesh params; break
-
-            when "octagon"
-
-                @mesh = new POLY.OctagonMesh params; break
-
-            when "nonagon"
-
-                @mesh = new POLY.NonagonMesh params; break
-
-            when "decagon"
-
-                @mesh = new POLY.DecagonMesh params; break
-
-            when "ring"
-
-                @mesh = new POLY.RingMesh params; break
-
-            when "line"
-
-                @mesh = new POLY.LineMesh params; break
-
-            when "stroke"
-
-                @mesh = new POLY.StrokeMesh params; break
+                @mesh = new Mesh3D type, params
 
             else
 
                 @mesh = params.mesh
 
-        this.mesh.save = this.save
-        this.mesh.morph = this.morph
+        params.panel ?= true
+
+        this.mesh.add = this.add
+        this.mesh.remove = this.remove
+
+        this.mesh.addEvents = this.addEvents
+        this.mesh.removeEvents = this.removeEvents
 
         this.mesh.getName = this.getName
         this.mesh.setName = this.setName
@@ -195,27 +44,56 @@ class Mesh
         this.mesh.getColor = this.getColor
         this.mesh.setColor = this.setColor
 
+        this.mesh.getTransparent = this.getTransparent
+        this.mesh.setTransparent = this.setTransparent
+
         this.mesh.getOpacity = this.getOpacity
         this.mesh.setOpacity = this.setOpacity
 
         this.mesh.getPosition = this.getPosition
         this.mesh.setPosition = this.setPosition
 
+        this.mesh.getPositionX = this.getPositionX
+        this.mesh.setPositionX = this.setPositionX
+
+        this.mesh.getPositionY = this.getPositionY
+        this.mesh.setPositionY = this.setPositionY
+
+        this.mesh.getPositionZ = this.getPositionZ
+        this.mesh.setPositionZ = this.setPositionZ
+
         this.mesh.getRotation = this.getRotation
         this.mesh.setRotation = this.setRotation
+
+        this.mesh.getRotationX = this.getRotationX
+        this.mesh.setRotationX = this.setRotationX
+
+        this.mesh.getRotationY = this.getRotationY
+        this.mesh.setRotationY = this.setRotationY
+
+        this.mesh.getRotationZ = this.getRotationZ
+        this.mesh.setRotationZ = this.setRotationZ
+
+        this.mesh.getScale = this.getScale
+        this.mesh.setScale = this.setScale
+
+        this.mesh.getScaleX = this.getScaleX
+        this.mesh.setScaleX = this.setScaleX
+
+        this.mesh.getScaleY = this.getScaleY
+        this.mesh.setScaleY = this.setScaleY
+
+        this.mesh.getScaleZ = this.getScaleZ
+        this.mesh.setScaleZ = this.setScaleZ
 
         this.updateMatrix = this.mesh.updateMatrix
         this.mesh.updateMetrics = this.updateMetrics
         this.mesh.updateParams = this.updateParams
 
-        this.mesh.addEvents = this.addEvents
-        this.mesh.removeEvents = this.removeEvents
+        if params.panel then this.mesh.panel = new MeshPanel this.mesh
 
-        this.mesh.add = this.add
-        this.mesh.remove = this.remove
-
-        if params.position then this.mesh.setPosition params.position
-        if params.rotation then this.mesh.setRotation params.rotation
+        if params.position then this.mesh.setPosition params.position, false
+        if params.rotation then this.mesh.setRotation params.rotation, false
 
         this.mesh.lock = if "lock" of params then params.lock else if this.mesh.lock then this.mesh.lock else false
         this.mesh.name = if "name" of params then params.name else if this.mesh.name then this.mesh.name else "Unnamed"
@@ -224,25 +102,201 @@ class Mesh
         this.mesh.material.style = if "style" of params then params.style else if this.mesh.material.style then this.mesh.material.style else "multi"
         this.mesh.material.wireframe = if "wireframe" of params then params.wireframe else if this.mesh.material.wireframe then this.mesh.material.wireframe else false
 
+        # this.translate = this.geometry.translate
+        # this.center = this.geometry.center
+
+        this.mesh.morph = this.morph
+        this.mesh.save = this.save
+
+        this.mesh.dragable = this.dragable
+        this.mesh.params = params
+
         return this.mesh
 
-    save: (method) ->
+    add: ->
 
-        store = if client then serverStore else localStore
+        scene.add this
+        this.save "add"
 
-        switch method
+        this.addEvents()
 
-            when "add"
+        # this.panel.add()
+        panels.meshes.addMesh this
 
-                store.addMesh this
+        return this
 
-            when "update"
+    remove: ->
 
-                store.updateMesh this
+        if not this.getLock()
 
-            when "remove"
+            scene.remove this
+            this.save "remove"
 
-                store.removeMesh this
+            this.removeEvents()
+
+            this.panel.remove()
+            panels.meshes.removeMesh this
+
+            this.geometry.dispose()
+            this.material.dispose()
+
+            if events.operation.mesh is this
+
+                events.clearCSG()
+
+        return this
+
+    addEvents: ->
+
+        events.addEventListener this, "mouseover", (event) =>
+
+            null
+
+        events.addEventListener this, "mousemove", (event) =>
+
+            if settings.get "ui.metabox"
+
+                metabox.update this, event.origDomEvent
+
+            if events.operation.key
+
+                if events.operation.mesh.uuid is this.uuid
+
+                    composer.outlinePass.visibleEdgeColor.set redThree
+                    $("#canvas").css "cursor", "not-allowed"
+
+                else
+
+                    composer.outlinePass.visibleEdgeColor.set greenThree
+                    $("#canvas").css "cursor", "copy"
+
+            else
+
+                if this.getLock()
+
+                    composer.outlinePass.visibleEdgeColor.set redThree
+                    $("#canvas").css "cursor", "not-allowed"
+
+                else
+
+                    composer.outlinePass.visibleEdgeColor.set blackThree
+                    $("#canvas").css "cursor", "grab"
+
+            composer.outlinePass.selectedObjects = [this]
+
+        events.addEventListener this, "mouseout", (event) =>
+
+            composer.outlinePass.selectedObjects = []
+
+            if events.operation.key
+
+                $("#canvas").css "cursor", "copy"
+
+            else
+
+                $("#canvas").css "cursor", ""
+
+            metabox.hide()
+
+        events.addEventListener this, "mousedown", (event) =>
+
+            this.dragable event.origDomEvent
+
+        events.addEventListener this, "click", (event) =>
+
+            event.origDomEvent.stopImmediatePropagation()
+
+            if not camera.dragged
+
+                if events.operation.key
+
+                    this.morph events.operation.key, null, true
+
+                else if tooltips.getSelected() isnt this
+
+                    tooltips.setSelected this
+
+        events.addEventListener this, "dblclick", (event) =>
+
+            if camera.focus this.getPosition()
+
+                $("#canvas").css "cursor", ""
+
+        events.addEventListener this, "contextmenu", (event) =>
+
+            panels.context.add "mesh", this, event.origDomEvent
+
+        return this
+
+    removeEvents: ->
+
+        events.removeEventListener this, "mouseover"
+        events.removeEventListener this, "mousemove"
+        events.removeEventListener this, "mouseout"
+        events.removeEventListener this, "mousedown"
+
+        events.removeEventListener this, "click"
+        events.removeEventListener this, "dblclick"
+        events.removeEventListener this, "contextmenu"
+
+        return this
+
+    dragable: (origDomEvent, save = true) ->
+
+        xOffset = 0
+        yOffset = 0
+
+        start = (event) =>
+
+            coordinates = d3$d2 this.position.x, this.position.y, this.position.z
+
+            xOffset = origDomEvent.clientX - coordinates.x
+            yOffset = origDomEvent.clientY - coordinates.y
+
+            $("#canvas").css "cursor", "grabbing"
+
+            document.onmousemove = drag
+            document.onmouseup = stop
+
+            this.dragged = null
+
+        drag = (event) =>
+
+            this.dragged = true
+
+            eventX = event.clientX - xOffset
+            eventY = event.clientY - yOffset
+
+            $("#canvas").css "cursor", "grabbing"
+
+            coordinates = d2$d3 eventX, eventY, this.position.z
+            size = vectorAdaptor "invert", "length", printer.getSize()
+
+            this.position.x = if coordinates.x < -size.x then -size.x else if coordinates.x > size.x then size.x else coordinates.x
+            this.position.y = if coordinates.y < -size.y then -size.y else if coordinates.y > size.y then size.y else coordinates.y
+            this.position.z = if coordinates.z < -size.z then -size.z else if coordinates.z > size.z then size.z else coordinates.z
+
+            composer.outlinePass.visibleEdgeColor.set blackThree
+            composer.outlinePass.selectedObjects = [this]
+
+            tooltips.guidelines.add this.getPosition()
+
+            this.setPosition this.getPosition()
+
+        stop = (event) =>
+
+            $("#canvas").css "cursor", "grab"
+
+            if save then this.save "update"
+
+            tooltips.guidelines.remove()
+
+            document.onmousemove = null
+            document.onmouseup = null
+
+        if not this.getLock() and not events.operation.key then start()
+
+        return this
 
     morph: (key = null, value = null, save = false) ->
 
@@ -275,9 +329,22 @@ class Mesh
                 if morphed
 
                     morphed.geometry = new Geometry "custom", geometry: morphed.geometry
-
                     events.operation.mesh.class = "custom"
-                    events.operation.mesh.geometry = morphed.geometry
+
+                    events.operation.mesh.geometry = morphed.geometry.clone()
+                    events.operation.mesh.matrix = morphed.matrix.clone()
+
+                    events.operation.mesh.position.x = morphed.position.x
+                    events.operation.mesh.position.y = morphed.position.y
+                    events.operation.mesh.position.z = morphed.position.z
+
+                    events.operation.mesh.rotation.x = morphed.rotation.x
+                    events.operation.mesh.rotation.y = morphed.rotation.y
+                    events.operation.mesh.rotation.z = morphed.rotation.z
+
+                    events.operation.mesh.scale.x = morphed.scale.x
+                    events.operation.mesh.scale.y = morphed.scale.y
+                    events.operation.mesh.scale.z = morphed.scale.z
 
                     events.operation.mesh.updateMetrics()
                     localStore.updateMesh events.operation.mesh
@@ -288,6 +355,8 @@ class Mesh
 
             events.operation.mesh = null
             events.operation.key = null
+
+        return this
 
     getName: ->
 
@@ -311,6 +380,8 @@ class Mesh
 
             if value is "" and key isnt "mesh" then meshPanelName.css("display", "none") else meshPanelName.css("display", "block")
 
+        return this
+
     getLock: ->
 
         return this.lock
@@ -326,7 +397,7 @@ class Mesh
 
             composer.outlinePass.visibleEdgeColor.set redThree
 
-            if this is events.operation.mesh then events.clearMeshOperation()
+            if this is events.operation.mesh then events.clearCSG()
 
             meshPanel.find("#join.operation").attr "src", "/app/imgs/panels/ops/disabled/join.png"
             meshPanel.find("#cut.operation").attr "src", "/app/imgs/panels/ops/disabled/cut.png"
@@ -378,85 +449,286 @@ class Mesh
 
         if save then this.save "update"
 
+        return this
+
     toggleLock: ->
 
         this.setLock not this.getLock()
 
+        return this
+
     getColor: ->
 
-        return this.material.color
+        return clone this.material.getColor()
 
-    setColor: (color, save = true) ->
+    setColor: (color = blackThree, save = true) ->
 
         if not this.getLock()
 
-            opacity = this.getOpacity()
-            wireframe = this.material.wireframe
-            material = if color is "multi" then "normal" else "standard"
+            this.params.color = color
 
-            $("#mesh." + this.uuid + "").find(".color").removeClass "selected"
-            $("#mesh." + this.uuid + "").find("#" + color + ".color").addClass "selected"
+            depthMaterial = this.params.material is "depth"
+            normalMaterial = this.params.material is "normal"
+            distanceMaterial = this.params.material is "distance"
 
-            if ["red", "orange", "yellow", "green", "blue", "purple", "pink"].includes color
+            if depthMaterial or normalMaterial or distanceMaterial
 
-                colorThree = rainbowThree[color + "Three"]
+                this.setMaterial "standard", false
 
-            else if ["white", "gray", "black"].includes color
+            if this.params.color is "multi"
 
-                colorThree = grayscaleThree[color + "Three"]
+                this.setMaterial "normal", false
 
-            else
-
-                colorThree = blackThree
-
-            this.material.dispose()
-            this.material = new MeshMaterial material, color: colorThree
-            this.material.opacity = opacity / 100
-            this.material.wireframe = wireframe
-            this.material.style = color
+            this.material.setColor this.params.color
 
             if save then this.save "update"
+
+        return this
+
+    getTransparent: ->
+
+        return clone this.material.getTransparent()
+
+    setTransparent: (transparent = true, save = true) ->
+
+        if not this.getLock()
+
+            this.params.transparent = Boolean transparent
+            this.material.setTransparent this.params.transparent
+
+            # panel stuff here
+
+            if save then this.save "update"
+
+        return this
 
     getOpacity: ->
 
-        return this.material.opacity * 100
+        return clone this.material.getOpacity()
 
-    setOpacity: (opacity, save = true) ->
+    setOpacity: (opacity = 100, save = true) ->
 
         if not this.getLock()
 
-            this.material.opacity = opacity / 100
+            this.params.opacity = Number opacity
+            this.material.setOpacity this.params.opacity
 
-            panel = $("#mesh." + this.uuid + "")
-            slider = panel.find "#visibility.slider"
-            visibility = if opacity < 50 then "hidden" else "visible"
+            # panel = $("#mesh." + this.uuid + "")
+            # slider = panel.find "#visibility.slider"
+            # visibility = if opacity < 50 then "hidden" else "visible"
 
-            panel.find("#eye").attr "src", "/app/imgs/panels/visibility/" + visibility + ".png"
+            # panel.find("#eye").attr "src", "/app/imgs/panels/visibility/" + visibility + ".png"
 
-            slider.slider "value", opacity
-            sliderFill slider
+            # slider.slider "value", opacity
+            # sliderFill slider
 
             if save then this.save "update"
 
+        return this
+
     getPosition: ->
 
-        return this.position
+        return vectorAdaptor "convert", "length", clone this.position
 
-    setPosition: (position) ->
+    setPosition: (position, save = true) ->
 
-        this.position.x = position.x
-        this.position.y = position.y
-        this.position.z = position.z
+        if not this.getLock()
+
+            if this.panel then this.panel.setPosition position
+
+            this.position.x = adaptor "invert", "length", position.x
+            this.position.y = adaptor "invert", "length", position.y
+            this.position.z = adaptor "invert", "length", position.z
+
+            if save then this.save "update"
+
+        return this
+
+    getPositionX: ->
+
+        return adaptor "convert", "length", clone this.position.x
+
+    setPositionX: (x, save = true) ->
+
+        if not this.getLock()
+
+            # if this.panel then this.panel.setPositionX x
+
+            this.position.x = adaptor "invert", "length", x
+
+            if save then this.save "update"
+
+        return this
+
+    getPositionY: ->
+
+        return adaptor "convert", "length", clone this.position.y
+
+    setPositionY: (y, save = true) ->
+
+        if not this.getLock()
+
+            # if this.panel then this.panel.setPositionY y
+
+            this.position.y = adaptor "invert", "length", y
+
+            if save then this.save "update"
+
+        return this
+
+    getPositionZ: ->
+
+        return adaptor "convert", "length", clone this.position.z
+
+    setPositionZ: (z, save = true) ->
+
+        if not this.getLock()
+
+            # if this.panel then this.panel.setPositionZ z
+
+            this.position.z = adaptor "invert", "length", z
+
+            if save then this.save "update"
+
+        return this
 
     getRotation: ->
 
-        return this.rotation
+        return clone this.rotation
 
-    setRotation: (rotation) ->
+    setRotation: (rotation, save = true) ->
 
-        this.rotation.x = rotation.x
-        this.rotation.y = rotation.y
-        this.rotation.z = rotation.z
+        if not this.getLock()
+
+            this.rotation.x = rotation.x
+            this.rotation.y = rotation.y
+            this.rotation.z = rotation.z
+
+            this.updateMatrix()
+
+            if save then this.save "update"
+
+        return this
+
+    getRotationX: ->
+
+        return clone this.rotation.x
+
+    setRotationX: (x, save = true) ->
+
+        if not this.getLock()
+
+            this.rotation.x = x
+
+            this.updateMatrix()
+
+            if save then this.save "update"
+
+        return this
+
+    getRotationY: ->
+
+        return clone this.rotation.x
+
+    setRotationY: (y, save = true) ->
+
+        if not this.getLock()
+
+            this.rotation.y = y
+
+            this.updateMatrix()
+
+            if save then this.save "update"
+
+        return this
+
+    getRotationZ: ->
+
+        return clone this.rotation.x
+
+    setRotationZ: (z, save = true) ->
+
+        if not this.getLock()
+
+            this.rotation.z = z
+
+            this.updateMatrix()
+
+            if save then this.save "update"
+
+        return this
+
+    getScale: ->
+
+        scale = clone this.scale
+
+        scale.x *= 100
+        scale.y *= 100
+        scale.z *= 100
+
+        return scale
+
+    setScale: (scale, save = true) ->
+
+        if not this.getLock()
+
+            this.scale.x = scale.x / 100
+            this.scale.y = scale.y / 100
+            this.scale.z = scale.z / 100
+
+            this.updateMetrics()
+
+            if save then this.save "update"
+
+        return this
+
+    getScaleX: ->
+
+        return clone this.scale.x * 100
+
+    setScaleX: (x, save = true) ->
+
+        if not this.getLock()
+
+            this.scale.x = x / 100
+
+            this.updateMetrics()
+
+            if save then this.save "update"
+
+        return this
+
+    getScaleY: ->
+
+        return clone this.scale.y * 100
+
+    setScaleY: (y, save = true) ->
+
+        if not this.getLock()
+
+            this.scale.y = y / 100
+
+            this.updateMetrics()
+
+            if save then this.save "update"
+
+        return this
+
+    getScaleZ: ->
+
+        return clone this.scale.z * 100
+
+    setScaleZ: (z, save = true) ->
+
+        if not this.getLock()
+
+            this.scale.z = z / 100
+
+            this.updateMetrics()
+
+            if save then this.save "update"
+
+        return this
 
     updateMetrics: ->
 
@@ -472,213 +744,26 @@ class Mesh
         controls.find("#surface span").text this.geometry.surface.toFixed 2
         controls.find("#volume span").text this.geometry.volume.toFixed 2
 
-    updateParams: (type = null, key = null, value = null, save = false) ->
+        return this
 
-        if not this.getLock()
+    save: (method) ->
 
-            panel = $("#mesh." + this.uuid + "")
+        this.updateMatrix()
 
-            input = panel.find "span#" + type + "-" + key + " input"
+        storage = if client then serverStore else localStore
 
-            min = Number input.attr "min"
-            max = Number input.attr "max"
+        switch method
 
-            value = if value < min then min else if value > max then max else if key.includes("segments") then value.toFixed(0) else value
+            when "add"
 
-            if save is "temp" or key.includes("segments") or value is min or value is max then input.val value
+                storage.addMesh this
 
-            switch type
+            when "update"
 
-                when "properties"
+                storage.updateMesh this
 
-                    this.geometry.dispose()
+            when "remove"
 
-                    parameters = this.geometry.parameters
+                storage.removeMesh this
 
-                    if this.class is "box"
-
-                        if key is "length" then parameters.width = value
-                        if key is "width" then parameters.height = value
-                        if key is "height" then parameters.depth = value
-
-                        this.geometry = new BoxGeometry parameters
-
-                    else if this.class is "sphere"
-
-                        if key is "radius" then parameters.radius = value
-                        if key is "width-segments" then parameters.widthSegments = value
-                        if key is "height-segments" then parameters.heightSegments = value
-
-                        this.geometry = new SphereGeometry parameters
-
-                    else if this.class is "cylinder" or this.class.split("-")[1] is "prism"
-
-                        if key is "length" then parameters.length = value
-                        if key is "radius-positive" then parameters.radiusTop = value
-                        if key is "radius-negative" then parameters.radiusBottom = value
-                        if key is "radius-segments" then parameters.radialSegments = value
-
-                        this.geometry = new CylinderGeometry parameters
-
-                    else if this.class is "cone" or this.class.split("-")[1] is "pyramid"
-
-                        if key is "height" then parameters.height = value
-                        if key is "radius" then parameters.radius = value
-                        if key is "radius-segments" then parameters.radialSegments = value
-
-                        this.geometry = new CylinderGeometry parameters
-
-                    else if this.class is "torus"
-
-                        if key is "radius" then parameters.radius = value
-                        if key is "thickness" then parameters.thickness = value
-                        if key is "radius-segments" then parameters.radialSegments = value
-                        if key is "tube-segments" then parameters.tubularSegments = value
-
-                        this.geometry = new TorusGeometry parameters
-
-                    this.updateMetrics()
-
-                    break
-
-                when "position"
-
-                    this[type][key] = value
-
-                    this.updateMatrix()
-
-                    break
-
-                when "rotation"
-
-                    this[type][key] = deg$rad value
-
-                    this.updateMatrix()
-
-                    break
-
-                when "scale"
-
-                    this[type][key] = value
-
-                    this.updateMetrics()
-
-                    break
-
-            if save is true then this.save "update"
-
-    addEvents: (self = this) ->
-
-        events.addEventListener self, "mouseover", (event) ->
-
-            if settings.getSetting "ui", "metabox"
-
-                metabox.draw "draw", self, event.origDomEvent
-
-        events.addEventListener self, "mousemove", (event) ->
-
-            if events.operation.key
-
-                if events.operation.mesh.uuid is self.uuid
-
-                    composer.outlinePass.visibleEdgeColor.set redThree
-                    $("#canvas").css "cursor", "not-allowed"
-
-                else
-
-                    composer.outlinePass.visibleEdgeColor.set greenThree
-                    $("#canvas").css "cursor", "copy"
-
-            else
-
-                if self.getLock()
-
-                    composer.outlinePass.visibleEdgeColor.set redThree
-                    $("#canvas").css "cursor", "not-allowed"
-
-                else
-
-                    composer.outlinePass.visibleEdgeColor.set blackThree
-                    $("#canvas").css "cursor", "grab"
-
-            composer.outlinePass.selectedObjects = [self]
-
-            if settings.getSetting "ui", "metabox"
-
-                metabox.draw "update", self, event.origDomEvent
-
-        events.addEventListener self, "mouseout", (event) ->
-
-            if events.operation.key then $("#canvas").css "cursor", "copy" else $("#canvas").css "cursor", ""
-
-            composer.outlinePass.selectedObjects = []
-
-            metabox.erase()
-
-        events.addEventListener self, "mousedown", (event) ->
-
-            if not self.getLock() then events.makeDragable self, event.origDomEvent
-
-        events.addEventListener self, "click", (event) ->
-
-            event.origDomEvent.stopImmediatePropagation()
-
-            if not camera.dragged
-
-                if events.operation.key
-
-                    self.morph events.operation.key, null, true
-
-                else if tooltips.getSelected() isnt self
-
-                    tooltips.setSelected self
-
-        events.addEventListener self, "dblclick", (event) ->
-
-            if camera.focus self.position
-
-                $("#canvas").css "cursor", ""
-
-        events.addEventListener self, "contextmenu", (event) ->
-
-            contextMenu "mesh", self, event.origDomEvent
-
-    removeEvents: (self = this) ->
-
-        events.removeEventListener self, "mouseover"
-        events.removeEventListener self, "mousemove"
-        events.removeEventListener self, "mouseout"
-        events.removeEventListener self, "mousedown"
-
-        events.removeEventListener self, "click"
-        events.removeEventListener self, "dblclick"
-        events.removeEventListener self, "contextmenu"
-
-    add: ->
-
-        this.addEvents()
-        this.updateMetrics()
-
-        updateMeshesPanel "add", this
-
-        this.save "add"
-        scene.add this
-
-    remove: ->
-
-        if not this.getLock()
-
-            this.removeEvents()
-
-            $("body").css "cursor", ""
-            $("#canvas").css "cursor", ""
-
-            if events.operation.mesh is this then events.clearMeshOperation()
-
-            updateMeshesPanel "remove", this
-
-            this.geometry.dispose()
-            this.material.dispose()
-
-            this.save "remove"
-            scene.remove this
+        return this

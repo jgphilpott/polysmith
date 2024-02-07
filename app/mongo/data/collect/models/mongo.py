@@ -2,11 +2,11 @@ from mongo.data.collect.ions import mongo_collection
 
 collection = mongo_collection("models")
 
-def new_model(model):
+def add_model(model):
 
     return str(collection.insert_one(model).inserted_id)
 
-def new_models(models):
+def add_models(models):
 
     return str(collection.insert_many(models).inserted_ids)
 
@@ -28,7 +28,9 @@ def update_models(models):
 
     for model in models:
 
-        update_model(model)
+        model = update_model(model)
+
+    return models
 
 def delete_model(model):
 
@@ -38,4 +40,6 @@ def delete_models(models):
 
     for model in models:
 
-        delete_image(model)
+        model = delete_model(model)
+
+    return models

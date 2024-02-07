@@ -1,0 +1,280 @@
+@import "../../colors/glass/grayscale.sass"
+@import "../../colors/glass/rainbow.sass"
+
+@import "../../colors/solid/grayscale.sass"
+@import "../../colors/solid/rainbow.sass"
+
+#mesh.panel
+
+    visibility: hidden
+
+    top: 50%
+    left: 50%
+
+    width: 250px
+
+    text-align: center
+
+    transform: translate(-50%, -50%)
+
+    h3, h4, p, label, input, button
+
+        margin: 5px
+
+    #name
+
+        width: 85%
+        margin: 5px auto
+
+        span
+
+            cursor: text
+            outline: none
+
+            display: block
+            overflow: hidden
+
+            white-space: pre
+
+        span.disabled
+
+            cursor: not-allowed
+
+    #operations
+
+        img.operation
+
+            margin: 5px
+
+            width: 25px
+            height: 25px
+
+        img.operation:hover
+
+            cursor: pointer
+
+        img.operation.disabled:hover
+
+            cursor: not-allowed
+
+    #colors
+
+        margin: 5px
+
+        display: block
+
+        .color
+
+            display: inline-block
+
+            margin: 2px
+
+            width: 15px
+            height: 15px
+
+            border: 1px solid $dark-gray-solid
+            border-radius: 50%
+
+        .color:hover
+
+            border: 1px dotted $black-solid
+
+            cursor: pointer
+
+        .color.selected
+
+            border: 1px solid $black-solid !important
+
+        .color.disabled
+
+            border: 1px solid $dark-gray-solid !important
+
+            cursor: not-allowed
+
+        #red
+
+            background-color: $red-solid
+
+        #orange
+
+            background-color: $orange-solid
+
+        #yellow
+
+            background-color: $yellow-solid
+
+        #green
+
+            background-color: $green-solid
+
+        #blue
+
+            background-color: $blue-solid
+
+        #purple
+
+            background-color: $purple-solid
+
+        #pink
+
+            background-color: $pink-solid
+
+        #white
+
+            background-color: $white-solid
+
+        #gray
+
+            background-color: $gray-solid
+
+        #black
+
+            background-color: $black-solid
+
+    #tools
+
+        margin: 12px 5px
+
+        display: flex
+        align-items: center
+        justify-content: center
+
+        img.tool
+
+            margin: auto
+            display: block
+
+            width: 22.5px
+            height: 22.5px
+
+        img#eye
+
+            height: 17.5px
+
+        img#trash
+
+            width: 16.5px
+            height: 22.5px
+
+        img.disabled
+
+            opacity: 0.5
+
+        img.tool:hover
+
+            cursor: pointer
+
+        img.disabled:hover
+
+            cursor: not-allowed
+
+        #visibility
+
+            margin: 0px 5px
+
+            width: 100px
+
+    #meta
+
+        text-align: left
+
+    #properties,
+    #position,
+    #rotation,
+    #scale
+
+        .head
+
+            display: flex
+            align-items: center
+
+            img.fold
+
+                width: 10px
+                height: 15px
+
+                padding: 3px
+
+            img.fold:hover,
+            h4:hover
+
+                cursor: pointer
+
+        .body
+
+            padding: 1px
+            display: none
+
+            span
+
+                margin: 0px 5px
+
+                display: flex
+                align-items: center
+                justify-content: center
+
+                #x
+
+                    color: $red-solid
+
+                #y
+
+                    color: $green-solid
+
+                #z
+
+                    color: $blue-solid
+
+                label
+
+                    cursor: grab
+
+                input, button
+
+                    border: 1px solid $black-solid
+                    border-radius: 5px
+
+                input
+
+                    width: 125px
+                    padding: 3px
+
+                    appearance: textfield
+
+                input:focus
+
+                    outline: none
+
+                input.disabled
+
+                    color: $dark-gray-solid
+
+                input.disabled:hover
+
+                    cursor: not-allowed
+
+                input::-webkit-outer-spin-button,
+                input::-webkit-inner-spin-button
+
+                    -webkit-appearance: none
+
+                button#plus
+
+                    background-color: $green-glass
+
+                button#minus
+
+                    background-color: $red-glass
+
+                button#plus.disabled,
+                button#minus.disabled
+
+                    background-color: $dark-gray-glass
+
+                button:hover
+
+                    cursor: pointer
+
+                button.disabled:hover
+
+                    cursor: not-allowed

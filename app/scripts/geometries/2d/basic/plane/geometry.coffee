@@ -10,10 +10,16 @@ class POLY.PlaneBufferGeometry extends THREE.PlaneBufferGeometry
 
     constructor: (params = {}) ->
 
-        width = params.width ?= 10
-        height = params.height ?= 10
+        width = adaptor "convert", "length", 10
+        length = adaptor "convert", "length", 10
+
+        width = params.width ?= width
+        length = params.length ?= length
 
         widthSegments = params.widthSegments ?= 1
-        heightSegments = params.heightSegments ?= 1
+        lengthSegments = params.lengthSegments ?= 1
 
-        super width, height, widthSegments, heightSegments
+        width = adaptor "invert", "length", width
+        length = adaptor "invert", "length", length
+
+        super width, length, widthSegments, lengthSegments

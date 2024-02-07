@@ -1,171 +1,615 @@
-addCameraPanel = ->
+class CameraPanel
 
-    $("body").append "<div id='camera' class='panel'><img title='Close' class='close' src='/app/imgs/panels/nav/close.png'></div>"
+    constructor: ->
 
-    panel = $("#camera.panel")
+        return this
 
-    panel.append "<img title='Camera' class='camera' src='/app/imgs/panels/main/camera.png'>"
-    panel.append "<img title='Reset Camera' class='reset' src='/app/imgs/panels/tools/reset.png'>"
+    add: ->
 
-    panel.append "<div id='position' class='controls'><div class='head'><img title='Fold Position' class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Position</h4></div><div class='body'></div></div>"
-    panel.append "<div id='target' class='controls'><div class='head'><img title='Fold Target' class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Target</h4></div><div class='body'></div></div>"
-    panel.append "<div id='speed' class='controls'><div class='head'><img title='Fold Speed' class='fold' src='/app/imgs/panels/nav/fold.png'><h4>Speed</h4></div><div class='body'></div></div>"
+        template =
 
-    panel.find(".fold, h4").click((event) ->
+            """
+            <div id='camera' class='panel'>
 
-        controls = $(this).closest ".controls"
-        display = controls.find(".body").css "display"
-        id = controls.attr "id"
+                <img title='Close' class='close' src='/app/imgs/panels/nav/close/black.png'>
+                <img title='Camera' class='camera' src='/app/imgs/panels/main/camera.png'>
+                <img title='Reset Camera' class='reset' src='/app/imgs/panels/tools/reset.png'>
 
-        if display is "none" then settings.setSetting("camera", "open", id) else settings.setSetting("camera", "open", false)
+                <div id='position' class='controls'>
 
-        foldPanel this
+                    <div class='head'>
 
-    ).on "mousedown mouseup", (event) -> event.stopPropagation()
+                        <img title='Fold Position' class='fold' src='/app/imgs/panels/nav/fold/black.png'>
 
-    if settings.getSetting "camera", "open"
+                        <h4>Position</h4>
 
-        controls = panel.find "#" + settings.getSetting("camera", "open") + ".controls"
+                    </div>
 
-        controls.find(".body").css "display", "block"
+                    <div class='body'></div>
 
-        rotate controls.find ".fold", 90, 0
+                </div>
 
-    unit = settings.getSetting "general", "unit"
-    scale = settings.getSetting "general", "scale"
+                <div id='target' class='controls'>
 
-    dragSpeed = settings.getSetting "controls", "dragSpeed"
-    flySpeed = settings.getSetting "controls", "flySpeed"
-    zoomSpeed = settings.getSetting "controls", "zoomSpeed"
+                    <div class='head'>
 
-    position = panel.find "#position .body"
-    target = panel.find "#target .body"
-    speed = panel.find "#speed .body"
+                        <img title='Fold Target' class='fold' src='/app/imgs/panels/nav/fold/black.png'>
 
-    cameraPosition = camera.getPosition()
-    cameraTarget = camera.getTarget()
+                        <h4>Target</h4>
 
-    holdInterval = null
-    holdTimeout = null
+                    </div>
 
-    min = - scale * 5
-    max = scale * 5
+                    <div class='body'></div>
 
-    position.append "<span id='position-x'><label id='x'>X</label><div class='suffix " + unit[scale] + "'><input type=number step=1 min=" + min + " max=" + max + " value=" + cameraPosition.x.toFixed(2) + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
-    position.append "<span id='position-y'><label id='y'>Y</label><div class='suffix " + unit[scale] + "'><input type=number step=1 min=" + min + " max=" + max + " value=" + cameraPosition.y.toFixed(2) + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
-    position.append "<span id='position-z'><label id='z'>Z</label><div class='suffix " + unit[scale] + "'><input type=number step=1 min=" + min + " max=" + max + " value=" + cameraPosition.z.toFixed(2) + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
+                </div>
 
-    target.append "<span id='target-x'><label id='x'>X</label><div class='suffix " + unit[scale] + "'><input type=number step=1 min=" + min + " max=" + max + " value=" + cameraTarget.x.toFixed(2) + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
-    target.append "<span id='target-y'><label id='y'>Y</label><div class='suffix " + unit[scale] + "'><input type=number step=1 min=" + min + " max=" + max + " value=" + cameraTarget.y.toFixed(2) + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
-    target.append "<span id='target-z'><label id='z'>Z</label><div class='suffix " + unit[scale] + "'><input type=number step=1 min=" + min + " max=" + max + " value=" + cameraTarget.z.toFixed(2) + "></div><button id='plus'>+</button><button id='minus'>-</button></span>"
+                <div id='speed' class='controls'>
 
-    speed.append "<p>Drag Speed</p><div id='drag' class='slider'></div>"
-    speed.append "<p>Fly Speed</p><div id='fly' class='slider'></div>"
-    speed.append "<p>Zoom Speed</p><div id='zoom' class='slider'></div>"
+                    <div class='head'>
 
-    speed.find("#drag.slider").slider min: 1, max: 100, value: dragSpeed, start: sliderStart, slide: sliderSlide, stop: sliderStop
-    speed.find("#fly.slider").slider min: 1, max: 100, value: flySpeed, start: sliderStart, slide: sliderSlide, stop: sliderStop
-    speed.find("#zoom.slider").slider min: 1, max: 100, value: zoomSpeed, start: sliderStart, slide: sliderSlide, stop: sliderStop
+                        <img title='Fold Speed' class='fold' src='/app/imgs/panels/nav/fold/black.png'>
 
-    sliderStyle speed.find "#drag.slider"
-    sliderStyle speed.find "#fly.slider"
-    sliderStyle speed.find "#zoom.slider"
+                        <h4>Speed</h4>
 
-    panel.find(".reset").click((event) ->
+                    </div>
 
-        controls = settings.defaultSettings.controls
-        target = settings.defaultSettings.camera.target
-        position = settings.defaultSettings.camera.position
+                    <div class='body'></div>
 
-        settings.setSetting "controls", "dragSpeed", controls.dragSpeed
-        settings.setSetting "controls", "flySpeed", controls.flySpeed
-        settings.setSetting "controls", "zoomSpeed", controls.zoomSpeed
+                </div>
 
-        speed.find("#drag.slider").slider "value", controls.dragSpeed
-        speed.find("#fly.slider").slider "value", controls.flySpeed
-        speed.find("#zoom.slider").slider "value", controls.zoomSpeed
+            </div>
+            """
 
-        sliderStyle speed.find "#drag.slider"
-        sliderStyle speed.find "#fly.slider"
-        sliderStyle speed.find "#zoom.slider"
+        $("body").append template
 
-        camera.setPosition position
-        camera.setTarget target
+        @panel = $("#camera.panel")
 
-    ).on "mousedown mouseup", (event) -> event.stopPropagation()
+        scale = settings.get "scales.scale"
+        unit = settings.get "scales.length.unit"
+        detail = settings.get "scales.length.detail"
 
-    panel.find("input").keypress (event) -> event.stopPropagation(); if event.keyCode is 13 then this.blur()
-    panel.find("input").keydown (event) -> event.stopPropagation()
-    panel.find("input").keyup (event) -> event.stopPropagation(); updateCamera(this, event)
-    panel.find("input").change (event) -> event.stopPropagation(); updateCamera(this, event)
+        cameraPosition = settings.get "camera.position"
+        cameraTarget = settings.get "camera.target"
 
-    panel.find("input").dblclick (event) -> document.execCommand "selectAll"
-    panel.find("input").mousedown (event) -> event.stopPropagation()
-    panel.find("input").mouseup (event) -> event.stopPropagation()
+        position = vectorAdaptor "convert", "length", cameraPosition
+        target = vectorAdaptor "convert", "length", cameraTarget
 
-    panel.find("input").blur (event) ->
+        @position = this.panel.find "#position .body"
+        @target = this.panel.find "#target .body"
+        @speed = this.panel.find "#speed .body"
+
+        @buttonInterval = null
+        @buttonTimeout = null
+
+        positionTemplate =
+
+            """
+            <span id='position-x'>
+
+                <label id='x'>X</label>
+
+                <div class='suffix """ + unit[scale] + """'>
+
+                    <input type=number step=1 value=""" + position.x.toFixed(detail) + """>
+
+                </div>
+
+                <button id='plus'>+</button>
+                <button id='minus'>-</button>
+
+            </span>
+
+            <span id='position-y'>
+
+                <label id='y'>Y</label>
+
+                <div class='suffix """ + unit[scale] + """'>
+
+                    <input type=number step=1 value=""" + position.y.toFixed(detail) + """>
+
+                </div>
+
+                <button id='plus'>+</button>
+                <button id='minus'>-</button>
+
+            </span>
+
+            <span id='position-z'>
+
+                <label id='z'>Z</label>
+
+                <div class='suffix """ + unit[scale] + """'>
+
+                    <input type=number step=1 value=""" + position.z.toFixed(detail) + """>
+
+                </div>
+
+                <button id='plus'>+</button>
+                <button id='minus'>-</button>
+
+            </span>
+            """
+
+        targetTemplate =
+
+            """
+            <span id='target-x'>
+
+                <label id='x'>X</label>
+
+                <div class='suffix """ + unit[scale] + """'>
+
+                    <input type=number step=1 value=""" + target.x.toFixed(detail) + """>
+
+                </div>
+
+                <button id='plus'>+</button>
+                <button id='minus'>-</button>
+
+            </span>
+
+            <span id='target-y'>
+
+                <label id='y'>Y</label>
+
+                <div class='suffix """ + unit[scale] + """'>
+
+                    <input type=number step=1 value=""" + target.y.toFixed(detail) + """>
+
+                </div>
+
+                <button id='plus'>+</button>
+                <button id='minus'>-</button>
+
+            </span>
+
+            <span id='target-z'>
+
+                <label id='z'>Z</label>
+
+                <div class='suffix """ + unit[scale] + """'>
+
+                    <input type=number step=1 value=""" + target.z.toFixed(detail) + """>
+
+                </div>
+
+                <button id='plus'>+</button>
+                <button id='minus'>-</button>
+
+            </span>
+            """
+
+        speedTemplate =
+
+            """
+            <p>Drag Speed</p>
+
+            <div id='drag' class='slider'></div>
+
+            <p>Fly Speed</p>
+
+            <div id='fly' class='slider'></div>
+
+            <p>Zoom Speed</p>
+
+            <div id='zoom' class='slider'></div>
+            """
+
+        this.position.append positionTemplate
+        this.target.append targetTemplate
+        this.speed.append speedTemplate
+
+        dragSpeed = settings.get "controls.speed.drag"
+        flySpeed = settings.get "controls.speed.fly"
+        zoomSpeed = settings.get "controls.speed.zoom"
+
+        @selected = settings.get "panels.camera.selected"
+
+        @drag = new Slider value: dragSpeed, start: this.sliderStart, slide: this.sliderSlide, stop: this.sliderStop, element: this.speed.find "#drag.slider"
+        @fly = new Slider value: flySpeed, start: this.sliderStart, slide: this.sliderSlide, stop: this.sliderStop, element: this.speed.find "#fly.slider"
+        @zoom = new Slider value: zoomSpeed, start: this.sliderStart, slide: this.sliderSlide, stop: this.sliderStop, element: this.speed.find "#zoom.slider"
+
+        if this.selected
+
+            controls = this.panel.find "#" + this.selected + ".controls"
+
+            controls.find(".body").css "display", "block"
+            controls.find(".fold").rotate 90, 0
+
+        this.events()
+
+    remove: ->
+
+        this.panel.remove()
+
+    show: ->
+
+        this.panel.css "visibility", "visible"
+        this.panel.css "z-index", events.zIndex += 1
+
+    hide: ->
+
+        this.panel.css "visibility", "hidden"
+
+    events: ->
+
+        panels.events this.panel
+
+        this.panel.find("img.reset").click (event) => this.reset()
+
+        this.panel.find(".fold, h4").click (event) =>
+
+            selection = $(event.target).closest(".controls").attr("id")
+
+            if this.selected isnt selection
+
+                this.selected = selection
+
+            else
+
+                this.selected = null
+
+            settings.set "panels.camera.selected", this.selected
+
+            this.fold this.selected
+
+        this.panel.find(".fold, h4").on "mousedown mouseup", (event) =>
+
+            event.stopPropagation()
+
+        this.panel.find("input").on "keypress keydown keyup change", (event) =>
+
+            this.input event
+
+        this.panel.find("input").on "dblclick mousedown mouseup blur", (event) =>
+
+            this.input event
+
+        this.panel.find("button").on "mousedown mouseup", (event) =>
+
+            this.button event
+
+    fold: (target, duration = 1000) ->
+
+        for control in this.panel.find ".controls"
+
+            control = $(control)
+
+            head = control.find ".head"
+            body = control.find ".body"
+            fold = control.find ".fold"
+
+            if control.attr("id") is target
+
+                body.css "display", "block"
+                height = body.height()
+                body.css "display", "none"
+
+                control.animate {height: height + head.height()}, {duration: duration}
+                body.css "display", "block"
+                fold.rotate 90, duration
+
+            else
+
+                control.animate {height: head.height()}, {duration: duration}
+                body.css "display", "none"
+                fold.rotate 0, duration
+
+    input: (event) ->
 
         event.stopPropagation()
 
-        selection = $(this).closest("span").attr("id").split("-")[0]
+        selection = $(event.target).closest(".controls").attr("id")
 
-        settings.setSetting "camera", selection, camera[selection]
+        if event.type is "keypress" and event.key is "Enter"
 
-    panel.find("button").mousedown((event) ->
+            $(event.target).blur()
+
+        else if event.type is "keyup" or event.type is "change"
+
+            if selection is "position"
+
+                x = Number this.position.find("#position-x input").val()
+                y = Number this.position.find("#position-y input").val()
+                z = Number this.position.find("#position-z input").val()
+
+                camera.setPosition x: x, y: y, z: z
+
+            else if selection is "target"
+
+                x = Number this.target.find("#target-x input").val()
+                y = Number this.target.find("#target-y input").val()
+                z = Number this.target.find("#target-z input").val()
+
+                camera.setTarget x: x, y: y, z: z
+
+        else if event.type is "blur"
+
+            if selection is "position"
+
+                this.position.find("#position-x input").val this.getPositionX()
+                this.position.find("#position-y input").val this.getPositionY()
+                this.position.find("#position-z input").val this.getPositionZ()
+
+            else if selection is "target"
+
+                this.target.find("#target-x input").val this.getTargetX()
+                this.target.find("#target-y input").val this.getTargetY()
+                this.target.find("#target-z input").val this.getTargetZ()
+
+    button: (event) ->
 
         event.stopPropagation()
 
-        controller = $ this
+        updateCamera = (event) =>
 
-        updateCamera controller, event
+            selection = $(event.target).closest("span")
 
-        holdTimeout = setTimeout ->
+            value = Number selection.find("input").val()
+            detail = settings.get "scales.length.detail"
 
-            holdInterval = setInterval (-> updateCamera controller, event), 100
+            control = selection.attr("id").split("-")[0]
+            axis = selection.attr("id").split("-")[1]
 
-        , 1000
+            step = selection.find("input").attr "step"
+            operation = $(event.target).attr "id"
 
-    ).mouseup((event) ->
+            if operation is "plus"
 
-        this.blur()
+                value += Number step
+
+            else if operation is "minus"
+
+                value -= Number step
+
+            if control is "position"
+
+                if axis is "x" then camera.setPositionX value, false
+                if axis is "y" then camera.setPositionY value, false
+                if axis is "z" then camera.setPositionZ value, false
+
+                this.position.find("#position-" + axis + " input").val value.round detail
+
+            else if control is "target"
+
+                if axis is "x" then camera.setTargetX value, false
+                if axis is "y" then camera.setTargetY value, false
+                if axis is "z" then camera.setTargetZ value, false
+
+                this.target.find("#target-" + axis + " input").val value.round detail
+
+        if event.type is "mousedown"
+
+            updateCamera event
+
+            this.buttonTimeout = setTimeout =>
+
+                this.buttonInterval = setInterval =>
+
+                    updateCamera event
+
+                , 100
+
+            , 1000
+
+            $(event.target).css "font-weight", "bold"
+
+        else if event.type is "mouseup"
+
+            $(event.target).blur()
+
+            clearTimeout this.buttonTimeout
+            clearInterval this.buttonInterval
+
+            $(event.target).css "font-weight", "normal"
+
+            camera.setPosition camera.getPosition()
+            camera.setTarget camera.getTarget()
+
+    getPosition: ->
+
+        x = clone this.position.find("#position-x input").attr "value"
+        y = clone this.position.find("#position-y input").attr "value"
+        z = clone this.position.find("#position-z input").attr "value"
+
+        return x: x, y: y, z: z
+
+    setPosition: (position) ->
+
+        detail = settings.get "scales.length.detail"
+
+        this.position.find("#position-x input").attr "value", Number position.x.toFixed detail
+        this.position.find("#position-y input").attr "value", Number position.y.toFixed detail
+        this.position.find("#position-z input").attr "value", Number position.z.toFixed detail
+
+    getPositionX: ->
+
+        return clone this.position.find("#position-x input").attr "value"
+
+    setPositionX: (x) ->
+
+        detail = settings.get "scales.length.detail"
+
+        this.position.find("#position-x input").attr "value", Number x.toFixed detail
+
+    getPositionY: ->
+
+        return clone this.position.find("#position-y input").attr "value"
+
+    setPositionY: (y) ->
+
+        detail = settings.get "scales.length.detail"
+
+        this.position.find("#position-y input").attr "value", Number y.toFixed detail
+
+    getPositionZ: ->
+
+        return clone this.position.find("#position-z input").attr "value"
+
+    setPositionZ: (z) ->
+
+        detail = settings.get "scales.length.detail"
+
+        this.position.find("#position-z input").attr "value", Number z.toFixed detail
+
+    getTarget: ->
+
+        x = clone this.target.find("#target-x input").attr "value"
+        y = clone this.target.find("#target-y input").attr "value"
+        z = clone this.target.find("#target-z input").attr "value"
+
+        return x: x, y: y, z: z
+
+    setTarget: (target) ->
+
+        detail = settings.get "scales.length.detail"
+
+        this.target.find("#target-x input").attr "value", Number target.x.toFixed detail
+        this.target.find("#target-y input").attr "value", Number target.y.toFixed detail
+        this.target.find("#target-z input").attr "value", Number target.z.toFixed detail
+
+    getTargetX: ->
+
+        return clone this.target.find("#target-x input").attr "value"
+
+    setTargetX: (x) ->
+
+        detail = settings.get "scales.length.detail"
+
+        this.target.find("#target-x input").attr "value", Number x.toFixed detail
+
+    getTargetY: ->
+
+        return clone this.target.find("#target-y input").attr "value"
+
+    setTargetY: (y) ->
+
+        detail = settings.get "scales.length.detail"
+
+        this.target.find("#target-y input").attr "value", Number y.toFixed detail
+
+    getTargetZ: ->
+
+        return clone this.target.find("#target-z input").attr "value"
+
+    setTargetZ: (z) ->
+
+        detail = settings.get "scales.length.detail"
+
+        this.target.find("#target-z input").attr "value", Number z.toFixed detail
+
+    getDragSpeed: ->
+
+        return clone this.drag.getValue()
+
+    setDragSpeed: (speed, animate = true, duration = 1000) ->
+
+        if animate
+
+            this.drag.animate speed, duration
+
+        else
+
+            this.drag.setValue speed
+
+    getFlySpeed: ->
+
+        return clone this.fly.getValue()
+
+    setFlySpeed: (speed, animate = true, duration = 1000) ->
+
+        if animate
+
+            this.fly.animate speed, duration
+
+        else
+
+            this.fly.setValue speed
+
+    getZoomSpeed: ->
+
+        return clone this.zoom.getValue()
+
+    setZoomSpeed: (speed, animate = true, duration = 1000) ->
+
+        if animate
+
+            this.zoom.animate speed, duration
+
+        else
+
+            this.zoom.setValue speed
+
+    sliderStart: (event, slider) =>
+
+        $(slider).focus()
+
+        events.slider = true
 
         event.stopPropagation()
 
-        clearTimeout holdTimeout
-        clearInterval holdInterval
+        this.panel.css "cursor", "ew-resize"
+        this.panel.find("*").css "cursor", "ew-resize"
 
-        selection = $(this).parent().attr("id").split("-")[0]
+    sliderSlide: (event, slider) =>
 
-        settings.setSetting "camera", selection, camera[selection]
+        event.stopPropagation()
 
-    )
+        this[event.target.id].setValue()
 
-    updateCamera = (controller, event) ->
+        this[event.target.id].fill $(event.target), "#3273f6", "#e6e6e6"
 
-        operation = $(controller).attr "id"
-        selection = $(controller).closest("span").attr("id").split "-"
+    sliderStop: (event, slider) =>
 
-        input = $(controller).parent().find "input"
+        $(slider).blur()
 
-        step = Number input.attr "step"
-        min = Number input.attr "min"
-        max = Number input.attr "max"
+        events.slider = false
 
-        position = camera.getPosition()
-        target = camera.getTarget()
+        event.stopPropagation()
 
-        step = if operation is "plus" then step else if operation is "minus" then - step else 0
+        this.panel.css "cursor", ""
+        this.panel.find("*").css "cursor", ""
 
-        value = Number(input.val()) + step
+        this[event.target.id].fill $(event.target)
 
-        value = if value < min then min else if value > max then max else value
+        controls[event.target.id].setSpeed this[event.target.id].getValue(), false
 
-        camera[selection[0]][selection[1]] = value
+    reset: (duration = 1000, steps = 100) ->
 
-        camera.setPosition position
+        this.panel.find("img.reset").rotate 360
 
-        if event.type isnt "keyup" or value is min or value is max
+        panelDefaults = settings.panels.defaults()
+        cameraDefaults = settings.camera.defaults()
+        controlsDefaults = settings.controls.defaults()
 
-            input.val value.toFixed 2
+        controls.drag.setSpeed controlsDefaults.speed.drag
+        controls.fly.setSpeed controlsDefaults.speed.fly
+        controls.zoom.setSpeed controlsDefaults.speed.zoom
 
-    return panel
+        positionStepX = (camera.getPositionX() - cameraDefaults.position.x) / steps
+        positionStepY = (camera.getPositionY() - cameraDefaults.position.y) / steps
+        positionStepZ = (camera.getPositionZ() - cameraDefaults.position.z) / steps
+
+        targetStepX = (camera.getTargetX() - cameraDefaults.target.x) / steps
+        targetStepY = (camera.getTargetY() - cameraDefaults.target.y) / steps
+        targetStepZ = (camera.getTargetZ() - cameraDefaults.target.z) / steps
+
+        updateCamera = =>
+
+            camera.setPositionX camera.getPositionX() - positionStepX
+            camera.setPositionY camera.getPositionY() - positionStepY
+            camera.setPositionZ camera.getPositionZ() - positionStepZ
+
+            camera.setTargetX camera.getTargetX() - targetStepX
+            camera.setTargetY camera.getTargetY() - targetStepY
+            camera.setTargetZ camera.getTargetZ() - targetStepZ
+
+        for step in [0...steps]
+
+            setTimeout updateCamera, duration / steps * step
+
+        if this.selected isnt panelDefaults.camera.selected
+
+            this.selected = panelDefaults.camera.selected
+
+            this.fold this.selected

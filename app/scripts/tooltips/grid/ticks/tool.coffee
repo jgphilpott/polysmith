@@ -4,53 +4,124 @@ class Ticks
 
         @active = null
 
+        @xyStep = settings.get "tooltips.grid.ticks.step.xy"
+        @xzStep = settings.get "tooltips.grid.ticks.step.xz"
+        @yzStep = settings.get "tooltips.grid.ticks.step.yz"
+
         @xy = []
         @xz = []
         @yz = []
 
-    add: (min = -scale, max = scale) ->
+    add: (save = false) ->
 
         if not this.active
 
             this.active = true
 
-            this.addXY min, max
-            this.addXZ min, max
-            this.addYZ min, max
+            this.addXY printer.getSizeX(), printer.getSizeY(), save
+            this.addXZ printer.getSizeX(), printer.getSizeZ(), save
+            this.addYZ printer.getSizeY(), printer.getSizeZ(), save
 
-    remove: ->
+    remove: (save = false) ->
 
         if this.active
 
             this.active = false
 
-            this.removeXY()
-            this.removeXZ()
-            this.removeYZ()
+            this.removeXY save
+            this.removeXZ save
+            this.removeYZ save
 
-    addXY: (min = -scale, max = scale) ->
+    reset: ->
 
-        if this.xy.length is 0 and settings.getSetting "axes", "xyPlane"
+        defaults = settings.tooltips.defaults().grid.ticks
 
-            step = settings.getSetting "axes", "xyPlaneStep"
+        settings.set "tooltips.grid.ticks.xy", defaults.xy
+        settings.set "tooltips.grid.ticks.xz", defaults.xz
+        settings.set "tooltips.grid.ticks.yz", defaults.yz
 
-            for tick in [step...max] by step
+        settings.set "tooltips.grid.ticks.step.xy", defaults.step.xy
+        settings.set "tooltips.grid.ticks.step.xz", defaults.step.xz
+        settings.set "tooltips.grid.ticks.step.yz", defaults.step.yz
 
-                xTickPositive = new Line vertices: [[min, tick, 0], [max, tick, 0]]
-                xTickNegative = new Line vertices: [[min, -tick, 0], [max, -tick, 0]]
-                yTickPositive = new Line vertices: [[tick, min, 0], [tick, max, 0]]
-                yTickNegative = new Line vertices: [[-tick, min, 0], [-tick, max, 0]]
+    refresh: ->
 
-                this.xy.push xTickPositive, xTickNegative, yTickPositive, yTickNegative
-                scene.add xTickPositive, xTickNegative, yTickPositive, yTickNegative
+        this.remove()
+        this.add()
 
-            xTick = new Line vertices: [[min, 0, 0], [max, 0, 0]]
-            yTick = new Line vertices: [[0, min, 0], [0, max, 0]]
+    getStepXY: ->
+
+        return adaptor "convert", "length", clone this.xyStep
+
+    setStepXY: (step, save = true) ->
+
+        this.removeXY false
+
+        this.xyStep = adaptor "invert", "length", step
+
+        this.addXY printer.getSizeX(), printer.getSizeY(), false
+
+        if save then settings.set "tooltips.grid.ticks.step.xy", this.xyStep
+
+    getStepXZ: ->
+
+        return adaptor "convert", "length", clone this.xzStep
+
+    setStepXZ: (step, save = true) ->
+
+        this.removeXZ false
+
+        this.xzStep = adaptor "invert", "length", step
+
+        this.addXZ printer.getSizeX(), printer.getSizeZ(), false
+
+        if save then settings.set "tooltips.grid.ticks.step.xz", this.xzStep
+
+    getStepYZ: ->
+
+        return adaptor "convert", "length", clone this.yzStep
+
+    setStepYZ: (step, save = true) ->
+
+        this.removeYZ false
+
+        this.yzStep = adaptor "invert", "length", step
+
+        this.addYZ printer.getSizeY(), printer.getSizeZ(), false
+
+        if save then settings.set "tooltips.grid.ticks.step.yz", this.yzStep
+
+    addXY: (xSize = printer.getSizeX(), ySize = printer.getSizeY(), save = true) ->
+
+        if this.xy.length is 0 and settings.get "tooltips.grid.ticks.xy"
+
+            step =  this.getStepXY()
+
+            for tick in [step...ySize / 2] by step
+
+                xTickPositive = new Line vertices: [[-xSize / 2, tick, 0], [xSize / 2, tick, 0]], panel: false
+                xTickNegative = new Line vertices: [[-xSize / 2, -tick, 0], [xSize / 2, -tick, 0]], panel: false
+
+                this.xy.push xTickPositive, xTickNegative
+                scene.add xTickPositive, xTickNegative
+
+            for tick in [step...xSize / 2] by step
+
+                yTickPositive = new Line vertices: [[tick, -ySize / 2, 0], [tick, ySize / 2, 0]], panel: false
+                yTickNegative = new Line vertices: [[-tick, -ySize / 2, 0], [-tick, ySize / 2, 0]], panel: false
+
+                this.xy.push yTickPositive, yTickNegative
+                scene.add yTickPositive, yTickNegative
+
+            xTick = new Line vertices: [[-xSize / 2, 0, 0], [xSize / 2, 0, 0]], panel: false
+            yTick = new Line vertices: [[0, -ySize / 2, 0], [0, ySize / 2, 0]], panel: false
 
             this.xy.push xTick, yTick
             scene.add xTick, yTick
 
-    removeXY: ->
+        if save then settings.set "tooltips.grid.ticks.xy", true
+
+    removeXY: (save = true) ->
 
         if this.xy.length isnt 0
 
@@ -63,29 +134,39 @@ class Ticks
 
             this.xy = []
 
-    addXZ: (min = -scale, max = scale) ->
+        if save then settings.set "tooltips.grid.ticks.xy", false
 
-        if this.xz.length is 0 and settings.getSetting "axes", "xzPlane"
+    addXZ: (xSize = printer.getSizeX(), zSize = printer.getSizeZ(), save = true) ->
 
-            step = settings.getSetting "axes", "xzPlaneStep"
+        if this.xz.length is 0 and settings.get "tooltips.grid.ticks.xz"
 
-            for tick in [step...max] by step
+            step = this.getStepXZ()
 
-                xTickPositive = new Line vertices: [[min, 0, tick], [max, 0, tick]]
-                xTickNegative = new Line vertices: [[min, 0, -tick], [max, 0, -tick]]
-                zTickPositive = new Line vertices: [[tick, 0, min], [tick, 0, max]]
-                zTickNegative = new Line vertices: [[-tick, 0, min], [-tick, 0, max]]
+            for tick in [step...zSize / 2] by step
 
-                this.xz.push xTickPositive, xTickNegative, zTickPositive, zTickNegative
-                scene.add xTickPositive, xTickNegative, zTickPositive, zTickNegative
+                xTickPositive = new Line vertices: [[-xSize / 2, 0, tick], [xSize / 2, 0, tick]], panel: false
+                xTickNegative = new Line vertices: [[-xSize / 2, 0, -tick], [xSize / 2, 0, -tick]], panel: false
 
-            xTick = new Line vertices: [[min, 0, 0], [max, 0, 0]]
-            zTick = new Line vertices: [[0, 0, min], [0, 0, max]]
+                this.xz.push xTickPositive, xTickNegative
+                scene.add xTickPositive, xTickNegative
+
+            for tick in [step...xSize / 2] by step
+
+                zTickPositive = new Line vertices: [[tick, 0, -zSize / 2], [tick, 0, zSize / 2]], panel: false
+                zTickNegative = new Line vertices: [[-tick, 0, -zSize / 2], [-tick, 0, zSize / 2]], panel: false
+
+                this.xz.push zTickPositive, zTickNegative
+                scene.add zTickPositive, zTickNegative
+
+            xTick = new Line vertices: [[-xSize / 2, 0, 0], [xSize / 2, 0, 0]], panel: false
+            zTick = new Line vertices: [[0, 0, -zSize / 2], [0, 0, zSize / 2]], panel: false
 
             this.xz.push xTick, zTick
             scene.add xTick, zTick
 
-    removeXZ: ->
+        if save then settings.set "tooltips.grid.ticks.xz", true
+
+    removeXZ: (save = true) ->
 
         if this.xz.length isnt 0
 
@@ -98,29 +179,39 @@ class Ticks
 
             this.xz = []
 
-    addYZ: (min = -scale, max = scale) ->
+        if save then settings.set "tooltips.grid.ticks.xz", false
 
-        if this.yz.length is 0 and settings.getSetting "axes", "yzPlane"
+    addYZ: (ySize = printer.getSizeY(), zSize = printer.getSizeZ(), save = true) ->
 
-            step = settings.getSetting "axes", "yzPlaneStep"
+        if this.yz.length is 0 and settings.get "tooltips.grid.ticks.yz"
 
-            for tick in [step...max] by step
+            step = this.getStepYZ()
 
-                yTickPositive = new Line vertices: [[0, min, tick], [0, max, tick]]
-                yTickNegative = new Line vertices: [[0, min, -tick], [0, max, -tick]]
-                zTickPositive = new Line vertices: [[0, tick, min], [0, tick, max]]
-                zTickNegative = new Line vertices: [[0, -tick, min], [0, -tick, max]]
+            for tick in [step...zSize / 2] by step
 
-                this.yz.push yTickPositive, yTickNegative, zTickPositive, zTickNegative
-                scene.add yTickPositive, yTickNegative, zTickPositive, zTickNegative
+                yTickPositive = new Line vertices: [[0, -ySize / 2, tick], [0, ySize / 2, tick]], panel: false
+                yTickNegative = new Line vertices: [[0, -ySize / 2, -tick], [0, ySize / 2, -tick]], panel: false
 
-            yTick = new Line vertices: [[0, min, 0], [0, max, 0]]
-            zTick = new Line vertices: [[0, 0, min], [0, 0, max]]
+                this.yz.push yTickPositive, yTickNegative
+                scene.add yTickPositive, yTickNegative
+
+            for tick in [step...ySize / 2] by step
+
+                zTickPositive = new Line vertices: [[0, tick, -zSize / 2], [0, tick, zSize / 2]], panel: false
+                zTickNegative = new Line vertices: [[0, -tick, -zSize / 2], [0, -tick, zSize / 2]], panel: false
+
+                this.yz.push zTickPositive, zTickNegative
+                scene.add zTickPositive, zTickNegative
+
+            yTick = new Line vertices: [[0, -ySize / 2, 0], [0, ySize / 2, 0]], panel: false
+            zTick = new Line vertices: [[0, 0, -zSize / 2], [0, 0, zSize / 2]], panel: false
 
             this.yz.push yTick, zTick
             scene.add yTick, zTick
 
-    removeYZ: ->
+        if save then settings.set "tooltips.grid.ticks.yz", true
+
+    removeYZ: (save = true) ->
 
         if this.yz.length isnt 0
 
@@ -132,3 +223,5 @@ class Ticks
                 scene.remove tick
 
             this.yz = []
+
+        if save then settings.set "tooltips.grid.ticks.yz", false

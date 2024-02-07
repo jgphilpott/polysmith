@@ -1,4 +1,4 @@
-# Link: https://threejs.org/docs/#api/en/cameras/CubeCamera
+# Docs: https://threejs.org/docs/#api/en/cameras/CubeCamera
 
 class CubeCamera extends THREE.CubeCamera
 

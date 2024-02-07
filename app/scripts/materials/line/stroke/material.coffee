@@ -1,4 +1,4 @@
-# Link: N/A
+# Link: https://gist.github.com/jgphilpott/9e1cf7758b8d7cf02537bb15aacdba6a
 
 class StrokeLineMaterial extends LineMaterial
 
@@ -10,24 +10,31 @@ class POLY.StrokeLineMaterial extends LineThickMaterial
 
     constructor: (params = {}) ->
 
-        color = params.color ?= blackThree
-        linewidth = params.linewidth ?= 1
+        params.color ?= blackThree
+        params.transparent ?= true
+        params.opacity ?= 100
+        params.linewidth ?= 1
+        params.dashed ?= false
 
-        dashed = params.dashed ?= false
-        dashSize = params.dashSize ?= 3
-        gapSize = params.gapSize ?= 2
+        params.dashSize ?= adaptor "convert", "length", 3
+        params.gapSize ?= adaptor "convert", "length", 2
 
-        vertexColors = params.vertexColors ?= false
-        alphaToCoverage = params.alphaToCoverage ?= false
+        $params = clone params
+        $params.opacity /= 100
 
-        super
+        $params.dashSize = adaptor "invert", "length", $params.dashSize
+        $params.gapSize = adaptor "invert", "length", $params.gapSize
 
-            color: color
-            linewidth: linewidth
+        super $params
 
-            dashed: dashed
-            dashSize: dashSize
-            gapSize: gapSize
+        this.setResolution()
 
-            vertexColors: vertexColors
-            alphaToCoverage: alphaToCoverage
+    getResolution: ->
+
+        return clone this.resolution
+
+    setResolution: (width = window.innerWidth, height = window.innerHeight) ->
+
+        this.resolution.set width, height
+
+        return this

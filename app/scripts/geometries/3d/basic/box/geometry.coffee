@@ -10,12 +10,20 @@ class POLY.BoxBufferGeometry extends THREE.BoxBufferGeometry
 
     constructor: (params = {}) ->
 
-        length = params.length ?= 10
-        width = params.width ?= 10
-        height = params.height ?= 10
+        width = adaptor "convert", "length", 10
+        length = adaptor "convert", "length", 10
+        height = adaptor "convert", "length", 10
 
-        lengthSegments = params.lengthSegments ?= 1
+        width = params.width ?= width
+        length = params.length ?= length
+        height = params.height ?= height
+
         widthSegments = params.widthSegments ?= 1
+        lengthSegments = params.lengthSegments ?= 1
         heightSegments = params.heightSegments ?= 1
 
-        super length, width, height, lengthSegments, widthSegments, heightSegments
+        width = adaptor "invert", "length", width
+        length = adaptor "invert", "length", length
+        height = adaptor "invert", "length", height
+
+        super width, length, height, widthSegments, lengthSegments, heightSegments

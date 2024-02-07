@@ -1,77 +1,120 @@
-addPanels = ->
+class Panels
 
-    panels.push addPanelEvents addCameraPanel()
-    panels.push addPanelEvents addLightsPanel()
-    panels.push addPanelEvents addMenuPanel()
-    panels.push addPanelEvents addMeshesPanel()
-    panels.push addPanelEvents addPolygenPanel()
-    panels.push addPanelEvents addSettingsPanel()
-    panels.push addPanelEvents addShapesPanel()
-    panels.push addPanelEvents addShortcutsPanel()
+    constructor: ->
 
-    addContextPanel()
+        @camera = new CameraPanel()
+        @context = new ContextPanel()
+        @lights = new LightsPanel()
+        @menu = new MenuPanel()
+        @meshes = new MeshesPanel()
+        @polygen = new PolygenPanel()
+        @settings = new SettingsPanel()
+        @shapes = new ShapesPanel()
+        @shortcuts = new ShortcutsPanel()
 
-    return panels
+    add: ->
 
-addPanelEvents = (panel) ->
+        this.camera.add()
+        this.lights.add()
+        this.menu.add()
+        this.meshes.add()
+        this.polygen.add()
+        this.settings.add()
+        this.shapes.add()
+        this.shortcuts.add()
 
-    queue = false
-    duration = 1000
+    events: (panel) ->
 
-    id = panel.attr "id"
-    close = panel.find ".close"
+        duration = 1000
+        id = panel.attr "id"
+        close = panel.find ".close"
 
-    panel.mouseenter((event) ->
+        close.click (event) =>
 
-        $("#context-menu.panel").remove()
-        $("#metabox").css "display", "none"
+            if id is "mesh"
 
-        panel.css "z-index", events.zIndex += 1
+                this.meshes.hideMeshPanel panel
 
-        if id is "mesh"
+            else if id is "light"
 
-            mesh = panel.data "mesh"
-            visibleEdgeColor = if mesh.getLock() then redThree else blackThree
+                this.lights.hideLightPanel panel
 
-            composer.outlinePass.visibleEdgeColor.set visibleEdgeColor
-            composer.outlinePass.selectedObjects = [mesh]
+            else
 
-        else
+                settings.set "panels." + id + ".open", false
+
+        close.on "mousedown mouseup", (event) => event.stopPropagation()
+
+        panel.mouseenter (event) =>
+
+            metabox.hide()
+
+            panel.css "z-index", events.zIndex += 1
+
+            if id is "mesh"
+
+                mesh = panel.data "mesh"
+                visibleEdgeColor = if mesh.getLock() then redThree else blackThree
+                composer.outlinePass.visibleEdgeColor.set visibleEdgeColor
+                composer.outlinePass.selectedObjects = [mesh]
+
+            else
+
+                composer.outlinePass.selectedObjects = []
+
+            close.animate {opacity: 1}, {duration: duration}
+            panel.animate {backgroundColor: grayGlass}, {duration: duration * 3}
+
+        panel.mouseleave (event) =>
 
             composer.outlinePass.selectedObjects = []
 
-        close.animate {opacity: 1}, {duration: duration, queue: queue}
-        panel.animate {backgroundColor: grayGlass}, {duration: duration * 3, queue: queue}
+            close.animate {opacity: 0}, {duration: duration}
+            panel.animate {backgroundColor: lightGrayGlass}, {duration: duration * 3}
 
-    ).mouseleave (event) ->
+        if id isnt "mesh"
 
-        $("#metabox").css "display", "block"
+            if settings.get("panels." + id).open then panel.css("visibility", "visible") else panel.css("visibility", "hidden")
 
-        composer.outlinePass.selectedObjects = []
+        panel.css "z-index", if events? then events.zIndex else 0
 
-        close.animate {opacity: 0}, {duration: duration, queue: queue}
-        panel.animate {backgroundColor: lightGrayGlass}, {duration: duration * 3, queue: queue}
+        this.dragable panel
 
-    close.click((event) ->
+    dragable: (panel) ->
 
-        if id is "mesh"
+        xOffset = 0
+        yOffset = 0
 
-            panel.css "visibility", "hidden"
+        start = (event) =>
 
-            $("#meshes.table tr#" + panel.data("mesh").uuid + " .settings").attr "src", "/app/imgs/panels/tools/toggle/off.png"
+            event.stopPropagation()
 
-        else
+            transform = panel.css("transform").replace(/[{()}]/g, "").replace(/[a-zA-Z]/g, "").split(",")
 
-            settings.setSetting "panels", id, false
+            xOffset = event.clientX - panel.position().left + Number transform[4]
+            yOffset = event.clientY - panel.position().top + Number transform[5]
 
-    ).on "mousedown mouseup", (event) -> event.stopPropagation()
+            panel.css "cursor", "grabbing"
 
-    if id isnt "mesh"
+            document.onmousemove = drag
+            document.onmouseup = stop
 
-        if settings.getSetting("panels", id) then panel.css("visibility", "visible") else panel.css("visibility", "hidden")
+        drag = (event) =>
 
-    panel.css "z-index", events.zIndex
+            event.stopPropagation()
 
-    events.makeDragable panel
+            eventX = event.clientX - xOffset
+            eventY = event.clientY - yOffset
 
-    return panel
+            panel.css top: eventY, left: eventX
+
+        stop = (event) =>
+
+            event.stopPropagation()
+
+            panel.css "cursor", ""
+
+            document.onmousemove = null
+            document.onmouseup = null
+
+        panel.mousedown start

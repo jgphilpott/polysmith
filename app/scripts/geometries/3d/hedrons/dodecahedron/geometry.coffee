@@ -1,4 +1,4 @@
-# Link: hhttps://threejs.org/docs/#api/en/geometries/DodecahedronGeometry
+# Link: https://threejs.org/docs/#api/en/geometries/DodecahedronGeometry
 
 class DodecahedronGeometry extends Geometry
 
@@ -10,7 +10,11 @@ class POLY.DodecahedronBufferGeometry extends THREE.DodecahedronBufferGeometry
 
     constructor: (params = {}) ->
 
-        radius = params.radius ?= 5
+        radius = adaptor "convert", "length", 5
+
         detail = params.detail ?= 0
+        radius = params.radius ?= radius
+
+        radius = adaptor "invert", "length", radius
 
         super radius, detail

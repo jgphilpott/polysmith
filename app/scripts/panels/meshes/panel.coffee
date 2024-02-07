@@ -1,121 +1,153 @@
-addMeshesPanel = ->
+class MeshesPanel
 
-    $("body").append "<div id='meshes' class='panel'><img title='Close' class='close' src='/app/imgs/panels/nav/close.png'></div>"
+    constructor: ->
 
-    panel = $("#meshes.panel")
+        @count = 0
 
-    panel.append "<h3>Meshes</h3>"
+        return this
 
-    panel.append "<div class='table'><table id='meshes' class='table'><thead><tr></tr></thead><tbody></tbody></table></div>"
+    add: ->
 
-    tableHead = panel.find "#meshes.table thead tr"
+        $("body").append "<div id='meshes' class='panel'><img title='Close' class='close' src='/app/imgs/panels/nav/close/black.png'></div>"
 
-    tableHead.append "<th><h4>ID</h4></th>"
-    tableHead.append "<th><h4>Name</h4></th>"
-    tableHead.append "<th><h4>Settings</h4></th>"
-    tableHead.append "<th><h4>Lock</h4></th>"
-    tableHead.append "<th><h4>Trash</h4></th>"
+        @panel = $("#meshes.panel")
+        @table = this.panel.find "#meshes.table tbody"
 
-    panel.append "<p id='none'><b>None</b></p>"
+        this.panel.append "<h3>Meshes</h3>"
 
-    panel.find("div.table").on "scroll", (event) ->
+        this.panel.append "<div class='table'><table id='meshes' class='table'><thead><tr></tr></thead><tbody></tbody></table></div>"
 
-        panel.find("#meshes.table tbody").css "clip-path", "inset(" + $(this).scrollTop() + "px 0px 0px 0px)"
+        tableHead = this.panel.find "#meshes.table thead tr"
 
-    return panel
+        tableHead.append "<th><h4>ID</h4></th>"
+        tableHead.append "<th><h4>Name</h4></th>"
+        tableHead.append "<th><h4>Settings</h4></th>"
+        tableHead.append "<th><h4>Lock</h4></th>"
+        tableHead.append "<th><h4>Trash</h4></th>"
 
-updateMeshesPanel = (type, mesh) ->
+        this.panel.append "<p id='none'><b>None</b></p>"
 
-    panel = $("#meshes.panel")
-    table = panel.find "#meshes.table tbody"
+        # this.panel.find("div.table").on "scroll", (event) =>
 
-    switch type
+        #     this.table.css "clip-path", "inset(" + $(event.target).scrollTop() + "px 0px 0px 0px)"
 
-        when "add"
+        this.panel.find("div.table").on "scroll", (event) ->
 
-            meshes.push mesh
+            $("#meshes.panel #meshes.table tbody").css "clip-path", "inset(" + $(this).scrollTop() + "px 0px 0px 0px)"
 
-            tooltips.meshCount += 1
+        this.events()
 
-            panel.find("#none").css "display", "none"
-            panel.find("div.table").css "display", "block"
+    remove: ->
 
-            row = "<tr id=" + mesh.uuid + ">"
+        this.panel.remove()
 
-            row += "<td><p title='ID' class='id'>" + tooltips.meshCount + "</p></td>"
-            row += "<td><p title='Name' class='name'><span class='" + (if mesh.getLock() then "disabled" else "") + "' contenteditable='true'>" + mesh.name + "</span></p></td>"
-            row += "<td><img title='Settings' class='settings' src='/app/imgs/panels/tools/toggle/off.png'></td></td>"
-            row += "<td><img title='Lock Mesh' class='lock' src='/app/imgs/panels/lock/" + (if mesh.getLock() then "locked" else "unlocked") + ".png'></td>"
-            row += "<td><img title='Delete Mesh' class='trash " + (if mesh.getLock() then "disabled" else "") + "' src='/app/imgs/panels/tools/trash.png'></td>"
+    show: ->
 
-            table.append row + "</tr>"
+        this.panel.css "visibility", "visible"
+        this.panel.css "z-index", events.zIndex += 1
 
-            tableRow = table.find "tr#" + mesh.uuid + ""
+    hide: ->
 
-            tableRow.mouseenter((event) ->
+        this.panel.css "visibility", "hidden"
 
-                visibleEdgeColor = if mesh.getLock() then redThree else blackThree
+    events: ->
 
-                data.composer.outlinePass.visibleEdgeColor.set visibleEdgeColor
-                data.composer.outlinePass.selectedObjects = [mesh]
+        panels.events this.panel
 
-            ).mouseleave (event) ->
+    showMeshPanel: ->
 
-                data.composer.outlinePass.selectedObjects = []
+        null
 
-            tableRow.find(".name span").keypress (event) -> event.stopPropagation()
-            tableRow.find(".name span").keydown (event) -> event.stopPropagation()
-            tableRow.find(".name span").keyup (event) -> event.stopPropagation(); mesh.setName("meshes", $(this)[0].innerText)
+    hideMeshPanel: (panel) ->
 
-            tableRow.find(".name span").dblclick (event) -> if not mesh.getLock() then document.execCommand("selectAll")
-            tableRow.find(".name span").mousedown (event) -> event.stopPropagation(); if mesh.getLock() then event.preventDefault()
-            tableRow.find(".name span").mouseup (event) -> event.stopPropagation()
+        panel.css "visibility", "hidden"
 
-            tableRow.find(".name span").blur (event) -> event.stopPropagation(); mesh.setName(null, $(this)[0].innerText, true)
+        $("#meshes.table tr#" + panel.data("mesh").uuid + " .settings").attr "src", "/app/imgs/panels/tools/toggle/off.png"
 
-            tableRow.find(".settings").click ->
+    addMesh: (mesh) ->
 
-                panel = $("#mesh." + mesh.uuid + "")
+        panel = $("#meshes.panel")
+        table = panel.find "#meshes.table tbody"
 
-                if panel.length and panel.css("visibility") is "visible"
+        meshes.push mesh
 
-                    $(this).attr "src", "/app/imgs/panels/tools/toggle/off.png"
+        this.count += 1
 
-                    panel.css "visibility", "hidden"
+        panel.find("#none").css "display", "none"
+        panel.find("div.table").css "display", "block"
 
-                else if panel.length
+        row = "<tr id=" + mesh.uuid + ">"
 
-                    $(this).attr "src", "/app/imgs/panels/tools/toggle/on.png"
+        row += "<td><p title='ID' class='id'>" + this.count + "</p></td>"
+        row += "<td><p title='Name' class='name'><span class='" + (if mesh.getLock() then "disabled" else "") + "' contenteditable='true'>" + mesh.name + "</span></p></td>"
+        row += "<td><img title='Settings' class='settings' src='/app/imgs/panels/tools/toggle/off.png'></td></td>"
+        row += "<td><img title='Lock Mesh' class='lock' src='/app/imgs/panels/lock/" + (if mesh.getLock() then "locked" else "unlocked") + ".png'></td>"
+        row += "<td><img title='Delete Mesh' class='trash " + (if mesh.getLock() then "disabled" else "") + "' src='/app/imgs/panels/tools/trash.png'></td>"
 
-                    panel.css "z-index", events.zIndex += 1
-                    panel.css "visibility", "visible"
+        table.append row + "</tr>"
 
-                else
+        tableRow = table.find "tr#" + mesh.uuid + ""
 
-                    $(this).attr "src", "/app/imgs/panels/tools/toggle/on.png"
+        tableRow.mouseenter((event) ->
 
-                    addMeshPanel mesh
+            visibleEdgeColor = if mesh.getLock() then redThree else blackThree
 
-            tableRow.find(".lock").click -> mesh.toggleLock()
-            tableRow.find(".trash").click -> if not mesh.getLock() then mesh.remove()
-            tableRow.find(".settings, .lock, .trash").on "mousedown mouseup", (event) -> event.stopPropagation()
+            composer.outlinePass.visibleEdgeColor.set visibleEdgeColor
+            composer.outlinePass.selectedObjects = [mesh]
 
-            break
+        ).mouseleave (event) ->
 
-        when "update"
+            composer.outlinePass.selectedObjects = []
 
-            break
+        tableRow.find(".name span").keypress (event) -> event.stopPropagation()
+        tableRow.find(".name span").keydown (event) -> event.stopPropagation()
+        tableRow.find(".name span").keyup (event) -> event.stopPropagation(); mesh.setName("meshes", $(this)[0].innerText)
 
-        when "remove"
+        tableRow.find(".name span").dblclick (event) -> if not mesh.getLock() then document.execCommand("selectAll")
+        tableRow.find(".name span").mousedown (event) -> event.stopPropagation(); if mesh.getLock() then event.preventDefault()
+        tableRow.find(".name span").mouseup (event) -> event.stopPropagation()
 
-            $("#mesh." + mesh.uuid + "").remove()
-            table.find("tr#" + mesh.uuid + "").remove()
+        tableRow.find(".name span").blur (event) -> event.stopPropagation(); mesh.setName(null, $(this)[0].innerText, true)
 
-            meshes.filterInPlace (item) -> item.uuid isnt mesh.uuid
+        tableRow.find(".settings").click ->
 
-            if meshes.length is 0
+            panel = $("#mesh." + mesh.uuid + "")
 
-                panel.find("#none").css "display", "block"
-                panel.find("div.table").css "display", "none"
+            if panel.length and panel.css("visibility") is "visible"
 
-            break
+                $(this).attr "src", "/app/imgs/panels/tools/toggle/off.png"
+
+                panel.css "visibility", "hidden"
+
+            else if panel.length
+
+                $(this).attr "src", "/app/imgs/panels/tools/toggle/on.png"
+
+                panel.css "z-index", events.zIndex += 1
+                panel.css "visibility", "visible"
+
+            else
+
+                $(this).attr "src", "/app/imgs/panels/tools/toggle/on.png"
+
+                # addMeshPanel
+                mesh.panel.show()
+
+        tableRow.find(".lock").click -> mesh.toggleLock()
+        tableRow.find(".trash").click -> if not mesh.getLock() then mesh.remove()
+        tableRow.find(".settings, .lock, .trash").on "mousedown mouseup", (event) -> event.stopPropagation()
+
+    removeMesh: (mesh) ->
+
+        panel = $("#meshes.panel")
+        table = panel.find "#meshes.table tbody"
+
+        $("#mesh." + mesh.uuid + "").remove()
+        table.find("tr#" + mesh.uuid + "").remove()
+
+        meshes.exclude (item) => item.uuid is mesh.uuid
+
+        if meshes.length is 0
+
+            panel.find("#none").css "display", "block"
+            panel.find("div.table").css "display", "none"

@@ -2,11 +2,11 @@ from mongo.data.collect.ions import mongo_collection
 
 collection = mongo_collection("clients")
 
-def new_client(client):
+def add_client(client):
 
     return str(collection.insert_one(client).inserted_id)
 
-def new_clients(clients):
+def add_clients(clients):
 
     return str(collection.insert_many(clients).inserted_ids)
 
@@ -28,7 +28,9 @@ def update_clients(clients):
 
     for client in clients:
 
-        update_client(client)
+        client = update_client(client)
+
+    return clients
 
 def delete_client(client):
 
@@ -38,7 +40,9 @@ def delete_clients(clients):
 
     for client in clients:
 
-        delete_client(client)
+        client = delete_client(client)
+
+    return clients
 
 def valid_client(id):
 

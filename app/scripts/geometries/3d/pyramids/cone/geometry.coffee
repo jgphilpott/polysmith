@@ -10,8 +10,14 @@ class POLY.ConeBufferGeometry extends THREE.ConeBufferGeometry
 
     constructor: (params = {}) ->
 
-        radius = params.radius ?= 5
-        height = params.height ?= 10
+        radius = adaptor "convert", "length", 5
+        height = adaptor "convert", "length", 10
+
+        angleUnit = settings.get "scales.angle.unit"
+        thetaLength = convert.angle["radian"][angleUnit] Math.PI * 2
+
+        radius = params.radius ?= radius
+        height = params.height ?= height
 
         radialSegments = params.radialSegments ?= 42
         heightSegments = params.heightSegments ?= 1
@@ -19,6 +25,12 @@ class POLY.ConeBufferGeometry extends THREE.ConeBufferGeometry
         openEnded = params.openEnded ?= false
 
         thetaStart = params.thetaStart ?= 0
-        thetaLength = params.thetaLength ?= Math.PI * 2
+        thetaLength = params.thetaLength ?= thetaLength
+
+        radius = adaptor "invert", "length", radius
+        height = adaptor "invert", "length", height
+
+        thetaStart = convert.angle[angleUnit]["radian"] thetaStart
+        thetaLength = convert.angle[angleUnit]["radian"] thetaLength
 
         super radius, height, radialSegments, heightSegments, openEnded, thetaStart, thetaLength

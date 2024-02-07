@@ -15,7 +15,7 @@ class POLY.IcosahedronMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.class = "icosahedron"
-        this.name = "Icosahedron"
+        this.class = params.class ?= "icosahedron"
+        this.name = params.name ?= "Icosahedron"
 
         return this

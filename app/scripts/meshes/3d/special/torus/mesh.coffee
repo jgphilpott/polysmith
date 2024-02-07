@@ -15,9 +15,87 @@ class POLY.TorusMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.rotation.y = deg$rad 90
+        this.class = params.class ?= "torus"
+        this.name = params.name ?= "Torus"
 
-        this.class = "torus"
-        this.name = "Torus"
+        return this
+
+    getArc: ->
+
+        return clone this.params.arc
+
+    setArc: (arc, save = true) ->
+
+        if not this.getLock()
+
+            this.geometry.dispose()
+            this.params.arc = Number arc
+            this.geometry = new TorusGeometry this.params
+
+            if save then this.save "update"
+
+        return this
+
+    getRadius: ->
+
+        return clone this.params.radius
+
+    setRadius: (radius, save = true) ->
+
+        if not this.getLock()
+
+            this.geometry.dispose()
+            this.params.radius = Number radius
+            this.geometry = new TorusGeometry this.params
+
+            if save then this.save "update"
+
+        return this
+
+    getThickness: ->
+
+        return clone this.params.thickness
+
+    setThickness: (thickness, save = true) ->
+
+        if not this.getLock()
+
+            this.geometry.dispose()
+            this.params.thickness = Number thickness
+            this.geometry = new TorusGeometry this.params
+
+            if save then this.save "update"
+
+        return this
+
+    getRadialSegments: ->
+
+        return clone this.params.radialSegments
+
+    setRadialSegments: (radialSegments, save = true) ->
+
+        if not this.getLock()
+
+            this.geometry.dispose()
+            this.params.radialSegments = Number radialSegments
+            this.geometry = new TorusGeometry this.params
+
+            if save then this.save "update"
+
+        return this
+
+    getTubularSegments: ->
+
+        return clone this.params.tubularSegments
+
+    setTubularSegments: (tubularSegments, save = true) ->
+
+        if not this.getLock()
+
+            this.geometry.dispose()
+            this.params.tubularSegments = Number tubularSegments
+            this.geometry = new TorusGeometry this.params
+
+            if save then this.save "update"
 
         return this

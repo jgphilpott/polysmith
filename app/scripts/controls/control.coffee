@@ -27,3 +27,9 @@ class Controls
             this.drag.remove()
             this.fly.remove()
             this.zoom.remove()
+
+    reset: ->
+
+        this.drag.reset()
+        this.fly.reset()
+        this.zoom.reset()

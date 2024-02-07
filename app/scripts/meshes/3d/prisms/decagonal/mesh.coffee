@@ -15,7 +15,7 @@ class POLY.DecagonalPrismMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.class = "decagonal-prism"
-        this.name = "Decagonal Prism"
+        this.class = params.class ?= "decagonal-prism"
+        this.name = params.name ?= "Decagonal Prism"
 
         return this

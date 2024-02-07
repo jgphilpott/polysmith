@@ -15,9 +15,10 @@ class POLY.HexagonalPyramidMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.rotation.x = deg$rad 90
+        this.class = params.class ?= "hexagonal-pyramid"
+        this.name = params.name ?= "Hexagonal Pyramid"
 
-        this.class = "hexagonal-pyramid"
-        this.name = "Hexagonal Pyramid"
+        this.rotation.x = deg$rad 90
+        this.rotation.y = deg$rad 90
 
         return this

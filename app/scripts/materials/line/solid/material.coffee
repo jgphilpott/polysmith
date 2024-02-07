@@ -10,10 +10,15 @@ class POLY.SolidLineMaterial extends THREE.LineBasicMaterial
 
     constructor: (params = {}) ->
 
-        color = params.color ?= blackThree
-        linewidth = params.linewidth ?= 1
+        params.color ?= blackThree
+        params.transparent ?= true
+        params.opacity ?= 100
+        params.linewidth ?= 1
+        params.dashed = false
 
-        super
+        $params = clone params
+        $params.opacity /= 100
 
-            color: color
-            linewidth: linewidth
+        super $params
+
+        @dashed = $params.dashed

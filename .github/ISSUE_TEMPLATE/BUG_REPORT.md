@@ -6,11 +6,11 @@ labels: 'bug'
 assignees: jgphilpott
 ---
 
-### Description
+### Description:
 
 Add a clear and concise description of the bug.
 
-### Reproduction
+### Reproduction:
 
 Include steps that can be taken to reproduce the behavior, for example:
 
@@ -19,15 +19,15 @@ Include steps that can be taken to reproduce the behavior, for example:
 3. Scroll down to ...
 4. See error.
 
-### Expected Behavior
+### Expected Behavior:
 
 Add a clear and concise description of what you expected to happen.
 
-### Screenshots
+### Screenshots:
 
 If applicable, add screenshots to help explain the problem.
 
-### Environment
+### Environment:
 
 Please include the following information:
 
@@ -36,6 +36,6 @@ Please include the following information:
  - Browser
  - Version
 
-### Extra
+### Extra:
 
 Add any other information about the problem here.

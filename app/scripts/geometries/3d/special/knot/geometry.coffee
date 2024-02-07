@@ -10,13 +10,19 @@ class POLY.KnotBufferGeometry extends THREE.TorusKnotBufferGeometry
 
     constructor: (params = {}) ->
 
-        radius = params.radius ?= 10
-        thickness = params.thickness ?= 3
+        radius = adaptor "convert", "length", 5
+        thickness = adaptor "convert", "length", 1
+
+        p = params.p ?= 2
+        q = params.q ?= 3
+
+        radius = params.radius ?= radius
+        thickness = params.thickness ?= thickness
 
         radialSegments = params.radialSegments ?= 42
         tubularSegments = params.tubularSegments ?= 42
 
-        p = params.p ?= 2
-        q = params.q ?= 3
+        radius = adaptor "invert", "length", radius
+        thickness = adaptor "invert", "length", thickness
 
         super radius, thickness, tubularSegments, radialSegments, p, q

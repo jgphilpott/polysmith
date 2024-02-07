@@ -15,7 +15,7 @@ class POLY.QuadrilateralMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.class = "quadrilateral"
-        this.name = "Quadrilateral"
+        this.class = params.class ?= "quadrilateral"
+        this.name = params.name ?= "Quadrilateral"
 
         return this

@@ -15,7 +15,7 @@ class POLY.TriangleMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.class = "triangle"
-        this.name = "Triangle"
+        this.class = params.class ?= "triangle"
+        this.name = params.name ?= "Triangle"
 
         return this

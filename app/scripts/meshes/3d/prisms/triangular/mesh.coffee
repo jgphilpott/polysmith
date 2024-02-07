@@ -15,7 +15,7 @@ class POLY.TriangularPrismMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.class = "triangular-prism"
-        this.name = "Triangular Prism"
+        this.class = params.class ?= "triangular-prism"
+        this.name = params.name ?= "Triangular Prism"
 
         return this

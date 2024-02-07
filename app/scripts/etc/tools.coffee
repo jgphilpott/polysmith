@@ -1,26 +1,75 @@
-clone = (object) ->
+satoshi = 0.000001
+nakamoto = 0.0001
 
-    return JSON.parse JSON.stringify object
+log = console.log
+info = console.info
+warn = console.warn
+error = console.error
+assert = console.assert
 
-equal = (object1, object2) ->
+console.info = -> null
+console.warn = -> null
+console.error = -> null
+console.assert = -> null
 
-    return JSON.stringify(object1) is JSON.stringify(object2)
+clone = (object) -> _.clone object
+omit = (object, keys) -> _.omit object, keys
+equal = (object1, object2) -> _.isEqual object1, object2
+
+sleep = (time) ->
+
+    new Promise (resolve) ->
+
+        window.setTimeout resolve, time
+
+getCenterPoint = (point1, point2) ->
+
+    x: (point2.x - point1.x) / 2 + point1.x
+    y: (point2.y - point1.y) / 2 + point1.y
+    z: (point2.z - point1.z) / 2 + point1.z
 
 calculatePercent = (min, max, value) ->
 
-    return ((value - min) / (max - min)) * 100
+    ((value - min) / (max - min)) * 100
 
 signedVolumeOfTriangle = (p1, p2, p3) ->
 
-    return p1.dot(p2.cross(p3)) / 6.0
+    p1.dot(p2.cross(p3)) / 6
 
-getCenterPoint = (start, stop) ->
+interpreter = (type, category, value) ->
 
-    return
+    unit = settings.get "scales." + category + ".unit"
+    defaultUnit = settings.scales.defaults()[category].unit
 
-        x: (stop.x - start.x) / 2 + start.x
-        y: (stop.y - start.y) / 2 + start.y
-        z: (stop.z - start.z) / 2 + start.z
+    if type is "convert" then return convert[category][defaultUnit][unit] value
+    if type is "invert" then return convert[category][unit][defaultUnit] value
+
+vectorInterpreter = (type, category, vector) ->
+
+    vector.x = interpreter type, category, vector.x
+    vector.y = interpreter type, category, vector.y
+    vector.z = interpreter type, category, vector.z
+
+    return vector
+
+adaptor = (type, category, value) ->
+
+    scale = settings.get "scales.scale"
+    unit = settings.get "scales." + category + ".unit"
+
+    defaultScale = settings.scales.defaults().scale
+    defaultUnit = settings.scales.defaults()[category].unit
+
+    if type is "convert" then return convert[category][defaultUnit[defaultScale]][unit[scale]] value
+    if type is "invert" then return convert[category][unit[scale]][defaultUnit[defaultScale]] value
+
+vectorAdaptor = (type, category, vector) ->
+
+    vector.x = adaptor type, category, vector.x
+    vector.y = adaptor type, category, vector.y
+    vector.z = adaptor type, category, vector.z
+
+    return vector
 
 # Credit: https://stackoverflow.com/a/17411276/1544937
 circumpoint = (angle, radius) ->
@@ -33,71 +82,23 @@ circumpoint = (angle, radius) ->
     return [sin * radius, cos * radius]
 
 # Credit: https://stackoverflow.com/a/5624139/1544937
-component2hex = (component) ->
+component$hex = (component) ->
 
     hex = component.toString 16
 
     return if hex.length is 1 then "0" + hex else hex
 
 # Credit: https://stackoverflow.com/a/5624139/1544937
-rgb2hex = (red, green, blue) ->
+rgb$hex = (red, green, blue) ->
 
-    return "#" + component2hex(red) + component2hex(green) + component2hex(blue)
+    return "#" + component$hex(red) + component$hex(green) + component$hex(blue)
 
 # Credit: https://stackoverflow.com/a/5624139/1544937
-hex2rgb = (hex) ->
+hex$rgb = (hex) ->
 
     rgb = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec hex
 
     return r: parseInt(rgb[1], 16), g: parseInt(rgb[2], 16), b: parseInt(rgb[3], 16)
-
-# Credit: http://gist.github.com/399624
-# The click event will be fired with a small delay but will not fire upon a double click.
-$.fn.clickSingleDouble = (single_click_callback, double_click_callback, delay = 333) ->
-
-    return this.each ->
-
-        self = this
-        clicks = 0
-
-        jQuery(this).click (event) ->
-
-            clicks++
-
-            if clicks is 1
-
-                setTimeout( ->
-
-                    if clicks is 1
-
-                        single_click_callback.call(self, event)
-
-                    else
-
-                        double_click_callback.call(self, event)
-
-                    clicks = 0
-
-                , delay)
-
-# Credit: https://stackoverflow.com/a/57067151/1544937
-Array.prototype.filterInPlace = (condition, item) ->
-
-    i = 0
-
-    for element, index in this
-
-        if condition.call item, element, index, this
-
-            if index isnt i
-
-                this[i] = element
-
-            i++
-
-    this.length = i
-
-    return this
 
 serializeMesh = (mesh) ->
 

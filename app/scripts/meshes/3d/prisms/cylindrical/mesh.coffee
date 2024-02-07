@@ -15,7 +15,7 @@ class POLY.CylindricalPrismMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.class = "cylindrical-prism"
-        this.name = "Cylindrical Prism"
+        this.class = params.class ?= "cylindrical-prism"
+        this.name = params.name ?= "Cylindrical Prism"
 
         return this

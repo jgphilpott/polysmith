@@ -1,0 +1,275 @@
+@import "../../colors/glass/grayscale.sass"
+@import "../../colors/glass/rainbow.sass"
+
+@import "../../colors/solid/grayscale.sass"
+@import "../../colors/solid/rainbow.sass"
+
+#menu.panel
+
+    visibility: hidden
+
+    top: 33%
+    left: 50%
+
+    width: 240px
+
+    transform: translate(-50%, -50%)
+
+    .sub-panel
+
+        width: 220px
+
+        display: none
+        vertical-align: top
+
+        #title, h3
+
+            padding: 30px
+
+            text-align: center
+
+    .option
+
+        text-align: center
+
+        border: 1px solid $black-solid
+        border-radius: 5px
+
+        padding: 5px
+
+        margin: 10px
+        margin-top: 20px
+
+    .option:hover
+
+        cursor: pointer
+
+    .opt
+
+        width: 40%
+
+        margin-top: 10px
+
+    #main
+
+        width: 228px
+
+        display: inline-block
+
+        .head
+
+            padding: 5px
+
+            display: flex
+            align-items: center
+            justify-content: center
+
+            #logo
+
+                float: left
+
+                width: 75px
+                height: 75px
+
+                padding: 5px
+
+            #title
+
+                float: left
+
+                font-size: 25px
+
+                padding: 5px
+
+        #signup,
+        #profile
+
+            float: left
+
+        #login,
+        #logout
+
+            float: right
+
+    #export-import-panel
+
+        #stl,
+        #obj,
+        #import
+
+            width: 90px
+
+        #stl,
+        #obj
+
+            display: inline-block
+
+        #import
+
+            margin: auto
+
+        input[type=file]
+
+            display: none
+
+    #panels-panel
+
+        padding: 14px
+
+        div
+
+            display: flex
+            align-items: center
+
+            input
+
+                cursor: pointer
+
+            label
+
+                margin: 7px
+
+                cursor: grab
+
+    #settings-panel
+
+        width: 450px
+
+        #title, h3
+
+            padding-bottom: 0px
+
+        img#gear
+
+            position: fixed
+
+            margin: 7px
+
+            top: 0px
+            right: 0px
+
+            width: 14px
+            height: 14px
+
+            cursor: pointer
+
+        .settings-category
+
+            width: 150px
+            padding: 5px
+
+            display: inline-block
+            vertical-align: top
+
+            h4
+
+                margin: 10px
+                text-align: center
+
+            div
+
+                display: flex
+                align-items: center
+
+                label
+
+                    margin: 5px
+
+                    cursor: grab
+
+                input,
+                select
+
+                    cursor: pointer
+                    color: $black-solid
+
+                input:disabled
+
+                    cursor: not-allowed
+
+                input:disabled+label
+
+                    color: gray
+
+                select
+
+                    width: 100%
+                    margin: 2.5px 5px
+
+                    outline: none
+                    border-radius: 5px
+
+                select.metric,
+                select.imperial
+
+                    display: none
+
+        #measurement-settings.settings-category
+
+            div
+
+                margin: 8px
+                display: block
+
+    #signup-panel,
+    #login-panel
+
+        input
+
+            display: block
+
+            text-align: center
+
+            margin: 20px auto
+            padding: 5px
+            height: 30px
+
+            border: 1px solid $black-solid
+            border-radius: 15px
+
+            box-shadow: none
+            outline: none
+
+        input.invalid
+
+            box-shadow: 0 0 5px $red-solid !important
+
+        input:focus
+
+            box-shadow: 0 0 5px $blue-solid !important
+
+        input[type=email],
+        input[type=password]
+
+            width: 175px
+
+        input[type=submit]
+
+            padding: 5px 25px
+
+            border-radius: 5px
+
+            box-shadow: none !important
+            background: transparent
+
+            cursor: pointer
+
+    #profile-panel
+
+        text-align: center
+
+        img
+
+            width: 75px
+            height: 75px
+
+            display: block
+            margin: 20px auto
+
+        h4
+
+            margin: 10px auto
+
+        p
+
+            margin: 5px auto

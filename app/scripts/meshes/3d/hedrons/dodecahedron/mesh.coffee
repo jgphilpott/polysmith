@@ -15,7 +15,7 @@ class POLY.DodecahedronMesh extends THREE.Mesh
 
         super geometry, material
 
-        this.class = "dodecahedron"
-        this.name = "Dodecahedron"
+        this.class = params.class ?= "dodecahedron"
+        this.name = params.name ?= "Dodecahedron"
 
         return this

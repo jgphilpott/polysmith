@@ -1,9 +1,42 @@
-addPolygenPanel = ->
+class PolygenPanel
 
-    $("body").append "<div id='polygen' class='panel'><img title='Close' class='close' src='/app/imgs/panels/nav/close.png'></div>"
+    constructor: ->
 
-    panel = $("#polygen.panel")
+        return this
 
-    panel.append "<h3>Polygen</h3>"
+    add: ->
 
-    return panel
+        template =
+
+            """
+            <div id='polygen' class='panel'>
+
+                <img title='Close' class='close' src='/app/imgs/panels/nav/close/black.png'>
+
+                <h3>Polygen</h3>
+
+            </div>
+            """
+
+        $("body").append template
+
+        @panel = $("#polygen.panel")
+
+        this.events()
+
+    remove: ->
+
+        this.panel.remove()
+
+    show: ->
+
+        this.panel.css "visibility", "visible"
+        this.panel.css "z-index", events.zIndex += 1
+
+    hide: ->
+
+        this.panel.css "visibility", "hidden"
+
+    events: ->
+
+        panels.events this.panel

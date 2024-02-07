@@ -1,51 +1,54 @@
+live = 0
+
 from hashlib import sha256
 from flask_socketio import emit
 
 from mongo.data.collect.clients.mongo import *
 from mongo.data.collect.clients.model import Client
 
-clients = 0
-
 def connect_clients(app):
 
     @app.on("connect")
     def connect():
 
-        global clients
-        clients += 1
+        global live
+        live += 1
 
     @app.on("disconnect")
     def disconnect():
 
-        global clients
-        clients -= 1
+        global live
+        live -= 1
 
     @app.on("signup")
     def signup(client):
 
+        client["password"] = sha256(client["password"].encode("utf-8")).hexdigest()
+
         try:
 
-            find_client({"email": client["email"]})
+            match = find_client({"email": client["email"]})
 
-            emit("signup_failed")
+            if match: emit("signup_failed")
 
         except:
 
-            client["password"] = sha256(client["password"].encode("utf-8")).hexdigest()
-            client = Client(client).refresh_id()
+            client = Client(client)
 
-            new_client(vars(client))
+            add_client(vars(client))
 
             emit("signup_success", client.id)
 
     @app.on("login")
     def login(client):
 
+        client["password"] = sha256(client["password"].encode("utf-8")).hexdigest()
+
         try:
 
             match = find_client({"email": client["email"]})
 
-            if match["password"] == sha256(client["password"].encode("utf-8")).hexdigest():
+            if match["password"] == client["password"]:
 
                 client = Client(match).refresh_id()
 
@@ -66,12 +69,10 @@ def connect_clients(app):
 
         try:
 
-            client = Client(find_client({"id": update["id"]})).update_settings(update["category"], update["setting"], update["value"])
+            update_client(vars(Client(find_client({"id": update["id"]})).update_settings(update["path"], update["value"])))
 
-            update_client(vars(client))
-
-            emit("update_settings_success", {"category": update["category"], "setting": update["setting"], "value": update["value"]})
+            emit("update_settings_success", {"path": update["path"], "value": update["value"]})
 
         except:
 
-            emit("update_settings_failed", {"category": update["category"], "setting": update["setting"], "value": update["value"]})
+            emit("update_settings_failed", {"path": update["path"], "value": update["value"]})

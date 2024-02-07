@@ -16,4 +16,4 @@ def plugin(app):
 
 def unplug(app):
 
-    return app
+    return app.stop()

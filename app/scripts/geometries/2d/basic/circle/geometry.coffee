@@ -10,10 +10,20 @@ class POLY.CircleBufferGeometry extends THREE.CircleBufferGeometry
 
     constructor: (params = {}) ->
 
-        radius = params.radius ?= 5
+        radius = adaptor "convert", "length", 5
+
+        angleUnit = settings.get "scales.angle.unit"
+        thetaLength = convert.angle["radian"][angleUnit] Math.PI * 2
+
+        radius = params.radius ?= radius
         segments = params.segments ?= 42
 
         thetaStart = params.thetaStart ?= 0
-        thetaLength = params.thetaLength ?= Math.PI * 2
+        thetaLength = params.thetaLength ?= thetaLength
+
+        radius = adaptor "invert", "length", radius
+
+        thetaStart = convert.angle[angleUnit]["radian"] thetaStart
+        thetaLength = convert.angle[angleUnit]["radian"] thetaLength
 
         super radius, segments, thetaStart, thetaLength
