@@ -1,21 +1,17 @@
-FROM jgphilpott/flask-pack:base
+FROM node:latest
 
-ADD . /root
+COPY ./ /root
 WORKDIR /root
+
+RUN npm install
 
 RUN apt-get update
 RUN apt-get upgrade -y
 
-RUN apt-get install -y nano curl \
-    && curl -sL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs \
-    && curl -L https://www.npmjs.com/install.sh | sh \
-    && npm install --global coffeescript \
-    && npm install --global typescript \
-    && npm install --global uglify-js \
-    && npm install --global node-sass
+RUN apt-get install -y wget curl
 
-RUN python3 -m pip install --upgrade pip
-RUN python3 -m pip install pydash
+RUN npm install --global coffeescript
+RUN coffee -cb --no-header app
 
-CMD python3 app/root.py
+RUN npm install --global nodemon
+CMD ["nodemon", "--exec", "coffee", "app/root.coffee"]

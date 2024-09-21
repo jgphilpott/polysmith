@@ -1,0 +1,34 @@
+{
+  "name": "polysmith",
+  "version": "1.0.0",
+  "description": "A tool to generate STL and OBJ files for 3D printing.",
+  "main": "app/root.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jgphilpott/polysmith"
+  },
+  "keywords": [
+    "Polysmith",
+    "3D Printing",
+    "CSG",
+    "STL",
+    "OBJ"
+  ],
+  "author": "Jacob Philpott",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jgphilpott/polysmith/issues"
+  },
+  "homepage": "https://github.com/jgphilpott/polysmith#readme",
+  "dependencies": {
+    "coffeescript": "^2.7.0",
+    "express": "^4.21.0",
+    "nodemon": "^3.1.7"
+  }
+}

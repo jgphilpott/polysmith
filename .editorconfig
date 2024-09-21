@@ -9,8 +9,6 @@ trim_trailing_whitespace = true
 
 [*.yml] # YML
 indent_size = 2
-
-[*.py] # Python
 insert_final_newline = true
 
 [*.coffee] # CoffeeScript

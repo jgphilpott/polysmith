@@ -1,1 +1,0 @@
-For original images and more assets browse [this git-lfs repository](https://github.com/jgphilpott/git-lfs).
