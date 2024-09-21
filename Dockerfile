@@ -14,4 +14,4 @@ RUN npm install --global coffeescript
 RUN coffee -cb --no-header app
 
 RUN npm install --global nodemon
-CMD ["nodemon", "--exec", "coffee", "app/root.coffee"]
+CMD ["nodemon", "--exec", "coffee", "app/express.coffee"]

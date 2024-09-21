@@ -2,12 +2,32 @@
   "name": "polysmith",
   "version": "1.0.0",
   "description": "A tool to generate STL and OBJ files for 3D printing.",
-  "main": "app/root.js",
-  "directories": {
-    "test": "tests"
-  },
+  "main": "app/electron.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "Polysmith",
+    "productName": "Polysmith",
+    "files": [
+      "**/*"
+    ],
+    "directories": {
+      "output": "builds"
+    },
+    "linux": {
+      "target": "deb",
+      "icon": "imgs/theme/logo/basic/small/colored.png"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "imgs/theme/logo/basic/small/colored.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "imgs/theme/logo/basic/small/colored.icns"
+    }
   },
   "repository": {
     "type": "git",
@@ -20,7 +40,10 @@
     "STL",
     "OBJ"
   ],
-  "author": "Jacob Philpott",
+  "author": {
+    "name": "Jacob Philpott",
+    "email": "jacob.philpott@gmx.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jgphilpott/polysmith/issues"
@@ -29,6 +52,11 @@
   "dependencies": {
     "coffeescript": "^2.7.0",
     "express": "^4.21.0",
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "pug": "^3.0.3"
+  },
+  "devDependencies": {
+    "electron": "^32.1.2",
+    "electron-builder": "^25.0.5"
   }
 }
