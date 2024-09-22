@@ -11,8 +11,6 @@ createWindow = =>
 
             nodeIntegration: true
 
-        icon: path.join(__dirname, "imgs/theme/logo/icons/icon.png"),
-
     html = pug.renderFile path.join(__dirname, "templates/anvil.pug"), mode: "electron"
 
     win.loadURL "data:text/html;charset=utf-8," + encodeURI html
