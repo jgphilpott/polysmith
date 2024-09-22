@@ -25,19 +25,19 @@
     },
     "linux": {
       "target": "deb",
-      "icon": "app/icon.png"
+      "icon": "app/imgs/theme/logo/icons/icon.png"
     },
     "win": {
       "target": "nsis",
-      "icon": "app/icon.ico"
+      "icon": "app/imgs/theme/logo/icons/icon.ico"
     },
     "mac": {
       "target": "dmg",
-      "icon": "app/icon.icns"
+      "icon": "app/imgs/theme/logo/icons/icon.icns"
     },
     "dmg": {
-      "background": "app/blueprint.jpeg",
-      "icon": "app/icon.icns",
+      "background": "app/imgs/theme/wallpaper/dmg.jpeg",
+      "icon": "app/imgs/theme/logo/icons/icon.icns",
       "iconSize": 80,
       "window": {
         "width": 600,
