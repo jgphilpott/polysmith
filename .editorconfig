@@ -7,6 +7,9 @@ indent_style = space
 insert_final_newline = false
 trim_trailing_whitespace = true
 
+[*.json] # JSON
+indent_size = 2
+
 [*.yml] # YML
 indent_size = 2
 insert_final_newline = true

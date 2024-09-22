@@ -13,20 +13,48 @@
     "files": [
       "**/*"
     ],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "jgphilpott",
+        "repo": "polysmith"
+      }
+    ],
     "directories": {
       "output": "builds"
     },
     "linux": {
       "target": "deb",
-      "icon": "imgs/theme/logo/basic/small/colored.png"
+      "icon": "app/icon.png"
     },
     "win": {
       "target": "nsis",
-      "icon": "imgs/theme/logo/basic/small/colored.ico"
+      "icon": "app/icon.ico"
     },
     "mac": {
       "target": "dmg",
-      "icon": "imgs/theme/logo/basic/small/colored.icns"
+      "icon": "app/icon.icns"
+    },
+    "dmg": {
+      "background": "app/blueprint.jpeg",
+      "icon": "app/icon.icns",
+      "iconSize": 80,
+      "window": {
+        "width": 600,
+        "height": 400
+      },
+      "contents": [
+        {
+          "x": 160,
+          "y": 175
+        },
+        {
+          "x": 440,
+          "y": 175,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
     }
   },
   "repository": {
