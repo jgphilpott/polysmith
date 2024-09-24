@@ -1,0 +1,1 @@
+You can convert OTF and TTF fonts to JSON and/or JS fonts with [facetype.js](https://gero3.github.io/facetype.js).
