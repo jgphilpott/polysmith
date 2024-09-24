@@ -1,4 +1,9 @@
-{app, BrowserWindow, globalShortcut} = require "electron"
+{ app, BrowserWindow, globalShortcut } = require "electron"
+{ autoUpdater } = require "electron-updater"
+
+require("electron-reload")(__dirname)
+
+win = null
 
 createWindow = =>
 
@@ -26,15 +31,17 @@ createWindow = =>
 
     win.maximize()
 
-app.whenReady().then =>
+app.on "ready", =>
 
     createWindow()
 
-    app.on "activate", =>
+    autoUpdater.checkForUpdatesAndNotify()
 
-        if BrowserWindow.getAllWindows().length is 0
+app.on "activate", =>
 
-            createWindow()
+    if BrowserWindow.getAllWindows().length is 0
+
+        createWindow()
 
 app.on "will-quit", =>
 
@@ -45,3 +52,11 @@ app.on "window-all-closed", =>
     if process.platform isnt "darwin"
 
         app.quit()
+
+autoUpdater.on "update-available", =>
+
+    autoUpdater.downloadUpdate()
+
+autoUpdater.on "update-downloaded", =>
+
+    win.webContents.send "update-downloaded"

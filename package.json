@@ -112,6 +112,8 @@
     "electron": "^32.1.2",
     "electron-builder": "^25.0.5",
     "electron-devtools-installer": "^3.2.0",
+    "electron-reload": "^2.0.0-alpha.1",
+    "electron-updater": "^6.3.4",
     "pug-cli": "^1.0.0-alpha6",
     "sass": "^1.79.3",
     "uglify-js": "^3.19.3"
