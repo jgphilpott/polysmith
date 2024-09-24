@@ -1,19 +1,28 @@
-{app, BrowserWindow} = require "electron"
-
-path = require "path"
-pug = require "pug"
+{app, BrowserWindow, globalShortcut} = require "electron"
 
 createWindow = =>
 
     win = new BrowserWindow
 
+        width: 1600
+        height: 900
         webPreferences:
 
             nodeIntegration: true
+            contextIsolation: false
 
-    html = pug.renderFile path.join(__dirname, "templates/anvil.pug"), mode: "electron"
+        frame: false # Toggle the default title bar.
+        resizable: true # Determines if the window is resizable.
+        transparent: true # Determines if the window background is transparent.
+        titleBarStyle: "hidden" # Optionally use 'hiddenInset' to keep macOS close, min, max buttons.
 
-    win.loadURL "data:text/html;charset=utf-8," + encodeURI html
+    if process.env.NODE_ENV is "development"
+
+        globalShortcut.register "CommandOrControl+Shift+I", =>
+
+            win.webContents.toggleDevTools()
+
+    win.loadFile("app/templates/anvil.html")
 
     win.maximize()
 
@@ -26,6 +35,10 @@ app.whenReady().then =>
         if BrowserWindow.getAllWindows().length is 0
 
             createWindow()
+
+app.on "will-quit", =>
+
+    globalShortcut.unregisterAll()
 
 app.on "window-all-closed", =>
 

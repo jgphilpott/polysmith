@@ -2,10 +2,35 @@
   "name": "polysmith",
   "version": "1.0.0",
   "description": "A tool to generate STL and OBJ files for 3D printing.",
+  "funding": "https://github.com/sponsors/jgphilpott",
   "main": "app/electron.js",
   "scripts": {
+    "build": "electron-builder",
+    "electron": "electron .",
+    "express": "docker-compose up -d",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "electron-builder"
+    "setup": "npm run coffee && npm run sass && npm run pug",
+    "setup:dev": "npm run coffee:auto && npm run sass:auto && npm run pug:auto",
+    "setup:prod": "npm run coffee:ugly && npm run sass:ugly && npm run pug:ugly",
+    "coffee": "coffee -cb app/",
+    "coffee:watch": "coffee -cbw app/",
+    "coffee:auto": "coffee -cbw app/ &",
+    "coffee:ugly": "coffee -cb app/ && npm run compress",
+    "coffee:watch:ugly": "coffee -cbw app/ && npm run compress",
+    "coffee:auto:ugly": "coffee -cbw app/ && npm run compress &",
+    "sass": "sass app/styles/:app/styles/",
+    "sass:watch": "sass app/styles/:app/styles/ --watch",
+    "sass:auto": "sass app/styles/:app/styles/ --watch &",
+    "sass:ugly": "sass app/styles/:app/styles/ --style=compressed",
+    "sass:watch:ugly": "sass app/styles/:app/styles/ --style=compressed --watch",
+    "sass:auto:ugly": "sass app/styles/:app/styles/ --style=compressed --watch &",
+    "pug": "pug app/templates/ -o app/templates/ --obj \"{mode: 'electron'}\" --pretty",
+    "pug:watch": "pug app/templates/ -o app/templates/ --obj \"{mode: 'electron'}\" --watch --pretty",
+    "pug:auto": "pug app/templates/ -o app/templates/ --obj \"{mode: 'electron'}\" --watch --pretty &",
+    "pug:ugly": "pug app/templates/ -o app/templates/ --obj \"{mode: 'electron'}\"",
+    "pug:watch:ugly": "pug app/templates/ -o app/templates/ --obj \"{mode: 'electron'}\" --watch",
+    "pug:auto:ugly": "pug app/templates/ -o app/templates/ --obj \"{mode: 'electron'}\" --watch &",
+    "compress": "find . -path ./node_modules -prune -o -name '*.js' -print0 | xargs -0 -I {} uglifyjs {} -o $(basename {} .js) --compress --mangle"
   },
   "build": {
     "appId": "Polysmith",
@@ -85,6 +110,10 @@
   },
   "devDependencies": {
     "electron": "^32.1.2",
-    "electron-builder": "^25.0.5"
+    "electron-builder": "^25.0.5",
+    "electron-devtools-installer": "^3.2.0",
+    "pug-cli": "^1.0.0-alpha6",
+    "sass": "^1.79.3",
+    "uglify-js": "^3.19.3"
   }
 }

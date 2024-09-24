@@ -9,11 +9,17 @@ html(lang="en-US", dir="ltr")
         meta(charset="utf-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
 
-        link(rel="shortcut icon" id="dark-scheme-icon" href="imgs/theme/favicons/silhouette/white.png")
-        link(rel="shortcut icon" id="light-scheme-icon" href="imgs/theme/favicons/silhouette/black.png")
+        link(rel="shortcut icon", id="dark-scheme-icon", href="imgs/theme/favicons/silhouette/white.png")
+        link(rel="shortcut icon", id="light-scheme-icon", href="imgs/theme/favicons/silhouette/black.png")
+
+        link(rel="stylesheet", type="text/css", href="../styles/core.css")
+
+        script.
+
+            const mode = !{JSON.stringify(mode)}
+
+        script(src="../scripts/core.js")
 
     body
 
-      h1 Polysmith
-
-      h3=mode
+        h1 Polysmith
