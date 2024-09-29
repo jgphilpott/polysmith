@@ -13,7 +13,7 @@ app.use express.static path.join(__dirname, "")
 
 app.get "/", (request, responce) =>
 
-    responce.render "anvil", mode: "express"
+    responce.render "anvil", platform: "express"
 
 app.listen port, =>
 

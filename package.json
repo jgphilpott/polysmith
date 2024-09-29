@@ -5,10 +5,10 @@
   "funding": "https://github.com/sponsors/jgphilpott",
   "main": "app/electron.js",
   "scripts": {
+    "test": "jest",
     "build": "electron-builder",
     "electron": "electron .",
     "express": "docker-compose up -d",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "setup": "npm run coffee && npm run sass && npm run pug",
     "setup:dev": "npm run coffee:auto && npm run sass:auto && npm run pug:auto",
     "setup:prod": "npm run coffee:ugly && npm run sass:ugly && npm run pug:ugly",
@@ -24,12 +24,12 @@
     "sass:ugly": "sass app/styles/:app/styles/ --style=compressed",
     "sass:watch:ugly": "sass app/styles/:app/styles/ --style=compressed --watch",
     "sass:auto:ugly": "sass app/styles/:app/styles/ --style=compressed --watch &",
-    "pug": "pug app/templates/ -o app/templates/ --obj \"{mode: 'electron'}\" --pretty",
-    "pug:watch": "pug app/templates/ -o app/templates/ --obj \"{mode: 'electron'}\" --watch --pretty",
-    "pug:auto": "pug app/templates/ -o app/templates/ --obj \"{mode: 'electron'}\" --watch --pretty &",
-    "pug:ugly": "pug app/templates/ -o app/templates/ --obj \"{mode: 'electron'}\"",
-    "pug:watch:ugly": "pug app/templates/ -o app/templates/ --obj \"{mode: 'electron'}\" --watch",
-    "pug:auto:ugly": "pug app/templates/ -o app/templates/ --obj \"{mode: 'electron'}\" --watch &",
+    "pug": "pug app/templates/ -o app/templates/ --obj \"{platform: 'electron'}\" --pretty",
+    "pug:watch": "pug app/templates/ -o app/templates/ --obj \"{platform: 'electron'}\" --watch --pretty",
+    "pug:auto": "pug app/templates/ -o app/templates/ --obj \"{platform: 'electron'}\" --watch --pretty &",
+    "pug:ugly": "pug app/templates/ -o app/templates/ --obj \"{platform: 'electron'}\"",
+    "pug:watch:ugly": "pug app/templates/ -o app/templates/ --obj \"{platform: 'electron'}\" --watch",
+    "pug:auto:ugly": "pug app/templates/ -o app/templates/ --obj \"{platform: 'electron'}\" --watch &",
     "compress": "find . -path ./node_modules -prune -o -name '*.js' -print0 | xargs -0 -I {} uglifyjs {} -o $(basename {} .js) --compress --mangle"
   },
   "build": {
@@ -106,14 +106,17 @@
     "coffeescript": "^2.7.0",
     "express": "^4.21.0",
     "nodemon": "^3.1.7",
-    "pug": "^3.0.3"
+    "pug": "^3.0.3",
+    "three": "^0.168.0"
   },
   "devDependencies": {
+    "browserify": "^17.0.0",
     "electron": "^32.1.2",
     "electron-builder": "^25.0.5",
     "electron-devtools-installer": "^3.2.0",
     "electron-reload": "^2.0.0-alpha.1",
     "electron-updater": "^6.3.4",
+    "jest": "^29.7.0",
     "pug-cli": "^1.0.0-alpha6",
     "sass": "^1.79.3",
     "uglify-js": "^3.19.3"
