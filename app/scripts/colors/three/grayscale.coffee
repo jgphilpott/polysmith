@@ -1,13 +1,9 @@
-blackThree = new THREE.Color "rgba(0, 0, 0)"
-darkGrayThree = new THREE.Color "rgba(179, 179, 179)"
-grayThree = new THREE.Color "rgba(204, 204, 204)"
-lightGrayThree = new THREE.Color "rgba(230, 230, 230)"
-whiteThree = new THREE.Color "rgba(255, 255, 255)"
+THREE = require "three"
 
-grayscaleThree =
+black = new THREE.Color "rgba(0, 0, 0)"
+darkGray = new THREE.Color "rgba(179, 179, 179)"
+gray = new THREE.Color "rgba(204, 204, 204)"
+lightGray = new THREE.Color "rgba(230, 230, 230)"
+white = new THREE.Color "rgba(255, 255, 255)"
 
-    blackThree: blackThree
-    darkGrayThree: darkGrayThree
-    grayThree: grayThree
-    lightGrayThree: lightGrayThree
-    whiteThree: whiteThree
+module.exports = { black, darkGray, gray, lightGray, white }
