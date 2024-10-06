@@ -1,0 +1,28 @@
+name: Node CI
+
+on:
+  push:
+    branches:
+      - polysmith
+  pull_request:
+    branches:
+      - polysmith
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Run Tests
+      run: npm test

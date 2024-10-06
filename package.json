@@ -92,6 +92,7 @@
     "Polysmith",
     "3D Printing",
     "CSG",
+    "BVH",
     "STL",
     "OBJ"
   ],
@@ -107,9 +108,17 @@
   "dependencies": {
     "coffeescript": "^2.7.0",
     "express": "^4.21.0",
+    "jquery": "^3.7.1",
+    "jquery-ui": "^1.14.0",
+    "lodash": "^4.17.21",
     "nodemon": "^3.1.7",
+    "polyconvert": "^4.0.0",
     "pug": "^3.0.3",
-    "three": "^0.168.0"
+    "sha256": "^0.2.0",
+    "sha512": "^0.0.1",
+    "three": "^0.168.0",
+    "three-bvh-csg": "^0.0.16",
+    "three-mesh-bvh": "^0.8.2"
   },
   "devDependencies": {
     "browserify": "^17.0.0",
