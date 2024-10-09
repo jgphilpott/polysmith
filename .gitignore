@@ -1,3 +1,4 @@
+bundle.js.tmp-browserify-*
 node_modules
 app/libs
 builds
