@@ -24,5 +24,8 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
+    - name: Setup Directories
+      run: npm run setup
+
     - name: Run Tests
       run: npm test
