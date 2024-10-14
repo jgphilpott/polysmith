@@ -27,7 +27,7 @@ createWindow = =>
 
             win.webContents.toggleDevTools()
 
-    win.loadFile("app/templates/anvil.html")
+    win.loadFile("app/templates/pages/anvil.html")
 
     win.maximize()
 

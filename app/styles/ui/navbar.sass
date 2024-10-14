@@ -1,0 +1,45 @@
+@import "../colors/glass/grayscale.sass"
+@import "../colors/glass/rainbow.sass"
+
+@import "../colors/solid/grayscale.sass"
+@import "../colors/solid/rainbow.sass"
+
+#navbar
+
+    width: 100%
+    padding: 0px 5px
+
+    display: flex
+    position: fixed
+    align-items: center
+
+    z-index: calc(9e999)
+
+    background-color: $black-solid
+
+    .icon
+
+        width: 50px
+        height: 50px
+
+        cursor: pointer
+
+    #title
+
+        left: 50%
+        max-width: calc(100% - 310px)
+        transform: translate(-50%, 0%)
+
+        position: absolute
+
+        color: $white-solid
+
+        span
+
+            cursor: text
+            outline: none
+
+            display: block
+            overflow: hidden
+
+            white-space: pre

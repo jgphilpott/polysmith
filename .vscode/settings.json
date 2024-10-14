@@ -32,5 +32,14 @@
     "titlize",
     "urandom",
     "vrml"
-  ]
+  ],
+  "files.exclude": {
+    "builds": true,
+    "node_modules": true,
+    "**/bundle.js.tmp-browserify-*": true,
+    "app/**/*.html": true,
+    "app/**/*.css": true,
+    "app/**/*.map": true,
+    "app/**/*.js": true,
+  }
 }

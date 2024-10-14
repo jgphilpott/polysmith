@@ -12,14 +12,12 @@ html(lang="en-US", dir="ltr")
         link(rel="shortcut icon", id="dark-scheme-icon", href="imgs/theme/favicons/silhouette/white.png")
         link(rel="shortcut icon", id="light-scheme-icon", href="imgs/theme/favicons/silhouette/black.png")
 
-        link(rel="stylesheet", type="text/css", href="../styles/core.css")
-
-        script.
-
-            const POLY = {}
-
-            const platform = !{JSON.stringify(platform)}
+        link(rel="stylesheet", type="text/css", href="../../styles/core.css")
 
     body
 
-        script(src="../scripts/bundle.js")
+        script.
+
+            window.location.platform = !{JSON.stringify(platform)}
+
+        block content

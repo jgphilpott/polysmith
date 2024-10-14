@@ -2,7 +2,13 @@ bundle.js.tmp-browserify-*
 node_modules
 app/libs
 builds
+*.jinja
 *.html
 *.css
 *.map
 *.js
+!/*.jinja
+!/*.html
+!/*.css
+!/*.map
+!/*.js
