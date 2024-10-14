@@ -7,8 +7,10 @@ builds
 *.css
 *.map
 *.js
+*.py
 !/*.jinja
 !/*.html
 !/*.css
 !/*.map
 !/*.js
+!/*.py
