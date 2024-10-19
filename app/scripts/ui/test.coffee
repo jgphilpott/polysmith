@@ -1,26 +1,55 @@
+html = ""
+
+$ = require "jquery"
+
 fs = require "fs"
 path = require "path"
 
+Forkme = require "./forkme"
 Navbar = require "./navbar"
 
-file = path.resolve __dirname, "../../templates/ui/navbar.html"
+delete window.location
+
+window.location =
+
+    href: ""
+    page: "root"
+    name: "Polysmith"
+    platform: "electron"
 
 global.fetch = jest.fn =>
+
+    file = path.resolve __dirname, html
 
     Promise.resolve
 
         text: => Promise.resolve fs.readFileSync file, "utf-8"
 
+test "Forkme", (done) =>
+
+    html = "../../templates/ui/forkme.html"
+
+    forkme = new Forkme()
+
+    process.nextTick =>
+
+        expect(forkme.banner.length).toBe 1
+
+        expect(forkme.link.href).toBe "https://github.com/jgphilpott/polysmith"
+
+        forkme.hide(); expect(forkme.banner.css "display").toBe "none"
+        forkme.show(); expect(forkme.banner.css "display").toBe "block"
+
+        forkme.remove(); expect($("#forkme").length).toBe 0
+        forkme.add(); expect($("#forkme").length).toBe 1
+
+        forkme.click()
+
+        done()
+
 test "Navbar", (done) =>
 
-    delete window.location
-
-    window.location =
-
-        platform: "electron"
-        name: "Polysmith"
-        page: "root"
-        href: ""
+    html = "../../templates/ui/navbar.html"
 
     navbar = new Navbar()
 
