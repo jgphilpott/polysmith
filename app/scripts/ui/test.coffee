@@ -75,6 +75,9 @@ test "Navbar", (done) =>
         navbar.docs.click(); expect(window.location.href).toBe "/docs"
         navbar.tutorials.click(); expect(window.location.href).toBe "/tutorials"
 
+        navbar.title.text("   "); navbar.title.blur()
+        expect(navbar.title.text()).toBe window.location.name
+
         navbar.title.text("abc"); navbar.title.blur()
         expect(navbar.title.text()).toBe "abc"
 
