@@ -1,11 +1,18 @@
 express = require "express"
+
+WebSocket = require "ws"
+http = require "http"
+
 path = require "path"
 
+platform = "express"
 host = "127.0.0.1"
 port = "4000"
 
 app = express()
-platform = "express"
+
+server = http.createServer app
+socket = new WebSocket.Server({ server })
 
 app.set "view engine", "pug"
 app.set "views", path.join(__dirname, "templates")
@@ -28,6 +35,20 @@ app.get "/tutorials", (request, responce) =>
 
     responce.render "pages/tutorials", platform: platform
 
-app.listen port, =>
+socket.on "connection", (node) =>
 
-    console.log "Polysmith listening at http://localhost:" + port
+    console.log "Node Connected"
+
+    node.on "message", (message) =>
+
+        console.log "Received: " + message
+
+        node.send "Echo from server: " + message
+
+    node.on "close", =>
+
+        console.log "Node Disconnected"
+
+server.listen port, =>
+
+    console.log "Polysmith listening at " + host + ":" + port

@@ -4,6 +4,8 @@
 @import "colors/solid/grayscale.sass"
 @import "colors/solid/rainbow.sass"
 
+@import "tools/vars.sass"
+
 *
 
     margin: 0px
@@ -27,7 +29,11 @@ body
 
 canvas
 
+    z-index: $background
+
+    display: block
     outline: none
+
     cursor: move
 
 label, input, img, h1, h2, h3, h4, h5, h6, p, a
